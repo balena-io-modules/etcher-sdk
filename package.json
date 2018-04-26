@@ -1,0 +1,23 @@
+{
+  "name": "etcher-sdk",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "alexis@resin.io",
+  "license": "ISC",
+  "dependencies": {
+    "@types/bluebird": "^3.5.20",
+    "@types/node": "^8.10.10",
+    "axios": "^0.18.0",
+    "file-disk": "^4.1.2",
+    "lodash": "^4.17.10",
+    "udif": "^0.15.2",
+    "unzip-stream": "^0.3.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.108"
+  }
+}

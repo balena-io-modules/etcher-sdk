@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"typeRoots": ["typings", "node_modules/@types"],
+		"module": "commonjs",
+		"outDir": "build",
+		"sourceMap": true,
+		"declaration": true,
+		"target": "es2017",
+		"noImplicitAny": true,
+		"strictNullChecks": true
+	},
+	"include": [
+		"src/**/*"
+	],
+	"exclude": [
+		"node_modules",
+		"build",
+		"tests"
+	]
+}
