@@ -16,7 +16,7 @@
     "lodash": "^4.17.10",
     "udif": "^0.15.2",
     "unzip-stream": "^0.3.0",
-    "usb": "^1.3.1",
+    "usb": "zvin/node-usb#add-missing-unref",
     "winusb-driver-generator": "^1.1.7"
   },
   "devDependencies": {

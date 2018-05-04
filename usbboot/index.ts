@@ -4,16 +4,9 @@
  */
 
 import * as Bluebird from 'bluebird';
-import * as _ from 'lodash';
+import { EventEmitter } from 'events';
 import * as Path from 'path';
-import {
-	Device as UsbDevice,
-	Interface as UsbInterface,
-	Endpoint as UsbEndpoint,
-	getDeviceList,
-	LIBUSB_REQUEST_TYPE_VENDOR,
-	LIBUSB_ENDPOINT_IN,
-} from 'usb';
+import * as usb from 'usb';
 
 import { readFile } from '../fs';
 
@@ -97,18 +90,9 @@ const USB_ENDPOINT_INTERFACES_SOC_BCM2835 = 1
 const USB_VENDOR_ID_BROADCOM_CORPORATION = 0x0a5c
 const USB_PRODUCT_ID_BCM2708_BOOT = 0x2763
 const USB_PRODUCT_ID_BCM2710_BOOT = 0x2764
-const USBBOOT_CAPABLE_USB_DEVICES = [
-	// BCM2835
-	{
-		vendorID: USB_VENDOR_ID_BROADCOM_CORPORATION,
-		productID: USB_PRODUCT_ID_BCM2708_BOOT,
-	},
-	// BCM2837
-	{
-		vendorID: USB_VENDOR_ID_BROADCOM_CORPORATION,
-		productID: USB_PRODUCT_ID_BCM2710_BOOT,
-	},
-]
+
+// When the pi reboots in mass storage mode, it has this product id
+const USB_PRODUCT_ID_MASS_STORAGE = 0x0001
 
 enum FileMessageCommand {
 	GetFileSize,
@@ -141,7 +125,7 @@ const parseFileMessageBuffer = (fileMessageBuffer: Buffer): { command: FileMessa
 	let command = getCommand(fileMessageBuffer);
 	const filename = getFilename(fileMessageBuffer);
 	// A blank file name can also mean "done"
-	if (_.isEmpty(filename)) {
+	if (filename === '') {
 		command = FileMessageCommand.Done;
 	}
 	return { command, filename }
@@ -153,7 +137,7 @@ const parseFileMessageBuffer = (fileMessageBuffer: Buffer): { command: FileMessa
  * See http://libusb.sourceforge.net/api-1.0/group__syncio.html
  */
 const performControlTransfer = async (
-	device: UsbDevice,
+	device: usb.Device,
 	bmRequestType: number,
 	bRequest: number,
 	wValue: number,
@@ -176,14 +160,17 @@ const performControlTransfer = async (
 	return result;
 }
 
-const isUsbBootCapableUSBDevice = (device: UsbDevice): boolean => {
-	return _.some(USBBOOT_CAPABLE_USB_DEVICES, {
-		vendorID: device.deviceDescriptor.idVendor,
-		productID: device.deviceDescriptor.idProduct,
-	})
+const isUsbBootCapableUSBDevice = (device: usb.Device): boolean => {
+	return (
+		(device.deviceDescriptor.idVendor === USB_VENDOR_ID_BROADCOM_CORPORATION) &&
+		(
+			(device.deviceDescriptor.idProduct === USB_PRODUCT_ID_BCM2708_BOOT) ||
+			(device.deviceDescriptor.idProduct === USB_PRODUCT_ID_BCM2710_BOOT)
+		)
+	);
 }
 
-const initializeDevice = (device: UsbDevice): { iface: UsbInterface, endpoint: UsbEndpoint } => {
+const initializeDevice = (device: usb.Device): { iface: usb.Interface, endpoint: usb.Endpoint } => {
 	// interface is a reserved keyword in TypeScript so we use iface
 	device.open()
 	// Handle 2837 where it can start with two interfaces, the first is mass storage
@@ -199,14 +186,14 @@ const initializeDevice = (device: UsbDevice): { iface: UsbInterface, endpoint: U
 	}
 	const iface = device.interface(interfaceNumber)
 	const endpoint = iface.endpoint(endpointNumber)
-	console.log("Initialised device correctly");
+	console.log("Initialized device correctly");
 	return { iface, endpoint }
 }
 
-const sendSize = async (device: UsbDevice, size: number): Promise<void> => {
+const sendSize = async (device: usb.Device, size: number): Promise<void> => {
 	await performControlTransfer(
 		device,
-		LIBUSB_REQUEST_TYPE_VENDOR,
+		usb.LIBUSB_REQUEST_TYPE_VENDOR,
 		USB_REQUEST_CODE_GET_STATUS,
 		size & USBBOOT_MESSAGE_MAX_BUFFER_LENGTH,
 		size >> CONTROL_TRANSFER_INDEX_RIGHT_BIT_SHIFT,
@@ -214,7 +201,7 @@ const sendSize = async (device: UsbDevice, size: number): Promise<void> => {
 	);
 }
 
-const epWrite = async (buffer: Buffer, device: UsbDevice, endpoint: UsbEndpoint) => {
+const epWrite = async (buffer: Buffer, device: usb.Device, endpoint: usb.Endpoint) => {
 	await sendSize(device, buffer.length)
 	if (buffer.length > 0) {
 		await Bluebird.fromCallback((callback) => {
@@ -223,15 +210,19 @@ const epWrite = async (buffer: Buffer, device: UsbDevice, endpoint: UsbEndpoint)
 	}
 }
 
-const epRead = async (device: UsbDevice, bytesToRead: number): Promise<Buffer> => {
+const epRead = async (device: usb.Device, bytesToRead: number): Promise<Buffer> => {
 	return await performControlTransfer(
 		device,
-		LIBUSB_REQUEST_TYPE_VENDOR | LIBUSB_ENDPOINT_IN,
+		usb.LIBUSB_REQUEST_TYPE_VENDOR | usb.LIBUSB_ENDPOINT_IN,
 		USB_REQUEST_CODE_GET_STATUS,
 		bytesToRead & USBBOOT_MESSAGE_MAX_BUFFER_LENGTH,
 		bytesToRead >> CONTROL_TRANSFER_INDEX_RIGHT_BIT_SHIFT,
 		bytesToRead,
 	)
+}
+
+const getDeviceId = (device: usb.Device): string => {
+	return `${device.busNumber}:${device.deviceAddress}`
 }
 
 const getFileBuffer = async (filename: string): Promise<Buffer|undefined> => {
@@ -267,7 +258,7 @@ const createBootMessageBuffer = (bootCodeBufferLength: number): Buffer => {
 	return bootMessageBuffer
 }
 
-const secondStageBoot = async (device: UsbDevice, endpoint: UsbEndpoint) => {
+const secondStageBoot = async (device: usb.Device, endpoint: usb.Endpoint) => {
 	const bootcodeBuffer = await getFileBuffer('bootcode.bin');
 	if (bootcodeBuffer === undefined) {
 		throw new Error("Can't find bootcode.bin")
@@ -276,7 +267,7 @@ const secondStageBoot = async (device: UsbDevice, endpoint: UsbEndpoint) => {
 	await epWrite(bootMessage, device, endpoint);
 	console.log(`Writing ${bootMessage.length} bytes`);
 	await epWrite(bootcodeBuffer, device, endpoint);
-	await Bluebird.delay(1000);
+	// raspberrypi's sample code has a sleep(1) here, but it looks like it isn't required.
 	const data = await epRead(device, RETURN_CODE_LENGTH);
 	const returnCode = data.readInt32LE(0)
 	if (returnCode !== RETURN_CODE_SUCCESS) {
@@ -284,81 +275,160 @@ const secondStageBoot = async (device: UsbDevice, endpoint: UsbEndpoint) => {
 	}
 }
 
-const fileServer = async (device: UsbDevice, endpoint: UsbEndpoint) => {
-	let going = 1;
-	while (going) {
+class UsbbootDevice extends EventEmitter {
+	// LAST_STEP is hardcoded here as it is depends on the bootcode.bin file we send to the pi.
+	// List of steps:
+	// 0) device connects with iSerialNumber 0
+	// 1) we write bootcode.bin to the device
+	// 2) we read the status of the previous write
+	// 3) the device detaches
+	// 4) the device reattaches with iSerialNumber 1
+	// 5) the device asks for the size of autoboot.txt
+	// 6) we send 0
+	// 7) the device asks for the size of config.txt
+	// 8) we send 0
+	// 9) the device asks for the size of recovery.elf
+	// 10) we send 0
+	// 11) the device asks for the size of start.elf
+	// 12) we send the start.elf size
+	// 13) the device asks for the start.elf contents
+	// 14) we send the start.elf contents
+	// 15) the device asks for the size of fixup.dat
+	// 16) we send 0
+	// 17) the device detaches
+	// 18) the device reattaches as a mass storage device
+	static LAST_STEP = 18;
+	private _step = 0;
+
+	constructor() {
+		super()
+	}
+
+	get progress() {
+		return Math.round((this._step / UsbbootDevice.LAST_STEP) * 100)
+	}
+
+	set step(step: number) {
+		this._step = step;
+		this.emit('progress', this.progress);
+	}
+}
+
+class UsbbootScanner extends EventEmitter {
+	private usbbootDevices = new Map();
+
+	constructor() {
+		super()
+		this.start();
+	}
+
+	start(): void {
+		usb.on('attach', attachDevice);
+		usb.on('detach', detachDevice);
+	}
+
+	stop(): void {
+		usb.removeListener('attach', attachDevice);
+		usb.removeListener('detach', detachDevice);
+		this.usbbootDevices.clear();
+	}
+	
+	step(device: usb.Device, step: number): void {
+		const usbbootDevice = this.getOrCreate(device);
+		usbbootDevice.step = step;
+		if (step === UsbbootDevice.LAST_STEP) {
+			this.remove(device);
+		}
+	}
+
+	private getOrCreate(device: usb.Device): UsbbootDevice {
+		const key = portId(device);
+		let usbbootDevice = this.usbbootDevices.get(key)
+		if (usbbootDevice === undefined) {
+			usbbootDevice = new UsbbootDevice();
+			this.usbbootDevices.set(key, usbbootDevice);
+			this.emit('attach', usbbootDevice);
+		}
+		return usbbootDevice;
+	}
+
+	private remove(device: usb.Device): void {
+		const key = portId(device);
+		let usbbootDevice = this.usbbootDevices.get(key)
+		if (usbbootDevice !== undefined) {
+			this.usbbootDevices.delete(key);
+			this.emit('detach', usbbootDevice);
+		}
+	}
+}
+
+const fileServer = async (device: usb.Device, endpoint: usb.Endpoint) => {
+	while (true) {
 		let data
 		try {
 			data = await epRead(device, FILE_MESSAGE_SIZE)
 		} catch (error) {
 			if ((error.message === 'LIBUSB_ERROR_NO_DEVICE') || (error.message === 'LIBUSB_ERROR_IO')) {
-				throw error
+				// Drop out if the device goes away
+				break
 			}
-			console.log('got error', error, 'waiting')
-			await Bluebird.delay(1000)
+			await Bluebird.delay(100)
 			continue
 		}
 		const message = parseFileMessageBuffer(data)
 		console.log("Received message", FileMessageCommand[message.command], message.filename);
-
-		let buffer
-		switch(message.command) {
-			case FileMessageCommand.GetFileSize:
-				buffer = await getFileBuffer(message.filename);
-				if (buffer === undefined) {
-					console.log(`Couldn't find ${message.filename}`)
-					await sendSize(device, 0);
-					console.log('error sent')
-				} else {
-					console.log('file size', buffer.length)
+		if ((message.command === FileMessageCommand.GetFileSize) || (message.command === FileMessageCommand.ReadFile)) {
+			const buffer = await getFileBuffer(message.filename);
+			if (buffer === undefined) {
+				console.log(`Couldn't find ${message.filename}`)
+				await sendSize(device, 0);
+			} else {
+				if (message.command === FileMessageCommand.GetFileSize) {
 					await sendSize(device, buffer.length)
-				}
-				break;
-			case FileMessageCommand.ReadFile:
-				buffer = await getFileBuffer(message.filename);
-				if (buffer === undefined) {
-					console.log(`Couldn't find ${message.filename}`)
-					await sendSize(device, 0);
 				} else {
 					await epWrite(buffer, device, endpoint);
 				}
-				break;
-			case FileMessageCommand.Done:
-				going = 0;
-				break;
-			default:
-				throw new Error('Unknown message');
+			}
+		} else if (message.command === FileMessageCommand.Done) {
+			break;
 		}
 	}
-	console.log("Second stage boot server done\n");
+	console.log('File server done');
 }
 
-let done = false;  // TODO: remove this hack
+const portId = (device: usb.Device) => {
+	return `${device.busNumber}-${device.portNumbers.join('.')}`
+}
 
-const prepareDevice = async (device: UsbDevice): Promise<void> => {
-	// TODO: compare serial number with last serial number
-	console.log("Found serial number", device.deviceDescriptor.iSerialNumber);
+const attachDevice = async (device: usb.Device): Promise<void> => {
+	if (!isUsbBootCapableUSBDevice(device)) {
+		return;  // TODO: recognize MSD devices and set step to 18
+	}
+	console.log('Found serial number', device.deviceDescriptor.iSerialNumber, Date.now());
+	console.log('port id', portId(device))
 	const { iface, endpoint } = initializeDevice(device);
 	if (device.deviceDescriptor.iSerialNumber === 0) {
 		console.log("Sending bootcode.bin\n");
 		await secondStageBoot(device, endpoint);
 	} else {
 		console.log("Second stage boot server\n");
-		if (!done) {
-			await fileServer(device, endpoint);
-		}
-		done = true
+		await fileServer(device, endpoint);
 	}
 	device.close();
 }
 
+const detachDevice = (device: usb.Device): void => {
+	console.log('detach', portId(device), Date.now())
+}
+
 const main = async () => {
 	console.log("Waiting for BCM2835/6/7\n");
-	while (true) {
-		const devices = getDeviceList().filter(isUsbBootCapableUSBDevice) 
-		await Bluebird.map(devices, prepareDevice)  // TODO: don't await
-		await Bluebird.delay(1000)
-	}
+	// Prepare already connected devices
+	Bluebird.map(usb.getDeviceList(), attachDevice)
+	// Watch for new devices being plugged in and prepare them
+	usb.on('attach', attachDevice);
+	// ...
+	usb.on('detach', detachDevice);
 }
 
 const wrapper = async () => {

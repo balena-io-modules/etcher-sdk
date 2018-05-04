@@ -28,6 +28,8 @@ declare module 'usb' {
 		idVendor: number;
 		idProduct: number;
 		iSerialNumber: number;
+		iManufacturer: number;
+		iProduct: number;
 	}
 
 	export class Interface {
@@ -58,11 +60,10 @@ declare module 'usb' {
 		deviceAddress: number;
 		interfaces: Interface[];
 		_configDescriptor: ConfigDescriptor;
+		portNumbers: number[];
 		readonly configDescriptor: ConfigDescriptor;
 		readonly allConfigDescriptors: ConfigDescriptor[];
 		readonly deviceDescriptor: DeviceDescriptor;
-
-		accessible?: boolean;  // This is not defined in the usb package but monkey patched by listDevices()
 
 		open(): void;
 		close(): void;
@@ -83,4 +84,7 @@ declare module 'usb' {
 	}
 
 	export const getDeviceList = (): Device[];
+	export const on = (eventName: string, fn: (device: Device) => void);
+	export const removeListener = (eventName: string, fn: (device: Device) => void);
+	export const setDebugLevel = (level: number): void;
 }
