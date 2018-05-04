@@ -4,11 +4,15 @@
  */
 
 import * as Bluebird from 'bluebird';
+import * as _debug from 'debug';
 import { EventEmitter } from 'events';
+import * as ProgressBar from 'progress';  // TODO: remove this
 import * as Path from 'path';
 import * as usb from 'usb';
 
 import { readFile } from '../fs';
+
+const debug = _debug('etcher-sdk:usbboot')
 
 // The equivalent of a NULL buffer, given that node-usb complains
 // if the data argument is not an instance of Buffer
@@ -94,6 +98,12 @@ const USB_PRODUCT_ID_BCM2710_BOOT = 0x2764
 // When the pi reboots in mass storage mode, it has this product id
 const USB_PRODUCT_ID_MASS_STORAGE = 0x0001
 
+// Delay in ms after which we consider that the device was unplugged (not resetted)
+const DEVICE_UNPLUG_TIMEOUT = 5000;
+
+// Delay (in ms) to wait when epRead throws an error
+const READ_ERROR_DELAY = 100;
+
 enum FileMessageCommand {
 	GetFileSize,
 	ReadFile,
@@ -170,6 +180,13 @@ const isUsbBootCapableUSBDevice = (device: usb.Device): boolean => {
 	);
 }
 
+const isUsbbootDeviceInMassStorageMode = (device: usb.Device): boolean => {
+	return (
+		(device.deviceDescriptor.idVendor === USB_VENDOR_ID_BROADCOM_CORPORATION) &&
+		(device.deviceDescriptor.idProduct === USB_PRODUCT_ID_MASS_STORAGE)
+	);
+}
+
 const initializeDevice = (device: usb.Device): { iface: usb.Interface, endpoint: usb.Endpoint } => {
 	// interface is a reserved keyword in TypeScript so we use iface
 	device.open()
@@ -186,7 +203,7 @@ const initializeDevice = (device: usb.Device): { iface: usb.Interface, endpoint:
 	}
 	const iface = device.interface(interfaceNumber)
 	const endpoint = iface.endpoint(endpointNumber)
-	console.log("Initialized device correctly");
+	debug("Initialized device correctly");
 	return { iface, endpoint }
 }
 
@@ -265,7 +282,7 @@ const secondStageBoot = async (device: usb.Device, endpoint: usb.Endpoint) => {
 	}
 	const bootMessage = createBootMessageBuffer(bootcodeBuffer.length)
 	await epWrite(bootMessage, device, endpoint);
-	console.log(`Writing ${bootMessage.length} bytes`);
+	debug(`Writing ${bootMessage.length} bytes`);
 	await epWrite(bootcodeBuffer, device, endpoint);
 	// raspberrypi's sample code has a sleep(1) here, but it looks like it isn't required.
 	const data = await epRead(device, RETURN_CODE_LENGTH);
@@ -278,26 +295,12 @@ const secondStageBoot = async (device: usb.Device, endpoint: usb.Endpoint) => {
 class UsbbootDevice extends EventEmitter {
 	// LAST_STEP is hardcoded here as it is depends on the bootcode.bin file we send to the pi.
 	// List of steps:
-	// 0) device connects with iSerialNumber 0
-	// 1) we write bootcode.bin to the device
-	// 2) we read the status of the previous write
+	// 0) device connects with iSerialNumber 0 and we write bootcode.bin to it
+	// 1) the device detaches
+	// 2) the device reattaches with iSerialNumber 1 and we upload the files it requires (start.elf)
 	// 3) the device detaches
-	// 4) the device reattaches with iSerialNumber 1
-	// 5) the device asks for the size of autoboot.txt
-	// 6) we send 0
-	// 7) the device asks for the size of config.txt
-	// 8) we send 0
-	// 9) the device asks for the size of recovery.elf
-	// 10) we send 0
-	// 11) the device asks for the size of start.elf
-	// 12) we send the start.elf size
-	// 13) the device asks for the start.elf contents
-	// 14) we send the start.elf contents
-	// 15) the device asks for the size of fixup.dat
-	// 16) we send 0
-	// 17) the device detaches
-	// 18) the device reattaches as a mass storage device
-	static LAST_STEP = 18;
+	// 4) the device reattaches as a mass storage device
+	static LAST_STEP = 4;
 	private _step = 0;
 
 	constructor() {
@@ -308,6 +311,10 @@ class UsbbootDevice extends EventEmitter {
 		return Math.round((this._step / UsbbootDevice.LAST_STEP) * 100)
 	}
 
+	get step() {
+		return this._step;
+	}
+
 	set step(step: number) {
 		this._step = step;
 		this.emit('progress', this.progress);
@@ -316,20 +323,28 @@ class UsbbootDevice extends EventEmitter {
 
 class UsbbootScanner extends EventEmitter {
 	private usbbootDevices = new Map();
+	private boundAttachDevice: (device: usb.Device) => Promise<void>;
+	private boundDetachDevice: (device: usb.Device) => void;
 
 	constructor() {
 		super()
-		this.start();
+		this.boundAttachDevice = this.attachDevice.bind(this);
+		this.boundDetachDevice = this.detachDevice.bind(this);
 	}
 
 	start(): void {
-		usb.on('attach', attachDevice);
-		usb.on('detach', detachDevice);
+		debug('Waiting for BCM2835/6/7');
+		// Prepare already connected devices
+		Bluebird.map(usb.getDeviceList(), this.boundAttachDevice)
+		// Watch for new devices being plugged in and prepare them
+		usb.on('attach', this.boundAttachDevice);
+		// Watch for devices detaching
+		usb.on('detach', this.boundDetachDevice);
 	}
 
 	stop(): void {
-		usb.removeListener('attach', attachDevice);
-		usb.removeListener('detach', detachDevice);
+		usb.removeListener('attach', this.boundAttachDevice);
+		usb.removeListener('detach', this.boundDetachDevice);
 		this.usbbootDevices.clear();
 	}
 	
@@ -339,6 +354,11 @@ class UsbbootScanner extends EventEmitter {
 		if (step === UsbbootDevice.LAST_STEP) {
 			this.remove(device);
 		}
+	}
+
+	private get(device: usb.Device): UsbbootDevice | undefined {
+		const key = portId(device);
+		return this.usbbootDevices.get(key)
 	}
 
 	private getOrCreate(device: usb.Device): UsbbootDevice {
@@ -360,6 +380,52 @@ class UsbbootScanner extends EventEmitter {
 			this.emit('detach', usbbootDevice);
 		}
 	}
+
+	private async attachDevice(device: usb.Device): Promise<void> {
+		if (isUsbbootDeviceInMassStorageMode(device) && this.usbbootDevices.has(portId(device))) {
+			this.step(device, 4);
+			return;
+		}
+		if (!isUsbBootCapableUSBDevice(device)) {
+			return;
+		}
+		debug('Found serial number', device.deviceDescriptor.iSerialNumber);
+		debug('port id', portId(device))
+		const { iface, endpoint } = initializeDevice(device);
+		if (device.deviceDescriptor.iSerialNumber === 0) {
+			debug('Sending bootcode.bin');
+			this.step(device, 0);
+			await secondStageBoot(device, endpoint);
+			// The device will now detach and reattach with iSerialNumber 1.
+			// This takes approximately 1.5 seconds
+		} else {
+			debug('Second stage boot server');
+			this.step(device, 2);
+			await fileServer(device, endpoint);
+		}
+		device.close();
+	}
+
+	private detachDevice(device: usb.Device): void {
+		if (!isUsbBootCapableUSBDevice(device)) {
+			return;
+		}
+		debug('detach', portId(device))
+		const step = (device.deviceDescriptor.iSerialNumber === 0) ? 1 : 3;
+		this.step(device, step);
+		// This timeout is here to differentiate between the device resetting and the device being unplugged
+		// If the step didn't changed in 5 seconds, we assume the device was unplugged.
+		setTimeout(
+			() => {
+				const usbbootDevice = this.get(device)
+				if ((usbbootDevice !== undefined) && (usbbootDevice.step === step)) {
+					debug('device', portId(device), 'did not reattached after', DEVICE_UNPLUG_TIMEOUT, 'ms.')
+					this.remove(device)
+				}
+			},
+			DEVICE_UNPLUG_TIMEOUT,
+		);
+	}
 }
 
 const fileServer = async (device: usb.Device, endpoint: usb.Endpoint) => {
@@ -372,15 +438,15 @@ const fileServer = async (device: usb.Device, endpoint: usb.Endpoint) => {
 				// Drop out if the device goes away
 				break
 			}
-			await Bluebird.delay(100)
+			await Bluebird.delay(READ_ERROR_DELAY)
 			continue
 		}
 		const message = parseFileMessageBuffer(data)
-		console.log("Received message", FileMessageCommand[message.command], message.filename);
+		debug("Received message", FileMessageCommand[message.command], message.filename);
 		if ((message.command === FileMessageCommand.GetFileSize) || (message.command === FileMessageCommand.ReadFile)) {
 			const buffer = await getFileBuffer(message.filename);
 			if (buffer === undefined) {
-				console.log(`Couldn't find ${message.filename}`)
+				debug(`Couldn't find ${message.filename}`)
 				await sendSize(device, 0);
 			} else {
 				if (message.command === FileMessageCommand.GetFileSize) {
@@ -393,50 +459,26 @@ const fileServer = async (device: usb.Device, endpoint: usb.Endpoint) => {
 			break;
 		}
 	}
-	console.log('File server done');
+	debug('File server done');
 }
 
 const portId = (device: usb.Device) => {
 	return `${device.busNumber}-${device.portNumbers.join('.')}`
 }
 
-const attachDevice = async (device: usb.Device): Promise<void> => {
-	if (!isUsbBootCapableUSBDevice(device)) {
-		return;  // TODO: recognize MSD devices and set step to 18
-	}
-	console.log('Found serial number', device.deviceDescriptor.iSerialNumber, Date.now());
-	console.log('port id', portId(device))
-	const { iface, endpoint } = initializeDevice(device);
-	if (device.deviceDescriptor.iSerialNumber === 0) {
-		console.log("Sending bootcode.bin\n");
-		await secondStageBoot(device, endpoint);
-	} else {
-		console.log("Second stage boot server\n");
-		await fileServer(device, endpoint);
-	}
-	device.close();
+const main = () => {  // TODO: remove this
+	const scanner = new UsbbootScanner();
+	scanner.on('attach', (usbbootDevice: UsbbootDevice) => {
+		const bar = new ProgressBar('[:bar]', { total: 100 });
+		usbbootDevice.on('progress', (progress: number) => {
+			bar.tick(progress - bar.curr)
+		});
+	});
+	scanner.on('detach', (usbbootDevice: UsbbootDevice) => {
+		usbbootDevice.removeAllListeners();
+		console.log('device detached')
+	});
+	scanner.start();
 }
 
-const detachDevice = (device: usb.Device): void => {
-	console.log('detach', portId(device), Date.now())
-}
-
-const main = async () => {
-	console.log("Waiting for BCM2835/6/7\n");
-	// Prepare already connected devices
-	Bluebird.map(usb.getDeviceList(), attachDevice)
-	// Watch for new devices being plugged in and prepare them
-	usb.on('attach', attachDevice);
-	// ...
-	usb.on('detach', detachDevice);
-}
-
-const wrapper = async () => {
-	try {
-		await main()
-	} catch (error) {
-		console.error('boom', error)
-	}
-}
-
-wrapper()
+main()
