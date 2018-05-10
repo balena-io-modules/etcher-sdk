@@ -1,30 +1,26 @@
 import axios from 'axios';
-import * as Bluebird from 'bluebird';
-import { ZipStreamEntry } from 'unzip-stream';
-import * as _ from 'lodash';
 import { Chunk, createFilterStream, FilterStream } from 'blockmap';
+import * as Bluebird from 'bluebird';
 import { ReadResult, WriteResult } from 'file-disk';
 import { createReadStream, createWriteStream } from 'fs';
-import { promisify } from 'util';
-import { Image as UDIFImage } from 'udif';
+import * as _ from 'lodash';
 import { PassThrough, Writable } from 'stream';
+import { Image as UDIFImage } from 'udif';
+import { ZipStreamEntry } from 'unzip-stream';
+import { promisify } from 'util';
 
-import { open, close, fstat, read, write } from './fs';
+import { close, fstat, open, read, write } from './fs';
 import { getFileStreamFromZipStream } from './zip';
 
-class NotCapable extends Error {
+export class NotCapable extends Error {
 }
 
-interface Metadata {
+export interface Metadata {
 	size?: number;
 	compressedSize?: number;
 }
 
-class SourceDestination {
-	// This can be a source or a destination, I couldn't find a better name
-	constructor() {
-	}
-
+export class SourceDestination {
 	async canRead(): Promise<boolean> {
 		return false;
 	}
@@ -78,7 +74,7 @@ class SourceDestination {
 	}
 }
 
-class MultiDestination extends SourceDestination {
+export class MultiDestination extends SourceDestination {
 	constructor(private destinations: SourceDestination[]) {
 		super();
 		if (destinations.length === 0) {
@@ -90,9 +86,9 @@ class MultiDestination extends SourceDestination {
 		return _.every(
 			await Promise.all(
 				this.destinations.map(async (destination: SourceDestination) => {
-					return await destination[methodName]()
-				})
-			)
+					return await destination[methodName]();
+				}),
+			),
 		);
 	}
 
@@ -129,7 +125,7 @@ class MultiDestination extends SourceDestination {
 		const results = await Promise.all(
 			this.destinations.map(async (destination: SourceDestination) => {
 				return await destination.write(buffer, bufferOffset, length, fileOffset);
-			})
+			}),
 		);
 		// Returns the first WriteResult (they should be all the same)
 		return results[0];
@@ -148,14 +144,14 @@ class MultiDestination extends SourceDestination {
 		const streams = await Promise.all(
 			this.destinations.map(async (destination: SourceDestination) => {
 				return await destination[methodName]();
-			})
+			}),
 		);
 		const passthrough = new PassThrough();
 		streams.forEach((stream: NodeJS.WritableStream) => {
 			// TODO: allow some streams to fail
 			stream.on('error', passthrough.emit.bind(passthrough, 'error'));
 			passthrough.pipe(stream);
-		})
+		});
 		return passthrough;
 	}
 
@@ -171,12 +167,12 @@ class MultiDestination extends SourceDestination {
 export interface SparseWriteStream extends NodeJS.WritableStream {
 	_write(chunk: Chunk, enc: string, callback: (err?: Error | void) => void): void;
 	on(event: 'progress', listener: (data: ProgressEvent) => void): this;
-	on(event: string, listener: Function): this;
+	on(event: string, listener: (data: any) => void): this;
 }
 
 type FileFlags = 'r' | 'w+';  // TODO: OpenFlags ?
 
-class File extends SourceDestination {
+export class File extends SourceDestination {
 	constructor(private fd: number, private flags: FileFlags) {
 		super();
 	}
@@ -228,7 +224,7 @@ class File extends SourceDestination {
 		return new FileSparseWriteStream(this.fd);
 	}
 
-	static async fromPath(path: string, flags: FileFlags) {
+	static async fromPath(path: string, flags: FileFlags): Promise<Bluebird.Disposer<File>> {
 		const fd = await open(path, flags);
 		return Bluebird.resolve(new File(fd, flags))
 		.disposer(async () => {
@@ -237,11 +233,11 @@ class File extends SourceDestination {
 	}
 }
 
-class Http extends SourceDestination {
+export class Http extends SourceDestination {
 	// Only implements reading for now
 	private size: number;
 	private acceptsRange: boolean;
-	private ready: Promise<void>
+	private ready: Promise<void>;
 
 	constructor(private url: string) {
 		super();
@@ -341,34 +337,34 @@ export class SourceDestinationFs {
 	}
 
 	open(path: string, options: any, callback: any) {  // TODO: callback type
-		console.log('open')
+		console.log('open');
 		callback(null, 1);
 	}
 
 	close(fd: number, callback: any) {  // TODO: callback type
-		console.log('close')
+		console.log('close');
 		callback(null);
 	}
 
 	fstat(fd: number, callback: any) {  // TODO: callback type
-		console.log('fstat')
+		console.log('fstat');
 		this.source.getMetadata()
 		.then((metadata) => {
 			if (metadata.size === undefined) {
-				callback(new Error('No size'))
-				return
+				callback(new Error('No size'));
+				return;
 			}
-			callback(null, { size: metadata.size })
+			callback(null, { size: metadata.size });
 		})
-		.catch(callback)
+		.catch(callback);
 	}
 
 	read(fd: number, buffer: Buffer, bufferOffset: number, length: number, sourceOffset: number, callback: any) {  // TODO: callback type
 		this.source.read(buffer, bufferOffset, length, sourceOffset)
 		.then((res: ReadResult) => {
-			callback(null, res.bytesRead, res.buffer)
+			callback(null, res.bytesRead, res.buffer);
 		})
-		.catch(callback)
+		.catch(callback);
 	}
 
 	// TODO: add write if it is needed
@@ -394,10 +390,10 @@ export class DmgSource extends SourceDestination {
 			size: this.image.getUncompressedSize(),
 		};
 	}
-	
+
 	static async fromSource(source: SourceDestination): Promise<Bluebird.Disposer<DmgSource>> {
 		const image = new UDIFImage('', { fs: new SourceDestinationFs(source) });
-		await promisify(image.open).bind(image)()
+		await promisify(image.open).bind(image)();
 		return Bluebird.resolve(new DmgSource(image, source))
 		.disposer(async () => {
 			await promisify(image.close).bind(image)();
@@ -436,7 +432,7 @@ export class ZipSource extends SourceDestination {
 	}
 
 	static async fromSource(source: SourceDestination): Promise<Bluebird.Disposer<ZipSource>> {
-		return Bluebird.resolve(new ZipSource(source)).disposer(_.noop)
+		return Bluebird.resolve(new ZipSource(source)).disposer(_.noop);
 	}
 }
 
@@ -451,10 +447,10 @@ const main = async () => {
 				sourceStream.on('error', reject);
 				destinationStream.on('error', reject);
 				sourceStream.on('end', resolve);
-				sourceStream.pipe(destinationStream)
+				sourceStream.pipe(destinationStream);
 			});
 		});
-}
+};
 
 const main2 = async () => {
 	await Bluebird.using(
@@ -468,11 +464,11 @@ const main2 = async () => {
 					sourceStream.on('error', reject);
 					destinationStream.on('error', reject);
 					sourceStream.on('end', resolve);
-					sourceStream.pipe(destinationStream)
+					sourceStream.pipe(destinationStream);
 				});
 			});
 		});
-}
+};
 
 const main3 = async () => {
 	await Bluebird.using(
@@ -488,11 +484,11 @@ const main3 = async () => {
 					sourceStream.on('error', reject);
 					destinationStream.on('error', reject);
 					sourceStream.on('end', resolve);
-					sourceStream.pipe(destinationStream)
+					sourceStream.pipe(destinationStream);
 				});
 			});
 		});
-}
+};
 
 const main4 = async () => {
 	await Bluebird.using(
@@ -508,11 +504,11 @@ const main4 = async () => {
 					sourceStream.on('error', reject);
 					destinationStream.on('error', reject);
 					sourceStream.on('end', resolve);
-					sourceStream.pipe(destinationStream)
+					sourceStream.pipe(destinationStream);
 				});
 			});
 		});
-}
+};
 
 const main5 = async () => {
 	await Bluebird.using(
@@ -528,11 +524,11 @@ const main5 = async () => {
 					sourceStream.on('error', reject);
 					destinationStream.on('error', reject);
 					sourceStream.on('end', resolve);
-					sourceStream.pipe(destinationStream)
+					sourceStream.pipe(destinationStream);
 				});
 			});
 		});
-}
+};
 
 const wrapper = async () => {
 	try {
@@ -540,6 +536,6 @@ const wrapper = async () => {
 	} catch (error) {
 		console.log('error', error);
 	}
-}
+};
 
 wrapper();
