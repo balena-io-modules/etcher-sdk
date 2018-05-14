@@ -10,7 +10,7 @@ export class UsbbootDrive extends Drive {
 	canCreateDestination = false;
 }
 
-export class UsbbootDriveScanner extends Adapter {
+export class UsbbootDeviceAdapter extends Adapter {
 	private drives: Map<UsbbootDevice, UsbbootDrive> = new Map();
 	private scanner: UsbbootScanner;
 

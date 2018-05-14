@@ -2,9 +2,9 @@ import * as debug_ from 'debug';
 import { EventEmitter } from 'events';
 
 import { Adapter } from './adapter';
-import { BlockDeviceScanner } from './blockdevice';
+import { BlockDeviceAdapter } from './blockdevice';
 import { Drive } from './drive';
-import { UsbbootDriveScanner } from './usbboot';
+import { UsbbootDeviceAdapter } from './usbboot';
 
 const debug = debug_('etcher-sdk:scanner');
 
@@ -36,8 +36,8 @@ export class Scanner extends EventEmitter {
 }
 
 const main = () => {  // TODO: remove this
-	const scanners = [ new BlockDeviceScanner(), new UsbbootDriveScanner() ];
-	const scanner = new Scanner(scanners);
+	const adapters = [ new BlockDeviceAdapter(), new UsbbootDeviceAdapter() ];
+	const scanner = new Scanner(adapters);
 	scanner.on('attach', (drive: Drive) => {
 		console.log('attach', drive);
 		if (drive.emitsProgress) {

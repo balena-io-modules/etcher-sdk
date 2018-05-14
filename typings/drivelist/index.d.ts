@@ -14,8 +14,7 @@ declare module 'drivelist' {
 		mountpoints: Mountpoint[];
 		size: number;
 		raw: string;
-
-	};
+	}
 
 	export function list(callback: (error: Error, drives: Drive[]) => void): void;
 }

@@ -10,7 +10,7 @@
 		"strictNullChecks": true
 	},
 	"include": [
-		"src/**/*"
+		"lib"
 	],
 	"exclude": [
 		"node_modules",

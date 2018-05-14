@@ -8,5 +8,5 @@ declare module 'winusb-driver-generator' {
 		deviceDescriptor: DriverlessDeviceDescriptor;
 	}
 
-	export const listDriverlessDevices(): DriverlessDevice[];
+	export function listDriverlessDevices(): DriverlessDevice[];
 }

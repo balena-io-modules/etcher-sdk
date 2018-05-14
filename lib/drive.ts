@@ -1,7 +1,8 @@
 import { Disposer } from 'bluebird';
 import { EventEmitter } from 'events';
 
-import { NotCapable, SourceDestination } from './';
+import { NotCapable } from './errors';
+import { SourceDestination } from './source-destination/source-destination';
 
 export class Drive extends EventEmitter {
 	// icon: string;  // TODO

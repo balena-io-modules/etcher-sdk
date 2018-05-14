@@ -2,13 +2,16 @@ import { delay, Disposer } from 'bluebird';
 import * as _debug from 'debug';
 import { Drive as DrivelistDrive, list } from 'drivelist';
 import { EventEmitter } from 'events';
+import { unmountDisk } from 'mountutils';
 import { promisify } from 'util';
 
-import { File } from './';
 import { Adapter } from './adapter';
+import { clean } from './diskpart';
 import { Drive } from './drive';
+import { File, OpenFlags } from './source-destination/file';
 
 const listDrives = promisify(list);
+const unmountDiskAsync = promisify(unmountDisk);
 
 const debug = _debug('etcher-sdk:blockdevice');
 
@@ -43,15 +46,23 @@ export class BlockDevice extends Drive {
 	}
 
 	createSourceDisposer(): Promise<Disposer<File>> {
-		return File.fromPath(this.drive.raw, 'r');
+		return File.fromPath(this.drive.raw, OpenFlags.Read);
 	}
 
 	createDestinationDisposer(): Promise<Disposer<File>> {
-		return File.fromPath(this.drive.raw, 'w+');  // TODO: sync io flag
+		return File.fromPath(this.drive.raw, OpenFlags.WriteDevice);
+	}
+
+	async umount(): Promise<void> {
+		await unmountDiskAsync(this.drive.device);
+	}
+
+	async clean(): Promise<void> {
+		await clean(this.drive.device);
 	}
 }
 
-export class BlockDeviceScanner extends Adapter {
+export class BlockDeviceAdapter extends Adapter {
 	// Emits 'attach', 'detach' and 'error' events
 	private drives: Map<string, BlockDevice> = new Map();
 	private running = false;
