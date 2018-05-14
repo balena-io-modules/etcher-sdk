@@ -1,14 +1,9 @@
 import { Disposer } from 'bluebird';
 import { UsbbootDevice, UsbbootScanner } from 'node-raspberrypi-usbboot';
 
+import { SourceDestination } from '../../source-destination/source-destination';
+import { UsbbootDrive } from '../../source-destination/usbboot';
 import { Adapter } from './adapter';
-import { Drive } from './drive';
-
-export class UsbbootDrive extends Drive {
-	emitsProgress = true;
-	canCreateSource = false;
-	canCreateDestination = false;
-}
 
 export class UsbbootDeviceAdapter extends Adapter {
 	private drives: Map<UsbbootDevice, UsbbootDrive> = new Map();
@@ -33,10 +28,9 @@ export class UsbbootDeviceAdapter extends Adapter {
 	private onAttach(device: UsbbootDevice): void {
 		let drive = this.drives.get(device);
 		if (drive === undefined) {
-			drive = new UsbbootDrive();
+			drive = new UsbbootDrive(device);
 			this.drives.set(device, drive);
 		}
-		device.on('progress', drive.emit.bind(drive, 'progress'));
 		this.emit('attach', drive);
 	}
 

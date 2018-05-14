@@ -3,8 +3,9 @@ import { Disposer, resolve } from 'bluebird';
 import { ReadResult, WriteResult } from 'file-disk';
 import { constants, createReadStream, createWriteStream } from 'fs';
 import { Writable } from 'stream';
+import { Stream as HashStream } from 'xxhash';
 
-import { close, fstat, open, read, write } from '../fs';
+import { close, stat, open, read, write } from '../fs';
 import { Metadata } from './metadata';
 import { SourceDestination } from './source-destination';
 import { SparseWriteStream } from './sparse-write-stream';
@@ -51,21 +52,30 @@ export class FileSparseWriteStream extends Writable implements SparseWriteStream
 
 export enum OpenFlags {
 	Read = constants.O_RDONLY,
-	Write = constants.O_WRONLY,
+	ReadWrite = constants.O_RDWR | constants.O_CREAT,
 	WriteDevice = constants.O_RDWR | constants.O_NONBLOCK | constants.O_SYNC,
 }
 
 export class File extends SourceDestination {
-	constructor(private fd: number, private flags: OpenFlags) {
+	private fd: number;
+
+	constructor(private path: string, private flags: OpenFlags) {
 		super();
 	}
 
 	private _canRead() {
-		return ((this.flags === OpenFlags.Read) || (this.flags === OpenFlags.WriteDevice));
+		return (
+			(this.flags === OpenFlags.Read) ||
+			(this.flags === OpenFlags.ReadWrite) ||
+			(this.flags === OpenFlags.WriteDevice)
+		);
 	}
 
 	private _canWrite() {
-		return ((this.flags === OpenFlags.Write) || (this.flags === OpenFlags.WriteDevice));
+		return (
+			(this.flags === OpenFlags.ReadWrite) ||
+			(this.flags === OpenFlags.WriteDevice)
+		);
 	}
 	
 	async canRead(): Promise<boolean> {
@@ -89,9 +99,8 @@ export class File extends SourceDestination {
 	}
 
 	async getMetadata(): Promise<Metadata> {
-		const stat = await fstat(this.fd);
 		return {
-			size: stat.size,
+			size: (await stat(this.path)).size,
 		};
 	}
 
@@ -104,22 +113,24 @@ export class File extends SourceDestination {
 	}
 
 	async createReadStream(): Promise<NodeJS.ReadableStream> {
-		return createReadStream('', { fd: this.fd, autoClose: false });
+		return createReadStream('', { fd: this.fd, autoClose: false, start: 0 });
 	}
 
 	async createWriteStream(): Promise<NodeJS.WritableStream> {
-		return createWriteStream('', { fd: this.fd, autoClose: false });
+		return createWriteStream('', { fd: this.fd, autoClose: false, start: 0 });
 	}
 
 	async createSparseWriteStream(): Promise<SparseWriteStream> {
 		return new FileSparseWriteStream(this.fd);
 	}
 
-	static async fromPath(path: string, flags: OpenFlags): Promise<Disposer<File>> {
-		const fd = await open(path, flags);
-		return resolve(new File(fd, flags))
-		.disposer(async () => {
-			await close(fd);
-		});
+	async open(): Promise<void> {
+		await super.open();
+		this.fd = await open(this.path, this.flags);
+	}
+
+	async close(): Promise<void> {
+		await super.close();
+		await close(this.fd);
 	}
 }

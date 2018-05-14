@@ -1,10 +1,10 @@
 import * as debug_ from 'debug';
 import { EventEmitter } from 'events';
 
-import { Adapter } from './adapter';
-import { BlockDeviceAdapter } from './blockdevice';
-import { Drive } from './drive';
-import { UsbbootDeviceAdapter } from './usbboot';
+import { SourceDestination } from '../source-destination/source-destination';
+import { Adapter } from './adapters/adapter';
+import { BlockDeviceAdapter } from './adapters/block-device';
+import { UsbbootDeviceAdapter } from './adapters/usbboot';
 
 const debug = debug_('etcher-sdk:scanner');
 
@@ -35,18 +35,18 @@ export class Scanner extends EventEmitter {
 	}
 }
 
-const main = () => {  // TODO: remove this
+const main = () => {  // TODO: move this to examples
 	const adapters = [ new BlockDeviceAdapter(), new UsbbootDeviceAdapter() ];
 	const scanner = new Scanner(adapters);
-	scanner.on('attach', (drive: Drive) => {
+	scanner.on('attach', async (drive: SourceDestination) => {
 		console.log('attach', drive);
-		if (drive.emitsProgress) {
+		if (await drive.emitsProgress()) {
 			drive.on('progress', (progress: number) => {
 				console.log(drive, progress, '%');
 			});
 		}
 	});
-	scanner.on('detach', (drive: Drive) => {
+	scanner.on('detach', (drive: SourceDestination) => {
 		console.log('detach', drive);
 	});
 	scanner.start();

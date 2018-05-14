@@ -1,4 +1,3 @@
-import { Disposer, resolve } from 'bluebird';
 import { ZipStreamEntry } from 'unzip-stream';
 
 import { getFileStreamFromZipStream } from '../zip';
@@ -38,7 +37,11 @@ export class ZipSource extends SourceDestination {
 		};
 	}
 
-	static async fromSource(source: SourceDestination): Promise<Disposer<ZipSource>> {
-		return resolve(new ZipSource(source)).disposer(noop);
+	async open(): Promise<void> {
+		await this.source.open();
+	}
+
+	async close(): Promise<void> {
+		await this.source.close();
 	}
 }

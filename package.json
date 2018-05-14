@@ -24,7 +24,8 @@
     "node-raspberrypi-usbboot": "0.0.3",
     "udif": "^0.15.6",
     "unzip-stream": "^0.3.0",
-    "winusb-driver-generator": "^1.1.7"
+    "winusb-driver-generator": "^1.1.7",
+    "xxhash": "^0.2.4"
   },
   "devDependencies": {
     "@types/debug": "0.0.30",

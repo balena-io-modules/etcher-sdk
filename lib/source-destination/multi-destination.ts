@@ -1,3 +1,4 @@
+import { map } from 'bluebird';
 import { FilterStream } from 'blockmap';
 import { ReadResult, WriteResult } from 'file-disk';
 import { every } from 'lodash';
@@ -5,6 +6,12 @@ import { PassThrough } from 'stream';
 
 import { SourceDestination } from './source-destination';
 import { SparseWriteStream } from './sparse-write-stream';
+
+export class MultiDestinationError extends Error {
+	constructor(public error: Error, public destination: SourceDestination) {
+		super();
+	}
+}
 
 export class MultiDestination extends SourceDestination {
 	constructor(private destinations: SourceDestination[]) {
@@ -16,11 +23,9 @@ export class MultiDestination extends SourceDestination {
 
 	private async can(methodName: 'canRead' | 'canWrite' | 'canCreateReadStream' | 'canCreateSparseReadStream' | 'canCreateWriteStream' | 'canCreateSparseWriteStream') {
 		return every(
-			await Promise.all(
-				this.destinations.map(async (destination: SourceDestination) => {
-					return await destination[methodName]();
-				}),
-			),
+			await map(this.destinations, async (destination: SourceDestination) => {
+				return await destination[methodName]();
+			})
 		);
 	}
 
@@ -54,11 +59,9 @@ export class MultiDestination extends SourceDestination {
 	}
 
 	async write(buffer: Buffer, bufferOffset: number, length: number, fileOffset: number): Promise<WriteResult> {
-		const results = await Promise.all(
-			this.destinations.map(async (destination: SourceDestination) => {
-				return await destination.write(buffer, bufferOffset, length, fileOffset);
-			}),
-		);
+		const results = await map(this.destinations, async (destination: SourceDestination) => {
+			return await destination.write(buffer, bufferOffset, length, fileOffset);
+		});
 		// Returns the first WriteResult (they should be all the same)
 		return results[0];
 		// TODO: handle errors so one destination can fail
@@ -73,13 +76,9 @@ export class MultiDestination extends SourceDestination {
 	}
 
 	private async createStream(methodName: 'createWriteStream' | 'createSparseWriteStream') {
-		const streams = await Promise.all(
-			this.destinations.map(async (destination: SourceDestination) => {
-				return await destination[methodName]();
-			}),
-		);
 		const passthrough = new PassThrough();
-		streams.forEach((stream: NodeJS.WritableStream) => {
+		const streams = await map(this.destinations, async (destination: SourceDestination) => {
+			const stream = await destination[methodName]();
 			// TODO: allow some streams to fail
 			stream.on('error', passthrough.emit.bind(passthrough, 'error'));
 			passthrough.pipe(stream);
@@ -93,5 +92,27 @@ export class MultiDestination extends SourceDestination {
 
 	async createSparseWriteStream(): Promise<SparseWriteStream> {
 		return await this.createStream('createSparseWriteStream');
+	}
+
+	async open(): Promise<void> {  // TODO: factorize open and close
+		await super.open();
+		await map(this.destinations, async (destination) => {
+			try {
+				await destination.open();
+			} catch (error) {
+				this.emit('error', new MultiDestinationError(error, destination));
+			}
+		});
+	}
+
+	async close(): Promise<void> {
+		await super.close();
+		await map(this.destinations, async (destination) => {
+			try {
+				await destination.close();
+			} catch (error) {
+				this.emit('error', new MultiDestinationError(error, destination));
+			}
+		});
 	}
 }

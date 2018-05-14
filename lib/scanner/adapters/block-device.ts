@@ -1,19 +1,14 @@
-import { delay, Disposer } from 'bluebird';
+import { delay } from 'bluebird';
 import * as _debug from 'debug';
 import { Drive as DrivelistDrive, list } from 'drivelist';
-import { EventEmitter } from 'events';
-import { unmountDisk } from 'mountutils';
 import { promisify } from 'util';
 
 import { Adapter } from './adapter';
-import { clean } from './diskpart';
-import { Drive } from './drive';
-import { File, OpenFlags } from './source-destination/file';
+import { BlockDevice } from '../../source-destination/block-device';
 
 const listDrives = promisify(list);
-const unmountDiskAsync = promisify(unmountDisk);
 
-const debug = _debug('etcher-sdk:blockdevice');
+const debug = _debug('etcher-sdk:block-device-adapter');
 
 const SCAN_INTERVAL = 1000;
 const USBBOOT_RPI_COMPUTE_MODULE_NAMES = [
@@ -35,32 +30,6 @@ const difference = <T>(setA: Set<T>, setB: Set<T>): Set<T> => {
 const driveKey = (drive: DrivelistDrive) => {
 	return drive.device + '|' + drive.size + '|' + drive.description;
 };
-
-export class BlockDevice extends Drive {
-	emitsProgress = false;
-	canCreateSource = true;
-	canCreateDestination = true;
-
-	constructor(private drive: DrivelistDrive) {
-		super();
-	}
-
-	createSourceDisposer(): Promise<Disposer<File>> {
-		return File.fromPath(this.drive.raw, OpenFlags.Read);
-	}
-
-	createDestinationDisposer(): Promise<Disposer<File>> {
-		return File.fromPath(this.drive.raw, OpenFlags.WriteDevice);
-	}
-
-	async umount(): Promise<void> {
-		await unmountDiskAsync(this.drive.device);
-	}
-
-	async clean(): Promise<void> {
-		await clean(this.drive.device);
-	}
-}
 
 export class BlockDeviceAdapter extends Adapter {
 	// Emits 'attach', 'detach' and 'error' events
