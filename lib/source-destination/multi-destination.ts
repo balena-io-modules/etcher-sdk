@@ -5,7 +5,7 @@ import { every } from 'lodash';
 import { PassThrough } from 'stream';
 
 import { SourceDestination } from './source-destination';
-import { SparseWriteStream } from './sparse-write-stream';
+import { SparseWriteStream } from '../sparse-write-stream';
 
 export class MultiDestinationError extends Error {
 	constructor(public error: Error, public destination: SourceDestination) {
@@ -95,6 +95,7 @@ export class MultiDestination extends SourceDestination {
 	}
 
 	async open(): Promise<void> {  // TODO: factorize open and close
+		// TODO: remove destination from destinations list on error?
 		await super.open();
 		await map(this.destinations, async (destination) => {
 			try {

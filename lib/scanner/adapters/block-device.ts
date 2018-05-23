@@ -32,35 +32,39 @@ const driveKey = (drive: DrivelistDrive) => {
 };
 
 export class BlockDeviceAdapter extends Adapter {
-	// Emits 'attach', 'detach' and 'error' events
+	// Emits 'attach', 'detach', 'ready' and 'error' events
 	private drives: Map<string, BlockDevice> = new Map();
 	private running = false;
+	private ready = false;
 
-	constructor() {
+	constructor(public includeSystemDrives = false) {
 		super();
-		this.scanLoop();
 	}
 
 	start(): void {
 		this.running = true;
+		this.scanLoop();
 	}
 
 	stop(): void {
-		this.drives.clear();
 		this.running = false;
+		this.ready = false;
+		this.drives.clear();
 	}
 
 	private async scanLoop(): Promise<void> {
-		while (true) {
-			if (this.running) {
-				await this.scan();
+		while (this.running) {
+			await this.scan();
+			if (!this.ready) {
+				this.ready = true;
+				this.emit('ready');
 			}
 			await delay(SCAN_INTERVAL);
 		}
 	}
 
-	private async scan(includeSystemDrives = false): Promise<void> {
-		const drives = await this.listDrives(includeSystemDrives);
+	private async scan(): Promise<void> {
+		const drives = await this.listDrives();
 		if (this.running) {  // we may have been stopped while listing the drives.
 			const oldDevices = new Set<string>(this.drives.keys());
 			const newDevices = new Set<string>(drives.keys());
@@ -77,7 +81,7 @@ export class BlockDeviceAdapter extends Adapter {
 		}
 	}
 
-	private async listDrives(includeSystemDrives = false): Promise<Map<string, DrivelistDrive>> {
+	private async listDrives(): Promise<Map<string, DrivelistDrive>> {
 		let drives;
 		const result = new Map<string, DrivelistDrive>();
 		try {
@@ -93,7 +97,7 @@ export class BlockDeviceAdapter extends Adapter {
 			if (drive.busType === 'RAID') {
 				return false;
 			}
-			return !drive.error && (includeSystemDrives || !drive.isSystem);
+			return !drive.error && (this.includeSystemDrives || !drive.isSystem);
 		});
 		drives.forEach((drive: DrivelistDrive) => {
 			// TODO: Find a better way to detect that a certain

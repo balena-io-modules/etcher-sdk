@@ -3,8 +3,9 @@ import { Drive as DrivelistDrive } from 'drivelist';
 import { unmountDisk } from 'mountutils';
 import { promisify } from 'util';
 
+import { AdapterSourceDestination } from '../scanner/adapters/adapter';
 import { clean } from '../diskpart';
-import { File, OpenFlags } from './file';
+import { File } from './file';
 import { Metadata } from './metadata';
 
 /**
@@ -14,9 +15,39 @@ const UNMOUNT_ON_SUCCESS_TIMEOUT_MS = 2000;
 
 const unmountDiskAsync = promisify(unmountDisk);
 
-export class BlockDevice extends File {
+export class BlockDevice extends File implements AdapterSourceDestination {
+	emitsProgress = false;
+
 	constructor(private drive: DrivelistDrive) {
-		super(drive.raw, OpenFlags.WriteDevice);
+		super(drive.raw, File.OpenFlags.WriteDevice);
+	}
+
+	get isSystem(): boolean {
+		return this.drive.isSystem;
+	}
+
+	get raw(): string {
+		return this.drive.raw;
+	}
+
+	get device(): string {
+		return this.drive.device;
+	}
+
+	get devicePath(): string {
+		return this.drive.devicePath;
+	}
+
+	get description(): string {
+		return this.drive.description;
+	}
+
+	get mountpoints(): { path: string }[] {
+		return this.drive.mountpoints;
+	}
+
+	get size(): number {
+		return this.drive.size;
 	}
 
 	async getMetadata(): Promise<Metadata> {
@@ -24,6 +55,19 @@ export class BlockDevice extends File {
 			size: this.drive.size,
 		};
 	}
+
+	async canWrite(): Promise<boolean> {
+		return !this.drive.isReadOnly;
+	}
+
+	async canCreateWriteStream(): Promise<boolean> {
+		return !this.drive.isReadOnly;
+	}
+
+	async canCreateSparseWriteStream(): Promise<boolean> {
+		return !this.drive.isReadOnly;
+	}
+
 	async open(): Promise<void> {
 		await unmountDiskAsync(this.drive.device);
 		await clean(this.drive.device);
@@ -36,7 +80,7 @@ export class BlockDevice extends File {
 		// partitions causes macOS to mount the drive. If we try to
 		// unmount too quickly, then the drive might get re-mounted
 		// right afterwards.
-		if (true) {  // TODO: not sure if unmountOnSuccess sould be stored in this class or read from settings
+		if (true) {  // TODO: not sure if unmountOnSuccess should be stored in this class or read from settings
 			await delay(UNMOUNT_ON_SUCCESS_TIMEOUT_MS);
 			await unmountDiskAsync(this.drive.device);
 		}

@@ -1,8 +1,4 @@
 declare module 'drivelist' {
-	export interface Mountpoint {
-		path: string;
-	}
-
 	export interface Drive {
 		description: string;
 		icon: string;  // TODO: this is only monkey patched by blockdevice.ts
@@ -11,9 +7,11 @@ declare module 'drivelist' {
 		error: string | null;
 		displayName: string;
 		device: string;
-		mountpoints: Mountpoint[];
+		mountpoints: { path: string }[];
 		size: number;
 		raw: string;
+		devicePath: string;
+		isReadOnly: boolean;
 	}
 
 	export function list(callback: (error: Error, drives: Drive[]) => void): void;

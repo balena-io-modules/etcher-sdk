@@ -8,7 +8,7 @@ import { Stream as HashStream } from 'xxhash';
 import { close, stat, open, read, write } from '../fs';
 import { Metadata } from './metadata';
 import { SourceDestination } from './source-destination';
-import { SparseWriteStream } from './sparse-write-stream';
+import { SparseWriteStream } from '../sparse-write-stream';
 
 export class FileSparseWriteStream extends Writable implements SparseWriteStream {
 	private position: number;
@@ -50,31 +50,25 @@ export class FileSparseWriteStream extends Writable implements SparseWriteStream
 	}
 }
 
-export enum OpenFlags {
-	Read = constants.O_RDONLY,
-	ReadWrite = constants.O_RDWR | constants.O_CREAT,
-	WriteDevice = constants.O_RDWR | constants.O_NONBLOCK | constants.O_SYNC,
-}
-
 export class File extends SourceDestination {
 	private fd: number;
 
-	constructor(private path: string, private flags: OpenFlags) {
+	constructor(private path: string, private flags: File.OpenFlags) {
 		super();
 	}
 
 	private _canRead() {
 		return (
-			(this.flags === OpenFlags.Read) ||
-			(this.flags === OpenFlags.ReadWrite) ||
-			(this.flags === OpenFlags.WriteDevice)
+			(this.flags === File.OpenFlags.Read) ||
+			(this.flags === File.OpenFlags.ReadWrite) ||
+			(this.flags === File.OpenFlags.WriteDevice)
 		);
 	}
 
 	private _canWrite() {
 		return (
-			(this.flags === OpenFlags.ReadWrite) ||
-			(this.flags === OpenFlags.WriteDevice)
+			(this.flags === File.OpenFlags.ReadWrite) ||
+			(this.flags === File.OpenFlags.WriteDevice)
 		);
 	}
 	
@@ -113,7 +107,7 @@ export class File extends SourceDestination {
 	}
 
 	async createReadStream(): Promise<NodeJS.ReadableStream> {
-		return createReadStream('', { fd: this.fd, autoClose: false, start: 0 });
+		return createReadStream('', { fd: this.fd, autoClose: false, start: 0, highWaterMark: 1024 * 1024 });
 	}
 
 	async createWriteStream(): Promise<NodeJS.WritableStream> {
@@ -134,3 +128,12 @@ export class File extends SourceDestination {
 		await close(this.fd);
 	}
 }
+
+export namespace File {
+	export enum OpenFlags {
+		Read = constants.O_RDONLY,
+		ReadWrite = constants.O_RDWR | constants.O_CREAT,
+		WriteDevice = constants.O_RDWR | constants.O_NONBLOCK | constants.O_SYNC,
+	}
+}
+

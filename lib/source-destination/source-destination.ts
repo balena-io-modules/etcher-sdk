@@ -3,8 +3,9 @@ import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
 
 import { NotCapable } from '../errors';
+import { SparseWriteStream } from '../sparse-write-stream';
+
 import { Metadata } from './metadata';
-import { SparseWriteStream } from './sparse-write-stream';
 
 export class SourceDestination extends EventEmitter {
 	async canRead(): Promise<boolean> {
@@ -28,11 +29,6 @@ export class SourceDestination extends EventEmitter {
 	}
 
 	async canCreateSparseWriteStream(): Promise<boolean> {
-		return false;
-	}
-
-	async emitsProgress(): Promise<boolean> {
-		// Only used in UsbbootDevice
 		return false;
 	}
 

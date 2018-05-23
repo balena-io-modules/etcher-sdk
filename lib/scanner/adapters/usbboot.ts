@@ -1,7 +1,6 @@
 import { Disposer } from 'bluebird';
 import { UsbbootDevice, UsbbootScanner } from 'node-raspberrypi-usbboot';
 
-import { SourceDestination } from '../../source-destination/source-destination';
 import { UsbbootDrive } from '../../source-destination/usbboot';
 import { Adapter } from './adapter';
 
@@ -14,6 +13,7 @@ export class UsbbootDeviceAdapter extends Adapter {
 		this.scanner = new UsbbootScanner();
 		this.scanner.on('attach', this.onAttach.bind(this));
 		this.scanner.on('detach', this.onDetach.bind(this));
+		this.scanner.on('ready', this.emit.bind(this, 'ready'));
 		this.scanner.on('error', this.emit.bind(this, 'error'));
 	}
 

@@ -1,7 +1,5 @@
 import { FilterStream } from 'blockmap';
-import { Disposer, resolve } from 'bluebird';
 import { ReadResult } from 'file-disk';
-import { Stats } from 'fs';
 import { Image as UDIFImage } from 'udif';
 import { promisify } from 'util';
 
@@ -52,8 +50,11 @@ export class SourceDestinationFs {
 }
 
 export class DmgSource extends SourceDestination {
-	private constructor(private image: any, private source: SourceDestination) {
+	private image: UDIFImage;
+
+	constructor(private source: SourceDestination) {
 		super();
+		this.image = new UDIFImage('', { fs: new SourceDestinationFs(source) });
 	}
 
 	async createReadStream(): Promise<NodeJS.ReadableStream> {
@@ -72,12 +73,15 @@ export class DmgSource extends SourceDestination {
 		};
 	}
 
-	static async fromSource(source: SourceDestination): Promise<Disposer<DmgSource>> {
-		const image = new UDIFImage('', { fs: new SourceDestinationFs(source) });
-		await promisify(image.open).bind(image)();
-		return resolve(new DmgSource(image, source))
-		.disposer(async () => {
-			await promisify(image.close).bind(image)();
-		});
+	async open(): Promise<void> {
+		await super.open();
+		await this.source.open();
+		await promisify(this.image.open).bind(this.image)();
+	}
+
+	async close(): Promise<void> {
+		await super.close();
+		await promisify(this.image.close).bind(this.image)();
+		await this.source.close();
 	}
 }
