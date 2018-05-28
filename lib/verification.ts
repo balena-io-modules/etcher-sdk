@@ -14,7 +14,7 @@ export class VerificationError extends Error { // TODO: move to errors
 
 export const createHasher = () => {
 	return new HashStream(SEED, BITS);
-}
+};
 
 export const createVerifier = async (destination: SourceDestination, checksum: string, size: number): Promise<EventEmitter> => {
 	// This could be a method of SourceDestination.
@@ -34,17 +34,18 @@ export const createVerifier = async (destination: SourceDestination, checksum: s
 	hasher.on('error', emitter.emit.bind(emitter, 'error'));
 	hasher.on('finish', async () => {
 		const streamChecksum = (await streamToBuffer(hasher)).toString('hex');
-		console.log('finish', position, streamChecksum)
+		// TODO: debug
+		console.log('finish', position, streamChecksum);
 
 		if (streamChecksum === checksum) {
-		      emitter.emit('success');
+			emitter.emit('success');
 		} else {
 			emitter.emit(
 				'error',
-				new VerificationError(`Source and destination checksums do not match: ${checksum} !== ${streamChecksum}`)
+				new VerificationError(`Source and destination checksums do not match: ${checksum} !== ${streamChecksum}`),
 			);
 		}
 	});
 	stream.pipe(hasher);
 	return emitter;
-}
+};

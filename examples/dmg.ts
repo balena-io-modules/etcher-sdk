@@ -13,6 +13,7 @@ const main = async ({ sourceDmg, destinationFile }: any) => {
 	await Promise.all([ dmgSource.close(), fileDestination.close() ]);
 };
 
+// tslint:disable-next-line: no-var-requires
 const argv = require('yargs').command(
 	'$0 <sourceDmg> <destinationFile>',
 	'Extract the dmg file into a raw disk image.',
@@ -20,6 +21,6 @@ const argv = require('yargs').command(
 		yargs.positional('sourceDmg', { describe: 'Source dmg file' });
 		yargs.positional('destinationFile', { describe: 'Destination image file' });
 	},
-).argv
+).argv;
 
 wrapper(main, argv);

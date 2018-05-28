@@ -1,4 +1,5 @@
 export interface Metadata {
-	size?: number;
+	size: number;
 	compressedSize?: number;
+	blockmappedSize?: number;
 }

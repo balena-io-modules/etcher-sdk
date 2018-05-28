@@ -2,6 +2,7 @@ import axios from 'axios';
 import { ReadResult } from 'file-disk';
 
 import { Metadata } from './metadata';
+import { makeStreamEmitProgressEvents } from './progress-event';
 import { SourceDestination } from './source-destination';
 
 export class Http extends SourceDestination {
@@ -58,6 +59,6 @@ export class Http extends SourceDestination {
 			url: this.url,
 			responseType: 'stream',
 		});
-		return response.data;
+		return await makeStreamEmitProgressEvents(response.data, this);
 	}
 }

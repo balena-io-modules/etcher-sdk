@@ -7,5 +7,4 @@ export const streamToBuffer = async (stream: NodeJS.ReadableStream): Promise<Buf
 			resolve(Buffer.concat(chunks));
 		});
 	});
-}
-
+};

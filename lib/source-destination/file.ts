@@ -7,6 +7,7 @@ import { Stream as HashStream } from 'xxhash';
 
 import { close, stat, open, read, write } from '../fs';
 import { Metadata } from './metadata';
+import { makeStreamEmitProgressEvents } from './progress-event';
 import { SourceDestination } from './source-destination';
 import { SparseWriteStream } from '../sparse-write-stream';
 
@@ -20,6 +21,7 @@ export class FileSparseWriteStream extends Writable implements SparseWriteStream
 	}
 
 	private emitProgress(): void {
+		// TODO: remove this, we probably won't need progress events on write streams
 		this.emit('progress', {
 			bytes: this.bytes,
 			position: this.position,
@@ -107,7 +109,10 @@ export class File extends SourceDestination {
 	}
 
 	async createReadStream(): Promise<NodeJS.ReadableStream> {
-		return createReadStream('', { fd: this.fd, autoClose: false, start: 0, highWaterMark: 1024 * 1024 });
+		return await makeStreamEmitProgressEvents(
+			createReadStream('', { fd: this.fd, autoClose: false, start: 0, highWaterMark: 1024 * 1024 }),
+			this,
+		);
 	}
 
 	async createWriteStream(): Promise<NodeJS.WritableStream> {

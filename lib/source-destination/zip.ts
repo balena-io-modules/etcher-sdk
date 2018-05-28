@@ -2,6 +2,7 @@ import { ZipStreamEntry } from 'unzip-stream';
 
 import { getFileStreamFromZipStream } from '../zip';
 import { Metadata } from './metadata';
+import { makeStreamEmitProgressEvents } from './progress-event';
 import { SourceDestination } from './source-destination';
 
 const noop = () => {
@@ -26,7 +27,7 @@ export class ZipSource extends SourceDestination {
 	}
 
 	async createReadStream(): Promise<NodeJS.ReadableStream> {
-		return await this.getEntry();
+		return await makeStreamEmitProgressEvents(await this.getEntry(), this);
 	}
 
 	async getMetadata(): Promise<Metadata> {

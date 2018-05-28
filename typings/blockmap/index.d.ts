@@ -15,6 +15,8 @@ declare module 'blockmap' {
 
 	export class Blockmap {
 		imageSize: number;
+		blockSize: number;
+		blockCount: number;
 	}
 
 	export function createFilterStream(blockmap: Blockmap, options?: { verify?: boolean }): FilterStream;

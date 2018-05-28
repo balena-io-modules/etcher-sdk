@@ -8,8 +8,8 @@ const main = async ({ sourceImage, devicePathPrefix }: any) => {
 	const verify = false;
 	const adapters = [ new scanner.adapters.BlockDeviceAdapter(false), new scanner.adapters.UsbbootDeviceAdapter() ];
 	const deviceScanner = new scanner.Scanner(adapters);
-	deviceScanner.on('error', console.error)
-	deviceScanner.start()
+	deviceScanner.on('error', console.error);
+	deviceScanner.start();
 	// Wait for the deviceScanner to be ready
 	await new Promise((resolve, reject) => {
 		deviceScanner.on('ready', resolve);
@@ -24,7 +24,7 @@ const main = async ({ sourceImage, devicePathPrefix }: any) => {
 	});
 	console.log(destinationDrives.map((d) => d.devicePath));
 	const destination = new sourceDestination.MultiDestination(destinationDrives);
-	destination.on('error', console.error) // TODO
+	destination.on('error', console.error); // TODO
 	await Promise.all([ sourceDrive.open(), destination.open() ]);
 	try {
 		console.log('start flashing', Date.now());
@@ -37,7 +37,7 @@ const main = async ({ sourceImage, devicePathPrefix }: any) => {
 				verifier.on('success', resolve);
 				//verifier.on('progress', console.log);
 			});
-			console.log('ok')
+			console.log('ok');
 		}
 	} finally {
 		await Promise.all([ destination.close(), sourceDrive.close() ]);
@@ -45,6 +45,7 @@ const main = async ({ sourceImage, devicePathPrefix }: any) => {
 	}
 };
 
+// tslint:disable-next-line: no-var-requires
 const argv = require('yargs').command(
 	'$0 <sourceImage> <devicePathPrefix>',
 	'Write the sourceImage on all drives which link name in /dev/disk/by-path/ starts with devicePathPrefix.',
@@ -52,6 +53,6 @@ const argv = require('yargs').command(
 		yargs.positional('sourceImage', { describe: 'Source image' });
 		yargs.positional('devicePathPrefix', { describe: 'Devices name prefix in /dev/disk/by-path/' });
 	},
-).argv
+).argv;
 
 wrapper(main, argv);

@@ -13,8 +13,8 @@ export class UsbbootDrive extends SourceDestination implements AdapterSourceDest
 	size = null;
 	emitsProgress = true;
 
-	constructor(private device_: UsbbootDevice) {
+	constructor(private usbDevice: UsbbootDevice) {
 		super();
-		device_.on('progress', this.emit.bind(this, 'progress'));
+		usbDevice.on('progress', this.emit.bind(this, 'progress'));
 	}
 }

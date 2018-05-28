@@ -33,7 +33,7 @@ export class SourceDestination extends EventEmitter {
 	}
 
 	async getMetadata(): Promise<Metadata> {
-		return {};
+		throw new NotCapable();
 	}
 
 	async read(buffer: Buffer, bufferOffset: number, length: number, sourceOffset: number): Promise<ReadResult> {

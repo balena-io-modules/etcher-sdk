@@ -23,7 +23,7 @@ const main = () => {
 	deviceScanner.start();
 	deviceScanner.on('ready', () => {
 		const drive = deviceScanner.getBy('devicePath', 'pci-0000:00:14.0-usb-0:2:1.0-scsi-0:0:0:0');
-		console.log('ready', drive)
+		console.log('ready', drive);
 	});
 };
 

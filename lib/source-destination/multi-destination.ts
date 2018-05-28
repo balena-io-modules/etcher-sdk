@@ -25,7 +25,7 @@ export class MultiDestination extends SourceDestination {
 		return every(
 			await map(this.destinations, async (destination: SourceDestination) => {
 				return await destination[methodName]();
-			})
+			}),
 		);
 	}
 

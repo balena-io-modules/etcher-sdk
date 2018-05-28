@@ -13,6 +13,7 @@ const main = async ({ zipSource, fileDestination }: any) => {
 	await Promise.all([ sourceZip.close(), destinationFile.close() ]);
 };
 
+// tslint:disable-next-line: no-var-requires
 const argv = require('yargs').command(
 	'$0 <zipSource> <fileDestination>',
 	'Write the image contained in the zipSource url into fileDestination',
@@ -20,11 +21,11 @@ const argv = require('yargs').command(
 		yargs.positional(
 			'zipSource',
 			{
-				describe: 'Source zip url (http or https), you can try https://resin-staging-img.s3.amazonaws.com/images/artik10/2.3.0%2Brev1.dev/image/resin.img.zip'
-			}
+				describe: 'Source zip url (http or https), you can try https://resin-staging-img.s3.amazonaws.com/images/artik10/2.3.0%2Brev1.dev/image/resin.img.zip',
+			},
 		);
 		yargs.positional('fileDestination', { describe: 'Destination image file' });
 	},
-).argv
+).argv;
 
 wrapper(main, argv);

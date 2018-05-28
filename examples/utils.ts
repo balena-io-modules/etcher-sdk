@@ -16,7 +16,7 @@ export const wrapper = async (main: (args: any) => Promise<void>, args: any) => 
 export const pipeSourceToDestination = async (
 	source: SourceDestination,
 	destination: SourceDestination,
-	calculateSourceHash = false
+	calculateSourceHash = false,
 ): Promise<{ bytes: number, hash?: string }> => {
 	// TODO: check capabilities + sparse streams
 	const [ sourceStream, destinationStream ] = await Promise.all([ source.createReadStream(), destination.createWriteStream() ]);
@@ -38,7 +38,7 @@ export const pipeSourceToDestination = async (
 	await new Promise((resolve: () => void, reject: (error: Error) => void) => {
 		sourceStream.on('error', reject);
 		sourceStream.on('data', (data) => {
-			bytes += data.length
+			bytes += data.length;
 		});
 		destinationStream.on('error', reject);
 		if (calculateSourceHash) {
@@ -56,4 +56,4 @@ export const pipeSourceToDestination = async (
 	});
 	clearInterval(intervalId);
 	return { bytes, hash };
-}
+};
