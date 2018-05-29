@@ -1,6 +1,6 @@
 declare module 'blockmap' {
 
-	import { Transform } from 'stream';
+	import { Readable, Transform } from 'stream';
 
 	export class Chunk {
 		buffer: Buffer;
@@ -13,10 +13,25 @@ declare module 'blockmap' {
 		bytesRead: number;
 	}
 
+	export class Range {
+		start: number;
+		end: number;
+		checksum?: string;
+	}
+
+	export class ReadRange {
+		constructor(range: Range, blockSize: number);
+	}
+
+	export class ReadStream extends Readable {
+		constructor(filename: string, blockmap: Blockmap, options: any);
+	}
+
 	export class Blockmap {
 		imageSize: number;
 		blockSize: number;
 		blockCount: number;
+		ranges: Range[];
 	}
 
 	export function createFilterStream(blockmap: Blockmap, options?: { verify?: boolean }): FilterStream;

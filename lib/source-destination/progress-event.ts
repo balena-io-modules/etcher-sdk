@@ -31,4 +31,4 @@ export async function makeStreamEmitProgressEvents<T extends EventEmitter>(strea
 		stream.emit('progress', { position, size, bytes, totalBytes });
 	});
 	return stream;
-};
+}

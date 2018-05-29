@@ -8,31 +8,32 @@ const readJsonFile = async (path: string): Promise<any> => {
 	return JSON.parse(await fs.readFile(path, 'utf8'));
 };
 
-const main = async ({ bucket, deviceType, buildId, fileDestination, trim, config }: any) => {
-	let source: sourceDestination.SourceDestination = new sourceDestination.ResinS3Source(bucket, deviceType, buildId);
+const main = async ({ fileSource, fileDestination, trim, config }: any) => {
+	let source: sourceDestination.SourceDestination = new sourceDestination.File(fileSource, sourceDestination.File.OpenFlags.Read);
 	if (trim || (config !== undefined)) {
 		source = new sourceDestination.ConfiguredSource(
 			source,
 			trim,
-			false,
+			true,
 			(config !== undefined) ? 'legacy' : undefined,
 			{ config: await readJsonFile(config) },
 		);
 	}
 	const destination= new sourceDestination.File(fileDestination, sourceDestination.File.OpenFlags.ReadWrite);
 	await Promise.all([ source.open(), destination.open() ]);
-	await pipeSourceToDestination(source, destination, true);
+	const hash = await pipeSourceToDestination(source, destination, true);
+	if (hash) {
+		console.log('hash', hash);
+	}
 	await Promise.all([ source.close(), destination.close() ]);
 };
 
 // tslint:disable-next-line: no-var-requires
 const argv = require('yargs').command(
-	'$0 <bucket> <deviceType> <buildId> <fileDestination>',
+	'$0 <fileSource> <fileDestination>',
 	'Write the image contained in the zipSource url into fileDestination',
 	(yargs: Argv) => {
-		yargs.positional('bucket', { describe: 's3 bucket (resin-staging-img or resin-production-img-cloudformation)' });
-		yargs.positional('deviceType', { describe: 'device type (example: raspberrypi3)' });
-		yargs.positional('buildId', { describe: 'device type build id (example: 2.12.7+rev1.prod/)' });
+		yargs.positional('fileSource', { describe: 'Source image file' });
 		yargs.positional('fileDestination', { describe: 'Destination image file' });
 		yargs.option('trim', { default: false });
 		yargs.describe('config', 'json configuration file');

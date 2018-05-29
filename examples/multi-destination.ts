@@ -28,10 +28,10 @@ const main = async ({ sourceImage, devicePathPrefix }: any) => {
 	await Promise.all([ sourceDrive.open(), destination.open() ]);
 	try {
 		console.log('start flashing', Date.now());
-		const { bytes, hash } = await pipeSourceToDestination(sourceDrive, destination, verify);
+		const hash = await pipeSourceToDestination(sourceDrive, destination, verify);
 		console.log('done flashing', Date.now());
 		if (verify && (hash !== undefined)) {
-			const verifier = await verification.createVerifier(destination, hash, bytes);
+			const verifier = await verification.createVerifier(destination, hash, (await sourceDrive.getMetadata()).size);
 			await new Promise((resolve, reject) => {
 				verifier.on('error', reject);
 				verifier.on('success', resolve);

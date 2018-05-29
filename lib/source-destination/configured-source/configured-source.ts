@@ -1,15 +1,14 @@
-import { Blockmap, createFilterStream, FilterStream } from 'blockmap';
+import { Blockmap, createFilterStream, ReadStream } from 'blockmap';
 import { using } from 'bluebird';
 import * as _debug from 'debug';
 import { DiscardDiskChunk, Disk, ReadResult, WriteResult } from 'file-disk';
 import { getPartitions } from 'partitioninfo';
 import { interact, AsyncFsLike } from 'resin-image-fs';
-import { Transform } from 'stream';
 
 import { configure as legacyConfigure } from './configure';
 import { Metadata } from '../metadata';
 import { makeStreamEmitProgressEvents } from '../progress-event';
-import { SourceDestination } from '../source-destination';
+import { SourceDestination, SourceDestinationFs } from '../source-destination';
 
 const debug = _debug('etcher-sdk:configured-source');
 const BLOCK_SIZE = 512;
@@ -50,6 +49,7 @@ export class ConfiguredSource extends SourceDestination {
 		// source needs to implement read and createReadStream
 		private source: SourceDestination,
 		private shouldTrimPartitions: boolean,
+		private createStreamFromDisk: boolean,
 		configure?: ConfigureFunction | 'legacy',
 		private config?: any,
 	) {
@@ -88,16 +88,17 @@ export class ConfiguredSource extends SourceDestination {
 		imageStream.on('error', (err) => {
 			transform.emit('error', err);
 		});
-		imageStream.on('progress', (progress) => {
-			transform.emit('progress', progress);
-		});
 		imageStream.pipe(transform);
 		return await makeStreamEmitProgressEvents(transform, this);
 	}
 
-	async createSparseReadStream(): Promise<FilterStream> {
-		// TODO: depending on the source reading only the required chunks may be faster
-		// for FileSource for example.
+	async createSparseReadStreamFromDisk(): Promise<ReadStream> {
+		const blockmap = await this.getBlockmap();
+		const stream = new ReadStream('', blockmap, { verify: false, fs: new SourceDestinationFs(this) });
+		return await makeStreamEmitProgressEvents(stream, this);
+	}
+
+	async createSparseReadStreamFromStream(): Promise<NodeJS.ReadableStream> {
 		const stream = await this.createReadStream();
 		const blockmap = await this.getBlockmap();
 		debug('blockmap', blockmap);
@@ -105,11 +106,16 @@ export class ConfiguredSource extends SourceDestination {
 		stream.on('error', (error: Error) => {
 			transform.emit('error', error);
 		});
-		stream.on('progress', (progress) => {
-			transform.emit('progress', progress);
-		});
 		stream.pipe(transform);
 		return await makeStreamEmitProgressEvents(transform, this);
+	}
+
+	async createSparseReadStream(): Promise<NodeJS.ReadableStream> {
+		if (this.createStreamFromDisk) {
+			return await this.createSparseReadStreamFromDisk();
+		} else {
+			return await this.createSparseReadStreamFromStream();
+		}
 	}
 
 	async getMetadata(): Promise<Metadata> {

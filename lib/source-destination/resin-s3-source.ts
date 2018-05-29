@@ -1,42 +1,13 @@
-import * as AWS from 'aws-sdk';
 import { ReadResult } from 'file-disk';
-import { ZipStreamEntry } from 'unzip-stream';
-import { Url } from 'url';
 
+import { Http } from './http';
 import { Metadata } from './metadata';
-import { makeStreamEmitProgressEvents } from './progress-event';
 import { SourceDestination } from './source-destination';
-import { getFileStreamFromZipStream } from '../zip';
-
-const getS3Client = (): AWS.S3 => {
-	const s3Config: AWS.S3.Types.ClientConfiguration = {
-		accessKeyId: '',
-		secretAccessKey: '',
-		s3ForcePathStyle: true,
-		sslEnabled: false,
-	};
-	const s3 = new AWS.S3(s3Config);
-	// Make it work without accessKeyId and secretAccessKey
-	s3.getObject = (...args: any[]) => {
-		return s3.makeUnauthenticatedRequest('getObject', ...args);
-	};
-	s3.headObject = (...args: any[]) => {
-		return s3.makeUnauthenticatedRequest('headObject', ...args);
-	};
-	return s3;
-};
-
-export class NoContentLength extends Error {
-	constructor(source: ResinS3Source) {
-		super(`No content length for resin s3 source ${source.bucket} ${source.deviceType} ${source.version}`);
-	}
-}
+import { ZipSource } from './zip';
 
 export class ResinS3Source extends SourceDestination {
-	static protocol: string = 'resin-s3:';
-
-	private static s3: AWS.S3 = getS3Client();
-	private entry: ZipStreamEntry;
+	private rawSource: Http;
+	private zipSource: ZipSource;
 
 	constructor(readonly bucket: string, readonly deviceType: string, readonly version: string) {
 		// example:
@@ -44,53 +15,44 @@ export class ResinS3Source extends SourceDestination {
 		// deviceType: raspberry-pi
 		// version: 2.9.6+rev1.prod
 		super();
+		this.rawSource = new Http(this.getUrl('image/resin.img'));
+		this.zipSource = new ZipSource(new Http(this.getUrl('image/resin.img.zip')));
+
 	}
 
-	private getS3Params(compressed: boolean): AWS.S3.Types.GetObjectRequest {
-		return {
-			Bucket: this.bucket,
-			Key: `images/${this.deviceType}/${this.version}/image/resin.img${compressed ? '.zip' : ''}`,
-		};
+	async canCreateReadStream(): Promise<boolean> {
+		return true;
 	}
 
-	private getRange(start?: number, end?: number): string | undefined {
-		if ((start !== undefined) || (end !== undefined)) {
-			return `bytes=${start || 0}-${end || ''}`;
-		}
+	async canRead(): Promise<boolean> {
+		return true;
 	}
 
-	private async getEntry(): Promise<ZipStreamEntry> {
-		if (this.entry === undefined) {
-			const stream = ResinS3Source.s3.getObject(this.getS3Params(true)).createReadStream();
-			this.entry = await getFileStreamFromZipStream(stream, 'resin.img');
-		}
-		return this.entry;
-	}
-
-	private async getSize(compressed: boolean): Promise<number> {
-		return (await this.getEntry()).size;
+	private getUrl(path: string): string {
+		return `https://${this.bucket}.s3.amazonaws.com/images/${this.deviceType}/${encodeURIComponent(this.version)}/${path}`;
 	}
 
 	async read(buffer: Buffer, bufferOffset: number, length: number, sourceOffset: number): Promise<ReadResult> {
-		const params = this.getS3Params(false);
-		params.Range = this.getRange(sourceOffset, sourceOffset + length - 1);
-		const data = await ResinS3Source.s3.getObject(params).promise();
-		if (data.ContentLength === undefined) {
-			throw new NoContentLength(this);
-		}
-		(data.Body as Buffer).copy(buffer, bufferOffset);
-		return { bytesRead: data.ContentLength, buffer };
+		return await this.rawSource.read(buffer, bufferOffset, length, sourceOffset);
 	}
 
 	async createReadStream(): Promise<NodeJS.ReadableStream> {
-		return await makeStreamEmitProgressEvents(await this.getEntry(), this);
+		return await this.zipSource.createReadStream();
 	}
 
 	async getMetadata(): Promise<Metadata> {
-		const entry = await this.getEntry();
-		return {
-			size: entry.size,
-			compressedSize: entry.compressedSize,
-		};
+		return await this.zipSource.getMetadata();
+	}
+
+	async open() {
+		await super.open();
+		await this.rawSource.open();
+		await this.zipSource.open();
+	}
+
+	async close() {
+		await this.zipSource.close();
+		await this.rawSource.close();
+		await super.close();
 	}
 }

@@ -1,5 +1,4 @@
 import { map } from 'bluebird';
-import { FilterStream } from 'blockmap';
 import { ReadResult, WriteResult } from 'file-disk';
 import { every } from 'lodash';
 import { PassThrough } from 'stream';
@@ -71,7 +70,7 @@ export class MultiDestination extends SourceDestination {
 		return await this.destinations[0].createReadStream();
 	}
 
-	async createSparseReadStream(): Promise<FilterStream> {  // TODO: replace FilterStream with SparseReadStream
+	async createSparseReadStream(): Promise<NodeJS.ReadableStream> {
 		return await this.destinations[0].createSparseReadStream();
 	}
 

@@ -1,4 +1,4 @@
-import { Chunk, createFilterStream, FilterStream } from 'blockmap';
+import { Chunk } from 'blockmap';
 import { Disposer, resolve } from 'bluebird';
 import { ReadResult, WriteResult } from 'file-disk';
 import { constants, createReadStream, createWriteStream } from 'fs';

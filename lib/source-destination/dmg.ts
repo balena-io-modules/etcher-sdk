@@ -1,4 +1,3 @@
-import { FilterStream } from 'blockmap';
 import { ReadResult } from 'file-disk';
 import * as _ from 'lodash';
 import { BLOCK, SECTOR_SIZE, Image as UDIFImage } from 'udif';
@@ -6,50 +5,7 @@ import { promisify } from 'util';
 
 import { Metadata } from './metadata';
 import { makeStreamEmitProgressEvents } from './progress-event';
-import { SourceDestination } from './source-destination';
-
-export class SourceDestinationFs {
-	// Adapts a SourceDestination to an fs like interface (so it can be used in udif for example)
-	constructor(private source: SourceDestination) {
-	}
-
-	open(path: string, options: any, callback: (error: Error | null, fd?: number) => void) {
-		callback(null, 1);
-	}
-
-	close(fd: number, callback: (error: Error | null) => void) {
-		callback(null);
-	}
-
-	fstat(fd: number, callback: (error: Error | null, stats?: { size: number }) => void) {
-		this.source.getMetadata()
-		.then((metadata) => {
-			if (metadata.size === undefined) {
-				callback(new Error('No size'));
-				return;
-			}
-			callback(null, { size: metadata.size });
-		})
-		.catch(callback);
-	}
-
-	read(
-		fd: number,
-		buffer: Buffer,
-		bufferOffset: number,
-		length: number,
-		sourceOffset: number,
-		callback: (error: Error | null, bytesRead?: number, buffer?: Buffer) => void,
-	) {
-		this.source.read(buffer, bufferOffset, length, sourceOffset)
-		.then((res: ReadResult) => {
-			callback(null, res.bytesRead, res.buffer);
-		})
-		.catch(callback);
-	}
-
-	// TODO: add write if it is needed
-}
+import { SourceDestination, SourceDestinationFs } from './source-destination';
 
 export class DmgSource extends SourceDestination {
 	private image: UDIFImage;
@@ -63,7 +19,7 @@ export class DmgSource extends SourceDestination {
 		return await makeStreamEmitProgressEvents(this.image.createReadStream(), this);
 	}
 
-	async createSparseReadStream(): Promise<FilterStream> {
+	async createSparseReadStream(): Promise<NodeJS.ReadableStream> {
 		return await makeStreamEmitProgressEvents(this.image.createSparseReadStream(), this);
 	}
 
