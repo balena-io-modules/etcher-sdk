@@ -8,23 +8,21 @@ const readJsonFile = async (path: string): Promise<any> => {
 	return JSON.parse(await fs.readFile(path, 'utf8'));
 };
 
-const main = async ({ fileSource, fileDestination, trim, config }: any) => {
+const main = async ({ fileSource, fileDestination, trim, config, verify }: any) => {
 	let source: sourceDestination.SourceDestination = new sourceDestination.File(fileSource, sourceDestination.File.OpenFlags.Read);
 	if (trim || (config !== undefined)) {
 		source = new sourceDestination.ConfiguredSource(
 			source,
 			trim,
+			//false,
 			true,
 			(config !== undefined) ? 'legacy' : undefined,
-			{ config: await readJsonFile(config) },
+			(config !== undefined) ? { config: await readJsonFile(config) } : undefined,
 		);
 	}
-	const destination= new sourceDestination.File(fileDestination, sourceDestination.File.OpenFlags.ReadWrite);
+	const destination = new sourceDestination.File(fileDestination, sourceDestination.File.OpenFlags.ReadWrite);
 	await Promise.all([ source.open(), destination.open() ]);
-	const hash = await pipeSourceToDestination(source, destination, true);
-	if (hash) {
-		console.log('hash', hash);
-	}
+	await pipeSourceToDestination(source, destination, verify);
 	await Promise.all([ source.close(), destination.close() ]);
 };
 
@@ -36,6 +34,7 @@ const argv = require('yargs').command(
 		yargs.positional('fileSource', { describe: 'Source image file' });
 		yargs.positional('fileDestination', { describe: 'Destination image file' });
 		yargs.option('trim', { default: false });
+		yargs.option('verify', { default: false });
 		yargs.describe('config', 'json configuration file');
 	},
 ).argv;

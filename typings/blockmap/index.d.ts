@@ -10,6 +10,7 @@ declare module 'blockmap' {
 
 	export class FilterStream extends Transform {
 		blockMap: Blockmap;
+		blocksRead: number;
 		bytesRead: number;
 	}
 
@@ -24,6 +25,9 @@ declare module 'blockmap' {
 	}
 
 	export class ReadStream extends Readable {
+		blockMap: Blockmap;
+		blocksRead: number;
+		bytesRead: number;
 		constructor(filename: string, blockmap: Blockmap, options: any);
 	}
 
@@ -31,8 +35,9 @@ declare module 'blockmap' {
 		imageSize: number;
 		blockSize: number;
 		blockCount: number;
+		mappedBlockCount: number;
 		ranges: Range[];
 	}
 
-	export function createFilterStream(blockmap: Blockmap, options?: { verify?: boolean }): FilterStream;
+	export function createFilterStream(blockmap: Blockmap, options?: { verify?: boolean, generateChecksums?: boolean }): FilterStream;
 }

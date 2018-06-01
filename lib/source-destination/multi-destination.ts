@@ -1,3 +1,4 @@
+import { FilterStream, ReadStream } from 'blockmap';
 import { map } from 'bluebird';
 import { ReadResult, WriteResult } from 'file-disk';
 import { every } from 'lodash';
@@ -66,12 +67,12 @@ export class MultiDestination extends SourceDestination {
 		// TODO: handle errors so one destination can fail
 	}
 
-	async createReadStream(): Promise<NodeJS.ReadableStream> {
-		return await this.destinations[0].createReadStream();
+	async _createReadStream(): Promise<NodeJS.ReadableStream> {
+		return await this.destinations[0]._createReadStream();
 	}
 
-	async createSparseReadStream(): Promise<NodeJS.ReadableStream> {
-		return await this.destinations[0].createSparseReadStream();
+	async _createSparseReadStream(): Promise<FilterStream | ReadStream> {
+		return await this.destinations[0]._createSparseReadStream();
 	}
 
 	private async createStream(methodName: 'createWriteStream' | 'createSparseWriteStream') {

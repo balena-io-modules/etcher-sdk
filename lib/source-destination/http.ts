@@ -2,7 +2,6 @@ import axios from 'axios';
 import { ReadResult } from 'file-disk';
 
 import { Metadata } from './metadata';
-import { makeStreamEmitProgressEvents } from './progress-event';
 import { SourceDestination } from './source-destination';
 
 export class Http extends SourceDestination {
@@ -53,12 +52,12 @@ export class Http extends SourceDestination {
 		return { bytesRead, buffer };
 	}
 
-	async createReadStream(): Promise<NodeJS.ReadableStream> {
+	async _createReadStream(): Promise<NodeJS.ReadableStream> {
 		const response = await axios({
 			method: 'get',
 			url: this.url,
 			responseType: 'stream',
 		});
-		return await makeStreamEmitProgressEvents(response.data, this);
+		return response.data;
 	}
 }

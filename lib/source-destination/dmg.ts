@@ -1,3 +1,4 @@
+import { FilterStream } from 'blockmap';
 import { ReadResult } from 'file-disk';
 import * as _ from 'lodash';
 import { BLOCK, SECTOR_SIZE, Image as UDIFImage } from 'udif';
@@ -15,12 +16,13 @@ export class DmgSource extends SourceDestination {
 		this.image = new UDIFImage('', { fs: new SourceDestinationFs(source) });
 	}
 
-	async createReadStream(): Promise<NodeJS.ReadableStream> {
-		return await makeStreamEmitProgressEvents(this.image.createReadStream(), this);
+	async _createReadStream(): Promise<NodeJS.ReadableStream> {
+		return this.image.createReadStream();
 	}
 
-	async createSparseReadStream(): Promise<NodeJS.ReadableStream> {
-		return await makeStreamEmitProgressEvents(this.image.createSparseReadStream(), this);
+	async _createSparseReadStream(generateChecksums: boolean): Promise<FilterStream> {
+		// We don't care about generateChecksums here as the blockmap already has checksums.
+		return this.image.createSparseReadStream();
 	}
 
 	getMappedBlocksSize = () => {

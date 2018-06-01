@@ -1,13 +1,10 @@
 import { Chunk } from 'blockmap';
-import { Disposer, resolve } from 'bluebird';
 import { ReadResult, WriteResult } from 'file-disk';
 import { constants, createReadStream, createWriteStream } from 'fs';
 import { Writable } from 'stream';
-import { Stream as HashStream } from 'xxhash';
 
 import { close, stat, open, read, write } from '../fs';
 import { Metadata } from './metadata';
-import { makeStreamEmitProgressEvents } from './progress-event';
 import { SourceDestination } from './source-destination';
 import { SparseWriteStream } from '../sparse-write-stream';
 
@@ -108,11 +105,8 @@ export class File extends SourceDestination {
 		return await write(this.fd, buffer, bufferOffset, length, fileOffset);
 	}
 
-	async createReadStream(): Promise<NodeJS.ReadableStream> {
-		return await makeStreamEmitProgressEvents(
-			createReadStream('', { fd: this.fd, autoClose: false, start: 0, highWaterMark: 1024 * 1024 }),
-			this,
-		);
+	async _createReadStream(): Promise<NodeJS.ReadableStream> {
+		return createReadStream('', { fd: this.fd, autoClose: false, start: 0, highWaterMark: 1024 * 1024 });
 	}
 
 	async createWriteStream(): Promise<NodeJS.WritableStream> {
