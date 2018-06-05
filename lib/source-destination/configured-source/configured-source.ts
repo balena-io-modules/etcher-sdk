@@ -1,9 +1,10 @@
-import { Blockmap, createFilterStream, FilterStream, ReadStream } from 'blockmap';
 import { using } from 'bluebird';
 import * as _debug from 'debug';
 import { DiscardDiskChunk, Disk, ReadResult, WriteResult } from 'file-disk';
 import { getPartitions } from 'partitioninfo';
 import { interact, AsyncFsLike } from 'resin-image-fs';
+
+import BlockMap = require('blockmap');
 
 import { configure as legacyConfigure } from './configure';
 import { Metadata } from '../metadata';
@@ -61,7 +62,7 @@ export class ConfiguredSource extends SourceDestination {
 		}
 	}
 
-	private async getBlockmap(): Promise<Blockmap> {
+	private async getBlockmap(): Promise<BlockMap> {
 		return await this.disk.getBlockMap(BLOCK_SIZE, false);
 	}
 
@@ -91,28 +92,30 @@ export class ConfiguredSource extends SourceDestination {
 		return transform;
 	}
 
-	private async createSparseReadStreamFromDisk(generateChecksums: boolean): Promise<ReadStream> {
-		return new ReadStream(
+	private async createSparseReadStreamFromDisk(generateChecksums: boolean): Promise<BlockMap.ReadStream> {
+		return new BlockMap.ReadStream(
 			'',
 			await this.getBlockmap(),
 			{
 				verify: false,
 				generateChecksums,
 				fs: new SourceDestinationFs(this),
+				chunkSize: 2 * 1024 * 1024,  // TODO: constant
+				autoClose: false,
 			}
 		);
 	}
 
-	private async createSparseReadStreamFromStream(generateChecksums: boolean): Promise<FilterStream> {
+	private async createSparseReadStreamFromStream(generateChecksums: boolean): Promise<BlockMap.FilterStream> {
 		const stream = await this.createReadStream();
 		const blockmap = await this.getBlockmap();
-		const transform = createFilterStream(blockmap, { verify: false, generateChecksums });
+		const transform = BlockMap.createFilterStream(blockmap, { verify: false, generateChecksums });
 		stream.on('error', transform.emit.bind(transform, 'error'));
 		stream.pipe(transform);
 		return transform;
 	}
 
-	async _createSparseReadStream(generateChecksums: boolean): Promise<FilterStream | ReadStream> {
+	async _createSparseReadStream(generateChecksums: boolean): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
 		if (this.createStreamFromDisk) {
 			return await this.createSparseReadStreamFromDisk(generateChecksums);
 		} else {

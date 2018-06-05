@@ -1,10 +1,12 @@
-import { FilterStream, ReadStream } from 'blockmap';
-import { map } from 'bluebird';
+import { each, map } from 'bluebird';
 import { ReadResult, WriteResult } from 'file-disk';
-import { every } from 'lodash';
+import { every, minBy } from 'lodash';
 import { PassThrough } from 'stream';
 
-import { SourceDestination } from './source-destination';
+import BlockMap = require('blockmap');
+
+import { PROGRESS_EMISSION_INTERVAL } from '../constants';
+import { SourceDestination, Verifier } from './source-destination';
 import { SparseWriteStream } from '../sparse-write-stream';
 
 export class MultiDestinationError extends Error {
@@ -13,8 +15,50 @@ export class MultiDestinationError extends Error {
 	}
 }
 
+export class MultiDestinationVerifier extends Verifier {
+	private verifiers: Verifier[];
+	private remaining: number;
+	private timer: number;
+
+	constructor(private source: MultiDestination, checksumOrBlockmap: string | BlockMap, size?: number) {
+		super();
+		this.remaining = source.destinations.length;
+		this.verifiers = source.destinations.map((dest: SourceDestination) => {
+			const verifier = dest.createVerifier(checksumOrBlockmap, size);
+			verifier.on('error', (error: Error) => {
+				this.emit('error', new MultiDestinationError(error, dest));
+			});
+			verifier.on('finish', () => {
+				this.remaining -= 1;
+				if (this.remaining === 0) {
+					clearInterval(this.timer);
+					this.emitProgress();
+					this.emit('finish');
+				}
+			});
+			return verifier;
+		});
+	}
+
+	private emitProgress() {
+		const verifier = minBy(this.verifiers, (verifier: Verifier) => {
+			return verifier.progress.bytes;
+		});
+		if (verifier !== undefined) {
+			this.emit('progress', verifier.progress);
+		}
+	}
+
+	async run(): Promise<void> {
+		this.timer = setInterval(this.emitProgress.bind(this), PROGRESS_EMISSION_INTERVAL);
+		this.verifiers.map((verifier: Verifier) => {
+			verifier.run();
+		});
+	}
+}
+
 export class MultiDestination extends SourceDestination {
-	constructor(private destinations: SourceDestination[]) {
+	constructor(readonly destinations: SourceDestination[]) {
 		super();
 		if (destinations.length === 0) {
 			throw new Error('At least one destination is required');
@@ -67,20 +111,37 @@ export class MultiDestination extends SourceDestination {
 		// TODO: handle errors so one destination can fail
 	}
 
-	async _createReadStream(): Promise<NodeJS.ReadableStream> {
-		return await this.destinations[0]._createReadStream();
+	async _createReadStream(...args: any[]): Promise<NodeJS.ReadableStream> {
+		// TODO: raise an error or a warning here
+		return await this.destinations[0]._createReadStream(...args);
 	}
 
-	async _createSparseReadStream(): Promise<FilterStream | ReadStream> {
-		return await this.destinations[0]._createSparseReadStream();
+	async _createSparseReadStream(...args: any[]): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
+		// TODO: raise an error or a warning here
+		return await this.destinations[0]._createSparseReadStream(...args);
 	}
 
 	private async createStream(methodName: 'createWriteStream' | 'createSparseWriteStream') {
-		const passthrough = new PassThrough();
-		const streams = await map(this.destinations, async (destination: SourceDestination) => {
+		let remaining = this.destinations.length;
+		const passthrough = new PassThrough({ objectMode: (methodName === 'createSparseWriteStream') });
+		passthrough.setMaxListeners(this.destinations.length + 1);  // all streams listen to end events, +1 because we'll listen too
+		const streams = await map(this.destinations, async (destination: SourceDestination, index: number) => {
 			const stream = await destination[methodName]();
+			if (index === 0) {
+				// TODO: emit min progress of all streams
+				// TODO: emit progress every 1000 / 60 seconds
+				// TODO: emit progress 100 when all streams reach 100
+				// TODO: don't take in account errored streams
+				stream.on('progress', passthrough.emit.bind(passthrough, 'progress'))
+			}
 			// TODO: allow some streams to fail
 			stream.on('error', passthrough.emit.bind(passthrough, 'error'));
+			stream.on('finish', () => {
+				remaining -= 1;
+				if (remaining === 0) {
+					passthrough.emit('done');
+				}
+			});
 			passthrough.pipe(stream);
 		});
 		return passthrough;
@@ -94,10 +155,15 @@ export class MultiDestination extends SourceDestination {
 		return await this.createStream('createSparseWriteStream');
 	}
 
+	createVerifier(checksumOrBlockmap: string | BlockMap, size?: number): Verifier {
+		return new MultiDestinationVerifier(this, checksumOrBlockmap, size);
+	}
+
 	async open(): Promise<void> {  // TODO: factorize open and close
 		// TODO: remove destination from destinations list on error?
 		await super.open();
-		await map(this.destinations, async (destination) => {
+		//await map(this.destinations, async (destination) => {
+		await each(this.destinations, async (destination) => {
 			try {
 				await destination.open();
 			} catch (error) {
@@ -108,7 +174,8 @@ export class MultiDestination extends SourceDestination {
 
 	async close(): Promise<void> {
 		await super.close();
-		await map(this.destinations, async (destination) => {
+		//await map(this.destinations, async (destination) => {
+		await each(this.destinations, async (destination) => {
 			try {
 				await destination.close();
 			} catch (error) {

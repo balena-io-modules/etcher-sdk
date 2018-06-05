@@ -1,22 +1,43 @@
-import { Blockmap, createFilterStream, FilterStream, ReadStream } from 'blockmap';
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
 import { arch } from 'process';
 import { Stream as HashStream } from 'xxhash';
 
+import BlockMap = require('blockmap');
+
+import { PROGRESS_EMISSION_INTERVAL } from '../constants';
 import { NotCapable, VerificationError } from '../errors';
 import { SparseWriteStream } from '../sparse-write-stream';
 import { streamToBuffer } from '../utils';
 
 import { Metadata } from './metadata';
-import { makeStreamEmitProgressEvents } from './progress-event';
+import { makeClassEmitProgressEvents, ProgressEvent, ProgressWritable } from './progress';
 
 // Seed value 0x45544348 = ASCII "ETCH"
-const SEED = 0x45544348;
+//const SEED = 0x45544348;
+const SEED = 0;
 const BITS = (arch === 'x64' || arch === 'aarch64') ? 64 : 32;
 
-function createHasher() {
-	return new HashStream(SEED, BITS);
+export class CountingHashStream extends HashStream {
+	bytesWritten = 0;
+
+	_transform(chunk: Buffer, encoding: string, callback: () => void) {
+		super._transform(chunk, encoding, () => {
+			callback();
+			this.bytesWritten += chunk.length;
+		});
+	}
+}
+
+export const ProgressHashStream = makeClassEmitProgressEvents(CountingHashStream, 'bytesWritten', 'bytesWritten', PROGRESS_EMISSION_INTERVAL);
+
+export function createHasher() {
+	const hasher = new ProgressHashStream(SEED, BITS);
+	hasher.on('finish', async () => {
+		const checksum = (await streamToBuffer(hasher)).toString('hex');
+		hasher.emit('checksum', checksum);
+	});
+	return hasher;
 }
 
 export class SourceDestinationFs {
@@ -62,6 +83,67 @@ export class SourceDestinationFs {
 	// TODO: add write if it is needed
 }
 
+export abstract class Verifier extends EventEmitter {
+	progress: ProgressEvent = { bytes: 0, position: 0, speed: 0 };
+
+	abstract async run(): Promise<void>;
+
+	protected handleEventsAndPipe(stream: NodeJS.ReadableStream, meter: NodeJS.WritableStream) {
+		meter.on('progress', (progress: ProgressEvent) => {
+			this.progress = progress;
+			this.emit('progress', progress);
+		});
+		stream.on('error', (error: Error) => {
+			this.emit('error', new VerificationError(error.message));
+		});
+		stream.on('end', this.emit.bind(this, 'end'));
+		meter.on('finish', this.emit.bind(this, 'finish'));
+		stream.pipe(meter);
+	}
+}
+
+export class StreamVerifier extends Verifier {
+	constructor(private source: SourceDestination, private checksum: string, private size: number) {
+		super();
+	}
+
+	async run(): Promise<void> {
+		const stream = await this.source.createReadStream(this.size - 1);
+		const hasher = createHasher();
+		hasher.on('checksum', (streamChecksum) => {
+			if (streamChecksum !== this.checksum) {
+				this.emit(
+					'error',
+					new VerificationError(`Source and destination checksums do not match: ${this.checksum} !== ${streamChecksum}`),
+				);
+			}
+		});
+		this.handleEventsAndPipe(stream, hasher);
+	}
+}
+
+export class SparseStreamVerifier extends Verifier {
+	constructor(private source: SourceDestination, private blockmap: BlockMap) {
+		super();
+	}
+
+	async run(): Promise<void> {
+		let stream: BlockMap.ReadStream | BlockMap.FilterStream;
+		if (await this.source.canRead()) {
+			stream = new BlockMap.ReadStream('', this.blockmap, { fs: new SourceDestinationFs(this.source) });
+		} else if (await this.source.canCreateReadStream()) {
+			const originalStream = await this.source._createReadStream();
+			const transform = BlockMap.createFilterStream(this.blockmap);
+			originalStream.pipe(transform);
+			stream = transform;
+		} else {
+			throw new NotCapable();
+		}
+		const meter = new ProgressWritable({ objectMode: true });
+		this.handleEventsAndPipe(stream, meter);
+	}
+}
+
 export class SourceDestination extends EventEmitter {
 	async canRead(): Promise<boolean> {
 		return false;
@@ -99,36 +181,19 @@ export class SourceDestination extends EventEmitter {
 		throw new NotCapable();
 	}
 
-	private makeStreamEmitChecksum(stream: NodeJS.ReadableStream): void {
-		const hasher = createHasher();
-		hasher.on('error', stream.emit.bind(stream, 'error'));
-		hasher.on('finish', async () => {
-			const checksum = (await streamToBuffer(hasher)).toString('hex');
-			stream.emit('checksum', checksum);
-		});
-		stream.pipe(hasher);
+	async createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
+		return await this._createReadStream(end);
 	}
 
-	async createReadStream(generateChecksum = false): Promise<NodeJS.ReadableStream> {
-		const stream = await this._createReadStream();
-		await makeStreamEmitProgressEvents(stream, this);
-		if (generateChecksum) {
-			this.makeStreamEmitChecksum(stream);
-		}
-		return stream;
-	}
-
-	async _createReadStream(): Promise<NodeJS.ReadableStream> {
+	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
 		throw new NotCapable();
 	}
 
-	async createSparseReadStream(generateChecksums = false): Promise<FilterStream | ReadStream> {
-		const stream = await this._createSparseReadStream(generateChecksums);
-		await makeStreamEmitProgressEvents(stream, this);
-		return stream;
+	async createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
+		return await this._createSparseReadStream(generateChecksums);
 	}
 
-	async _createSparseReadStream(generateChecksums = false): Promise<FilterStream | ReadStream> {
+	async _createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
 		throw new NotCapable();
 	}
 
@@ -146,45 +211,14 @@ export class SourceDestination extends EventEmitter {
 	async close(): Promise<void> {
 	}
 
-	async createVerifier(checksum: string): Promise<EventEmitter> {
-		if (!(await this.canCreateReadStream())) {
-			throw new NotCapable();
-		}
-		const verifier = new EventEmitter();
-		const stream = await this.createReadStream(true);
-		stream.on('progress', verifier.emit.bind(verifier, 'progress'));
-		stream.on('checksum', (streamChecksum) => {
-			if (streamChecksum !== checksum) {
-				verifier.emit(
-					'error',
-					new VerificationError(`Source and destination checksums do not match: ${checksum} !== ${streamChecksum}`),
-				);
-			} else {
-				verifier.emit('end')
-			}
-		});
-		return verifier;
-	}
-
-	async createSparseVerifier(blockmap: Blockmap): Promise<EventEmitter> {
-		let stream: ReadStream | FilterStream;
-		if (await this.canRead()) {
-			stream = new ReadStream('', blockmap, { fs: new SourceDestinationFs(this) });
-		} else if (await this.canCreateReadStream()) {
-			const originalStream = await this._createReadStream();
-			const transform = createFilterStream(blockmap);
-			originalStream.pipe(transform);
-			stream = transform;
+	createVerifier(checksumOrBlockmap: string | BlockMap, size?: number): Verifier {
+		if (checksumOrBlockmap instanceof BlockMap) {
+			return new SparseStreamVerifier(this, checksumOrBlockmap);
 		} else {
-			throw new NotCapable();
+			if (size === undefined) {
+				throw new Error('A size argument is required for creating a stream checksum verifier');
+			}
+			return new StreamVerifier(this, checksumOrBlockmap, size);
 		}
-		await makeStreamEmitProgressEvents(stream, this);
-		const verifier = new EventEmitter();
-		stream.on('progress', verifier.emit.bind(verifier, 'progress'));
-		stream.on('end', verifier.emit.bind(verifier, 'end'));
-		stream.on('error', (error) => {
-			verifier.emit('error', new VerificationError(error.message));
-		});
-		return verifier;
 	}
 }

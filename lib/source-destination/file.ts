@@ -1,53 +1,42 @@
 import { Chunk } from 'blockmap';
 import { ReadResult, WriteResult } from 'file-disk';
-import { constants, createReadStream, createWriteStream } from 'fs';
+import { constants, createReadStream, write as fswrite, WriteStream } from 'fs';
 import { Writable } from 'stream';
 
-import { close, stat, open, read, write } from '../fs';
 import { Metadata } from './metadata';
+import { makeClassEmitProgressEvents } from './progress';
 import { SourceDestination } from './source-destination';
+
+import { PROGRESS_EMISSION_INTERVAL } from '../constants';
+import { close, stat, open, read, write } from '../fs';
 import { SparseWriteStream } from '../sparse-write-stream';
 
 export class FileSparseWriteStream extends Writable implements SparseWriteStream {
 	private position: number;
-	private bytes = 0;
-	private timeSpentWriting = 0;
+	private bytesWritten = 0;
 
 	constructor(private fd: number) {
 		super({ objectMode: true });
 	}
 
-	private emitProgress(): void {
-		// TODO: remove this, we probably won't need progress events on write streams
-		this.emit('progress', {
-			bytes: this.bytes,
-			position: this.position,
-			time: this.timeSpentWriting,
-		});
-	}
-
 	private async __write(chunk: Chunk, enc: string): Promise<void> {
 		try {
-			if (this.position !== chunk.position) {
-				this.position = chunk.position;
-				this.emitProgress();
-			}
-			const start = Date.now();
+			this.position = chunk.position;
 			await write(this.fd, chunk.buffer, 0, chunk.length, chunk.position);
-			const end = Date.now();
-			this.timeSpentWriting += end - start;
 			this.position += chunk.length;
-			this.bytes += chunk.length;
-			this.emitProgress();
+			this.bytesWritten += chunk.length;
 		} catch (error) {
 			this.emit('error', error);
 		}
 	}
 
 	_write(chunk: Chunk, enc: string, callback?: (err?: Error | void) => void): void {
-		this.__write(chunk, enc).then(callback, callback);
+		this.__write(chunk, enc).then(callback);
 	}
 }
+
+export const ProgressWriteStream = makeClassEmitProgressEvents(WriteStream, 'bytesWritten', 'bytesWritten', PROGRESS_EMISSION_INTERVAL);
+export const ProgressFileSparseWriteStream = makeClassEmitProgressEvents(FileSparseWriteStream, 'bytesWritten', 'position', PROGRESS_EMISSION_INTERVAL);
 
 export class File extends SourceDestination {
 	private fd: number;
@@ -105,16 +94,22 @@ export class File extends SourceDestination {
 		return await write(this.fd, buffer, bufferOffset, length, fileOffset);
 	}
 
-	async _createReadStream(): Promise<NodeJS.ReadableStream> {
-		return createReadStream('', { fd: this.fd, autoClose: false, start: 0, highWaterMark: 1024 * 1024 });
+	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
+		return createReadStream('', { fd: this.fd, autoClose: false, start: 0, end, highWaterMark: 2 * 1024 * 1024 });  // TODO: constant
 	}
 
 	async createWriteStream(): Promise<NodeJS.WritableStream> {
-		return createWriteStream('', { fd: this.fd, autoClose: false, start: 0 });
+		// The ignore is here because types for WriteStream believe the constructor only takes one parameter.
+		// @ts-ignore
+		const stream = new ProgressWriteStream('', { fd: this.fd, autoClose: false, start: 0, highWaterMark: 1024 * 1024 });  // TODO: constant
+		stream.on('finish', stream.emit.bind(stream, 'done'));
+		return stream;
 	}
 
 	async createSparseWriteStream(): Promise<SparseWriteStream> {
-		return new FileSparseWriteStream(this.fd);
+		const stream = new ProgressFileSparseWriteStream(this.fd);
+		stream.on('finish', stream.emit.bind(stream, 'done'));
+		return stream;
 	}
 
 	async open(): Promise<void> {
@@ -135,4 +130,3 @@ export namespace File {
 		WriteDevice = constants.O_RDWR | constants.O_NONBLOCK | constants.O_SYNC,
 	}
 }
-

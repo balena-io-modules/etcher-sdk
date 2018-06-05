@@ -2,9 +2,9 @@ import { Argv } from 'yargs';
 
 import { scanner, sourceDestination } from '../lib';
 
-import { pipeSourceToDestination, wrapper } from './utils';
+import { pipeSourceToDestination, readJsonFile, wrapper } from './utils';
 
-const main = async ({ sourceImage, devicePathPrefix, verify }: any) => {
+const main = async ({ sourceImage, devicePathPrefix, verify, trim, config }: any) => {
 	const adapters = [ new scanner.adapters.BlockDeviceAdapter(false), new scanner.adapters.UsbbootDeviceAdapter() ];
 	const deviceScanner = new scanner.Scanner(adapters);
 	deviceScanner.on('error', console.error);
@@ -13,22 +13,30 @@ const main = async ({ sourceImage, devicePathPrefix, verify }: any) => {
 	await new Promise((resolve, reject) => {
 		deviceScanner.on('ready', resolve);
 	});
-	const sourceDrive = new sourceDestination.File(sourceImage, sourceDestination.File.OpenFlags.Read);
-	if (sourceDrive === undefined) {
-		console.log('No source drive');
+	let source: sourceDestination.SourceDestination = new sourceDestination.File(sourceImage, sourceDestination.File.OpenFlags.Read);
+	if (source === undefined) {
+		console.log('No source file');
 		return;
+	}
+	if (trim || (config !== undefined)) {
+		source = new sourceDestination.ConfiguredSource(
+			source,
+			trim,
+			true,
+			(config !== undefined) ? 'legacy' : undefined,
+			(config !== undefined) ? { config: await readJsonFile(config) } : undefined,
+		);
 	}
 	const destinationDrives = Array.from(deviceScanner.drives.values()).filter((drive) => {
 		return drive.devicePath && drive.devicePath.startsWith(devicePathPrefix);
 	});
-	console.log(destinationDrives.map((d) => d.devicePath));
 	const destination = new sourceDestination.MultiDestination(destinationDrives);
 	destination.on('error', console.error); // TODO
-	await Promise.all([ sourceDrive.open(), destination.open() ]);
+	await Promise.all([ source.open(), destination.open() ]);
 	try {
-		await pipeSourceToDestination(sourceDrive, destination, verify);
+		await pipeSourceToDestination(source, destination, verify);
 	} finally {
-		await Promise.all([ destination.close(), sourceDrive.close() ]);
+		await Promise.all([ destination.close(), source.close() ]);
 		deviceScanner.stop();
 	}
 };
@@ -41,6 +49,8 @@ const argv = require('yargs').command(
 		yargs.positional('sourceImage', { describe: 'Source image' });
 		yargs.positional('devicePathPrefix', { describe: 'Devices name prefix in /dev/disk/by-path/' });
 		yargs.option('verify', { default: false });
+		yargs.option('trim', { default: false });
+		yargs.describe('config', 'json configuration file');
 	},
 ).argv;
 

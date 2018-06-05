@@ -10,17 +10,7 @@ export const getFileStreamFromZipStream = async (zipStream: NodeJS.ReadableStrea
 		unzipper.on('entry', (entry: unzip.ZipStreamEntry) => {
 			if (!found && (entry.type === 'File') && ((filePath === undefined) || (entry.path === filePath))) {
 				entry.compressedSize = (unzipper as any).unzipStream.parsedEntity.compressedSize;
-				let compressedBytes = 0;
-				zipStream.on('data', (buffer) => {
-					compressedBytes += buffer.length;
-					entry.emit('progress', { bytes, compressedBytes, position: bytes });
-				});
 				found = true;
-				let bytes = 0;
-				entry.on('data', (buffer) => {
-					bytes += buffer.length;
-					entry.emit('progress', { bytes, compressedBytes, position: bytes });
-				});
 				entry.on('end', () => {
 					// Stop reading the zip archive once the file we want has been extracted.
 					zipStream.unpipe(unzipper);

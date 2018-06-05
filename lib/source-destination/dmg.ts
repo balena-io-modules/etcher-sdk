@@ -5,7 +5,6 @@ import { BLOCK, SECTOR_SIZE, Image as UDIFImage } from 'udif';
 import { promisify } from 'util';
 
 import { Metadata } from './metadata';
-import { makeStreamEmitProgressEvents } from './progress-event';
 import { SourceDestination, SourceDestinationFs } from './source-destination';
 
 export class DmgSource extends SourceDestination {

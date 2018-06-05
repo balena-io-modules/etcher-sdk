@@ -1,12 +1,8 @@
 import { Argv } from 'yargs';
 
-import { fs, sourceDestination } from '../lib';
+import { sourceDestination } from '../lib';
 
-import { pipeSourceToDestination, wrapper } from './utils';
-
-const readJsonFile = async (path: string): Promise<any> => {
-	return JSON.parse(await fs.readFile(path, 'utf8'));
-};
+import { pipeSourceToDestination, readJsonFile, wrapper } from './utils';
 
 const main = async ({ fileSource, fileDestination, trim, config, verify }: any) => {
 	let source: sourceDestination.SourceDestination = new sourceDestination.File(fileSource, sourceDestination.File.OpenFlags.Read);
@@ -29,7 +25,7 @@ const main = async ({ fileSource, fileDestination, trim, config, verify }: any) 
 // tslint:disable-next-line: no-var-requires
 const argv = require('yargs').command(
 	'$0 <fileSource> <fileDestination>',
-	'Write the image contained in the zipSource url into fileDestination',
+	'Write the image contained in the fileSource file into fileDestination',
 	(yargs: Argv) => {
 		yargs.positional('fileSource', { describe: 'Source image file' });
 		yargs.positional('fileDestination', { describe: 'Destination image file' });
