@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { ReadResult } from 'file-disk';
+import { basename } from 'path';
+import { unescape } from 'querystring';
+import { parse } from 'url';
 
 import { Metadata } from './metadata';
 import { SourceDestination } from './source-destination';
@@ -32,8 +35,14 @@ export class Http extends SourceDestination {
 
 	async getMetadata(): Promise<Metadata> {
 		await this.ready;
+		let name;
+		const pathname = parse(this.url).pathname;
+		if (pathname !== undefined) {
+			name = basename(unescape(pathname));
+		}
 		return {
 			size: this.size,
+			name,
 		};
 	}
 
@@ -52,10 +61,15 @@ export class Http extends SourceDestination {
 		return { bytesRead, buffer };
 	}
 
-	async _createReadStream(): Promise<NodeJS.ReadableStream> {
+	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
+		let headers;
+		if (end !== undefined) {
+			headers =  { Range: `bytes=0-${end}` };
+		}
 		const response = await axios({
 			method: 'get',
 			url: this.url,
+			headers,
 			responseType: 'stream',
 		});
 		return response.data;

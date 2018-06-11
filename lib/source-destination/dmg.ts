@@ -7,7 +7,10 @@ import { promisify } from 'util';
 import { Metadata } from './metadata';
 import { SourceDestination, SourceDestinationFs } from './source-destination';
 
+import { NotCapable } from '../errors';
+
 export class DmgSource extends SourceDestination {
+	static readonly mimetype = 'application/x-apple-diskimage';
 	private image: UDIFImage;
 
 	constructor(private source: SourceDestination) {
@@ -15,7 +18,11 @@ export class DmgSource extends SourceDestination {
 		this.image = new UDIFImage('', { fs: new SourceDestinationFs(source) });
 	}
 
-	async _createReadStream(): Promise<NodeJS.ReadableStream> {
+	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
+		if (end !== undefined) {
+			// TODO stream end capability?
+			throw new NotCapable();
+		}
 		return this.image.createReadStream();
 	}
 
@@ -42,15 +49,17 @@ export class DmgSource extends SourceDestination {
 		};
 	}
 
-	async open(): Promise<void> {
-		await super.open();
+	protected async _open(): Promise<void> {
+		await super._open();
 		await this.source.open();
 		await promisify(this.image.open).bind(this.image)();
 	}
 
-	async close(): Promise<void> {
-		await super.close();
+	protected async _close(): Promise<void> {
+		await super._close();
 		await promisify(this.image.close).bind(this.image)();
 		await this.source.close();
 	}
 }
+
+SourceDestination.register(DmgSource);

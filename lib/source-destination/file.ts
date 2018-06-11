@@ -1,6 +1,7 @@
 import { Chunk } from 'blockmap';
 import { ReadResult, WriteResult } from 'file-disk';
 import { constants, createReadStream, write as fswrite, WriteStream } from 'fs';
+import { basename } from 'path';
 import { Writable } from 'stream';
 
 import { Metadata } from './metadata';
@@ -83,6 +84,7 @@ export class File extends SourceDestination {
 	async getMetadata(): Promise<Metadata> {
 		return {
 			size: (await stat(this.path)).size,
+			name: basename(this.path),
 		};
 	}
 
@@ -112,13 +114,13 @@ export class File extends SourceDestination {
 		return stream;
 	}
 
-	async open(): Promise<void> {
-		await super.open();
+	protected async _open(): Promise<void> {
+		await super._open();
 		this.fd = await open(this.path, this.flags);
 	}
 
-	async close(): Promise<void> {
-		await super.close();
+	protected async _close(): Promise<void> {
+		await super._close();
 		await close(this.fd);
 	}
 }

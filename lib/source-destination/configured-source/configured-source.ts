@@ -82,8 +82,8 @@ export class ConfiguredSource extends SourceDestination {
 		return await this.disk.read(buffer, bufferOffset, length, sourceOffset);
 	}
 
-	async _createReadStream(): Promise<NodeJS.ReadableStream> {
-		const imageStream = await this.source.createReadStream();
+	async _createReadStream(...args: any[]): Promise<NodeJS.ReadableStream> {
+		const imageStream = await this.source.createReadStream(...args);
 		const transform = this.disk.getTransformStream();
 		imageStream.on('error', (err) => {
 			transform.emit('error', err);
@@ -156,8 +156,8 @@ export class ConfiguredSource extends SourceDestination {
 		debug(`discarded ${discards.length} chunks, ${discardedBytes} bytes, ${percentage}% of the image`);
 	}
 
-	async open(): Promise<void> {
-		await super.open();
+	protected async _open(): Promise<void> {
+		await super._open();
 		await this.source.open();
 		if (this.configure !== undefined) {
 			await this.configure(this.disk, this.config);
@@ -167,8 +167,8 @@ export class ConfiguredSource extends SourceDestination {
 		}
 	}
 
-	async close(): Promise<void> {
+	protected async _close(): Promise<void> {
 		await this.source.close();
-		await super.close();
+		await super._close();
 	}
 }

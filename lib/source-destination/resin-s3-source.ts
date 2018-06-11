@@ -36,23 +36,23 @@ export class ResinS3Source extends SourceDestination {
 		return await this.rawSource.read(buffer, bufferOffset, length, sourceOffset);
 	}
 
-	async _createReadStream(): Promise<NodeJS.ReadableStream> {
-		return await this.zipSource._createReadStream();
+	async _createReadStream(...args: any[]): Promise<NodeJS.ReadableStream> {
+		return await this.zipSource._createReadStream(...args);
 	}
 
 	async getMetadata(): Promise<Metadata> {
 		return await this.zipSource.getMetadata();
 	}
 
-	async open() {
-		await super.open();
+	protected async _open() {
+		await super._open();
 		await this.rawSource.open();
 		await this.zipSource.open();
 	}
 
-	async close() {
+	protected async _close() {
 		await this.zipSource.close();
 		await this.rawSource.close();
-		await super.close();
+		await super._close();
 	}
 }

@@ -68,14 +68,14 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return !this.drive.isReadOnly;
 	}
 
-	async open(): Promise<void> {
+	protected async _open(): Promise<void> {
 		await unmountDiskAsync(this.drive.device);
 		await clean(this.drive.device);
-		await super.open();
+		await super._open();
 	}
 
-	async close(): Promise<void> {
-		await super.close();
+	protected async _close(): Promise<void> {
+		await super._close();
 		// Closing a file descriptor on a drive containing mountable
 		// partitions causes macOS to mount the drive. If we try to
 		// unmount too quickly, then the drive might get re-mounted

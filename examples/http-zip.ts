@@ -6,9 +6,10 @@ import { pipeSourceToDestination, wrapper } from './utils';
 
 const main = async ({ zipSource, fileDestination }: any) => {
 	const sourceHttp = new sourceDestination.Http(zipSource);
-	const sourceZip = new sourceDestination.ZipSource(sourceHttp);
 	const destinationFile = new sourceDestination.File(fileDestination, sourceDestination.File.OpenFlags.ReadWrite);
-	await Promise.all([ sourceZip.open(), destinationFile.open() ]);
+	await Promise.all([ sourceHttp.open(), destinationFile.open() ]);
+	const sourceZip = await sourceHttp.getInnerSource();
+	await sourceZip.open();
 	await pipeSourceToDestination(sourceZip, destinationFile);
 	await Promise.all([ sourceZip.close(), destinationFile.close() ]);
 };

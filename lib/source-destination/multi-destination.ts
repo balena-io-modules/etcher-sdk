@@ -159,9 +159,9 @@ export class MultiDestination extends SourceDestination {
 		return new MultiDestinationVerifier(this, checksumOrBlockmap, size);
 	}
 
-	async open(): Promise<void> {  // TODO: factorize open and close
+	protected async _open(): Promise<void> {
 		// TODO: remove destination from destinations list on error?
-		await super.open();
+		await super._open();
 		//await map(this.destinations, async (destination) => {
 		await each(this.destinations, async (destination) => {
 			try {
@@ -172,8 +172,8 @@ export class MultiDestination extends SourceDestination {
 		});
 	}
 
-	async close(): Promise<void> {
-		await super.close();
+	protected async _close(): Promise<void> {
+		await super._close();
 		//await map(this.destinations, async (destination) => {
 		await each(this.destinations, async (destination) => {
 			try {

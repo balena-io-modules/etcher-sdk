@@ -1,5 +1,7 @@
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
+import * as fileType from 'file-type';
+import { extname } from 'path';
 import { arch } from 'process';
 import { Stream as HashStream } from 'xxhash';
 
@@ -14,8 +16,7 @@ import { Metadata } from './metadata';
 import { makeClassEmitProgressEvents, ProgressEvent, ProgressWritable } from './progress';
 
 // Seed value 0x45544348 = ASCII "ETCH"
-//const SEED = 0x45544348;
-const SEED = 0;
+const SEED = 0x45544348;
 const BITS = (arch === 'x64' || arch === 'aarch64') ? 64 : 32;
 
 export class CountingHashStream extends HashStream {
@@ -145,6 +146,17 @@ export class SparseStreamVerifier extends Verifier {
 }
 
 export class SourceDestination extends EventEmitter {
+	static readonly mimetype?: string;
+	private static mimetypes = new Map<string, any>();  // TODO: proper typing
+
+	private isOpen = false;
+
+	static register(Cls: any) {  // TODO: proper typing
+		if (Cls.mimetype !== undefined) {
+			SourceDestination.mimetypes.set(Cls.mimetype, Cls);
+		}
+	}
+
 	async canRead(): Promise<boolean> {
 		return false;
 	}
@@ -206,9 +218,23 @@ export class SourceDestination extends EventEmitter {
 	}
 
 	async open(): Promise<void> {
+		if (!this.isOpen) {
+			await this._open();
+			this.isOpen = true;
+		}
 	}
 
 	async close(): Promise<void> {
+		if (this.isOpen) {
+			await this._close();
+			this.isOpen = false;
+		}
+	}
+
+	protected async _open(): Promise<void> {
+	}
+
+	protected async _close(): Promise<void> {
 	}
 
 	createVerifier(checksumOrBlockmap: string | BlockMap, size?: number): Verifier {
@@ -219,6 +245,66 @@ export class SourceDestination extends EventEmitter {
 				throw new Error('A size argument is required for creating a stream checksum verifier');
 			}
 			return new StreamVerifier(this, checksumOrBlockmap, size);
+		}
+	}
+
+	private async getMimeTypeFromName(): Promise<string | undefined> {
+		const metadata = await this.getMetadata();
+		if (metadata.name === undefined) {
+			return;
+		}
+		const extension = extname(metadata.name);
+		if (extension === '.dmg') {
+			return 'application/x-apple-diskimage';
+		}
+	}
+
+	private async getMimeTypeFromContent(): Promise<string | undefined> {
+		let stream: NodeJS.ReadableStream;
+		try {
+			stream = await this.createReadStream(263);  // TODO: constant
+		} catch (error) {
+			if (error instanceof NotCapable) {
+				return
+			}
+			throw error;
+		}
+		const ft = fileType(await streamToBuffer(stream));
+		if (ft !== null) {
+			return ft.mime;
+		}
+	}
+
+	private async getMimetype(): Promise<string | undefined> {
+		let mimetype = await this.getMimeTypeFromName();
+		if (mimetype === undefined) {
+			mimetype = await this.getMimeTypeFromContent();
+		}
+		return mimetype;
+	}
+
+	async getInnerSource(): Promise<SourceDestination> {
+		const wasOpen = this.isOpen;
+		if (!wasOpen) {
+			await this.open();
+		}
+		try {
+			const mimetype = await this.getMimetype();
+			if (mimetype === undefined) {
+				return this;
+			}
+			const Cls = SourceDestination.mimetypes.get(mimetype);
+			if (Cls === undefined) {
+				return this;
+			}
+			// Ignoring ts errors here.
+			// Subclasses that have a mimetype must implement a constructor which only parameter is a SourceDestination.
+			// @ts-ignore
+			return await (new Cls(this)).getInnerSource();
+		} finally {
+			if (!wasOpen) {
+				await this.close();
+			}
 		}
 	}
 }

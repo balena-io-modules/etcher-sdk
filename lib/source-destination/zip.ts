@@ -1,13 +1,17 @@
+import { basename } from 'path';
 import { ZipStreamEntry } from 'unzip-stream';
 
 import { getFileStreamFromZipStream } from '../zip';
 import { Metadata } from './metadata';
 import { SourceDestination } from './source-destination';
 
+import { NotCapable } from '../errors';
+
 const noop = () => {
 };
 
 export class ZipSource extends SourceDestination {
+	static readonly mimetype = 'application/zip';
 	private entry: ZipStreamEntry;
 
 	constructor(private source: SourceDestination) {
@@ -25,7 +29,11 @@ export class ZipSource extends SourceDestination {
 		return this.entry;
 	}
 
-	async _createReadStream(): Promise<NodeJS.ReadableStream> {
+	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
+		if (end !== undefined) {
+			// TODO: capability?
+			throw new NotCapable();
+		}
 		return await this.getEntry();
 	}
 
@@ -34,14 +42,17 @@ export class ZipSource extends SourceDestination {
 		return {
 			size: entry.size,
 			compressedSize: entry.compressedSize,
+			name: basename(entry.path),
 		};
 	}
 
-	async open(): Promise<void> {
+	protected async _open(): Promise<void> {
+		await super._open();
 		await this.source.open();
 	}
 
-	async close(): Promise<void> {
+	protected async _close(): Promise<void> {
+		await super._close();
 		await this.source.close();
 	}
 }

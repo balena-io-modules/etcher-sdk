@@ -6,9 +6,10 @@ import { pipeSourceToDestination, wrapper } from './utils';
 
 const main = async ({ sourceDmg, destinationFile }: any) => {
 	const fileSource = new sourceDestination.File(sourceDmg, sourceDestination.File.OpenFlags.Read);
-	const dmgSource = new sourceDestination.DmgSource(fileSource);
 	const fileDestination = new sourceDestination.File(destinationFile, sourceDestination.File.OpenFlags.ReadWrite);
-	await Promise.all([ dmgSource.open(), fileDestination.open() ]);
+	await Promise.all([ fileSource.open(), fileDestination.open() ]);
+	const dmgSource = await fileSource.getInnerSource();
+	await dmgSource.open();
 	await pipeSourceToDestination(dmgSource, fileDestination);
 	await Promise.all([ dmgSource.close(), fileDestination.close() ]);
 };
