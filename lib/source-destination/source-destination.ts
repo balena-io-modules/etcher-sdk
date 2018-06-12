@@ -111,7 +111,7 @@ export class StreamVerifier extends Verifier {
 	async run(): Promise<void> {
 		const stream = await this.source.createReadStream(this.size - 1);
 		const hasher = createHasher();
-		hasher.on('checksum', (streamChecksum) => {
+		hasher.on('checksum', (streamChecksum: string) => {
 			if (streamChecksum !== this.checksum) {
 				this.emit(
 					'error',
@@ -265,7 +265,7 @@ export class SourceDestination extends EventEmitter {
 			stream = await this.createReadStream(263);  // TODO: constant
 		} catch (error) {
 			if (error instanceof NotCapable) {
-				return
+				return;
 			}
 			throw error;
 		}

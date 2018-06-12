@@ -23,7 +23,7 @@ export function makeClassEmitProgressEvents<T extends Constructor<EventEmitter>>
 		_attributeDelta = 0;
 
 		constructor (...args: any[]) {
-			super(...args)
+			super(...args);
 
 			const meter = speedometer();
 			const state: ProgressEvent = { position: 0, bytes: 0, speed: 0 };
@@ -36,13 +36,13 @@ export function makeClassEmitProgressEvents<T extends Constructor<EventEmitter>>
 				state.speed = meter(this._attributeDelta);
 				this._attributeDelta = 0;
 				this.emit('progress', state);
-			}
+			};
 
 			const timer = setInterval(update, interval);
 
 			const clear = () => {
 				clearInterval(timer);
-			}
+			};
 
 			this.once('error', clear);
 			this.once('finish', clear);
@@ -57,7 +57,7 @@ export function makeClassEmitProgressEvents<T extends Constructor<EventEmitter>>
 			this._attributeDelta += value - this._attributeValue;
 			this._attributeValue = value;
 		}
-	}
+	};
 }
 
 export class CountingWritable extends Writable {

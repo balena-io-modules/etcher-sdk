@@ -1,7 +1,6 @@
-import { delay } from 'bluebird';
+import { delay, promisify } from 'bluebird';
 import { Drive as DrivelistDrive } from 'drivelist';
 import { unmountDisk } from 'mountutils';
-import { promisify } from 'util';
 
 import { AdapterSourceDestination } from '../scanner/adapters/adapter';
 import { clean } from '../diskpart';

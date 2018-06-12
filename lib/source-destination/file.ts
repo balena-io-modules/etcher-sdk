@@ -1,6 +1,7 @@
 import { Chunk } from 'blockmap';
 import { ReadResult, WriteResult } from 'file-disk';
-import { constants, createReadStream, write as fswrite, WriteStream } from 'fs';
+import { constants, createReadStream, write as fswrite } from 'fs';
+import * as fs from 'fs';
 import { basename } from 'path';
 import { Writable } from 'stream';
 
@@ -31,12 +32,15 @@ export class FileSparseWriteStream extends Writable implements SparseWriteStream
 		}
 	}
 
-	_write(chunk: Chunk, enc: string, callback?: (err?: Error | void) => void): void {
+	//_write(chunk: Chunk, enc: string, callback?: (err?: Error | void) => void): void {
+	_write(chunk: Chunk, enc: string, callback?: any): void {
 		this.__write(chunk, enc).then(callback);
 	}
 }
 
-export const ProgressWriteStream = makeClassEmitProgressEvents(WriteStream, 'bytesWritten', 'bytesWritten', PROGRESS_EMISSION_INTERVAL);
+// With node 6 types, typescript complains that "'WriteStream' only refers to a type, but is being used as a value here." which is not true.
+// @ts-ignore
+export const ProgressWriteStream = makeClassEmitProgressEvents(fs.WriteStream, 'bytesWritten', 'bytesWritten', PROGRESS_EMISSION_INTERVAL);
 export const ProgressFileSparseWriteStream = makeClassEmitProgressEvents(FileSparseWriteStream, 'bytesWritten', 'position', PROGRESS_EMISSION_INTERVAL);
 
 export class File extends SourceDestination {

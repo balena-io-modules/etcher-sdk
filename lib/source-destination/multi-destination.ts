@@ -18,7 +18,7 @@ export class MultiDestinationError extends Error {
 export class MultiDestinationVerifier extends Verifier {
 	private verifiers: Verifier[];
 	private remaining: number;
-	private timer: number;
+	private timer: NodeJS.Timer;
 
 	constructor(private source: MultiDestination, checksumOrBlockmap: string | BlockMap, size?: number) {
 		super();
@@ -132,7 +132,7 @@ export class MultiDestination extends SourceDestination {
 				// TODO: emit progress every 1000 / 60 seconds
 				// TODO: emit progress 100 when all streams reach 100
 				// TODO: don't take in account errored streams
-				stream.on('progress', passthrough.emit.bind(passthrough, 'progress'))
+				stream.on('progress', passthrough.emit.bind(passthrough, 'progress'));
 			}
 			// TODO: allow some streams to fail
 			stream.on('error', passthrough.emit.bind(passthrough, 'error'));

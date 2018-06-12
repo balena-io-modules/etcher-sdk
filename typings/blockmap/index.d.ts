@@ -7,7 +7,6 @@ declare module 'blockmap' {
 		blockSize: number;
 		blockCount: number;
 		mappedBlockCount: number;
-		ranges: Range[];
 	}
 
 	namespace BlockMap {

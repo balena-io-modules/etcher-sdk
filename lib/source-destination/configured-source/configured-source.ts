@@ -85,7 +85,7 @@ export class ConfiguredSource extends SourceDestination {
 	async _createReadStream(...args: any[]): Promise<NodeJS.ReadableStream> {
 		const imageStream = await this.source.createReadStream(...args);
 		const transform = this.disk.getTransformStream();
-		imageStream.on('error', (err) => {
+		imageStream.on('error', (err: Error) => {
 			transform.emit('error', err);
 		});
 		imageStream.pipe(transform);
@@ -102,7 +102,7 @@ export class ConfiguredSource extends SourceDestination {
 				fs: new SourceDestinationFs(this),
 				chunkSize: 2 * 1024 * 1024,  // TODO: constant
 				autoClose: false,
-			}
+			},
 		);
 	}
 

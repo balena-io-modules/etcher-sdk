@@ -1,7 +1,6 @@
-import { delay } from 'bluebird';
+import { delay, promisify } from 'bluebird';
 import * as _debug from 'debug';
 import { Drive as DrivelistDrive, list } from 'drivelist';
-import { promisify } from 'util';
 
 import { Adapter } from './adapter';
 import { BlockDevice } from '../../source-destination/block-device';

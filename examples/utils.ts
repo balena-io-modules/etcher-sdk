@@ -5,22 +5,22 @@ import * as ProgressBar from 'progress';
 import { fs, sourceDestination, utils } from '../lib';
 
 function createDestinationProgressBar(destinationStream: EventEmitter, sourceMetadata: sourceDestination.Metadata, title: string) {
-	const sparse = (destinationStream instanceof FilterStream) || (destinationStream instanceof ReadStream)
+	const sparse = (destinationStream instanceof FilterStream) || (destinationStream instanceof ReadStream);
 	const total = sparse ? sourceMetadata.blockmappedSize : sourceMetadata.size;
 	const progressBar = new ProgressBar(
 		`${title} [:bar] :current / :total bytes ; :percent :speed MiB/s`,
 		{ total, width: 40 },
 	);
 	const updateProgressBar = (progress: sourceDestination.ProgressEvent) => {
-		const value = sparse ? progress.bytes : progress.position
+		const value = sparse ? progress.bytes : progress.position;
 		progressBar.tick(value - progressBar.curr, { speed: (progress.speed / 1024 / 1024).toFixed(2) });
 	};
 	destinationStream.on('progress', updateProgressBar);
 }
 
 export async function readJsonFile(path: string): Promise<any> {
-	return JSON.parse(await fs.readFile(path, 'utf8'));
-};
+	return JSON.parse((await fs.readFile(path, { encoding: 'utf8', flag: 'r' })) as string);
+}
 
 async function runVerifier(verifier: sourceDestination.Verifier, metadata: sourceDestination.Metadata) {
 	createDestinationProgressBar(verifier, metadata, 'verifying');
@@ -59,7 +59,7 @@ export async function pipeSourceToDestination(
 export async function pipeRegularSourceToDestination(
 	source: sourceDestination.SourceDestination,
 	destination: sourceDestination.SourceDestination,
-	verify: boolean
+	verify: boolean,
 ): Promise<void> {
 	const [ sourceStream, destinationStream ] = await Promise.all([ source.createReadStream(), destination.createWriteStream() ]);
 	const sourceMetadata = await source.getMetadata();
@@ -71,18 +71,18 @@ export async function pipeRegularSourceToDestination(
 		destinationStream.on('error', console.error);  // don't reject as it may be a MultiDestination
 		if (verify) {
 			const hasher = sourceDestination.createHasher();
-			hasher.on('checksum', (cs) => {
-				checksum = cs
+			hasher.on('checksum', (cs: string) => {
+				checksum = cs;
 				if (done) {
-					resolve(cs)
+					resolve(cs);
 				}
-			})
+			});
 			sourceStream.pipe(hasher);
 		}
 		destinationStream.on('done', () => {
 			done = true;
 			if (!verify || (checksum != undefined)) {
-				resolve(checksum)
+				resolve(checksum);
 			}
 		});
 		sourceStream.pipe(destinationStream);

@@ -1,8 +1,8 @@
 import { FilterStream } from 'blockmap';
+import { promisify } from 'bluebird';
 import { ReadResult } from 'file-disk';
 import * as _ from 'lodash';
 import { BLOCK, SECTOR_SIZE, Image as UDIFImage } from 'udif';
-import { promisify } from 'util';
 
 import { Metadata } from './metadata';
 import { SourceDestination, SourceDestinationFs } from './source-destination';
