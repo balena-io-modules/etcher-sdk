@@ -14,6 +14,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@types/bluebird": "^3.5.20",
+    "@types/file-type": "^5.2.1",
     "@types/node": "^6.0.112",
     "axios": "^0.18.0",
     "blockmap": "^3.4.2",
@@ -39,7 +40,6 @@
     "typescript": "^2.9.1"
   },
   "devDependencies": {
-    "@types/file-type": "^5.2.1",
     "@types/progress": "^2.0.1",
     "@types/yargs": "^11.0.0",
     "progress": "^2.0.0",
