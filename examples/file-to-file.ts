@@ -6,19 +6,28 @@ import { pipeSourceToDestination, readJsonFile, wrapper } from './utils';
 
 const main = async ({ fileSource, fileDestination, trim, config, verify }: any) => {
 	let source: sourceDestination.SourceDestination = new sourceDestination.File(fileSource, sourceDestination.File.OpenFlags.Read);
-	if (trim || (config !== undefined)) {
-		source = new sourceDestination.ConfiguredSource(
-			source,
-			trim,
-			//false,
-			true,
-			(config !== undefined) ? 'legacy' : undefined,
-			(config !== undefined) ? { config: await readJsonFile(config) } : undefined,
-		);
-	}
 	const destination = new sourceDestination.File(fileDestination, sourceDestination.File.OpenFlags.ReadWrite);
 	await Promise.all([ source.open(), destination.open() ]);
+	source = await source.getInnerSource();
+	await source.open();
+	const canRead = await source.canRead();
+	if (trim || (config !== undefined)) {
+		if (!canRead) {
+			console.warn("Can't configure or trim a source that is not randomly readable, skipping");
+		} else {
+			source = new sourceDestination.ConfiguredSource(
+				source,
+				trim,
+				true,  // create stream from disk (not from stream)
+				(config !== undefined) ? 'legacy' : undefined,
+				(config !== undefined) ? { config: await readJsonFile(config) } : undefined,
+			);
+		}
+	}
 	await pipeSourceToDestination(source, destination, verify);
+	if (!canRead && config && (await destination.canRead)) {
+		// TODO: configure destination
+	}
 	await Promise.all([ source.close(), destination.close() ]);
 };
 

@@ -12,7 +12,7 @@ const noop = () => {
 
 export class ZipSource extends SourceDestination {
 	static readonly mimetype = 'application/zip';
-	private entry: ZipStreamEntry;
+	private entry?: ZipStreamEntry;
 
 	constructor(private source: SourceDestination) {
 		super();
@@ -25,6 +25,13 @@ export class ZipSource extends SourceDestination {
 	private async getEntry(): Promise<ZipStreamEntry> {
 		if (this.entry === undefined) {
 			this.entry = await getFileStreamFromZipStream(await this.source.createReadStream());
+			// We need to reset the entry if any read happens
+			const originalRead = this.entry._read.bind(this.entry);
+			this.entry._read = (...args: any[]) => {
+				this.entry!._read = originalRead;
+				this.entry = undefined;
+				return originalRead(...args);
+			};
 		}
 		return this.entry;
 	}
@@ -56,3 +63,5 @@ export class ZipSource extends SourceDestination {
 		await this.source.close();
 	}
 }
+
+SourceDestination.register(ZipSource);
