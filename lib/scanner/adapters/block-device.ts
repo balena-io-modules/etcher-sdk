@@ -36,7 +36,7 @@ export class BlockDeviceAdapter extends Adapter {
 	private running = false;
 	private ready = false;
 
-	constructor(public includeSystemDrives = false) {
+	constructor(public includeSystemDrives: () => boolean = () => false) {
 		super();
 	}
 
@@ -96,7 +96,7 @@ export class BlockDeviceAdapter extends Adapter {
 			if (drive.busType === 'RAID') {
 				return false;
 			}
-			return !drive.error && (this.includeSystemDrives || !drive.isSystem);
+			return !drive.error && (this.includeSystemDrives() || !drive.isSystem);
 		});
 		drives.forEach((drive: DrivelistDrive) => {
 			// TODO: Find a better way to detect that a certain

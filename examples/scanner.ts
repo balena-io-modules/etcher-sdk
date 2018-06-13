@@ -2,7 +2,7 @@ import { scanner } from '../lib/';
 
 const main = () => {
 	const adapters: scanner.adapters.Adapter[] = [
-		new scanner.adapters.BlockDeviceAdapter(true),
+		new scanner.adapters.BlockDeviceAdapter(() => true),
 		new scanner.adapters.UsbbootDeviceAdapter(),
 	];
 	const deviceScanner = new scanner.Scanner(adapters);

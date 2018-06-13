@@ -5,7 +5,7 @@ import { scanner, sourceDestination } from '../lib';
 import { pipeSourceToDestination, readJsonFile, wrapper } from './utils';
 
 const main = async ({ sourceImage, devicePathPrefix, verify, trim, config }: any) => {
-	const adapters = [ new scanner.adapters.BlockDeviceAdapter(false), new scanner.adapters.UsbbootDeviceAdapter() ];
+	const adapters = [ new scanner.adapters.BlockDeviceAdapter(() => false), new scanner.adapters.UsbbootDeviceAdapter() ];
 	const deviceScanner = new scanner.Scanner(adapters);
 	deviceScanner.on('error', console.error);
 	deviceScanner.start();
