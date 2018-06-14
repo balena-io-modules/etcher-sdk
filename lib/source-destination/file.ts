@@ -1,6 +1,6 @@
 import { Chunk } from 'blockmap';
 import { ReadResult, WriteResult } from 'file-disk';
-import { constants, createReadStream, write as fswrite } from 'fs';
+import { constants, write as fswrite } from 'fs';
 import * as fs from 'fs';
 import { basename } from 'path';
 import { Writable } from 'stream';
@@ -10,6 +10,7 @@ import { makeClassEmitProgressEvents } from './progress';
 import { SourceDestination } from './source-destination';
 
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
+import { BlockReadStream } from '../block-read-stream';
 import { close, stat, open, read, write } from '../fs';
 import { SparseWriteStream } from '../sparse-write-stream';
 
@@ -101,7 +102,7 @@ export class File extends SourceDestination {
 	}
 
 	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
-		return createReadStream('', { fd: this.fd, autoClose: false, start: 0, end, highWaterMark: 2 * 1024 * 1024 });  // TODO: constant
+		return new BlockReadStream(this.fd, 0, end, 1024 * 1024);  // TODO: constant
 	}
 
 	async createWriteStream(): Promise<NodeJS.WritableStream> {

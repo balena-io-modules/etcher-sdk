@@ -28,6 +28,7 @@
     "node-raspberrypi-usbboot": "0.0.5",
     "outdent": "^0.5.0",
     "partitioninfo": "^4.0.0",
+    "readable-stream": "^2.3.6",
     "resin-image-fs": "^5.0.4",
     "speedometer": "^1.0.0",
     "udif": "^0.15.6",
