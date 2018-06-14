@@ -92,6 +92,7 @@ export async function pipeRegularSourceToDestination(
 		await runVerifier(verifier, await source.getMetadata());
 	}
 }
+
 export async function pipeSparseSourceToDestination(
 	source: sourceDestination.SourceDestination,
 	destination: sourceDestination.SourceDestination,
