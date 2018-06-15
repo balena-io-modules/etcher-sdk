@@ -1,9 +1,8 @@
 import { Chunk } from 'blockmap';
 import { ReadResult, WriteResult } from 'file-disk';
 import { constants, write as fswrite } from 'fs';
-import * as fs from 'fs';
 import { basename } from 'path';
-import { Writable } from 'stream';
+import { Writable } from 'readable-stream';
 
 import { Metadata } from './metadata';
 import { makeClassEmitProgressEvents } from './progress';
@@ -11,6 +10,7 @@ import { SourceDestination } from './source-destination';
 
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
 import { BlockReadStream } from '../block-read-stream';
+import { ProgressBlockWriteStream } from '../block-write-stream';
 import { close, stat, open, read, write } from '../fs';
 import { SparseWriteStream } from '../sparse-write-stream';
 
@@ -33,15 +33,11 @@ export class FileSparseWriteStream extends Writable implements SparseWriteStream
 		}
 	}
 
-	//_write(chunk: Chunk, enc: string, callback?: (err?: Error | void) => void): void {
 	_write(chunk: Chunk, enc: string, callback?: any): void {
 		this.__write(chunk, enc).then(callback);
 	}
 }
 
-// With node 6 types, typescript complains that "'WriteStream' only refers to a type, but is being used as a value here." which is not true.
-// @ts-ignore
-export const ProgressWriteStream = makeClassEmitProgressEvents(fs.WriteStream, 'bytesWritten', 'bytesWritten', PROGRESS_EMISSION_INTERVAL);
 export const ProgressFileSparseWriteStream = makeClassEmitProgressEvents(FileSparseWriteStream, 'bytesWritten', 'position', PROGRESS_EMISSION_INTERVAL);
 
 export class File extends SourceDestination {
@@ -106,9 +102,7 @@ export class File extends SourceDestination {
 	}
 
 	async createWriteStream(): Promise<NodeJS.WritableStream> {
-		// The ignore is here because types for WriteStream believe the constructor only takes one parameter.
-		// @ts-ignore
-		const stream = new ProgressWriteStream('', { fd: this.fd, autoClose: false, start: 0, highWaterMark: 1024 * 1024 });  // TODO: constant
+		const stream = new ProgressBlockWriteStream(this.fd);
 		stream.on('finish', stream.emit.bind(stream, 'done'));
 		return stream;
 	}

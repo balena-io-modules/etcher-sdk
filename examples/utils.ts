@@ -13,7 +13,10 @@ function createDestinationProgressBar(destinationStream: EventEmitter, sourceMet
 	);
 	const updateProgressBar = (progress: sourceDestination.ProgressEvent) => {
 		const value = sparse ? progress.bytes : progress.position;
-		progressBar.tick(value - progressBar.curr, { speed: (progress.speed / 1024 / 1024).toFixed(2) });
+		const delta = value - progressBar.curr;
+		if (delta !== 0) {
+			progressBar.tick(delta, { speed: (progress.speed / 1024 / 1024).toFixed(2) });
+		}
 	};
 	destinationStream.on('progress', updateProgressBar);
 }
@@ -29,7 +32,6 @@ async function runVerifier(verifier: sourceDestination.Verifier, metadata: sourc
 		verifier.on('finish', resolve);
 		verifier.run();
 	});
-	console.log();
 }
 
 export async function wrapper(main: (args: any) => Promise<void>, args: any) {
