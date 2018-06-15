@@ -135,7 +135,9 @@ export class MultiDestination extends SourceDestination {
 				stream.on('progress', passthrough.emit.bind(passthrough, 'progress'));
 			}
 			// TODO: allow some streams to fail
-			stream.on('error', passthrough.emit.bind(passthrough, 'error'));
+			stream.on('error', (error: Error) => {
+				passthrough.emit('error', new MultiDestinationError(error, destination));
+			})
 			stream.on('finish', () => {
 				remaining -= 1;
 				if (remaining === 0) {
