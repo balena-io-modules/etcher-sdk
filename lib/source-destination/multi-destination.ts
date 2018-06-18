@@ -6,8 +6,13 @@ import { PassThrough } from 'stream';
 import BlockMap = require('blockmap');
 
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
+import { ProgressEvent } from './progress';
 import { SourceDestination, Verifier } from './source-destination';
 import { SparseWriteStream } from '../sparse-write-stream';
+
+function isntNull(x: any) {
+	return x !== null
+}
 
 export class MultiDestinationError extends Error {
 	constructor(public error: Error, public destination: SourceDestination) {
@@ -122,30 +127,43 @@ export class MultiDestination extends SourceDestination {
 	}
 
 	private async createStream(methodName: 'createWriteStream' | 'createSparseWriteStream') {
-		let remaining = this.destinations.length;
 		const passthrough = new PassThrough({ objectMode: (methodName === 'createSparseWriteStream') });
 		passthrough.setMaxListeners(this.destinations.length + 1);  // all streams listen to end events, +1 because we'll listen too
-		function oneFinished() {
-			remaining -= 1;
-			if (remaining === 0) {
+		const progresses: Map<NodeJS.WritableStream, ProgressEvent | null> = new Map();
+		let interval: NodeJS.Timer;
+
+		function oneStreamFinished(stream: NodeJS.WritableStream) {
+			if (progresses.size === 1) {
+				clearInterval(interval);
+				emitProgress();  // Just to be sure we emitted the last state
 				passthrough.emit('done');
 			}
+			progresses.delete(stream);
 		}
+
+		function emitProgress() {
+			// TODO: avoid Array.from
+			passthrough.emit('progress', minBy(Array.from(progresses.values()).filter(isntNull), 'position'));
+		}
+
 		const streams = await map(this.destinations, async (destination: SourceDestination, index: number) => {
 			const stream = await destination[methodName]();
+			progresses.set(stream, null);
+			stream.on('progress', (progressEvent: ProgressEvent) => {
+				progresses.set(stream, progressEvent);
+				if (interval === undefined) {
+					interval = setInterval(emitProgress, PROGRESS_EMISSION_INTERVAL);
+				}
+			});
 			if (index === 0) {
-				// TODO: emit min progress of all streams
-				// TODO: emit progress every 1000 / 60 seconds
-				// TODO: emit progress 100 when all streams reach 100
-				// TODO: don't take in account errored streams
 				stream.on('progress', passthrough.emit.bind(passthrough, 'progress'));
 			}
 			stream.on('error', (error: Error) => {
 				// Don't emit 'error' events as it would unpipe the source from passthrough
 				passthrough.emit('fail', new MultiDestinationError(error, destination));
-				oneFinished();
+				oneStreamFinished(stream);
 			});
-			stream.on('finish', oneFinished);
+			stream.on('finish', oneStreamFinished.bind(null, stream));
 			passthrough.pipe(stream);
 		});
 		return passthrough;
