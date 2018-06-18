@@ -125,6 +125,12 @@ export class MultiDestination extends SourceDestination {
 		let remaining = this.destinations.length;
 		const passthrough = new PassThrough({ objectMode: (methodName === 'createSparseWriteStream') });
 		passthrough.setMaxListeners(this.destinations.length + 1);  // all streams listen to end events, +1 because we'll listen too
+		function oneFinished() {
+			remaining -= 1;
+			if (remaining === 0) {
+				passthrough.emit('done');
+			}
+		}
 		const streams = await map(this.destinations, async (destination: SourceDestination, index: number) => {
 			const stream = await destination[methodName]();
 			if (index === 0) {
@@ -134,16 +140,12 @@ export class MultiDestination extends SourceDestination {
 				// TODO: don't take in account errored streams
 				stream.on('progress', passthrough.emit.bind(passthrough, 'progress'));
 			}
-			// TODO: allow some streams to fail
 			stream.on('error', (error: Error) => {
-				passthrough.emit('error', new MultiDestinationError(error, destination));
-			})
-			stream.on('finish', () => {
-				remaining -= 1;
-				if (remaining === 0) {
-					passthrough.emit('done');
-				}
+				// Don't emit 'error' events as it would unpipe the source from passthrough
+				passthrough.emit('fail', new MultiDestinationError(error, destination));
+				oneFinished();
 			});
+			stream.on('finish', oneFinished);
 			passthrough.pipe(stream);
 		});
 		return passthrough;

@@ -70,7 +70,8 @@ export async function pipeRegularSourceToDestination(
 		let checksum: string;
 		let done = false;
 		sourceStream.on('error', reject);
-		destinationStream.on('error', console.error);  // don't reject as it may be a MultiDestination
+		destinationStream.on('fail', console.error);  // This is emitted by MultiDestination when one of its destinations fails
+		destinationStream.on('error', reject);
 		if (verify) {
 			const hasher = sourceDestination.createHasher();
 			hasher.on('checksum', (cs: string) => {
@@ -105,7 +106,8 @@ export async function pipeSparseSourceToDestination(
 	createDestinationProgressBar(destinationStream, await source.getMetadata(), 'flashing');
 	await new Promise((resolve: () => void, reject: (error: Error) => void) => {
 		sourceStream.on('error', reject);
-		destinationStream.on('error', console.error);  // don't reject as it may be a MultiDestination
+		destinationStream.on('fail', console.error);  // This is emitted by MultiDestination when one of its destinations fails
+		destinationStream.on('error', reject);
 		destinationStream.on('done', resolve);
 		sourceStream.pipe(destinationStream);
 	});
