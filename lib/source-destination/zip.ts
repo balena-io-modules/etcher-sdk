@@ -7,9 +7,6 @@ import { SourceDestination } from './source-destination';
 
 import { NotCapable } from '../errors';
 
-const noop = () => {
-};
-
 export class ZipSource extends SourceDestination {
 	static readonly mimetype = 'application/zip';
 	private entry?: ZipStreamEntry;
@@ -28,8 +25,10 @@ export class ZipSource extends SourceDestination {
 			// We need to reset the entry if any read happens
 			const originalRead = this.entry._read.bind(this.entry);
 			this.entry._read = (...args: any[]) => {
-				this.entry!._read = originalRead;
-				this.entry = undefined;
+				if (this.entry !== undefined) {
+					this.entry._read = originalRead;
+					this.entry = undefined;
+				}
 				return originalRead(...args);
 			};
 		}
