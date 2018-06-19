@@ -58,6 +58,7 @@ export class Scanner extends EventEmitter {
 
 	stop(): void {
 		debug('stop');
+		this.drives.clear();
 		this.adapters.forEach((adapter: Adapter) => {
 			adapter.stop();
 		});
