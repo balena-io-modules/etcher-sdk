@@ -27,8 +27,14 @@ export class MultiDestinationVerifier extends Verifier {
 
 	constructor(private source: MultiDestination, checksumOrBlockmap: string | BlockMap, size?: number) {
 		super();
-		this.remaining = source.destinations.length;
-		this.verifiers = source.destinations.map((dest: SourceDestination) => {
+		const destinations = source.destinations
+		.filter((dest: SourceDestination) => {
+			// Don't try to verify destinations that failed.
+			return !source.erroredDestinations.includes(dest);
+		});
+		this.remaining = destinations.length;
+		this.verifiers = destinations
+		.map((dest: SourceDestination) => {
 			const verifier = dest.createVerifier(checksumOrBlockmap, size);
 			verifier.on('error', (error: Error) => {
 				this.emit('error', new MultiDestinationError(error, dest));
@@ -63,6 +69,8 @@ export class MultiDestinationVerifier extends Verifier {
 }
 
 export class MultiDestination extends SourceDestination {
+	erroredDestinations: SourceDestination[] = [];
+
 	constructor(readonly destinations: SourceDestination[]) {
 		super();
 		if (destinations.length === 0) {
@@ -159,6 +167,7 @@ export class MultiDestination extends SourceDestination {
 				stream.on('progress', passthrough.emit.bind(passthrough, 'progress'));
 			}
 			stream.on('error', (error: Error) => {
+				this.erroredDestinations.push(destination);
 				// Don't emit 'error' events as it would unpipe the source from passthrough
 				passthrough.emit('fail', new MultiDestinationError(error, destination));
 				oneStreamFinished(stream);
