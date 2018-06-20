@@ -4,16 +4,13 @@ import { ZipStreamEntry } from 'unzip-stream';
 import { getFileStreamFromZipStream } from '../zip';
 import { Metadata } from './metadata';
 import { SourceDestination } from './source-destination';
+import { SourceSource } from './source-source';
 
 import { NotCapable } from '../errors';
 
-export class ZipSource extends SourceDestination {
+export class ZipSource extends SourceSource {
 	static readonly mimetype = 'application/zip';
 	private entry?: ZipStreamEntry;
-
-	constructor(private source: SourceDestination) {
-		super();
-	}
 
 	async canCreateReadStream(): Promise<boolean> {
 		return true;
@@ -50,16 +47,6 @@ export class ZipSource extends SourceDestination {
 			compressedSize: entry.compressedSize,
 			name: basename(entry.path),
 		};
-	}
-
-	protected async _open(): Promise<void> {
-		await super._open();
-		await this.source.open();
-	}
-
-	protected async _close(): Promise<void> {
-		await super._close();
-		await this.source.close();
 	}
 }
 

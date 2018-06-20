@@ -6,15 +6,16 @@ import { BLOCK, SECTOR_SIZE, Image as UDIFImage } from 'udif';
 
 import { Metadata } from './metadata';
 import { SourceDestination, SourceDestinationFs } from './source-destination';
+import { SourceSource } from './source-source';
 
 import { NotCapable } from '../errors';
 
-export class DmgSource extends SourceDestination {
+export class DmgSource extends SourceSource {
 	static readonly mimetype = 'application/x-apple-diskimage';
 	private image: UDIFImage;
 
-	constructor(private source: SourceDestination) {
-		super();
+	constructor(source: SourceDestination) {
+		super(source);
 		this.image = new UDIFImage('', { fs: new SourceDestinationFs(source) });
 	}
 
@@ -51,14 +52,12 @@ export class DmgSource extends SourceDestination {
 
 	protected async _open(): Promise<void> {
 		await super._open();
-		await this.source.open();
 		await promisify(this.image.open).bind(this.image)();
 	}
 
 	protected async _close(): Promise<void> {
-		await super._close();
 		await promisify(this.image.close).bind(this.image)();
-		await this.source.close();
+		await super._close();
 	}
 }
 

@@ -45,7 +45,6 @@ export class ResinS3Source extends SourceDestination {
 	}
 
 	protected async _open() {
-		await super._open();
 		await this.rawSource.open();
 		await this.zipSource.open();
 	}
@@ -53,6 +52,5 @@ export class ResinS3Source extends SourceDestination {
 	protected async _close() {
 		await this.zipSource.close();
 		await this.rawSource.close();
-		await super._close();
 	}
 }

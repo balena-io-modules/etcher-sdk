@@ -9,6 +9,8 @@ import BlockMap = require('blockmap');
 import { configure as legacyConfigure } from './configure';
 import { Metadata } from '../metadata';
 import { SourceDestination, SourceDestinationFs } from '../source-destination';
+import { SourceSource } from '../source-source';
+import { NotCapable } from '../../errors';
 
 const debug = _debug('etcher-sdk:configured-source');
 const BLOCK_SIZE = 512;
@@ -26,7 +28,12 @@ export class SourceDisk extends Disk {
 	}
 
 	async _getCapacity(): Promise<number> {
-		return (await this.source.getMetadata()).size;
+		// Don't create SourceDisks with sources that do not define a size
+		const size = (await this.source.getMetadata()).size;
+		if (size === undefined) {
+			throw new NotCapable();
+		}
+		return size;
 	}
 
 	async _read(buffer: Buffer, bufferOffset: number, length: number, fileOffset: number): Promise<ReadResult> {
@@ -41,19 +48,19 @@ export class SourceDisk extends Disk {
 	}
 }
 
-export class ConfiguredSource extends SourceDestination {
+export class ConfiguredSource extends SourceSource {
 	private disk: SourceDisk;
 	private configure?: ConfigureFunction;
 
 	constructor(
 		// source needs to implement read and createReadStream
-		private source: SourceDestination,
+		source: SourceDestination,
 		private shouldTrimPartitions: boolean,
 		private createStreamFromDisk: boolean,
 		configure?: ConfigureFunction | 'legacy',
 		private config?: any,
 	) {
-		super();
+		super(source);
 		this.disk = new SourceDisk(source);
 		if (configure === 'legacy') {
 			this.configure = legacyConfigure;
@@ -152,13 +159,14 @@ export class ConfiguredSource extends SourceDestination {
 			return a + b;
 		});  // TODO: discarededBytes in metadata ?
 		const metadata = await this.getMetadata();
-		const percentage = Math.round(discardedBytes / metadata.size * 100);
-		debug(`discarded ${discards.length} chunks, ${discardedBytes} bytes, ${percentage}% of the image`);
+		if (metadata.size !== undefined) {
+			const percentage = Math.round(discardedBytes / metadata.size * 100);
+			debug(`discarded ${discards.length} chunks, ${discardedBytes} bytes, ${percentage}% of the image`);
+		}
 	}
 
 	protected async _open(): Promise<void> {
 		await super._open();
-		await this.source.open();
 		if (this.configure !== undefined) {
 			await this.configure(this.disk, this.config);
 		}
@@ -168,7 +176,6 @@ export class ConfiguredSource extends SourceDestination {
 	}
 
 	protected async _close(): Promise<void> {
-		await this.source.close();
 		await super._close();
 	}
 }

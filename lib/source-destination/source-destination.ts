@@ -9,6 +9,7 @@ import BlockMap = require('blockmap');
 
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
 import { NotCapable, VerificationError } from '../errors';
+import { SourceSource } from './source-source';
 import { SparseWriteStream } from '../sparse-write-stream';
 import { streamToBuffer } from '../utils';
 
@@ -147,11 +148,11 @@ export class SparseStreamVerifier extends Verifier {
 
 export class SourceDestination extends EventEmitter {
 	static readonly mimetype?: string;
-	private static mimetypes = new Map<string, any>();  // TODO: proper typing
+	private static mimetypes = new Map<string, typeof SourceSource>();
 
 	private isOpen = false;
 
-	static register(Cls: any) {  // TODO: proper typing
+	static register(Cls: typeof SourceSource) {
 		if (Cls.mimetype !== undefined) {
 			SourceDestination.mimetypes.set(Cls.mimetype, Cls);
 		}
@@ -284,27 +285,16 @@ export class SourceDestination extends EventEmitter {
 	}
 
 	async getInnerSource(): Promise<SourceDestination> {
-		const wasOpen = this.isOpen;
-		if (!wasOpen) {
-			await this.open();
+		await this.open();
+		const mimetype = await this.getMimetype();
+		if (mimetype === undefined) {
+			return this;
 		}
-		try {
-			const mimetype = await this.getMimetype();
-			if (mimetype === undefined) {
-				return this;
-			}
-			const Cls = SourceDestination.mimetypes.get(mimetype);
-			if (Cls === undefined) {
-				return this;
-			}
-			// Ignoring ts errors here.
-			// Subclasses that have a mimetype must implement a constructor which only parameter is a SourceDestination.
-			// @ts-ignore
-			return await (new Cls(this)).getInnerSource();
-		} finally {
-			if (!wasOpen) {
-				await this.close();
-			}
+		const Cls = SourceDestination.mimetypes.get(mimetype);
+		if (Cls === undefined) {
+			return this;
 		}
+		const innerSource = new Cls(this);
+		return await innerSource.getInnerSource();
 	}
 }

@@ -14,10 +14,7 @@ const main = async ({ sourceImage, devicePathPrefix, verify, trim, config }: any
 		deviceScanner.on('ready', resolve);
 	});
 	let source: sourceDestination.SourceDestination = new sourceDestination.File(sourceImage, sourceDestination.File.OpenFlags.Read);
-	if (source === undefined) {
-		console.log('No source file');
-		return;
-	}
+	source = await source.getInnerSource();  // getInnerSource will open the sources for you, no need to call open().
 	if (trim || (config !== undefined)) {
 		source = new sourceDestination.ConfiguredSource(
 			source,
@@ -32,7 +29,7 @@ const main = async ({ sourceImage, devicePathPrefix, verify, trim, config }: any
 	});
 	const destination = new sourceDestination.MultiDestination(destinationDrives);
 	destination.on('error', console.error); // TODO
-	await Promise.all([ source.open(), destination.open() ]);
+	await destination.open();
 	try {
 		await pipeSourceToDestination(source, destination, verify);
 	} finally {

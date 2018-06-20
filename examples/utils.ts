@@ -1,24 +1,41 @@
 import { FilterStream, ReadStream } from 'blockmap';
 import { EventEmitter } from 'events';
 import * as ProgressBar from 'progress';
+import { Spinner } from 'cli-spinner';
 
 import { fs, sourceDestination, utils } from '../lib';
 
 function createDestinationProgressBar(destinationStream: EventEmitter, sourceMetadata: sourceDestination.Metadata, title: string) {
 	const sparse = (destinationStream instanceof FilterStream) || (destinationStream instanceof ReadStream);
 	const total = sparse ? sourceMetadata.blockmappedSize : sourceMetadata.size;
-	const progressBar = new ProgressBar(
-		`${title} [:bar] :current / :total bytes ; :percent :speed MiB/s`,
-		{ total, width: 40 },
-	);
-	const updateProgressBar = (progress: sourceDestination.ProgressEvent) => {
-		const value = sparse ? progress.bytes : progress.position;
-		const delta = value - progressBar.curr;
-		if (delta !== 0) {
-			progressBar.tick(delta, { speed: (progress.speed / 1024 / 1024).toFixed(2) });
-		}
-	};
-	destinationStream.on('progress', updateProgressBar);
+	if (total !== undefined) {
+		const progressBar = new ProgressBar(
+			`${title} [:bar] :current / :total bytes ; :percent :speed MiB/s`,
+			{ total, width: 40 },
+		);
+		const updateProgressBar = (progress: sourceDestination.ProgressEvent) => {
+			const value = sparse ? progress.bytes : progress.position;
+			const delta = value - progressBar.curr;
+			if (delta !== 0) {
+				progressBar.tick(delta, { speed: (progress.speed / 1024 / 1024).toFixed(2) });
+			}
+		};
+		destinationStream.on('progress', updateProgressBar);
+	} else {
+		let lastBytes: number;
+		const spinner = new Spinner('Source size not available');
+		const updateProgressBar = (progress: sourceDestination.ProgressEvent) => {
+			lastBytes = progress.bytes;
+			spinner.setSpinnerTitle(`Source size not available, ${lastBytes} bytes read`);
+		};
+		destinationStream.on('progress', updateProgressBar);
+		destinationStream.on('done', () => {
+			console.log();
+			spinner.stop();
+			sourceMetadata.size = lastBytes;
+		});
+		spinner.start();
+	}
 }
 
 export async function readJsonFile(path: string): Promise<any> {
@@ -92,7 +109,7 @@ export async function pipeRegularSourceToDestination(
 	});
 	if (verify) {
 		const verifier = destination.createVerifier(checksum, sourceMetadata.size);
-		await runVerifier(verifier, await source.getMetadata());
+		await runVerifier(verifier, sourceMetadata);
 	}
 }
 

@@ -114,12 +114,10 @@ export class File extends SourceDestination {
 	}
 
 	protected async _open(): Promise<void> {
-		await super._open();
 		this.fd = await open(this.path, this.flags);
 	}
 
 	protected async _close(): Promise<void> {
-		await super._close();
 		await close(this.fd);
 	}
 }

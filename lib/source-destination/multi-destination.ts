@@ -11,7 +11,7 @@ import { SourceDestination, Verifier } from './source-destination';
 import { SparseWriteStream } from '../sparse-write-stream';
 
 function isntNull(x: any) {
-	return x !== null
+	return x !== null;
 }
 
 export class MultiDestinationError extends Error {
@@ -163,9 +163,6 @@ export class MultiDestination extends SourceDestination {
 					interval = setInterval(emitProgress, PROGRESS_EMISSION_INTERVAL);
 				}
 			});
-			if (index === 0) {
-				stream.on('progress', passthrough.emit.bind(passthrough, 'progress'));
-			}
 			stream.on('error', (error: Error) => {
 				this.erroredDestinations.push(destination);
 				// Don't emit 'error' events as it would unpipe the source from passthrough
@@ -192,7 +189,7 @@ export class MultiDestination extends SourceDestination {
 
 	protected async _open(): Promise<void> {
 		// TODO: remove destination from destinations list on error?
-		await super._open();
+		// TODO: fix mountutils and use map
 		//await map(this.destinations, async (destination) => {
 		await each(this.destinations, async (destination) => {
 			try {
@@ -204,7 +201,7 @@ export class MultiDestination extends SourceDestination {
 	}
 
 	protected async _close(): Promise<void> {
-		await super._close();
+		// TODO: fix mountutils and use map
 		//await map(this.destinations, async (destination) => {
 		await each(this.destinations, async (destination) => {
 			try {
