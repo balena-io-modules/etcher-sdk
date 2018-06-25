@@ -16,7 +16,7 @@ export class ResinS3Source extends SourceDestination {
 		// version: 2.9.6+rev1.prod
 		super();
 		this.rawSource = new Http(this.getUrl('image/resin.img'));
-		this.zipSource = new ZipSource(new Http(this.getUrl('image/resin.img.zip')));
+		this.zipSource = new ZipSource(new Http(this.getUrl('image/resin.img.zip')), true);
 
 	}
 

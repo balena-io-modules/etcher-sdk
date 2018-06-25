@@ -147,6 +147,17 @@ export class SparseStreamVerifier extends Verifier {
 }
 
 export class SourceDestination extends EventEmitter {
+	static readonly imageExtensions = [
+		'img',
+		'iso',
+		'bin',
+		'dsk',
+		'hddimg',
+		'raw',
+		'dmg',
+		'sdcard',
+		'rpi-sdimg',
+	];
 	static readonly mimetype?: string;
 	private static mimetypes = new Map<string, typeof SourceSource>();
 
