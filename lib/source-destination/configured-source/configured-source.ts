@@ -130,7 +130,7 @@ export class ConfiguredSource extends SourceSource {
 		}
 	}
 
-	async getMetadata(): Promise<Metadata> {
+	async _getMetadata(): Promise<Metadata> {
 		const metadata = await this.source.getMetadata();
 		const blockmap = await this.getBlockmap();
 		metadata.blockmappedSize = blockmap.blockSize * blockmap.mappedBlockCount;

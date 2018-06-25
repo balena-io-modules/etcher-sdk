@@ -40,7 +40,7 @@ export class ResinS3Source extends SourceDestination {
 		return await this.zipSource._createReadStream(...args);
 	}
 
-	async getMetadata(): Promise<Metadata> {
+	async _getMetadata(): Promise<Metadata> {
 		return await this.zipSource.getMetadata();
 	}
 

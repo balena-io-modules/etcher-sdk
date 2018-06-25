@@ -161,6 +161,7 @@ export class SourceDestination extends EventEmitter {
 	static readonly mimetype?: string;
 	private static mimetypes = new Map<string, typeof SourceSource>();
 
+	private metadata: Metadata;
 	private isOpen = false;
 
 	static register(Cls: typeof SourceSource) {
@@ -194,6 +195,13 @@ export class SourceDestination extends EventEmitter {
 	}
 
 	async getMetadata(): Promise<Metadata> {
+		if (this.metadata === undefined) {
+			this.metadata = await this._getMetadata();
+		}
+		return this.metadata;
+	}
+
+	async _getMetadata(): Promise<Metadata> {
 		throw new NotCapable();
 	}
 

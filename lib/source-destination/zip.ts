@@ -43,7 +43,7 @@ export class StreamZipSource extends SourceSource {
 		return await this.getEntry();
 	}
 
-	async getMetadata(): Promise<Metadata> {
+	async _getMetadata(): Promise<Metadata> {
 		const entry = await this.getEntry();
 		return {
 			size: entry.size,
@@ -160,7 +160,7 @@ export class RandomAccessZipSource extends SourceSource {
 		return transform;
 	}
 
-	async getMetadata(): Promise<Metadata> {
+	async _getMetadata(): Promise<Metadata> {
 		const entry = await this.getImageEntry();
 		const result: Metadata = {
 			size: entry.size,
@@ -220,7 +220,7 @@ export class ZipSource extends SourceSource {
 		return await this.implementation._createSparseReadStream(generateChecksums);
 	}
 
-	async getMetadata(): Promise<Metadata> {
+	async _getMetadata(): Promise<Metadata> {
 		await this.prepare();
 		return await this.implementation.getMetadata();
 	}

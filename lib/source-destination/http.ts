@@ -33,7 +33,7 @@ export class Http extends SourceDestination {
 		return true;
 	}
 
-	async getMetadata(): Promise<Metadata> {
+	async _getMetadata(): Promise<Metadata> {
 		await this.ready;
 		let name;
 		const pathname = parse(this.url).pathname;

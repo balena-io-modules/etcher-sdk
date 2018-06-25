@@ -41,7 +41,7 @@ export class DmgSource extends SourceSource {
 		.sum();
 	}
 
-	async getMetadata(): Promise<Metadata> {
+	async _getMetadata(): Promise<Metadata> {
 		const compressedSize = (await this.source.getMetadata()).size;
 		return {
 			compressedSize,

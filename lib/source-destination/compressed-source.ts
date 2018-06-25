@@ -27,7 +27,7 @@ export abstract class CompressedSource extends SourceSource {
 		return transform;
 	}
 
-	async getMetadata(): Promise<Metadata> {
+	async _getMetadata(): Promise<Metadata> {
 		const sourceMetadata = await this.source.getMetadata();
 		const compressedSize = sourceMetadata.compressedSize || sourceMetadata.size;
 		const size = await this.getSize();

@@ -82,7 +82,7 @@ export class File extends SourceDestination {
 		return this._canWrite();
 	}
 
-	async getMetadata(): Promise<Metadata> {
+	async _getMetadata(): Promise<Metadata> {
 		return {
 			size: (await stat(this.path)).size,
 			name: basename(this.path),

@@ -49,7 +49,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return this.drive.size;
 	}
 
-	async getMetadata(): Promise<Metadata> {
+	async _getMetadata(): Promise<Metadata> {
 		return {
 			size: this.drive.size,
 		};
