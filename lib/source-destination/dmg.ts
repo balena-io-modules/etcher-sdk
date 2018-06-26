@@ -2,6 +2,7 @@ import { FilterStream } from 'blockmap';
 import { promisify } from 'bluebird';
 import { ReadResult } from 'file-disk';
 import * as _ from 'lodash';
+import StreamLimiter = require('stream-limiter');
 import { BLOCK, SECTOR_SIZE, Image as UDIFImage } from 'udif';
 
 import { Metadata } from './metadata';
@@ -20,11 +21,13 @@ export class DmgSource extends SourceSource {
 	}
 
 	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
+		const stream = await this.image.createReadStream();
 		if (end !== undefined) {
-			// TODO stream end capability?
-			throw new NotCapable();
+			const transform = new StreamLimiter(end + 1);
+			stream.pipe(transform);
+			return transform;
 		}
-		return this.image.createReadStream();
+		return stream;
 	}
 
 	async _createSparseReadStream(generateChecksums: boolean): Promise<FilterStream> {

@@ -1,5 +1,6 @@
 import { basename, extname } from 'path';
 import { Transform } from 'stream';
+import StreamLimiter = require('stream-limiter');
 
 import { Metadata } from './metadata';
 import { SourceSource } from './source-source';
@@ -17,13 +18,14 @@ export abstract class CompressedSource extends SourceSource {
 	}
 
 	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
-		if (end !== undefined) {
-			// TODO: handle end parameter
-			throw new NotCapable();
-		}
 		const stream = await this.source.createReadStream();
 		const transform = this.createTransform();
 		stream.pipe(transform);
+		if (end !== undefined) {
+			const limiter = new StreamLimiter(end + 1);
+			transform.pipe(limiter);
+			return limiter;
+		}
 		return transform;
 	}
 

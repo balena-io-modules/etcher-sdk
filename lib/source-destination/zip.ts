@@ -2,6 +2,7 @@ import BlockMap = require('blockmap');
 import { sortBy, values  } from 'lodash';
 import ZipStream = require('node-stream-zip');
 import { extname, basename, dirname, join } from 'path';
+import StreamLimiter = require('stream-limiter');
 import { ZipStreamEntry } from 'unzip-stream';
 
 import { getFileStreamFromZipStream } from '../zip';
@@ -36,11 +37,13 @@ export class StreamZipSource extends SourceSource {
 	}
 
 	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
+		const stream = await this.getEntry();
 		if (end !== undefined) {
-			// TODO: capability?
-			throw new NotCapable();
+			const transform = new StreamLimiter(end + 1);
+			stream.pipe(transform);
+			return transform;
 		}
-		return await this.getEntry();
+		return stream;
 	}
 
 	async _getMetadata(): Promise<Metadata> {
@@ -140,12 +143,14 @@ export class RandomAccessZipSource extends SourceSource {
 	}
 
 	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
-		if (end !== undefined) {
-			// TODO: capability?
-			throw new NotCapable();
-		}
 		const entry = await this.getImageEntry();
-		return await this.getStream(entry.name);
+		const stream = await this.getStream(entry.name);
+		if (end !== undefined) {
+			const transform = new StreamLimiter(end + 1);
+			stream.pipe(transform);
+			return transform;
+		}
+		return stream;
 	}
 
 	async _createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream> {
