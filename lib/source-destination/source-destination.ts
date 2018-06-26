@@ -1,3 +1,5 @@
+import MBR = require('mbr');
+import GPT = require('gpt');
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
 import * as fileType from 'file-type';
@@ -143,6 +145,38 @@ export class SparseStreamVerifier extends Verifier {
 		}
 		const meter = new ProgressWritable({ objectMode: true });
 		this.handleEventsAndPipe(stream, meter);
+	}
+}
+
+// As MBR and GPT partition entries have a different structure,
+// we normalize them here to make them easier to deal with and
+// avoid clutter in what's sent to analytics
+interface Partition {
+	type: string;
+	id?: string;
+	name?: string;
+	firstLBA: number;
+	lastLBA: number;
+	extended: boolean;
+}
+
+interface PartitionTable {
+	type: 'mbr' | 'gpt';
+	partitions: Partition[];
+}
+
+function detectGPT(buffer: Buffer): any {  // TODO: GPT typings
+	let blockSize = 512;
+	// Attempt to parse the GPT from several offsets,
+	// as the block size of the image may vary (512,1024,2048,4096);
+	// For example, ISOs will usually have a block size of 4096,
+	// but raw images a block size of 512 bytes
+	while (blockSize <= 4096) {
+		try {
+			return GPT.parse(buffer.slice(blockSize));
+		} catch (error) {
+		}
+		blockSize *= 2;
 	}
 }
 
@@ -315,5 +349,52 @@ export class SourceDestination extends EventEmitter {
 		}
 		const innerSource = new Cls(this);
 		return await innerSource.getInnerSource();
+	}
+
+	async getPartitionTable(): Promise<PartitionTable | undefined> {
+		// TODO: this should be in partitioninfo
+		// missing parts in partitioninfo:
+		// * read from Buffer directly (can be avoided using a Buffer backed FileDisk)
+		// * try detecting GPT at different offsets (see detectGPT above)
+		const stream = await this.createReadStream(65535);  // TODO: constant
+		const buffer = await streamToBuffer(stream);
+		let mbr;
+		let gpt;
+
+		try {
+			mbr = MBR.parse(buffer);
+		} catch (error) {
+			gpt = detectGPT(buffer);
+		}
+
+		if (mbr !== undefined) {
+			return {
+				type: 'mbr',
+				partitions: mbr.partitions.map((partition: any) => {
+					return {
+						type: partition.type,
+						id: null,
+						name: null,
+						firstLBA: partition.firstLBA,
+						lastLBA: partition.lastLBA,
+						extended: partition.extended,
+					};
+				}),
+			};
+		} else if (gpt !== undefined) {
+			return {
+				type: 'gpt',
+				partitions: mbr.partitions.map((partition: any) => {
+					return {
+						type: partition.type.toString(),
+						id: partition.guid.toString(),
+						name: partition.name,
+						firstLBA: partition.firstLBA,
+						lastLBA: partition.lastLBA,
+						extended: false,
+					};
+				}),
+			};
+		}
 	}
 }
