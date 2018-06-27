@@ -141,6 +141,9 @@ export class MultiDestination extends SourceDestination {
 		let interval: NodeJS.Timer;
 
 		function oneStreamFinished(stream: NodeJS.WritableStream) {
+			if (!progresses.has(stream)) {
+				return;
+			}
 			if (progresses.size === 1) {
 				clearInterval(interval);
 				emitProgress();  // Just to be sure we emitted the last state
