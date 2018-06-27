@@ -46,13 +46,22 @@ export class Http extends SourceDestination {
 		};
 	}
 
+	private getRange(start = 0, end?: number) {
+		// start and end are inclusive
+		let range = `bytes=${start}-`;
+		if (end !== undefined) {
+			range += end;
+		}
+		return range;
+	}
+
 	async read(buffer: Buffer, bufferOffset: number, length: number, sourceOffset: number): Promise<ReadResult> {
 		const response = await axios({
 			method: 'get',
 			url: this.url,
 			responseType: 'arraybuffer',
 			headers: {
-				Range: `bytes=${sourceOffset}-${sourceOffset + length - 1}`,
+				Range: this.getRange(sourceOffset, sourceOffset + length - 1),
 			},
 		});
 		const bytesRead = response.data.length;
@@ -61,15 +70,13 @@ export class Http extends SourceDestination {
 		return { bytesRead, buffer };
 	}
 
-	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
-		let headers;
-		if (end !== undefined) {
-			headers =  { Range: `bytes=0-${end}` };
-		}
+	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
 		const response = await axios({
 			method: 'get',
 			url: this.url,
-			headers,
+			headers: {
+				Range: this.getRange(start, end),
+			},
 			responseType: 'stream',
 		});
 		return response.data;

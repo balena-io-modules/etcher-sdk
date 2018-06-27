@@ -1,10 +1,10 @@
 import { basename, extname } from 'path';
 import { Transform } from 'stream';
-import StreamLimiter = require('stream-limiter');
 
 import { Metadata } from './metadata';
 import { SourceSource } from './source-source';
 import { NotCapable } from '../errors';
+import { StreamLimiter } from '../stream-limiter';
 
 export abstract class CompressedSource extends SourceSource {
 	protected abstract createTransform(): Transform;
@@ -17,13 +17,24 @@ export abstract class CompressedSource extends SourceSource {
 		return true;
 	}
 
-	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
+	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+		if (start !== 0) {
+			throw new NotCapable();
+		}
 		const stream = await this.source.createReadStream();
 		const transform = this.createTransform();
 		stream.pipe(transform);
 		if (end !== undefined) {
-			const limiter = new StreamLimiter(end + 1);
-			transform.pipe(limiter);
+			const limiter = new StreamLimiter(transform, end + 1);
+			limiter.on('finish', () => {
+				// Ignore EBADF errors after this:
+				// We might be still reading the source stream from a closed fd
+				stream.on('error', (err: NodeJS.ErrnoException) => {
+					if (err.code !== 'EBADF') {
+						throw err;
+					}
+				});
+			});
 			return limiter;
 		}
 		return transform;

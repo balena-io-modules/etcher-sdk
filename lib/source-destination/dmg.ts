@@ -2,7 +2,6 @@ import { FilterStream } from 'blockmap';
 import { promisify } from 'bluebird';
 import { ReadResult } from 'file-disk';
 import * as _ from 'lodash';
-import StreamLimiter = require('stream-limiter');
 import { BLOCK, SECTOR_SIZE, Image as UDIFImage } from 'udif';
 
 import { Metadata } from './metadata';
@@ -10,6 +9,7 @@ import { SourceDestination, SourceDestinationFs } from './source-destination';
 import { SourceSource } from './source-source';
 
 import { NotCapable } from '../errors';
+import { StreamLimiter } from '../stream-limiter';
 
 export class DmgSource extends SourceSource {
 	static readonly mimetype = 'application/x-apple-diskimage';
@@ -20,11 +20,13 @@ export class DmgSource extends SourceSource {
 		this.image = new UDIFImage('', { fs: new SourceDestinationFs(source) });
 	}
 
-	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
+	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+		if (start !== 0) {
+			throw new NotCapable();
+		}
 		const stream = await this.image.createReadStream();
 		if (end !== undefined) {
-			const transform = new StreamLimiter(end + 1);
-			stream.pipe(transform);
+			const transform = new StreamLimiter(stream, end + 1);
 			return transform;
 		}
 		return stream;

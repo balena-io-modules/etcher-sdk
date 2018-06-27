@@ -1,8 +1,9 @@
+import { fromCallback } from 'bluebird';
 import BlockMap = require('blockmap');
 import { sortBy, values  } from 'lodash';
-import ZipStream = require('node-stream-zip');
 import { extname, basename, dirname, join } from 'path';
-import StreamLimiter = require('stream-limiter');
+import { PassThrough } from 'readable-stream';
+import { Entry, fromRandomAccessReader, RandomAccessReader, ZipFile } from 'yauzl';
 import { ZipStreamEntry } from 'unzip-stream';
 
 import { getFileStreamFromZipStream } from '../zip';
@@ -11,6 +12,7 @@ import { SourceDestination, SourceDestinationFs } from './source-destination';
 import { SourceSource } from './source-source';
 
 import { NotCapable } from '../errors';
+import { StreamLimiter } from '../stream-limiter';
 import { streamToBuffer } from '../utils';
 
 export class StreamZipSource extends SourceSource {
@@ -36,11 +38,14 @@ export class StreamZipSource extends SourceSource {
 		return this.entry;
 	}
 
-	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
+	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+		if (start !== 0) {
+			throw new NotCapable();
+		}
 		const stream = await this.getEntry();
 		if (end !== undefined) {
-			const transform = new StreamLimiter(end + 1);
-			stream.pipe(transform);
+			// TODO: handle errors on stream after transform finsh event
+			const transform = new StreamLimiter(stream, end + 1);
 			return transform;
 		}
 		return stream;
@@ -56,6 +61,26 @@ export class StreamZipSource extends SourceSource {
 	}
 }
 
+class SourceRandomAccessReader extends RandomAccessReader {
+	constructor(private source: SourceDestination) {
+		super();
+	}
+
+	_readStreamForRange(start: number, end: number) {
+		// _readStreamForRange end is exclusive
+		// this.source.createReadStream end is inclusive
+		// Workaround this method not being async with a passthrough stream
+		const passthrough = new PassThrough();
+		this.source.createReadStream(start, end - 1)
+		.then((stream) => {
+			stream.on('error', passthrough.emit.bind(passthrough, 'error'));
+			stream.pipe(passthrough);
+		})
+		.catch(passthrough.emit.bind(passthrough, 'error'));
+		return passthrough;
+	}
+}
+
 export class RandomAccessZipSource extends SourceSource {
 	private static manifestFields: (keyof Metadata)[] = [
 		'bytesToZeroOutFromTheBeginning',
@@ -67,19 +92,30 @@ export class RandomAccessZipSource extends SourceSource {
 		'url',
 		'version',
 	];
-	private zip: ZipStream;
+	private zip: ZipFile;
 	private ready: Promise<void>;
+	private entries: Entry[] = [];
 
 	constructor(source: SourceDestination) {
 		super(source);
-		// TODO: We can only set one global custom fs in ZipStream (node-stream-zip package).
-		// This means that we can't have multiple instances of RandomAccessZipSource at the same time.
-		// This needs to be addressed in node-stream-zip.
-		ZipStream.setFs(new SourceDestinationFs(this.source));
-		this.zip = new ZipStream({ file: '', storeEntries: true });
-		this.ready = new Promise((resolve, reject) => {
+		this.ready = this.init();
+	}
+
+	async init() {
+		const sourceMetadata = await this.source.getMetadata();
+		const reader = new SourceRandomAccessReader(this.source);
+		this.zip = await fromCallback((callback) => {
+			if (sourceMetadata.size === undefined) {
+				throw new NotCapable();
+			}
+			fromRandomAccessReader(reader, sourceMetadata.size, { autoClose: false }, callback);
+		});
+		this.zip.on('entry', (entry: Entry) => {
+			this.entries.push(entry);
+		});
+		await new Promise((resolve, reject) => {
+			this.zip.on('end', resolve);
 			this.zip.on('error', reject);
-			this.zip.on('ready', resolve);
 		});
 	}
 
@@ -92,62 +128,69 @@ export class RandomAccessZipSource extends SourceSource {
 		return metadata.bmap !== undefined;
 	}
 
-	private async getEntries(): Promise<ZipStream.ZipEntry[]> {
+	private async getEntries(): Promise<Entry[]> {
 		await this.ready;
-		return values(this.zip.entries());
+		return this.entries;
 	}
 
-	private async getImageEntry(): Promise<ZipStream.ZipEntry> {
+	private async getImageEntry(): Promise<Entry> {
 		let entries = (await this.getEntries()).filter((entry) => {
-			const extension = extname(entry.name);
+			const extension = extname(entry.fileName);
 			return ((extension.length > 1) && SourceDestination.imageExtensions.includes(extension.slice(1)));
 		});
 		if (entries.length === 0) {
 			throw new Error('Could not find a disk image in this archive');
 		}
-		entries = sortBy(entries, 'size');
+		entries = sortBy(entries, 'uncompressedSize');
 		return entries[entries.length - 1];
 	}
 
-	private async getStream(path: string): Promise<NodeJS.ReadableStream> {
-		return await new Promise((resolve: (stream: NodeJS.ReadableStream) => void, reject: (error: Error) => void) => {
-			this.zip.stream(path, (error: Error | null, stream: NodeJS.ReadableStream) => {
-				if (error) {
-					reject(error);
-				} else {
-					resolve(stream);
-				}
-			});
-		});
+	private async getEntryByName(name: string): Promise<Entry | undefined> {
+		const entries = await this.getEntries();
+		for (const entry of entries) {
+			if (entry.fileName === name) {
+				return entry;
+			}
+		}
 	}
 
-	private async getString(path: string): Promise<string | undefined> {
-		try {
-			const stream = await this.getStream(path);
+	private async getStream(name: string): Promise<NodeJS.ReadableStream | undefined> {
+		const entry = await this.getEntryByName(name);
+		if (entry !== undefined) {
+			return await fromCallback((callback) => {
+				// yauzl does not support start / end for compressed entries
+				this.zip.openReadStream(entry, callback);
+			});
+		}
+	}
+
+	private async getString(name: string): Promise<string | undefined> {
+		const stream = await this.getStream(name);
+		if (stream !== undefined) {
 			const buffer = await streamToBuffer(stream);
 			return buffer.toString();
-		} catch (error) {
-			// TODO: debug
 		}
 	}
 
-	private async getJson(path: string): Promise<any> {
-		try {
-			const data = await this.getString(path);
-			if (data !== undefined) {
-				return JSON.parse(data);
-			}
-		} catch (error) {
-			// TODO: debug
+	private async getJson(name: string): Promise<any> {
+		const data = await this.getString(name);
+		if (data !== undefined) {
+			return JSON.parse(data);
 		}
 	}
 
-	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
+	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+		if (start !== 0) {
+			throw new NotCapable();
+		}
 		const entry = await this.getImageEntry();
-		const stream = await this.getStream(entry.name);
+		const stream = await this.getStream(entry.fileName);
+		if (stream === undefined) {
+			throw new NotCapable();
+		}
 		if (end !== undefined) {
-			const transform = new StreamLimiter(end + 1);
-			stream.pipe(transform);
+			// TODO: handle errors on stream after transform finsh event
+			const transform = new StreamLimiter(stream, end + 1);
 			return transform;
 		}
 		return stream;
@@ -168,11 +211,10 @@ export class RandomAccessZipSource extends SourceSource {
 	async _getMetadata(): Promise<Metadata> {
 		const entry = await this.getImageEntry();
 		const result: Metadata = {
-			size: entry.size,
+			size: entry.uncompressedSize,
 			compressedSize: entry.compressedSize,
 		};
-		const prefix = join(dirname(entry.name), '.meta');
-		const entries = await this.getEntries();
+		const prefix = join(dirname(entry.fileName), '.meta');
 		result.logo = await this.getString(join(prefix, 'logo.svg'));
 		result.instructions = await this.getString(join(prefix, 'instructions.markdown'));
 		let bmap = await this.getString(join(prefix, 'image.bmap'));
@@ -187,7 +229,10 @@ export class RandomAccessZipSource extends SourceSource {
 				result[key] = manifest[key];
 			}
 		}
-		result.name = name || basename(entry.name);
+		result.name = name || basename(entry.fileName);
+		if (result.logo || result.instructions || result.bmap || manifest) {
+			result.isEtch = true;
+		}
 		return result;
 	}
 }
@@ -215,9 +260,9 @@ export class ZipSource extends SourceSource {
 		return await this.implementation.canCreateSparseReadStream();
 	}
 
-	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
+	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
 		await this.prepare();
-		return await this.implementation._createReadStream(end);
+		return await this.implementation._createReadStream(start, end);
 	}
 
 	async _createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {

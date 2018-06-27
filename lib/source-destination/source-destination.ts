@@ -112,7 +112,7 @@ export class StreamVerifier extends Verifier {
 	}
 
 	async run(): Promise<void> {
-		const stream = await this.source.createReadStream(this.size - 1);
+		const stream = await this.source.createReadStream(0, this.size - 1);
 		const hasher = createHasher();
 		hasher.on('checksum', (streamChecksum: string) => {
 			if (streamChecksum !== this.checksum) {
@@ -136,7 +136,7 @@ export class SparseStreamVerifier extends Verifier {
 		if (await this.source.canRead()) {
 			stream = new BlockMap.ReadStream('', this.blockmap, { fs: new SourceDestinationFs(this.source) });
 		} else if (await this.source.canCreateReadStream()) {
-			const originalStream = await this.source._createReadStream();
+			const originalStream = await this.source.createReadStream();
 			const transform = BlockMap.createFilterStream(this.blockmap);
 			originalStream.pipe(transform);
 			stream = transform;
@@ -247,11 +247,11 @@ export class SourceDestination extends EventEmitter {
 		throw new NotCapable();
 	}
 
-	async createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
-		return await this._createReadStream(end);
+	async createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+		return await this._createReadStream(start, end);
 	}
 
-	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
+	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
 		throw new NotCapable();
 	}
 
@@ -316,7 +316,7 @@ export class SourceDestination extends EventEmitter {
 	private async getMimeTypeFromContent(): Promise<string | undefined> {
 		let stream: NodeJS.ReadableStream;
 		try {
-			stream = await this.createReadStream(263);  // TODO: constant
+			stream = await this.createReadStream(0, 263);  // TODO: constant
 		} catch (error) {
 			if (error instanceof NotCapable) {
 				return;
@@ -339,6 +339,10 @@ export class SourceDestination extends EventEmitter {
 
 	async getInnerSource(): Promise<SourceDestination> {
 		await this.open();
+		const metadata = await this.getMetadata();
+		if (metadata.isEtch === true) {
+			return this;
+		}
 		const mimetype = await this.getMimetype();
 		if (mimetype === undefined) {
 			return this;
@@ -356,7 +360,7 @@ export class SourceDestination extends EventEmitter {
 		// missing parts in partitioninfo:
 		// * read from Buffer directly (can be avoided using a Buffer backed FileDisk)
 		// * try detecting GPT at different offsets (see detectGPT above)
-		const stream = await this.createReadStream(65535);  // TODO: constant
+		const stream = await this.createReadStream(0, 65535);  // TODO: constant
 		const buffer = await streamToBuffer(stream);
 		let mbr;
 		let gpt;

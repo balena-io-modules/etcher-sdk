@@ -97,8 +97,8 @@ export class File extends SourceDestination {
 		return await write(this.fd, buffer, bufferOffset, length, fileOffset);
 	}
 
-	async _createReadStream(end?: number): Promise<NodeJS.ReadableStream> {
-		return new BlockReadStream(this.fd, 0, end, 1024 * 1024);  // TODO: constant
+	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+		return new BlockReadStream(this.fd, start, end, 1024 * 1024);  // TODO: constant
 	}
 
 	async createWriteStream(): Promise<NodeJS.WritableStream> {

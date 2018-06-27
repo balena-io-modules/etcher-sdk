@@ -16,5 +16,6 @@ export interface Metadata {
 	supportUrl?: string;
 	url?: string;
 	version?: string;
+	isEtch?: boolean;
 
 }
