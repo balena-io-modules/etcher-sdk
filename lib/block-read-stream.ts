@@ -51,7 +51,7 @@ export class BlockReadStream extends Readable {
 			return;
 		}
 
-		const length = Math.min(this.chunkSize, Math.max(MIN_CHUNK_SIZE, toRead));
+		const length = Math.min(this.chunkSize, toRead);
 		const buffer = Buffer.allocUnsafe(length);
 
 		read(this.fd, buffer, 0, length, this.bytesRead, this.boundOnRead);
