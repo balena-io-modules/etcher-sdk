@@ -17,7 +17,7 @@ const unmountDiskAsync = promisify(unmountDisk);
 export class BlockDevice extends File implements AdapterSourceDestination {
 	emitsProgress = false;
 
-	constructor(private drive: DrivelistDrive) {
+	constructor(private drive: DrivelistDrive, private unmountOnSuccess = false) {
 		super(drive.raw, File.OpenFlags.WriteDevice);
 	}
 
@@ -79,7 +79,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		// partitions causes macOS to mount the drive. If we try to
 		// unmount too quickly, then the drive might get re-mounted
 		// right afterwards.
-		if (true) {  // TODO: not sure if unmountOnSuccess should be stored in this class or read from settings
+		if (this.unmountOnSuccess) {
 			await delay(UNMOUNT_ON_SUCCESS_TIMEOUT_MS);
 			await unmountDiskAsync(this.drive.device);
 		}
