@@ -20,6 +20,19 @@ export class DmgSource extends SourceSource {
 		this.image = new UDIFImage('', { fs: new SourceDestinationFs(source) });
 	}
 
+	async canCreateReadStream() {
+		return true;
+	}
+
+	async canCreateSparseReadStream() {
+		// TODO: We act like we can't create sparse streams because we have no way to verify
+		// flashed images.
+		// This is because node-udif does not use blockmap but implements its own BlockMap
+		// We need a function to extract a regular BlockMap from the UDIFImage.
+		//return true;
+		return false;
+	}
+
 	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
 		if (start !== 0) {
 			throw new NotCapable();
@@ -33,7 +46,6 @@ export class DmgSource extends SourceSource {
 	}
 
 	async _createSparseReadStream(generateChecksums: boolean): Promise<FilterStream> {
-		// We don't care about generateChecksums here as the blockmap already has checksums.
 		return this.image.createSparseReadStream();
 	}
 
