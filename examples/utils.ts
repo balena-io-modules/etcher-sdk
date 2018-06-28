@@ -46,6 +46,7 @@ async function runVerifier(verifier: sourceDestination.Verifier, metadata: sourc
 	createDestinationProgressBar(verifier, metadata, 'verifying');
 	await new Promise((resolve, reject) => {
 		verifier.on('error', console.error);
+		verifier.on('fail', console.error);  // MultiDestinationVerifier emits fail instead of error
 		verifier.on('finish', resolve);
 		verifier.run();
 	});
@@ -66,6 +67,9 @@ export async function pipeSourceToDestination(
 	verify = false,
 ): Promise<void> {
 	// TODO: open and close in this function
+	if (destination instanceof sourceDestination.MultiDestination) {
+		destination.on('fail', console.error);
+	}
 	const [ sparseSource, sparseDestination ] = await Promise.all([ source.canCreateSparseReadStream(), destination.canCreateSparseWriteStream() ]);
 	const sparse = sparseSource && sparseDestination;
 	if (sparse) {
