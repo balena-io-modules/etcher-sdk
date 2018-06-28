@@ -1,4 +1,5 @@
 import { Chunk } from 'blockmap';
+import { delay } from 'bluebird';
 import { ReadResult, WriteResult } from 'file-disk';
 import { constants, write as fswrite } from 'fs';
 import { basename } from 'path';
@@ -11,30 +12,48 @@ import { SourceDestination } from './source-destination';
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
 import { BlockReadStream } from '../block-read-stream';
 import { ProgressBlockWriteStream } from '../block-write-stream';
+import { isTransientError } from '../errors';
 import { close, stat, open, read, write } from '../fs';
 import { SparseWriteStream } from '../sparse-write-stream';
 
+const RETRY_BASE_TIMEOUT = 100;
+
 export class FileSparseWriteStream extends Writable implements SparseWriteStream {
+	// TODO: this should write the first sectors last like block-write-stream
+	// or we should open the block devices with the correct flags on Windows
 	private position: number;
 	private bytesWritten = 0;
 
-	constructor(private fd: number) {
+	constructor(private fd: number, private maxRetries = 5) {
 		super({ objectMode: true });
 	}
 
 	private async __write(chunk: Chunk, enc: string): Promise<void> {
-		try {
-			this.position = chunk.position;
-			await write(this.fd, chunk.buffer, 0, chunk.length, chunk.position);
-			this.position += chunk.length;
-			this.bytesWritten += chunk.length;
-		} catch (error) {
-			this.emit('error', error);
+		let retries = 0;
+		while (true) {
+			try {
+				this.position = chunk.position;
+				await write(this.fd, chunk.buffer, 0, chunk.buffer.length, chunk.position);
+				this.position += chunk.buffer.length;
+				this.bytesWritten += chunk.buffer.length;
+				return;
+			} catch (error) {
+				if (isTransientError(error)) {
+					if (retries < this.maxRetries) {
+						retries += 1;
+						await delay(RETRY_BASE_TIMEOUT * retries);
+						continue;
+					}
+					error.code = 'EUNPLUGGED';
+				}
+				//this.emit('error', error);
+				throw error;
+			}
 		}
 	}
 
 	_write(chunk: Chunk, enc: string, callback?: any): void {
-		this.__write(chunk, enc).then(callback);
+		this.__write(chunk, enc).then(callback, callback);
 	}
 }
 
