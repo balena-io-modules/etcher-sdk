@@ -97,11 +97,15 @@ export abstract class Verifier extends EventEmitter {
 			this.progress = progress;
 			this.emit('progress', progress);
 		});
-		stream.on('error', (error: Error) => {
-			this.emit('error', new VerificationError(error.message));
-		});
 		stream.on('end', this.emit.bind(this, 'end'));
 		meter.on('finish', this.emit.bind(this, 'finish'));
+		stream.once('error', () => {
+			stream.unpipe(meter);
+			meter.end();
+			if (stream instanceof BlockMap.ReadStream) {
+				stream.destroy();
+			}
+		});
 		stream.pipe(meter);
 	}
 }

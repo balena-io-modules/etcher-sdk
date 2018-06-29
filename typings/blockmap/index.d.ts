@@ -37,6 +37,7 @@ declare module 'blockmap' {
 			blocksRead: number;
 			bytesRead: number;
 			constructor(filename: string, blockmap: BlockMap, options: any);
+			destroy(): void;
 		}
 
 		export function createFilterStream(blockmap: BlockMap, options?: { verify?: boolean, generateChecksums?: boolean }): FilterStream;
