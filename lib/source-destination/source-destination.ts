@@ -117,7 +117,9 @@ export class StreamVerifier extends Verifier {
 
 	async run(): Promise<void> {
 		const stream = await this.source.createReadStream(0, this.size - 1);
+		stream.on('error', this.emit.bind(this, 'error'));
 		const hasher = createHasher();
+		hasher.on('error', this.emit.bind(this, 'error'));
 		hasher.on('checksum', (streamChecksum: string) => {
 			if (streamChecksum !== this.checksum) {
 				this.emit(
@@ -131,17 +133,30 @@ export class StreamVerifier extends Verifier {
 }
 
 export class SparseStreamVerifier extends Verifier {
-	constructor(private source: SourceDestination, private blockmap: BlockMap) {
+	constructor(private source: SourceDestination, private blockMap: BlockMap) {
 		super();
+	}
+
+	private wrapErrorAndEmit(error: Error) {
+		// Transforms the error into a VerificationError if needed
+		if (error.message.startsWith('Invalid checksum')) {
+			error = new VerificationError(error.message);
+		}
+		this.emit('error', error);
 	}
 
 	async run(): Promise<void> {
 		let stream: BlockMap.ReadStream | BlockMap.FilterStream;
 		if (await this.source.canRead()) {
-			stream = new BlockMap.ReadStream('', this.blockmap, { fs: new SourceDestinationFs(this.source) });
+			stream = new BlockMap.ReadStream('', this.blockMap, { fs: new SourceDestinationFs(this.source) });
+			stream.on('error', this.wrapErrorAndEmit.bind(this));
 		} else if (await this.source.canCreateReadStream()) {
+			// TODO: will this ever be used?
+			// if yes, originalStream should be unpiped from the transform and destroyed on error
 			const originalStream = await this.source.createReadStream();
-			const transform = BlockMap.createFilterStream(this.blockmap);
+			originalStream.on('error', this.emit.bind(this, 'error'));
+			const transform = BlockMap.createFilterStream(this.blockMap);
+			transform.on('error', this.wrapErrorAndEmit.bind(this));
 			originalStream.pipe(transform);
 			stream = transform;
 		} else {
