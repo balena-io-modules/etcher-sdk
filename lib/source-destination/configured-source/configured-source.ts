@@ -1,6 +1,7 @@
 import { using } from 'bluebird';
 import * as _debug from 'debug';
 import { DiscardDiskChunk, Disk, ReadResult, WriteResult } from 'file-disk';
+import { cloneDeep } from 'lodash';
 import { getPartitions } from 'partitioninfo';
 import { interact, AsyncFsLike } from 'resin-image-fs';
 
@@ -115,8 +116,8 @@ export class ConfiguredSource extends SourceSource {
 
 	private async createSparseReadStreamFromStream(generateChecksums: boolean): Promise<BlockMap.FilterStream> {
 		const stream = await this.createReadStream();
-		const blockmap = await this.getBlockmap();
-		const transform = BlockMap.createFilterStream(blockmap, { verify: false, generateChecksums });
+		const blockMap = await this.getBlockmap();
+		const transform = BlockMap.createFilterStream(blockMap, { verify: false, generateChecksums });
 		stream.on('error', transform.emit.bind(transform, 'error'));
 		stream.pipe(transform);
 		return transform;
@@ -131,9 +132,9 @@ export class ConfiguredSource extends SourceSource {
 	}
 
 	async _getMetadata(): Promise<Metadata> {
-		const metadata = await this.source.getMetadata();
-		const blockmap = await this.getBlockmap();
-		metadata.blockmappedSize = blockmap.blockSize * blockmap.mappedBlockCount;
+		const metadata = cloneDeep(await this.source.getMetadata());
+		metadata.blockMap = await this.getBlockmap();
+		metadata.blockmappedSize = metadata.blockMap.blockSize * metadata.blockMap.mappedBlockCount;
 		return metadata;
 	}
 

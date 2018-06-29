@@ -125,7 +125,7 @@ export class RandomAccessZipSource extends SourceSource {
 
 	async canCreateSparseReadStream(): Promise<boolean> {
 		const metadata = await this.getMetadata();
-		return metadata.bmap !== undefined;
+		return metadata.blockMap !== undefined;
 	}
 
 	private async getEntries(): Promise<Entry[]> {
@@ -198,11 +198,11 @@ export class RandomAccessZipSource extends SourceSource {
 
 	async _createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream> {
 		const metadata = await this.getMetadata();
-		if (metadata.bmap === undefined) {
+		if (metadata.blockMap === undefined) {
 			throw new NotCapable();
 		}
 		// Verifying and generating checksums makes no sense, so we only verify if generateChecksums is false.
-		const transform = BlockMap.createFilterStream(metadata.bmap, { verify: !generateChecksums, generateChecksums });
+		const transform = BlockMap.createFilterStream(metadata.blockMap, { verify: !generateChecksums, generateChecksums });
 		const stream = await this.createReadStream();
 		stream.pipe(transform);
 		return transform;
@@ -217,9 +217,9 @@ export class RandomAccessZipSource extends SourceSource {
 		const prefix = join(dirname(entry.fileName), '.meta');
 		result.logo = await this.getString(join(prefix, 'logo.svg'));
 		result.instructions = await this.getString(join(prefix, 'instructions.markdown'));
-		let bmap = await this.getString(join(prefix, 'image.bmap'));
-		if (bmap !== undefined) {
-			result.bmap = BlockMap.parse(bmap);
+		let blockMap = await this.getString(join(prefix, 'image.bmap'));
+		if (blockMap !== undefined) {
+			result.blockMap = BlockMap.parse(blockMap);
 		}
 		let manifest = await this.getJson(join(prefix, 'manifest.json'));
 		let name;
@@ -230,7 +230,7 @@ export class RandomAccessZipSource extends SourceSource {
 			}
 		}
 		result.name = name || basename(entry.fileName);
-		if (result.logo || result.instructions || result.bmap || manifest) {
+		if (result.logo || result.instructions || result.blockMap || manifest) {
 			result.isEtch = true;
 		}
 		return result;

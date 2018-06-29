@@ -5,7 +5,7 @@ export interface Metadata {
 	compressedSize?: number;
 	blockmappedSize?: number;
 	name?: string;
-	bmap?: BlockMap;
+	blockMap?: BlockMap;
 	instructions?: string;
 	logo?: string;
 	bytesToZeroOutFromTheBeginning?: number;
