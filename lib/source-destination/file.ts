@@ -46,7 +46,6 @@ export class FileSparseWriteStream extends Writable implements SparseWriteStream
 					}
 					error.code = 'EUNPLUGGED';
 				}
-				//this.emit('error', error);
 				throw error;
 			}
 		}
