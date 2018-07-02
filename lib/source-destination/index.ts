@@ -1,6 +1,7 @@
 export * from './block-device';
 export * from './bzip2';
 export * from './configured-source/configured-source';
+export * from './compressed-source';
 export * from './dmg';
 export * from './gzip';
 export * from './file';
