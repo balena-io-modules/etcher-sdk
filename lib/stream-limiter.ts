@@ -18,6 +18,12 @@ export class StreamLimiter extends Transform {
 		this.maxBytes -= length;
 		if (this.maxBytes === 0) {
 			// @ts-ignore
+			this.stream.unpipe(this);
+			this.push(null);
+			this.emit('finish');
+			// TODO: maybe we don't need to try to close / destroy the stream ?
+			// We could let it be destroyed later when there is no more references to it.
+			// @ts-ignore
 			if (this.stream.close !== undefined) {
 				// avoid https://github.com/nodejs/node/issues/15625
 				// @ts-ignore
@@ -27,11 +33,12 @@ export class StreamLimiter extends Transform {
 				}
 			// @ts-ignore
 			} else if (this.stream.destroy !== undefined) {
-				// @ts-ignore
-				this.stream.destroy();
+				// avoid `stream.push() after EOF`
+				if (this.stream.constructor.name !== 'JSLzmaStream') {
+					// @ts-ignore
+					this.stream.destroy();
+				}
 			}
-			this.push(null);
-			this.emit('finish');
 		}
 		callback();
 	}
