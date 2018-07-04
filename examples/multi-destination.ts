@@ -2,7 +2,7 @@ import { Argv } from 'yargs';
 
 import { scanner, sourceDestination } from '../lib';
 
-import { pipeSourceToDestination, readJsonFile, wrapper } from './utils';
+import { pipeSourceToDestinationsWithProgressBar, readJsonFile, wrapper } from './utils';
 
 const main = async ({ sourceImage, devicePathPrefix, verify, trim, config }: any) => {
 	const adapters = [ new scanner.adapters.BlockDeviceAdapter(() => false), new scanner.adapters.UsbbootDeviceAdapter() ];
@@ -27,13 +27,9 @@ const main = async ({ sourceImage, devicePathPrefix, verify, trim, config }: any
 	const destinationDrives = Array.from(deviceScanner.drives.values()).filter((drive) => {
 		return drive.devicePath && drive.devicePath.startsWith(devicePathPrefix);
 	});
-	const destination = new sourceDestination.MultiDestination(destinationDrives);
-	destination.on('error', console.error); // TODO
-	await destination.open();
 	try {
-		await pipeSourceToDestination(source, destination, verify);
+		await pipeSourceToDestinationsWithProgressBar(source, destinationDrives, verify);
 	} finally {
-		await Promise.all([ destination.close(), source.close() ]);
 		deviceScanner.stop();
 	}
 };

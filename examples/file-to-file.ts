@@ -2,14 +2,12 @@ import { Argv } from 'yargs';
 
 import { sourceDestination } from '../lib';
 
-import { pipeSourceToDestination, readJsonFile, wrapper } from './utils';
+import { pipeSourceToDestinationsWithProgressBar, readJsonFile, wrapper } from './utils';
 
 const main = async ({ fileSource, fileDestination, trim, config, verify }: any) => {
 	let source: sourceDestination.SourceDestination = new sourceDestination.File(fileSource, sourceDestination.File.OpenFlags.Read);
 	const destination = new sourceDestination.File(fileDestination, sourceDestination.File.OpenFlags.ReadWrite);
-	await Promise.all([ source.open(), destination.open() ]);
 	source = await source.getInnerSource();
-	await source.open();
 	const canRead = await source.canRead();
 	if (trim || (config !== undefined)) {
 		if (!canRead) {
@@ -24,11 +22,7 @@ const main = async ({ fileSource, fileDestination, trim, config, verify }: any) 
 			);
 		}
 	}
-	await pipeSourceToDestination(source, destination, verify);
-	if (!canRead && config && (await destination.canRead)) {
-		// TODO: configure destination
-	}
-	await Promise.all([ source.close(), destination.close() ]);
+	await pipeSourceToDestinationsWithProgressBar(source, [ destination ], verify);
 };
 
 // tslint:disable-next-line: no-var-requires

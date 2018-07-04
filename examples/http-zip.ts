@@ -2,16 +2,13 @@ import { Argv } from 'yargs';
 
 import { sourceDestination } from '../lib';
 
-import { pipeSourceToDestination, wrapper } from './utils';
+import { pipeSourceToDestinationsWithProgressBar, wrapper } from './utils';
 
-const main = async ({ zipSource, fileDestination }: any) => {
+const main = async ({ zipSource, fileDestination, verify }: any) => {
 	const sourceHttp = new sourceDestination.Http(zipSource);
 	const destinationFile = new sourceDestination.File(fileDestination, sourceDestination.File.OpenFlags.ReadWrite);
-	await Promise.all([ sourceHttp.open(), destinationFile.open() ]);
 	const sourceZip = await sourceHttp.getInnerSource();
-	await sourceZip.open();
-	await pipeSourceToDestination(sourceZip, destinationFile);
-	await Promise.all([ sourceZip.close(), destinationFile.close() ]);
+	await pipeSourceToDestinationsWithProgressBar(sourceZip, [ destinationFile ], verify);
 };
 
 // tslint:disable-next-line: no-var-requires
@@ -26,6 +23,7 @@ const argv = require('yargs').command(
 			},
 		);
 		yargs.positional('fileDestination', { describe: 'Destination image file' });
+		yargs.option('verify', { default: false });
 	},
 ).argv;
 

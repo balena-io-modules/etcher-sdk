@@ -186,7 +186,10 @@ export class MultiDestination extends SourceDestination {
 
 		function emitProgress() {
 			// TODO: avoid Array.from
-			passthrough.emit('progress', minBy(Array.from(progresses.values()).filter(isntNull), 'position'));
+			const leastAdvancedProgress = minBy(Array.from(progresses.values()).filter(isntNull), 'position');
+			if (leastAdvancedProgress !== undefined) {
+				passthrough.emit('progress', leastAdvancedProgress);
+			}
 		}
 
 		const streams = await map(this.activeDestinations, async (destination: SourceDestination, index: number) => {

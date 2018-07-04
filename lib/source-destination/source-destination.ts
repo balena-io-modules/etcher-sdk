@@ -10,7 +10,7 @@ import { Stream as HashStream } from 'xxhash';
 import BlockMap = require('blockmap');
 
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
-import { NotCapable, VerificationError } from '../errors';
+import { ChecksumVerificationError, NotCapable, VerificationError } from '../errors';
 import { SourceSource } from './source-source';
 import { SparseWriteStream } from '../sparse-write-stream';
 import { streamToBuffer } from '../utils';
@@ -124,7 +124,11 @@ export class StreamVerifier extends Verifier {
 			if (streamChecksum !== this.checksum) {
 				this.emit(
 					'error',
-					new VerificationError(`Source and destination checksums do not match: ${this.checksum} !== ${streamChecksum}`),
+					new ChecksumVerificationError(
+						`Source and destination checksums do not match: ${this.checksum} !== ${streamChecksum}`,
+						streamChecksum,
+						this.checksum,
+					),
 				);
 			}
 		});

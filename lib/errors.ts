@@ -6,6 +6,11 @@ export class NotCapable extends Error {
 export class VerificationError extends Error {
 }
 
+export class ChecksumVerificationError extends VerificationError {
+	constructor(message: string, public checksum: string, public expectedChecksum: string) {
+		super(message);
+	}
+}
 /**
  * @summary Determine whether an error is considered a
  * transient occurrence, and the operation should be retried

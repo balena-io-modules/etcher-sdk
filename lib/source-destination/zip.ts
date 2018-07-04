@@ -220,6 +220,7 @@ export class RandomAccessZipSource extends SourceSource {
 		let blockMap = await this.getString(join(prefix, 'image.bmap'));
 		if (blockMap !== undefined) {
 			result.blockMap = BlockMap.parse(blockMap);
+			result.blockmappedSize = result.blockMap.blockSize * result.blockMap.mappedBlockCount;
 		}
 		let manifest = await this.getJson(join(prefix, 'manifest.json'));
 		let name;

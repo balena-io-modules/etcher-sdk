@@ -32,12 +32,16 @@ export function makeClassEmitProgressEvents<T extends Constructor<EventEmitter>>
 				state.bytes += this._attributeDelta;
 				// Ignore because I don't know how to express that positionAttribute is a key of T instances
 				// @ts-ignore
-				state.position = this[positionAttribute];
+				const position = this[positionAttribute];
+				if (position !== undefined) {
+					state.position = position;
+				}
 				state.speed = meter(this._attributeDelta);
 				this._attributeDelta = 0;
 				this.emit('progress', state);
 			};
 
+			// TODO: setInterval only when attribute is set
 			const timer = setInterval(update, interval);
 
 			const clear = () => {
