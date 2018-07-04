@@ -30,6 +30,11 @@ export type OnFailFunction = (destination: SourceDestination, error: Error) => v
 
 export type OnProgressFunction = (progress: MultiDestinationProgress) => void;
 
+export interface PipeSourceToDestinationsResult {
+	failures: Map<SourceDestination, Error>;
+	bytesWritten: number;
+}
+
 // This function is the most common use case of the SDK.
 // Added it here to avoid duplicating it in other projects.
 export async function pipeSourceToDestinations(
@@ -38,9 +43,10 @@ export async function pipeSourceToDestinations(
 	onFail: OnFailFunction,
 	onProgress: OnProgressFunction,
 	verify = false,
-): Promise<Map<SourceDestination, Error>> {
+): Promise<PipeSourceToDestinationsResult> {
 	const destination = new MultiDestination(destinations);
 	const failures: Map<SourceDestination, Error> = new Map();
+	let bytesWritten = 0;
 
 	destination.on('fail', _onFail);
 	await Promise.all([ source.open(), destination.open() ]);
@@ -88,19 +94,18 @@ export async function pipeSourceToDestinations(
 	function _onProgress(progress: ProgressEvent) {
 		const totalSpeed = progress.speed * state.active;
 		let size: number | undefined;
-		let bytes: number | undefined;
 		let percentage: number | undefined;
 		let eta: number | undefined;
 		if (sparse) {
 			size = state.blockmappedSize;
-			bytes = progress.bytes;
+			bytesWritten = progress.bytes;
 		} else {
 			size = state.size;
-			bytes = progress.position;
+			bytesWritten = progress.position;
 		}
-		if ((size !== undefined) && (bytes !== undefined)) {
-			percentage = bytes / size * 100;
-			eta = (size - bytes) / progress.speed;
+		if ((size !== undefined) && (bytesWritten !== undefined)) {
+			percentage = bytesWritten / size * 100;
+			eta = (size - bytesWritten) / progress.speed;
 		}
 		const result: MultiDestinationProgress = Object.assign(
 			{},
@@ -119,7 +124,7 @@ export async function pipeSourceToDestinations(
 	}
 	updateState('finished');
 	await Promise.all([ source.close(), destination.close() ]);
-	return failures;
+	return { failures, bytesWritten };
 }
 
 async function pipeRegularSourceToDestination(
