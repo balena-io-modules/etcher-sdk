@@ -14,7 +14,7 @@ interface MultiDestinationState {
 	type: WriteStep;
 	size?: number;
 	blockmappedSize?: number;
-	sparse: boolean;
+	sparse?: boolean;
 }
 
 export interface MultiDestinationProgress extends MultiDestinationState {
@@ -48,6 +48,15 @@ export async function pipeSourceToDestinations(
 	const failures: Map<SourceDestination, Error> = new Map();
 	let bytesWritten = 0;
 
+	const state: MultiDestinationState = {
+		active: destination.destinations.size,
+		flashing: destination.destinations.size,
+		verifying: 0,
+		failed: 0,
+		successful: 0,
+		type: 'flashing',
+	};
+
 	destination.on('fail', _onFail);
 	await Promise.all([ source.open(), destination.open() ]);
 
@@ -56,17 +65,9 @@ export async function pipeSourceToDestinations(
 	);
 	const sparse = sparseSource && sparseDestination;
 
-	const state: MultiDestinationState = {
-		active: destination.destinations.size,
-		flashing: destination.destinations.size,
-		verifying: 0,
-		failed: 0,
-		successful: 0,
-		type: 'flashing',
-		size: sourceMetadata.size,
-		blockmappedSize: sourceMetadata.blockmappedSize,
-		sparse,
-	};
+	state.sparse = sparse;
+	state.size = sourceMetadata.size;
+	state.blockmappedSize = sourceMetadata.blockmappedSize;
 
 	function updateState(step?: WriteStep) {
 		if (step !== undefined) {
@@ -153,7 +154,7 @@ async function pipeRegularSourceToDestination(
 			if (done && (!verify || (destination.activeDestinations.size === 0) || (checksum !== undefined))) {
 				if (hasher !== undefined) {
 					sourceStream.unpipe(hasher);
-					hasher.end()
+					hasher.end();
 				}
 				resolve(checksum);
 			}
