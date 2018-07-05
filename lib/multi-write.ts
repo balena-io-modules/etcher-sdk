@@ -93,6 +93,9 @@ export async function pipeSourceToDestinations(
 	}
 
 	function _onProgress(progress: ProgressEvent) {
+		if ((state.size === undefined) && (sourceMetadata.size !== undefined)) {
+			state.size = sourceMetadata.size;
+		}
 		const totalSpeed = progress.speed * state.active;
 		let size: number | undefined;
 		let percentage: number | undefined;
@@ -112,7 +115,6 @@ export async function pipeSourceToDestinations(
 			{},
 			progress,
 			state,
-			{ size: sourceMetadata.size, blockmappedSize: sourceMetadata.blockmappedSize },
 			{ totalSpeed, percentage, eta },
 		);
 		onProgress(result);
