@@ -1,4 +1,4 @@
-import { each, map } from 'bluebird';
+import { map } from 'bluebird';
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
 import { every, minBy } from 'lodash';
@@ -231,9 +231,7 @@ export class MultiDestination extends SourceDestination {
 	}
 
 	protected async _open(): Promise<void> {
-		// TODO: fix mountutils and use map
-		//await map(this.destinations, async (destination) => {
-		await each(this.activeDestinations, async (destination) => {
+		await map(this.destinations, async (destination) => {
 			try {
 				await destination.open();
 			} catch (error) {
@@ -243,9 +241,7 @@ export class MultiDestination extends SourceDestination {
 	}
 
 	protected async _close(): Promise<void> {
-		// TODO: fix mountutils and use map
-		//await map(this.destinations, async (destination) => {
-		await each(this.activeDestinations, async (destination) => {
+		await map(this.destinations, async (destination) => {
 			try {
 				await destination.close();
 			} catch (error) {
