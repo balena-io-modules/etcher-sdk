@@ -49,7 +49,7 @@ export async function pipeSourceToDestinationsWithProgressBar(
 	source: sourceDestination.SourceDestination,
 	destinations: sourceDestination.SourceDestination[],
 	verify = false,
-): Promise<Map<sourceDestination.SourceDestination, Error>> {
+): Promise<multiWrite.PipeSourceToDestinationsResult> {
 	function onFail(destination: sourceDestination.SourceDestination, error: Error) {
 		console.error(`Error "${error}" on ${destination}`);
 	}
