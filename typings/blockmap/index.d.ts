@@ -42,7 +42,7 @@ declare module 'blockmap' {
 
 		export function createFilterStream(blockmap: BlockMap, options?: { verify?: boolean, generateChecksums?: boolean }): FilterStream;
 
-		export function parse(data: string): BlockMap;
+		export function parse(data: string, options?: { verify: boolean }): BlockMap;
 	}
 
 	export = BlockMap;

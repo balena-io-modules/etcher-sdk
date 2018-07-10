@@ -1,11 +1,22 @@
-import { delay, promisify } from 'bluebird';
+import { delay } from 'bluebird';
 import * as _debug from 'debug';
 import { Drive as DrivelistDrive, list } from 'drivelist';
 
 import { Adapter } from './adapter';
 import { BlockDevice } from '../../source-destination/block-device';
 
-const listDrives = promisify(list);
+// Exported so it can be mocked in tests
+export const listDrives = (): Promise<DrivelistDrive[]> => {
+	return new Promise((resolve, reject) => {
+		list((error: Error, drives: DrivelistDrive[]): void => {
+			if (error) {
+				reject(error);
+				return;
+			}
+			resolve(drives);
+		});
+	});
+};
 
 const debug = _debug('etcher-sdk:block-device-adapter');
 

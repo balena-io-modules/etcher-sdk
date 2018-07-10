@@ -142,7 +142,17 @@ export class RandomAccessZipSource extends SourceSource {
 			throw new Error('Could not find a disk image in this archive');
 		}
 		entries = sortBy(entries, 'uncompressedSize');
-		return entries[entries.length - 1];
+		const entry = entries[entries.length - 1];
+		if ((entry.compressionMethod !== 0) && (entry.compressionMethod !== 8)) {
+			throw new Error(`unsupported compression method: ${entry.compressionMethod}`);
+		}
+		return entry;
+	}
+
+	async _open(): Promise<void> {
+		await this.ready;
+		// We only want to run this for the error it may throw if there is no disk image in the zip
+		await this.getImageEntry();
 	}
 
 	private async getEntryByName(name: string): Promise<Entry | undefined> {
@@ -222,7 +232,12 @@ export class RandomAccessZipSource extends SourceSource {
 			result.blockMap = BlockMap.parse(blockMap);
 			result.blockmappedSize = result.blockMap.blockSize * result.blockMap.mappedBlockCount;
 		}
-		let manifest = await this.getJson(join(prefix, 'manifest.json'));
+		let manifest: any;
+		try {
+			manifest = await this.getJson(join(prefix, 'manifest.json'));
+		} catch (error) {
+			throw new Error('Invalid archive manifest.json');
+		}
 		let name;
 		if (manifest !== undefined) {
 			name = manifest.name;
@@ -254,6 +269,16 @@ export class ZipSource extends SourceSource {
 				this.implementation = new StreamZipSource(this.source);
 			}
 		}
+	}
+
+	async canCreateReadStream(): Promise<boolean> {
+		await this.prepare();
+		return await this.implementation.canCreateReadStream();
+	}
+
+	async open(): Promise<void> {
+		await this.prepare();
+		return await this.implementation.open();
 	}
 
 	async canCreateSparseReadStream(): Promise<boolean> {

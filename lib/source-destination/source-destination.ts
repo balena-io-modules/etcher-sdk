@@ -385,33 +385,14 @@ export class SourceDestination extends EventEmitter {
 		// * try detecting GPT at different offsets (see detectGPT above)
 		const stream = await this.createReadStream(0, 65535);  // TODO: constant
 		const buffer = await streamToBuffer(stream);
-		let mbr;
-		let gpt;
 
-		try {
-			mbr = MBR.parse(buffer);
-		} catch (error) {
-			gpt = detectGPT(buffer);
-		}
 
-		if (mbr !== undefined) {
-			return {
-				type: 'mbr',
-				partitions: mbr.partitions.map((partition: any) => {
-					return {
-						type: partition.type,
-						id: null,
-						name: null,
-						firstLBA: partition.firstLBA,
-						lastLBA: partition.lastLBA,
-						extended: partition.extended,
-					};
-				}),
-			};
-		} else if (gpt !== undefined) {
+		const gpt = detectGPT(buffer);
+
+		if (gpt !== undefined) {
 			return {
 				type: 'gpt',
-				partitions: mbr.partitions.map((partition: any) => {
+				partitions: gpt.partitions.map((partition: any) => {
 					return {
 						type: partition.type.toString(),
 						id: partition.guid.toString(),
@@ -422,6 +403,24 @@ export class SourceDestination extends EventEmitter {
 					};
 				}),
 			};
+		} else {
+			try {
+				const mbr = MBR.parse(buffer);
+				return {
+					type: 'mbr',
+					partitions: mbr.partitions.map((partition: any) => {
+						return {
+							type: partition.type,
+							id: null,
+							name: null,
+							firstLBA: partition.firstLBA,
+							lastLBA: partition.lastLBA,
+							extended: partition.extended,
+						};
+					}),
+				};
+			} catch (error) {
+			}
 		}
 	}
 }

@@ -1,4 +1,3 @@
-import { Disposer } from 'bluebird';
 import { UsbbootDevice, UsbbootScanner } from 'node-raspberrypi-usbboot';
 
 import { UsbbootDrive } from '../../source-destination/usbboot';
