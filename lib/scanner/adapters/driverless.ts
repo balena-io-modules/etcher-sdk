@@ -1,5 +1,6 @@
 import { delay } from 'bluebird';
-import { listDriverlessDevices, DriverlessDevice as WinUsbDriverlessDevice } from 'winusb-driver-generator';
+import { platform } from 'process';
+import { DriverlessDevice as WinUsbDriverlessDevice } from 'winusb-driver-generator';
 
 import { DriverlessDevice } from '../../source-destination/driverless';
 import { Adapter } from './adapter';
@@ -7,11 +8,12 @@ import { difference } from '../../utils';
 
 const SCAN_INTERVAL = 1000;
 
-export class DriverlessDeviceAdapter extends Adapter {
+class DriverlessDeviceAdapter_ extends Adapter {
 	// Emits 'attach', 'detach' and 'ready'
 	private drives: Map<string, DriverlessDevice> = new Map();
 	private running = false;
 	private ready = false;
+	private listDriverlessDevices: any;
 
 	start(): void {
 		this.running = true;
@@ -25,6 +27,8 @@ export class DriverlessDeviceAdapter extends Adapter {
 	}
 
 	private async scanLoop(): Promise<void> {
+		// This imort fails on anything else than win32 and this class will only be exported on win32
+		this.listDriverlessDevices = (await import('winusb-driver-generator')).listDriverlessDevices;
 		while (this.running) {
 			this.scan();
 			if (!this.ready) {
@@ -54,7 +58,7 @@ export class DriverlessDeviceAdapter extends Adapter {
 	}
 
 	private listDrives(): Map<string, WinUsbDriverlessDevice> {
-		const devices = listDriverlessDevices();
+		const devices = this.listDriverlessDevices();
 		const result = new Map<string, WinUsbDriverlessDevice>();
 		for (const device of devices) {
 			result.set(device.did, device);
@@ -62,3 +66,5 @@ export class DriverlessDeviceAdapter extends Adapter {
 		return result;
 	}
 }
+
+export const DriverlessDeviceAdapter = (platform === 'win32') ? DriverlessDeviceAdapter_ : undefined;
