@@ -1,7 +1,7 @@
 import { fromCallback } from 'bluebird';
 import BlockMap = require('blockmap');
 import { sortBy, values  } from 'lodash';
-import { extname, basename, dirname, join } from 'path';
+import { posix } from 'path';
 import { PassThrough } from 'readable-stream';
 import { Entry, fromRandomAccessReader, RandomAccessReader, ZipFile } from 'yauzl';
 import { ZipStreamEntry } from 'unzip-stream';
@@ -56,7 +56,7 @@ export class StreamZipSource extends SourceSource {
 		return {
 			size: entry.size,
 			compressedSize: entry.compressedSize,
-			name: basename(entry.path),
+			name: posix.basename(entry.path),
 		};
 	}
 }
@@ -135,7 +135,7 @@ export class RandomAccessZipSource extends SourceSource {
 
 	private async getImageEntry(): Promise<Entry> {
 		let entries = (await this.getEntries()).filter((entry) => {
-			const extension = extname(entry.fileName);
+			const extension = posix.extname(entry.fileName);
 			return ((extension.length > 1) && SourceDestination.imageExtensions.includes(extension.slice(1)));
 		});
 		if (entries.length === 0) {
@@ -224,17 +224,17 @@ export class RandomAccessZipSource extends SourceSource {
 			size: entry.uncompressedSize,
 			compressedSize: entry.compressedSize,
 		};
-		const prefix = join(dirname(entry.fileName), '.meta');
-		result.logo = await this.getString(join(prefix, 'logo.svg'));
-		result.instructions = await this.getString(join(prefix, 'instructions.markdown'));
-		let blockMap = await this.getString(join(prefix, 'image.bmap'));
+		const prefix = posix.join(posix.dirname(entry.fileName), '.meta');
+		result.logo = await this.getString(posix.join(prefix, 'logo.svg'));
+		result.instructions = await this.getString(posix.join(prefix, 'instructions.markdown'));
+		let blockMap = await this.getString(posix.join(prefix, 'image.bmap'));
 		if (blockMap !== undefined) {
 			result.blockMap = BlockMap.parse(blockMap);
 			result.blockmappedSize = result.blockMap.blockSize * result.blockMap.mappedBlockCount;
 		}
 		let manifest: any;
 		try {
-			manifest = await this.getJson(join(prefix, 'manifest.json'));
+			manifest = await this.getJson(posix.join(prefix, 'manifest.json'));
 		} catch (error) {
 			throw new Error('Invalid archive manifest.json');
 		}
@@ -245,7 +245,7 @@ export class RandomAccessZipSource extends SourceSource {
 				result[key] = manifest[key];
 			}
 		}
-		result.name = name || basename(entry.fileName);
+		result.name = name || posix.basename(entry.fileName);
 		if (result.logo || result.instructions || result.blockMap || manifest) {
 			result.isEtch = true;
 		}
