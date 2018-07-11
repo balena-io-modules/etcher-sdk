@@ -16,7 +16,6 @@ describe('directory', function() {
 			expect(error).to.be.an.instanceof(Error);
 			expect(error.message).to.equal('EISDIR: illegal operation on a directory, read');
 			expect(error.code).to.equal('EISDIR');
-			expect(error.errno).to.equal(-21);
 		}
 	});
 });
