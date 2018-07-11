@@ -7,6 +7,7 @@ export class UsbbootDrive extends SourceDestination implements AdapterSourceDest
 	raw = null;
 	device = null;
 	devicePath = null;
+	icon = 'raspberrypi';  // TODO: Should this be in the sdk?
 	isSystem = false;
 	description = 'Compute Module';
 	mountpoints = [];

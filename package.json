@@ -36,7 +36,7 @@
     "udif": "^0.15.6",
     "unbzip2-stream": "resin-io-modules/unbzip2-stream#942fc218013c14adab01cf693b0500cf6ac83193",
     "unzip-stream": "^0.3.0",
-    "winusb-driver-generator": "^1.1.7",
+    "winusb-driver-generator": "^1.2.1",
     "xxhash": "^0.2.4",
     "yauzl": "^2.9.2",
 

@@ -5,6 +5,9 @@ const main = () => {
 		new scanner.adapters.BlockDeviceAdapter(() => true),
 		new scanner.adapters.UsbbootDeviceAdapter(),
 	];
+	if (platform === 'win32') {
+		adapters.push(new scanner.adapters.DriverlessDeviceAdapter());
+	}
 	const deviceScanner = new scanner.Scanner(adapters);
 	deviceScanner.on('attach', async (drive: scanner.adapters.AdapterSourceDestination) => {
 		console.log('attach', drive);

@@ -4,6 +4,7 @@ import { Drive as DrivelistDrive, list } from 'drivelist';
 
 import { Adapter } from './adapter';
 import { BlockDevice } from '../../source-destination/block-device';
+import { difference } from '../../utils';
 
 // Exported so it can be mocked in tests
 export const listDrives = (): Promise<DrivelistDrive[]> => {
@@ -28,14 +29,6 @@ const USBBOOT_RPI_COMPUTE_MODULE_NAMES = [
 	'Linux File-Stor Gadget USB Device',
 	'Linux File-Stor Gadget Media',
 ];
-
-const difference = <T>(setA: Set<T>, setB: Set<T>): Set<T> => {
-	const difference = new Set(setA);
-	for (const elem of setB) {
-		difference.delete(elem);
-	}
-	return difference;
-};
 
 const driveKey = (drive: DrivelistDrive) => {
 	return drive.device + '|' + drive.size + '|' + drive.description;
