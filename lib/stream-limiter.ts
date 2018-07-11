@@ -1,6 +1,5 @@
 import { versions } from 'process';
 import { Transform } from 'readable-stream';
-import { gte } from 'semver';
 import zlib = require('zlib');
 
 export class StreamLimiter extends Transform {
@@ -27,7 +26,7 @@ export class StreamLimiter extends Transform {
 			if (this.stream.close !== undefined) {
 				// avoid https://github.com/nodejs/node/issues/15625
 				// @ts-ignore
-				if (!(this.stream instanceof zlib.Gunzip) || gte(versions.node, '8.0.0')) {
+				if (!(this.stream instanceof zlib.Gunzip)) {
 					// @ts-ignore
 					this.stream.close();
 				}
