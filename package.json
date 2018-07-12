@@ -1,17 +1,44 @@
 {
   "name": "etcher-sdk",
   "version": "0.0.1",
-  "description": "",
+  "description": "Etcher SDK",
+  "author": "Resin.io Ltd <hello@etcher.io> (https://resin.io)",
   "main": "build/index.js",
+  "license": "Apache-2.0",
   "types": "build/index.d.ts",
+  "contributors": [
+    "Alexis Svinartchouk <alexis@resin.io>"
+  ],
   "scripts": {
     "test": "mocha -r ts-node/register tests/**/*.spec.ts",
     "lint": "resin-lint --typescript lib examples tests",
     "build": "tsc",
     "install": "tsc"
   },
-  "author": "alexis@resin.io",
-  "license": "Apache-2.0",
+  "keywords": [
+    "etcher",
+    "sdk",
+    "flash",
+    "flashing",
+    "disk",
+    "disk image",
+    "sd-card",
+    "imager",
+    "img",
+    "iso",
+    "dmg",
+    "resin",
+    "balena",
+    "resinos"
+  ],
+  "homepage": "https://github.com/resin-io-modules/etcher-sdk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/resin-io-modules/etcher-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/resin-io-modules/etcher-sdk/issues"
+  },
   "dependencies": {
     "@types/bluebird": "^3.5.20",
     "@types/file-type": "^5.2.1",
@@ -39,7 +66,6 @@
     "winusb-driver-generator": "^1.2.1",
     "xxhash": "^0.2.4",
     "yauzl": "^2.9.2",
-
     "@types/debug": "0.0.30",
     "@types/lodash": "^4.14.108",
     "typescript": "^2.9.1"
