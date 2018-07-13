@@ -1,0 +1,53 @@
+language: node_js
+node_js:
+  - "6.10.3"
+
+# Remove wine from cache
+before_cache:
+  - rm -rf $HOME/.cache/electron-builder/wine
+
+cache:
+  ccache: true
+  directories:
+    - $HOME/.npm/_prebuilds
+    - node_modules
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - libstdc++-6-dev
+
+env:
+  global:
+    - CCACHE_TEMPDIR=/tmp/.ccache-temp
+    - CCACHE_COMPRESS=1
+    - CC="clang"
+    - CXX="clang++"
+    - HOMEBREW_NO_AUTO_UPDATE=1
+  matrix:
+    - TARGET_ARCH=x64
+    - TARGET_ARCH=x86
+
+matrix:
+  fast_finish: true
+  exclude:
+    - os: osx
+      env: TARGET_ARCH=x86
+
+os:
+  - linux
+  - osx
+
+before_install:
+  - export HOST_OS="$TRAVIS_OS_NAME";
+
+install:
+  - npm install
+
+script:
+  - npm test
+
+notifications:
+  email: false
