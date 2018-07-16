@@ -1,0 +1,17 @@
+---
+npm:
+  versions:
+    - platform: linux
+      os: ubuntu
+      architecture: x86_64
+      node_versions:
+        - "6"
+        - "8"
+        - "10"
+    - platform: linux
+      os: ubuntu
+      architecture: x86
+      node_versions:
+        - "6"
+        - "8"
+        - "10"
