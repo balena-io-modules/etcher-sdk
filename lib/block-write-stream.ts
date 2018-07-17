@@ -5,19 +5,23 @@ import { Writable } from 'readable-stream';
 import { PROGRESS_EMISSION_INTERVAL } from './constants';
 import { isTransientError } from './errors';
 import { write } from './fs';
+import { asCallback } from './utils';
 import { makeClassEmitProgressEvents } from './source-destination/progress';
 
 const debug = _debug('etcher:writer:block-write-stream');
 
+const MIN_CHUNK_SIZE = 512;
 const CHUNK_SIZE = 64 * 1024;
-const UPDATE_INTERVAL_MS = 500;
 const RETRY_BASE_TIMEOUT = 100;
 
 export class BlockWriteStream extends Writable {
 	private bytesWritten = 0;
 	private _firstBlocks: { position: number, buffer: Buffer }[] = [];
 
-	constructor(private fd: number, private chunkSize = CHUNK_SIZE, private maxRetries = 5) {
+	private _buffers: Buffer[] = [];
+	private _bytes = 0;
+
+	constructor(private fd: number, private blockSize = MIN_CHUNK_SIZE, private chunkSize = CHUNK_SIZE, private maxRetries = 5) {
 		super({ objectMode: true, highWaterMark: 1 });
 	}
 
@@ -56,10 +60,50 @@ export class BlockWriteStream extends Writable {
 			return;
 		}
 
-		this.__write(buffer, this.bytesWritten).then(callback, callback);
+		if (this._bytes === 0 && buffer.length >= this.chunkSize) {
+			if (buffer.length % this.blockSize === 0) {
+				asCallback(this.__write(buffer, this.bytesWritten), callback);
+				return;
+			}
+		}
+
+		this._buffers.push(buffer);
+		this._bytes += buffer.length;
+
+		if (this._bytes >= this.chunkSize) {
+			let block = Buffer.concat(this._buffers);
+			const length = Math.floor(block.length / this.blockSize) * this.blockSize;
+
+			this._buffers.length = 0;
+			this._bytes = 0;
+
+			if (block.length !== length) {
+				this._buffers.push(block.slice(length));
+				this._bytes += block.length - length;
+				block = block.slice(0, length);
+			}
+
+			asCallback(this.__write(block, this.bytesWritten), callback);
+			return;
+		}
+
+		callback();
 	}
 
 	async __final(): Promise<void> {
+		if (this._bytes) {
+			const length = Math.ceil(this._bytes / this.blockSize) * this.blockSize;
+			const block = Buffer.alloc(length);
+			let offset = 0;
+
+			for (let index = 0; index < this._buffers.length; index += 1) {
+				this._buffers[index].copy(block, offset);
+				offset += this._buffers[index].length;
+			}
+
+			await this.__write(block, this.bytesWritten);
+		}
+
 		for (let i = 0; i < this._firstBlocks.length; i++) {
 			const { buffer, position } = this._firstBlocks[i];
 			await this.__write(buffer, position, true);
@@ -69,9 +113,14 @@ export class BlockWriteStream extends Writable {
 	/**
 	 * @summary Write buffered data before a stream ends, called by stream internals
 	 */
-	_final(callback: () => void) {
+	_final(callback: (error?: Error | void) => void) {
 		debug('_final');
-		this.__final().then(callback, this.destroy.bind(this));
+		asCallback(this.__final(), (error) => {
+			if (error) {
+				this.destroy();
+			}
+			callback(error);
+		})
 	}
 }
 
