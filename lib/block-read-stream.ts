@@ -32,33 +32,7 @@ export class BlockReadStream extends Readable {
 
 	constructor(private fd: number, private bytesRead = 0, private end = Infinity, private chunkSize = CHUNK_SIZE, private maxRetries = 5) {
 		super({ objectMode: true, highWaterMark: 2 });
-		this.chunkSize = Math.max(this.chunkSize, MIN_CHUNK_SIZE);
-		this.boundOnRead = this._onRead.bind(this);
 		this.boundRead = this._read.bind(this);
-	}
-
-	private _onRead(error: NodeJS.ErrnoException | undefined, bytesRead: number, buffer: Buffer) {
-		if (error) {
-			if (isTransientError(error)) {
-				if (this.retries < this.maxRetries) {
-					this.retries += 1;
-					setTimeout(this.boundRead, RETRY_BASE_TIMEOUT * this.retries);
-					return;
-				}
-				error.code = 'EUNPLUGGED';
-			}
-			this.emit('error', error);
-			return;
-		}
-
-		if (bytesRead === 0) {
-			this.push(null);
-			return;
-		}
-
-		this.retries = 0;
-		this.bytesRead += bytesRead;
-		this.push(buffer.slice(0, bytesRead));
 	}
 
 	_read() {
@@ -69,10 +43,38 @@ export class BlockReadStream extends Readable {
 			return;
 		}
 
-		const length = Math.min(this.chunkSize, toRead);
+		// Align to the minimum block size for a block device
+		const length = Math.min(CHUNK_SIZE, Math.max(MIN_CHUNK_SIZE, toRead));
 		const buffer = Buffer.allocUnsafe(length);
 
-		read(this.fd, buffer, 0, length, this.bytesRead, this.boundOnRead);
+		read(this.fd, buffer, 0, length, this.bytesRead, (error, bytesRead, buffer) => {
+			if (error) {
+				if (isTransientError(error)) {
+					if (this.retries < this.maxRetries) {
+						this.retries += 1;
+						setTimeout(this.boundRead, RETRY_BASE_TIMEOUT * this.retries);
+						return;
+					}
+					error.code = 'EUNPLUGGED';
+				}
+				this.emit('error', error);
+				return;
+			}
+
+			if (bytesRead === 0) {
+				this.push(null)
+				return
+			}
+
+			// As we're going to read more bytes than required
+			// in some cases (due to block size alignment),
+			// the output needs to be adjusted here
+			const requestedBytes = Math.min(toRead, length);
+
+			this.retries = 0;
+			this.bytesRead += bytesRead;
+			this.push(buffer.slice(0, requestedBytes));
+		});
 	}
 }
 
