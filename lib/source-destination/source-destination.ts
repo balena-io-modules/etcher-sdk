@@ -346,7 +346,7 @@ export class SourceDestination extends EventEmitter {
 		if (metadata.name === undefined) {
 			return;
 		}
-		const extension = extname(metadata.name);
+		const extension = extname(metadata.name).toLowerCase();
 		if (extension === '.dmg') {
 			return 'application/x-apple-diskimage';
 		}
