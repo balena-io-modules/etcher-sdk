@@ -12,8 +12,8 @@
   "scripts": {
     "test": "mocha -r ts-node/register tests/**/*.spec.ts",
     "lint": "resin-lint --typescript lib examples tests",
-    "build": "tsc",
-    "install": "tsc"
+    "build": "rimraf build && tsc",
+    "install": "npm run build"
   },
   "keywords": [
     "etcher",
@@ -59,6 +59,7 @@
     "partitioninfo": "^4.0.2",
     "readable-stream": "^2.3.6",
     "resin-image-fs": "^5.0.4",
+    "rimraf": "^2.6.2",
     "speedometer": "^1.0.0",
     "udif": "^0.15.6",
     "unbzip2-stream": "resin-io-modules/unbzip2-stream#942fc218013c14adab01cf693b0500cf6ac83193",
