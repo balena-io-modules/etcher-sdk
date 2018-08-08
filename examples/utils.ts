@@ -15,11 +15,14 @@
  */
 
 import { FilterStream, ReadStream } from 'blockmap';
+import { delay } from 'bluebird';
 import { EventEmitter } from 'events';
 import ProgressBar = require('progress');
 import { Spinner } from 'cli-spinner';
 
 import { fs, multiWrite, sourceDestination, utils } from '../lib';
+
+const SPINNER_DELAY = 60;
 
 export async function readJsonFile(path: string): Promise<any> {
 	return JSON.parse((await fs.readFile(path, { encoding: 'utf8', flag: 'r' })) as string);
@@ -53,6 +56,7 @@ function createProgressBar(step: string, total?: number): [ ProgressBar | Spinne
 	} else {
 		const title = `${step}: size not available`;
 		const spinner = new Spinner(title);
+		spinner.setSpinnerDelay(SPINNER_DELAY);
 		spinner.start();
 		function update(bytes: number, speed: number) {
 			spinner.setSpinnerTitle(`${title}, ${bytes} bytes, ${bytesToMebibytes(speed)} MiB/s`);
@@ -70,7 +74,7 @@ export async function pipeSourceToDestinationsWithProgressBar(
 		console.error(`Error "${error}" on ${destination}`);
 	}
 	let step: multiWrite.WriteStep;
-	let progressBar: ProgressBar | Spinner;
+	let progressBar: any | ProgressBar | Spinner = undefined;
 	let update: UpdateProgressBarFunction;
 	function onProgress(progress: multiWrite.MultiDestinationProgress) {
 		if (progress.type !== step) {
@@ -86,11 +90,22 @@ export async function pipeSourceToDestinationsWithProgressBar(
 		const bytes = progress.sparse ? progress.bytes : progress.position;
 		update(bytes, progress.speed, progress.eta);
 	}
-	return await multiWrite.pipeSourceToDestinations(
+	const result = await multiWrite.pipeSourceToDestinations(
 		source,
 		destinations,
 		onFail,
 		onProgress,
 		verify,
 	);
+	// Sleep here to be sure the last spinner title was shown.
+	await delay(SPINNER_DELAY);
+	if (progressBar !== undefined) {
+		if (progressBar instanceof Spinner) {
+			progressBar.stop();
+		} else if (progressBar instanceof ProgressBar) {
+			progressBar.terminate();
+		}
+	}
+	console.log();
+	return result;
 }
