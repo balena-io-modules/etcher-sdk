@@ -120,7 +120,7 @@ export class RandomAccessZipSource extends SourceSource {
 	async init() {
 		const sourceMetadata = await this.source.getMetadata();
 		const reader = new SourceRandomAccessReader(this.source);
-		this.zip = await fromCallback((callback) => {
+		this.zip = await fromCallback((callback: (err: any, result?: ZipFile) => void) => {
 			if (sourceMetadata.size === undefined) {
 				throw new NotCapable();
 			}
@@ -183,7 +183,7 @@ export class RandomAccessZipSource extends SourceSource {
 	private async getStream(name: string): Promise<NodeJS.ReadableStream | undefined> {
 		const entry = await this.getEntryByName(name);
 		if (entry !== undefined) {
-			return await fromCallback((callback) => {
+			return await fromCallback((callback: (err: any, result?: NodeJS.ReadableStream) => void) => {
 				// yauzl does not support start / end for compressed entries
 				this.zip.openReadStream(entry, callback);
 			});
