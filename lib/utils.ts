@@ -36,5 +36,5 @@ export function difference<T>(setA: Set<T>, setB: Set<T>): Set<T> {
 export function asCallback(promise: Promise<any>, callback: (error: Error | void, value?: any) => void) {
 	promise.then((value: any) => {
 		callback(undefined, value);
-	}).catch(callback)
+	}).catch(callback);
 }
