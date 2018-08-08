@@ -136,7 +136,7 @@ export class BlockWriteStream extends Writable {
 				this.destroy();
 			}
 			callback(error);
-		})
+		});
 	}
 }
 
