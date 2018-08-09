@@ -36,21 +36,24 @@ export async function wrapper(main: (args: any) => Promise<void>, args: any) {
 	}
 }
 
-type UpdateProgressBarFunction = (bytes: number, speed: number, eta?: number) => void;
+type UpdateProgressBarFunction = (bytes: number, speed: number, eta?: number, outputPosition?: number) => void;
 
 function bytesToMebibytes(bytes: number): string {
 	return (bytes / 1024 / 1024).toFixed(2);
 }
 
-function createProgressBar(step: string, total?: number): [ ProgressBar | Spinner, UpdateProgressBarFunction ] {
+function createProgressBar(step: string, total?: number, compressed = false): [ ProgressBar | Spinner, UpdateProgressBarFunction ] {
 	if (total !== undefined) {
-		const progressBar = new ProgressBar(
-			`${step} [:bar] :current / :total bytes ; :percent :speed MiB/s ; :timeLeft seconds left`,
-			{ total, width: 40 },
-		);
-		function update(bytes: number, speed: number, eta: number) {
+		let fmt;
+		if (compressed) {
+			fmt = `${step} [:bar] :current / :total compressed bytes ; :outputPosition bytes ; :percent :speed MiB/s ; :timeLeft seconds left`;
+		} else {
+			fmt = `${step} [:bar] :current / :total bytes ; :percent :speed MiB/s ; :timeLeft seconds left`;
+		}
+		const progressBar = new ProgressBar(fmt, { total, width: 40 });
+		function update(bytes: number, speed: number, eta: number, outputPosition: number) {
 			const delta = bytes - progressBar.curr;
-			progressBar.tick(delta, { speed: bytesToMebibytes(speed), timeLeft: eta.toFixed(0) });
+			progressBar.tick(delta, { outputPosition, speed: bytesToMebibytes(speed), timeLeft: eta.toFixed(0) });
 		}
 		return [ progressBar, update ];
 	} else {
@@ -62,6 +65,26 @@ function createProgressBar(step: string, total?: number): [ ProgressBar | Spinne
 			spinner.setSpinnerTitle(`${title}, ${bytes} bytes, ${bytesToMebibytes(speed)} MiB/s`);
 		}
 		return [ spinner, update ];
+	}
+}
+
+function multiDestinationProgressTotal(progress: multiWrite.MultiDestinationProgress) {
+	if (progress.sparse) {
+		return progress.blockmappedSize;
+	} else if (progress.size !== undefined) {
+		return progress.size;
+	} else {
+		return progress.compressedSize;
+	}
+}
+
+function multiDestinationProgressBytes(progress: multiWrite.MultiDestinationProgress): number {
+	if (progress.sparse) {
+		return progress.bytes;
+	} else if ((progress.size === undefined) && (progress.rootStreamPosition !== undefined)) {
+		return progress.rootStreamPosition;
+	} else {
+		return progress.position;
 	}
 }
 
@@ -85,10 +108,12 @@ export async function pipeSourceToDestinationsWithProgressBar(
 				}
 			}
 			step = progress.type;
-			[ progressBar, update ] = createProgressBar(progress.type, progress.sparse ? progress.blockmappedSize : progress.size);
+			const total = multiDestinationProgressTotal(progress);
+			const compressed = !progress.sparse && (progress.size === undefined) && (progress.compressedSize !== undefined);
+			[ progressBar, update ] = createProgressBar(progress.type, total, compressed);
 		}
-		const bytes = progress.sparse ? progress.bytes : progress.position;
-		update(bytes, progress.speed, progress.eta);
+		const bytes = multiDestinationProgressBytes(progress);
+		update(bytes, progress.speed, progress.eta, progress.position);
 	}
 	const result = await multiWrite.pipeSourceToDestinations(
 		source,

@@ -65,8 +65,12 @@ export function makeClassEmitProgressEvents<T extends Constructor<EventEmitter>>
 			};
 
 			this.once('error', clear);
+			// Writable streams
 			this.once('finish', clear);
 			this.once('finish', update);
+			// Readable streams
+			this.once('end', clear);
+			this.once('end', update);
 		}
 
 		get [attribute]() {

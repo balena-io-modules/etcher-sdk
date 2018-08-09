@@ -18,6 +18,8 @@ import { versions } from 'process';
 import { Transform } from 'readable-stream';
 import zlib = require('zlib');
 
+import { getRootStream } from './source-destination/compressed-source';
+
 export class StreamLimiter extends Transform {
 	constructor(private stream: NodeJS.ReadableStream, private maxBytes: number) {
 		super();
@@ -36,6 +38,8 @@ export class StreamLimiter extends Transform {
 			this.stream.unpipe(this);
 			this.push(null);
 			this.emit('finish');
+			// Emit an 'end' event on the root stream because we want to stop reporting progress events on it.
+			getRootStream(this.stream).emit('end');
 			// TODO: maybe we don't need to try to close / destroy the stream ?
 			// We could let it be destroyed later when there is no more references to it.
 			// @ts-ignore

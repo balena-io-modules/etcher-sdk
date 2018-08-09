@@ -22,6 +22,21 @@ import { SourceSource } from './source-source';
 import { NotCapable } from '../errors';
 import { StreamLimiter } from '../stream-limiter';
 
+export interface SourceTransform extends Transform {
+	sourceStream: NodeJS.ReadableStream;
+}
+
+export function isSourceTransform(stream: any): stream is SourceTransform {
+	return (<SourceTransform>stream).sourceStream !== undefined;
+}
+
+export function getRootStream(stream: NodeJS.ReadableStream): NodeJS.ReadableStream {
+	while (isSourceTransform(stream)) {
+		stream = stream.sourceStream;
+	}
+	return stream;
+}
+
 export abstract class CompressedSource extends SourceSource {
 	protected abstract createTransform(): Transform;
 
@@ -33,15 +48,18 @@ export abstract class CompressedSource extends SourceSource {
 		return true;
 	}
 
-	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+	async _createReadStream(start = 0, end?: number): Promise<SourceTransform> {
 		if (start !== 0) {
 			throw new NotCapable();
 		}
 		const stream = await this.source.createReadStream();
-		const transform = this.createTransform();
+		// as any because we need to add the sourceStream property
+		const transform = this.createTransform() as any;
 		stream.pipe(transform);
+		transform.sourceStream = stream;
 		if (end !== undefined) {
-			const limiter = new StreamLimiter(transform, end + 1);
+			const limiter = new StreamLimiter(transform, end + 1) as any;
+			limiter.sourceStream = transform;
 			limiter.on('finish', () => {
 				// Ignore EBADF errors after this:
 				// We might be still reading the source stream from a closed fd
