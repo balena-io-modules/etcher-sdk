@@ -35,7 +35,7 @@ export function makeClassEmitProgressEvents<T extends Constructor<EventEmitter>>
 	//  * the type of `attribute` must be a number;
 	//  * the position attribute of emitted events will be copied from the `positionAttribute` of the instances.
 	return class extends Cls {
-		_attributeValue = 0;
+		_attributeValue: number;
 		_attributeDelta = 0;
 
 		constructor (...args: any[]) {
@@ -65,8 +65,12 @@ export function makeClassEmitProgressEvents<T extends Constructor<EventEmitter>>
 			};
 
 			this.once('error', clear);
+			// Writable streams
 			this.once('finish', clear);
 			this.once('finish', update);
+			// Readable streams
+			this.once('end', clear);
+			this.once('end', update);
 		}
 
 		get [attribute]() {
@@ -74,7 +78,9 @@ export function makeClassEmitProgressEvents<T extends Constructor<EventEmitter>>
 		}
 
 		set [attribute](value: number) {
-			this._attributeDelta += value - this._attributeValue;
+			if (this._attributeValue !== undefined) {
+				this._attributeDelta += value - this._attributeValue;
+			}
 			this._attributeValue = value;
 		}
 	};

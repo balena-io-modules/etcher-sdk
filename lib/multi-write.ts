@@ -18,6 +18,7 @@ import { createHasher, ProgressHashStream, SourceDestination, Verifier } from '.
 import { Metadata } from './source-destination/metadata';
 import { MultiDestination, MultiDestinationError } from './source-destination/multi-destination';
 import { ProgressEvent } from './source-destination/progress';
+import { getRootStream } from './source-destination/compressed-source';
 
 export type WriteStep = 'flashing' | 'verifying' | 'finished';
 
@@ -29,8 +30,11 @@ interface MultiDestinationState {
 	successful: number;
 	type: WriteStep;
 	size?: number;
+	compressedSize?: number;
 	blockmappedSize?: number;
 	sparse?: boolean;
+	rootStreamPosition?: number;
+	rootStreamSpeed?: number;
 }
 
 export interface MultiDestinationProgress extends MultiDestinationState {
@@ -83,6 +87,7 @@ export async function pipeSourceToDestinations(
 
 	state.sparse = sparse;
 	state.size = sourceMetadata.size;
+	state.compressedSize = sourceMetadata.compressedSize;
 	state.blockmappedSize = sourceMetadata.blockmappedSize;
 
 	function updateState(step?: WriteStep) {
@@ -108,6 +113,11 @@ export async function pipeSourceToDestinations(
 		onFail(error.destination, error.error);
 	}
 
+	function _onRootStreamProgress(progress: ProgressEvent) {
+		state.rootStreamPosition = progress.position;
+		state.rootStreamSpeed = progress.speed;
+	}
+
 	function _onProgress(progress: ProgressEvent) {
 		if ((state.size === undefined) && (sourceMetadata.size !== undefined)) {
 			state.size = sourceMetadata.size;
@@ -126,6 +136,9 @@ export async function pipeSourceToDestinations(
 		if ((size !== undefined) && (bytesWritten !== undefined)) {
 			percentage = bytesWritten / size * 100;
 			eta = (size - bytesWritten) / progress.speed;
+		} else if ((state.rootStreamSpeed !== undefined) && (state.rootStreamPosition !== undefined) && (state.compressedSize !== undefined)) {
+			percentage = state.rootStreamPosition / state.compressedSize * 100;
+			eta = (state.compressedSize - state.rootStreamPosition) / state.rootStreamSpeed;
 		}
 		const result: MultiDestinationProgress = Object.assign(
 			{},
@@ -137,9 +150,9 @@ export async function pipeSourceToDestinations(
 	}
 
 	if (sparse) {
-		await pipeSparseSourceToDestination(source, sourceMetadata, destination, verify, updateState, _onFail, _onProgress);
+		await pipeSparseSourceToDestination(source, sourceMetadata, destination, verify, updateState, _onFail, _onProgress, _onRootStreamProgress);
 	} else {
-		await pipeRegularSourceToDestination(source, sourceMetadata, destination, verify, updateState, _onFail, _onProgress);
+		await pipeRegularSourceToDestination(source, sourceMetadata, destination, verify, updateState, _onFail, _onProgress, _onRootStreamProgress);
 	}
 	updateState('finished');
 	await Promise.all([ source.close(), destination.close() ]);
@@ -154,9 +167,13 @@ async function pipeRegularSourceToDestination(
 	updateState: (state?: WriteStep) => void,
 	onFail: (error: MultiDestinationError) => void,
 	onProgress: (progress: ProgressEvent) => void,
+	_onRootStreamProgress: (progress: ProgressEvent) => void,
 ): Promise<void> {
 	let lastPosition = 0;
 	const [ sourceStream, destinationStream ] = await Promise.all([ source.createReadStream(), destination.createWriteStream() ]);
+	getRootStream(sourceStream).on('progress', (progress: ProgressEvent) => {
+		_onRootStreamProgress(progress);
+	});
 	const checksum = await new Promise((resolve: (checksum: string | undefined) => void, reject: (error: Error) => void) => {
 		let checksum: string;
 		let done = false;
@@ -210,9 +227,13 @@ async function pipeSparseSourceToDestination(
 	updateState: (state?: WriteStep) => void,
 	onFail: (error: MultiDestinationError) => void,
 	onProgress: (progress: ProgressEvent) => void,
+	_onRootStreamProgress: (progress: ProgressEvent) => void,
 ): Promise<void> {
 	// TODO: if verify is true, we must ensure that source and destination streams hash algorithms are the same
 	const [ sourceStream, destinationStream ] = await Promise.all([ source.createSparseReadStream(true), destination.createSparseWriteStream() ]);
+	getRootStream(sourceStream).on('progress', (progress: ProgressEvent) => {
+		_onRootStreamProgress(progress);
+	});
 	await new Promise((resolve: () => void, reject: (error: Error) => void) => {
 		sourceStream.once('error', reject);
 		destinationStream.once('error', reject);

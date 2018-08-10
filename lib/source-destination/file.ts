@@ -26,7 +26,7 @@ import { makeClassEmitProgressEvents } from './progress';
 import { SourceDestination } from './source-destination';
 
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
-import { BlockReadStream } from '../block-read-stream';
+import { ProgressBlockReadStream } from '../block-read-stream';
 import { ProgressBlockWriteStream } from '../block-write-stream';
 import { isTransientError } from '../errors';
 import { close, stat, open, read, write } from '../fs';
@@ -132,7 +132,7 @@ export class File extends SourceDestination {
 	}
 
 	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
-		return new BlockReadStream(this.fd, start, end, 1024 * 1024);  // TODO: constant
+		return new ProgressBlockReadStream(this.fd, start, end, 1024 * 1024);  // TODO: constant
 	}
 
 	async createWriteStream(): Promise<NodeJS.WritableStream> {

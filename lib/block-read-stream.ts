@@ -17,7 +17,9 @@
 import { read } from 'fs';
 import { Readable } from 'readable-stream';
 
+import { PROGRESS_EMISSION_INTERVAL } from './constants';
 import { isTransientError } from './errors';
+import { makeClassEmitProgressEvents } from './source-destination/progress';
 
 const CHUNK_SIZE = 64 * 1024;
 const MIN_CHUNK_SIZE = 512;
@@ -73,3 +75,5 @@ export class BlockReadStream extends Readable {
 		read(this.fd, buffer, 0, length, this.bytesRead, this.boundOnRead);
 	}
 }
+
+export const ProgressBlockReadStream = makeClassEmitProgressEvents(BlockReadStream, 'bytesRead', 'bytesRead', PROGRESS_EMISSION_INTERVAL);
