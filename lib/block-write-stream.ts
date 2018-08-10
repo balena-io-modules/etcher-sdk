@@ -118,6 +118,11 @@ export class BlockWriteStream extends Writable {
 			}
 
 			await this.__write(block, this.bytesWritten);
+
+			// NOTE: As we pad the last write to fit the minimum block size,
+			// and the verifier uses the `bytesWritten`, we have to correct for
+			// the zero-padding here, to avoid checksumming added zeros
+			this.bytesWritten = this.bytesWritten - (length - this._bytes);
 		}
 
 		for (let i = 0; i < this._firstBlocks.length; i++) {
