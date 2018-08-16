@@ -41,7 +41,7 @@ describe('metadata zip', function() {
 		'given an archive with a `manifest.json`',
 		join(ZIP_PATH, 'etcher-test-with-manifest.zip'),
 		join(IMAGES_PATH, 'etcher-test.img'),
-		true,  // alsoTestSparseStream
+		false,  // alsoTestSparseStream
 		true,  // shouldHaveSize
 		7791,   // shouldHaveCompressedSize
 		'mbr',  // partitionTableType
@@ -63,7 +63,7 @@ describe('metadata zip', function() {
 		'given an archive with a `logo.svg`',
 		join(ZIP_PATH, 'etcher-test-with-logo.zip'),
 		join(IMAGES_PATH, 'etcher-test.img'),
-		true,  // alsoTestSparseStream
+		false,  // alsoTestSparseStream
 		true,  // shouldHaveSize
 		7791,   // shouldHaveCompressedSize
 		'mbr',  // partitionTableType
@@ -110,7 +110,7 @@ describe('metadata zip', function() {
 		'given an archive with instructions',
 		join(ZIP_PATH, 'etcher-test-with-instructions.zip'),
 		join(IMAGES_PATH, 'etcher-test.img'),
-		true,  // alsoTestSparseStream
+		false,  // alsoTestSparseStream
 		true,  // shouldHaveSize
 		7791,   // shouldHaveCompressedSize
 		'mbr',  // partitionTableType

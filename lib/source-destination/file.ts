@@ -14,68 +14,29 @@
  * limitations under the License.
  */
 
-import { Chunk } from 'blockmap';
-import { delay } from 'bluebird';
 import { ReadResult, WriteResult } from 'file-disk';
-import { constants, write as fswrite } from 'fs';
+// Can't use "import { constants, ReadStream, WriteStream } from 'fs';"
+// as ReadStream and WriteStream are defined as interfaces in @types/node
+// and are not imported in the generated js. They are classes, not interfaces.
+import * as fs from 'fs';
 import { basename } from 'path';
-import { Writable } from 'readable-stream';
 
 import { Metadata } from './metadata';
 import { makeClassEmitProgressEvents } from './progress';
 import { SourceDestination } from './source-destination';
 
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
-import { ProgressBlockReadStream } from '../block-read-stream';
-import { ProgressBlockWriteStream } from '../block-write-stream';
-import { isTransientError } from '../errors';
 import { close, stat, open, read, write } from '../fs';
-import { SparseWriteStream } from '../sparse-write-stream';
+import { DestinationSparseWriteStream, ProgressDestinationSparseWriteStream } from '../destination-sparse-write-stream';
 
-const RETRY_BASE_TIMEOUT = 100;
-
-export class FileSparseWriteStream extends Writable implements SparseWriteStream {
-	// TODO: this should write the first sectors last like block-write-stream
-	// or we should open the block devices with the correct flags on Windows
-	private position: number;
-	private bytesWritten = 0;
-
-	constructor(private fd: number, private maxRetries = 5) {
-		super({ objectMode: true });
-	}
-
-	private async __write(chunk: Chunk, enc: string): Promise<void> {
-		let retries = 0;
-		while (true) {
-			try {
-				this.position = chunk.position;
-				await write(this.fd, chunk.buffer, 0, chunk.buffer.length, chunk.position);
-				this.position += chunk.buffer.length;
-				this.bytesWritten += chunk.buffer.length;
-				return;
-			} catch (error) {
-				if (isTransientError(error)) {
-					if (retries < this.maxRetries) {
-						retries += 1;
-						await delay(RETRY_BASE_TIMEOUT * retries);
-						continue;
-					}
-					error.code = 'EUNPLUGGED';
-				}
-				throw error;
-			}
-		}
-	}
-
-	_write(chunk: Chunk, enc: string, callback?: any): void {
-		this.__write(chunk, enc).then(callback, callback);
-	}
-}
-
-export const ProgressFileSparseWriteStream = makeClassEmitProgressEvents(FileSparseWriteStream, 'bytesWritten', 'position', PROGRESS_EMISSION_INTERVAL);
+// type definitions for node 6 export fs.ReadStream and fs.Write stream as interfaces, but they are classes.
+// @ts-ignore
+export const ProgressReadStream = makeClassEmitProgressEvents(fs.ReadStream, 'bytesRead', 'bytesRead', PROGRESS_EMISSION_INTERVAL);
+// @ts-ignore
+export const ProgressWriteStream = makeClassEmitProgressEvents(fs.WriteStream, 'bytesWritten', 'bytesWritten', PROGRESS_EMISSION_INTERVAL);
 
 export class File extends SourceDestination {
-	private fd: number;
+	protected fd: number;
 
 	constructor(private path: string, private flags: File.OpenFlags) {
 		super();
@@ -132,17 +93,17 @@ export class File extends SourceDestination {
 	}
 
 	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
-		return new ProgressBlockReadStream(this.fd, start, end, 1024 * 1024);  // TODO: constant
+		return new ProgressReadStream(null, { fd: this.fd, start, end, autoClose: false, highWaterMark: 1024 * 1024 });  // TODO: constant
 	}
 
 	async createWriteStream(): Promise<NodeJS.WritableStream> {
-		const stream = new ProgressBlockWriteStream(this.fd);
+		const stream = new ProgressWriteStream(null, { fd: this.fd, autoClose: false });
 		stream.on('finish', stream.emit.bind(stream, 'done'));
 		return stream;
 	}
 
-	async createSparseWriteStream(): Promise<SparseWriteStream> {
-		const stream = new ProgressFileSparseWriteStream(this.fd);
+	async createSparseWriteStream(): Promise<DestinationSparseWriteStream> {
+		const stream = new ProgressDestinationSparseWriteStream(this);
 		stream.on('finish', stream.emit.bind(stream, 'done'));
 		return stream;
 	}
@@ -158,8 +119,8 @@ export class File extends SourceDestination {
 
 export namespace File {
 	export enum OpenFlags {
-		Read = constants.O_RDONLY,
-		ReadWrite = constants.O_RDWR | constants.O_CREAT,
-		WriteDevice = constants.O_RDWR | constants.O_NONBLOCK | constants.O_SYNC,
+		Read = fs.constants.O_RDONLY,
+		ReadWrite = fs.constants.O_RDWR | fs.constants.O_CREAT,
+		WriteDevice = fs.constants.O_RDWR | fs.constants.O_NONBLOCK | fs.constants.O_SYNC,
 	}
 }

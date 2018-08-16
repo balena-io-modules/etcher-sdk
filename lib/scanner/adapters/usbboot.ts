@@ -23,6 +23,7 @@ import { Adapter } from './adapter';
 
 let UsbbootScanner: typeof UsbbootScannerType | undefined = undefined;
 try {
+	// tslint:disable: no-var-requires
 	UsbbootScanner = require('node-raspberrypi-usbboot').UsbbootScanner;
 } catch (error) {
 	console.warn('Failed to import node-raspberrypi-usbboot:', error);

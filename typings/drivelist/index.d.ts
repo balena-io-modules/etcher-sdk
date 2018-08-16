@@ -12,6 +12,7 @@ declare module 'drivelist' {
 		raw: string;
 		devicePath: string;
 		isReadOnly: boolean;
+		blockSize?: number;
 	}
 
 	export function list(callback: (error: Error, drives: Drive[]) => void): void;

@@ -21,6 +21,7 @@ import { createGunzip } from 'zlib';
 
 import { DEFAULT_IMAGE_TESTS_TIMEOUT, testImage, testImageNoIt  } from './tester';
 
+import { sourceDestination } from '../lib';
 import { unlink } from '../lib/fs';
 import { tmpFile } from '../lib/tmp';
 
@@ -53,7 +54,7 @@ describe('img', function() {
 		'mbr',
 		join(IMAGES_PATH, 'etcher-test.img'),
 		join(IMAGES_PATH, 'etcher-test.img'),
-		true,  // alsoTestSparseStream
+		false,  // alsoTestSparseStream
 		true,  // shouldHaveSize
 		false,   // shouldHaveCompressedSize
 		'mbr',  // partitionTableType
@@ -65,9 +66,10 @@ describe('img', function() {
 			join(IMAGES_PATH, 'etcher-gpt-test.img.gz'),
 			// @ts-ignore
 			gunzippedFilePath,
-			true,  // alsoTestSparseStream
+			false,  // alsoTestSparseStream
 			true,  // shouldHaveSize
 			false,   // shouldHaveCompressedSize
+			sourceDestination.File,  // sourceClass (File or BlockDevice)
 			'gpt',  // partitionTableType
 			join(IMAGES_PATH, 'etcher-gpt-test-partitions.json'),  // partitionsFile
 		);

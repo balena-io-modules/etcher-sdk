@@ -16,10 +16,16 @@
 
 import { delay, promisify } from 'bluebird';
 import { Drive as DrivelistDrive } from 'drivelist';
+import { ReadResult, WriteResult } from 'file-disk';
 import { unmountDisk } from 'mountutils';
+import { platform } from 'os';
 
 import { AdapterSourceDestination } from '../scanner/adapters/adapter';
+import { BlockReadStream, ProgressBlockReadStream } from '../block-read-stream';
+import { BlockWriteStream, ProgressBlockWriteStream } from '../block-write-stream';
+import { DestinationSparseWriteStream, ProgressDestinationSparseWriteStream } from '../destination-sparse-write-stream';
 import { clean } from '../diskpart';
+
 import { File } from './file';
 import { Metadata } from './metadata';
 
@@ -27,14 +33,18 @@ import { Metadata } from './metadata';
  * @summary Time, in milliseconds, to wait before unmounting on success
  */
 const UNMOUNT_ON_SUCCESS_TIMEOUT_MS = 2000;
+const DEFAULT_BLOCK_SIZE = 512;
+const WIN32_FIRST_BYTES_TO_KEEP = 64 * 1024;
 
 const unmountDiskAsync = promisify(unmountDisk);
 
 export class BlockDevice extends File implements AdapterSourceDestination {
+	public blockSize: number;
 	emitsProgress = false;
 
 	constructor(private drive: DrivelistDrive, private unmountOnSuccess = false) {
 		super(drive.raw, File.OpenFlags.WriteDevice);
+		this.blockSize = drive.blockSize || DEFAULT_BLOCK_SIZE;
 	}
 
 	get isSystem(): boolean {
@@ -83,6 +93,22 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return !this.drive.isReadOnly;
 	}
 
+	async _createReadStream(start = 0, end?: number): Promise<BlockReadStream> {
+		return new ProgressBlockReadStream(this, start, end, 1024 * this.blockSize);  // TODO: constant
+	}
+
+	async createWriteStream(): Promise<BlockWriteStream> {
+		const stream = new ProgressBlockWriteStream(this, (platform() === 'win32') ? WIN32_FIRST_BYTES_TO_KEEP : 0);
+		stream.on('finish', stream.emit.bind(stream, 'done'));
+		return stream;
+	}
+
+	async createSparseWriteStream(): Promise<DestinationSparseWriteStream> {
+		const stream = new ProgressDestinationSparseWriteStream(this, (platform() === 'win32') ? WIN32_FIRST_BYTES_TO_KEEP : 0);
+		stream.on('finish', stream.emit.bind(stream, 'done'));
+		return stream;
+	}
+
 	protected async _open(): Promise<void> {
 		await unmountDiskAsync(this.drive.device);
 		await clean(this.drive.device);
@@ -98,6 +124,55 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		if (this.unmountOnSuccess) {
 			await delay(UNMOUNT_ON_SUCCESS_TIMEOUT_MS);
 			await unmountDiskAsync(this.drive.device);
+		}
+	}
+
+	private offsetIsAligned(offset: number): boolean {
+		return (offset % this.blockSize) === 0;
+	}
+
+	private alignOffsetBefore(offset: number): number {
+		return Math.floor(offset / this.blockSize) * this.blockSize;
+	}
+
+	private alignOffsetAfter(offset: number): number {
+		return Math.ceil(offset / this.blockSize) * this.blockSize;
+	}
+
+	private async alignedRead(buffer: Buffer, bufferOffset: number, length: number, sourceOffset: number): Promise<ReadResult> {
+		const start = this.alignOffsetBefore(sourceOffset);
+		const end = this.alignOffsetAfter(sourceOffset + length);
+		const alignedBuffer = Buffer.allocUnsafe(end - start);
+		await super.read(alignedBuffer, 0, alignedBuffer.length, start);
+		const offset = sourceOffset - start;
+		alignedBuffer.copy(buffer, bufferOffset, offset, offset + length);
+		return { buffer, bytesRead: length };
+	}
+
+	async read(buffer: Buffer, bufferOffset: number, length: number, sourceOffset: number): Promise<ReadResult> {
+		if ((platform() === 'win32') && !(this.offsetIsAligned(sourceOffset) && this.offsetIsAligned(length))) {
+			return await this.alignedRead(buffer, bufferOffset, length, sourceOffset);
+		} else {
+			return await super.read(buffer, bufferOffset, length, sourceOffset);
+		}
+	}
+
+	private async alignedWrite(buffer: Buffer, bufferOffset: number, length: number, fileOffset: number): Promise<WriteResult> {
+		const start = this.alignOffsetBefore(fileOffset);
+		const end = this.alignOffsetAfter(fileOffset + length);
+		const alignedBuffer = Buffer.allocUnsafe(end - start);
+		await super.read(alignedBuffer, 0, alignedBuffer.length, start);
+		const offset = fileOffset - start;
+		buffer.copy(alignedBuffer, offset, bufferOffset, length);
+		await super.write(alignedBuffer, 0, alignedBuffer.length, start);
+		return { buffer, bytesWritten: length };
+	}
+
+	async write(buffer: Buffer, bufferOffset: number, length: number, fileOffset: number): Promise<WriteResult> {
+		if ((platform() === 'win32') && !(this.offsetIsAligned(fileOffset) && this.offsetIsAligned(length))) {
+			return await this.alignedWrite(buffer, bufferOffset, length, fileOffset);
+		} else {
+			return await super.write(buffer, bufferOffset, length, fileOffset);
 		}
 	}
 }

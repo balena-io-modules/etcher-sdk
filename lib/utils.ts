@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-export const streamToBuffer = async (stream: NodeJS.ReadableStream): Promise<Buffer> => {
+import { Chunk } from 'blockmap';
+
+export async function streamToBuffer(stream: NodeJS.ReadableStream): Promise<Buffer> {
 	return await new Promise((resolve: (buffer: Buffer) => void, reject: (error: Error) => void) => {
 		const chunks: Buffer[] = [];
 		stream.on('error', reject);
@@ -23,7 +25,25 @@ export const streamToBuffer = async (stream: NodeJS.ReadableStream): Promise<Buf
 			resolve(Buffer.concat(chunks));
 		});
 	});
-};
+}
+
+export async function sparseStreamToBuffer(stream: NodeJS.ReadableStream): Promise<Buffer> {
+	const chunks: Chunk[] = [];
+	await new Promise((resolve: () => void, reject: (error: Error) => void) => {
+		stream.on('error', reject);
+		stream.on('end', resolve);
+		stream.on('data', chunks.push.bind(chunks));
+	});
+	if (chunks.length === 0) {
+		return Buffer.alloc(0);
+	}
+	const lastChunk = chunks[chunks.length - 1];
+	const result = Buffer.alloc(lastChunk.position + lastChunk.buffer.length);
+	for (const chunk of chunks) {
+		chunk.buffer.copy(result, chunk.position);
+	}
+	return result;
+}
 
 export function difference<T>(setA: Set<T>, setB: Set<T>): Set<T> {
 	const _difference = new Set(setA);

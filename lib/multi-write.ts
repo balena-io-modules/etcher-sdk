@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { createHasher, ProgressHashStream, SourceDestination, Verifier } from './source-destination/source-destination';
+import { createHasher, CountingHashStream, ProgressHashStream, SourceDestination, Verifier } from './source-destination/source-destination';
 import { Metadata } from './source-destination/metadata';
 import { MultiDestination, MultiDestinationError } from './source-destination/multi-destination';
 import { ProgressEvent } from './source-destination/progress';
@@ -177,9 +177,7 @@ async function pipeRegularSourceToDestination(
 	const checksum = await new Promise((resolve: (checksum: string | undefined) => void, reject: (error: Error) => void) => {
 		let checksum: string;
 		let done = false;
-		// Not sure why typescript can't find ProgressHashStream here
-		// @ts-ignore
-		let hasher: ProgressHashStream;
+		let hasher: CountingHashStream;
 		function maybeDone(maybeChecksum?: string) {
 			if (maybeChecksum !== undefined) {
 				checksum = maybeChecksum;

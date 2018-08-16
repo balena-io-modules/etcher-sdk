@@ -18,34 +18,32 @@ import { delay } from 'bluebird';
 import * as _debug from 'debug';
 import { Writable } from 'readable-stream';
 
-import { PROGRESS_EMISSION_INTERVAL } from './constants';
+import { PROGRESS_EMISSION_INTERVAL, RETRY_BASE_TIMEOUT } from './constants';
 import { isTransientError } from './errors';
-import { write } from './fs';
 import { asCallback } from './utils';
 import { makeClassEmitProgressEvents } from './source-destination/progress';
+import { BlockDevice } from './source-destination/block-device';
 
 const debug = _debug('etcher:writer:block-write-stream');
 
-const MIN_CHUNK_SIZE = 512;
-const CHUNK_SIZE = 64 * 1024;
-const RETRY_BASE_TIMEOUT = 100;
-
 export class BlockWriteStream extends Writable {
-	private bytesWritten = 0;
-	private _firstBlocks: { position: number, buffer: Buffer }[] = [];
-
+	public bytesWritten = 0;
+	private _firstBuffers: Buffer[] = [];
 	private _buffers: Buffer[] = [];
 	private _bytes = 0;
 
-	constructor(private fd: number, private blockSize = MIN_CHUNK_SIZE, private chunkSize = CHUNK_SIZE, private maxRetries = 5) {
+	constructor(private destination: BlockDevice, public firstBytesToKeep = 0, private maxRetries = 5) {
 		super({ objectMode: true, highWaterMark: 1 });
+		if ((firstBytesToKeep !== 0) && (firstBytesToKeep % this.destination.blockSize !== 0)) {
+			throw new Error('firstBytesToKeep must be a multiple of the destination blockSize');
+		}
 	}
 
-	private async __write(buffer: Buffer, position: number, flushing = false): Promise<void> {
+	private async writeChunk(buffer: Buffer, position: number, flushing = false): Promise<void> {
 		let retries = 0;
 		while (true) {
 			try {
-				const { bytesWritten } = await write(this.fd, buffer, 0, buffer.length, position);
+				const { bytesWritten } = await this.destination.write(buffer, 0, buffer.length, position);
 				if (!flushing) {
 					this.bytesWritten += bytesWritten;
 				}
@@ -64,31 +62,10 @@ export class BlockWriteStream extends Writable {
 		}
 	}
 
-	_write(buffer: Buffer, encoding: string, callback: (error?: Error | void) => void) {
-		debug('_write', buffer.length, this.bytesWritten);
-
-		// Keep the first blocks in memory and write them once the rest has been written.
-		// This is to prevent Windows from mounting the device while we flash it.
-		if (this.bytesWritten < CHUNK_SIZE) {
-			this._firstBlocks.push({ buffer, position: this.bytesWritten });
-			this.bytesWritten += buffer.length;
-			callback();
-			return;
-		}
-
-		if (this._bytes === 0 && buffer.length >= this.chunkSize) {
-			if (buffer.length % this.blockSize === 0) {
-				asCallback(this.__write(buffer, this.bytesWritten), callback);
-				return;
-			}
-		}
-
-		this._buffers.push(buffer);
-		this._bytes += buffer.length;
-
-		if (this._bytes >= this.chunkSize) {
+	private async writeBuffers(): Promise<void> {
+		if (this._bytes >= this.destination.blockSize) {
 			let block = Buffer.concat(this._buffers);
-			const length = Math.floor(block.length / this.blockSize) * this.blockSize;
+			const length = Math.floor(block.length / this.destination.blockSize) * this.destination.blockSize;
 
 			this._buffers.length = 0;
 			this._bytes = 0;
@@ -99,30 +76,57 @@ export class BlockWriteStream extends Writable {
 				block = block.slice(0, length);
 			}
 
-			asCallback(this.__write(block, this.bytesWritten), callback);
-			return;
+			await this.writeChunk(block, this.bytesWritten);
 		}
+	}
 
-		callback();
+	private async __write(buffer: Buffer): Promise<void> {
+		debug('_write', buffer.length, this.bytesWritten);
+
+		// Keep the first blocks in memory and write them once the rest has been written.
+		// This is to prevent Windows from mounting the device while we flash it.
+		if (this.bytesWritten < this.firstBytesToKeep) {
+			const end = this.bytesWritten + buffer.length;
+			if (end <= this.firstBytesToKeep) {
+				this._firstBuffers.push(buffer);
+				this.bytesWritten += buffer.length;
+			} else {
+				const difference = this.firstBytesToKeep - this.bytesWritten;
+				this._firstBuffers.push(buffer.slice(0, difference));
+				this._buffers.push(buffer.slice(difference));
+				this._bytes += buffer.length - difference;
+				this.bytesWritten += difference;
+				await this.writeBuffers();
+			}
+		} else if ((this._bytes === 0) && (buffer.length >= this.destination.blockSize) && (buffer.length % this.destination.blockSize === 0)) {
+			await this.writeChunk(buffer, this.bytesWritten);
+		} else {
+			this._buffers.push(buffer);
+			this._bytes += buffer.length;
+			await this.writeBuffers();
+		}
+	}
+
+	_write(buffer: Buffer, encoding: string, callback: (error?: Error | void) => void) {
+		asCallback(this.__write(buffer), callback);
 	}
 
 	async __final(): Promise<void> {
-		if (this._bytes) {
-			const length = Math.ceil(this._bytes / this.blockSize) * this.blockSize;
-			const block = Buffer.alloc(length);
-			let offset = 0;
-
-			for (let index = 0; index < this._buffers.length; index += 1) {
-				this._buffers[index].copy(block, offset);
-				offset += this._buffers[index].length;
+		debug('_final');
+		try {
+			if (this._bytes) {
+				await this.writeChunk(Buffer.concat(this._buffers, this._bytes), this.bytesWritten);
 			}
 
-			await this.__write(block, this.bytesWritten);
-		}
-
-		for (let i = 0; i < this._firstBlocks.length; i++) {
-			const { buffer, position } = this._firstBlocks[i];
-			await this.__write(buffer, position, true);
+			let position = 0;
+			for (let i = 0; i < this._firstBuffers.length; i++) {
+				const buffer = this._firstBuffers[i];
+				await this.writeChunk(buffer, position, true);
+				position += buffer.length;
+			}
+		} catch (error) {
+			this.destroy();
+			throw error;
 		}
 	}
 
@@ -130,13 +134,7 @@ export class BlockWriteStream extends Writable {
 	 * @summary Write buffered data before a stream ends, called by stream internals
 	 */
 	_final(callback: (error?: Error | void) => void) {
-		debug('_final');
-		asCallback(this.__final(), (error) => {
-			if (error) {
-				this.destroy();
-			}
-			callback(error);
-		});
+		asCallback(this.__final(), callback);
 	}
 }
 

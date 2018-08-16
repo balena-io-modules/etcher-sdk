@@ -118,6 +118,7 @@ export class RandomAccessZipSource extends SourceSource {
 	}
 
 	async init() {
+		await this.source.open();
 		const sourceMetadata = await this.source.getMetadata();
 		const reader = new SourceRandomAccessReader(this.source);
 		this.zip = await fromCallback((callback: (err: any, result?: ZipFile) => void) => {
@@ -215,7 +216,7 @@ export class RandomAccessZipSource extends SourceSource {
 			throw new NotCapable();
 		}
 		if (end !== undefined) {
-			// TODO: handle errors on stream after transform finsh event
+			// TODO: handle errors on stream after transform finish event
 			const transform = new StreamLimiter(stream, end + 1);
 			return transform;
 		}

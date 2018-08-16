@@ -14,54 +14,48 @@
  * limitations under the License.
  */
 
+import { delay } from 'bluebird';
+import { ReadResult } from 'file-disk';
 import { read } from 'fs';
 import { Readable } from 'readable-stream';
 
-import { PROGRESS_EMISSION_INTERVAL } from './constants';
+import { PROGRESS_EMISSION_INTERVAL, RETRY_BASE_TIMEOUT } from './constants';
 import { isTransientError } from './errors';
+import { BlockDevice } from './source-destination/block-device';
 import { makeClassEmitProgressEvents } from './source-destination/progress';
 
-const CHUNK_SIZE = 64 * 1024;
-const MIN_CHUNK_SIZE = 512;
-const RETRY_BASE_TIMEOUT = 100;
+const DEFAULT_CHUNK_SIZE = 64 * 1024;
 
 export class BlockReadStream extends Readable {
-	private retries = 0;
-	private boundOnRead: (error: Error, bytesRead: number, buffer: Buffer) => void;
-	private boundRead: () => void;
+	private chunkSize: number;
 
-	constructor(private fd: number, private bytesRead = 0, private end = Infinity, private chunkSize = CHUNK_SIZE, private maxRetries = 5) {
+	constructor(private source: BlockDevice, private bytesRead = 0, private end = Infinity, chunkSize = DEFAULT_CHUNK_SIZE, private maxRetries = 5) {
 		super({ objectMode: true, highWaterMark: 2 });
-		this.chunkSize = Math.max(this.chunkSize, MIN_CHUNK_SIZE);
-		this.boundOnRead = this._onRead.bind(this);
-		this.boundRead = this._read.bind(this);
+		this.chunkSize = Math.max(Math.floor(chunkSize / this.source.blockSize) * this.source.blockSize, this.source.blockSize);
 	}
 
-	private _onRead(error: NodeJS.ErrnoException | undefined, bytesRead: number, buffer: Buffer) {
-		if (error) {
-			if (isTransientError(error)) {
-				if (this.retries < this.maxRetries) {
-					this.retries += 1;
-					setTimeout(this.boundRead, RETRY_BASE_TIMEOUT * this.retries);
-					return;
+	private async tryRead(buffer: Buffer): Promise<ReadResult> {
+		// Tries to read `this.maxRetries` times if the error is transient.
+		// Throws EUNPLUGGED if all retries failed.
+		let retries = 0;
+		while (true) {
+			try {
+				return await this.source.read(buffer, 0, buffer.length, this.bytesRead);
+			} catch (error) {
+				if (isTransientError(error)) {
+					if (retries < this.maxRetries) {
+						retries += 1;
+						await delay(RETRY_BASE_TIMEOUT * retries);
+						continue;
+					}
+					error.code = 'EUNPLUGGED';
 				}
-				error.code = 'EUNPLUGGED';
+				throw error;
 			}
-			this.emit('error', error);
-			return;
 		}
-
-		if (bytesRead === 0) {
-			this.push(null);
-			return;
-		}
-
-		this.retries = 0;
-		this.bytesRead += bytesRead;
-		this.push(buffer.slice(0, bytesRead));
 	}
 
-	_read() {
+	private async __read(): Promise<void> {
 		const toRead = this.end - this.bytesRead + 1;  // end is inclusive
 
 		if (toRead <= 0) {
@@ -69,10 +63,25 @@ export class BlockReadStream extends Readable {
 			return;
 		}
 
+		// Read chunkSize bytes if available, else all remaining bytes.
 		const length = Math.min(this.chunkSize, toRead);
 		const buffer = Buffer.allocUnsafe(length);
 
-		read(this.fd, buffer, 0, length, this.bytesRead, this.boundOnRead);
+		try {
+			const { bytesRead } = await this.tryRead(buffer);
+			if (bytesRead === 0) {
+				this.push(null);
+				return;
+			}
+			this.bytesRead += bytesRead;
+			this.push(buffer.slice(0, bytesRead));
+		} catch (error) {
+			this.emit('error', error);
+		}
+	}
+
+	_read() {
+		this.__read();
 	}
 }
 
