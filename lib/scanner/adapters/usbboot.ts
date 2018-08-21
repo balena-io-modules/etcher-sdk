@@ -14,22 +14,36 @@
  * limitations under the License.
  */
 
-import { UsbbootDevice, UsbbootScanner } from 'node-raspberrypi-usbboot';
+declare function require(moduleName: string): any;
+
+import { UsbbootDevice, UsbbootScanner as UsbbootScannerType } from 'node-raspberrypi-usbboot';
 
 import { UsbbootDrive } from '../../source-destination/usbboot';
 import { Adapter } from './adapter';
 
+let UsbbootScanner: typeof UsbbootScannerType | undefined = undefined;
+try {
+	UsbbootScanner = require('node-raspberrypi-usbboot').UsbbootScanner;
+} catch (error) {
+	console.warn('Failed to import node-raspberrypi-usbboot:', error);
+}
+
 export class UsbbootDeviceAdapter extends Adapter {
 	private drives: Map<UsbbootDevice, UsbbootDrive> = new Map();
-	private scanner: UsbbootScanner;
+	private scanner: UsbbootScannerType;
 
 	constructor() {
 		super();
-		this.scanner = new UsbbootScanner();
-		this.scanner.on('attach', this.onAttach.bind(this));
-		this.scanner.on('detach', this.onDetach.bind(this));
-		this.scanner.on('ready', this.emit.bind(this, 'ready'));
-		this.scanner.on('error', this.emit.bind(this, 'error'));
+		if (UsbbootScanner !== undefined) {
+			this.scanner = new UsbbootScanner();
+			this.scanner.on('attach', this.onAttach.bind(this));
+			this.scanner.on('detach', this.onDetach.bind(this));
+			this.scanner.on('ready', this.emit.bind(this, 'ready'));
+			this.scanner.on('error', this.emit.bind(this, 'error'));
+		} else {
+			console.warn('node-raspberrypi-usbboot not available');
+			setImmediate(this.emit.bind(this, 'ready'));
+		}
 	}
 
 	start(): void {
