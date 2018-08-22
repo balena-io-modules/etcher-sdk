@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import { expect } from 'chai';
 import { entries } from 'lodash';
 import 'mocha';
@@ -22,9 +21,27 @@ import { sourceDestination } from '../lib';
 import { SourceSource } from '../lib/source-destination/source-source';
 
 import { stat } from '../lib/fs';
-import { streamToBuffer } from '../lib/utils';
+import { sparseStreamToBuffer, streamToBuffer } from '../lib/utils';
 
 export type PartitionTableType = 'mbr' | 'gpt';
+
+export async function blockDeviceFromFile(path: string): Promise<sourceDestination.BlockDevice> {
+	const drive = {
+		raw: path,
+		device: path,
+		devicePath: path,
+		displayName: path,
+		icon: 'some icon',
+		isSystem: false,
+		description: 'some description',
+		mountpoints: [],
+		size: (await stat(path)).size,
+		isReadOnly: false,
+		busType: 'UNKNOWN',
+		error: null,
+	};
+	return new sourceDestination.BlockDevice(drive);
+}
 
 export async function testImageNoIt(
 	imagePath: string,
@@ -32,12 +49,25 @@ export async function testImageNoIt(
 	alsoTestSparseStream: boolean,
 	shouldHaveSize: boolean,
 	shouldHaveCompressedSize: boolean | number,  // if true, compare to the archive size; if number, compare to number
+	sourceClass: typeof sourceDestination.File | typeof sourceDestination.BlockDevice,
 	partitionTableType?: PartitionTableType,
 	partitionsFile?: string,
 	expectedMetadata: any = {},
+	innerSourceClass?: typeof sourceDestination.SourceSource,
 ): Promise<void> {
-	const source = new sourceDestination.File(imagePath, sourceDestination.File.OpenFlags.Read);
-	const innerSource = await source.getInnerSource();
+	let source: sourceDestination.File | sourceDestination.BlockDevice;
+	if (sourceClass === sourceDestination.File) {
+		source = new sourceDestination.File(imagePath, sourceDestination.File.OpenFlags.Read);
+	} else {
+		source = await blockDeviceFromFile(imagePath);
+	}
+	let innerSource: sourceDestination.SourceDestination;
+	if (innerSourceClass === undefined) {
+		innerSource = await source.getInnerSource();
+	} else {
+		innerSource = new innerSourceClass(source);
+		await innerSource.open();
+	}
 	const sourceMetadata = await innerSource.getMetadata();
 	const sourceStat = await stat(imagePath);
 
@@ -65,14 +95,12 @@ export async function testImageNoIt(
 	const sourceStreamBuffer = await streamToBuffer(sourceStream);
 	expect(sourceStreamBuffer).to.deep.equal(compareToData);
 
-	if (false) {  // TODO
-	// if (alsoTestSparseStream) {
-		// TODO: compare blockmap
-		const canCreateReadStream = await innerSource.canCreateReadStream();
-		expect(canCreateReadStream).to.be.true;
-		const sourceStream = await innerSource.createReadStream();
-		const sourceStreamBuffer = await streamToBuffer(sourceStream);
-		expect(sourceStreamBuffer).to.deep.equal(compareToData);
+	if (alsoTestSparseStream) {
+		const canCreateSparseReadStream = await innerSource.canCreateSparseReadStream();
+		expect(canCreateSparseReadStream).to.be.true;
+		const sourceSparseStream = await innerSource.createSparseReadStream();
+		const sourceSparseStreamBuffer = await sparseStreamToBuffer(sourceSparseStream);
+		expect(sourceSparseStreamBuffer).to.deep.equal(compareToData);
 	}
 
 	if ((partitionsFile !== undefined) || (partitionTableType !== undefined)) {
@@ -105,21 +133,26 @@ export function testImage(
 	partitionTableType?: PartitionTableType,
 	partitionsFile?: string,
 	expectedMetadata: any = {},
+	innerSourceClass?: typeof sourceDestination.SourceSource,
 ): void {
-	it(
-		testName,
-		testImageNoIt.bind(
-			null,
-			imagePath,
-			compareToPath,
-			alsoTestSparseStream,
-			shouldHaveSize,
-			shouldHaveCompressedSize,
-			partitionTableType,
-			partitionsFile,
-			expectedMetadata,
-		),
-	);
+	for (const sourceClass of [ sourceDestination.File, sourceDestination.BlockDevice ]) {
+		it(
+			`${testName} ${sourceClass.name}`,
+			testImageNoIt.bind(
+				null,
+				imagePath,
+				compareToPath,
+				alsoTestSparseStream,
+				shouldHaveSize,
+				shouldHaveCompressedSize,
+				sourceClass,
+				partitionTableType,
+				partitionsFile,
+				expectedMetadata,
+				innerSourceClass,
+			),
+		);
+	}
 }
 
 export const DEFAULT_IMAGE_TESTS_TIMEOUT = 20000;

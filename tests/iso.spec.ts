@@ -29,7 +29,7 @@ describe('iso support', function() {
 		'iso',
 		join(IMAGES_PATH, 'etcher-test.iso'),
 		join(IMAGES_PATH, 'etcher-test.iso'),
-		true,  // alsoTestSparseStream
+		false,  // alsoTestSparseStream
 		true,  // shouldHaveSize
 		false,   // shouldHaveCompressedSize
 		'mbr',  // partitionTableType

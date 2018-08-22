@@ -47,6 +47,8 @@ describe('dmg support', function() {
 			true,   // shouldHaveCompressedSize
 			'mbr',  // partitionTableType
 			join(IMAGES_PATH, 'etcher-test-partitions.json'),  // partitionsFile
+			{},  // expectedMetadata
+			sourceDestination.DmgSource,
 		);
 	});
 
