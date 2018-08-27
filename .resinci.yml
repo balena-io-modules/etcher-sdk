@@ -1,8 +1,10 @@
 ---
 npm:
-  versions:
+  platforms:
     - platform: linux
       os: ubuntu
+      packages:
+        - "libudev-dev"
       architecture: x86_64
       node_versions:
         - "6"
@@ -10,6 +12,8 @@ npm:
         - "10"
     - platform: linux
       os: ubuntu
+      packages:
+        - "libudev-dev"
       architecture: x86
       node_versions:
         - "6"
