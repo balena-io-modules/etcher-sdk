@@ -21,7 +21,6 @@ import { unmountDisk } from 'mountutils';
 import { platform } from 'os';
 
 import { AdapterSourceDestination } from '../scanner/adapters/adapter';
-import { BlockReadStream, ProgressBlockReadStream } from '../block-read-stream';
 import { BlockWriteStream, ProgressBlockWriteStream } from '../block-write-stream';
 import { DestinationSparseWriteStream, ProgressDestinationSparseWriteStream } from '../destination-sparse-write-stream';
 import { clean } from '../diskpart';
@@ -39,7 +38,6 @@ const WIN32_FIRST_BYTES_TO_KEEP = 64 * 1024;
 const unmountDiskAsync = promisify(unmountDisk);
 
 export class BlockDevice extends File implements AdapterSourceDestination {
-	public blockSize: number;
 	emitsProgress = false;
 
 	constructor(private drive: DrivelistDrive, private unmountOnSuccess = false) {
@@ -91,10 +89,6 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 
 	async canCreateSparseWriteStream(): Promise<boolean> {
 		return !this.drive.isReadOnly;
-	}
-
-	async _createReadStream(start = 0, end?: number): Promise<BlockReadStream> {
-		return new ProgressBlockReadStream(this, start, end, 1024 * this.blockSize);  // TODO: constant
 	}
 
 	async createWriteStream(): Promise<BlockWriteStream> {
