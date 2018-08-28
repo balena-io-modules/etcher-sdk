@@ -1,6 +1,6 @@
 {
   "name": "etcher-sdk",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Etcher SDK",
   "author": "Resin.io Ltd <hello@etcher.io> (https://resin.io)",
   "main": "build/index.js",
