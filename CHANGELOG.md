@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## v0.1.3 - 2018-08-28
+
+* Update(drivelist): Update drivelist to ^6.4.1 [Alexis Svinartchouk]
+
 ## v0.1.2 - 2018-08-28
 
 * Fix(file): Use BlockReadStream for File instances [Alexis Svinartchouk]
