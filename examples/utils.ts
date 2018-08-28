@@ -36,24 +36,44 @@ export async function wrapper(main: (args: any) => Promise<void>, args: any) {
 	}
 }
 
-type UpdateProgressBarFunction = (bytes: number, speed: number, eta?: number, outputPosition?: number) => void;
+type UpdateProgressBarFunction = (progress: multiWrite.MultiDestinationProgress) => void;
 
 function bytesToMebibytes(bytes: number): string {
 	return (bytes / 1024 / 1024).toFixed(2);
 }
 
-function createProgressBar(step: string, total?: number, compressed = false): [ ProgressBar | Spinner, UpdateProgressBarFunction ] {
-	if (total !== undefined) {
-		let fmt;
-		if (compressed) {
-			fmt = `${step} [:bar] :current / :total compressed bytes ; :outputPosition bytes ; :percent :speed MiB/s ; :timeLeft seconds left`;
-		} else {
-			fmt = `${step} [:bar] :current / :total bytes ; :percent :speed MiB/s ; :timeLeft seconds left`;
-		}
-		const progressBar = new ProgressBar(fmt, { total, width: 40 });
-		function update(bytes: number, speed: number, eta: number, outputPosition: number) {
-			const delta = bytes - progressBar.curr;
-			progressBar.tick(delta, { outputPosition, speed: bytesToMebibytes(speed), timeLeft: eta.toFixed(0) });
+function progressBarLabel(progress: multiWrite.MultiDestinationProgress): string {
+	const sourceProgress = !progress.sparse && (progress.size === undefined) || ((progress.size !== undefined) && (progress.bytes > progress.size));
+	let size: number | undefined;
+	let bytes: number | undefined;
+	if (sourceProgress) {
+		size = progress.compressedSize;
+		bytes = progress.rootStreamPosition;
+	} else if (progress.sparse) {
+		size = progress.blockmappedSize;
+		bytes = progress.bytes;
+	} else {
+		size = progress.size;
+		bytes = progress.bytes;
+	}
+	return [
+		`${Math.floor(progress.percentage || 0)}%`,
+		`${bytes} / ${size} ${sourceProgress ? 'compressed ' : ''}bytes`,
+		`position in output: ${progress.position}`,
+		`${bytesToMebibytes(progress.speed)} MiB/s`,
+		`${Math.round(progress.eta || 0)} seconds left`,
+	].join(' ; ');
+
+}
+
+function createProgressBar(step: string, hasTotal: boolean): [ ProgressBar | Spinner, UpdateProgressBarFunction ] {
+	if (hasTotal) {
+		const fmt = `${step} [:bar] :label`;
+		const progressBar = new ProgressBar(fmt, { total: 100, width: 40 });
+		function update(progress: multiWrite.MultiDestinationProgress) {
+			const percentage = (progress.percentage === undefined) ? progressBar.curr : progress.percentage;
+			const delta = Math.floor(percentage) - progressBar.curr;
+			progressBar.tick(delta, { label: progressBarLabel(progress) });
 		}
 		return [ progressBar, update ];
 	} else {
@@ -61,20 +81,10 @@ function createProgressBar(step: string, total?: number, compressed = false): [ 
 		const spinner = new Spinner(title);
 		spinner.setSpinnerDelay(SPINNER_DELAY);
 		spinner.start();
-		function update(bytes: number, speed: number) {
-			spinner.setSpinnerTitle(`${title}, ${bytes} bytes, ${bytesToMebibytes(speed)} MiB/s`);
+		function update(progress: multiWrite.MultiDestinationProgress) {
+			spinner.setSpinnerTitle(`${title}, ${progress.bytes} bytes, ${bytesToMebibytes(progress.speed)} MiB/s`);
 		}
 		return [ spinner, update ];
-	}
-}
-
-function multiDestinationProgressTotal(progress: multiWrite.MultiDestinationProgress) {
-	if (progress.sparse) {
-		return progress.blockmappedSize;
-	} else if (progress.size !== undefined) {
-		return progress.size;
-	} else {
-		return progress.compressedSize;
 	}
 }
 
@@ -108,12 +118,10 @@ export async function pipeSourceToDestinationsWithProgressBar(
 				}
 			}
 			step = progress.type;
-			const total = multiDestinationProgressTotal(progress);
-			const compressed = !progress.sparse && (progress.size === undefined) && (progress.compressedSize !== undefined);
-			[ progressBar, update ] = createProgressBar(progress.type, total, compressed);
+			const hasTotal = ((progress.blockmappedSize !== undefined) || (progress.size !== undefined) || (progress.compressedSize !== undefined));
+			[ progressBar, update ] = createProgressBar(progress.type, hasTotal);
 		}
-		const bytes = multiDestinationProgressBytes(progress);
-		update(bytes, progress.speed, progress.eta, progress.position);
+		update(progress);
 	}
 	const result = await multiWrite.pipeSourceToDestinations(
 		source,

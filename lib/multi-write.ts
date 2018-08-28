@@ -55,6 +55,10 @@ export interface PipeSourceToDestinationsResult {
 	bytesWritten: number;
 }
 
+function getEta(current: number, total: number, speed: number): number | undefined {
+	return (speed === 0) ? undefined : (total - current) / speed;
+}
+
 // This function is the most common use case of the SDK.
 // Added it here to avoid duplicating it in other projects.
 export async function pipeSourceToDestinations(
@@ -133,12 +137,12 @@ export async function pipeSourceToDestinations(
 			size = state.size;
 			bytesWritten = progress.position;
 		}
-		if ((size !== undefined) && (bytesWritten !== undefined)) {
+		if ((size !== undefined) && (bytesWritten !== undefined) && (bytesWritten <= size)) {
 			percentage = bytesWritten / size * 100;
-			eta = (size - bytesWritten) / progress.speed;
+			eta = getEta(bytesWritten, size, progress.speed);
 		} else if ((state.rootStreamSpeed !== undefined) && (state.rootStreamPosition !== undefined) && (state.compressedSize !== undefined)) {
 			percentage = state.rootStreamPosition / state.compressedSize * 100;
-			eta = (state.compressedSize - state.rootStreamPosition) / state.rootStreamSpeed;
+			eta = getEta(state.rootStreamPosition, state.compressedSize, state.rootStreamSpeed);
 		}
 		const result: MultiDestinationProgress = Object.assign(
 			{},
