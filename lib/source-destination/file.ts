@@ -28,15 +28,15 @@ import { SourceDestination } from './source-destination';
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
 import { close, stat, open, read, write } from '../fs';
 import { DestinationSparseWriteStream, ProgressDestinationSparseWriteStream } from '../destination-sparse-write-stream';
+import { ProgressBlockReadStream } from '../block-read-stream';
 
-// type definitions for node 6 export fs.ReadStream and fs.Write stream as interfaces, but they are classes.
-// @ts-ignore
-export const ProgressReadStream = makeClassEmitProgressEvents(fs.ReadStream, 'bytesRead', 'bytesRead', PROGRESS_EMISSION_INTERVAL);
+// type definitions for node 6 export fs.WriteStream as an interface, but it's a class.
 // @ts-ignore
 export const ProgressWriteStream = makeClassEmitProgressEvents(fs.WriteStream, 'bytesWritten', 'bytesWritten', PROGRESS_EMISSION_INTERVAL);
 
 export class File extends SourceDestination {
 	protected fd: number;
+	public blockSize = 512;
 
 	constructor(private path: string, private flags: File.OpenFlags) {
 		super();
@@ -93,7 +93,7 @@ export class File extends SourceDestination {
 	}
 
 	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
-		return new ProgressReadStream(null, { fd: this.fd, start, end, autoClose: false, highWaterMark: 1024 * 1024 });  // TODO: constant
+		return new ProgressBlockReadStream(this, start, end);
 	}
 
 	async createWriteStream(): Promise<NodeJS.WritableStream> {
