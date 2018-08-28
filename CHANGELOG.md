@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## v0.1.2 - 2018-08-28
+
+* Fix(file): Use BlockReadStream for File instances [Alexis Svinartchouk]
+
 ## v0.1.1 - 2018-08-28
 
 * Fix(block-device): Don't unmount the drive before flashing on win32 [Alexis Svinartchouk]
