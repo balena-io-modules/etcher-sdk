@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## v0.1.5 - 2018-08-29
+
+* Fix(block-write-stream): Write 1MiB blocks [Alexis Svinartchouk]
+
 ## v0.1.4 - 2018-08-29
 
 * Fix(block-read-stream): Read 1MiB blocks instead of 64KiB blocks [Alexis Svinartchouk]
