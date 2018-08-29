@@ -24,7 +24,7 @@ import { isTransientError } from './errors';
 import { File } from './source-destination/file';
 import { makeClassEmitProgressEvents } from './source-destination/progress';
 
-const DEFAULT_CHUNK_SIZE = 64 * 1024;
+const DEFAULT_CHUNK_SIZE = 1024 * 1024;
 
 export class BlockReadStream extends Readable {
 	private chunkSize: number;
