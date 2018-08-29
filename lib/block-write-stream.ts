@@ -25,6 +25,7 @@ import { makeClassEmitProgressEvents } from './source-destination/progress';
 import { BlockDevice } from './source-destination/block-device';
 
 const debug = _debug('etcher:writer:block-write-stream');
+const CHUNK_SIZE = 1024 ** 2;
 
 export class BlockWriteStream extends Writable {
 	public bytesWritten = 0;
@@ -63,7 +64,7 @@ export class BlockWriteStream extends Writable {
 	}
 
 	private async writeBuffers(): Promise<void> {
-		if (this._bytes >= this.destination.blockSize) {
+		if (this._bytes >= CHUNK_SIZE) {
 			let block = Buffer.concat(this._buffers);
 			const length = Math.floor(block.length / this.destination.blockSize) * this.destination.blockSize;
 
@@ -98,7 +99,7 @@ export class BlockWriteStream extends Writable {
 				this.bytesWritten += difference;
 				await this.writeBuffers();
 			}
-		} else if ((this._bytes === 0) && (buffer.length >= this.destination.blockSize) && (buffer.length % this.destination.blockSize === 0)) {
+		} else if ((this._bytes === 0) && (buffer.length >= CHUNK_SIZE) && (buffer.length % this.destination.blockSize === 0)) {
 			await this.writeChunk(buffer, this.bytesWritten);
 		} else {
 			this._buffers.push(buffer);
