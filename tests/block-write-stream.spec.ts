@@ -23,7 +23,7 @@ import { join } from 'path';
 import { spy, stub } from 'sinon';
 import { Readable } from 'stream';
 
-import { BlockWriteStream } from '../lib/block-write-stream';
+import { BlockWriteStream, CHUNK_SIZE as BLOCK_WRITE_STREAM_CHUNK_SIZE } from '../lib/block-write-stream';
 import { DestinationSparseWriteStream } from '../lib/destination-sparse-write-stream';
 import { BlockDevice } from '../lib/source-destination/block-device';
 import * as diskpart from '../lib/diskpart';
@@ -71,7 +71,7 @@ async function expectFileToContain(path: string, data: Buffer): Promise<void> {
 
 describe('block-write-stream', function() {
 	this.timeout(DEFAULT_IMAGE_TESTS_TIMEOUT);
-	const SIZE = 64 * 1024 + 7;
+	const SIZE = BLOCK_WRITE_STREAM_CHUNK_SIZE + 7;
 	const CHUNK_SIZE = 512;
 
 	async function testBlockWriteStream(size: number, chunkSize: number, sparse = false): Promise<void> {
@@ -103,13 +103,15 @@ describe('block-write-stream', function() {
 				expect(output.firstBytesToKeep).to.not.equal(0);
 				// @ts-ignore
 				expect(destination.write.getCall(0).args[3]).to.equal(output.firstBytesToKeep);
+				const chunkSize = sparse ? CHUNK_SIZE : BLOCK_WRITE_STREAM_CHUNK_SIZE;
+				const callNumber = Math.floor((SIZE - output.firstBytesToKeep) / chunkSize) + 1;
 				// @ts-ignore
-				expect(destination.write.getCall(1).args[3]).to.equal(0);
+				expect(destination.write.getCall(callNumber).args[3]).to.equal(0);
 			} else {
 				// @ts-ignore
 				expect(destination.write.getCall(0).args[3]).to.equal(0);
 				// @ts-ignore
-				expect(destination.write.getCall(1).args[3]).to.equal(chunkSize);
+				expect(destination.write.getCall(1).args[3]).to.equal(sparse ? CHUNK_SIZE : BLOCK_WRITE_STREAM_CHUNK_SIZE );
 			}
 			expect(output.bytesWritten).to.equal(size);
 			await destination.close();
