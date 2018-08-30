@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## v0.1.7 - 2018-08-30
+
+* Feat(gzip): Add isSizeEstimated=true in gzip images metadata [Alexis Svinartchouk]
+
 ## v0.1.6 - 2018-08-30
 
 * Fix(block-write-stream): Fix block-write-stream tests [Alexis Svinartchouk]
