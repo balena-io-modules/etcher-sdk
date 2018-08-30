@@ -39,6 +39,7 @@ export function getRootStream(stream: NodeJS.ReadableStream): NodeJS.ReadableStr
 
 export abstract class CompressedSource extends SourceSource {
 	protected abstract createTransform(): Transform;
+	protected isSizeEstimated = false;
 
 	protected async getSize(): Promise<number | undefined> {
 		return;
@@ -82,6 +83,6 @@ export abstract class CompressedSource extends SourceSource {
 		if (sourceMetadata.name !== undefined) {
 			name = basename(sourceMetadata.name, extname(sourceMetadata.name));
 		}
-		return { name, size, compressedSize };
+		return { name, size, compressedSize, isSizeEstimated: this.isSizeEstimated };
 	}
 }

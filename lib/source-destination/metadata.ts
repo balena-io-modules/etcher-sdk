@@ -18,6 +18,7 @@ import BlockMap = require('blockmap');
 
 export interface Metadata {
 	size?: number;
+	isSizeEstimated?: boolean;
 	compressedSize?: number;
 	blockmappedSize?: number;
 	name?: string;
