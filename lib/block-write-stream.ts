@@ -25,7 +25,8 @@ import { makeClassEmitProgressEvents } from './source-destination/progress';
 import { BlockDevice } from './source-destination/block-device';
 
 const debug = _debug('etcher:writer:block-write-stream');
-const CHUNK_SIZE = 1024 ** 2;
+
+export const CHUNK_SIZE = 1024 ** 2;
 
 export class BlockWriteStream extends Writable {
 	public bytesWritten = 0;
