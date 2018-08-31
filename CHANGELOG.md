@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## v0.1.9 - 2018-08-31
+
+* Fix(package): Build before publishing [Alexis Svinartchouk]
+
 ## v0.1.8 - 2018-08-31
 
 * Fix(package): Only publish built files [Alexis Svinartchouk]
