@@ -12,7 +12,8 @@
   "scripts": {
     "test": "mocha -r ts-node/register tests/**/*.spec.ts",
     "lint": "resin-lint --typescript lib examples tests",
-    "build": "rimraf build && tsc"
+    "build": "rimraf build && tsc",
+    "prepublish": "npm run build"
   },
   "files": [
     "build"
