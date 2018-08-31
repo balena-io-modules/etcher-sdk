@@ -1,6 +1,6 @@
 {
   "name": "etcher-sdk",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Etcher SDK",
   "author": "Resin.io Ltd <hello@etcher.io> (https://resin.io)",
   "main": "build/index.js",
@@ -14,7 +14,9 @@
     "lint": "resin-lint --typescript lib examples tests",
     "build": "rimraf build && tsc"
   },
-  "files": ["build"],
+  "files": [
+    "build"
+  ],
   "keywords": [
     "etcher",
     "sdk",
