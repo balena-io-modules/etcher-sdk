@@ -16,7 +16,7 @@
 
 import { Chunk } from 'blockmap';
 import { EventEmitter } from 'events';
-import { Transform, Writable } from 'stream';
+import { Writable } from 'stream';
 
 import speedometer = require('speedometer');
 
