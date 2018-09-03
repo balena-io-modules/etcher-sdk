@@ -5,6 +5,11 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## v0.1.10 - 2018-09-03
+
+* Feat(block-transform-stream): Faster writes for compressed images [Alexis Svinartchouk]
+* Fix(lint): Fix linter errors [Alexis Svinartchouk]
+
 ## v0.1.9 - 2018-08-31
 
 * Fix(package): Build before publishing [Alexis Svinartchouk]
