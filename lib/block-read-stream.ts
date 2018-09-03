@@ -19,17 +19,15 @@ import { ReadResult } from 'file-disk';
 import { read } from 'fs';
 import { Readable } from 'readable-stream';
 
-import { PROGRESS_EMISSION_INTERVAL, RETRY_BASE_TIMEOUT } from './constants';
+import { CHUNK_SIZE, PROGRESS_EMISSION_INTERVAL, RETRY_BASE_TIMEOUT } from './constants';
 import { isTransientError } from './errors';
 import { File } from './source-destination/file';
 import { makeClassEmitProgressEvents } from './source-destination/progress';
 
-const DEFAULT_CHUNK_SIZE = 1024 * 1024;
-
 export class BlockReadStream extends Readable {
 	private chunkSize: number;
 
-	constructor(private source: File, private bytesRead = 0, private end = Infinity, chunkSize = DEFAULT_CHUNK_SIZE, private maxRetries = 5) {
+	constructor(private source: File, private bytesRead = 0, private end = Infinity, chunkSize = CHUNK_SIZE, private maxRetries = 5) {
 		super({ objectMode: true, highWaterMark: 2 });
 		this.chunkSize = Math.max(Math.floor(chunkSize / this.source.blockSize) * this.source.blockSize, this.source.blockSize);
 	}

@@ -24,7 +24,7 @@ const ISIZE_LENGTH = 4;
 
 export class GZipSource extends CompressedSource {
 	static readonly mimetype = 'application/gzip';
-	isSizeEstimated = true
+	isSizeEstimated = true;
 
 	protected createTransform(): Transform {
 		return createGunzip();

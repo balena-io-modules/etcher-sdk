@@ -23,7 +23,8 @@ import { join } from 'path';
 import { spy, stub } from 'sinon';
 import { Readable } from 'stream';
 
-import { BlockWriteStream, CHUNK_SIZE as BLOCK_WRITE_STREAM_CHUNK_SIZE } from '../lib/block-write-stream';
+import { BlockWriteStream } from '../lib/block-write-stream';
+import { CHUNK_SIZE as BLOCK_WRITE_STREAM_CHUNK_SIZE } from '../lib/constants';
 import { DestinationSparseWriteStream } from '../lib/destination-sparse-write-stream';
 import { BlockDevice } from '../lib/source-destination/block-device';
 import * as diskpart from '../lib/diskpart';

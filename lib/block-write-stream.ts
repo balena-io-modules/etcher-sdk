@@ -18,15 +18,13 @@ import { delay } from 'bluebird';
 import * as _debug from 'debug';
 import { Writable } from 'readable-stream';
 
-import { PROGRESS_EMISSION_INTERVAL, RETRY_BASE_TIMEOUT } from './constants';
+import { CHUNK_SIZE, PROGRESS_EMISSION_INTERVAL, RETRY_BASE_TIMEOUT } from './constants';
 import { isTransientError } from './errors';
 import { asCallback } from './utils';
 import { makeClassEmitProgressEvents } from './source-destination/progress';
 import { BlockDevice } from './source-destination/block-device';
 
 const debug = _debug('etcher:writer:block-write-stream');
-
-export const CHUNK_SIZE = 1024 ** 2;
 
 export class BlockWriteStream extends Writable {
 	public bytesWritten = 0;

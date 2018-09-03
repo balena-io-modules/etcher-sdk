@@ -35,7 +35,7 @@ describe('gzip support', function() {
 		true,   // shouldHaveCompressedSize
 		'mbr',  // partitionTableType
 		join(IMAGES_PATH, 'etcher-test-partitions.json'),  // partitionsFile
-		{ isSizeEstimated: true }
+		{ isSizeEstimated: true },
 	);
 
 });
