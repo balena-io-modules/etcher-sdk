@@ -106,7 +106,7 @@ export class ConfiguredSource extends SourceSource {
 		return await this.disk.read(buffer, bufferOffset, length, sourceOffset);
 	}
 
-	async _createReadStream(...args: any[]): Promise<NodeJS.ReadableStream> {
+	async createReadStream(...args: any[]): Promise<NodeJS.ReadableStream> {
 		const imageStream = await this.source.createReadStream(...args);
 		const transform = this.disk.getTransformStream();
 		imageStream.on('error', (err: Error) => {
@@ -139,7 +139,7 @@ export class ConfiguredSource extends SourceSource {
 		return transform;
 	}
 
-	async _createSparseReadStream(generateChecksums: boolean): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
+	async createSparseReadStream(generateChecksums: boolean): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
 		if (this.createStreamFromDisk) {
 			return await this.createSparseReadStreamFromDisk(generateChecksums);
 		} else {

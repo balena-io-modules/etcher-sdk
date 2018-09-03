@@ -54,7 +54,7 @@ export class StreamZipSource extends SourceSource {
 		return this.entry;
 	}
 
-	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+	async createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
 		if (start !== 0) {
 			throw new NotCapable();
 		}
@@ -206,7 +206,7 @@ export class RandomAccessZipSource extends SourceSource {
 		}
 	}
 
-	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+	async createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
 		if (start !== 0) {
 			throw new NotCapable();
 		}
@@ -223,7 +223,7 @@ export class RandomAccessZipSource extends SourceSource {
 		return stream;
 	}
 
-	async _createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream> {
+	async createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream> {
 		const metadata = await this.getMetadata();
 		if (metadata.blockMap === undefined) {
 			throw new NotCapable();
@@ -303,14 +303,14 @@ export class ZipSource extends SourceSource {
 		return await this.implementation.canCreateSparseReadStream();
 	}
 
-	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+	async createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
 		await this.prepare();
-		return await this.implementation._createReadStream(start, end);
+		return await this.implementation.createReadStream(start, end);
 	}
 
-	async _createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
+	async createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
 		await this.prepare();
-		return await this.implementation._createSparseReadStream(generateChecksums);
+		return await this.implementation.createSparseReadStream(generateChecksums);
 	}
 
 	async _getMetadata(): Promise<Metadata> {

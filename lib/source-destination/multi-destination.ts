@@ -172,14 +172,14 @@ export class MultiDestination extends SourceDestination {
 		// TODO: handle errors so one destination can fail
 	}
 
-	async _createReadStream(...args: any[]): Promise<NodeJS.ReadableStream> {
+	async createReadStream(...args: any[]): Promise<NodeJS.ReadableStream> {
 		// TODO: raise an error or a warning here
-		return await Array.from(this.activeDestinations)[0]._createReadStream(...args);
+		return await Array.from(this.activeDestinations)[0].createReadStream(...args);
 	}
 
-	async _createSparseReadStream(...args: any[]): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
+	async createSparseReadStream(...args: any[]): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
 		// TODO: raise an error or a warning here
-		return await Array.from(this.activeDestinations)[0]._createSparseReadStream(...args);
+		return await Array.from(this.activeDestinations)[0].createSparseReadStream(...args);
 	}
 
 	private async createStream(methodName: 'createWriteStream' | 'createSparseWriteStream') {

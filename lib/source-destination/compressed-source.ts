@@ -49,7 +49,7 @@ export abstract class CompressedSource extends SourceSource {
 		return true;
 	}
 
-	async _createReadStream(start = 0, end?: number): Promise<SourceTransform> {
+	async createReadStream(start = 0, end?: number): Promise<SourceTransform> {
 		if (start !== 0) {
 			throw new NotCapable();
 		}

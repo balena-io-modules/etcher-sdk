@@ -49,7 +49,7 @@ export class DmgSource extends SourceSource {
 		return false;
 	}
 
-	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+	async createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
 		if (start !== 0) {
 			throw new NotCapable();
 		}
@@ -61,7 +61,7 @@ export class DmgSource extends SourceSource {
 		return stream;
 	}
 
-	async _createSparseReadStream(generateChecksums: boolean): Promise<FilterStream> {
+	async createSparseReadStream(generateChecksums: boolean): Promise<FilterStream> {
 		return this.image.createSparseReadStream();
 	}
 

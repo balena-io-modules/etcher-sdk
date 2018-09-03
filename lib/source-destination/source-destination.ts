@@ -287,18 +287,10 @@ export class SourceDestination extends EventEmitter {
 	}
 
 	async createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
-		return await this._createReadStream(start, end);
-	}
-
-	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
 		throw new NotCapable();
 	}
 
 	async createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
-		return await this._createSparseReadStream(generateChecksums);
-	}
-
-	async _createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
 		throw new NotCapable();
 	}
 
