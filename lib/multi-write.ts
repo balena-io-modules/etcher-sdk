@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+import { BlockReadStream } from './block-read-stream';
+import { BlockTransformStream } from './block-transform-stream';
+import { CHUNK_SIZE } from './constants';
 import { createHasher, CountingHashStream, ProgressHashStream, SourceDestination, Verifier } from './source-destination/source-destination';
 import { Metadata } from './source-destination/metadata';
 import { MultiDestination, MultiDestinationError } from './source-destination/multi-destination';
@@ -209,7 +212,13 @@ async function pipeRegularSourceToDestination(
 			lastPosition = progress.position;
 			onProgress(progress);
 		});
-		sourceStream.pipe(destinationStream);
+		if (!(sourceStream instanceof BlockReadStream) && (destination.destinations.size > 1)) {
+			// Chunk the input stream in a transform if it's not a block read stream, avoiding
+			// chunking it in each destination stream.
+			sourceStream.pipe(new BlockTransformStream(CHUNK_SIZE)).pipe(destinationStream);
+		} else {
+			sourceStream.pipe(destinationStream);
+		}
 	});
 	if (sourceMetadata.size === undefined) {
 		sourceMetadata.size = lastPosition;
