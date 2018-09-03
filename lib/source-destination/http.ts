@@ -86,7 +86,7 @@ export class Http extends SourceDestination {
 		return { bytesRead, buffer };
 	}
 
-	async createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+	async createReadStream(emitProgress = false, start = 0, end?: number): Promise<NodeJS.ReadableStream> {
 		const response = await axios({
 			method: 'get',
 			url: this.url,

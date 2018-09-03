@@ -49,7 +49,7 @@ export class DmgSource extends SourceSource {
 		return false;
 	}
 
-	async createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+	async createReadStream(emitProgress = false, start = 0, end?: number): Promise<NodeJS.ReadableStream> {
 		if (start !== 0) {
 			throw new NotCapable();
 		}
