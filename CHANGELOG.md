@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## v0.1.12 - 2018-09-04
+
+* Update(drivelist): Update drivelist to ^6.4.2 [Alexis Svinartchouk]
+
 ## v0.1.11 - 2018-09-03
 
 * Fix(source-destination): Only emit progress events if needed [Alexis Svinartchouk]
