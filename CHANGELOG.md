@@ -5,6 +5,11 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## v0.1.11 - 2018-09-03
+
+* Fix(source-destination): Only emit progress events if needed [Alexis Svinartchouk]
+* Fix(source-destination): Remove unused methods [Alexis Svinartchouk]
+
 ## v0.1.10 - 2018-09-03
 
 * Feat(block-transform-stream): Faster writes for compressed images [Alexis Svinartchouk]
