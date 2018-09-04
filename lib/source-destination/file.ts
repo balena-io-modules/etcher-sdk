@@ -28,7 +28,7 @@ import { SourceDestination } from './source-destination';
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
 import { close, stat, open, read, write } from '../fs';
 import { DestinationSparseWriteStream, ProgressDestinationSparseWriteStream } from '../destination-sparse-write-stream';
-import { ProgressBlockReadStream } from '../block-read-stream';
+import { BlockReadStream, ProgressBlockReadStream } from '../block-read-stream';
 
 // type definitions for node 6 export fs.WriteStream as an interface, but it's a class.
 // @ts-ignore
@@ -92,8 +92,12 @@ export class File extends SourceDestination {
 		return await write(this.fd, buffer, bufferOffset, length, fileOffset);
 	}
 
-	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
-		return new ProgressBlockReadStream(this, start, end);
+	async createReadStream(emitProgress = false, start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+		if (emitProgress) {
+			return new ProgressBlockReadStream(this, start, end);
+		} else {
+			return new BlockReadStream(this, start, end);
+		}
 	}
 
 	async createWriteStream(): Promise<NodeJS.WritableStream> {

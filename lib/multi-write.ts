@@ -177,7 +177,8 @@ async function pipeRegularSourceToDestination(
 	_onRootStreamProgress: (progress: ProgressEvent) => void,
 ): Promise<void> {
 	let lastPosition = 0;
-	const [ sourceStream, destinationStream ] = await Promise.all([ source.createReadStream(), destination.createWriteStream() ]);
+	const emitSourceProgress = (sourceMetadata.size === undefined);
+	const [ sourceStream, destinationStream ] = await Promise.all([ source.createReadStream(emitSourceProgress), destination.createWriteStream() ]);
 	getRootStream(sourceStream).on('progress', (progress: ProgressEvent) => {
 		_onRootStreamProgress(progress);
 	});

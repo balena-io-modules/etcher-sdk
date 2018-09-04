@@ -40,7 +40,7 @@ export class StreamZipSource extends SourceSource {
 
 	private async getEntry(): Promise<ZipStreamEntry> {
 		if (this.entry === undefined) {
-			this.entry = await getFileStreamFromZipStream(await this.source.createReadStream());
+			this.entry = await getFileStreamFromZipStream(await this.source.createReadStream(false));
 			// We need to reset the entry if any read happens
 			const originalRead = this.entry._read.bind(this.entry);
 			this.entry._read = (...args: any[]) => {
@@ -54,7 +54,7 @@ export class StreamZipSource extends SourceSource {
 		return this.entry;
 	}
 
-	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+	async createReadStream(emitProgress = false, start = 0, end?: number): Promise<NodeJS.ReadableStream> {
 		if (start !== 0) {
 			throw new NotCapable();
 		}
@@ -87,7 +87,7 @@ class SourceRandomAccessReader extends RandomAccessReader {
 		// this.source.createReadStream end is inclusive
 		// Workaround this method not being async with a passthrough stream
 		const passthrough = new PassThrough();
-		this.source.createReadStream(start, end - 1)
+		this.source.createReadStream(false, start, end - 1)
 		.then((stream) => {
 			stream.on('error', passthrough.emit.bind(passthrough, 'error'));
 			stream.pipe(passthrough);
@@ -206,7 +206,7 @@ export class RandomAccessZipSource extends SourceSource {
 		}
 	}
 
-	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+	async createReadStream(emitProgress = false, start = 0, end?: number): Promise<NodeJS.ReadableStream> {
 		if (start !== 0) {
 			throw new NotCapable();
 		}
@@ -223,14 +223,14 @@ export class RandomAccessZipSource extends SourceSource {
 		return stream;
 	}
 
-	async _createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream> {
+	async createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream> {
 		const metadata = await this.getMetadata();
 		if (metadata.blockMap === undefined) {
 			throw new NotCapable();
 		}
 		// Verifying and generating checksums makes no sense, so we only verify if generateChecksums is false.
 		const transform = BlockMap.createFilterStream(metadata.blockMap, { verify: !generateChecksums, generateChecksums });
-		const stream = await this.createReadStream();
+		const stream = await this.createReadStream(false);
 		stream.pipe(transform);
 		return transform;
 	}
@@ -303,14 +303,14 @@ export class ZipSource extends SourceSource {
 		return await this.implementation.canCreateSparseReadStream();
 	}
 
-	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+	async createReadStream(emitProgress = false, start = 0, end?: number): Promise<NodeJS.ReadableStream> {
 		await this.prepare();
-		return await this.implementation._createReadStream(start, end);
+		return await this.implementation.createReadStream(emitProgress, start, end);
 	}
 
-	async _createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
+	async createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
 		await this.prepare();
-		return await this.implementation._createSparseReadStream(generateChecksums);
+		return await this.implementation.createSparseReadStream(generateChecksums);
 	}
 
 	async _getMetadata(): Promise<Metadata> {

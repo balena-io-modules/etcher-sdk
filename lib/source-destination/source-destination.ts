@@ -132,7 +132,7 @@ export class StreamVerifier extends Verifier {
 	}
 
 	async run(): Promise<void> {
-		const stream = await this.source.createReadStream(0, this.size - 1);
+		const stream = await this.source.createReadStream(false, 0, this.size - 1);
 		stream.on('error', this.emit.bind(this, 'error'));
 		const hasher = createHasher();
 		hasher.on('error', this.emit.bind(this, 'error'));
@@ -286,19 +286,11 @@ export class SourceDestination extends EventEmitter {
 		throw new NotCapable();
 	}
 
-	async createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
-		return await this._createReadStream(start, end);
-	}
-
-	async _createReadStream(start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+	async createReadStream(emitProgress = false, start = 0, end?: number): Promise<NodeJS.ReadableStream> {
 		throw new NotCapable();
 	}
 
 	async createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
-		return await this._createSparseReadStream(generateChecksums);
-	}
-
-	async _createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
 		throw new NotCapable();
 	}
 
@@ -355,7 +347,7 @@ export class SourceDestination extends EventEmitter {
 	private async getMimeTypeFromContent(): Promise<string | undefined> {
 		let stream: NodeJS.ReadableStream;
 		try {
-			stream = await this.createReadStream(0, 263);  // TODO: constant
+			stream = await this.createReadStream(false, 0, 263);  // TODO: constant
 		} catch (error) {
 			if (error instanceof NotCapable) {
 				return;
@@ -399,7 +391,7 @@ export class SourceDestination extends EventEmitter {
 		// missing parts in partitioninfo:
 		// * read from Buffer directly (can be avoided using a Buffer backed FileDisk)
 		// * try detecting GPT at different offsets (see detectGPT above)
-		const stream = await this.createReadStream(0, 65535);  // TODO: constant
+		const stream = await this.createReadStream(false, 0, 65535);  // TODO: constant
 		const buffer = await streamToBuffer(stream);
 
 
