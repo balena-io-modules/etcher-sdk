@@ -27,7 +27,7 @@ export class BlockTransformStream extends Transform {
 	}
 
 	private writeBuffers(flush = false) {
-		if (this._bytes >= this.chunkSize) {
+		if (flush || (this._bytes >= this.chunkSize)) {
 			let block = Buffer.concat(this._buffers);
 			const length = flush ? block.length : Math.floor(block.length / this.chunkSize) * this.chunkSize;
 
