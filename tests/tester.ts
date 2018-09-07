@@ -25,6 +25,20 @@ import { sparseStreamToBuffer, streamToBuffer } from '../lib/utils';
 
 export type PartitionTableType = 'mbr' | 'gpt';
 
+export class FakeBlockDevice extends sourceDestination.BlockDevice {
+	protected async _open(): Promise<void> {
+		// We need to call this class' grand-parent (File) methods as we don't want to unmount files.
+		// ts-ignore because _open() and _close() are protected.
+		// @ts-ignore
+		await sourceDestination.File.prototype._open.call(this);
+	}
+
+	protected async _close(): Promise<void> {
+		// @ts-ignore
+		await sourceDestination.File.prototype._close.call(this);
+	}
+}
+
 export async function blockDeviceFromFile(path: string): Promise<sourceDestination.BlockDevice> {
 	const drive = {
 		raw: path,
@@ -40,7 +54,7 @@ export async function blockDeviceFromFile(path: string): Promise<sourceDestinati
 		busType: 'UNKNOWN',
 		error: null,
 	};
-	return new sourceDestination.BlockDevice(drive);
+	return new FakeBlockDevice(drive);
 }
 
 export async function testImageNoIt(
