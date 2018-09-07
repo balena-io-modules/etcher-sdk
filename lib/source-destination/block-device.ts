@@ -34,6 +34,7 @@ import { Metadata } from './metadata';
 const UNMOUNT_ON_SUCCESS_TIMEOUT_MS = 2000;
 const DEFAULT_BLOCK_SIZE = 512;
 const WIN32_FIRST_BYTES_TO_KEEP = 64 * 1024;
+const USE_ALIGNED_IO = platform() === 'win32' || platform() === 'darwin';
 
 const unmountDiskAsync = promisify(unmountDisk);
 
@@ -146,7 +147,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 	}
 
 	async read(buffer: Buffer, bufferOffset: number, length: number, sourceOffset: number): Promise<ReadResult> {
-		if ((platform() === 'win32') && !(this.offsetIsAligned(sourceOffset) && this.offsetIsAligned(length))) {
+		if (USE_ALIGNED_IO && !(this.offsetIsAligned(sourceOffset) && this.offsetIsAligned(length))) {
 			return await this.alignedRead(buffer, bufferOffset, length, sourceOffset);
 		} else {
 			return await super.read(buffer, bufferOffset, length, sourceOffset);
@@ -165,7 +166,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 	}
 
 	async write(buffer: Buffer, bufferOffset: number, length: number, fileOffset: number): Promise<WriteResult> {
-		if ((platform() === 'win32') && !(this.offsetIsAligned(fileOffset) && this.offsetIsAligned(length))) {
+		if (USE_ALIGNED_IO && !(this.offsetIsAligned(fileOffset) && this.offsetIsAligned(length))) {
 			return await this.alignedWrite(buffer, bufferOffset, length, fileOffset);
 		} else {
 			return await super.write(buffer, bufferOffset, length, fileOffset);
