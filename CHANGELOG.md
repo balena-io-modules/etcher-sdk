@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## v0.1.14 - 2018-09-07
+
+* Blockdevice: Use aligned reads / writes on MacOS [Jonas Hermsmeier]
+
 ## v0.1.13 - 2018-09-06
 
 * Fix(block-transform-stream): Flush last bytes [Alexis Svinartchouk]
