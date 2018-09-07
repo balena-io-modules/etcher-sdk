@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## v0.1.15 - 2018-09-07
+
+* Fix(tests): Don't unmount files in tests [Alexis Svinartchouk]
+
 ## v0.1.14 - 2018-09-07
 
 * Blockdevice: Use aligned reads / writes on MacOS [Jonas Hermsmeier]
