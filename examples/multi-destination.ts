@@ -41,7 +41,8 @@ const main = async ({ sourceImage, devicePathPrefix, verify, trim, config }: any
 		);
 	}
 	const destinationDrives = Array.from(deviceScanner.drives.values()).filter((drive) => {
-		return drive.devicePath && drive.devicePath.startsWith(devicePathPrefix);
+		return drive.device && drive.device.startsWith(devicePathPrefix) ||
+			(drive.devicePath && drive.devicePath.startsWith(devicePathPrefix));
 	});
 	try {
 		await pipeSourceToDestinationsWithProgressBar(source, destinationDrives, verify);
@@ -53,10 +54,10 @@ const main = async ({ sourceImage, devicePathPrefix, verify, trim, config }: any
 // tslint:disable-next-line: no-var-requires
 const argv = require('yargs').command(
 	'$0 <sourceImage> <devicePathPrefix>',
-	'Write the sourceImage on all drives which link name in /dev/disk/by-path/ starts with devicePathPrefix.',
+	'Write the sourceImage on all drives which match the name, prefix, or link name in /dev/disk/by-path/.',
 	(yargs: Argv) => {
 		yargs.positional('sourceImage', { describe: 'Source image' });
-		yargs.positional('devicePathPrefix', { describe: 'Devices name prefix in /dev/disk/by-path/' });
+		yargs.positional('devicePathPrefix', { describe: 'Devices name prefix (in /dev/, /dev/disk/by-path/, or \\\\.\\PhysicalDriveN)' });
 		yargs.option('verify', { default: false });
 		yargs.option('trim', { default: false });
 		yargs.describe('config', 'json configuration file');
