@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## v0.1.16 - 2018-09-11
+
+* Fix(errors): Set VerificationError.code to EVALIDATION [Alexis Svinartchouk]
+
 ## v0.1.15 - 2018-09-07
 
 * Fix(tests): Don't unmount files in tests [Alexis Svinartchouk]
