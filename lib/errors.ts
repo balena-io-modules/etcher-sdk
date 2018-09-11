@@ -20,6 +20,7 @@ export class NotCapable extends Error {
 }
 
 export class VerificationError extends Error {
+	code = 'EVALIDATION';
 }
 
 export class ChecksumVerificationError extends VerificationError {
