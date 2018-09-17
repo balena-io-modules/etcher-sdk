@@ -16,7 +16,8 @@
     "prepublish": "npm run build"
   },
   "files": [
-    "build"
+    "build",
+    "typings"
   ],
   "keywords": [
     "etcher",
