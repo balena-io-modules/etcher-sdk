@@ -28,6 +28,7 @@ export class Http extends SourceDestination {
 	private size: number;
 	private acceptsRange: boolean;
 	private ready: Promise<void>;
+	private error: Error;
 
 	constructor(private url: string) {
 		super();
@@ -35,13 +36,20 @@ export class Http extends SourceDestination {
 	}
 
 	private async getInfo() {
-		const response = await axios({ method: 'head', url: this.url });
-		this.size = parseInt(response.headers['content-length'], 10);
-		this.acceptsRange = (response.headers['accept-ranges'] === 'bytes');
+		try {
+			const response = await axios({ method: 'head', url: this.url });
+			this.size = parseInt(response.headers['content-length'], 10);
+			this.acceptsRange = (response.headers['accept-ranges'] === 'bytes');
+		} catch (error) {
+			this.error = error;
+		}
 	}
 
 	async canRead(): Promise<boolean> {
 		await this.ready;
+		if (this.error) {
+			throw this.error;
+		}
 		return this.acceptsRange;
 	}
 
@@ -51,6 +59,9 @@ export class Http extends SourceDestination {
 
 	async _getMetadata(): Promise<Metadata> {
 		await this.ready;
+		if (this.error) {
+			throw this.error;
+		}
 		let name;
 		const pathname = parse(this.url).pathname;
 		if (pathname !== undefined) {
