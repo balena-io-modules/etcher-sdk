@@ -107,7 +107,7 @@ export class BlockWriteStream extends Writable {
 		}
 	}
 
-	_write(buffer: Buffer, encoding: string, callback: (error?: Error | void) => void) {
+	_write(buffer: Buffer, encoding: string, callback: (error: Error | undefined) => void) {
 		asCallback(this.__write(buffer), callback);
 	}
 

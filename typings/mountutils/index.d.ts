@@ -1,3 +1,3 @@
 declare module 'mountutils' {
-	export function unmountDisk(device: string, callback: (error: Error) => void): void;
+	export function unmountDisk(device: string, callback: (error: any, result?: any) => void): void;
 }

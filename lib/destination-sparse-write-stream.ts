@@ -66,7 +66,7 @@ export class DestinationSparseWriteStream extends Writable implements SparseWrit
 		}
 	}
 
-	_write(chunk: Chunk, enc: string, callback: (error?: Error | void) => void): void {
+	_write(chunk: Chunk, enc: string, callback: (error: Error | undefined) => void): void {
 		asCallback(this.__write(chunk), callback);
 	}
 
