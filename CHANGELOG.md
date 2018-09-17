@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## v0.1.17 - 2018-09-17
+
+* Fix(http): Catch errors that may happen during a HEAD request [Alexis Svinartchouk]
+
 ## v0.1.16 - 2018-09-11
 
 * Fix(errors): Set VerificationError.code to EVALIDATION [Alexis Svinartchouk]
