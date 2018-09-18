@@ -157,10 +157,15 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		const start = this.alignOffsetBefore(sourceOffset);
 		const end = this.alignOffsetAfter(sourceOffset + length);
 		const alignedBuffer = Buffer.allocUnsafe(end - start);
-		await super.read(alignedBuffer, 0, alignedBuffer.length, start);
+		const { bytesRead } = await super.read(
+			alignedBuffer,
+			0,
+			alignedBuffer.length,
+			start,
+		);
 		const offset = sourceOffset - start;
 		alignedBuffer.copy(buffer, bufferOffset, offset, offset + length);
-		return { buffer, bytesRead: length };
+		return { buffer, bytesRead: Math.min(length, bytesRead - offset) };
 	}
 
 	async read(
