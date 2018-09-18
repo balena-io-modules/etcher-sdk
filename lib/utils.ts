@@ -16,18 +16,24 @@
 
 import { Chunk } from 'blockmap';
 
-export async function streamToBuffer(stream: NodeJS.ReadableStream): Promise<Buffer> {
-	return await new Promise((resolve: (buffer: Buffer) => void, reject: (error: Error) => void) => {
-		const chunks: Buffer[] = [];
-		stream.on('error', reject);
-		stream.on('data', chunks.push.bind(chunks));
-		stream.on('end', () => {
-			resolve(Buffer.concat(chunks));
-		});
-	});
+export async function streamToBuffer(
+	stream: NodeJS.ReadableStream,
+): Promise<Buffer> {
+	return await new Promise(
+		(resolve: (buffer: Buffer) => void, reject: (error: Error) => void) => {
+			const chunks: Buffer[] = [];
+			stream.on('error', reject);
+			stream.on('data', chunks.push.bind(chunks));
+			stream.on('end', () => {
+				resolve(Buffer.concat(chunks));
+			});
+		},
+	);
 }
 
-export async function sparseStreamToBuffer(stream: NodeJS.ReadableStream): Promise<Buffer> {
+export async function sparseStreamToBuffer(
+	stream: NodeJS.ReadableStream,
+): Promise<Buffer> {
 	const chunks: Chunk[] = [];
 	await new Promise((resolve: () => void, reject: (error: Error) => void) => {
 		stream.on('error', reject);
@@ -53,8 +59,13 @@ export function difference<T>(setA: Set<T>, setB: Set<T>): Set<T> {
 	return _difference;
 }
 
-export function asCallback(promise: Promise<any>, callback: (error: Error | void, value?: any) => void) {
-	promise.then((value: any) => {
-		callback(undefined, value);
-	}).catch(callback);
+export function asCallback(
+	promise: Promise<any>,
+	callback: (error: Error | void, value?: any) => void,
+) {
+	promise
+		.then((value: any) => {
+			callback(undefined, value);
+		})
+		.catch(callback);
 }

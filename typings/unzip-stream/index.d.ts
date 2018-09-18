@@ -1,5 +1,4 @@
 declare module 'unzip-stream' {
-	
 	import { PassThrough, Transform } from 'stream';
 
 	class ZipStreamEntry extends PassThrough {
@@ -11,5 +10,4 @@ declare module 'unzip-stream' {
 	}
 
 	function Parse(): Transform;
-
 }

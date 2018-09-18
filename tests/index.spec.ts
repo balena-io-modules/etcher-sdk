@@ -22,17 +22,21 @@ import { sourceDestination } from '../lib';
 
 describe('SourceDestination.imageExtensions', function() {
 	it('should be an array', function() {
-		expect(isArray(sourceDestination.SourceDestination.imageExtensions)).to.be.true;
+		expect(isArray(sourceDestination.SourceDestination.imageExtensions)).to.be
+			.true;
 	});
 
 	it('should not be empty', function() {
-		expect(isEmpty(sourceDestination.SourceDestination.imageExtensions)).to.be.false;
+		expect(isEmpty(sourceDestination.SourceDestination.imageExtensions)).to.be
+			.false;
 	});
 
 	it('should contain only strings', function() {
 		expect(
 			every(
-				map(sourceDestination.SourceDestination.imageExtensions, function(extension) {
+				map(sourceDestination.SourceDestination.imageExtensions, function(
+					extension,
+				) {
 					return isString(extension);
 				}),
 			),
@@ -42,7 +46,9 @@ describe('SourceDestination.imageExtensions', function() {
 	it('should not contain empty strings', function() {
 		expect(
 			every(
-				map(sourceDestination.SourceDestination.imageExtensions, function(extension) {
+				map(sourceDestination.SourceDestination.imageExtensions, function(
+					extension,
+				) {
 					return !isEmpty(extension);
 				}),
 			),
@@ -52,7 +58,9 @@ describe('SourceDestination.imageExtensions', function() {
 	it('should not contain a leading period in any file type extension', function() {
 		expect(
 			every(
-				map(sourceDestination.SourceDestination.imageExtensions, function(extension) {
+				map(sourceDestination.SourceDestination.imageExtensions, function(
+					extension,
+				) {
 					return first(extension) !== '.';
 				}),
 			),

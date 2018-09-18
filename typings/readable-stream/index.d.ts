@@ -4,17 +4,14 @@ declare module 'readable-stream' {
 		PassThrough as NodeJSPassThrough,
 		Readable as NodeJSReadable,
 		Transform as NodeJSTransform,
-		Writable as NodeJSWritable
-	} from 'stream'
+		Writable as NodeJSWritable,
+	} from 'stream';
 
-	export class PassThrough extends NodeJSPassThrough {
-	}
+	export class PassThrough extends NodeJSPassThrough {}
 
-	export class Readable extends NodeJSReadable {
-	}
+	export class Readable extends NodeJSReadable {}
 
-	export class Transform extends NodeJSTransform {
-	}
+	export class Transform extends NodeJSTransform {}
 
 	export class Writable extends NodeJSWritable {
 		// destroy does not exist in node 6 Writable

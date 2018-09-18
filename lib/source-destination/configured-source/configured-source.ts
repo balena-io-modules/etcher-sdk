@@ -37,10 +37,10 @@ export type ConfigureFunction = (disk: Disk, config: any) => Promise<void>;
 export class SourceDisk extends Disk {
 	constructor(private source: SourceDestination) {
 		super(
-			true,  // readOnly
-			true,  // recordWrites
-			true,  // recordReads
-			true,  // discardIsZero
+			true, // readOnly
+			true, // recordWrites
+			true, // recordReads
+			true, // discardIsZero
 		);
 	}
 
@@ -53,16 +53,25 @@ export class SourceDisk extends Disk {
 		return size;
 	}
 
-	async _read(buffer: Buffer, bufferOffset: number, length: number, fileOffset: number): Promise<ReadResult> {
+	async _read(
+		buffer: Buffer,
+		bufferOffset: number,
+		length: number,
+		fileOffset: number,
+	): Promise<ReadResult> {
 		return await this.source.read(buffer, bufferOffset, length, fileOffset);
 	}
 
-	async _write(buffer: Buffer, bufferOffset: number, length: number, fileOffset: number): Promise<WriteResult> {
+	async _write(
+		buffer: Buffer,
+		bufferOffset: number,
+		length: number,
+		fileOffset: number,
+	): Promise<WriteResult> {
 		throw new Error("Can't write to a SourceDisk");
 	}
 
-	async _flush(): Promise<void> {
-	}
+	async _flush(): Promise<void> {}
 }
 
 export class ConfiguredSource extends SourceSource {
@@ -102,7 +111,12 @@ export class ConfiguredSource extends SourceSource {
 		return true;
 	}
 
-	async read(buffer: Buffer, bufferOffset: number, length: number, sourceOffset: number): Promise<ReadResult> {
+	async read(
+		buffer: Buffer,
+		bufferOffset: number,
+		length: number,
+		sourceOffset: number,
+	): Promise<ReadResult> {
 		return await this.disk.read(buffer, bufferOffset, length, sourceOffset);
 	}
 
@@ -116,30 +130,35 @@ export class ConfiguredSource extends SourceSource {
 		return transform;
 	}
 
-	private async createSparseReadStreamFromDisk(generateChecksums: boolean): Promise<BlockMap.ReadStream> {
-		return new BlockMap.ReadStream(
-			'',
-			await this.getBlockmap(),
-			{
-				verify: false,
-				generateChecksums,
-				fs: new SourceDestinationFs(this),
-				chunkSize: 2 * 1024 * 1024,  // TODO: constant
-				autoClose: false,
-			},
-		);
+	private async createSparseReadStreamFromDisk(
+		generateChecksums: boolean,
+	): Promise<BlockMap.ReadStream> {
+		return new BlockMap.ReadStream('', await this.getBlockmap(), {
+			verify: false,
+			generateChecksums,
+			fs: new SourceDestinationFs(this),
+			chunkSize: 2 * 1024 * 1024, // TODO: constant
+			autoClose: false,
+		});
 	}
 
-	private async createSparseReadStreamFromStream(generateChecksums: boolean): Promise<BlockMap.FilterStream> {
+	private async createSparseReadStreamFromStream(
+		generateChecksums: boolean,
+	): Promise<BlockMap.FilterStream> {
 		const stream = await this.createReadStream();
 		const blockMap = await this.getBlockmap();
-		const transform = BlockMap.createFilterStream(blockMap, { verify: false, generateChecksums });
+		const transform = BlockMap.createFilterStream(blockMap, {
+			verify: false,
+			generateChecksums,
+		});
 		stream.on('error', transform.emit.bind(transform, 'error'));
 		stream.pipe(transform);
 		return transform;
 	}
 
-	async createSparseReadStream(generateChecksums: boolean): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
+	async createSparseReadStream(
+		generateChecksums: boolean,
+	): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
 		if (this.createStreamFromDisk) {
 			return await this.createSparseReadStreamFromDisk(generateChecksums);
 		} else {
@@ -150,35 +169,45 @@ export class ConfiguredSource extends SourceSource {
 	async _getMetadata(): Promise<Metadata> {
 		const metadata = cloneDeep(await this.source.getMetadata());
 		metadata.blockMap = await this.getBlockmap();
-		metadata.blockmappedSize = metadata.blockMap.blockSize * metadata.blockMap.mappedBlockCount;
+		metadata.blockmappedSize =
+			metadata.blockMap.blockSize * metadata.blockMap.mappedBlockCount;
 		return metadata;
 	}
 
 	private async trimPartitions(): Promise<void> {
-		const { partitions } = await getPartitions(this.disk, { includeExtended: false });
+		const { partitions } = await getPartitions(this.disk, {
+			includeExtended: false,
+		});
 		for (const partition of partitions) {
 			try {
-				await using(interact(this.disk, partition.index), async (fs: AsyncFsLike) => {
-					if (fs.trimAsync !== undefined) {
-						await fs.trimAsync();
-					}
-				});
+				await using(
+					interact(this.disk, partition.index),
+					async (fs: AsyncFsLike) => {
+						if (fs.trimAsync !== undefined) {
+							await fs.trimAsync();
+						}
+					},
+				);
 			} catch {
 				// Unsupported filesystem
 			}
 		}
 		const discards = this.disk.getDiscardedChunks();
 		const discardedBytes = discards
-		.map((d: DiscardDiskChunk) => {
-			return d.end - d.start + 1;
-		})
-		.reduce((a: number, b: number) => {
-			return a + b;
-		});  // TODO: discarededBytes in metadata ?
+			.map((d: DiscardDiskChunk) => {
+				return d.end - d.start + 1;
+			})
+			.reduce((a: number, b: number) => {
+				return a + b;
+			}); // TODO: discarededBytes in metadata ?
 		const metadata = await this.getMetadata();
 		if (metadata.size !== undefined) {
-			const percentage = Math.round(discardedBytes / metadata.size * 100);
-			debug(`discarded ${discards.length} chunks, ${discardedBytes} bytes, ${percentage}% of the image`);
+			const percentage = Math.round((discardedBytes / metadata.size) * 100);
+			debug(
+				`discarded ${
+					discards.length
+				} chunks, ${discardedBytes} bytes, ${percentage}% of the image`,
+			);
 		}
 	}
 

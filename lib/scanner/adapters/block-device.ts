@@ -25,13 +25,15 @@ import { difference } from '../../utils';
 // Exported so it can be mocked in tests
 export const listDrives = (): Promise<DrivelistDrive[]> => {
 	return new Promise((resolve, reject) => {
-		list((error: Error, drives: DrivelistDrive[]): void => {
-			if (error) {
-				reject(error);
-				return;
-			}
-			resolve(drives);
-		});
+		list(
+			(error: Error, drives: DrivelistDrive[]): void => {
+				if (error) {
+					reject(error);
+					return;
+				}
+				resolve(drives);
+			},
+		);
 	});
 };
 
@@ -84,7 +86,8 @@ export class BlockDeviceAdapter extends Adapter {
 
 	private async scan(): Promise<void> {
 		const drives = await this.listDrives();
-		if (this.running) {  // we may have been stopped while listing the drives.
+		if (this.running) {
+			// we may have been stopped while listing the drives.
 			const oldDevices = new Set<string>(this.drives.keys());
 			const newDevices = new Set<string>(drives.keys());
 			for (const removed of difference(oldDevices, newDevices)) {
@@ -124,7 +127,7 @@ export class BlockDeviceAdapter extends Adapter {
 			// through usbboot.
 			if (USBBOOT_RPI_COMPUTE_MODULE_NAMES.includes(drive.description)) {
 				drive.description = 'Compute Module';
-				drive.icon = 'raspberrypi';  // TODO: Should this be in the sdk?
+				drive.icon = 'raspberrypi'; // TODO: Should this be in the sdk?
 				drive.isSystem = false;
 			}
 			if (/PhysicalDrive/i.test(drive.device) && drive.mountpoints.length) {

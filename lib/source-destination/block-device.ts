@@ -21,8 +21,14 @@ import { unmountDisk } from 'mountutils';
 import { platform } from 'os';
 
 import { AdapterSourceDestination } from '../scanner/adapters/adapter';
-import { BlockWriteStream, ProgressBlockWriteStream } from '../block-write-stream';
-import { DestinationSparseWriteStream, ProgressDestinationSparseWriteStream } from '../destination-sparse-write-stream';
+import {
+	BlockWriteStream,
+	ProgressBlockWriteStream,
+} from '../block-write-stream';
+import {
+	DestinationSparseWriteStream,
+	ProgressDestinationSparseWriteStream,
+} from '../destination-sparse-write-stream';
 import { clean } from '../diskpart';
 
 import { File } from './file';
@@ -93,13 +99,19 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 	}
 
 	async createWriteStream(): Promise<BlockWriteStream> {
-		const stream = new ProgressBlockWriteStream(this, (platform() === 'win32') ? WIN32_FIRST_BYTES_TO_KEEP : 0);
+		const stream = new ProgressBlockWriteStream(
+			this,
+			platform() === 'win32' ? WIN32_FIRST_BYTES_TO_KEEP : 0,
+		);
 		stream.on('finish', stream.emit.bind(stream, 'done'));
 		return stream;
 	}
 
 	async createSparseWriteStream(): Promise<DestinationSparseWriteStream> {
-		const stream = new ProgressDestinationSparseWriteStream(this, (platform() === 'win32') ? WIN32_FIRST_BYTES_TO_KEEP : 0);
+		const stream = new ProgressDestinationSparseWriteStream(
+			this,
+			platform() === 'win32' ? WIN32_FIRST_BYTES_TO_KEEP : 0,
+		);
 		stream.on('finish', stream.emit.bind(stream, 'done'));
 		return stream;
 	}
@@ -125,7 +137,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 	}
 
 	private offsetIsAligned(offset: number): boolean {
-		return (offset % this.blockSize) === 0;
+		return offset % this.blockSize === 0;
 	}
 
 	private alignOffsetBefore(offset: number): number {
@@ -136,7 +148,12 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return Math.ceil(offset / this.blockSize) * this.blockSize;
 	}
 
-	private async alignedRead(buffer: Buffer, bufferOffset: number, length: number, sourceOffset: number): Promise<ReadResult> {
+	private async alignedRead(
+		buffer: Buffer,
+		bufferOffset: number,
+		length: number,
+		sourceOffset: number,
+	): Promise<ReadResult> {
 		const start = this.alignOffsetBefore(sourceOffset);
 		const end = this.alignOffsetAfter(sourceOffset + length);
 		const alignedBuffer = Buffer.allocUnsafe(end - start);
@@ -146,15 +163,28 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return { buffer, bytesRead: length };
 	}
 
-	async read(buffer: Buffer, bufferOffset: number, length: number, sourceOffset: number): Promise<ReadResult> {
-		if (USE_ALIGNED_IO && !(this.offsetIsAligned(sourceOffset) && this.offsetIsAligned(length))) {
+	async read(
+		buffer: Buffer,
+		bufferOffset: number,
+		length: number,
+		sourceOffset: number,
+	): Promise<ReadResult> {
+		if (
+			USE_ALIGNED_IO &&
+			!(this.offsetIsAligned(sourceOffset) && this.offsetIsAligned(length))
+		) {
 			return await this.alignedRead(buffer, bufferOffset, length, sourceOffset);
 		} else {
 			return await super.read(buffer, bufferOffset, length, sourceOffset);
 		}
 	}
 
-	private async alignedWrite(buffer: Buffer, bufferOffset: number, length: number, fileOffset: number): Promise<WriteResult> {
+	private async alignedWrite(
+		buffer: Buffer,
+		bufferOffset: number,
+		length: number,
+		fileOffset: number,
+	): Promise<WriteResult> {
 		const start = this.alignOffsetBefore(fileOffset);
 		const end = this.alignOffsetAfter(fileOffset + length);
 		const alignedBuffer = Buffer.allocUnsafe(end - start);
@@ -165,12 +195,19 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return { buffer, bytesWritten: length };
 	}
 
-	async write(buffer: Buffer, bufferOffset: number, length: number, fileOffset: number): Promise<WriteResult> {
-		if (USE_ALIGNED_IO && !(this.offsetIsAligned(fileOffset) && this.offsetIsAligned(length))) {
+	async write(
+		buffer: Buffer,
+		bufferOffset: number,
+		length: number,
+		fileOffset: number,
+	): Promise<WriteResult> {
+		if (
+			USE_ALIGNED_IO &&
+			!(this.offsetIsAligned(fileOffset) && this.offsetIsAligned(length))
+		) {
 			return await this.alignedWrite(buffer, bufferOffset, length, fileOffset);
 		} else {
 			return await super.write(buffer, bufferOffset, length, fileOffset);
 		}
 	}
 }
-

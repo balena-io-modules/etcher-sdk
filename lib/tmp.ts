@@ -51,9 +51,11 @@ export const tmpFile = async (keepOpen = true): Promise<TmpFileResult> => {
 		}
 	}
 	if (!ok) {
-		throw new Error(`Could not generate a temporary filename in ${TRIES} tries`);
+		throw new Error(
+			`Could not generate a temporary filename in ${TRIES} tries`,
+		);
 	}
-	if (!keepOpen && (fd !== undefined)) {
+	if (!keepOpen && fd !== undefined) {
 		await close(fd);
 		fd = undefined;
 	}
@@ -61,9 +63,8 @@ export const tmpFile = async (keepOpen = true): Promise<TmpFileResult> => {
 };
 
 export const tmpFileDisposer = (keepOpen = true): Disposer<TmpFileResult> => {
-	return resolve(tmpFile(keepOpen))
-	.disposer(async (result: TmpFileResult) => {
-		if (keepOpen && (result.fd !== undefined)) {
+	return resolve(tmpFile(keepOpen)).disposer(async (result: TmpFileResult) => {
+		if (keepOpen && result.fd !== undefined) {
 			await close(result.fd);
 		}
 		await unlink(result.path);

@@ -30,7 +30,9 @@ export function isSourceTransform(stream: any): stream is SourceTransform {
 	return (<SourceTransform>stream).sourceStream !== undefined;
 }
 
-export function getRootStream(stream: NodeJS.ReadableStream): NodeJS.ReadableStream {
+export function getRootStream(
+	stream: NodeJS.ReadableStream,
+): NodeJS.ReadableStream {
 	while (isSourceTransform(stream)) {
 		stream = stream.sourceStream;
 	}
@@ -49,7 +51,11 @@ export abstract class CompressedSource extends SourceSource {
 		return true;
 	}
 
-	async createReadStream(emitProgress = false, start = 0, end?: number): Promise<SourceTransform> {
+	async createReadStream(
+		emitProgress = false,
+		start = 0,
+		end?: number,
+	): Promise<SourceTransform> {
 		if (start !== 0) {
 			throw new NotCapable();
 		}
@@ -83,6 +89,11 @@ export abstract class CompressedSource extends SourceSource {
 		if (sourceMetadata.name !== undefined) {
 			name = basename(sourceMetadata.name, extname(sourceMetadata.name));
 		}
-		return { name, size, compressedSize, isSizeEstimated: this.isSizeEstimated };
+		return {
+			name,
+			size,
+			compressedSize,
+			isSizeEstimated: this.isSizeEstimated,
+		};
 	}
 }

@@ -34,15 +34,17 @@ interface ExecResult {
 }
 
 const execAsync = async (command: string): Promise<ExecResult> => {
-	return await new Promise((resolve: (res: ExecResult) => void, reject: (err: Error) => void) => {
-		exec(command, (error: Error, stdout: string, stderr: string) => {
-			if (error) {
-				reject(error);
-				return;
-			}
-			resolve({ stdout, stderr });
-		});
-	});
+	return await new Promise(
+		(resolve: (res: ExecResult) => void, reject: (err: Error) => void) => {
+			exec(command, (error: Error, stdout: string, stderr: string) => {
+				if (error) {
+					reject(error);
+					return;
+				}
+				resolve({ stdout, stderr });
+			});
+		},
+	);
 };
 
 /**
@@ -82,14 +84,18 @@ export const clean = async (device: string): Promise<void> => {
 	let errorCount = 0;
 	while (errorCount <= DISKPART_RETRIES) {
 		try {
-			await runDiskpart([ `select disk ${deviceId}`, 'clean', 'rescan' ]);
+			await runDiskpart([`select disk ${deviceId}`, 'clean', 'rescan']);
 			return;
 		} catch (error) {
 			errorCount += 1;
 			if (errorCount <= DISKPART_RETRIES) {
 				await delay(DISKPART_DELAY);
 			} else {
-				throw new Error(`Couldn't clean the drive, ${error.failure.message} (code ${error.failure.code})`);
+				throw new Error(
+					`Couldn't clean the drive, ${error.failure.message} (code ${
+						error.failure.code
+					})`,
+				);
 			}
 		}
 	}

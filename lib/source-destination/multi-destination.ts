@@ -43,7 +43,11 @@ export class MultiDestinationVerifier extends Verifier {
 	private verifiers: Set<Verifier> = new Set();
 	private timer: NodeJS.Timer;
 
-	constructor(private source: MultiDestination, checksumOrBlockmap: string | BlockMap, size?: number) {
+	constructor(
+		private source: MultiDestination,
+		checksumOrBlockmap: string | BlockMap,
+		size?: number,
+	) {
 		super();
 		for (const dest of source.activeDestinations) {
 			const verifier = dest.createVerifier(checksumOrBlockmap, size);
@@ -85,7 +89,10 @@ export class MultiDestinationVerifier extends Verifier {
 			this.emit('finish');
 			return;
 		}
-		this.timer = setInterval(this.emitProgress.bind(this), PROGRESS_EMISSION_INTERVAL);
+		this.timer = setInterval(
+			this.emitProgress.bind(this),
+			PROGRESS_EMISSION_INTERVAL,
+		);
 		for (const verifier of this.verifiers) {
 			verifier.run();
 		}
@@ -107,7 +114,11 @@ export class MultiDestination extends SourceDestination {
 		});
 	}
 
-	destinationError(destination: SourceDestination, error: Error, stream?: EventEmitter) {
+	destinationError(
+		destination: SourceDestination,
+		error: Error,
+		stream?: EventEmitter,
+	) {
 		// If a stream is provided, emit the 'fail' event on it, instead of this instance.
 		if (!(error instanceof VerificationError)) {
 			// Verification errors aren't fatal
@@ -126,11 +137,22 @@ export class MultiDestination extends SourceDestination {
 		return difference(this.destinations, this.erroredDestinations);
 	}
 
-	private async can(methodName: 'canRead' | 'canWrite' | 'canCreateReadStream' | 'canCreateSparseReadStream' | 'canCreateWriteStream' | 'canCreateSparseWriteStream') {
+	private async can(
+		methodName:
+			| 'canRead'
+			| 'canWrite'
+			| 'canCreateReadStream'
+			| 'canCreateSparseReadStream'
+			| 'canCreateWriteStream'
+			| 'canCreateSparseWriteStream',
+	) {
 		return every(
-			await map(this.activeDestinations, async (destination: SourceDestination) => {
-				return await destination[methodName]();
-			}),
+			await map(
+				this.activeDestinations,
+				async (destination: SourceDestination) => {
+					return await destination[methodName]();
+				},
+			),
 		);
 	}
 
@@ -158,15 +180,38 @@ export class MultiDestination extends SourceDestination {
 		return await this.can('canCreateSparseWriteStream');
 	}
 
-	async read(buffer: Buffer, bufferOffset: number, length: number, sourceOffset: number): Promise<ReadResult> {
+	async read(
+		buffer: Buffer,
+		bufferOffset: number,
+		length: number,
+		sourceOffset: number,
+	): Promise<ReadResult> {
 		// Reads from the first destination (supposing all destinations contain the same data)
-		return await Array.from(this.activeDestinations)[0].read(buffer, bufferOffset, length, sourceOffset);
+		return await Array.from(this.activeDestinations)[0].read(
+			buffer,
+			bufferOffset,
+			length,
+			sourceOffset,
+		);
 	}
 
-	async write(buffer: Buffer, bufferOffset: number, length: number, fileOffset: number): Promise<WriteResult> {
-		const results = await map(this.activeDestinations, async (destination: SourceDestination) => {
-			return await destination.write(buffer, bufferOffset, length, fileOffset);
-		});
+	async write(
+		buffer: Buffer,
+		bufferOffset: number,
+		length: number,
+		fileOffset: number,
+	): Promise<WriteResult> {
+		const results = await map(
+			this.activeDestinations,
+			async (destination: SourceDestination) => {
+				return await destination.write(
+					buffer,
+					bufferOffset,
+					length,
+					fileOffset,
+				);
+			},
+		);
 		// Returns the first WriteResult (they should be all the same)
 		return results[0];
 		// TODO: handle errors so one destination can fail
@@ -174,18 +219,31 @@ export class MultiDestination extends SourceDestination {
 
 	async createReadStream(...args: any[]): Promise<NodeJS.ReadableStream> {
 		// TODO: raise an error or a warning here
-		return await Array.from(this.activeDestinations)[0].createReadStream(...args);
+		return await Array.from(this.activeDestinations)[0].createReadStream(
+			...args,
+		);
 	}
 
-	async createSparseReadStream(...args: any[]): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
+	async createSparseReadStream(
+		...args: any[]
+	): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
 		// TODO: raise an error or a warning here
-		return await Array.from(this.activeDestinations)[0].createSparseReadStream(...args);
+		return await Array.from(this.activeDestinations)[0].createSparseReadStream(
+			...args,
+		);
 	}
 
-	private async createStream(methodName: 'createWriteStream' | 'createSparseWriteStream') {
-		const passthrough = new PassThrough({ objectMode: (methodName === 'createSparseWriteStream') });
-		passthrough.setMaxListeners(this.activeDestinations.size + 1);  // all streams listen to end events, +1 because we'll listen too
-		const progresses: Map<NodeJS.WritableStream, ProgressEvent | null> = new Map();
+	private async createStream(
+		methodName: 'createWriteStream' | 'createSparseWriteStream',
+	) {
+		const passthrough = new PassThrough({
+			objectMode: methodName === 'createSparseWriteStream',
+		});
+		passthrough.setMaxListeners(this.activeDestinations.size + 1); // all streams listen to end events, +1 because we'll listen too
+		const progresses: Map<
+			NodeJS.WritableStream,
+			ProgressEvent | null
+		> = new Map();
 		let interval: NodeJS.Timer;
 
 		function oneStreamFinished(stream: NodeJS.WritableStream) {
@@ -194,7 +252,7 @@ export class MultiDestination extends SourceDestination {
 			}
 			if (progresses.size === 1) {
 				clearInterval(interval);
-				emitProgress();  // Just to be sure we emitted the last state
+				emitProgress(); // Just to be sure we emitted the last state
 				passthrough.emit('done');
 			}
 			progresses.delete(stream);
@@ -202,28 +260,34 @@ export class MultiDestination extends SourceDestination {
 
 		function emitProgress() {
 			// TODO: avoid Array.from
-			const leastAdvancedProgress = minBy(Array.from(progresses.values()).filter(isntNull), 'position');
+			const leastAdvancedProgress = minBy(
+				Array.from(progresses.values()).filter(isntNull),
+				'position',
+			);
 			if (leastAdvancedProgress !== undefined) {
 				passthrough.emit('progress', leastAdvancedProgress);
 			}
 		}
 
-		const streams = await map(this.activeDestinations, async (destination: SourceDestination, index: number) => {
-			const stream = await destination[methodName]();
-			progresses.set(stream, null);
-			stream.on('progress', (progressEvent: ProgressEvent) => {
-				progresses.set(stream, progressEvent);
-				if (interval === undefined) {
-					interval = setInterval(emitProgress, PROGRESS_EMISSION_INTERVAL);
-				}
-			});
-			stream.on('error', (error: Error) => {
-				this.destinationError(destination, error, passthrough);
-				oneStreamFinished(stream);
-			});
-			stream.on('finish', oneStreamFinished.bind(null, stream));
-			passthrough.pipe(stream);
-		});
+		const streams = await map(
+			this.activeDestinations,
+			async (destination: SourceDestination, index: number) => {
+				const stream = await destination[methodName]();
+				progresses.set(stream, null);
+				stream.on('progress', (progressEvent: ProgressEvent) => {
+					progresses.set(stream, progressEvent);
+					if (interval === undefined) {
+						interval = setInterval(emitProgress, PROGRESS_EMISSION_INTERVAL);
+					}
+				});
+				stream.on('error', (error: Error) => {
+					this.destinationError(destination, error, passthrough);
+					oneStreamFinished(stream);
+				});
+				stream.on('finish', oneStreamFinished.bind(null, stream));
+				passthrough.pipe(stream);
+			},
+		);
 
 		passthrough.on('pipe', () => {
 			// Handle the special case where we have zero destination streams
@@ -242,12 +306,15 @@ export class MultiDestination extends SourceDestination {
 		return await this.createStream('createSparseWriteStream');
 	}
 
-	createVerifier(checksumOrBlockmap: string | BlockMap, size?: number): Verifier {
+	createVerifier(
+		checksumOrBlockmap: string | BlockMap,
+		size?: number,
+	): Verifier {
 		return new MultiDestinationVerifier(this, checksumOrBlockmap, size);
 	}
 
 	protected async _open(): Promise<void> {
-		await map(this.destinations, async (destination) => {
+		await map(this.destinations, async destination => {
 			try {
 				await destination.open();
 			} catch (error) {
@@ -257,7 +324,7 @@ export class MultiDestination extends SourceDestination {
 	}
 
 	protected async _close(): Promise<void> {
-		await map(this.destinations, async (destination) => {
+		await map(this.destinations, async destination => {
 			try {
 				await destination.close();
 			} catch (error) {

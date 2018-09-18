@@ -1,5 +1,4 @@
 declare module 'udif' {
-
 	import { FilterStream } from 'blockmap';
 
 	export class Image {

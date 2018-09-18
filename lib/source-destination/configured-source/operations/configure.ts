@@ -20,7 +20,14 @@ import * as _ from 'lodash';
 import { outdent } from 'outdent';
 import { interact, AsyncFsLike } from 'resin-image-fs';
 
-const NETWORK_SETTINGS_KEYS = ['wifiSsid', 'wifiKey', 'ip', 'netmask', 'gateway', 'routeMetric'];
+const NETWORK_SETTINGS_KEYS = [
+	'wifiSsid',
+	'wifiKey',
+	'ip',
+	'netmask',
+	'gateway',
+	'routeMetric',
+];
 
 interface WifiConfig {
 	wifiSsid: string;
@@ -123,14 +130,23 @@ export const execute = async (operation: any, disk: Disk): Promise<void> => {
 	// FIXME: no need to remove wifiSsid, wifiKey, ip, netmask and gateway once api is updated
 	config = _.omit(config, 'network', ...NETWORK_SETTINGS_KEYS);
 
-	await Bluebird.using(interact(disk, operation.partition), async (fs: AsyncFsLike) => {
-		await fs.writeFileAsync('/config.json', JSON.stringify(config));
-		let index;
-		for (index=0; index<networkConfigFiles.ethernet.length; index++) {
-			await fs.writeFileAsync(`/system-connections/connection-${pad(index + 1)}`, networkConfigFiles.ethernet[index]);
-		}
-		for (index=0; index<networkConfigFiles.wifi.length; index++) {
-			await fs.writeFileAsync(`/system-connections/connection-${pad(index + 1)}`, networkConfigFiles.wifi[index]);
-		}
-	});
+	await Bluebird.using(
+		interact(disk, operation.partition),
+		async (fs: AsyncFsLike) => {
+			await fs.writeFileAsync('/config.json', JSON.stringify(config));
+			let index;
+			for (index = 0; index < networkConfigFiles.ethernet.length; index++) {
+				await fs.writeFileAsync(
+					`/system-connections/connection-${pad(index + 1)}`,
+					networkConfigFiles.ethernet[index],
+				);
+			}
+			for (index = 0; index < networkConfigFiles.wifi.length; index++) {
+				await fs.writeFileAsync(
+					`/system-connections/connection-${pad(index + 1)}`,
+					networkConfigFiles.wifi[index],
+				);
+			}
+		},
+	);
 };

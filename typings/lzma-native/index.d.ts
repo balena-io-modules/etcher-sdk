@@ -5,13 +5,13 @@ declare module 'lzma-native' {
 
 	function parseFileIndex(
 		options: {
-			fileSize: number,
+			fileSize: number;
 			read: (
 				count: number,
 				offset: number,
-				cb: (err: Error | null, buffer?: Buffer) => any
-			) => void,
+				cb: (err: Error | null, buffer?: Buffer) => any,
+			) => void;
 		},
-		callback: (error?: Error, metadata?: { uncompressedSize: number  }) => void
+		callback: (error?: Error, metadata?: { uncompressedSize: number }) => void,
 	): void;
 }

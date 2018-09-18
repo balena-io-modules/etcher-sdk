@@ -1,9 +1,11 @@
 declare module 'resin-image-fs' {
-
 	import * as Bluebird from 'bluebird';
 	import { Disk } from 'file-disk';
 
-	function interact(disk: Disk, partition: number): Bluebird<Bluebird.Disposer<AsyncFsLike>>;
+	function interact(
+		disk: Disk,
+		partition: number,
+	): Bluebird<Bluebird.Disposer<AsyncFsLike>>;
 
 	interface AsyncFsLike {
 		trimAsync?(): Bluebird<void>;

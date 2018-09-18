@@ -27,7 +27,11 @@ export class StreamLimiter extends Transform {
 		this.stream.pipe(this);
 	}
 
-	_transform(buffer: Buffer, encoding: string, callback: (error?: Error | null, data?: Buffer) => void) {
+	_transform(
+		buffer: Buffer,
+		encoding: string,
+		callback: (error?: Error | null, data?: Buffer) => void,
+	) {
 		let length = Math.min(buffer.length, this.maxBytes);
 		if (length > 0) {
 			this.push(buffer.slice(0, length));
@@ -50,7 +54,7 @@ export class StreamLimiter extends Transform {
 					// @ts-ignore
 					this.stream.close();
 				}
-			// @ts-ignore
+				// @ts-ignore
 			} else if (this.stream.destroy !== undefined) {
 				// avoid `stream.push() after EOF`
 				if (this.stream.constructor.name !== 'JSLzmaStream') {

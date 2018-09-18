@@ -25,15 +25,21 @@ export class ResinS3Source extends SourceDestination {
 	private rawSource: Http;
 	private zipSource: ZipSource;
 
-	constructor(readonly bucket: string, readonly deviceType: string, readonly version: string) {
+	constructor(
+		readonly bucket: string,
+		readonly deviceType: string,
+		readonly version: string,
+	) {
 		// example:
 		// bucket: resin-staging-img or resin-production-img-cloudformation
 		// deviceType: raspberry-pi
 		// version: 2.9.6+rev1.prod
 		super();
 		this.rawSource = new Http(this.getUrl('image/resin.img'));
-		this.zipSource = new ZipSource(new Http(this.getUrl('image/resin.img.zip')), true);
-
+		this.zipSource = new ZipSource(
+			new Http(this.getUrl('image/resin.img.zip')),
+			true,
+		);
 	}
 
 	async canCreateReadStream(): Promise<boolean> {
@@ -45,11 +51,23 @@ export class ResinS3Source extends SourceDestination {
 	}
 
 	private getUrl(path: string): string {
-		return `https://${this.bucket}.s3.amazonaws.com/images/${this.deviceType}/${encodeURIComponent(this.version)}/${path}`;
+		return `https://${this.bucket}.s3.amazonaws.com/images/${
+			this.deviceType
+		}/${encodeURIComponent(this.version)}/${path}`;
 	}
 
-	async read(buffer: Buffer, bufferOffset: number, length: number, sourceOffset: number): Promise<ReadResult> {
-		return await this.rawSource.read(buffer, bufferOffset, length, sourceOffset);
+	async read(
+		buffer: Buffer,
+		bufferOffset: number,
+		length: number,
+		sourceOffset: number,
+	): Promise<ReadResult> {
+		return await this.rawSource.read(
+			buffer,
+			bufferOffset,
+			length,
+			sourceOffset,
+		);
 	}
 
 	async createReadStream(...args: any[]): Promise<NodeJS.ReadableStream> {

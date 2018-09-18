@@ -16,15 +16,18 @@
 
 import { platform } from 'process';
 
-export class NotCapable extends Error {
-}
+export class NotCapable extends Error {}
 
 export class VerificationError extends Error {
 	code = 'EVALIDATION';
 }
 
 export class ChecksumVerificationError extends VerificationError {
-	constructor(message: string, public checksum: string, public expectedChecksum: string) {
+	constructor(
+		message: string,
+		public checksum: string,
+		public expectedChecksum: string,
+	) {
 		super(message);
 	}
 }

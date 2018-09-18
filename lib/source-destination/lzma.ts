@@ -40,9 +40,18 @@ export class XzSource extends CompressedSource {
 		}
 		const { uncompressedSize } = await parseFileIndexAsync({
 			fileSize: size,
-			read: async (count: number, offset: number, callback: (error: Error | null, buffer?: Buffer) => Promise<void>) => {
+			read: async (
+				count: number,
+				offset: number,
+				callback: (error: Error | null, buffer?: Buffer) => Promise<void>,
+			) => {
 				try {
-					const readResult = await this.source.read(Buffer.allocUnsafe(count), 0, count, offset);
+					const readResult = await this.source.read(
+						Buffer.allocUnsafe(count),
+						0,
+						count,
+						offset,
+					);
 					callback(null, readResult.buffer);
 				} catch (error) {
 					callback(error);

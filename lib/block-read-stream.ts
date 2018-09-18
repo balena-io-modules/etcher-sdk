@@ -19,7 +19,11 @@ import { ReadResult } from 'file-disk';
 import { read } from 'fs';
 import { Readable } from 'readable-stream';
 
-import { CHUNK_SIZE, PROGRESS_EMISSION_INTERVAL, RETRY_BASE_TIMEOUT } from './constants';
+import {
+	CHUNK_SIZE,
+	PROGRESS_EMISSION_INTERVAL,
+	RETRY_BASE_TIMEOUT,
+} from './constants';
 import { isTransientError } from './errors';
 import { File } from './source-destination/file';
 import { makeClassEmitProgressEvents } from './source-destination/progress';
@@ -27,9 +31,18 @@ import { makeClassEmitProgressEvents } from './source-destination/progress';
 export class BlockReadStream extends Readable {
 	private chunkSize: number;
 
-	constructor(private source: File, private bytesRead = 0, private end = Infinity, chunkSize = CHUNK_SIZE, private maxRetries = 5) {
+	constructor(
+		private source: File,
+		private bytesRead = 0,
+		private end = Infinity,
+		chunkSize = CHUNK_SIZE,
+		private maxRetries = 5,
+	) {
 		super({ objectMode: true, highWaterMark: 2 });
-		this.chunkSize = Math.max(Math.floor(chunkSize / this.source.blockSize) * this.source.blockSize, this.source.blockSize);
+		this.chunkSize = Math.max(
+			Math.floor(chunkSize / this.source.blockSize) * this.source.blockSize,
+			this.source.blockSize,
+		);
 	}
 
 	private async tryRead(buffer: Buffer): Promise<ReadResult> {
@@ -54,7 +67,7 @@ export class BlockReadStream extends Readable {
 	}
 
 	private async __read(): Promise<void> {
-		const toRead = this.end - this.bytesRead + 1;  // end is inclusive
+		const toRead = this.end - this.bytesRead + 1; // end is inclusive
 
 		if (toRead <= 0) {
 			this.push(null);
@@ -83,4 +96,9 @@ export class BlockReadStream extends Readable {
 	}
 }
 
-export const ProgressBlockReadStream = makeClassEmitProgressEvents(BlockReadStream, 'bytesRead', 'bytesRead', PROGRESS_EMISSION_INTERVAL);
+export const ProgressBlockReadStream = makeClassEmitProgressEvents(
+	BlockReadStream,
+	'bytesRead',
+	'bytesRead',
+	PROGRESS_EMISSION_INTERVAL,
+);

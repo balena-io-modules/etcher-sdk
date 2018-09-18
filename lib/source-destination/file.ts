@@ -27,12 +27,20 @@ import { SourceDestination } from './source-destination';
 
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
 import { close, stat, open, read, write } from '../fs';
-import { DestinationSparseWriteStream, ProgressDestinationSparseWriteStream } from '../destination-sparse-write-stream';
+import {
+	DestinationSparseWriteStream,
+	ProgressDestinationSparseWriteStream,
+} from '../destination-sparse-write-stream';
 import { BlockReadStream, ProgressBlockReadStream } from '../block-read-stream';
 
-// type definitions for node 6 export fs.WriteStream as an interface, but it's a class.
-// @ts-ignore
-export const ProgressWriteStream = makeClassEmitProgressEvents(fs.WriteStream, 'bytesWritten', 'bytesWritten', PROGRESS_EMISSION_INTERVAL);
+export const ProgressWriteStream = makeClassEmitProgressEvents(
+	// type definitions for node 6 export fs.WriteStream as an interface, but it's a class.
+	// @ts-ignore
+	fs.WriteStream,
+	'bytesWritten',
+	'bytesWritten',
+	PROGRESS_EMISSION_INTERVAL,
+);
 
 export class File extends SourceDestination {
 	protected fd: number;
@@ -44,16 +52,16 @@ export class File extends SourceDestination {
 
 	private _canRead() {
 		return (
-			(this.flags === File.OpenFlags.Read) ||
-			(this.flags === File.OpenFlags.ReadWrite) ||
-			(this.flags === File.OpenFlags.WriteDevice)
+			this.flags === File.OpenFlags.Read ||
+			this.flags === File.OpenFlags.ReadWrite ||
+			this.flags === File.OpenFlags.WriteDevice
 		);
 	}
 
 	private _canWrite() {
 		return (
-			(this.flags === File.OpenFlags.ReadWrite) ||
-			(this.flags === File.OpenFlags.WriteDevice)
+			this.flags === File.OpenFlags.ReadWrite ||
+			this.flags === File.OpenFlags.WriteDevice
 		);
 	}
 
@@ -84,15 +92,29 @@ export class File extends SourceDestination {
 		};
 	}
 
-	async read(buffer: Buffer, bufferOffset: number, length: number, sourceOffset: number): Promise<ReadResult> {
+	async read(
+		buffer: Buffer,
+		bufferOffset: number,
+		length: number,
+		sourceOffset: number,
+	): Promise<ReadResult> {
 		return await read(this.fd, buffer, bufferOffset, length, sourceOffset);
 	}
 
-	async write(buffer: Buffer, bufferOffset: number, length: number, fileOffset: number): Promise<WriteResult> {
+	async write(
+		buffer: Buffer,
+		bufferOffset: number,
+		length: number,
+		fileOffset: number,
+	): Promise<WriteResult> {
 		return await write(this.fd, buffer, bufferOffset, length, fileOffset);
 	}
 
-	async createReadStream(emitProgress = false, start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+	async createReadStream(
+		emitProgress = false,
+		start = 0,
+		end?: number,
+	): Promise<NodeJS.ReadableStream> {
 		if (emitProgress) {
 			return new ProgressBlockReadStream(this, start, end);
 		} else {
@@ -101,7 +123,10 @@ export class File extends SourceDestination {
 	}
 
 	async createWriteStream(): Promise<NodeJS.WritableStream> {
-		const stream = new ProgressWriteStream(null, { fd: this.fd, autoClose: false });
+		const stream = new ProgressWriteStream(null, {
+			fd: this.fd,
+			autoClose: false,
+		});
 		stream.on('finish', stream.emit.bind(stream, 'done'));
 		return stream;
 	}
@@ -125,6 +150,8 @@ export namespace File {
 	export enum OpenFlags {
 		Read = fs.constants.O_RDONLY,
 		ReadWrite = fs.constants.O_RDWR | fs.constants.O_CREAT,
-		WriteDevice = fs.constants.O_RDWR | fs.constants.O_NONBLOCK | fs.constants.O_SYNC,
+		WriteDevice = fs.constants.O_RDWR |
+			fs.constants.O_NONBLOCK |
+			fs.constants.O_SYNC,
 	}
 }

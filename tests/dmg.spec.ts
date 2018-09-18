@@ -19,7 +19,7 @@ import 'mocha';
 import { join } from 'path';
 
 import { sourceDestination } from '../lib';
-import { DEFAULT_IMAGE_TESTS_TIMEOUT, testImage  } from './tester';
+import { DEFAULT_IMAGE_TESTS_TIMEOUT, testImage } from './tester';
 
 const DATA_PATH = join(__dirname, 'data');
 const IMAGES_PATH = join(DATA_PATH, 'images');
@@ -37,17 +37,17 @@ describe('dmg support', function() {
 		// 'lzfse',
 	];
 
-	compressionMethods.forEach((compressionMethod) => {
+	compressionMethods.forEach(compressionMethod => {
 		testImage(
 			compressionMethod,
 			join(DMG_PATH, `etcher-test-${compressionMethod}.dmg`),
 			join(IMAGES_PATH, 'etcher-test.img'),
-			false,  // alsoTestSparseStream  // TODO: test it once DmgSource.canCreateSparseReadStream() returns true
-			true,  // shouldHaveSize
-			true,   // shouldHaveCompressedSize
-			'mbr',  // partitionTableType
-			join(IMAGES_PATH, 'etcher-test-partitions.json'),  // partitionsFile
-			{},  // expectedMetadata
+			false, // alsoTestSparseStream  // TODO: test it once DmgSource.canCreateSparseReadStream() returns true
+			true, // shouldHaveSize
+			true, // shouldHaveCompressedSize
+			'mbr', // partitionTableType
+			join(IMAGES_PATH, 'etcher-test-partitions.json'), // partitionsFile
+			{}, // expectedMetadata
 			sourceDestination.DmgSource,
 		);
 	});
@@ -63,7 +63,9 @@ describe('dmg support', function() {
 			await dmgSource.open();
 		} catch (error) {
 			expect(error).to.be.an.instanceof(Error);
-			expect(error.message).to.equal('Invalid footer signature: Expected 0x6b6f6c79, saw 0x735179a8');
+			expect(error.message).to.equal(
+				'Invalid footer signature: Expected 0x6b6f6c79, saw 0x735179a8',
+			);
 			await source.close();
 			return;
 		}

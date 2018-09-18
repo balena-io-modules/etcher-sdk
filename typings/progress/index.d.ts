@@ -1,5 +1,4 @@
 declare module 'progress' {
-
 	class ProgressBar {
 		curr: number;
 		constructor(fmt: string, options: any);
@@ -8,5 +7,4 @@ declare module 'progress' {
 	}
 
 	export = ProgressBar;
-
 }

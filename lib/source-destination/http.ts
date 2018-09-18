@@ -39,7 +39,7 @@ export class Http extends SourceDestination {
 		try {
 			const response = await axios({ method: 'head', url: this.url });
 			this.size = parseInt(response.headers['content-length'], 10);
-			this.acceptsRange = (response.headers['accept-ranges'] === 'bytes');
+			this.acceptsRange = response.headers['accept-ranges'] === 'bytes';
 		} catch (error) {
 			this.error = error;
 		}
@@ -82,7 +82,12 @@ export class Http extends SourceDestination {
 		return range;
 	}
 
-	async read(buffer: Buffer, bufferOffset: number, length: number, sourceOffset: number): Promise<ReadResult> {
+	async read(
+		buffer: Buffer,
+		bufferOffset: number,
+		length: number,
+		sourceOffset: number,
+	): Promise<ReadResult> {
 		const response = await axios({
 			method: 'get',
 			url: this.url,
@@ -97,7 +102,11 @@ export class Http extends SourceDestination {
 		return { bytesRead, buffer };
 	}
 
-	async createReadStream(emitProgress = false, start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+	async createReadStream(
+		emitProgress = false,
+		start = 0,
+		end?: number,
+	): Promise<NodeJS.ReadableStream> {
 		const response = await axios({
 			method: 'get',
 			url: this.url,

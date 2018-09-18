@@ -18,10 +18,23 @@ import { Argv } from 'yargs';
 
 import { scanner, sourceDestination } from '../lib';
 
-import { pipeSourceToDestinationsWithProgressBar, readJsonFile, wrapper } from './utils';
+import {
+	pipeSourceToDestinationsWithProgressBar,
+	readJsonFile,
+	wrapper,
+} from './utils';
 
-const main = async ({ sourceImage, devicePathPrefix, verify, trim, config }: any) => {
-	const adapters = [ new scanner.adapters.BlockDeviceAdapter(() => false), new scanner.adapters.UsbbootDeviceAdapter() ];
+const main = async ({
+	sourceImage,
+	devicePathPrefix,
+	verify,
+	trim,
+	config,
+}: any) => {
+	const adapters = [
+		new scanner.adapters.BlockDeviceAdapter(() => false),
+		new scanner.adapters.UsbbootDeviceAdapter(),
+	];
 	const deviceScanner = new scanner.Scanner(adapters);
 	deviceScanner.on('error', console.error);
 	deviceScanner.start();
@@ -29,22 +42,31 @@ const main = async ({ sourceImage, devicePathPrefix, verify, trim, config }: any
 	await new Promise((resolve, reject) => {
 		deviceScanner.on('ready', resolve);
 	});
-	let source: sourceDestination.SourceDestination = new sourceDestination.File(sourceImage, sourceDestination.File.OpenFlags.Read);
-	source = await source.getInnerSource();  // getInnerSource will open the sources for you, no need to call open().
-	if (trim || (config !== undefined)) {
+	let source: sourceDestination.SourceDestination = new sourceDestination.File(
+		sourceImage,
+		sourceDestination.File.OpenFlags.Read,
+	);
+	source = await source.getInnerSource(); // getInnerSource will open the sources for you, no need to call open().
+	if (trim || config !== undefined) {
 		source = new sourceDestination.ConfiguredSource(
 			source,
 			trim,
 			true,
-			(config !== undefined) ? 'legacy' : undefined,
-			(config !== undefined) ? { config: await readJsonFile(config) } : undefined,
+			config !== undefined ? 'legacy' : undefined,
+			config !== undefined ? { config: await readJsonFile(config) } : undefined,
 		);
 	}
-	const destinationDrives = Array.from(deviceScanner.drives.values()).filter((drive) => {
-		return drive.devicePath && drive.devicePath.startsWith(devicePathPrefix);
-	});
+	const destinationDrives = Array.from(deviceScanner.drives.values()).filter(
+		drive => {
+			return drive.devicePath && drive.devicePath.startsWith(devicePathPrefix);
+		},
+	);
 	try {
-		await pipeSourceToDestinationsWithProgressBar(source, destinationDrives, verify);
+		await pipeSourceToDestinationsWithProgressBar(
+			source,
+			destinationDrives,
+			verify,
+		);
 	} finally {
 		deviceScanner.stop();
 	}
@@ -56,7 +78,9 @@ const argv = require('yargs').command(
 	'Write the sourceImage on all drives which link name in /dev/disk/by-path/ starts with devicePathPrefix.',
 	(yargs: Argv) => {
 		yargs.positional('sourceImage', { describe: 'Source image' });
-		yargs.positional('devicePathPrefix', { describe: 'Devices name prefix in /dev/disk/by-path/' });
+		yargs.positional('devicePathPrefix', {
+			describe: 'Devices name prefix in /dev/disk/by-path/',
+		});
 		yargs.option('verify', { default: false });
 		yargs.option('trim', { default: false });
 		yargs.describe('config', 'json configuration file');

@@ -16,10 +16,15 @@
 
 import { fromCallback } from 'bluebird';
 import BlockMap = require('blockmap');
-import { sortBy, values  } from 'lodash';
+import { sortBy, values } from 'lodash';
 import { posix } from 'path';
 import { PassThrough } from 'readable-stream';
-import { Entry, fromRandomAccessReader, RandomAccessReader, ZipFile } from 'yauzl';
+import {
+	Entry,
+	fromRandomAccessReader,
+	RandomAccessReader,
+	ZipFile,
+} from 'yauzl';
 import { ZipStreamEntry } from 'unzip-stream';
 
 import { getFileStreamFromZipStream } from '../zip';
@@ -40,7 +45,9 @@ export class StreamZipSource extends SourceSource {
 
 	private async getEntry(): Promise<ZipStreamEntry> {
 		if (this.entry === undefined) {
-			this.entry = await getFileStreamFromZipStream(await this.source.createReadStream(false));
+			this.entry = await getFileStreamFromZipStream(
+				await this.source.createReadStream(false),
+			);
 			// We need to reset the entry if any read happens
 			const originalRead = this.entry._read.bind(this.entry);
 			this.entry._read = (...args: any[]) => {
@@ -54,7 +61,11 @@ export class StreamZipSource extends SourceSource {
 		return this.entry;
 	}
 
-	async createReadStream(emitProgress = false, start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+	async createReadStream(
+		emitProgress = false,
+		start = 0,
+		end?: number,
+	): Promise<NodeJS.ReadableStream> {
 		if (start !== 0) {
 			throw new NotCapable();
 		}
@@ -87,12 +98,13 @@ class SourceRandomAccessReader extends RandomAccessReader {
 		// this.source.createReadStream end is inclusive
 		// Workaround this method not being async with a passthrough stream
 		const passthrough = new PassThrough();
-		this.source.createReadStream(false, start, end - 1)
-		.then((stream) => {
-			stream.on('error', passthrough.emit.bind(passthrough, 'error'));
-			stream.pipe(passthrough);
-		})
-		.catch(passthrough.emit.bind(passthrough, 'error'));
+		this.source
+			.createReadStream(false, start, end - 1)
+			.then(stream => {
+				stream.on('error', passthrough.emit.bind(passthrough, 'error'));
+				stream.pipe(passthrough);
+			})
+			.catch(passthrough.emit.bind(passthrough, 'error'));
 		return passthrough;
 	}
 }
@@ -121,12 +133,19 @@ export class RandomAccessZipSource extends SourceSource {
 		await this.source.open();
 		const sourceMetadata = await this.source.getMetadata();
 		const reader = new SourceRandomAccessReader(this.source);
-		this.zip = await fromCallback((callback: (err: any, result?: ZipFile) => void) => {
-			if (sourceMetadata.size === undefined) {
-				throw new NotCapable();
-			}
-			fromRandomAccessReader(reader, sourceMetadata.size, { autoClose: false }, callback);
-		});
+		this.zip = await fromCallback(
+			(callback: (err: any, result?: ZipFile) => void) => {
+				if (sourceMetadata.size === undefined) {
+					throw new NotCapable();
+				}
+				fromRandomAccessReader(
+					reader,
+					sourceMetadata.size,
+					{ autoClose: false },
+					callback,
+				);
+			},
+		);
 		this.zip.on('entry', (entry: Entry) => {
 			this.entries.push(entry);
 		});
@@ -151,17 +170,22 @@ export class RandomAccessZipSource extends SourceSource {
 	}
 
 	private async getImageEntry(): Promise<Entry> {
-		let entries = (await this.getEntries()).filter((entry) => {
+		let entries = (await this.getEntries()).filter(entry => {
 			const extension = posix.extname(entry.fileName);
-			return ((extension.length > 1) && SourceDestination.imageExtensions.includes(extension.slice(1)));
+			return (
+				extension.length > 1 &&
+				SourceDestination.imageExtensions.includes(extension.slice(1))
+			);
 		});
 		if (entries.length === 0) {
 			throw new Error('Could not find a disk image in this archive');
 		}
 		entries = sortBy(entries, 'uncompressedSize');
 		const entry = entries[entries.length - 1];
-		if ((entry.compressionMethod !== 0) && (entry.compressionMethod !== 8)) {
-			throw new Error(`unsupported compression method: ${entry.compressionMethod}`);
+		if (entry.compressionMethod !== 0 && entry.compressionMethod !== 8) {
+			throw new Error(
+				`unsupported compression method: ${entry.compressionMethod}`,
+			);
 		}
 		return entry;
 	}
@@ -181,13 +205,17 @@ export class RandomAccessZipSource extends SourceSource {
 		}
 	}
 
-	private async getStream(name: string): Promise<NodeJS.ReadableStream | undefined> {
+	private async getStream(
+		name: string,
+	): Promise<NodeJS.ReadableStream | undefined> {
 		const entry = await this.getEntryByName(name);
 		if (entry !== undefined) {
-			return await fromCallback((callback: (err: any, result?: NodeJS.ReadableStream) => void) => {
-				// yauzl does not support start / end for compressed entries
-				this.zip.openReadStream(entry, callback);
-			});
+			return await fromCallback(
+				(callback: (err: any, result?: NodeJS.ReadableStream) => void) => {
+					// yauzl does not support start / end for compressed entries
+					this.zip.openReadStream(entry, callback);
+				},
+			);
 		}
 	}
 
@@ -206,7 +234,11 @@ export class RandomAccessZipSource extends SourceSource {
 		}
 	}
 
-	async createReadStream(emitProgress = false, start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+	async createReadStream(
+		emitProgress = false,
+		start = 0,
+		end?: number,
+	): Promise<NodeJS.ReadableStream> {
 		if (start !== 0) {
 			throw new NotCapable();
 		}
@@ -223,13 +255,18 @@ export class RandomAccessZipSource extends SourceSource {
 		return stream;
 	}
 
-	async createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream> {
+	async createSparseReadStream(
+		generateChecksums = false,
+	): Promise<BlockMap.FilterStream> {
 		const metadata = await this.getMetadata();
 		if (metadata.blockMap === undefined) {
 			throw new NotCapable();
 		}
 		// Verifying and generating checksums makes no sense, so we only verify if generateChecksums is false.
-		const transform = BlockMap.createFilterStream(metadata.blockMap, { verify: !generateChecksums, generateChecksums });
+		const transform = BlockMap.createFilterStream(metadata.blockMap, {
+			verify: !generateChecksums,
+			generateChecksums,
+		});
 		const stream = await this.createReadStream(false);
 		stream.pipe(transform);
 		return transform;
@@ -243,11 +280,14 @@ export class RandomAccessZipSource extends SourceSource {
 		};
 		const prefix = posix.join(posix.dirname(entry.fileName), '.meta');
 		result.logo = await this.getString(posix.join(prefix, 'logo.svg'));
-		result.instructions = await this.getString(posix.join(prefix, 'instructions.markdown'));
+		result.instructions = await this.getString(
+			posix.join(prefix, 'instructions.markdown'),
+		);
 		let blockMap = await this.getString(posix.join(prefix, 'image.bmap'));
 		if (blockMap !== undefined) {
 			result.blockMap = BlockMap.parse(blockMap);
-			result.blockmappedSize = result.blockMap.blockSize * result.blockMap.mappedBlockCount;
+			result.blockmappedSize =
+				result.blockMap.blockSize * result.blockMap.mappedBlockCount;
 		}
 		let manifest: any;
 		try {
@@ -303,12 +343,18 @@ export class ZipSource extends SourceSource {
 		return await this.implementation.canCreateSparseReadStream();
 	}
 
-	async createReadStream(emitProgress = false, start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+	async createReadStream(
+		emitProgress = false,
+		start = 0,
+		end?: number,
+	): Promise<NodeJS.ReadableStream> {
 		await this.prepare();
 		return await this.implementation.createReadStream(emitProgress, start, end);
 	}
 
-	async createSparseReadStream(generateChecksums = false): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
+	async createSparseReadStream(
+		generateChecksums = false,
+	): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
 		await this.prepare();
 		return await this.implementation.createSparseReadStream(generateChecksums);
 	}
