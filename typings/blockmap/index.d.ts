@@ -1,5 +1,4 @@
 declare module 'blockmap' {
-
 	import { Readable, Transform } from 'stream';
 
 	class BlockMap {
@@ -40,9 +39,15 @@ declare module 'blockmap' {
 			destroy(): void;
 		}
 
-		export function createFilterStream(blockmap: BlockMap, options?: { verify?: boolean, generateChecksums?: boolean }): FilterStream;
+		export function createFilterStream(
+			blockmap: BlockMap,
+			options?: { verify?: boolean; generateChecksums?: boolean },
+		): FilterStream;
 
-		export function parse(data: string, options?: { verify: boolean }): BlockMap;
+		export function parse(
+			data: string,
+			options?: { verify: boolean },
+		): BlockMap;
 	}
 
 	export = BlockMap;

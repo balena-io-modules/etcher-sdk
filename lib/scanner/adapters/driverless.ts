@@ -57,7 +57,8 @@ class DriverlessDeviceAdapter_ extends Adapter {
 
 	private scan(): void {
 		const drives = this.listDrives();
-		if (this.running) {  // we may have been stopped while listing the drives.
+		if (this.running) {
+			// we may have been stopped while listing the drives.
 			const oldDevices = new Set<string>(this.drives.keys());
 			const newDevices = new Set<string>(drives.keys());
 			for (const removed of difference(oldDevices, newDevices)) {
@@ -83,4 +84,5 @@ class DriverlessDeviceAdapter_ extends Adapter {
 	}
 }
 
-export const DriverlessDeviceAdapter = (platform === 'win32') ? DriverlessDeviceAdapter_ : undefined;
+export const DriverlessDeviceAdapter =
+	platform === 'win32' ? DriverlessDeviceAdapter_ : undefined;

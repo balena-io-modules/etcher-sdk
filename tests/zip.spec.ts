@@ -20,7 +20,11 @@ import { join } from 'path';
 
 import { sourceDestination } from '../lib';
 import { SourceSource } from '../lib/source-destination/source-source';
-import { DEFAULT_IMAGE_TESTS_TIMEOUT, expectSourceSourceError, testImage  } from './tester';
+import {
+	DEFAULT_IMAGE_TESTS_TIMEOUT,
+	expectSourceSourceError,
+	testImage,
+} from './tester';
 
 const DATA_PATH = join(__dirname, 'data');
 const IMAGES_PATH = join(DATA_PATH, 'images');
@@ -54,22 +58,22 @@ describe('zip support', function() {
 		'given a zip directory containing only an image',
 		join(ZIP_PATH, 'zip-directory-etcher-test-only.zip'),
 		join(IMAGES_PATH, 'etcher-test.img'),
-		false,  // alsoTestSparseStream
-		true,  // shouldHaveSize
-		7791,   // shouldHaveCompressedSize
-		'mbr',  // partitionTableType
-		join(IMAGES_PATH, 'etcher-test-partitions.json'),  // partitionsFile
+		false, // alsoTestSparseStream
+		true, // shouldHaveSize
+		7791, // shouldHaveCompressedSize
+		'mbr', // partitionTableType
+		join(IMAGES_PATH, 'etcher-test-partitions.json'), // partitionsFile
 	);
 
 	testImage(
 		'given a zip directory containing an image and other misc files',
 		join(ZIP_PATH, 'zip-directory-etcher-test-and-misc.zip'),
 		join(IMAGES_PATH, 'etcher-test.img'),
-		false,  // alsoTestSparseStream
-		true,  // shouldHaveSize
-		7791,   // shouldHaveCompressedSize
-		'mbr',  // partitionTableType
-		join(IMAGES_PATH, 'etcher-test-partitions.json'),  // partitionsFile
+		false, // alsoTestSparseStream
+		true, // shouldHaveSize
+		7791, // shouldHaveCompressedSize
+		'mbr', // partitionTableType
+		join(IMAGES_PATH, 'etcher-test-partitions.json'), // partitionsFile
 	);
 
 	describe('compression method', function() {
@@ -83,16 +87,16 @@ describe('zip support', function() {
 			// 'lzma',
 		];
 
-		compressionMethods.forEach((compressionMethod) => {
+		compressionMethods.forEach(compressionMethod => {
 			testImage(
 				compressionMethod,
 				join(ZIP_PATH, `zip-${compressionMethod}.zip`),
 				join(IMAGES_PATH, 'etcher-test.img'),
-				false,  // alsoTestSparseStream
-				true,  // shouldHaveSize
-				8850,   // shouldHaveCompressedSize
-				'mbr',  // partitionTableType
-				join(IMAGES_PATH, 'etcher-test-partitions.json'),  // partitionsFile
+				false, // alsoTestSparseStream
+				true, // shouldHaveSize
+				8850, // shouldHaveCompressedSize
+				'mbr', // partitionTableType
+				join(IMAGES_PATH, 'etcher-test-partitions.json'), // partitionsFile
 			);
 		});
 	});

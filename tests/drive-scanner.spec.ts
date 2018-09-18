@@ -21,8 +21,12 @@ import { stub } from 'sinon';
 import { scanner } from '../lib';
 import * as blockDeviceAdapter from '../lib/scanner/adapters/block-device';
 
-async function createScanner(includeSystemDrives = false): Promise<scanner.Scanner> {
-	const adapters: scanner.adapters.Adapter[] = [ new scanner.adapters.BlockDeviceAdapter(() => includeSystemDrives) ];
+async function createScanner(
+	includeSystemDrives = false,
+): Promise<scanner.Scanner> {
+	const adapters: scanner.adapters.Adapter[] = [
+		new scanner.adapters.BlockDeviceAdapter(() => includeSystemDrives),
+	];
 	const driveScanner = new scanner.Scanner(adapters);
 	await new Promise((resolve, reject) => {
 		driveScanner.once('error', (error: Error) => {
@@ -142,9 +146,11 @@ describe('Scanner', function() {
 			});
 
 			it('should emit the non removable drives', function() {
-				// ignore because BlockDevice.drive is private
-				// @ts-ignore
-				expect(Array.from(this.driveScanner.drives).map((d) => d.drive)).to.deep.equal([
+				expect(
+					// ignore because BlockDevice.drive is private
+					// @ts-ignore
+					Array.from(this.driveScanner.drives).map(d => d.drive),
+				).to.deep.equal([
 					{
 						device: '/dev/sdb',
 						displayName: '/dev/sdb',
@@ -235,9 +241,11 @@ describe('Scanner', function() {
 			});
 
 			it('should emit the non removable drives', function() {
-				// ignore because BlockDevice.drive is private
-				// @ts-ignore
-				expect(Array.from(this.driveScanner.drives).map((d) => d.drive)).to.deep.equal([
+				expect(
+					// ignore because BlockDevice.drive is private
+					// @ts-ignore
+					Array.from(this.driveScanner.drives).map(d => d.drive),
+				).to.deep.equal([
 					{
 						device: '\\\\.\\PHYSICALDRIVE2',
 						displayName: '\\\\.\\PHYSICALDRIVE2',
@@ -292,8 +300,10 @@ describe('Scanner', function() {
 
 			it('should use the drive letter as the name', function() {
 				expect(this.driveScanner.drives.size).to.equal(1);
-				// @ts-ignore
-				expect(Array.from(this.driveScanner.drives)[0].drive.displayName).to.equal('F:');
+				expect(
+					// @ts-ignore
+					Array.from(this.driveScanner.drives)[0].drive.displayName,
+				).to.equal('F:');
 			});
 		});
 
@@ -331,8 +341,10 @@ describe('Scanner', function() {
 
 			it('should join all the mountpoints in `name`', function() {
 				expect(this.driveScanner.drives.size).to.equal(1);
-				// @ts-ignore
-				expect(Array.from(this.driveScanner.drives)[0].drive.displayName).to.equal('F:, G:, H:');
+				expect(
+					// @ts-ignore
+					Array.from(this.driveScanner.drives)[0].drive.displayName,
+				).to.equal('F:, G:, H:');
 			});
 		});
 	});

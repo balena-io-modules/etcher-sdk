@@ -16,7 +16,10 @@
 
 declare function require(moduleName: string): any;
 
-import { UsbbootDevice, UsbbootScanner as UsbbootScannerType } from 'node-raspberrypi-usbboot';
+import {
+	UsbbootDevice,
+	UsbbootScanner as UsbbootScannerType,
+} from 'node-raspberrypi-usbboot';
 
 import { UsbbootDrive } from '../../source-destination/usbboot';
 import { Adapter } from './adapter';

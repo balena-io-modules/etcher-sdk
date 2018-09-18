@@ -34,5 +34,4 @@ export interface Metadata {
 	url?: string;
 	version?: string;
 	isEtch?: boolean;
-
 }

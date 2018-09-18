@@ -10,12 +10,17 @@ import { isTransientError } from './errors';
 import { SparseWriteStream } from './sparse-write-stream';
 import { asCallback } from './utils';
 
-export class DestinationSparseWriteStream extends Writable implements SparseWriteStream {
+export class DestinationSparseWriteStream extends Writable
+	implements SparseWriteStream {
 	public position: number;
 	public bytesWritten = 0;
 	private _firstChunks: Chunk[] = [];
 
-	constructor(private destination: SourceDestination, public firstBytesToKeep = 0, private maxRetries = 5) {
+	constructor(
+		private destination: SourceDestination,
+		public firstBytesToKeep = 0,
+		private maxRetries = 5,
+	) {
 		super({ objectMode: true });
 	}
 
@@ -24,7 +29,12 @@ export class DestinationSparseWriteStream extends Writable implements SparseWrit
 		while (true) {
 			try {
 				this.position = chunk.position;
-				await this.destination.write(chunk.buffer, 0, chunk.length, chunk.position);
+				await this.destination.write(
+					chunk.buffer,
+					0,
+					chunk.length,
+					chunk.position,
+				);
 				if (!flushing) {
 					this.position += chunk.length;
 					this.bytesWritten += chunk.length;
@@ -55,18 +65,30 @@ export class DestinationSparseWriteStream extends Writable implements SparseWrit
 				this.bytesWritten += chunk.length;
 			} else {
 				const difference = this.firstBytesToKeep - chunk.position;
-				this._firstChunks.push({ position: chunk.position, buffer: chunk.buffer.slice(0, difference), length: difference });
+				this._firstChunks.push({
+					position: chunk.position,
+					buffer: chunk.buffer.slice(0, difference),
+					length: difference,
+				});
 				this.position = this.firstBytesToKeep;
 				this.bytesWritten += difference;
 				const remainingBuffer = chunk.buffer.slice(difference);
-				await this.writeChunk({ position: this.firstBytesToKeep, buffer: remainingBuffer, length: remainingBuffer.length });
+				await this.writeChunk({
+					position: this.firstBytesToKeep,
+					buffer: remainingBuffer,
+					length: remainingBuffer.length,
+				});
 			}
 		} else {
 			await this.writeChunk(chunk);
 		}
 	}
 
-	_write(chunk: Chunk, enc: string, callback: (error: Error | undefined) => void): void {
+	_write(
+		chunk: Chunk,
+		enc: string,
+		callback: (error: Error | undefined) => void,
+	): void {
 		asCallback(this.__write(chunk), callback);
 	}
 
@@ -89,5 +111,9 @@ export class DestinationSparseWriteStream extends Writable implements SparseWrit
 	}
 }
 
-export const ProgressDestinationSparseWriteStream = makeClassEmitProgressEvents(DestinationSparseWriteStream, 'bytesWritten', 'position', PROGRESS_EMISSION_INTERVAL);
-
+export const ProgressDestinationSparseWriteStream = makeClassEmitProgressEvents(
+	DestinationSparseWriteStream,
+	'bytesWritten',
+	'position',
+	PROGRESS_EMISSION_INTERVAL,
+);

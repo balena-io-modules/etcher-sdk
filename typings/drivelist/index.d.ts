@@ -1,7 +1,7 @@
 declare module 'drivelist' {
 	export interface Drive {
 		description: string;
-		icon: string;  // TODO: this is only monkey patched by blockdevice.ts
+		icon: string; // TODO: this is only monkey patched by blockdevice.ts
 		isSystem: boolean;
 		busType: string;
 		error: string | null;

@@ -17,7 +17,7 @@
 import 'mocha';
 import { join } from 'path';
 
-import { DEFAULT_IMAGE_TESTS_TIMEOUT, testImage  } from './tester';
+import { DEFAULT_IMAGE_TESTS_TIMEOUT, testImage } from './tester';
 
 const DATA_PATH = join(__dirname, 'data');
 const IMAGES_PATH = join(DATA_PATH, 'images');
@@ -34,7 +34,7 @@ describe('bzip2 support', function() {
 		false,
 		true,
 		'mbr',
-		join(IMAGES_PATH, 'etcher-test-partitions.json'),  // partitionsFile
+		join(IMAGES_PATH, 'etcher-test-partitions.json'), // partitionsFile
 	);
 
 	testImage(
@@ -45,7 +45,6 @@ describe('bzip2 support', function() {
 		false,
 		true,
 		'mbr',
-		join(IMAGES_PATH, 'etcher-test-partitions.json'),  // partitionsFile
+		join(IMAGES_PATH, 'etcher-test-partitions.json'), // partitionsFile
 	);
-
 });

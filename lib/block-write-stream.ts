@@ -18,7 +18,11 @@ import { delay } from 'bluebird';
 import * as _debug from 'debug';
 import { Writable } from 'readable-stream';
 
-import { CHUNK_SIZE, PROGRESS_EMISSION_INTERVAL, RETRY_BASE_TIMEOUT } from './constants';
+import {
+	CHUNK_SIZE,
+	PROGRESS_EMISSION_INTERVAL,
+	RETRY_BASE_TIMEOUT,
+} from './constants';
 import { isTransientError } from './errors';
 import { asCallback } from './utils';
 import { makeClassEmitProgressEvents } from './source-destination/progress';
@@ -32,18 +36,36 @@ export class BlockWriteStream extends Writable {
 	private _buffers: Buffer[] = [];
 	private _bytes = 0;
 
-	constructor(private destination: BlockDevice, public firstBytesToKeep = 0, private maxRetries = 5) {
+	constructor(
+		private destination: BlockDevice,
+		public firstBytesToKeep = 0,
+		private maxRetries = 5,
+	) {
 		super({ objectMode: true, highWaterMark: 1 });
-		if ((firstBytesToKeep !== 0) && (firstBytesToKeep % this.destination.blockSize !== 0)) {
-			throw new Error('firstBytesToKeep must be a multiple of the destination blockSize');
+		if (
+			firstBytesToKeep !== 0 &&
+			firstBytesToKeep % this.destination.blockSize !== 0
+		) {
+			throw new Error(
+				'firstBytesToKeep must be a multiple of the destination blockSize',
+			);
 		}
 	}
 
-	private async writeChunk(buffer: Buffer, position: number, flushing = false): Promise<void> {
+	private async writeChunk(
+		buffer: Buffer,
+		position: number,
+		flushing = false,
+	): Promise<void> {
 		let retries = 0;
 		while (true) {
 			try {
-				const { bytesWritten } = await this.destination.write(buffer, 0, buffer.length, position);
+				const { bytesWritten } = await this.destination.write(
+					buffer,
+					0,
+					buffer.length,
+					position,
+				);
 				if (!flushing) {
 					this.bytesWritten += bytesWritten;
 				}
@@ -65,7 +87,9 @@ export class BlockWriteStream extends Writable {
 	private async writeBuffers(): Promise<void> {
 		if (this._bytes >= CHUNK_SIZE) {
 			let block = Buffer.concat(this._buffers);
-			const length = Math.floor(block.length / this.destination.blockSize) * this.destination.blockSize;
+			const length =
+				Math.floor(block.length / this.destination.blockSize) *
+				this.destination.blockSize;
 
 			this._buffers.length = 0;
 			this._bytes = 0;
@@ -98,7 +122,11 @@ export class BlockWriteStream extends Writable {
 				this.bytesWritten += difference;
 				await this.writeBuffers();
 			}
-		} else if ((this._bytes === 0) && (buffer.length >= CHUNK_SIZE) && (buffer.length % this.destination.blockSize === 0)) {
+		} else if (
+			this._bytes === 0 &&
+			buffer.length >= CHUNK_SIZE &&
+			buffer.length % this.destination.blockSize === 0
+		) {
 			await this.writeChunk(buffer, this.bytesWritten);
 		} else {
 			this._buffers.push(buffer);
@@ -107,7 +135,11 @@ export class BlockWriteStream extends Writable {
 		}
 	}
 
-	_write(buffer: Buffer, encoding: string, callback: (error: Error | undefined) => void) {
+	_write(
+		buffer: Buffer,
+		encoding: string,
+		callback: (error: Error | undefined) => void,
+	) {
 		asCallback(this.__write(buffer), callback);
 	}
 
@@ -115,7 +147,10 @@ export class BlockWriteStream extends Writable {
 		debug('_final');
 		try {
 			if (this._bytes) {
-				await this.writeChunk(Buffer.concat(this._buffers, this._bytes), this.bytesWritten);
+				await this.writeChunk(
+					Buffer.concat(this._buffers, this._bytes),
+					this.bytesWritten,
+				);
 			}
 
 			let position = 0;
@@ -138,4 +173,9 @@ export class BlockWriteStream extends Writable {
 	}
 }
 
-export const ProgressBlockWriteStream = makeClassEmitProgressEvents(BlockWriteStream, 'bytesWritten', 'bytesWritten', PROGRESS_EMISSION_INTERVAL);
+export const ProgressBlockWriteStream = makeClassEmitProgressEvents(
+	BlockWriteStream,
+	'bytesWritten',
+	'bytesWritten',
+	PROGRESS_EMISSION_INTERVAL,
+);

@@ -49,7 +49,11 @@ export class DmgSource extends SourceSource {
 		return false;
 	}
 
-	async createReadStream(emitProgress = false, start = 0, end?: number): Promise<NodeJS.ReadableStream> {
+	async createReadStream(
+		emitProgress = false,
+		start = 0,
+		end?: number,
+	): Promise<NodeJS.ReadableStream> {
 		if (start !== 0) {
 			throw new NotCapable();
 		}
@@ -61,18 +65,25 @@ export class DmgSource extends SourceSource {
 		return stream;
 	}
 
-	async createSparseReadStream(generateChecksums: boolean): Promise<FilterStream> {
+	async createSparseReadStream(
+		generateChecksums: boolean,
+	): Promise<FilterStream> {
 		return this.image.createSparseReadStream();
 	}
 
 	getMappedBlocksSize = () => {
 		return _(this.image.resourceFork.blkx)
-		.map('map.blocks')
-		.flatten()
-		.filter((blk: any) => ([ BLOCK.RAW, BLOCK.UDCO, BLOCK.UDZO, BLOCK.UDBZ, BLOCK.LZFSE ].indexOf(blk.type) !== -1))
-		.map((blk) => blk.sectorCount * SECTOR_SIZE)
-		.sum();
-	}
+			.map('map.blocks')
+			.flatten()
+			.filter(
+				(blk: any) =>
+					[BLOCK.RAW, BLOCK.UDCO, BLOCK.UDZO, BLOCK.UDBZ, BLOCK.LZFSE].indexOf(
+						blk.type,
+					) !== -1,
+			)
+			.map(blk => blk.sectorCount * SECTOR_SIZE)
+			.sum();
+	};
 
 	async _getMetadata(): Promise<Metadata> {
 		const compressedSize = (await this.source.getMetadata()).size;

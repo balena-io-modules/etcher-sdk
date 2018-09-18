@@ -10,8 +10,9 @@
     "Alexis Svinartchouk <alexis@resin.io>"
   ],
   "scripts": {
-    "test": "mocha -r ts-node/register tests/**/*.spec.ts",
-    "lint": "resin-lint --typescript lib examples tests",
+    "test": "npm run lint && mocha -r ts-node/register tests/**/*.spec.ts",
+    "prettier": "prettier --config ./node_modules/resin-lint/config/.prettierrc --write \"lib/**/*.ts\" \"typings/**/*.ts\" \"examples/**/*.ts\" \"tests/**/*.ts\"",
+    "lint": "resin-lint --typescript lib typings examples tests",
     "build": "rimraf build && tsc",
     "prepublish": "npm run build"
   },
@@ -84,7 +85,7 @@
     "cli-spinner": "^0.2.8",
     "mocha": "^5.2.0",
     "progress": "^2.0.0",
-    "resin-lint": "^1.5.7",
+    "resin-lint": "^2.0.1",
     "rimraf": "^2.6.2",
     "sinon": "^6.1.3",
     "ts-node": "^7.0.1",

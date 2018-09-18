@@ -50,7 +50,10 @@ export class Scanner extends EventEmitter {
 		this.emit('detach', drive);
 	}
 
-	getBy(field: 'raw' | 'device' | 'devicePath', value: string): AdapterSourceDestination | undefined {
+	getBy(
+		field: 'raw' | 'device' | 'devicePath',
+		value: string,
+	): AdapterSourceDestination | undefined {
 		for (const drive of this.drives) {
 			if (drive[field] === value) {
 				return drive;

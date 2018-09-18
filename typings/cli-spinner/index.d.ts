@@ -1,5 +1,4 @@
 declare module 'cli-spinner' {
-
 	export class Spinner {
 		constructor(title: string);
 		start(): void;
@@ -7,5 +6,4 @@ declare module 'cli-spinner' {
 		setSpinnerDelay(ms: number): void;
 		stop(): void;
 	}
-
 }

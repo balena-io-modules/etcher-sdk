@@ -25,7 +25,10 @@ import { fs, multiWrite, sourceDestination, utils } from '../lib';
 const SPINNER_DELAY = 60;
 
 export async function readJsonFile(path: string): Promise<any> {
-	return JSON.parse((await fs.readFile(path, { encoding: 'utf8', flag: 'r' })) as string);
+	return JSON.parse((await fs.readFile(path, {
+		encoding: 'utf8',
+		flag: 'r',
+	})) as string);
 }
 
 export async function wrapper(main: (args: any) => Promise<void>, args: any) {
@@ -36,14 +39,20 @@ export async function wrapper(main: (args: any) => Promise<void>, args: any) {
 	}
 }
 
-type UpdateProgressBarFunction = (progress: multiWrite.MultiDestinationProgress) => void;
+type UpdateProgressBarFunction = (
+	progress: multiWrite.MultiDestinationProgress,
+) => void;
 
 function bytesToMebibytes(bytes: number): string {
 	return (bytes / 1024 / 1024).toFixed(2);
 }
 
-function progressBarLabel(progress: multiWrite.MultiDestinationProgress): string {
-	const sourceProgress = !progress.sparse && (progress.size === undefined) || ((progress.size !== undefined) && (progress.bytes > progress.size));
+function progressBarLabel(
+	progress: multiWrite.MultiDestinationProgress,
+): string {
+	const sourceProgress =
+		(!progress.sparse && progress.size === undefined) ||
+		(progress.size !== undefined && progress.bytes > progress.size);
 	let size: number | undefined;
 	let bytes: number | undefined;
 	if (sourceProgress) {
@@ -63,35 +72,49 @@ function progressBarLabel(progress: multiWrite.MultiDestinationProgress): string
 		`${bytesToMebibytes(progress.speed)} MiB/s`,
 		`${Math.round(progress.eta || 0)} seconds left`,
 	].join(' ; ');
-
 }
 
-function createProgressBar(step: string, hasTotal: boolean): [ ProgressBar | Spinner, UpdateProgressBarFunction ] {
+function createProgressBar(
+	step: string,
+	hasTotal: boolean,
+): [ProgressBar | Spinner, UpdateProgressBarFunction] {
 	if (hasTotal) {
 		const fmt = `${step} [:bar] :label`;
 		const progressBar = new ProgressBar(fmt, { total: 100, width: 40 });
 		function update(progress: multiWrite.MultiDestinationProgress) {
-			const percentage = (progress.percentage === undefined) ? progressBar.curr : progress.percentage;
+			const percentage =
+				progress.percentage === undefined
+					? progressBar.curr
+					: progress.percentage;
 			const delta = Math.floor(percentage) - progressBar.curr;
 			progressBar.tick(delta, { label: progressBarLabel(progress) });
 		}
-		return [ progressBar, update ];
+		return [progressBar, update];
 	} else {
 		const title = `${step}: size not available`;
 		const spinner = new Spinner(title);
 		spinner.setSpinnerDelay(SPINNER_DELAY);
 		spinner.start();
 		function update(progress: multiWrite.MultiDestinationProgress) {
-			spinner.setSpinnerTitle(`${title}, ${progress.bytes} bytes, ${bytesToMebibytes(progress.speed)} MiB/s`);
+			spinner.setSpinnerTitle(
+				`${title}, ${progress.bytes} bytes, ${bytesToMebibytes(
+					progress.speed,
+				)} MiB/s`,
+			);
 		}
-		return [ spinner, update ];
+		return [spinner, update];
 	}
 }
 
-function multiDestinationProgressBytes(progress: multiWrite.MultiDestinationProgress): number {
+function multiDestinationProgressBytes(
+	progress: multiWrite.MultiDestinationProgress,
+): number {
 	if (progress.sparse) {
 		return progress.bytes;
-	} else if ((progress.size === undefined) && (progress.rootStreamPosition !== undefined)) {
+	} else if (
+		progress.size === undefined &&
+		progress.rootStreamPosition !== undefined
+	) {
 		return progress.rootStreamPosition;
 	} else {
 		return progress.position;
@@ -103,7 +126,10 @@ export async function pipeSourceToDestinationsWithProgressBar(
 	destinations: sourceDestination.SourceDestination[],
 	verify = false,
 ): Promise<multiWrite.PipeSourceToDestinationsResult> {
-	function onFail(destination: sourceDestination.SourceDestination, error: Error) {
+	function onFail(
+		destination: sourceDestination.SourceDestination,
+		error: Error,
+	) {
 		console.error(`Error "${error}" on ${destination}`);
 	}
 	let step: multiWrite.WriteStep;
@@ -118,8 +144,11 @@ export async function pipeSourceToDestinationsWithProgressBar(
 				}
 			}
 			step = progress.type;
-			const hasTotal = ((progress.blockmappedSize !== undefined) || (progress.size !== undefined) || (progress.compressedSize !== undefined));
-			[ progressBar, update ] = createProgressBar(progress.type, hasTotal);
+			const hasTotal =
+				progress.blockmappedSize !== undefined ||
+				progress.size !== undefined ||
+				progress.compressedSize !== undefined;
+			[progressBar, update] = createProgressBar(progress.type, hasTotal);
 		}
 		update(progress);
 	}

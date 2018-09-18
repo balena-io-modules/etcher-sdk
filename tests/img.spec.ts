@@ -19,7 +19,11 @@ import 'mocha';
 import { join } from 'path';
 import { createGunzip } from 'zlib';
 
-import { DEFAULT_IMAGE_TESTS_TIMEOUT, testImage, testImageNoIt  } from './tester';
+import {
+	DEFAULT_IMAGE_TESTS_TIMEOUT,
+	testImage,
+	testImageNoIt,
+} from './tester';
 
 import { sourceDestination } from '../lib';
 import { unlink } from '../lib/fs';
@@ -35,7 +39,9 @@ describe('img', function() {
 	before(async function() {
 		gunzippedFilePath = (await tmpFile(false)).path;
 		await new Promise((resolve, reject) => {
-			const source = createReadStream(join(IMAGES_PATH, 'etcher-gpt-test.img.gz'));
+			const source = createReadStream(
+				join(IMAGES_PATH, 'etcher-gpt-test.img.gz'),
+			);
 			const gunzip = createGunzip();
 			const destination = createWriteStream(gunzippedFilePath as string);
 			source.pipe(gunzip).pipe(destination);
@@ -54,11 +60,11 @@ describe('img', function() {
 		'mbr',
 		join(IMAGES_PATH, 'etcher-test.img'),
 		join(IMAGES_PATH, 'etcher-test.img'),
-		false,  // alsoTestSparseStream
-		true,  // shouldHaveSize
-		false,   // shouldHaveCompressedSize
-		'mbr',  // partitionTableType
-		join(IMAGES_PATH, 'etcher-test-partitions.json'),  // partitionsFile
+		false, // alsoTestSparseStream
+		true, // shouldHaveSize
+		false, // shouldHaveCompressedSize
+		'mbr', // partitionTableType
+		join(IMAGES_PATH, 'etcher-test-partitions.json'), // partitionsFile
 	);
 
 	it('gpt', async function() {
@@ -66,12 +72,12 @@ describe('img', function() {
 			join(IMAGES_PATH, 'etcher-gpt-test.img.gz'),
 			// @ts-ignore
 			gunzippedFilePath,
-			false,  // alsoTestSparseStream
-			true,  // shouldHaveSize
-			false,   // shouldHaveCompressedSize
-			sourceDestination.File,  // sourceClass (File or BlockDevice)
-			'gpt',  // partitionTableType
-			join(IMAGES_PATH, 'etcher-gpt-test-partitions.json'),  // partitionsFile
+			false, // alsoTestSparseStream
+			true, // shouldHaveSize
+			false, // shouldHaveCompressedSize
+			sourceDestination.File, // sourceClass (File or BlockDevice)
+			'gpt', // partitionTableType
+			join(IMAGES_PATH, 'etcher-gpt-test-partitions.json'), // partitionsFile
 		);
 	});
 });

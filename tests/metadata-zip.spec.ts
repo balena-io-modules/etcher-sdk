@@ -21,7 +21,7 @@ import { outdent } from 'outdent';
 import { join } from 'path';
 
 import { sourceDestination } from '../lib';
-import { expectGetInnerSourceError, testImage  } from './tester';
+import { expectGetInnerSourceError, testImage } from './tester';
 
 const DATA_PATH = join(__dirname, 'data');
 const IMAGES_PATH = join(DATA_PATH, 'images');
@@ -36,16 +36,15 @@ describe('metadata zip', function() {
 		'Invalid archive manifest.json',
 	);
 
-
 	testImage(
 		'given an archive with a `manifest.json`',
 		join(ZIP_PATH, 'etcher-test-with-manifest.zip'),
 		join(IMAGES_PATH, 'etcher-test.img'),
-		false,  // alsoTestSparseStream
-		true,  // shouldHaveSize
-		7791,   // shouldHaveCompressedSize
-		'mbr',  // partitionTableType
-		join(IMAGES_PATH, 'etcher-test-partitions.json'),  // partitionsFile
+		false, // alsoTestSparseStream
+		true, // shouldHaveSize
+		7791, // shouldHaveCompressedSize
+		'mbr', // partitionTableType
+		join(IMAGES_PATH, 'etcher-test-partitions.json'), // partitionsFile
 		{
 			name: 'Etcher Test',
 			version: '1.0.0',
@@ -63,11 +62,11 @@ describe('metadata zip', function() {
 		'given an archive with a `logo.svg`',
 		join(ZIP_PATH, 'etcher-test-with-logo.zip'),
 		join(IMAGES_PATH, 'etcher-test.img'),
-		false,  // alsoTestSparseStream
-		true,  // shouldHaveSize
-		7791,   // shouldHaveCompressedSize
-		'mbr',  // partitionTableType
-		join(IMAGES_PATH, 'etcher-test-partitions.json'),  // partitionsFile
+		false, // alsoTestSparseStream
+		true, // shouldHaveSize
+		7791, // shouldHaveCompressedSize
+		'mbr', // partitionTableType
+		join(IMAGES_PATH, 'etcher-test-partitions.json'), // partitionsFile
 		{
 			logo: outdent`
 				<svg xmlns="http://www.w3.org/2000/svg">
@@ -98,11 +97,11 @@ describe('metadata zip', function() {
 		'given an archive with a bmap file',
 		join(ZIP_PATH, 'etcher-test-with-bmap.zip'),
 		join(IMAGES_PATH, 'etcher-test.img'),
-		true,  // alsoTestSparseStream
-		true,  // shouldHaveSize
-		7791,   // shouldHaveCompressedSize
-		'mbr',  // partitionTableType
-		join(IMAGES_PATH, 'etcher-test-partitions.json'),  // partitionsFile
+		true, // alsoTestSparseStream
+		true, // shouldHaveSize
+		7791, // shouldHaveCompressedSize
+		'mbr', // partitionTableType
+		join(IMAGES_PATH, 'etcher-test-partitions.json'), // partitionsFile
 		{ blockMap },
 	);
 
@@ -110,11 +109,11 @@ describe('metadata zip', function() {
 		'given an archive with instructions',
 		join(ZIP_PATH, 'etcher-test-with-instructions.zip'),
 		join(IMAGES_PATH, 'etcher-test.img'),
-		false,  // alsoTestSparseStream
-		true,  // shouldHaveSize
-		7791,   // shouldHaveCompressedSize
-		'mbr',  // partitionTableType
-		join(IMAGES_PATH, 'etcher-test-partitions.json'),  // partitionsFile
+		false, // alsoTestSparseStream
+		true, // shouldHaveSize
+		7791, // shouldHaveCompressedSize
+		'mbr', // partitionTableType
+		join(IMAGES_PATH, 'etcher-test-partitions.json'), // partitionsFile
 		{
 			instructions: outdent`
 				# Example Next Steps

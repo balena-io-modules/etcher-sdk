@@ -22,15 +22,17 @@ import speedometer = require('speedometer');
 
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
 
-export type Constructor<T> = new(...args: any[]) => T;
+export type Constructor<T> = new (...args: any[]) => T;
 
 export interface ProgressEvent {
-	position: number;    // Position in file
-	bytes: number;       // Number of bytes read
-	speed: number;       // Speed in bytes per second (based on bytes, not position)
+	position: number; // Position in file
+	bytes: number; // Number of bytes read
+	speed: number; // Speed in bytes per second (based on bytes, not position)
 }
 
-export function makeClassEmitProgressEvents<T extends Constructor<EventEmitter>>(Cls: T, attribute: string, positionAttribute: string, interval: number) {
+export function makeClassEmitProgressEvents<
+	T extends Constructor<EventEmitter>
+>(Cls: T, attribute: string, positionAttribute: string, interval: number) {
 	// This returns a class that extends Cls, tracks for `attribute` updates and emits `progress` events every `interval` based on it.
 	//  * the type of `attribute` must be a number;
 	//  * the position attribute of emitted events will be copied from the `positionAttribute` of the instances.
@@ -38,7 +40,7 @@ export function makeClassEmitProgressEvents<T extends Constructor<EventEmitter>>
 		_attributeValue: number;
 		_attributeDelta = 0;
 
-		constructor (...args: any[]) {
+		constructor(...args: any[]) {
 			super(...args);
 
 			const meter = speedometer();
@@ -90,7 +92,11 @@ export class CountingWritable extends Writable {
 	bytesWritten = 0;
 	position: number | undefined;
 
-	_write(chunk: Buffer | Chunk, enc: string, callback: (err?: Error | undefined) => void): void {
+	_write(
+		chunk: Buffer | Chunk,
+		enc: string,
+		callback: (err?: Error | undefined) => void,
+	): void {
 		if (Buffer.isBuffer(chunk)) {
 			this.bytesWritten = this.position = this.bytesWritten + chunk.length;
 		} else {
@@ -101,4 +107,9 @@ export class CountingWritable extends Writable {
 	}
 }
 
-export const ProgressWritable = makeClassEmitProgressEvents(CountingWritable, 'bytesWritten', 'position', PROGRESS_EMISSION_INTERVAL);
+export const ProgressWritable = makeClassEmitProgressEvents(
+	CountingWritable,
+	'bytesWritten',
+	'position',
+	PROGRESS_EMISSION_INTERVAL,
+);

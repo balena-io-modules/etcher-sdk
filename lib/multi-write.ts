@@ -17,9 +17,18 @@
 import { BlockReadStream } from './block-read-stream';
 import { BlockTransformStream } from './block-transform-stream';
 import { CHUNK_SIZE } from './constants';
-import { createHasher, CountingHashStream, ProgressHashStream, SourceDestination, Verifier } from './source-destination/source-destination';
+import {
+	createHasher,
+	CountingHashStream,
+	ProgressHashStream,
+	SourceDestination,
+	Verifier,
+} from './source-destination/source-destination';
 import { Metadata } from './source-destination/metadata';
-import { MultiDestination, MultiDestinationError } from './source-destination/multi-destination';
+import {
+	MultiDestination,
+	MultiDestinationError,
+} from './source-destination/multi-destination';
 import { ProgressEvent } from './source-destination/progress';
 import { getRootStream } from './source-destination/compressed-source';
 
@@ -49,7 +58,10 @@ export interface MultiDestinationProgress extends MultiDestinationState {
 	eta?: number;
 }
 
-export type OnFailFunction = (destination: SourceDestination, error: Error) => void;
+export type OnFailFunction = (
+	destination: SourceDestination,
+	error: Error,
+) => void;
 
 export type OnProgressFunction = (progress: MultiDestinationProgress) => void;
 
@@ -58,8 +70,12 @@ export interface PipeSourceToDestinationsResult {
 	bytesWritten: number;
 }
 
-function getEta(current: number, total: number, speed: number): number | undefined {
-	return (speed === 0) ? undefined : (total - current) / speed;
+function getEta(
+	current: number,
+	total: number,
+	speed: number,
+): number | undefined {
+	return speed === 0 ? undefined : (total - current) / speed;
 }
 
 // This function is the most common use case of the SDK.
@@ -85,11 +101,13 @@ export async function pipeSourceToDestinations(
 	};
 
 	destination.on('fail', _onFail);
-	await Promise.all([ source.open(), destination.open() ]);
+	await Promise.all([source.open(), destination.open()]);
 
-	const [ sourceMetadata, sparseSource, sparseDestination ] = await Promise.all(
-		[ source.getMetadata(), source.canCreateSparseReadStream(), destination.canCreateSparseWriteStream() ],
-	);
+	const [sourceMetadata, sparseSource, sparseDestination] = await Promise.all([
+		source.getMetadata(),
+		source.canCreateSparseReadStream(),
+		destination.canCreateSparseWriteStream(),
+	]);
 	const sparse = sparseSource && sparseDestination;
 
 	state.sparse = sparse;
@@ -126,7 +144,7 @@ export async function pipeSourceToDestinations(
 	}
 
 	function _onProgress(progress: ProgressEvent) {
-		if ((state.size === undefined) && (sourceMetadata.size !== undefined)) {
+		if (state.size === undefined && sourceMetadata.size !== undefined) {
 			state.size = sourceMetadata.size;
 		}
 		const totalSpeed = progress.speed * state.active;
@@ -140,12 +158,24 @@ export async function pipeSourceToDestinations(
 			size = state.size;
 			bytesWritten = progress.position;
 		}
-		if ((size !== undefined) && (bytesWritten !== undefined) && (bytesWritten <= size)) {
-			percentage = bytesWritten / size * 100;
+		if (
+			size !== undefined &&
+			bytesWritten !== undefined &&
+			bytesWritten <= size
+		) {
+			percentage = (bytesWritten / size) * 100;
 			eta = getEta(bytesWritten, size, progress.speed);
-		} else if ((state.rootStreamSpeed !== undefined) && (state.rootStreamPosition !== undefined) && (state.compressedSize !== undefined)) {
-			percentage = state.rootStreamPosition / state.compressedSize * 100;
-			eta = getEta(state.rootStreamPosition, state.compressedSize, state.rootStreamSpeed);
+		} else if (
+			state.rootStreamSpeed !== undefined &&
+			state.rootStreamPosition !== undefined &&
+			state.compressedSize !== undefined
+		) {
+			percentage = (state.rootStreamPosition / state.compressedSize) * 100;
+			eta = getEta(
+				state.rootStreamPosition,
+				state.compressedSize,
+				state.rootStreamSpeed,
+			);
 		}
 		const result: MultiDestinationProgress = Object.assign(
 			{},
@@ -157,12 +187,30 @@ export async function pipeSourceToDestinations(
 	}
 
 	if (sparse) {
-		await pipeSparseSourceToDestination(source, sourceMetadata, destination, verify, updateState, _onFail, _onProgress, _onRootStreamProgress);
+		await pipeSparseSourceToDestination(
+			source,
+			sourceMetadata,
+			destination,
+			verify,
+			updateState,
+			_onFail,
+			_onProgress,
+			_onRootStreamProgress,
+		);
 	} else {
-		await pipeRegularSourceToDestination(source, sourceMetadata, destination, verify, updateState, _onFail, _onProgress, _onRootStreamProgress);
+		await pipeRegularSourceToDestination(
+			source,
+			sourceMetadata,
+			destination,
+			verify,
+			updateState,
+			_onFail,
+			_onProgress,
+			_onRootStreamProgress,
+		);
 	}
 	updateState('finished');
-	await Promise.all([ source.close(), destination.close() ]);
+	await Promise.all([source.close(), destination.close()]);
 	return { failures, bytesWritten };
 }
 
@@ -177,50 +225,68 @@ async function pipeRegularSourceToDestination(
 	_onRootStreamProgress: (progress: ProgressEvent) => void,
 ): Promise<void> {
 	let lastPosition = 0;
-	const emitSourceProgress = (sourceMetadata.size === undefined);
-	const [ sourceStream, destinationStream ] = await Promise.all([ source.createReadStream(emitSourceProgress), destination.createWriteStream() ]);
+	const emitSourceProgress = sourceMetadata.size === undefined;
+	const [sourceStream, destinationStream] = await Promise.all([
+		source.createReadStream(emitSourceProgress),
+		destination.createWriteStream(),
+	]);
 	getRootStream(sourceStream).on('progress', (progress: ProgressEvent) => {
 		_onRootStreamProgress(progress);
 	});
-	const checksum = await new Promise((resolve: (checksum: string | undefined) => void, reject: (error: Error) => void) => {
-		let checksum: string;
-		let done = false;
-		let hasher: CountingHashStream;
-		function maybeDone(maybeChecksum?: string) {
-			if (maybeChecksum !== undefined) {
-				checksum = maybeChecksum;
-			} else {
-				done = true;
-			}
-			if (done && (!verify || (destination.activeDestinations.size === 0) || (checksum !== undefined))) {
-				if (hasher !== undefined) {
-					sourceStream.unpipe(hasher);
-					hasher.end();
+	const checksum = await new Promise(
+		(
+			resolve: (checksum: string | undefined) => void,
+			reject: (error: Error) => void,
+		) => {
+			let checksum: string;
+			let done = false;
+			let hasher: CountingHashStream;
+			function maybeDone(maybeChecksum?: string) {
+				if (maybeChecksum !== undefined) {
+					checksum = maybeChecksum;
+				} else {
+					done = true;
 				}
-				resolve(checksum);
+				if (
+					done &&
+					(!verify ||
+						destination.activeDestinations.size === 0 ||
+						checksum !== undefined)
+				) {
+					if (hasher !== undefined) {
+						sourceStream.unpipe(hasher);
+						hasher.end();
+					}
+					resolve(checksum);
+				}
 			}
-		}
-		sourceStream.once('error', reject);
-		destinationStream.on('fail', onFail);  // This is emitted by MultiDestination when one of its destinations fails
-		destinationStream.once('error', reject);
-		if (verify) {
-			hasher = createHasher();
-			hasher.once('checksum', maybeDone);
-			sourceStream.pipe(hasher);
-		}
-		destinationStream.once('done', maybeDone);
-		destinationStream.on('progress', (progress: ProgressEvent) => {
-			lastPosition = progress.position;
-			onProgress(progress);
-		});
-		if (!(sourceStream instanceof BlockReadStream) && (destination.destinations.size > 1)) {
-			// Chunk the input stream in a transform if it's not a block read stream, avoiding
-			// chunking it in each destination stream.
-			sourceStream.pipe(new BlockTransformStream(CHUNK_SIZE)).pipe(destinationStream);
-		} else {
-			sourceStream.pipe(destinationStream);
-		}
-	});
+			sourceStream.once('error', reject);
+			destinationStream.on('fail', onFail); // This is emitted by MultiDestination when one of its destinations fails
+			destinationStream.once('error', reject);
+			if (verify) {
+				hasher = createHasher();
+				hasher.once('checksum', maybeDone);
+				sourceStream.pipe(hasher);
+			}
+			destinationStream.once('done', maybeDone);
+			destinationStream.on('progress', (progress: ProgressEvent) => {
+				lastPosition = progress.position;
+				onProgress(progress);
+			});
+			if (
+				!(sourceStream instanceof BlockReadStream) &&
+				destination.destinations.size > 1
+			) {
+				// Chunk the input stream in a transform if it's not a block read stream, avoiding
+				// chunking it in each destination stream.
+				sourceStream
+					.pipe(new BlockTransformStream(CHUNK_SIZE))
+					.pipe(destinationStream);
+			} else {
+				sourceStream.pipe(destinationStream);
+			}
+		},
+	);
 	if (sourceMetadata.size === undefined) {
 		sourceMetadata.size = lastPosition;
 	}
@@ -242,7 +308,10 @@ async function pipeSparseSourceToDestination(
 	_onRootStreamProgress: (progress: ProgressEvent) => void,
 ): Promise<void> {
 	// TODO: if verify is true, we must ensure that source and destination streams hash algorithms are the same
-	const [ sourceStream, destinationStream ] = await Promise.all([ source.createSparseReadStream(true), destination.createSparseWriteStream() ]);
+	const [sourceStream, destinationStream] = await Promise.all([
+		source.createSparseReadStream(true),
+		destination.createSparseWriteStream(),
+	]);
 	getRootStream(sourceStream).on('progress', (progress: ProgressEvent) => {
 		_onRootStreamProgress(progress);
 	});
@@ -250,7 +319,7 @@ async function pipeSparseSourceToDestination(
 		sourceStream.once('error', reject);
 		destinationStream.once('error', reject);
 		destinationStream.once('done', resolve);
-		destinationStream.on('fail', onFail);  // This is emitted by MultiDestination when one of its destinations fails
+		destinationStream.on('fail', onFail); // This is emitted by MultiDestination when one of its destinations fails
 		destinationStream.on('progress', onProgress);
 		sourceStream.pipe(destinationStream);
 	});

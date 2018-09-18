@@ -40,11 +40,16 @@ const ACTIONS = {
 	copy: copyAction,
 };
 
-const executeOperation = async (operation: Operation, disk: Disk): Promise<void> => {
+const executeOperation = async (
+	operation: Operation,
+	disk: Disk,
+): Promise<void> => {
 	return await ACTIONS[operation.command](operation, disk);
 };
 
-const getPartitionIndex = (partition: number | { primary?: number, logical?: number }): number => {
+const getPartitionIndex = (
+	partition: number | { primary?: number; logical?: number },
+): number => {
 	// New device-type.json partition format: partition index
 	if (typeof partition === 'number') {
 		return partition;
@@ -64,9 +69,14 @@ const getDiskDeviceType = async (disk: Disk): Promise<any> => {
 	const partitions = await getPartitions(disk);
 	for (const partition of partitions.partitions) {
 		if (partition.type === 14) {
-			const deviceType = await Bluebird.using(interact(disk, partition.index), async (fs: AsyncFsLike) => {
-				return await fs.readFileAsync('/device-type.json').catchReturn(undefined);
-			});
+			const deviceType = await Bluebird.using(
+				interact(disk, partition.index),
+				async (fs: AsyncFsLike) => {
+					return await fs
+						.readFileAsync('/device-type.json')
+						.catchReturn(undefined);
+				},
+			);
 			if (deviceType) {
 				return JSON.parse(deviceType.toString());
 			}
@@ -74,11 +84,19 @@ const getDiskDeviceType = async (disk: Disk): Promise<any> => {
 	}
 };
 
-export const configure = async (disk: Disk, options: { [k: string]: any, config?: any } = {}): Promise<void> => {
+export const configure = async (
+	disk: Disk,
+	options: { [k: string]: any; config?: any } = {},
+): Promise<void> => {
 	console.log('options', options);
 	const deviceType = await getDiskDeviceType(disk);
-	console.log('device type read from disk image:\n', JSON.stringify(deviceType, null, 4));
-	let operations = _.cloneDeep(_.get(deviceType, 'configuration.operations', []));
+	console.log(
+		'device type read from disk image:\n',
+		JSON.stringify(deviceType, null, 4),
+	);
+	let operations = _.cloneDeep(
+		_.get(deviceType, 'configuration.operations', []),
+	);
 	const config = _.get(deviceType, 'configuration.config');
 
 	if (config) {

@@ -39,7 +39,9 @@ export class FakeBlockDevice extends sourceDestination.BlockDevice {
 	}
 }
 
-export async function blockDeviceFromFile(path: string): Promise<sourceDestination.BlockDevice> {
+export async function blockDeviceFromFile(
+	path: string,
+): Promise<sourceDestination.BlockDevice> {
 	const drive = {
 		raw: path,
 		device: path,
@@ -62,8 +64,10 @@ export async function testImageNoIt(
 	compareToPath: string,
 	alsoTestSparseStream: boolean,
 	shouldHaveSize: boolean,
-	shouldHaveCompressedSize: boolean | number,  // if true, compare to the archive size; if number, compare to number
-	sourceClass: typeof sourceDestination.File | typeof sourceDestination.BlockDevice,
+	shouldHaveCompressedSize: boolean | number, // if true, compare to the archive size; if number, compare to number
+	sourceClass:
+		| typeof sourceDestination.File
+		| typeof sourceDestination.BlockDevice,
 	partitionTableType?: PartitionTableType,
 	partitionsFile?: string,
 	expectedMetadata: any = {},
@@ -71,7 +75,10 @@ export async function testImageNoIt(
 ): Promise<void> {
 	let source: sourceDestination.File | sourceDestination.BlockDevice;
 	if (sourceClass === sourceDestination.File) {
-		source = new sourceDestination.File(imagePath, sourceDestination.File.OpenFlags.Read);
+		source = new sourceDestination.File(
+			imagePath,
+			sourceDestination.File.OpenFlags.Read,
+		);
 	} else {
 		source = await blockDeviceFromFile(imagePath);
 	}
@@ -85,7 +92,10 @@ export async function testImageNoIt(
 	const sourceMetadata = await innerSource.getMetadata();
 	const sourceStat = await stat(imagePath);
 
-	const compareSource = new sourceDestination.File(compareToPath, sourceDestination.File.OpenFlags.Read);
+	const compareSource = new sourceDestination.File(
+		compareToPath,
+		sourceDestination.File.OpenFlags.Read,
+	);
 	await compareSource.open();
 	const compareMetadata = await compareSource.getMetadata();
 	const compareStat = await stat(compareToPath);
@@ -101,7 +111,9 @@ export async function testImageNoIt(
 		expect(sourceMetadata.size).to.equal(compareStat.size);
 	}
 
-	const compareToData = await streamToBuffer(await compareSource.createReadStream());
+	const compareToData = await streamToBuffer(
+		await compareSource.createReadStream(),
+	);
 
 	const canCreateReadStream = await innerSource.canCreateReadStream();
 	expect(canCreateReadStream).to.be.true;
@@ -113,22 +125,26 @@ export async function testImageNoIt(
 		const canCreateSparseReadStream = await innerSource.canCreateSparseReadStream();
 		expect(canCreateSparseReadStream).to.be.true;
 		const sourceSparseStream = await innerSource.createSparseReadStream();
-		const sourceSparseStreamBuffer = await sparseStreamToBuffer(sourceSparseStream);
+		const sourceSparseStreamBuffer = await sparseStreamToBuffer(
+			sourceSparseStream,
+		);
 		expect(sourceSparseStreamBuffer).to.deep.equal(compareToData);
 	}
 
-	if ((partitionsFile !== undefined) || (partitionTableType !== undefined)) {
+	if (partitionsFile !== undefined || partitionTableType !== undefined) {
 		const sourcePartitionTable = await innerSource.getPartitionTable();
 		if (partitionTableType !== undefined) {
 			expect(sourcePartitionTable!.type).to.equal(partitionTableType);
 		}
 		if (partitionsFile !== undefined) {
-			expect(sourcePartitionTable!.partitions).to.deep.equal(require(partitionsFile));
+			expect(sourcePartitionTable!.partitions).to.deep.equal(
+				require(partitionsFile),
+			);
 		}
 	}
 
 	if (expectedMetadata !== undefined) {
-		for (const [ key, value ] of entries(expectedMetadata)) {
+		for (const [key, value] of entries(expectedMetadata)) {
 			// @ts-ignore
 			expect(sourceMetadata[key]).to.deep.equal(value);
 		}
@@ -143,13 +159,16 @@ export function testImage(
 	compareToPath: string,
 	alsoTestSparseStream: boolean,
 	shouldHaveSize: boolean,
-	shouldHaveCompressedSize: boolean | number,  // if true, compare to the archive size; if number, compare to number
+	shouldHaveCompressedSize: boolean | number, // if true, compare to the archive size; if number, compare to number
 	partitionTableType?: PartitionTableType,
 	partitionsFile?: string,
 	expectedMetadata: any = {},
 	innerSourceClass?: typeof sourceDestination.SourceSource,
 ): void {
-	for (const sourceClass of [ sourceDestination.File, sourceDestination.BlockDevice ]) {
+	for (const sourceClass of [
+		sourceDestination.File,
+		sourceDestination.BlockDevice,
+	]) {
 		it(
 			`${testName} ${sourceClass.name}`,
 			testImageNoIt.bind(
@@ -171,9 +190,17 @@ export function testImage(
 
 export const DEFAULT_IMAGE_TESTS_TIMEOUT = 20000;
 
-export function expectSourceSourceError(testName: string, filePath: string, Cls: typeof SourceSource, message: string) {
+export function expectSourceSourceError(
+	testName: string,
+	filePath: string,
+	Cls: typeof SourceSource,
+	message: string,
+) {
 	it(testName, async function() {
-		const source = new sourceDestination.File(filePath, sourceDestination.File.OpenFlags.Read);
+		const source = new sourceDestination.File(
+			filePath,
+			sourceDestination.File.OpenFlags.Read,
+		);
 		await source.open();
 		const innerSource = new Cls(source);
 		try {
@@ -188,9 +215,16 @@ export function expectSourceSourceError(testName: string, filePath: string, Cls:
 	});
 }
 
-export function expectGetInnerSourceError(testName: string, filePath: string, message: string) {
+export function expectGetInnerSourceError(
+	testName: string,
+	filePath: string,
+	message: string,
+) {
 	it(testName, async function() {
-		const source = new sourceDestination.File(filePath, sourceDestination.File.OpenFlags.Read);
+		const source = new sourceDestination.File(
+			filePath,
+			sourceDestination.File.OpenFlags.Read,
+		);
 		try {
 			await source.getInnerSource();
 		} catch (error) {

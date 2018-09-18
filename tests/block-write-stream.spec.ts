@@ -33,15 +33,17 @@ import { tmpFileDisposer, TmpFileResult } from '../lib/tmp';
 import { blockDeviceFromFile, DEFAULT_IMAGE_TESTS_TIMEOUT } from './tester';
 
 async function randomBytes(size: number): Promise<Buffer> {
-	return await new Promise((resolve: (stats: Buffer) => void, reject: (err: Error) => void) => {
-		randomBytesNode(size, (err: Error, buffer: Buffer) => {
-			if (err) {
-				reject(err);
-				return;
-			}
-			resolve(buffer);
-		});
-	});
+	return await new Promise(
+		(resolve: (stats: Buffer) => void, reject: (err: Error) => void) => {
+			randomBytesNode(size, (err: Error, buffer: Buffer) => {
+				if (err) {
+					reject(err);
+					return;
+				}
+				resolve(buffer);
+			});
+		},
+	);
 }
 
 function* bufferChunks(buffer: Buffer, chunkSize: number) {
@@ -51,14 +53,22 @@ function* bufferChunks(buffer: Buffer, chunkSize: number) {
 	}
 }
 
-function bufferToStream(stream: Readable, buffer: Buffer, chunkSize: number): void {
+function bufferToStream(
+	stream: Readable,
+	buffer: Buffer,
+	chunkSize: number,
+): void {
 	for (const chunk of bufferChunks(buffer, chunkSize)) {
 		stream.push(chunk.buffer);
 	}
 	stream.push(null);
 }
 
-function bufferToSparseStream(stream: Readable, buffer: Buffer, chunkSize: number): void {
+function bufferToSparseStream(
+	stream: Readable,
+	buffer: Buffer,
+	chunkSize: number,
+): void {
 	for (const chunk of bufferChunks(buffer, chunkSize)) {
 		stream.push(chunk);
 	}
@@ -75,7 +85,11 @@ describe('block-write-stream', function() {
 	const SIZE = BLOCK_WRITE_STREAM_CHUNK_SIZE + 7;
 	const CHUNK_SIZE = 512;
 
-	async function testBlockWriteStream(size: number, chunkSize: number, sparse = false): Promise<void> {
+	async function testBlockWriteStream(
+		size: number,
+		chunkSize: number,
+		sparse = false,
+	): Promise<void> {
 		const data = await randomBytes(size);
 		const input = new Readable({ objectMode: sparse });
 		await using(tmpFileDisposer(false), async (file: TmpFileResult) => {
@@ -103,16 +117,21 @@ describe('block-write-stream', function() {
 			if (os.platform() === 'win32') {
 				expect(output.firstBytesToKeep).to.not.equal(0);
 				// @ts-ignore
-				expect(destination.write.getCall(0).args[3]).to.equal(output.firstBytesToKeep);
+				expect(destination.write.getCall(0).args[3]).to.equal(
+					output.firstBytesToKeep,
+				);
 				const chunkSize = sparse ? CHUNK_SIZE : BLOCK_WRITE_STREAM_CHUNK_SIZE;
-				const callNumber = Math.floor((SIZE - output.firstBytesToKeep) / chunkSize) + 1;
+				const callNumber =
+					Math.floor((SIZE - output.firstBytesToKeep) / chunkSize) + 1;
 				// @ts-ignore
 				expect(destination.write.getCall(callNumber).args[3]).to.equal(0);
 			} else {
 				// @ts-ignore
 				expect(destination.write.getCall(0).args[3]).to.equal(0);
 				// @ts-ignore
-				expect(destination.write.getCall(1).args[3]).to.equal(sparse ? CHUNK_SIZE : BLOCK_WRITE_STREAM_CHUNK_SIZE );
+				expect(destination.write.getCall(1).args[3]).to.equal(
+					sparse ? CHUNK_SIZE : BLOCK_WRITE_STREAM_CHUNK_SIZE,
+				);
 			}
 			expect(output.bytesWritten).to.equal(size);
 			await destination.close();
@@ -132,8 +151,14 @@ describe('block-write-stream', function() {
 			this.diskpartCleanStub.restore();
 		});
 
-		it('should write the correct bytes', testBlockWriteStream.bind(null, SIZE, CHUNK_SIZE));
-		it('should write the correct bytes sparse', testBlockWriteStream.bind(null, SIZE, CHUNK_SIZE, true));
+		it(
+			'should write the correct bytes',
+			testBlockWriteStream.bind(null, SIZE, CHUNK_SIZE),
+		);
+		it(
+			'should write the correct bytes sparse',
+			testBlockWriteStream.bind(null, SIZE, CHUNK_SIZE, true),
+		);
 	});
 
 	describe('linux', function() {
@@ -146,8 +171,13 @@ describe('block-write-stream', function() {
 			this.osPlatformStub.restore();
 		});
 
-		it('should write the correct bytes', testBlockWriteStream.bind(null, SIZE, CHUNK_SIZE));
-		it('should write the correct bytes sparse', testBlockWriteStream.bind(null, SIZE, CHUNK_SIZE, true));
+		it(
+			'should write the correct bytes',
+			testBlockWriteStream.bind(null, SIZE, CHUNK_SIZE),
+		);
+		it(
+			'should write the correct bytes sparse',
+			testBlockWriteStream.bind(null, SIZE, CHUNK_SIZE, true),
+		);
 	});
-
 });

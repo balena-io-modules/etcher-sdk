@@ -27,9 +27,11 @@ export class BlockTransformStream extends Transform {
 	}
 
 	private writeBuffers(flush = false) {
-		if (flush || (this._bytes >= this.chunkSize)) {
+		if (flush || this._bytes >= this.chunkSize) {
 			let block = Buffer.concat(this._buffers);
-			const length = flush ? block.length : Math.floor(block.length / this.chunkSize) * this.chunkSize;
+			const length = flush
+				? block.length
+				: Math.floor(block.length / this.chunkSize) * this.chunkSize;
 
 			this._buffers.length = 0;
 			this._bytes = 0;
@@ -45,9 +47,17 @@ export class BlockTransformStream extends Transform {
 		}
 	}
 
-	_transform(chunk: Buffer, encoding: string, callback: (error?: Error) => void) {
+	_transform(
+		chunk: Buffer,
+		encoding: string,
+		callback: (error?: Error) => void,
+	) {
 		this.bytesRead += chunk.length;
-		if ((this._bytes === 0) && (chunk.length >= this.chunkSize) && (chunk.length % this.chunkSize === 0)) {
+		if (
+			this._bytes === 0 &&
+			chunk.length >= this.chunkSize &&
+			chunk.length % this.chunkSize === 0
+		) {
 			this.bytesWritten += chunk.length;
 			this.push(chunk);
 		} else {
