@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## v0.1.19 - 2018-09-18
+
+* Update(typescript): Update typescript to ^3.0.3 [Alexis Svinartchouk]
+
 ## v0.1.18 - 2018-09-17
 
 * Fix(npm): Publish the typings folder [Alexis Svinartchouk]
