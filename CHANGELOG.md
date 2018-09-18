@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## v0.1.21 - 2018-09-18
+
+* Fix(block-device): Fix BlockDevice.alignedRead() bytesRead property [Alexis Svinartchouk]
+
 ## v0.1.20 - 2018-09-18
 
 * Update(resin-lint): Update resin-lint to ^2.0.1 [Alexis Svinartchouk]
