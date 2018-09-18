@@ -62,7 +62,7 @@
     "readable-stream": "^2.3.6",
     "resin-image-fs": "^5.0.4",
     "speedometer": "^1.0.0",
-    "udif": "^0.15.6",
+    "udif": "^0.15.7",
     "unbzip2-stream": "resin-io-modules/unbzip2-stream#942fc218013c14adab01cf693b0500cf6ac83193",
     "unzip-stream": "^0.3.0",
     "winusb-driver-generator": "^1.2.1",
