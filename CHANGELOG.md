@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## v0.1.23 - 2018-09-21
+
+* Fix(resin-s3-source): Allow changing the s3 host [Alexis Svinartchouk]
+
 ## v0.1.22 - 2018-09-18
 
 * Update(udif): Update udif to ^0.15.7 [Alexis Svinartchouk]
