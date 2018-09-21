@@ -29,6 +29,7 @@ export class ResinS3Source extends SourceDestination {
 		readonly bucket: string,
 		readonly deviceType: string,
 		readonly version: string,
+		readonly host = 's3.amazonaws.com',
 	) {
 		// example:
 		// bucket: resin-staging-img or resin-production-img-cloudformation
@@ -51,7 +52,7 @@ export class ResinS3Source extends SourceDestination {
 	}
 
 	private getUrl(path: string): string {
-		return `https://${this.bucket}.s3.amazonaws.com/images/${
+		return `https://${this.bucket}.${this.host}/images/${
 			this.deviceType
 		}/${encodeURIComponent(this.version)}/${path}`;
 	}
