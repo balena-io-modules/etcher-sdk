@@ -22,12 +22,15 @@ import { SourceDestination } from './source-destination';
 export class UsbbootDrive extends SourceDestination
 	implements AdapterSourceDestination {
 	raw = null;
+	displayName = 'Initializing device';
 	device = null;
 	devicePath = null;
-	icon = 'raspberrypi'; // TODO: Should this be in the sdk?
+	icon = 'loading';
 	isSystem = false;
 	description = 'Compute Module';
 	mountpoints = [];
+	isReadOnly = false;
+	disabled = true;
 	size = null;
 	emitsProgress = true;
 
