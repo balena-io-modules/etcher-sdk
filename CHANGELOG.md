@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## v0.1.24 - 2018-10-02
+
+* Fix(usbboot): Fix usbboot devices display name [Alexis Svinartchouk]
+
 ## v0.1.23 - 2018-09-21
 
 * Fix(resin-s3-source): Allow changing the s3 host [Alexis Svinartchouk]
