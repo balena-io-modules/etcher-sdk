@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## v0.1.27 - 2018-10-18
+
+* Update(usbboot): Update node-raspberrypi-usbboot to 0.0.10 [Alexis Svinartchouk]
+
 ## v0.1.26 - 2018-10-10
 
 * Update(usbboot): Update node-raspberrypi-usbboot to 0.0.9 [Alexis Svinartchouk]
