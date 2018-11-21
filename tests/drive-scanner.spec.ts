@@ -61,7 +61,7 @@ describe('Scanner', function() {
 				{
 					device: '/dev/sda',
 					description: 'WDC WD10JPVX-75J',
-					size: '931.5G',
+					size: 931500000000,
 					mountpoints: [
 						{
 							path: '/',
@@ -101,7 +101,7 @@ describe('Scanner', function() {
 						device: '/dev/sda',
 						displayName: '/dev/sda',
 						description: 'WDC WD10JPVX-75J',
-						size: '931.5G',
+						size: 931500000000,
 						mountpoints: [
 							{
 								path: '/',
@@ -114,7 +114,7 @@ describe('Scanner', function() {
 						device: '/dev/sdb',
 						displayName: '/dev/sdb',
 						description: 'Foo',
-						size: '14G',
+						size: 14000000000,
 						mountpoints: [
 							{
 								path: '/mnt/foo',
@@ -127,7 +127,7 @@ describe('Scanner', function() {
 						device: '/dev/sdc',
 						displayName: '/dev/sdc',
 						description: 'Bar',
-						size: '14G',
+						size: 14000000000,
 						mountpoints: [
 							{
 								path: '/mnt/bar',
@@ -155,7 +155,7 @@ describe('Scanner', function() {
 						device: '/dev/sdb',
 						displayName: '/dev/sdb',
 						description: 'Foo',
-						size: '14G',
+						size: 14000000000,
 						mountpoints: [
 							{
 								path: '/mnt/foo',
@@ -168,7 +168,7 @@ describe('Scanner', function() {
 						device: '/dev/sdc',
 						displayName: '/dev/sdc',
 						description: 'Bar',
-						size: '14G',
+						size: 14000000000,
 						mountpoints: [
 							{
 								path: '/mnt/bar',
@@ -200,7 +200,7 @@ describe('Scanner', function() {
 						device: '\\\\.\\PHYSICALDRIVE1',
 						displayName: 'C:',
 						description: 'WDC WD10JPVX-75J',
-						size: '931.5G',
+						size: 931500000000,
 						mountpoints: [
 							{
 								path: 'C:',
@@ -213,7 +213,7 @@ describe('Scanner', function() {
 						device: '\\\\.\\PHYSICALDRIVE2',
 						displayName: '\\\\.\\PHYSICALDRIVE2',
 						description: 'Foo',
-						size: '14G',
+						size: 14000000000,
 						mountpoints: [],
 						isSystem: false,
 						isRemovable: false,
@@ -222,7 +222,7 @@ describe('Scanner', function() {
 						device: '\\\\.\\PHYSICALDRIVE3',
 						displayName: 'F:',
 						description: 'Bar',
-						size: '14G',
+						size: 14000000000,
 						mountpoints: [
 							{
 								path: 'F:',
@@ -250,7 +250,7 @@ describe('Scanner', function() {
 						device: '\\\\.\\PHYSICALDRIVE2',
 						displayName: '\\\\.\\PHYSICALDRIVE2',
 						description: 'Foo',
-						size: '14G',
+						size: 14000000000,
 						mountpoints: [],
 						isSystem: false,
 						isRemovable: false,
@@ -259,7 +259,7 @@ describe('Scanner', function() {
 						device: '\\\\.\\PHYSICALDRIVE3',
 						displayName: 'F:',
 						description: 'Bar',
-						size: '14G',
+						size: 14000000000,
 						mountpoints: [
 							{
 								path: 'F:',
@@ -280,7 +280,7 @@ describe('Scanner', function() {
 						device: '\\\\.\\PHYSICALDRIVE3',
 						raw: '\\\\.\\PHYSICALDRIVE3',
 						description: 'Bar',
-						size: '14G',
+						size: 14000000000,
 						mountpoints: [
 							{
 								path: 'F:',
@@ -315,7 +315,7 @@ describe('Scanner', function() {
 						device: '\\\\.\\PHYSICALDRIVE3',
 						raw: '\\\\.\\PHYSICALDRIVE3',
 						description: 'Bar',
-						size: '14G',
+						size: 14000000000,
 						mountpoints: [
 							{
 								path: 'F:',
