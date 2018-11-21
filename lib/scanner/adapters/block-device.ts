@@ -114,12 +114,17 @@ export class BlockDeviceAdapter extends Adapter {
 			return result;
 		}
 		drives = drives.filter((drive: DrivelistDrive) => {
-			// Always ignore RAID attached devices, as they are in danger-country;
-			// Even flashing RAIDs intentionally can have unintended effects
-			if (drive.busType === 'RAID') {
-				return false;
-			}
-			return !drive.error && (this.includeSystemDrives() || !drive.isSystem);
+			return (
+				// Always ignore RAID attached devices, as they are in danger-country;
+				// Even flashing RAIDs intentionally can have unintended effects
+				drive.busType !== 'RAID' &&
+				// Exclude errored drives
+				!drive.error &&
+				// Exclude system drives if needed
+				(this.includeSystemDrives() || !drive.isSystem) &&
+				// Exclude drives with no size
+				typeof drive.size === 'number'
+			);
 		});
 		drives.forEach((drive: DrivelistDrive) => {
 			// TODO: Find a better way to detect that a certain
