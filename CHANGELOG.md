@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## 0.1.29 - 2018-11-21
+
+* Fix(scanner): Filter out drives with no size [Alexis Svinartchouk]
+
 ## v0.1.28 - 2018-10-19
 
 * Update(usbboot): Update node-raspberrypi-usbboot to 0.0.12 [Alexis Svinartchouk]
