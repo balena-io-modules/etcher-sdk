@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## 0.1.31 - 2018-11-28
+
+* Add .wic as a supported image format [Alexis Svinartchouk]
+
 ## 0.1.30 - 2018-11-23
 
 * Update(lzma-native): Update lzma-native to ^4.0.3 [Alexis Svinartchouk]
