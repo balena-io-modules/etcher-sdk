@@ -266,6 +266,7 @@ export class SourceDestination extends EventEmitter {
 		'dmg',
 		'sdcard',
 		'rpi-sdimg',
+		'wic',
 	];
 	static readonly mimetype?: string;
 	private static mimetypes = new Map<string, typeof SourceSource>();
