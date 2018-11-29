@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## 0.1.32 - 2018-11-29
+
+* Update file-disk to ^5.0.0 [Alexis Svinartchouk]
+
 ## 0.1.31 - 2018-11-28
 
 * Add .wic as a supported image format [Alexis Svinartchouk]
