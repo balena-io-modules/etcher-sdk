@@ -41,7 +41,7 @@ interface WifiConfig {
 const nmWifiConfig = (index: number, options: WifiConfig): string => {
 	let config = outdent`
 		[connection]
-		id=resin-wifi-${pad(index)}
+		id=balena-wifi-${pad(index)}
 		type=wifi
 
 		[wifi]
