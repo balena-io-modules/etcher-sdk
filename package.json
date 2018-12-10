@@ -2,12 +2,12 @@
   "name": "etcher-sdk",
   "version": "1.0.0",
   "description": "Etcher SDK",
-  "author": "Resin.io Ltd <hello@etcher.io> (https://resin.io)",
+  "author": "Balena.io Ltd <hello@etcher.io> (https://balena.io)",
   "main": "build/index.js",
   "license": "Apache-2.0",
   "types": "build/index.d.ts",
   "contributors": [
-    "Alexis Svinartchouk <alexis@resin.io>"
+    "Alexis Svinartchouk <alexis@balena.io>"
   ],
   "scripts": {
     "test": "npm run lint && mocha -r ts-node/register tests/**/*.spec.ts",
@@ -36,13 +36,13 @@
     "balena",
     "resinos"
   ],
-  "homepage": "https://github.com/resin-io-modules/etcher-sdk",
+  "homepage": "https://github.com/balena-io-modules/etcher-sdk",
   "repository": {
     "type": "git",
-    "url": "https://github.com/resin-io-modules/etcher-sdk.git"
+    "url": "https://github.com/balena-io-modules/etcher-sdk.git"
   },
   "bugs": {
-    "url": "https://github.com/resin-io-modules/etcher-sdk/issues"
+    "url": "https://github.com/balena-io-modules/etcher-sdk/issues"
   },
   "optionalDependencies": {
     "winusb-driver-generator": "^1.2.3"
@@ -66,7 +66,7 @@
     "resin-image-fs": "^5.0.6",
     "speedometer": "^1.0.0",
     "udif": "^0.15.7",
-    "unbzip2-stream": "resin-io-modules/unbzip2-stream#942fc218013c14adab01cf693b0500cf6ac83193",
+    "unbzip2-stream": "balena-io-modules/unbzip2-stream#942fc218013c14adab01cf693b0500cf6ac83193",
     "unzip-stream": "^0.3.0",
     "xxhash": "balena-io-modules/node-xxhash#70ac31da1a41c6f8c53d931b5802c6c93f7b6b83",
     "yauzl": "^2.9.2"
