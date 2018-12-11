@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as Bluebird from 'bluebird';
+import { using } from 'bluebird';
 import { Disk } from 'file-disk';
 import * as _ from 'lodash';
 import { interact, AsyncFsLike } from 'resin-image-fs';
@@ -43,11 +43,11 @@ export const execute = async (operation: any, disk: Disk) => {
 		throw new Error('copy operation needs from and to properties');
 	}
 	if (source === destination) {
-		await Bluebird.using(interact(disk, source), async (fs: AsyncFsLike) => {
+		await using(interact(disk, source), async (fs: AsyncFsLike) => {
 			await copy(fs, operation.from.path, fs, operation.to.path);
 		});
 	} else {
-		await Bluebird.using(
+		await using(
 			interact(disk, source),
 			interact(disk, destination),
 			async (sourceFs: AsyncFsLike, destinationFs: AsyncFsLike) => {
