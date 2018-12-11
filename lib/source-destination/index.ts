@@ -27,7 +27,7 @@ export * from './lzma';
 export * from './metadata';
 export * from './multi-destination';
 export * from './progress';
-export * from './resin-s3-source';
+export * from './balena-s3-source';
 export * from './source-destination';
 export * from './source-source';
 export * from './usbboot';

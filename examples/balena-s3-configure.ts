@@ -34,7 +34,7 @@ const main = async ({
 	config,
 	verify,
 }: any) => {
-	let source: sourceDestination.SourceDestination = new sourceDestination.ResinS3Source(
+	let source: sourceDestination.SourceDestination = new sourceDestination.BalenaS3Source(
 		bucket,
 		deviceType,
 		buildId,
