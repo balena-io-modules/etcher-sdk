@@ -239,7 +239,11 @@ export class MultiDestination extends SourceDestination {
 		const passthrough = new PassThrough({
 			objectMode: methodName === 'createSparseWriteStream',
 		});
-		passthrough.setMaxListeners(this.activeDestinations.size + 1); // all streams listen to end events, +1 because we'll listen too
+		// all streams listen to end events, +1 because we'll listen too
+		const listeners = this.activeDestinations.size + 1;
+		if (listeners > EventEmitter.defaultMaxListeners) {
+			passthrough.setMaxListeners(listeners);
+		}
 		const progresses: Map<
 			NodeJS.WritableStream,
 			ProgressEvent | null
