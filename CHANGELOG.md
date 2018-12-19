@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## 0.1.34 - 2018-12-19
+
+* Ci: Update platforms to use new syntax [John (Jack) Brown]
+
 ## 0.1.33 - 2018-12-18
 
 * Don't update multi write destination streams max listeners if < default [Alexis Svinartchouk]
