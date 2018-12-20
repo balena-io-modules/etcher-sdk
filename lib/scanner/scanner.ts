@@ -57,17 +57,20 @@ export class Scanner extends EventEmitter {
 		}
 	}
 
-	start(): void {
+	start(): Promise<void> {
 		debug('start');
 		let notReady = this.adapters.length;
-		this.adapters.forEach((adapter: Adapter) => {
-			adapter.on('ready', () => {
-				notReady -= 1;
-				if (notReady === 0) {
-					this.emit('ready');
-				}
+		return new Promise(resolve => {
+			this.adapters.forEach((adapter: Adapter) => {
+				adapter.on('ready', () => {
+					notReady -= 1;
+					if (notReady === 0) {
+						this.emit('ready');
+						resolve();
+					}
+				});
+				adapter.start();
 			});
-			adapter.start();
 		});
 	}
 
