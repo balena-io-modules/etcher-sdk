@@ -5,6 +5,11 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## 0.2.0 - 2018-12-20
+
+* Scanner.start() now returns a Promise<void> [Alexis Svinartchouk]
+* Remove not needed class members from Scanner [Alexis Svinartchouk]
+
 ## 0.1.34 - 2018-12-19
 
 * Ci: Update platforms to use new syntax [John (Jack) Brown]
