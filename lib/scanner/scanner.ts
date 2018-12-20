@@ -26,16 +26,12 @@ const debug = debug_('etcher-sdk:scanner');
 
 export class Scanner extends EventEmitter {
 	drives: Set<AdapterSourceDestination> = new Set();
-	private boundAttach: (drive: AdapterSourceDestination) => void;
-	private boundDetach: (drive: AdapterSourceDestination) => void;
 
 	constructor(private adapters: Adapter[]) {
 		super();
-		this.boundAttach = this.onAttach.bind(this);
-		this.boundDetach = this.onDetach.bind(this);
 		this.adapters.forEach((adapter: Adapter) => {
-			adapter.on('attach', this.boundAttach);
-			adapter.on('detach', this.boundDetach);
+			adapter.on('attach', this.onAttach.bind(this));
+			adapter.on('detach', this.onDetach.bind(this));
 			adapter.on('error', this.emit.bind(this, 'error'));
 		});
 	}
@@ -61,17 +57,20 @@ export class Scanner extends EventEmitter {
 		}
 	}
 
-	start(): void {
+	start(): Promise<void> {
 		debug('start');
 		let notReady = this.adapters.length;
-		this.adapters.forEach((adapter: Adapter) => {
-			adapter.on('ready', () => {
-				notReady -= 1;
-				if (notReady === 0) {
-					this.emit('ready');
-				}
+		return new Promise(resolve => {
+			this.adapters.forEach((adapter: Adapter) => {
+				adapter.on('ready', () => {
+					notReady -= 1;
+					if (notReady === 0) {
+						this.emit('ready');
+						resolve();
+					}
+				});
+				adapter.start();
 			});
-			adapter.start();
 		});
 	}
 
