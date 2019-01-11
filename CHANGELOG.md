@@ -5,6 +5,11 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## 0.2.2 - 2019-01-11
+
+* Use xxhash fork that fixes build with xcode 10.1 [Alexis Svinartchouk]
+* Fix typo [Alexis Svinartchouk]
+
 ## 0.2.1 - 2019-01-11
 
 * Winusb-driver-generator is optional (win32 only) [Alexis Svinartchouk]
