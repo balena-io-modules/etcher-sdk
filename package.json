@@ -68,7 +68,7 @@
     "udif": "^0.15.7",
     "unbzip2-stream": "resin-io-modules/unbzip2-stream#942fc218013c14adab01cf693b0500cf6ac83193",
     "unzip-stream": "^0.3.0",
-    "xxhash": "^0.2.4",
+    "xxhash": "balena-io-modules/node-xxhash#70ac31da1a41c6f8c53d931b5802c6c93f7b6b83",
     "yauzl": "^2.9.2"
   },
   "devDependencies": {

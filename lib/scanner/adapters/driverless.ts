@@ -43,7 +43,7 @@ class DriverlessDeviceAdapter_ extends Adapter {
 	}
 
 	private async scanLoop(): Promise<void> {
-		// This imort fails on anything else than win32 and this class will only be exported on win32
+		// This import fails on anything else than win32 and this class will only be exported on win32
 		this.listDriverlessDevices = (await import('winusb-driver-generator')).listDriverlessDevices;
 		while (this.running) {
 			this.scan();
