@@ -44,6 +44,9 @@
   "bugs": {
     "url": "https://github.com/resin-io-modules/etcher-sdk/issues"
   },
+  "optionalDependencies": {
+    "winusb-driver-generator": "^1.2.3"
+  },
   "dependencies": {
     "@types/node": "^6.0.112",
     "axios": "^0.18.0",
@@ -65,7 +68,6 @@
     "udif": "^0.15.7",
     "unbzip2-stream": "resin-io-modules/unbzip2-stream#942fc218013c14adab01cf693b0500cf6ac83193",
     "unzip-stream": "^0.3.0",
-    "winusb-driver-generator": "^1.2.1",
     "xxhash": "^0.2.4",
     "yauzl": "^2.9.2"
   },
