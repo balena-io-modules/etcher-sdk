@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## 0.2.1 - 2019-01-11
+
+* Winusb-driver-generator is optional (win32 only) [Alexis Svinartchouk]
+
 ## 0.2.0 - 2018-12-20
 
 * Scanner.start() now returns a Promise<void> [Alexis Svinartchouk]
