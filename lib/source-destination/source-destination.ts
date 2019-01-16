@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-import MBR = require('mbr');
-import GPT = require('gpt');
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
 import * as fileType from 'file-type';
+import { getPartitions, GetPartitionsResult } from 'partitioninfo';
 import { extname } from 'path';
 import { arch } from 'process';
 import { Stream as HashStream } from 'xxhash';
@@ -223,38 +222,6 @@ export class SparseStreamVerifier extends Verifier {
 	}
 }
 
-// As MBR and GPT partition entries have a different structure,
-// we normalize them here to make them easier to deal with and
-// avoid clutter in what's sent to analytics
-interface Partition {
-	type: string;
-	id?: string;
-	name?: string;
-	firstLBA: number;
-	lastLBA: number;
-	extended: boolean;
-}
-
-interface PartitionTable {
-	type: 'mbr' | 'gpt';
-	partitions: Partition[];
-}
-
-function detectGPT(buffer: Buffer): any {
-	// TODO: GPT typings
-	let blockSize = 512;
-	// Attempt to parse the GPT from several offsets,
-	// as the block size of the image may vary (512,1024,2048,4096);
-	// For example, ISOs will usually have a block size of 4096,
-	// but raw images a block size of 512 bytes
-	while (blockSize <= 4096) {
-		try {
-			return GPT.parse(buffer.slice(blockSize));
-		} catch (error) {}
-		blockSize *= 2;
-	}
-}
-
 export class SourceDestination extends EventEmitter {
 	static readonly imageExtensions = [
 		'img',
@@ -442,47 +409,11 @@ export class SourceDestination extends EventEmitter {
 		return await innerSource.getInnerSource();
 	}
 
-	async getPartitionTable(): Promise<PartitionTable | undefined> {
-		// TODO: this should be in partitioninfo
-		// missing parts in partitioninfo:
-		// * read from Buffer directly (can be avoided using a Buffer backed FileDisk)
-		// * try detecting GPT at different offsets (see detectGPT above)
+	async getPartitionTable(): Promise<GetPartitionsResult | undefined> {
 		const stream = await this.createReadStream(false, 0, 65535); // TODO: constant
 		const buffer = await streamToBuffer(stream);
-
-		const gpt = detectGPT(buffer);
-
-		if (gpt !== undefined) {
-			return {
-				type: 'gpt',
-				partitions: gpt.partitions.map((partition: any) => {
-					return {
-						type: partition.type.toString(),
-						id: partition.guid.toString(),
-						name: partition.name,
-						firstLBA: partition.firstLBA,
-						lastLBA: partition.lastLBA,
-						extended: false,
-					};
-				}),
-			};
-		} else {
-			try {
-				const mbr = MBR.parse(buffer);
-				return {
-					type: 'mbr',
-					partitions: mbr.partitions.map((partition: any) => {
-						return {
-							type: partition.type,
-							id: null,
-							name: null,
-							firstLBA: partition.firstLBA,
-							lastLBA: partition.lastLBA,
-							extended: partition.extended,
-						};
-					}),
-				};
-			} catch (error) {}
-		}
+		try {
+			return await getPartitions(buffer);
+		} catch {}
 	}
 }
