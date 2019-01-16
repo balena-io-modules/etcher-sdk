@@ -5,6 +5,10 @@
 * Fix(scanner): Export DriverlessDevice [Alexis Svinartchouk]
 * Use the BlockDevice or File in read and write streams, not the fd [Alexis Svinartchouk]
 
+## 1.0.0 - 2019-01-16
+
+* Update partitioninfo to detect gpt at different offsets [Alexis Svinartchouk]
+
 ## 0.2.2 - 2019-01-11
 
 * Use xxhash fork that fixes build with xcode 10.1 [Alexis Svinartchouk]
