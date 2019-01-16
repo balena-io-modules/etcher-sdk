@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 resin.io
+ * Copyright 2018 balena.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ const main = async ({
 	config,
 	verify,
 }: any) => {
-	let source: sourceDestination.SourceDestination = new sourceDestination.ResinS3Source(
+	let source: sourceDestination.SourceDestination = new sourceDestination.BalenaS3Source(
 		bucket,
 		deviceType,
 		buildId,

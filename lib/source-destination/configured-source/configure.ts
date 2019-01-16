@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 resin.io
+ * Copyright 2018 balena.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as Bluebird from 'bluebird';
+import { using } from 'bluebird';
 import { Disk } from 'file-disk';
 import * as _ from 'lodash';
 import { getPartitions } from 'partitioninfo';
@@ -69,7 +69,7 @@ const getDiskDeviceType = async (disk: Disk): Promise<any> => {
 	const partitions = await getPartitions(disk);
 	for (const partition of partitions.partitions) {
 		if (partition.type === 14) {
-			const deviceType = await Bluebird.using(
+			const deviceType = await using(
 				interact(disk, partition.index),
 				async (fs: AsyncFsLike) => {
 					return await fs

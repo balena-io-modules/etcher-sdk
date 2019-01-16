@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 resin.io
+ * Copyright 2018 balena.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ export * from './lzma';
 export * from './metadata';
 export * from './multi-destination';
 export * from './progress';
-export * from './resin-s3-source';
+export * from './balena-s3-source';
 export * from './source-destination';
 export * from './source-source';
 export * from './usbboot';

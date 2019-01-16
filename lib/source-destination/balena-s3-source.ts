@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 resin.io
+ * Copyright 2018 balena.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import axios from 'axios';
 import { ReadResult } from 'file-disk';
 
 import { Http } from './http';
@@ -21,9 +22,14 @@ import { Metadata } from './metadata';
 import { SourceDestination } from './source-destination';
 import { ZipSource } from './zip';
 
-export class ResinS3Source extends SourceDestination {
+type Name = 'balena' | 'resin';
+
+export class BalenaS3Source extends SourceDestination {
 	private rawSource: Http;
 	private zipSource: ZipSource;
+	private ready: Promise<void>;
+	private names: Name[] = ['balena', 'resin'];
+	name: Name; // images can be named balena.img or resin.img
 
 	constructor(
 		readonly bucket: string,
@@ -36,11 +42,30 @@ export class ResinS3Source extends SourceDestination {
 		// deviceType: raspberry-pi
 		// version: 2.9.6+rev1.prod
 		super();
-		this.rawSource = new Http(this.getUrl('image/resin.img'));
+		this.ready = this.prepare();
+	}
+
+	private async prepare(): Promise<void> {
+		this.name = await this.getName();
+		this.rawSource = new Http(this.getUrl(`image/${this.name}.img`));
 		this.zipSource = new ZipSource(
-			new Http(this.getUrl('image/resin.img.zip')),
+			new Http(this.getUrl(`image/${this.name}.img.zip`)),
 			true,
 		);
+	}
+
+	private async getName(): Promise<Name> {
+		for (const name of this.names) {
+			try {
+				await axios({ method: 'head', url: this.getUrl(`image/${name}.img`) });
+				return name;
+			} catch (error) {
+				if (error.response.status !== 404) {
+					throw error;
+				}
+			}
+		}
+		throw new Error('Could not find image');
 	}
 
 	async canCreateReadStream(): Promise<boolean> {
@@ -63,6 +88,7 @@ export class ResinS3Source extends SourceDestination {
 		length: number,
 		sourceOffset: number,
 	): Promise<ReadResult> {
+		await this.ready;
 		return await this.rawSource.read(
 			buffer,
 			bufferOffset,
@@ -72,20 +98,22 @@ export class ResinS3Source extends SourceDestination {
 	}
 
 	async createReadStream(...args: any[]): Promise<NodeJS.ReadableStream> {
+		await this.ready;
 		return await this.zipSource.createReadStream(...args);
 	}
 
 	async _getMetadata(): Promise<Metadata> {
+		await this.ready;
 		return await this.zipSource.getMetadata();
 	}
 
 	protected async _open() {
-		await this.rawSource.open();
-		await this.zipSource.open();
+		await this.ready;
+		await Promise.all([this.rawSource.open(), await this.zipSource.open()]);
 	}
 
 	protected async _close() {
-		await this.zipSource.close();
-		await this.rawSource.close();
+		await this.ready;
+		await Promise.all([this.zipSource.close(), await this.rawSource.close()]);
 	}
 }

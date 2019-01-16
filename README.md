@@ -3,7 +3,7 @@
 ## Install via [npm](https://npmjs.com)
 
 ```sh
-$ npm install --save resin-io-modules/etcher-sdk
+$ npm install --save etcher-sdk
 ```
 
 ## Usage
