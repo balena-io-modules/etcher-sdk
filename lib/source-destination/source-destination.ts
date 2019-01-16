@@ -413,7 +413,7 @@ export class SourceDestination extends EventEmitter {
 		const stream = await this.createReadStream(false, 0, 65535); // TODO: constant
 		const buffer = await streamToBuffer(stream);
 		try {
-			return await getPartitions(buffer);
+			return await getPartitions(buffer, { getLogical: false });
 		} catch {}
 	}
 }
