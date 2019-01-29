@@ -64,7 +64,7 @@ export const ProgressHashStream = makeClassEmitProgressEvents(
 );
 
 export function createHasher() {
-	const hasher = new ProgressHashStream(SEED, BITS);
+	const hasher = new ProgressHashStream(SEED, BITS, 'buffer');
 	hasher.on('finish', async () => {
 		const checksum = (await streamToBuffer(hasher)).toString('hex');
 		hasher.emit('checksum', checksum);
