@@ -115,6 +115,23 @@ export class Http extends SourceDestination {
 			},
 			responseType: 'stream',
 		});
+		if (emitProgress) {
+			let bytes = 0;
+			let lastTime = Date.now();
+			response.data.on('data', (chunk: Buffer) => {
+				const now = Date.now();
+				const length = chunk.length;
+				bytes += length;
+				const speed = length / ((now - lastTime) / 1000);
+				lastTime = now;
+				response.data.emit('progress', {
+					position: bytes,
+					bytes,
+					speed,
+				});
+			});
+			response.data.pause();
+		}
 		return response.data;
 	}
 }
