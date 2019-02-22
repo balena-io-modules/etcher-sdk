@@ -9,6 +9,9 @@
   "contributors": [
     "Alexis Svinartchouk <alexis@balena.io>"
   ],
+  "engines": {
+    "node": ">=10.0.0"
+  },
   "scripts": {
     "test": "npm run lint && mocha -r ts-node/register tests/**/*.spec.ts",
     "prettier": "prettier --config ./node_modules/resin-lint/config/.prettierrc --write \"lib/**/*.ts\" \"typings/**/*.ts\" \"examples/**/*.ts\" \"tests/**/*.ts\"",
@@ -48,7 +51,7 @@
     "winusb-driver-generator": "^1.2.3"
   },
   "dependencies": {
-    "@types/node": "^6.0.112",
+    "@types/node": "^10.12.26",
     "axios": "^0.18.0",
     "blockmap": "^3.4.2",
     "bluebird": "^3.5.1",
@@ -62,7 +65,6 @@
     "node-raspberrypi-usbboot": "^0.2.3",
     "outdent": "^0.5.0",
     "partitioninfo": "^5.3.0",
-    "readable-stream": "^2.3.6",
     "resin-image-fs": "^5.0.6",
     "speedometer": "^1.0.0",
     "udif": "^0.15.7",

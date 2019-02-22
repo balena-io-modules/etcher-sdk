@@ -15,10 +15,7 @@
  */
 
 import { ReadResult, WriteResult } from 'file-disk';
-// Can't use "import { constants, ReadStream, WriteStream } from 'fs';"
-// as ReadStream and WriteStream are defined as interfaces in @types/node
-// and are not imported in the generated js. They are classes, not interfaces.
-import * as fs from 'fs';
+import { constants, ReadStream, WriteStream } from 'fs';
 import { basename } from 'path';
 
 import { Metadata } from './metadata';
@@ -34,9 +31,7 @@ import {
 import { close, open, read, stat, write } from '../fs';
 
 export const ProgressWriteStream = makeClassEmitProgressEvents(
-	// type definitions for node 6 export fs.WriteStream as an interface, but it's a class.
-	// @ts-ignore
-	fs.WriteStream,
+	WriteStream,
 	'bytesWritten',
 	'bytesWritten',
 	PROGRESS_EMISSION_INTERVAL,
@@ -135,6 +130,8 @@ export class File extends SourceDestination {
 	}
 
 	public async createWriteStream(): Promise<NodeJS.WritableStream> {
+		// @types/node@10.12.26 is wrong about the fs.WriteStream constructor
+		// @ts-ignore
 		const stream = new ProgressWriteStream(null, {
 			fd: this.fd,
 			autoClose: false,

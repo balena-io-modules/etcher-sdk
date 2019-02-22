@@ -16,7 +16,7 @@
 
 import { delay } from 'bluebird';
 import * as _debug from 'debug';
-import { Writable } from 'readable-stream';
+import { Writable } from 'stream';
 
 import {
 	CHUNK_SIZE,
@@ -162,7 +162,7 @@ export class BlockWriteStream extends Writable {
 	/**
 	 * @summary Write buffered data before a stream ends, called by stream internals
 	 */
-	public _final(callback: (error?: Error | void) => void) {
+	public _final(callback: (error?: Error | null) => void) {
 		asCallback(this.__final(), callback);
 	}
 }

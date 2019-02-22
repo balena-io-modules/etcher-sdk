@@ -5,7 +5,7 @@
 		"outDir": "build",
 		"sourceMap": true,
 		"declaration": true,
-		"target": "es6",
+		"target": "es2018",
 		"noImplicitAny": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,

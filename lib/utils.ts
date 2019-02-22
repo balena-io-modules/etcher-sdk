@@ -63,7 +63,7 @@ export function difference<T>(setA: Set<T>, setB: Set<T>): Set<T> {
 
 export function asCallback(
 	promise: Promise<any>,
-	callback: (error: Error | void, value?: any) => void,
+	callback: (error?: Error | null, value?: any) => void,
 ) {
 	promise
 		.then((value: any) => {

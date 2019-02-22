@@ -1,6 +1,6 @@
 import { Chunk } from 'blockmap';
 import { delay } from 'bluebird';
-import { Writable } from 'readable-stream';
+import { Writable } from 'stream';
 
 import { makeClassEmitProgressEvents } from './source-destination/progress';
 import { SourceDestination } from './source-destination/source-destination';
@@ -106,7 +106,7 @@ export class DestinationSparseWriteStream extends Writable
 	/**
 	 * @summary Write buffered data before a stream ends, called by stream internals
 	 */
-	public _final(callback: (error?: Error | void) => void) {
+	public _final(callback: (error?: Error | null) => void) {
 		asCallback(this.__final(), callback);
 	}
 }

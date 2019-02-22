@@ -16,7 +16,8 @@
 
 import { delay } from 'bluebird';
 import { ReadResult } from 'file-disk';
-import { Readable } from 'readable-stream';
+import { read } from 'fs';
+import { Readable } from 'stream';
 
 import {
 	CHUNK_SIZE,
