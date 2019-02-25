@@ -39,11 +39,12 @@ export const ProgressWriteStream = makeClassEmitProgressEvents(
 
 // tslint:disable:no-bitwise
 enum OpenFlags {
-	Read = fs.constants.O_RDONLY,
-	ReadWrite = fs.constants.O_RDWR | fs.constants.O_CREAT,
-	WriteDevice = fs.constants.O_RDWR |
-		fs.constants.O_NONBLOCK |
-		fs.constants.O_SYNC,
+	Read = constants.O_RDONLY,
+	ReadWrite = constants.O_RDWR | constants.O_CREAT,
+	WriteDevice = constants.O_RDWR |
+		constants.O_NONBLOCK |
+		constants.O_SYNC |
+		constants.O_EXCL,
 }
 // tslint:enable:no-bitwise
 

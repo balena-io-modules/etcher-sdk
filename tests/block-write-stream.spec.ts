@@ -25,7 +25,6 @@ import { Readable } from 'stream';
 import { BlockWriteStream } from '../lib/block-write-stream';
 import { CHUNK_SIZE as BLOCK_WRITE_STREAM_CHUNK_SIZE } from '../lib/constants';
 import { DestinationSparseWriteStream } from '../lib/destination-sparse-write-stream';
-import * as diskpart from '../lib/diskpart';
 import { readFile } from '../lib/fs';
 import { tmpFileDisposer, TmpFileResult } from '../lib/tmp';
 import { blockDeviceFromFile, DEFAULT_IMAGE_TESTS_TIMEOUT } from './tester';
@@ -141,12 +140,10 @@ describe('block-write-stream', function() {
 		before(function() {
 			this.osPlatformStub = stub(os, 'platform');
 			this.osPlatformStub.returns('win32');
-			this.diskpartCleanStub = stub(diskpart, 'clean');
 		});
 
 		after(function() {
 			this.osPlatformStub.restore();
-			this.diskpartCleanStub.restore();
 		});
 
 		it(

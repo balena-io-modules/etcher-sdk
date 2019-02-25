@@ -28,7 +28,6 @@ import {
 	DestinationSparseWriteStream,
 	ProgressDestinationSparseWriteStream,
 } from '../destination-sparse-write-stream';
-import { clean } from '../diskpart';
 import { AdapterSourceDestination } from '../scanner/adapters/adapter';
 
 import { File } from './file';
@@ -122,7 +121,6 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		if (platform() !== 'win32') {
 			await unmountDiskAsync(this.drive.device);
 		}
-		await clean(this.drive.device);
 		await super._open();
 	}
 
