@@ -26,13 +26,15 @@ import {
 
 const main = async ({
 	sourceImage,
-	devicePathPrefix,
+	deviceRegex,
+	allowSystemDrives,
 	verify,
 	trim,
 	config,
 }: any) => {
+	deviceRegex = new RegExp(`^${deviceRegex}$`);
 	const adapters = [
-		new scanner.adapters.BlockDeviceAdapter(() => false),
+		new scanner.adapters.BlockDeviceAdapter(() => allowSystemDrives),
 		new scanner.adapters.UsbbootDeviceAdapter(),
 	];
 	const deviceScanner = new scanner.Scanner(adapters);
@@ -57,9 +59,8 @@ const main = async ({
 		);
 	}
 	const destinationDrives = Array.from(deviceScanner.drives.values()).filter(
-		drive => {
-			return drive.devicePath && drive.devicePath.startsWith(devicePathPrefix);
-		},
+		drive =>
+			deviceRegex.test(drive.devicePath) || deviceRegex.test(drive.device),
 	);
 	try {
 		await pipeSourceToDestinationsWithProgressBar(
@@ -74,13 +75,15 @@ const main = async ({
 
 // tslint:disable-next-line: no-var-requires
 const argv = require('yargs').command(
-	'$0 <sourceImage> <devicePathPrefix>',
-	'Write the sourceImage on all drives which link name in /dev/disk/by-path/ starts with devicePathPrefix.',
+	'$0 <sourceImage> <deviceRegex>',
+	'Write the sourceImage on all drives which `device` or `devicePath` attributes match deviceRegex.',
 	(yargs: Argv) => {
 		yargs.positional('sourceImage', { describe: 'Source image' });
-		yargs.positional('devicePathPrefix', {
-			describe: 'Devices name prefix in /dev/disk/by-path/',
+		yargs.positional('deviceRegex', {
+			describe:
+				'Regex matching the target drives `device` or `devicePath` attributes',
 		});
+		yargs.option('allowSystemDrives', { default: false });
 		yargs.option('verify', { default: false });
 		yargs.option('trim', { default: false });
 		yargs.describe('config', 'json configuration file');
