@@ -64,7 +64,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return this.drive.device;
 	}
 
-	get devicePath(): string {
+	get devicePath(): string | null {
 		return this.drive.devicePath;
 	}
 
@@ -76,13 +76,13 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return this.drive.mountpoints;
 	}
 
-	get size(): number {
+	get size(): number | null {
 		return this.drive.size;
 	}
 
 	async _getMetadata(): Promise<Metadata> {
 		return {
-			size: this.drive.size,
+			size: this.drive.size || undefined,
 		};
 	}
 

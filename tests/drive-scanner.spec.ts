@@ -15,11 +15,11 @@
  */
 
 import { expect } from 'chai';
+import * as drivelist from 'drivelist';
 import * as os from 'os';
 import { stub } from 'sinon';
 
 import { scanner } from '../lib';
-import * as blockDeviceAdapter from '../lib/scanner/adapters/block-device';
 
 async function createScanner(
 	includeSystemDrives = false,
@@ -56,7 +56,7 @@ describe('Scanner', function() {
 
 	describe('given only system available drives', function() {
 		beforeEach(async function() {
-			this.drivelistStub = stub(blockDeviceAdapter, 'listDrives');
+			this.drivelistStub = stub(drivelist, 'list');
 			this.drivelistStub.resolves([
 				{
 					device: '/dev/sda',
@@ -95,7 +95,7 @@ describe('Scanner', function() {
 
 		describe('given available drives', function() {
 			beforeEach(async function() {
-				this.drivelistStub = stub(blockDeviceAdapter, 'listDrives');
+				this.drivelistStub = stub(drivelist, 'list');
 				this.drivelistStub.resolves([
 					{
 						device: '/dev/sda',
@@ -194,7 +194,7 @@ describe('Scanner', function() {
 
 		describe('given available drives', function() {
 			beforeEach(async function() {
-				this.drivelistStub = stub(blockDeviceAdapter, 'listDrives');
+				this.drivelistStub = stub(drivelist, 'list');
 				this.drivelistStub.resolves([
 					{
 						device: '\\\\.\\PHYSICALDRIVE1',
@@ -274,7 +274,7 @@ describe('Scanner', function() {
 
 		describe('given a drive with a single drive letters', function() {
 			beforeEach(async function() {
-				this.drivelistStub = stub(blockDeviceAdapter, 'listDrives');
+				this.drivelistStub = stub(drivelist, 'list');
 				this.drivelistStub.resolves([
 					{
 						device: '\\\\.\\PHYSICALDRIVE3',
@@ -309,7 +309,7 @@ describe('Scanner', function() {
 
 		describe('given a drive with multiple drive letters', function() {
 			beforeEach(async function() {
-				this.drivelistStub = stub(blockDeviceAdapter, 'listDrives');
+				this.drivelistStub = stub(drivelist, 'list');
 				this.drivelistStub.resolves([
 					{
 						device: '\\\\.\\PHYSICALDRIVE3',
@@ -351,7 +351,7 @@ describe('Scanner', function() {
 
 	describe('given an error when listing the drives', function() {
 		beforeEach(function() {
-			this.drivelistStub = stub(blockDeviceAdapter, 'listDrives');
+			this.drivelistStub = stub(drivelist, 'list');
 			this.drivelistStub.rejects(new Error('scan error'));
 		});
 

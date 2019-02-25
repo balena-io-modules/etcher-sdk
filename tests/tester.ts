@@ -55,6 +55,16 @@ export async function blockDeviceFromFile(
 		isReadOnly: false,
 		busType: 'UNKNOWN',
 		error: null,
+		blockSize: 512,
+		busVersion: null,
+		enumerator: 'fake',
+		isCard: null,
+		isRemovable: true,
+		isSCSI: false,
+		isUAS: null,
+		isUSB: true,
+		isVirtual: false,
+		logicalBlockSize: 512,
 	};
 	return new FakeBlockDevice(drive);
 }

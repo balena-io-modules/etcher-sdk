@@ -16,26 +16,11 @@
 
 import { delay } from 'bluebird';
 import * as _debug from 'debug';
-import { Drive as DrivelistDrive, list } from 'drivelist';
+import { Drive as $Drive, list } from 'drivelist';
 
 import { Adapter } from './adapter';
 import { BlockDevice } from '../../source-destination/block-device';
 import { difference } from '../../utils';
-
-// Exported so it can be mocked in tests
-export const listDrives = (): Promise<DrivelistDrive[]> => {
-	return new Promise((resolve, reject) => {
-		list(
-			(error: Error, drives: DrivelistDrive[]): void => {
-				if (error) {
-					reject(error);
-					return;
-				}
-				resolve(drives);
-			},
-		);
-	});
-};
 
 const debug = _debug('etcher-sdk:block-device-adapter');
 
@@ -48,9 +33,14 @@ const USBBOOT_RPI_COMPUTE_MODULE_NAMES = [
 	'Linux File-Stor Gadget Media',
 ];
 
-const driveKey = (drive: DrivelistDrive) => {
+const driveKey = (drive: $Drive) => {
 	return drive.device + '|' + drive.size + '|' + drive.description;
 };
+
+export interface DrivelistDrive extends $Drive {
+	displayName: string;
+	icon?: string;
+}
 
 export class BlockDeviceAdapter extends Adapter {
 	// Emits 'attach', 'detach', 'ready' and 'error' events
@@ -104,46 +94,44 @@ export class BlockDeviceAdapter extends Adapter {
 	}
 
 	private async listDrives(): Promise<Map<string, DrivelistDrive>> {
-		let drives;
+		let drives: $Drive[];
 		const result = new Map<string, DrivelistDrive>();
 		try {
-			drives = await listDrives();
+			drives = await list();
 		} catch (error) {
 			debug(error);
 			this.emit('error', error);
 			return result;
 		}
-		drives = drives.filter((drive: DrivelistDrive) => {
-			return (
-				// Always ignore RAID attached devices, as they are in danger-country;
-				// Even flashing RAIDs intentionally can have unintended effects
-				drive.busType !== 'RAID' &&
-				// Exclude errored drives
-				!drive.error &&
-				// Exclude system drives if needed
-				(this.includeSystemDrives() || !drive.isSystem) &&
-				// Exclude drives with no size
-				typeof drive.size === 'number'
-			);
-		});
-		drives.forEach((drive: DrivelistDrive) => {
-			// TODO: Find a better way to detect that a certain
-			// block device is a compute module initialized
-			// through usbboot.
-			if (USBBOOT_RPI_COMPUTE_MODULE_NAMES.includes(drive.description)) {
-				drive.description = 'Compute Module';
-				drive.icon = 'raspberrypi'; // TODO: Should this be in the sdk?
-				drive.isSystem = false;
-			}
-			if (/PhysicalDrive/i.test(drive.device) && drive.mountpoints.length) {
-				// Windows
-				drive.displayName = drive.mountpoints.map(m => m.path).join(', ');
-			} else {
-				drive.displayName = drive.device;
-			}
-		});
 		for (const drive of drives) {
-			result.set(driveKey(drive), drive);
+			if (
+				!// Always ignore RAID attached devices, as they are in danger-country;
+				// Even flashing RAIDs intentionally can have unintended effects
+				(
+					drive.busType !== 'RAID' &&
+					// Exclude errored drives
+					!drive.error &&
+					// Exclude system drives if needed
+					(this.includeSystemDrives() || !drive.isSystem) &&
+					// Exclude drives with no size
+					typeof drive.size === 'number'
+				)
+			) {
+				continue;
+			}
+
+			const displayName =
+				/PhysicalDrive/i.test(drive.device) && drive.mountpoints.length
+					? drive.mountpoints.map(m => m.path).join(', ') // Windows
+					: drive.device;
+			const resultDrive: DrivelistDrive = { ...drive, displayName };
+			if (USBBOOT_RPI_COMPUTE_MODULE_NAMES.includes(resultDrive.description)) {
+				resultDrive.description = 'Compute Module';
+				// TODO: Should this be in the sdk?
+				resultDrive.icon = 'raspberrypi';
+				resultDrive.isSystem = false;
+			}
+			result.set(driveKey(drive), resultDrive);
 		}
 		return result;
 	}
