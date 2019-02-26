@@ -42,14 +42,9 @@ export class BlockWriteStream extends Writable {
 		private maxRetries = 5,
 	) {
 		super({ objectMode: true, highWaterMark: 1 });
-		if (
-			firstBytesToKeep !== 0 &&
-			firstBytesToKeep % this.destination.blockSize !== 0
-		) {
-			throw new Error(
-				'firstBytesToKeep must be a multiple of the destination blockSize',
-			);
-		}
+		this.firstBytesToKeep =
+			Math.ceil(firstBytesToKeep / destination.blockSize) *
+			destination.blockSize;
 	}
 
 	private async writeChunk(
