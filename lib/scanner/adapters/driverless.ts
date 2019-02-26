@@ -43,8 +43,10 @@ class DriverlessDeviceAdapter_ extends Adapter {
 	}
 
 	private async scanLoop(): Promise<void> {
-		// This import fails on anything else than win32 and this class will only be exported on win32
-		this.listDriverlessDevices = (await import('winusb-driver-generator')).listDriverlessDevices;
+		if (this.listDriverlessDevices === undefined) {
+			// This import fails on anything else than win32 and this class will only be exported on win32
+			this.listDriverlessDevices = (await import('winusb-driver-generator')).listDriverlessDevices;
+		}
 		while (this.running) {
 			this.scan();
 			if (!this.ready) {
@@ -56,7 +58,13 @@ class DriverlessDeviceAdapter_ extends Adapter {
 	}
 
 	private scan(): void {
-		const drives = this.listDrives();
+		let drives;
+		try {
+			// winusb-driver-generator may fail with "Requested resource busy or similar call already in progress"
+			drives = this.listDrives();
+		} catch (error) {
+			return;
+		}
 		if (this.running) {
 			// we may have been stopped while listing the drives.
 			const oldDevices = new Set<string>(this.drives.keys());
