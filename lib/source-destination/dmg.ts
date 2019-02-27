@@ -28,6 +28,7 @@ import { NotCapable } from '../errors';
 import { StreamLimiter } from '../stream-limiter';
 
 export class DmgSource extends SourceSource {
+	static requiresRandomReadableSource = true;
 	static readonly mimetype = 'application/x-apple-diskimage';
 	private image: UDIFImage;
 
