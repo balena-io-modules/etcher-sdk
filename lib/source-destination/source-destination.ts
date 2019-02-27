@@ -405,6 +405,11 @@ export class SourceDestination extends EventEmitter {
 		if (Cls === undefined) {
 			return this;
 		}
+		if (Cls.requiresRandomReadableSource && !(await this.canRead())) {
+			throw new NotCapable(
+				`Can not read a ${Cls.name} from a ${this.constructor.name}.`,
+			);
+		}
 		const innerSource = new Cls(this);
 		return await innerSource.getInnerSource();
 	}
