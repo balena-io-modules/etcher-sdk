@@ -383,21 +383,7 @@ export class SourceDestination extends EventEmitter {
 		}
 	}
 
-	private async getMimetype(): Promise<string | undefined> {
-		let mimetype = await this.getMimeTypeFromName();
-		if (mimetype === undefined) {
-			mimetype = await this.getMimeTypeFromContent();
-		}
-		return mimetype;
-	}
-
-	async getInnerSource(): Promise<SourceDestination> {
-		await this.open();
-		const metadata = await this.getMetadata();
-		if (metadata.isEtch === true) {
-			return this;
-		}
-		const mimetype = await this.getMimetype();
+	private async getInnerSourceHelper(mimetype?: string) {
 		if (mimetype === undefined) {
 			return this;
 		}
@@ -412,6 +398,27 @@ export class SourceDestination extends EventEmitter {
 		}
 		const innerSource = new Cls(this);
 		return await innerSource.getInnerSource();
+	}
+
+	async getInnerSource(): Promise<SourceDestination> {
+		await this.open();
+		const metadata = await this.getMetadata();
+		if (metadata.isEtch === true) {
+			return this;
+		}
+		let mimetype = await this.getMimeTypeFromName();
+		if (mimetype !== undefined) {
+			try {
+				return await this.getInnerSourceHelper(mimetype);
+			} catch (error) {
+				if (error instanceof NotCapable) {
+					throw error;
+				}
+				// File extension may be wrong, try content.
+			}
+		}
+		mimetype = await this.getMimeTypeFromContent();
+		return await this.getInnerSourceHelper(mimetype);
 	}
 
 	async getPartitionTable(): Promise<GetPartitionsResult | undefined> {
