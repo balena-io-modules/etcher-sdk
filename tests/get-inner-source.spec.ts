@@ -35,7 +35,7 @@ describe('getInnerSource()', function() {
 			const data = await streamToBuffer(await innerSource.createReadStream());
 			await innerSource.close();
 			expect(metadata.name).to.equal('data.img');
-			expect(data.toString('utf-8')).to.equal('some data\n');
+			expect(data.toString('utf8')).to.equal('some data\n');
 		});
 	}
 
@@ -57,4 +57,19 @@ describe('getInnerSource()', function() {
 			await source.close();
 		});
 	}
+
+	it(`should work for a raw image with a .dmg extension`, async function() {
+		const filename = 'raw-image-not-a-dmg.dmg';
+		const source = new sourceDestination.File(
+			join(__dirname, 'data', 'images', filename),
+			sourceDestination.File.OpenFlags.Read,
+		);
+		const innerSource = await source.getInnerSource();
+		const metadata = await innerSource.getMetadata();
+		const data = await streamToBuffer(await innerSource.createReadStream());
+		await innerSource.close();
+		expect(metadata.name).to.equal(filename);
+		expect(innerSource).to.be.an.instanceof(sourceDestination.File);
+		expect(data.toString('utf8')).to.equal('some data\n');
+	});
 });
