@@ -45,18 +45,17 @@ export class StreamZipSource extends SourceSource {
 
 	private async getEntry(): Promise<ZipStreamEntry> {
 		if (this.entry === undefined) {
-			this.entry = await getFileStreamFromZipStream(
+			const entry = await getFileStreamFromZipStream(
 				await this.source.createReadStream(false),
 			);
-			// We need to reset the entry if any read happens
-			const originalRead = this.entry._read.bind(this.entry);
-			this.entry._read = (...args: any[]) => {
-				if (this.entry !== undefined) {
-					this.entry._read = originalRead;
-					this.entry = undefined;
-				}
-				return originalRead(...args);
+			this.entry = entry;
+			const onData = () => {
+				// We need to reset the entry if any read happens on this stream
+				entry.removeListener('data', onData);
+				this.entry = undefined;
 			};
+			entry.on('data', onData);
+			entry.pause();
 		}
 		return this.entry;
 	}
