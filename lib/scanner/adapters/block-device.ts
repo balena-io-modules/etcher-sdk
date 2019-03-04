@@ -114,7 +114,9 @@ export class BlockDeviceAdapter extends Adapter {
 					// Exclude system drives if needed
 					(this.includeSystemDrives() || !drive.isSystem) &&
 					// Exclude drives with no size
-					typeof drive.size === 'number'
+					typeof drive.size === 'number' &&
+					// Exclude virtual drives (DMG, TimeMachine, ... on macOS)
+					!drive.isVirtual
 				)
 			) {
 				continue;
