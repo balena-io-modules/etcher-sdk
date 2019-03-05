@@ -29,6 +29,7 @@ export * from './progress';
 export * from './balena-s3-source';
 export * from './source-destination';
 export * from './source-source';
+export * from './single-use-stream-source';
 export * from './usbboot';
 export * from './xz';
 export * from './zip';

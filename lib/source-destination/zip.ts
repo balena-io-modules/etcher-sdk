@@ -36,8 +36,23 @@ import { NotCapable } from '../errors';
 import { StreamLimiter } from '../stream-limiter';
 import { streamToBuffer } from '../utils';
 
+export function matchSupportedExtensions(filename: string): boolean {
+	const extension = posix.extname(filename);
+	return (
+		extension.length > 1 &&
+		SourceDestination.imageExtensions.includes(extension.slice(1))
+	);
+}
+
 export class StreamZipSource extends SourceSource {
 	private entry?: ZipStreamEntry;
+
+	constructor(
+		source: SourceDestination,
+		private match: (filename: string) => boolean = matchSupportedExtensions,
+	) {
+		super(source);
+	}
 
 	async canCreateReadStream(): Promise<boolean> {
 		return true;
@@ -45,18 +60,18 @@ export class StreamZipSource extends SourceSource {
 
 	private async getEntry(): Promise<ZipStreamEntry> {
 		if (this.entry === undefined) {
-			this.entry = await getFileStreamFromZipStream(
+			const entry = await getFileStreamFromZipStream(
 				await this.source.createReadStream(false),
+				this.match,
 			);
-			// We need to reset the entry if any read happens
-			const originalRead = this.entry._read.bind(this.entry);
-			this.entry._read = (...args: any[]) => {
-				if (this.entry !== undefined) {
-					this.entry._read = originalRead;
-					this.entry = undefined;
-				}
-				return originalRead(...args);
+			this.entry = entry;
+			const onData = () => {
+				// We need to reset the entry if any read happens on this stream
+				entry.removeListener('data', onData);
+				this.entry = undefined;
 			};
+			entry.on('data', onData);
+			entry.pause();
 		}
 		return this.entry;
 	}
@@ -124,7 +139,10 @@ export class RandomAccessZipSource extends SourceSource {
 	private ready: Promise<void>;
 	private entries: Entry[] = [];
 
-	constructor(source: SourceDestination) {
+	constructor(
+		source: SourceDestination,
+		private match: (filename: string) => boolean = matchSupportedExtensions,
+	) {
 		super(source);
 		this.ready = this.init();
 	}
@@ -170,13 +188,9 @@ export class RandomAccessZipSource extends SourceSource {
 	}
 
 	private async getImageEntry(): Promise<Entry> {
-		let entries = (await this.getEntries()).filter(entry => {
-			const extension = posix.extname(entry.fileName);
-			return (
-				extension.length > 1 &&
-				SourceDestination.imageExtensions.includes(extension.slice(1))
-			);
-		});
+		let entries = (await this.getEntries()).filter(entry =>
+			this.match(entry.fileName),
+		);
 		if (entries.length === 0) {
 			throw new Error('Could not find a disk image in this archive');
 		}
@@ -314,16 +328,23 @@ export class ZipSource extends SourceSource {
 	static readonly mimetype = 'application/zip';
 	private implementation: RandomAccessZipSource | StreamZipSource;
 
-	constructor(source: SourceDestination, private preferStreamSource = false) {
+	constructor(
+		source: SourceDestination,
+		private preferStreamSource = false,
+		private match: (filename: string) => boolean = matchSupportedExtensions,
+	) {
 		super(source);
 	}
 
 	private async prepare() {
 		if (this.implementation === undefined) {
 			if (!this.preferStreamSource && (await this.source.canRead())) {
-				this.implementation = new RandomAccessZipSource(this.source);
+				this.implementation = new RandomAccessZipSource(
+					this.source,
+					this.match,
+				);
 			} else {
-				this.implementation = new StreamZipSource(this.source);
+				this.implementation = new StreamZipSource(this.source, this.match);
 			}
 		}
 	}

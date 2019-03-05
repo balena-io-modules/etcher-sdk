@@ -279,7 +279,7 @@ export class SourceDestination extends EventEmitter {
 	}
 
 	async _getMetadata(): Promise<Metadata> {
-		throw new NotCapable();
+		return {};
 	}
 
 	async read(

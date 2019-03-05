@@ -27,6 +27,8 @@ export async function streamToBuffer(
 			stream.on('end', () => {
 				resolve(Buffer.concat(chunks));
 			});
+			// The stream may have been explicitely paused
+			stream.resume();
 		},
 	);
 }
