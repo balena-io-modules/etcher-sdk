@@ -27,6 +27,7 @@ import {
 } from 'yauzl';
 import { ZipStreamEntry } from 'unzip-stream';
 
+import { NO_MATCHING_FILE_MSG } from '../constants';
 import { getFileStreamFromZipStream } from '../zip';
 import { Metadata } from './metadata';
 import { SourceDestination, SourceDestinationFs } from './source-destination';
@@ -192,7 +193,7 @@ export class RandomAccessZipSource extends SourceSource {
 			this.match(entry.fileName),
 		);
 		if (entries.length === 0) {
-			throw new Error('Could not find a disk image in this archive');
+			throw new Error(NO_MATCHING_FILE_MSG);
 		}
 		entries = sortBy(entries, 'uncompressedSize');
 		const entry = entries[entries.length - 1];

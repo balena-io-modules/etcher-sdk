@@ -19,7 +19,7 @@ import 'mocha';
 import { join } from 'path';
 
 import { sourceDestination } from '../lib';
-import { SourceSource } from '../lib/source-destination/source-source';
+import { NO_MATCHING_FILE_MSG } from '../lib/constants';
 import {
 	DEFAULT_IMAGE_TESTS_TIMEOUT,
 	expectSourceSourceError,
@@ -37,14 +37,14 @@ describe('zip support', function() {
 		'given an empty zip directory',
 		join(ZIP_PATH, 'zip-directory-empty.zip'),
 		sourceDestination.ZipSource,
-		'Could not find a disk image in this archive',
+		NO_MATCHING_FILE_MSG,
 	);
 
 	expectSourceSourceError(
 		'given a zip directory containing only misc files',
 		join(ZIP_PATH, 'zip-directory-no-image-only-misc.zip'),
 		sourceDestination.ZipSource,
-		'Could not find a disk image in this archive',
+		NO_MATCHING_FILE_MSG,
 	);
 
 	expectSourceSourceError(
@@ -100,4 +100,24 @@ describe('zip support', function() {
 			);
 		});
 	});
+
+	for (const preferStreamSource of [false, true]) {
+		it(`should fail to read from a zip file containing no archive (use stream=${preferStreamSource})`, async () => {
+			const source = new sourceDestination.ZipSource(
+				new sourceDestination.File(
+					join(ZIP_PATH, 'zip-directory-empty.zip'),
+					sourceDestination.File.OpenFlags.Read,
+				),
+				preferStreamSource,
+				() => false, // Don't match any filename
+			);
+			try {
+				await source.getMetadata();
+				expect(false).to.be.true;
+			} catch (error) {
+				expect(error).to.be.instanceof(Error);
+				expect(error.message).to.equal(NO_MATCHING_FILE_MSG);
+			}
+		});
+	}
 });

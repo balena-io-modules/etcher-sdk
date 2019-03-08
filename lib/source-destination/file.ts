@@ -115,6 +115,7 @@ export class File extends SourceDestination {
 		start = 0,
 		end?: number,
 	): Promise<NodeJS.ReadableStream> {
+		await this.open();
 		if (emitProgress) {
 			return new ProgressBlockReadStream(this, start, end);
 		} else {
