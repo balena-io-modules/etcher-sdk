@@ -16,6 +16,8 @@
 
 import * as unzip from 'unzip-stream';
 
+import { NO_MATCHING_FILE_MSG } from './constants';
+
 export const getFileStreamFromZipStream = async (
 	zipStream: NodeJS.ReadableStream,
 	match: (filename: string) => boolean,
@@ -46,9 +48,9 @@ export const getFileStreamFromZipStream = async (
 					entry.autodrain();
 				}
 			});
-			zipStream.on('finish', () => {
+			zipStream.on('end', () => {
 				if (!found) {
-					reject(new Error("Can't find a matching file in this zip archive"));
+					reject(new Error(NO_MATCHING_FILE_MSG));
 				}
 			});
 		},
