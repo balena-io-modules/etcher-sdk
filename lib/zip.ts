@@ -46,7 +46,7 @@ export const getFileStreamFromZipStream = async (
 					entry.autodrain();
 				}
 			});
-			zipStream.on('finish', () => {
+			zipStream.on('end', () => {
 				if (!found) {
 					reject(new Error("Can't find a matching file in this zip archive"));
 				}
