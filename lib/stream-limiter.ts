@@ -27,12 +27,12 @@ export class StreamLimiter extends Transform {
 		this.stream.pipe(this);
 	}
 
-	_transform(
+	public _transform(
 		buffer: Buffer,
 		encoding: string,
 		callback: (error?: Error | null, data?: Buffer) => void,
 	) {
-		let length = Math.min(buffer.length, this.maxBytes);
+		const length = Math.min(buffer.length, this.maxBytes);
 		if (length > 0) {
 			this.push(buffer.slice(0, length));
 		}

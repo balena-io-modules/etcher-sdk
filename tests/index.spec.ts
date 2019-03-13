@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { expect } from 'chai';
+import * as assert from 'assert';
 import { every, first, isArray, isEmpty, isString, map } from 'lodash';
 import 'mocha';
 
@@ -22,17 +22,15 @@ import { sourceDestination } from '../lib';
 
 describe('SourceDestination.imageExtensions', function() {
 	it('should be an array', function() {
-		expect(isArray(sourceDestination.SourceDestination.imageExtensions)).to.be
-			.true;
+		assert(isArray(sourceDestination.SourceDestination.imageExtensions));
 	});
 
 	it('should not be empty', function() {
-		expect(isEmpty(sourceDestination.SourceDestination.imageExtensions)).to.be
-			.false;
+		assert(!isEmpty(sourceDestination.SourceDestination.imageExtensions));
 	});
 
 	it('should contain only strings', function() {
-		expect(
+		assert(
 			every(
 				map(sourceDestination.SourceDestination.imageExtensions, function(
 					extension,
@@ -40,11 +38,11 @@ describe('SourceDestination.imageExtensions', function() {
 					return isString(extension);
 				}),
 			),
-		).to.be.true;
+		);
 	});
 
 	it('should not contain empty strings', function() {
-		expect(
+		assert(
 			every(
 				map(sourceDestination.SourceDestination.imageExtensions, function(
 					extension,
@@ -52,11 +50,11 @@ describe('SourceDestination.imageExtensions', function() {
 					return !isEmpty(extension);
 				}),
 			),
-		).to.be.true;
+		);
 	});
 
 	it('should not contain a leading period in any file type extension', function() {
-		expect(
+		assert(
 			every(
 				map(sourceDestination.SourceDestination.imageExtensions, function(
 					extension,
@@ -64,6 +62,6 @@ describe('SourceDestination.imageExtensions', function() {
 					return first(extension) !== '.';
 				}),
 			),
-		).to.be.true;
+		);
 	});
 });

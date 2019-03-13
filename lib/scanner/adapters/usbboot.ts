@@ -24,7 +24,7 @@ import {
 import { UsbbootDrive } from '../../source-destination/usbboot';
 import { Adapter } from './adapter';
 
-let UsbbootScanner: typeof UsbbootScannerType | undefined = undefined;
+let UsbbootScanner: typeof UsbbootScannerType | undefined;
 try {
 	// tslint:disable: no-var-requires
 	UsbbootScanner = require('node-raspberrypi-usbboot').UsbbootScanner;
@@ -50,11 +50,11 @@ export class UsbbootDeviceAdapter extends Adapter {
 		}
 	}
 
-	start(): void {
+	public start(): void {
 		this.scanner.start();
 	}
 
-	stop(): void {
+	public stop(): void {
 		this.scanner.stop();
 	}
 

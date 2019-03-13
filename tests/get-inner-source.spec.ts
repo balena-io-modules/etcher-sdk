@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import * as assert from 'assert';
 import { expect } from 'chai';
 import 'mocha';
 import { join } from 'path';
@@ -47,7 +48,7 @@ describe('getInnerSource()', function() {
 			);
 			try {
 				const innerSource = await source.getInnerSource();
-				expect(true).to.be.false;
+				assert(false);
 			} catch (error) {
 				expect(error).to.be.an.instanceof(errors.NotCapable);
 				expect(error.message).to.equal(

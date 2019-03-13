@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import * as assert from 'assert';
 import { expect } from 'chai';
 import 'mocha';
 import { join } from 'path';
@@ -69,6 +70,6 @@ describe('dmg support', function() {
 			await source.close();
 			return;
 		}
-		expect(true).to.be.false;
+		assert(false);
 	});
 });

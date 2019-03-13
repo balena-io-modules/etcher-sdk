@@ -91,7 +91,7 @@ export class BlockReadStream extends Readable {
 		}
 	}
 
-	_read() {
+	public _read() {
 		this.__read();
 	}
 }

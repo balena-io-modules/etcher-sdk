@@ -15,6 +15,6 @@ declare module 'readable-stream' {
 
 	export class Writable extends NodeJSWritable {
 		// destroy does not exist in node 6 Writable
-		destroy(error?: Error): this;
+		public destroy(error?: Error): this;
 	}
 }

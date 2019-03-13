@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import * as errors from './errors';
 import * as constants from './constants';
+import * as errors from './errors';
 import * as fs from './fs';
 import * as multiWrite from './multi-write';
 import * as scanner from './scanner';

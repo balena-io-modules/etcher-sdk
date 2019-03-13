@@ -21,16 +21,16 @@ import { SourceDestination } from './source-destination';
 
 export class DriverlessDevice extends SourceDestination
 	implements AdapterSourceDestination {
-	accessible = false;
-	raw = null;
-	device = null;
-	devicePath = null;
-	isSystem = false;
-	mountpoints = [];
-	size = null;
-	emitsProgress = false;
-	deviceDescriptor: { idVendor: number; idProduct: number };
-	description = '';
+	public accessible = false;
+	public raw = null;
+	public device = null;
+	public devicePath = null;
+	public isSystem = false;
+	public mountpoints = [];
+	public size = null;
+	public emitsProgress = false;
+	public deviceDescriptor: { idVendor: number; idProduct: number };
+	public description = '';
 
 	constructor(private driverlessDevice: WinUsbDriverlessDevice) {
 		super();

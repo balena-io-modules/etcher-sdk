@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-import { fromCallback } from 'bluebird';
 import BlockMap = require('blockmap');
+import { fromCallback } from 'bluebird';
 import { sortBy, values } from 'lodash';
 import { posix } from 'path';
 import { PassThrough } from 'readable-stream';
+import { ZipStreamEntry } from 'unzip-stream';
 import {
 	Entry,
 	fromRandomAccessReader,
 	RandomAccessReader,
 	ZipFile,
 } from 'yauzl';
-import { ZipStreamEntry } from 'unzip-stream';
 
 import { NO_MATCHING_FILE_MSG } from '../constants';
 import { getFileStreamFromZipStream } from '../zip';
@@ -55,7 +55,7 @@ export class StreamZipSource extends SourceSource {
 		super(source);
 	}
 
-	async canCreateReadStream(): Promise<boolean> {
+	public async canCreateReadStream(): Promise<boolean> {
 		return true;
 	}
 
@@ -77,7 +77,7 @@ export class StreamZipSource extends SourceSource {
 		return this.entry;
 	}
 
-	async createReadStream(
+	public async createReadStream(
 		emitProgress = false,
 		start = 0,
 		end?: number,
@@ -94,7 +94,7 @@ export class StreamZipSource extends SourceSource {
 		return stream;
 	}
 
-	async _getMetadata(): Promise<Metadata> {
+	protected async _getMetadata(): Promise<Metadata> {
 		const entry = await this.getEntry();
 		return {
 			size: entry.size,
@@ -109,7 +109,7 @@ class SourceRandomAccessReader extends RandomAccessReader {
 		super();
 	}
 
-	_readStreamForRange(start: number, end: number) {
+	public _readStreamForRange(start: number, end: number) {
 		// _readStreamForRange end is exclusive
 		// this.source.createReadStream end is inclusive
 		// Workaround this method not being async with a passthrough stream
@@ -126,7 +126,7 @@ class SourceRandomAccessReader extends RandomAccessReader {
 }
 
 export class RandomAccessZipSource extends SourceSource {
-	private static manifestFields: (keyof Metadata)[] = [
+	private static manifestFields: Array<keyof Metadata> = [
 		'bytesToZeroOutFromTheBeginning',
 		'checksum',
 		'checksumType',
@@ -148,7 +148,7 @@ export class RandomAccessZipSource extends SourceSource {
 		this.ready = this.init();
 	}
 
-	async init() {
+	private async init() {
 		await this.source.open();
 		const sourceMetadata = await this.source.getMetadata();
 		const reader = new SourceRandomAccessReader(this.source);
@@ -174,11 +174,11 @@ export class RandomAccessZipSource extends SourceSource {
 		});
 	}
 
-	async canCreateReadStream(): Promise<boolean> {
+	public async canCreateReadStream(): Promise<boolean> {
 		return true;
 	}
 
-	async canCreateSparseReadStream(): Promise<boolean> {
+	public async canCreateSparseReadStream(): Promise<boolean> {
 		const metadata = await this.getMetadata();
 		return metadata.blockMap !== undefined;
 	}
@@ -189,9 +189,7 @@ export class RandomAccessZipSource extends SourceSource {
 	}
 
 	private async getImageEntry(): Promise<Entry> {
-		let entries = (await this.getEntries()).filter(entry =>
-			this.match(entry.fileName),
-		);
+		let entries = (await this.getEntries()).filter(e => this.match(e.fileName));
 		if (entries.length === 0) {
 			throw new Error(NO_MATCHING_FILE_MSG);
 		}
@@ -205,7 +203,7 @@ export class RandomAccessZipSource extends SourceSource {
 		return entry;
 	}
 
-	async _open(): Promise<void> {
+	protected async _open(): Promise<void> {
 		await this.ready;
 		// We only want to run this for the error it may throw if there is no disk image in the zip
 		await this.getImageEntry();
@@ -249,7 +247,7 @@ export class RandomAccessZipSource extends SourceSource {
 		}
 	}
 
-	async createReadStream(
+	public async createReadStream(
 		emitProgress = false,
 		start = 0,
 		end?: number,
@@ -270,7 +268,7 @@ export class RandomAccessZipSource extends SourceSource {
 		return stream;
 	}
 
-	async createSparseReadStream(
+	public async createSparseReadStream(
 		generateChecksums = false,
 	): Promise<BlockMap.FilterStream> {
 		const metadata = await this.getMetadata();
@@ -287,7 +285,7 @@ export class RandomAccessZipSource extends SourceSource {
 		return transform;
 	}
 
-	async _getMetadata(): Promise<Metadata> {
+	public async _getMetadata(): Promise<Metadata> {
 		const entry = await this.getImageEntry();
 		const result: Metadata = {
 			size: entry.uncompressedSize,
@@ -298,7 +296,7 @@ export class RandomAccessZipSource extends SourceSource {
 		result.instructions = await this.getString(
 			posix.join(prefix, 'instructions.markdown'),
 		);
-		let blockMap = await this.getString(posix.join(prefix, 'image.bmap'));
+		const blockMap = await this.getString(posix.join(prefix, 'image.bmap'));
 		if (blockMap !== undefined) {
 			result.blockMap = BlockMap.parse(blockMap);
 			result.blockmappedSize =
@@ -326,7 +324,7 @@ export class RandomAccessZipSource extends SourceSource {
 }
 
 export class ZipSource extends SourceSource {
-	static readonly mimetype = 'application/zip';
+	public static readonly mimetype = 'application/zip';
 	private implementation: RandomAccessZipSource | StreamZipSource;
 
 	constructor(
@@ -350,22 +348,22 @@ export class ZipSource extends SourceSource {
 		}
 	}
 
-	async canCreateReadStream(): Promise<boolean> {
+	public async canCreateReadStream(): Promise<boolean> {
 		await this.prepare();
 		return await this.implementation.canCreateReadStream();
 	}
 
-	async open(): Promise<void> {
+	public async open(): Promise<void> {
 		await this.prepare();
 		return await this.implementation.open();
 	}
 
-	async canCreateSparseReadStream(): Promise<boolean> {
+	public async canCreateSparseReadStream(): Promise<boolean> {
 		await this.prepare();
 		return await this.implementation.canCreateSparseReadStream();
 	}
 
-	async createReadStream(
+	public async createReadStream(
 		emitProgress = false,
 		start = 0,
 		end?: number,
@@ -374,14 +372,14 @@ export class ZipSource extends SourceSource {
 		return await this.implementation.createReadStream(emitProgress, start, end);
 	}
 
-	async createSparseReadStream(
+	public async createSparseReadStream(
 		generateChecksums = false,
 	): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
 		await this.prepare();
 		return await this.implementation.createSparseReadStream(generateChecksums);
 	}
 
-	async _getMetadata(): Promise<Metadata> {
+	protected async _getMetadata(): Promise<Metadata> {
 		await this.prepare();
 		return await this.implementation.getMetadata();
 	}

@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import * as assert from 'assert';
 import { using } from 'bluebird';
 import { expect } from 'chai';
 import { createReadStream } from 'fs';
@@ -55,7 +56,7 @@ describe('zip in a single use stream source', function() {
 				],
 				// onFail
 				(destination: sourceDestination.SourceDestination, error: Error) => {
-					expect(true).to.be.false;
+					assert(false);
 				},
 				// onProgress
 				(progress: multiWrite.MultiDestinationProgress) => {
@@ -67,7 +68,7 @@ describe('zip in a single use stream source', function() {
 		expect(progressEvents.length).to.be.at.least(2);
 		try {
 			await source.createReadStream();
-			expect(true).to.be.false;
+			assert(false);
 		} catch (error) {
 			expect(error).to.be.an.instanceof(errors.NotCapable);
 		}

@@ -84,7 +84,7 @@ export class DestinationSparseWriteStream extends Writable
 		}
 	}
 
-	_write(
+	public _write(
 		chunk: Chunk,
 		enc: string,
 		callback: (error: Error | undefined) => void,
@@ -92,7 +92,7 @@ export class DestinationSparseWriteStream extends Writable
 		asCallback(this.__write(chunk), callback);
 	}
 
-	async __final(): Promise<void> {
+	private async __final(): Promise<void> {
 		try {
 			for (const chunk of this._firstChunks) {
 				await this.writeChunk(chunk, true);
@@ -106,7 +106,7 @@ export class DestinationSparseWriteStream extends Writable
 	/**
 	 * @summary Write buffered data before a stream ends, called by stream internals
 	 */
-	_final(callback: (error?: Error | void) => void) {
+	public _final(callback: (error?: Error | void) => void) {
 		asCallback(this.__final(), callback);
 	}
 }

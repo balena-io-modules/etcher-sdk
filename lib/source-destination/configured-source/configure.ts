@@ -18,7 +18,7 @@ import { using } from 'bluebird';
 import { Disk } from 'file-disk';
 import * as _ from 'lodash';
 import { getPartitions } from 'partitioninfo';
-import { interact, AsyncFsLike } from 'resin-image-fs';
+import { AsyncFsLike, interact } from 'resin-image-fs';
 
 import { execute as configureAction } from './operations/configure';
 import { execute as copyAction } from './operations/copy';

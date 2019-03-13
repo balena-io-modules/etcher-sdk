@@ -49,11 +49,11 @@ async function main() {
 		console.log('error', error);
 	});
 	await deviceScanner.start();
-	const drive = deviceScanner.getBy(
+	const d = deviceScanner.getBy(
 		'devicePath',
 		'pci-0000:00:14.0-usb-0:2:1.0-scsi-0:0:0:0',
 	);
-	console.log('ready', drive);
+	console.log('ready', d);
 }
 
 main();

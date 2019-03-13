@@ -16,9 +16,9 @@
 
 import { FilterStream, ReadStream } from 'blockmap';
 import { delay } from 'bluebird';
+import { Spinner } from 'cli-spinner';
 import { EventEmitter } from 'events';
 import ProgressBar = require('progress');
-import { Spinner } from 'cli-spinner';
 
 import { fs, multiWrite, sourceDestination, utils } from '../lib';
 
@@ -133,7 +133,7 @@ export async function pipeSourceToDestinationsWithProgressBar(
 		console.error(`Error "${error}" on ${destination}`);
 	}
 	let step: multiWrite.WriteStep;
-	let progressBar: any | ProgressBar | Spinner = undefined;
+	let progressBar: any | ProgressBar | Spinner;
 	let update: UpdateProgressBarFunction;
 	function onProgress(progress: multiWrite.MultiDestinationProgress) {
 		if (progress.type !== step) {

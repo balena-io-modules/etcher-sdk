@@ -17,7 +17,7 @@
 import { using } from 'bluebird';
 import { Disk } from 'file-disk';
 import * as _ from 'lodash';
-import { interact, AsyncFsLike } from 'resin-image-fs';
+import { AsyncFsLike, interact } from 'resin-image-fs';
 
 const copy = async (
 	sourceFs: AsyncFsLike,

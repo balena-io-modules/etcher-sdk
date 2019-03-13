@@ -26,11 +26,11 @@ export class SingleUseStreamSource extends SourceDestination {
 		super();
 	}
 
-	async canCreateReadStream(): Promise<boolean> {
+	public async canCreateReadStream(): Promise<boolean> {
 		return !this.used;
 	}
 
-	async createReadStream(
+	public async createReadStream(
 		emitProgress = false,
 		start = 0,
 		end?: number,

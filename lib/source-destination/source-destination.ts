@@ -30,7 +30,6 @@ import {
 	NotCapable,
 	VerificationError,
 } from '../errors';
-import { SourceSource } from './source-source';
 import { SparseWriteStream } from '../sparse-write-stream';
 import { streamToBuffer } from '../utils';
 
@@ -40,15 +39,16 @@ import {
 	ProgressEvent,
 	ProgressWritable,
 } from './progress';
+import { SourceSource } from './source-source';
 
 // Seed value 0x45544348 = ASCII "ETCH"
 const SEED = 0x45544348;
 const BITS = arch === 'x64' || arch === 'aarch64' ? 64 : 32;
 
 export class CountingHashStream extends HashStream {
-	bytesWritten = 0;
+	public bytesWritten = 0;
 
-	_transform(chunk: Buffer, encoding: string, callback: () => void) {
+	public _transform(chunk: Buffer, encoding: string, callback: () => void) {
 		super._transform(chunk, encoding, () => {
 			callback();
 			this.bytesWritten += chunk.length;
@@ -76,7 +76,7 @@ export class SourceDestinationFs {
 	// Adapts a SourceDestination to an fs like interface (so it can be used in udif for example)
 	constructor(private source: SourceDestination) {}
 
-	open(
+	public open(
 		path: string,
 		options: any,
 		callback: (error: Error | null, fd?: number) => void,
@@ -84,11 +84,11 @@ export class SourceDestinationFs {
 		callback(null, 1);
 	}
 
-	close(fd: number, callback: (error: Error | null) => void) {
+	public close(fd: number, callback: (error: Error | null) => void) {
 		callback(null);
 	}
 
-	fstat(
+	public fstat(
 		fd: number,
 		callback: (error: Error | null, stats?: { size: number }) => void,
 	) {
@@ -104,7 +104,7 @@ export class SourceDestinationFs {
 			.catch(callback);
 	}
 
-	read(
+	public read(
 		fd: number,
 		buffer: Buffer,
 		bufferOffset: number,
@@ -128,9 +128,9 @@ export class SourceDestinationFs {
 }
 
 export abstract class Verifier extends EventEmitter {
-	progress: ProgressEvent = { bytes: 0, position: 0, speed: 0 };
+	public progress: ProgressEvent = { bytes: 0, position: 0, speed: 0 };
 
-	abstract async run(): Promise<void>;
+	public abstract async run(): Promise<void>;
 
 	protected handleEventsAndPipe(
 		stream: NodeJS.ReadableStream,
@@ -162,7 +162,7 @@ export class StreamVerifier extends Verifier {
 		super();
 	}
 
-	async run(): Promise<void> {
+	public async run(): Promise<void> {
 		const stream = await this.source.createReadStream(false, 0, this.size - 1);
 		stream.on('error', this.emit.bind(this, 'error'));
 		const hasher = createHasher();
@@ -198,7 +198,7 @@ export class SparseStreamVerifier extends Verifier {
 		this.emit('error', error);
 	}
 
-	async run(): Promise<void> {
+	public async run(): Promise<void> {
 		let stream: BlockMap.ReadStream | BlockMap.FilterStream;
 		if (await this.source.canRead()) {
 			stream = new BlockMap.ReadStream('', this.blockMap, {
@@ -223,7 +223,7 @@ export class SparseStreamVerifier extends Verifier {
 }
 
 export class SourceDestination extends EventEmitter {
-	static readonly imageExtensions = [
+	public static readonly imageExtensions = [
 		'img',
 		'iso',
 		'bin',
@@ -235,54 +235,54 @@ export class SourceDestination extends EventEmitter {
 		'rpi-sdimg',
 		'wic',
 	];
-	static readonly mimetype?: string;
+	public static readonly mimetype?: string;
 	private static mimetypes = new Map<string, typeof SourceSource>();
 
 	private metadata: Metadata;
 	private isOpen = false;
 
-	static register(Cls: typeof SourceSource) {
+	public static register(Cls: typeof SourceSource) {
 		if (Cls.mimetype !== undefined) {
 			SourceDestination.mimetypes.set(Cls.mimetype, Cls);
 		}
 	}
 
-	async canRead(): Promise<boolean> {
+	public async canRead(): Promise<boolean> {
 		return false;
 	}
 
-	async canWrite(): Promise<boolean> {
+	public async canWrite(): Promise<boolean> {
 		return false;
 	}
 
-	async canCreateReadStream(): Promise<boolean> {
+	public async canCreateReadStream(): Promise<boolean> {
 		return false;
 	}
 
-	async canCreateSparseReadStream(): Promise<boolean> {
+	public async canCreateSparseReadStream(): Promise<boolean> {
 		return false;
 	}
 
-	async canCreateWriteStream(): Promise<boolean> {
+	public async canCreateWriteStream(): Promise<boolean> {
 		return false;
 	}
 
-	async canCreateSparseWriteStream(): Promise<boolean> {
+	public async canCreateSparseWriteStream(): Promise<boolean> {
 		return false;
 	}
 
-	async getMetadata(): Promise<Metadata> {
+	public async getMetadata(): Promise<Metadata> {
 		if (this.metadata === undefined) {
 			this.metadata = await this._getMetadata();
 		}
 		return this.metadata;
 	}
 
-	async _getMetadata(): Promise<Metadata> {
+	protected async _getMetadata(): Promise<Metadata> {
 		return {};
 	}
 
-	async read(
+	public async read(
 		buffer: Buffer,
 		bufferOffset: number,
 		length: number,
@@ -291,7 +291,7 @@ export class SourceDestination extends EventEmitter {
 		throw new NotCapable();
 	}
 
-	async write(
+	public async write(
 		buffer: Buffer,
 		bufferOffset: number,
 		length: number,
@@ -300,7 +300,7 @@ export class SourceDestination extends EventEmitter {
 		throw new NotCapable();
 	}
 
-	async createReadStream(
+	public async createReadStream(
 		emitProgress = false,
 		start = 0,
 		end?: number,
@@ -308,39 +308,43 @@ export class SourceDestination extends EventEmitter {
 		throw new NotCapable();
 	}
 
-	async createSparseReadStream(
+	public async createSparseReadStream(
 		generateChecksums = false,
 	): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
 		throw new NotCapable();
 	}
 
-	async createWriteStream(): Promise<NodeJS.WritableStream> {
+	public async createWriteStream(): Promise<NodeJS.WritableStream> {
 		throw new NotCapable();
 	}
 
-	async createSparseWriteStream(): Promise<SparseWriteStream> {
+	public async createSparseWriteStream(): Promise<SparseWriteStream> {
 		throw new NotCapable();
 	}
 
-	async open(): Promise<void> {
+	public async open(): Promise<void> {
 		if (!this.isOpen) {
 			await this._open();
 			this.isOpen = true;
 		}
 	}
 
-	async close(): Promise<void> {
+	public async close(): Promise<void> {
 		if (this.isOpen) {
 			await this._close();
 			this.isOpen = false;
 		}
 	}
 
-	protected async _open(): Promise<void> {}
+	protected async _open(): Promise<void> {
+		// noop
+	}
 
-	protected async _close(): Promise<void> {}
+	protected async _close(): Promise<void> {
+		// noop
+	}
 
-	createVerifier(
+	public createVerifier(
 		checksumOrBlockmap: string | BlockMap,
 		size?: number,
 	): Verifier {
@@ -400,7 +404,7 @@ export class SourceDestination extends EventEmitter {
 		return await innerSource.getInnerSource();
 	}
 
-	async getInnerSource(): Promise<SourceDestination> {
+	public async getInnerSource(): Promise<SourceDestination> {
 		await this.open();
 		const metadata = await this.getMetadata();
 		if (metadata.isEtch === true) {
@@ -421,11 +425,13 @@ export class SourceDestination extends EventEmitter {
 		return await this.getInnerSourceHelper(mimetype);
 	}
 
-	async getPartitionTable(): Promise<GetPartitionsResult | undefined> {
+	public async getPartitionTable(): Promise<GetPartitionsResult | undefined> {
 		const stream = await this.createReadStream(false, 0, 65535); // TODO: constant
 		const buffer = await streamToBuffer(stream);
 		try {
 			return await getPartitions(buffer, { getLogical: false });
-		} catch {}
+		} catch {
+			// no partitions
+		}
 	}
 }

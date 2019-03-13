@@ -2,29 +2,29 @@ declare module 'blockmap' {
 	import { Readable, Transform } from 'stream';
 
 	class BlockMap {
-		imageSize: number;
-		blockSize: number;
-		blockCount: number;
-		mappedBlockCount: number;
+		public imageSize: number;
+		public blockSize: number;
+		public blockCount: number;
+		public mappedBlockCount: number;
 	}
 
 	namespace BlockMap {
 		export class Chunk {
-			buffer: Buffer;
-			position: number;
-			length: number;
+			public buffer: Buffer;
+			public position: number;
+			public length: number;
 		}
 
 		export class FilterStream extends Transform {
-			blockMap: BlockMap;
-			blocksRead: number;
-			bytesRead: number;
+			public blockMap: BlockMap;
+			public blocksRead: number;
+			public bytesRead: number;
 		}
 
 		export class Range {
-			start: number;
-			end: number;
-			checksum?: string;
+			public start: number;
+			public end: number;
+			public checksum?: string;
 		}
 
 		export class ReadRange {
@@ -32,11 +32,11 @@ declare module 'blockmap' {
 		}
 
 		export class ReadStream extends Readable {
-			blockMap: BlockMap;
-			blocksRead: number;
-			bytesRead: number;
+			public blockMap: BlockMap;
+			public blocksRead: number;
+			public bytesRead: number;
 			constructor(filename: string, blockmap: BlockMap, options: any);
-			destroy(): void;
+			public destroy(): void;
 		}
 
 		export function createFilterStream(

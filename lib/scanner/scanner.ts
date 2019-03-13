@@ -25,7 +25,7 @@ import { UsbbootDeviceAdapter } from './adapters/usbboot';
 const debug = debug_('etcher-sdk:scanner');
 
 export class Scanner extends EventEmitter {
-	drives: Set<AdapterSourceDestination> = new Set();
+	public drives: Set<AdapterSourceDestination> = new Set();
 
 	constructor(private adapters: Adapter[]) {
 		super();
@@ -46,7 +46,7 @@ export class Scanner extends EventEmitter {
 		this.emit('detach', drive);
 	}
 
-	getBy(
+	public getBy(
 		field: 'raw' | 'device' | 'devicePath',
 		value: string,
 	): AdapterSourceDestination | undefined {
@@ -57,7 +57,7 @@ export class Scanner extends EventEmitter {
 		}
 	}
 
-	start(): Promise<void> {
+	public start(): Promise<void> {
 		debug('start');
 		let notReady = this.adapters.length;
 		return new Promise(resolve => {
@@ -74,7 +74,7 @@ export class Scanner extends EventEmitter {
 		});
 	}
 
-	stop(): void {
+	public stop(): void {
 		debug('stop');
 		this.drives.clear();
 		this.adapters.forEach((adapter: Adapter) => {

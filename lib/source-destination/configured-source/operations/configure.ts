@@ -18,7 +18,7 @@ import { using } from 'bluebird';
 import { Disk } from 'file-disk';
 import * as _ from 'lodash';
 import { outdent } from 'outdent';
-import { interact, AsyncFsLike } from 'resin-image-fs';
+import { AsyncFsLike, interact } from 'resin-image-fs';
 
 const NETWORK_SETTINGS_KEYS = [
 	'wifiSsid',
