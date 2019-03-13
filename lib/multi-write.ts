@@ -17,20 +17,19 @@
 import { BlockReadStream } from './block-read-stream';
 import { BlockTransformStream } from './block-transform-stream';
 import { CHUNK_SIZE } from './constants';
-import {
-	createHasher,
-	CountingHashStream,
-	ProgressHashStream,
-	SourceDestination,
-	Verifier,
-} from './source-destination/source-destination';
+import { getRootStream } from './source-destination/compressed-source';
 import { Metadata } from './source-destination/metadata';
 import {
 	MultiDestination,
 	MultiDestinationError,
 } from './source-destination/multi-destination';
 import { ProgressEvent } from './source-destination/progress';
-import { getRootStream } from './source-destination/compressed-source';
+import {
+	CountingHashStream,
+	createHasher,
+	SourceDestination,
+	Verifier,
+} from './source-destination/source-destination';
 
 export type WriteStep = 'flashing' | 'verifying' | 'finished';
 
@@ -189,7 +188,6 @@ export async function pipeSourceToDestinations(
 	if (sparse) {
 		await pipeSparseSourceToDestination(
 			source,
-			sourceMetadata,
 			destination,
 			verify,
 			updateState,
@@ -238,12 +236,12 @@ async function pipeRegularSourceToDestination(
 			resolve: (checksum: string | undefined) => void,
 			reject: (error: Error) => void,
 		) => {
-			let checksum: string;
+			let result: string;
 			let done = false;
 			let hasher: CountingHashStream;
 			function maybeDone(maybeChecksum?: string) {
 				if (maybeChecksum !== undefined) {
-					checksum = maybeChecksum;
+					result = maybeChecksum;
 				} else {
 					done = true;
 				}
@@ -251,13 +249,13 @@ async function pipeRegularSourceToDestination(
 					done &&
 					(!verify ||
 						destination.activeDestinations.size === 0 ||
-						checksum !== undefined)
+						result !== undefined)
 				) {
 					if (hasher !== undefined) {
 						sourceStream.unpipe(hasher);
 						hasher.end();
 					}
-					resolve(checksum);
+					resolve(result);
 				}
 			}
 			sourceStream.once('error', reject);
@@ -299,7 +297,6 @@ async function pipeRegularSourceToDestination(
 
 async function pipeSparseSourceToDestination(
 	source: SourceDestination,
-	sourceMetadata: Metadata,
 	destination: SourceDestination,
 	verify: boolean,
 	updateState: (state?: WriteStep) => void,

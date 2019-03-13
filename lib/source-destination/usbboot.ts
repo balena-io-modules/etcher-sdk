@@ -21,20 +21,20 @@ import { SourceDestination } from './source-destination';
 
 export class UsbbootDrive extends SourceDestination
 	implements AdapterSourceDestination {
-	raw = null;
-	displayName = 'Initializing device';
-	device = null;
-	devicePath = null;
-	icon = 'loading';
-	isSystem = false;
-	description = 'Compute Module';
-	mountpoints = [];
-	isReadOnly = false;
-	disabled = true;
-	size = null;
-	emitsProgress = true;
+	public raw = null;
+	public displayName = 'Initializing device';
+	public device = null;
+	public devicePath = null;
+	public icon = 'loading';
+	public isSystem = false;
+	public description = 'Compute Module';
+	public mountpoints = [];
+	public isReadOnly = false;
+	public disabled = true;
+	public size = null;
+	public emitsProgress = true;
 
-	constructor(private usbDevice: UsbbootDevice) {
+	constructor(usbDevice: UsbbootDevice) {
 		super();
 		usbDevice.on('progress', this.emit.bind(this, 'progress'));
 	}

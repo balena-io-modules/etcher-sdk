@@ -37,8 +37,8 @@ export function makeClassEmitProgressEvents<
 	//  * the type of `attribute` must be a number;
 	//  * the position attribute of emitted events will be copied from the `positionAttribute` of the instances.
 	return class extends Cls {
-		_attributeValue: number;
-		_attributeDelta = 0;
+		public _attributeValue: number;
+		public _attributeDelta = 0;
 
 		constructor(...args: any[]) {
 			super(...args);
@@ -89,12 +89,12 @@ export function makeClassEmitProgressEvents<
 }
 
 export class CountingWritable extends Writable {
-	bytesWritten = 0;
-	position: number | undefined;
+	public bytesWritten = 0;
+	public position: number | undefined;
 
-	_write(
+	public _write(
 		chunk: Buffer | Chunk,
-		enc: string,
+		_enc: string,
 		callback: (err?: Error | undefined) => void,
 	): void {
 		if (Buffer.isBuffer(chunk)) {

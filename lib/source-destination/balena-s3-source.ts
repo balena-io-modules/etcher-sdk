@@ -29,7 +29,7 @@ export class BalenaS3Source extends SourceDestination {
 	private zipSource: ZipSource;
 	private ready: Promise<void>;
 	private names: Name[] = ['balena', 'resin'];
-	name: Name; // images can be named balena.img or resin.img
+	public name: Name; // images can be named balena.img or resin.img
 
 	constructor(
 		readonly bucket: string,
@@ -68,11 +68,11 @@ export class BalenaS3Source extends SourceDestination {
 		throw new Error('Could not find image');
 	}
 
-	async canCreateReadStream(): Promise<boolean> {
+	public async canCreateReadStream(): Promise<boolean> {
 		return true;
 	}
 
-	async canRead(): Promise<boolean> {
+	public async canRead(): Promise<boolean> {
 		return true;
 	}
 
@@ -82,7 +82,7 @@ export class BalenaS3Source extends SourceDestination {
 		}/${encodeURIComponent(this.version)}/${path}`;
 	}
 
-	async read(
+	public async read(
 		buffer: Buffer,
 		bufferOffset: number,
 		length: number,
@@ -97,12 +97,14 @@ export class BalenaS3Source extends SourceDestination {
 		);
 	}
 
-	async createReadStream(...args: any[]): Promise<NodeJS.ReadableStream> {
+	public async createReadStream(
+		...args: any[]
+	): Promise<NodeJS.ReadableStream> {
 		await this.ready;
 		return await this.zipSource.createReadStream(...args);
 	}
 
-	async _getMetadata(): Promise<Metadata> {
+	protected async _getMetadata(): Promise<Metadata> {
 		await this.ready;
 		return await this.zipSource.getMetadata();
 	}

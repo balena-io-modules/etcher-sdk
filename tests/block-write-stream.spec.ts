@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-import 'mocha';
 import { using } from 'bluebird';
 import { expect } from 'chai';
 import { randomBytes as randomBytesNode } from 'crypto';
+import 'mocha';
 import * as os from 'os';
-import { join } from 'path';
 import { spy, stub } from 'sinon';
 import { Readable } from 'stream';
 
 import { BlockWriteStream } from '../lib/block-write-stream';
 import { CHUNK_SIZE as BLOCK_WRITE_STREAM_CHUNK_SIZE } from '../lib/constants';
 import { DestinationSparseWriteStream } from '../lib/destination-sparse-write-stream';
-import { BlockDevice } from '../lib/source-destination/block-device';
 import * as diskpart from '../lib/diskpart';
 import { readFile } from '../lib/fs';
 import { tmpFileDisposer, TmpFileResult } from '../lib/tmp';
@@ -120,9 +118,9 @@ describe('block-write-stream', function() {
 				expect(destination.write.getCall(0).args[3]).to.equal(
 					output.firstBytesToKeep,
 				);
-				const chunkSize = sparse ? CHUNK_SIZE : BLOCK_WRITE_STREAM_CHUNK_SIZE;
+				const $chunkSize = sparse ? CHUNK_SIZE : BLOCK_WRITE_STREAM_CHUNK_SIZE;
 				const callNumber =
-					Math.floor((SIZE - output.firstBytesToKeep) / chunkSize) + 1;
+					Math.floor((SIZE - output.firstBytesToKeep) / $chunkSize) + 1;
 				// @ts-ignore
 				expect(destination.write.getCall(callNumber).args[3]).to.equal(0);
 			} else {

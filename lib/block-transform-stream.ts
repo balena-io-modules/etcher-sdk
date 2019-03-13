@@ -17,8 +17,8 @@
 import { Transform } from 'readable-stream';
 
 export class BlockTransformStream extends Transform {
-	bytesRead = 0;
-	bytesWritten = 0;
+	public bytesRead = 0;
+	public bytesWritten = 0;
 	private _buffers: Buffer[] = [];
 	private _bytes = 0;
 
@@ -47,9 +47,9 @@ export class BlockTransformStream extends Transform {
 		}
 	}
 
-	_transform(
+	public _transform(
 		chunk: Buffer,
-		encoding: string,
+		_encoding: string,
 		callback: (error?: Error) => void,
 	) {
 		this.bytesRead += chunk.length;
@@ -68,7 +68,7 @@ export class BlockTransformStream extends Transform {
 		callback();
 	}
 
-	_flush(callback: (error?: Error) => void) {
+	public _flush(callback: (error?: Error) => void) {
 		this.writeBuffers(true);
 		callback();
 	}

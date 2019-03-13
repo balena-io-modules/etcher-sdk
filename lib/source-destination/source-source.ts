@@ -17,7 +17,7 @@
 import { SourceDestination } from './source-destination';
 
 export class SourceSource extends SourceDestination {
-	static requiresRandomReadableSource = false;
+	public static requiresRandomReadableSource = false;
 
 	constructor(protected source: SourceDestination) {
 		super();

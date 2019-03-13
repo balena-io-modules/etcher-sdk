@@ -18,9 +18,9 @@ import { delay } from 'bluebird';
 import * as _debug from 'debug';
 import { Drive as $Drive, list } from 'drivelist';
 
-import { Adapter } from './adapter';
 import { BlockDevice } from '../../source-destination/block-device';
 import { difference } from '../../utils';
+import { Adapter } from './adapter';
 
 const debug = _debug('etcher-sdk:block-device-adapter');
 
@@ -52,12 +52,12 @@ export class BlockDeviceAdapter extends Adapter {
 		super();
 	}
 
-	start(): void {
+	public start(): void {
 		this.running = true;
 		this.scanLoop();
 	}
 
-	stop(): void {
+	public stop(): void {
 		this.running = false;
 		this.ready = false;
 		this.drives.clear();

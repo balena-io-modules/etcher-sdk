@@ -45,7 +45,7 @@ export class Http extends SourceDestination {
 		}
 	}
 
-	async canRead(): Promise<boolean> {
+	public async canRead(): Promise<boolean> {
 		await this.ready;
 		if (this.error) {
 			throw this.error;
@@ -53,11 +53,11 @@ export class Http extends SourceDestination {
 		return this.acceptsRange;
 	}
 
-	async canCreateReadStream(): Promise<boolean> {
+	public async canCreateReadStream(): Promise<boolean> {
 		return true;
 	}
 
-	async _getMetadata(): Promise<Metadata> {
+	protected async _getMetadata(): Promise<Metadata> {
 		await this.ready;
 		if (this.error) {
 			throw this.error;
@@ -82,7 +82,7 @@ export class Http extends SourceDestination {
 		return range;
 	}
 
-	async read(
+	public async read(
 		buffer: Buffer,
 		bufferOffset: number,
 		length: number,
@@ -102,7 +102,7 @@ export class Http extends SourceDestination {
 		return { bytesRead, buffer };
 	}
 
-	async createReadStream(
+	public async createReadStream(
 		emitProgress = false,
 		start = 0,
 		end?: number,

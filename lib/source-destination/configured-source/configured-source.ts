@@ -19,15 +19,15 @@ import * as _debug from 'debug';
 import { DiscardDiskChunk, Disk, ReadResult, WriteResult } from 'file-disk';
 import { cloneDeep } from 'lodash';
 import { getPartitions } from 'partitioninfo';
-import { interact, AsyncFsLike } from 'resin-image-fs';
+import { AsyncFsLike, interact } from 'resin-image-fs';
 
 import BlockMap = require('blockmap');
 
-import { configure as legacyConfigure } from './configure';
+import { NotCapable } from '../../errors';
 import { Metadata } from '../metadata';
 import { SourceDestination, SourceDestinationFs } from '../source-destination';
 import { SourceSource } from '../source-source';
-import { NotCapable } from '../../errors';
+import { configure as legacyConfigure } from './configure';
 
 const debug = _debug('etcher-sdk:configured-source');
 const BLOCK_SIZE = 512;
@@ -44,7 +44,7 @@ export class SourceDisk extends Disk {
 		);
 	}
 
-	async _getCapacity(): Promise<number> {
+	protected async _getCapacity(): Promise<number> {
 		// Don't create SourceDisks with sources that do not define a size
 		const size = (await this.source.getMetadata()).size;
 		if (size === undefined) {
@@ -53,7 +53,7 @@ export class SourceDisk extends Disk {
 		return size;
 	}
 
-	async _read(
+	protected async _read(
 		buffer: Buffer,
 		bufferOffset: number,
 		length: number,
@@ -62,16 +62,18 @@ export class SourceDisk extends Disk {
 		return await this.source.read(buffer, bufferOffset, length, fileOffset);
 	}
 
-	async _write(
-		buffer: Buffer,
-		bufferOffset: number,
-		length: number,
-		fileOffset: number,
+	protected async _write(
+		_buffer: Buffer,
+		_bufferOffset: number,
+		_length: number,
+		_fileOffset: number,
 	): Promise<WriteResult> {
 		throw new Error("Can't write to a SourceDisk");
 	}
 
-	async _flush(): Promise<void> {}
+	protected async _flush(): Promise<void> {
+		// noop
+	}
 }
 
 export class ConfiguredSource extends SourceSource {
@@ -99,19 +101,19 @@ export class ConfiguredSource extends SourceSource {
 		return await this.disk.getBlockMap(BLOCK_SIZE, false);
 	}
 
-	async canRead(): Promise<boolean> {
+	public async canRead(): Promise<boolean> {
 		return true;
 	}
 
-	async canCreateReadStream(): Promise<boolean> {
+	public async canCreateReadStream(): Promise<boolean> {
 		return true;
 	}
 
-	async canCreateSparseReadStream(): Promise<boolean> {
+	public async canCreateSparseReadStream(): Promise<boolean> {
 		return true;
 	}
 
-	async read(
+	public async read(
 		buffer: Buffer,
 		bufferOffset: number,
 		length: number,
@@ -120,7 +122,9 @@ export class ConfiguredSource extends SourceSource {
 		return await this.disk.read(buffer, bufferOffset, length, sourceOffset);
 	}
 
-	async createReadStream(...args: any[]): Promise<NodeJS.ReadableStream> {
+	public async createReadStream(
+		...args: any[]
+	): Promise<NodeJS.ReadableStream> {
 		const imageStream = await this.source.createReadStream(...args);
 		const transform = this.disk.getTransformStream();
 		imageStream.on('error', (err: Error) => {
@@ -156,7 +160,7 @@ export class ConfiguredSource extends SourceSource {
 		return transform;
 	}
 
-	async createSparseReadStream(
+	public async createSparseReadStream(
 		generateChecksums: boolean,
 	): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
 		if (this.createStreamFromDisk) {
@@ -166,7 +170,7 @@ export class ConfiguredSource extends SourceSource {
 		}
 	}
 
-	async _getMetadata(): Promise<Metadata> {
+	protected async _getMetadata(): Promise<Metadata> {
 		const metadata = cloneDeep(await this.source.getMetadata());
 		metadata.blockMap = await this.getBlockmap();
 		metadata.blockmappedSize =

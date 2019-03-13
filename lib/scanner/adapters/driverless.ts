@@ -19,24 +19,24 @@ import { platform } from 'process';
 import { DriverlessDevice as WinUsbDriverlessDevice } from 'winusb-driver-generator';
 
 import { DriverlessDevice } from '../../source-destination/driverless';
-import { Adapter } from './adapter';
 import { difference } from '../../utils';
+import { Adapter } from './adapter';
 
 const SCAN_INTERVAL = 1000;
 
-class DriverlessDeviceAdapter_ extends Adapter {
+class DriverlessDeviceAdapter$ extends Adapter {
 	// Emits 'attach', 'detach' and 'ready'
 	private drives: Map<string, DriverlessDevice> = new Map();
 	private running = false;
 	private ready = false;
 	private listDriverlessDevices: any;
 
-	start(): void {
+	public start(): void {
 		this.running = true;
 		this.scanLoop();
 	}
 
-	stop(): void {
+	public stop(): void {
 		this.running = false;
 		this.ready = false;
 		this.drives.clear();
@@ -93,4 +93,4 @@ class DriverlessDeviceAdapter_ extends Adapter {
 }
 
 export const DriverlessDeviceAdapter =
-	platform === 'win32' ? DriverlessDeviceAdapter_ : undefined;
+	platform === 'win32' ? DriverlessDeviceAdapter$ : undefined;

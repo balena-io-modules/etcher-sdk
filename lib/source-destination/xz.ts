@@ -15,16 +15,16 @@
  */
 
 import { promisify } from 'bluebird';
-import { Transform } from 'stream';
 import { createDecompressor, parseFileIndex } from 'lzma-native';
+import { Transform } from 'stream';
 
-import { SourceDestination } from './source-destination';
 import { CompressedSource } from './compressed-source';
+import { SourceDestination } from './source-destination';
 
 const parseFileIndexAsync = promisify(parseFileIndex);
 
 export class XzSource extends CompressedSource {
-	static readonly mimetype = 'application/x-xz';
+	public static readonly mimetype = 'application/x-xz';
 
 	protected createTransform(): Transform {
 		return createDecompressor();

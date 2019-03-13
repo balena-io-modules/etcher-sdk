@@ -16,9 +16,8 @@
 
 import { FilterStream } from 'blockmap';
 import { promisify } from 'bluebird';
-import { ReadResult } from 'file-disk';
 import * as _ from 'lodash';
-import { BLOCK, SECTOR_SIZE, Image as UDIFImage } from 'udif';
+import { BLOCK, Image as UDIFImage, SECTOR_SIZE } from 'udif';
 
 import { Metadata } from './metadata';
 import { SourceDestination, SourceDestinationFs } from './source-destination';
@@ -28,8 +27,8 @@ import { NotCapable } from '../errors';
 import { StreamLimiter } from '../stream-limiter';
 
 export class DmgSource extends SourceSource {
-	static requiresRandomReadableSource = true;
-	static readonly mimetype = 'application/x-apple-diskimage';
+	public static requiresRandomReadableSource = true;
+	public static readonly mimetype = 'application/x-apple-diskimage';
 	private image: UDIFImage;
 
 	constructor(source: SourceDestination) {
@@ -37,21 +36,20 @@ export class DmgSource extends SourceSource {
 		this.image = new UDIFImage('', { fs: new SourceDestinationFs(source) });
 	}
 
-	async canCreateReadStream() {
+	public async canCreateReadStream() {
 		return true;
 	}
 
-	async canCreateSparseReadStream() {
+	public async canCreateSparseReadStream() {
 		// TODO: We act like we can't create sparse streams because we have no way to verify
 		// flashed images.
 		// This is because node-udif does not use blockmap but implements its own BlockMap
 		// We need a function to extract a regular BlockMap from the UDIFImage.
-		//return true;
 		return false;
 	}
 
-	async createReadStream(
-		emitProgress = false,
+	public async createReadStream(
+		_emitProgress = false,
 		start = 0,
 		end?: number,
 	): Promise<NodeJS.ReadableStream> {
@@ -66,13 +64,13 @@ export class DmgSource extends SourceSource {
 		return stream;
 	}
 
-	async createSparseReadStream(
-		generateChecksums: boolean,
+	public async createSparseReadStream(
+		_generateChecksums: boolean,
 	): Promise<FilterStream> {
 		return this.image.createSparseReadStream();
 	}
 
-	getMappedBlocksSize = () => {
+	public getMappedBlocksSize = () => {
 		return _(this.image.resourceFork.blkx)
 			.map('map.blocks')
 			.flatten()
@@ -86,7 +84,7 @@ export class DmgSource extends SourceSource {
 			.sum();
 	};
 
-	async _getMetadata(): Promise<Metadata> {
+	protected async _getMetadata(): Promise<Metadata> {
 		const compressedSize = (await this.source.getMetadata()).size;
 		return {
 			compressedSize,

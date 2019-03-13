@@ -15,12 +15,10 @@
  */
 
 import { parse } from 'blockmap';
-import { expect } from 'chai';
 import 'mocha';
 import { outdent } from 'outdent';
 import { join } from 'path';
 
-import { sourceDestination } from '../lib';
 import { expectGetInnerSourceError, testImage } from './tester';
 
 const DATA_PATH = join(__dirname, 'data');

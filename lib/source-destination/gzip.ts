@@ -17,14 +17,14 @@
 import { Transform } from 'stream';
 import { createGunzip } from 'zlib';
 
-import { SourceDestination } from './source-destination';
 import { CompressedSource } from './compressed-source';
+import { SourceDestination } from './source-destination';
 
 const ISIZE_LENGTH = 4;
 
 export class GZipSource extends CompressedSource {
-	static readonly mimetype = 'application/gzip';
-	isSizeEstimated = true;
+	public static readonly mimetype = 'application/gzip';
+	public isSizeEstimated = true;
 
 	protected createTransform(): Transform {
 		return createGunzip();

@@ -16,7 +16,6 @@
 
 import { delay } from 'bluebird';
 import { ReadResult } from 'file-disk';
-import { read } from 'fs';
 import { Readable } from 'readable-stream';
 
 import {
@@ -91,7 +90,7 @@ export class BlockReadStream extends Readable {
 		}
 	}
 
-	_read() {
+	public _read() {
 		this.__read();
 	}
 }

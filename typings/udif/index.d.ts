@@ -2,13 +2,13 @@ declare module 'udif' {
 	import { FilterStream } from 'blockmap';
 
 	export class Image {
-		resourceFork: any;
+		public resourceFork: any;
 		constructor(path: string, options: { fs: any });
-		getUncompressedSize(): number;
-		createReadStream(): NodeJS.ReadableStream;
-		createSparseReadStream(): FilterStream;
-		open(cb: any): void;
-		close(cb: any): void;
+		public getUncompressedSize(): number;
+		public createReadStream(): NodeJS.ReadableStream;
+		public createSparseReadStream(): FilterStream;
+		public open(cb: any): void;
+		public close(cb: any): void;
 	}
 
 	export const SECTOR_SIZE: number;

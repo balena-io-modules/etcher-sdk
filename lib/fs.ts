@@ -75,7 +75,7 @@ export async function open(
 
 export async function read(
 	fd: number,
-	buffer: Buffer,
+	buf: Buffer,
 	offset: number,
 	length: number,
 	position: number,
@@ -84,7 +84,7 @@ export async function read(
 		(resolve: (result: ReadResult) => void, reject: (err: Error) => void) => {
 			fs.read(
 				fd,
-				buffer,
+				buf,
 				offset,
 				length,
 				position,
@@ -167,7 +167,7 @@ export async function unlink(path: string | Buffer): Promise<void> {
 
 export async function write(
 	fd: number,
-	buffer: Buffer,
+	buf: Buffer,
 	offset: number,
 	length: number,
 	position: number,
@@ -176,7 +176,7 @@ export async function write(
 		(resolve: (result: WriteResult) => void, reject: (err: Error) => void) => {
 			fs.write(
 				fd,
-				buffer,
+				buf,
 				offset,
 				length,
 				position,

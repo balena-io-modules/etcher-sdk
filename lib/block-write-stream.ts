@@ -24,9 +24,9 @@ import {
 	RETRY_BASE_TIMEOUT,
 } from './constants';
 import { isTransientError } from './errors';
-import { asCallback } from './utils';
-import { makeClassEmitProgressEvents } from './source-destination/progress';
 import { BlockDevice } from './source-destination/block-device';
+import { makeClassEmitProgressEvents } from './source-destination/progress';
+import { asCallback } from './utils';
 
 const debug = _debug('etcher:writer:block-write-stream');
 
@@ -130,15 +130,15 @@ export class BlockWriteStream extends Writable {
 		}
 	}
 
-	_write(
+	public _write(
 		buffer: Buffer,
-		encoding: string,
+		_encoding: string,
 		callback: (error: Error | undefined) => void,
 	) {
 		asCallback(this.__write(buffer), callback);
 	}
 
-	async __final(): Promise<void> {
+	private async __final(): Promise<void> {
 		debug('_final');
 		try {
 			if (this._bytes) {
@@ -149,8 +149,7 @@ export class BlockWriteStream extends Writable {
 			}
 
 			let position = 0;
-			for (let i = 0; i < this._firstBuffers.length; i++) {
-				const buffer = this._firstBuffers[i];
+			for (const buffer of this._firstBuffers) {
 				await this.writeChunk(buffer, position, true);
 				position += buffer.length;
 			}
@@ -163,7 +162,7 @@ export class BlockWriteStream extends Writable {
 	/**
 	 * @summary Write buffered data before a stream ends, called by stream internals
 	 */
-	_final(callback: (error?: Error | void) => void) {
+	public _final(callback: (error?: Error | void) => void) {
 		asCallback(this.__final(), callback);
 	}
 }

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import * as assert from 'assert';
 import { expect } from 'chai';
 import { entries } from 'lodash';
 import 'mocha';
@@ -126,14 +127,14 @@ export async function testImageNoIt(
 	);
 
 	const canCreateReadStream = await innerSource.canCreateReadStream();
-	expect(canCreateReadStream).to.be.true;
+	assert(canCreateReadStream);
 	const sourceStream = await innerSource.createReadStream();
 	const sourceStreamBuffer = await streamToBuffer(sourceStream);
 	expect(sourceStreamBuffer).to.deep.equal(compareToData);
 
 	if (alsoTestSparseStream) {
 		const canCreateSparseReadStream = await innerSource.canCreateSparseReadStream();
-		expect(canCreateSparseReadStream).to.be.true;
+		assert(canCreateSparseReadStream);
 		const sourceSparseStream = await innerSource.createSparseReadStream();
 		const sourceSparseStreamBuffer = await sparseStreamToBuffer(
 			sourceSparseStream,
@@ -221,7 +222,7 @@ export function expectSourceSourceError(
 			await source.close();
 			return;
 		}
-		expect(true).to.be.false;
+		assert(false);
 	});
 }
 
@@ -243,6 +244,6 @@ export function expectGetInnerSourceError(
 			await source.close();
 			return;
 		}
-		expect(true).to.be.false;
+		assert(false);
 	});
 }

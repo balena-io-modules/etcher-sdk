@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import * as assert from 'assert';
 import { expect } from 'chai';
 import 'mocha';
 import { Readable } from 'stream';
@@ -49,7 +50,8 @@ describe('utils', function() {
 
 			it('should be rejected with the error', async function() {
 				try {
-					const data = await streamToBuffer(this.stream);
+					await streamToBuffer(this.stream);
+					assert(false);
 				} catch (error) {
 					expect(error).to.be.an.instanceof(Error);
 					expect(error.message).to.equal('stream error');

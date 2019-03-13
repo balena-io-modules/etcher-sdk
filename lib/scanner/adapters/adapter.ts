@@ -25,12 +25,12 @@ export interface AdapterSourceDestination extends SourceDestination {
 	devicePath: string | null;
 	isSystem: boolean;
 	description: string;
-	mountpoints: { path: string }[];
+	mountpoints: Array<{ path: string }>;
 	size: number | null;
 	emitsProgress: boolean;
 }
 
 export abstract class Adapter extends EventEmitter {
-	abstract start(): void;
-	abstract stop(): void;
+	public abstract start(): void;
+	public abstract stop(): void;
 }

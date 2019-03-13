@@ -26,12 +26,12 @@ export class SingleUseStreamSource extends SourceDestination {
 		super();
 	}
 
-	async canCreateReadStream(): Promise<boolean> {
+	public async canCreateReadStream(): Promise<boolean> {
 		return !this.used;
 	}
 
-	async createReadStream(
-		emitProgress = false,
+	public async createReadStream(
+		_emitProgress = false,
 		start = 0,
 		end?: number,
 	): Promise<NodeJS.ReadableStream> {

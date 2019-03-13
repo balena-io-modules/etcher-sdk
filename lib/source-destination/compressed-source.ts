@@ -17,17 +17,17 @@
 import { basename, extname } from 'path';
 import { Transform } from 'stream';
 
-import { Metadata } from './metadata';
-import { SourceSource } from './source-source';
 import { NotCapable } from '../errors';
 import { StreamLimiter } from '../stream-limiter';
+import { Metadata } from './metadata';
+import { SourceSource } from './source-source';
 
 export interface SourceTransform extends Transform {
 	sourceStream: NodeJS.ReadableStream;
 }
 
 export function isSourceTransform(stream: any): stream is SourceTransform {
-	return (<SourceTransform>stream).sourceStream !== undefined;
+	return (stream as SourceTransform).sourceStream !== undefined;
 }
 
 export function getRootStream(
@@ -47,11 +47,11 @@ export abstract class CompressedSource extends SourceSource {
 		return;
 	}
 
-	async canCreateReadStream(): Promise<boolean> {
+	public async canCreateReadStream(): Promise<boolean> {
 		return true;
 	}
 
-	async createReadStream(
+	public async createReadStream(
 		emitProgress = false,
 		start = 0,
 		end?: number,
@@ -81,7 +81,7 @@ export abstract class CompressedSource extends SourceSource {
 		return transform;
 	}
 
-	async _getMetadata(): Promise<Metadata> {
+	protected async _getMetadata(): Promise<Metadata> {
 		const sourceMetadata = await this.source.getMetadata();
 		const compressedSize = sourceMetadata.compressedSize || sourceMetadata.size;
 		const size = await this.getSize();

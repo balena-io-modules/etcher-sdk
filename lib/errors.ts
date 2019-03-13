@@ -19,7 +19,7 @@ import { platform } from 'process';
 export class NotCapable extends Error {}
 
 export class VerificationError extends Error {
-	code = 'EVALIDATION';
+	public code = 'EVALIDATION';
 }
 
 export class ChecksumVerificationError extends VerificationError {

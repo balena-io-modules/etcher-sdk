@@ -1,9 +1,9 @@
 declare module 'progress' {
 	class ProgressBar {
-		curr: number;
+		public curr: number;
 		constructor(fmt: string, options: any);
-		tick(value: number, options: any): void;
-		terminate(): void;
+		public tick(value: number, options: any): void;
+		public terminate(): void;
 	}
 
 	export = ProgressBar;

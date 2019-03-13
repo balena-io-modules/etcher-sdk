@@ -25,13 +25,13 @@ import { Metadata } from './metadata';
 import { makeClassEmitProgressEvents } from './progress';
 import { SourceDestination } from './source-destination';
 
+import { BlockReadStream, ProgressBlockReadStream } from '../block-read-stream';
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
-import { close, stat, open, read, write } from '../fs';
 import {
 	DestinationSparseWriteStream,
 	ProgressDestinationSparseWriteStream,
 } from '../destination-sparse-write-stream';
-import { BlockReadStream, ProgressBlockReadStream } from '../block-read-stream';
+import { close, open, read, stat, write } from '../fs';
 
 export const ProgressWriteStream = makeClassEmitProgressEvents(
 	// type definitions for node 6 export fs.WriteStream as an interface, but it's a class.
@@ -42,11 +42,22 @@ export const ProgressWriteStream = makeClassEmitProgressEvents(
 	PROGRESS_EMISSION_INTERVAL,
 );
 
+// tslint:disable:no-bitwise
+enum OpenFlags {
+	Read = fs.constants.O_RDONLY,
+	ReadWrite = fs.constants.O_RDWR | fs.constants.O_CREAT,
+	WriteDevice = fs.constants.O_RDWR |
+		fs.constants.O_NONBLOCK |
+		fs.constants.O_SYNC,
+}
+// tslint:enable:no-bitwise
+
 export class File extends SourceDestination {
+	public static readonly OpenFlags = OpenFlags;
 	protected fd: number;
 	public blockSize = 512;
 
-	constructor(private path: string, private flags: File.OpenFlags) {
+	constructor(private path: string, private flags: OpenFlags) {
 		super();
 	}
 
@@ -65,34 +76,34 @@ export class File extends SourceDestination {
 		);
 	}
 
-	async canRead(): Promise<boolean> {
+	public async canRead(): Promise<boolean> {
 		return this._canRead();
 	}
 
-	async canWrite(): Promise<boolean> {
+	public async canWrite(): Promise<boolean> {
 		return this._canWrite();
 	}
 
-	async canCreateReadStream(): Promise<boolean> {
+	public async canCreateReadStream(): Promise<boolean> {
 		return this._canRead();
 	}
 
-	async canCreateWriteStream(): Promise<boolean> {
+	public async canCreateWriteStream(): Promise<boolean> {
 		return this._canWrite();
 	}
 
-	async canCreateSparseWriteStream(): Promise<boolean> {
+	public async canCreateSparseWriteStream(): Promise<boolean> {
 		return this._canWrite();
 	}
 
-	async _getMetadata(): Promise<Metadata> {
+	protected async _getMetadata(): Promise<Metadata> {
 		return {
 			size: (await stat(this.path)).size,
 			name: basename(this.path),
 		};
 	}
 
-	async read(
+	public async read(
 		buffer: Buffer,
 		bufferOffset: number,
 		length: number,
@@ -101,7 +112,7 @@ export class File extends SourceDestination {
 		return await read(this.fd, buffer, bufferOffset, length, sourceOffset);
 	}
 
-	async write(
+	public async write(
 		buffer: Buffer,
 		bufferOffset: number,
 		length: number,
@@ -110,7 +121,7 @@ export class File extends SourceDestination {
 		return await write(this.fd, buffer, bufferOffset, length, fileOffset);
 	}
 
-	async createReadStream(
+	public async createReadStream(
 		emitProgress = false,
 		start = 0,
 		end?: number,
@@ -123,7 +134,7 @@ export class File extends SourceDestination {
 		}
 	}
 
-	async createWriteStream(): Promise<NodeJS.WritableStream> {
+	public async createWriteStream(): Promise<NodeJS.WritableStream> {
 		const stream = new ProgressWriteStream(null, {
 			fd: this.fd,
 			autoClose: false,
@@ -132,7 +143,9 @@ export class File extends SourceDestination {
 		return stream;
 	}
 
-	async createSparseWriteStream(): Promise<DestinationSparseWriteStream> {
+	public async createSparseWriteStream(): Promise<
+		DestinationSparseWriteStream
+	> {
 		const stream = new ProgressDestinationSparseWriteStream(this);
 		stream.on('finish', stream.emit.bind(stream, 'done'));
 		return stream;
@@ -144,15 +157,5 @@ export class File extends SourceDestination {
 
 	protected async _close(): Promise<void> {
 		await close(this.fd);
-	}
-}
-
-export namespace File {
-	export enum OpenFlags {
-		Read = fs.constants.O_RDONLY,
-		ReadWrite = fs.constants.O_RDWR | fs.constants.O_CREAT,
-		WriteDevice = fs.constants.O_RDWR |
-			fs.constants.O_NONBLOCK |
-			fs.constants.O_SYNC,
 	}
 }

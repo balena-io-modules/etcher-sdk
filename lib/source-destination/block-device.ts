@@ -20,7 +20,6 @@ import { ReadResult, WriteResult } from 'file-disk';
 import { unmountDisk } from 'mountutils';
 import { platform } from 'os';
 
-import { AdapterSourceDestination } from '../scanner/adapters/adapter';
 import {
 	BlockWriteStream,
 	ProgressBlockWriteStream,
@@ -30,6 +29,7 @@ import {
 	ProgressDestinationSparseWriteStream,
 } from '../destination-sparse-write-stream';
 import { clean } from '../diskpart';
+import { AdapterSourceDestination } from '../scanner/adapters/adapter';
 
 import { File } from './file';
 import { Metadata } from './metadata';
@@ -45,7 +45,7 @@ const USE_ALIGNED_IO = platform() === 'win32' || platform() === 'darwin';
 const unmountDiskAsync = promisify(unmountDisk);
 
 export class BlockDevice extends File implements AdapterSourceDestination {
-	emitsProgress = false;
+	public emitsProgress = false;
 
 	constructor(private drive: DrivelistDrive, private unmountOnSuccess = false) {
 		super(drive.raw, File.OpenFlags.WriteDevice);
@@ -72,7 +72,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return this.drive.description;
 	}
 
-	get mountpoints(): { path: string }[] {
+	get mountpoints(): Array<{ path: string }> {
 		return this.drive.mountpoints;
 	}
 
@@ -80,25 +80,25 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return this.drive.size;
 	}
 
-	async _getMetadata(): Promise<Metadata> {
+	protected async _getMetadata(): Promise<Metadata> {
 		return {
 			size: this.drive.size || undefined,
 		};
 	}
 
-	async canWrite(): Promise<boolean> {
+	public async canWrite(): Promise<boolean> {
 		return !this.drive.isReadOnly;
 	}
 
-	async canCreateWriteStream(): Promise<boolean> {
+	public async canCreateWriteStream(): Promise<boolean> {
 		return !this.drive.isReadOnly;
 	}
 
-	async canCreateSparseWriteStream(): Promise<boolean> {
+	public async canCreateSparseWriteStream(): Promise<boolean> {
 		return !this.drive.isReadOnly;
 	}
 
-	async createWriteStream(): Promise<BlockWriteStream> {
+	public async createWriteStream(): Promise<BlockWriteStream> {
 		const stream = new ProgressBlockWriteStream(
 			this,
 			platform() === 'win32' ? WIN32_FIRST_BYTES_TO_KEEP : 0,
@@ -107,7 +107,9 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return stream;
 	}
 
-	async createSparseWriteStream(): Promise<DestinationSparseWriteStream> {
+	public async createSparseWriteStream(): Promise<
+		DestinationSparseWriteStream
+	> {
 		const stream = new ProgressDestinationSparseWriteStream(
 			this,
 			platform() === 'win32' ? WIN32_FIRST_BYTES_TO_KEEP : 0,
@@ -168,7 +170,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return { buffer, bytesRead: Math.min(length, bytesRead - offset) };
 	}
 
-	async read(
+	public async read(
 		buffer: Buffer,
 		bufferOffset: number,
 		length: number,
@@ -200,7 +202,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return { buffer, bytesWritten: length };
 	}
 
-	async write(
+	public async write(
 		buffer: Buffer,
 		bufferOffset: number,
 		length: number,
