@@ -86,7 +86,7 @@ export class DestinationSparseWriteStream extends Writable
 
 	public _write(
 		chunk: Chunk,
-		enc: string,
+		_enc: string,
 		callback: (error: Error | undefined) => void,
 	): void {
 		asCallback(this.__write(chunk), callback);

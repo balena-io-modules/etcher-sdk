@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import * as assert from 'assert';
 import { expect } from 'chai';
 import 'mocha';
 import { join } from 'path';
@@ -30,7 +31,8 @@ describe('directory', function() {
 			sourceDestination.File.OpenFlags.Read,
 		);
 		try {
-			const innerSource = await source.getInnerSource();
+			await source.getInnerSource();
+			assert(false);
 		} catch (error) {
 			expect(error).to.be.an.instanceof(Error);
 			expect(error.message).to.equal(

@@ -94,7 +94,7 @@ export class CountingWritable extends Writable {
 
 	public _write(
 		chunk: Buffer | Chunk,
-		enc: string,
+		_enc: string,
 		callback: (err?: Error | undefined) => void,
 	): void {
 		if (Buffer.isBuffer(chunk)) {

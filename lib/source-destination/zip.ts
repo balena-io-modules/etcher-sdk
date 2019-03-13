@@ -16,7 +16,7 @@
 
 import BlockMap = require('blockmap');
 import { fromCallback } from 'bluebird';
-import { sortBy, values } from 'lodash';
+import { sortBy } from 'lodash';
 import { posix } from 'path';
 import { PassThrough } from 'readable-stream';
 import { ZipStreamEntry } from 'unzip-stream';
@@ -30,7 +30,7 @@ import {
 import { NO_MATCHING_FILE_MSG } from '../constants';
 import { getFileStreamFromZipStream } from '../zip';
 import { Metadata } from './metadata';
-import { SourceDestination, SourceDestinationFs } from './source-destination';
+import { SourceDestination } from './source-destination';
 import { SourceSource } from './source-source';
 
 import { NotCapable } from '../errors';
@@ -78,7 +78,7 @@ export class StreamZipSource extends SourceSource {
 	}
 
 	public async createReadStream(
-		emitProgress = false,
+		_emitProgress = false,
 		start = 0,
 		end?: number,
 	): Promise<NodeJS.ReadableStream> {
@@ -248,7 +248,7 @@ export class RandomAccessZipSource extends SourceSource {
 	}
 
 	public async createReadStream(
-		emitProgress = false,
+		_emitProgress = false,
 		start = 0,
 		end?: number,
 	): Promise<NodeJS.ReadableStream> {

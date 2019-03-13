@@ -47,7 +47,7 @@ describe('getInnerSource()', function() {
 				sourceDestination.File.OpenFlags.Read,
 			);
 			try {
-				const innerSource = await source.getInnerSource();
+				await source.getInnerSource();
 				assert(false);
 			} catch (error) {
 				expect(error).to.be.an.instanceof(errors.NotCapable);

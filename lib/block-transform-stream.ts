@@ -49,7 +49,7 @@ export class BlockTransformStream extends Transform {
 
 	public _transform(
 		chunk: Buffer,
-		encoding: string,
+		_encoding: string,
 		callback: (error?: Error) => void,
 	) {
 		this.bytesRead += chunk.length;

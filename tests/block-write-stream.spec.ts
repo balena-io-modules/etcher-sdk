@@ -19,7 +19,6 @@ import { expect } from 'chai';
 import { randomBytes as randomBytesNode } from 'crypto';
 import 'mocha';
 import * as os from 'os';
-import { join } from 'path';
 import { spy, stub } from 'sinon';
 import { Readable } from 'stream';
 
@@ -28,7 +27,6 @@ import { CHUNK_SIZE as BLOCK_WRITE_STREAM_CHUNK_SIZE } from '../lib/constants';
 import { DestinationSparseWriteStream } from '../lib/destination-sparse-write-stream';
 import * as diskpart from '../lib/diskpart';
 import { readFile } from '../lib/fs';
-import { BlockDevice } from '../lib/source-destination/block-device';
 import { tmpFileDisposer, TmpFileResult } from '../lib/tmp';
 import { blockDeviceFromFile, DEFAULT_IMAGE_TESTS_TIMEOUT } from './tester';
 

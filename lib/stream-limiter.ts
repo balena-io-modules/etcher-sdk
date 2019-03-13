@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { versions } from 'process';
 import { Transform } from 'readable-stream';
 import zlib = require('zlib');
 
@@ -29,7 +28,7 @@ export class StreamLimiter extends Transform {
 
 	public _transform(
 		buffer: Buffer,
-		encoding: string,
+		_encoding: string,
 		callback: (error?: Error | null, data?: Buffer) => void,
 	) {
 		const length = Math.min(buffer.length, this.maxBytes);

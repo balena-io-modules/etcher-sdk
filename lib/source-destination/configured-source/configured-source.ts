@@ -63,10 +63,10 @@ export class SourceDisk extends Disk {
 	}
 
 	protected async _write(
-		buffer: Buffer,
-		bufferOffset: number,
-		length: number,
-		fileOffset: number,
+		_buffer: Buffer,
+		_bufferOffset: number,
+		_length: number,
+		_fileOffset: number,
 	): Promise<WriteResult> {
 		throw new Error("Can't write to a SourceDisk");
 	}

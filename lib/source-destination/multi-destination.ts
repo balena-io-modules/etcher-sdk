@@ -44,7 +44,7 @@ export class MultiDestinationVerifier extends Verifier {
 	private timer: NodeJS.Timer;
 
 	constructor(
-		private source: MultiDestination,
+		source: MultiDestination,
 		checksumOrBlockmap: string | BlockMap,
 		size?: number,
 	) {
@@ -275,9 +275,9 @@ export class MultiDestination extends SourceDestination {
 			}
 		}
 
-		const streams = await map(
+		await map(
 			this.activeDestinations,
-			async (destination: SourceDestination, index: number) => {
+			async (destination: SourceDestination) => {
 				const stream = await destination[methodName]();
 				progresses.set(stream, null);
 				stream.on('progress', (progressEvent: ProgressEvent) => {

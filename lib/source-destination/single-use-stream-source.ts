@@ -31,7 +31,7 @@ export class SingleUseStreamSource extends SourceDestination {
 	}
 
 	public async createReadStream(
-		emitProgress = false,
+		_emitProgress = false,
 		start = 0,
 		end?: number,
 	): Promise<NodeJS.ReadableStream> {

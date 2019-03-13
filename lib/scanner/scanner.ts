@@ -17,10 +17,7 @@
 import * as debug_ from 'debug';
 import { EventEmitter } from 'events';
 
-import { SourceDestination } from '../source-destination/source-destination';
 import { Adapter, AdapterSourceDestination } from './adapters/adapter';
-import { BlockDeviceAdapter } from './adapters/block-device';
-import { UsbbootDeviceAdapter } from './adapters/usbboot';
 
 const debug = debug_('etcher-sdk:scanner');
 

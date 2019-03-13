@@ -55,7 +55,7 @@ describe('zip in a single use stream source', function() {
 					),
 				],
 				// onFail
-				(destination: sourceDestination.SourceDestination, error: Error) => {
+				(_destination: sourceDestination.SourceDestination, _error: Error) => {
 					assert(false);
 				},
 				// onProgress

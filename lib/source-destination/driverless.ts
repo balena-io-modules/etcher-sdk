@@ -32,7 +32,7 @@ export class DriverlessDevice extends SourceDestination
 	public deviceDescriptor: { idVendor: number; idProduct: number };
 	public description = '';
 
-	constructor(private driverlessDevice: WinUsbDriverlessDevice) {
+	constructor(driverlessDevice: WinUsbDriverlessDevice) {
 		super();
 		this.deviceDescriptor = {
 			idVendor: driverlessDevice.vid,

@@ -16,7 +16,6 @@
 
 import { FilterStream } from 'blockmap';
 import { promisify } from 'bluebird';
-import { ReadResult } from 'file-disk';
 import * as _ from 'lodash';
 import { BLOCK, Image as UDIFImage, SECTOR_SIZE } from 'udif';
 
@@ -50,7 +49,7 @@ export class DmgSource extends SourceSource {
 	}
 
 	public async createReadStream(
-		emitProgress = false,
+		_emitProgress = false,
 		start = 0,
 		end?: number,
 	): Promise<NodeJS.ReadableStream> {
@@ -66,7 +65,7 @@ export class DmgSource extends SourceSource {
 	}
 
 	public async createSparseReadStream(
-		generateChecksums: boolean,
+		_generateChecksums: boolean,
 	): Promise<FilterStream> {
 		return this.image.createSparseReadStream();
 	}

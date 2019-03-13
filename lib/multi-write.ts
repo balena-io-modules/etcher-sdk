@@ -27,7 +27,6 @@ import { ProgressEvent } from './source-destination/progress';
 import {
 	CountingHashStream,
 	createHasher,
-	ProgressHashStream,
 	SourceDestination,
 	Verifier,
 } from './source-destination/source-destination';
@@ -189,7 +188,6 @@ export async function pipeSourceToDestinations(
 	if (sparse) {
 		await pipeSparseSourceToDestination(
 			source,
-			sourceMetadata,
 			destination,
 			verify,
 			updateState,
@@ -299,7 +297,6 @@ async function pipeRegularSourceToDestination(
 
 async function pipeSparseSourceToDestination(
 	source: SourceDestination,
-	sourceMetadata: Metadata,
 	destination: SourceDestination,
 	verify: boolean,
 	updateState: (state?: WriteStep) => void,

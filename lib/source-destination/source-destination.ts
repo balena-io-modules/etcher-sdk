@@ -77,19 +77,19 @@ export class SourceDestinationFs {
 	constructor(private source: SourceDestination) {}
 
 	public open(
-		path: string,
-		options: any,
+		_path: string,
+		_options: any,
 		callback: (error: Error | null, fd?: number) => void,
 	) {
 		callback(null, 1);
 	}
 
-	public close(fd: number, callback: (error: Error | null) => void) {
+	public close(_fd: number, callback: (error: Error | null) => void) {
 		callback(null);
 	}
 
 	public fstat(
-		fd: number,
+		_fd: number,
 		callback: (error: Error | null, stats?: { size: number }) => void,
 	) {
 		this.source
@@ -105,7 +105,7 @@ export class SourceDestinationFs {
 	}
 
 	public read(
-		fd: number,
+		_fd: number,
 		buffer: Buffer,
 		bufferOffset: number,
 		length: number,
@@ -283,33 +283,33 @@ export class SourceDestination extends EventEmitter {
 	}
 
 	public async read(
-		buffer: Buffer,
-		bufferOffset: number,
-		length: number,
-		sourceOffset: number,
+		_buffer: Buffer,
+		_bufferOffset: number,
+		_length: number,
+		_sourceOffset: number,
 	): Promise<ReadResult> {
 		throw new NotCapable();
 	}
 
 	public async write(
-		buffer: Buffer,
-		bufferOffset: number,
-		length: number,
-		fileOffset: number,
+		_buffer: Buffer,
+		_bufferOffset: number,
+		_length: number,
+		_fileOffset: number,
 	): Promise<WriteResult> {
 		throw new NotCapable();
 	}
 
 	public async createReadStream(
-		emitProgress = false,
-		start = 0,
-		end?: number,
+		_emitProgress = false,
+		_start = 0,
+		_end?: number,
 	): Promise<NodeJS.ReadableStream> {
 		throw new NotCapable();
 	}
 
 	public async createSparseReadStream(
-		generateChecksums = false,
+		_generateChecksums = false,
 	): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
 		throw new NotCapable();
 	}
