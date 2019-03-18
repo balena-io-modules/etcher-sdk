@@ -34,7 +34,7 @@ export class UsbbootDrive extends SourceDestination
 	public size = null;
 	public emitsProgress = true;
 
-	constructor(usbDevice: UsbbootDevice) {
+	constructor(public usbDevice: UsbbootDevice) {
 		super();
 		usbDevice.on('progress', this.emit.bind(this, 'progress'));
 	}
