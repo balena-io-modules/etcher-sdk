@@ -53,7 +53,7 @@
     "blockmap": "^3.4.2",
     "bluebird": "^3.5.1",
     "debug": "^3.1.0",
-    "drivelist": "^8.0.3",
+    "drivelist": "^8.0.4",
     "file-disk": "^5.0.0",
     "file-type": "^8.0.0",
     "lodash": "^4.17.10",
