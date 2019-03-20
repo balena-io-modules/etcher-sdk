@@ -15,6 +15,7 @@
  */
 
 import { delay } from 'bluebird';
+import { isUsbBootCapableUSBDevice } from 'node-raspberrypi-usbboot';
 import { platform } from 'process';
 import { DriverlessDevice as WinUsbDriverlessDevice } from 'winusb-driver-generator';
 
@@ -86,7 +87,9 @@ class DriverlessDeviceAdapter$ extends Adapter {
 		const devices = this.listDriverlessDevices();
 		const result = new Map<string, WinUsbDriverlessDevice>();
 		for (const device of devices) {
-			result.set(device.did, device);
+			if (isUsbBootCapableUSBDevice(device.vid, device.pid)) {
+				result.set(device.did, device);
+			}
 		}
 		return result;
 	}
