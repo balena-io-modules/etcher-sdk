@@ -92,9 +92,7 @@ export const clean = async (device: string): Promise<void> => {
 				await delay(DISKPART_DELAY);
 			} else {
 				throw new Error(
-					`Couldn't clean the drive, ${error.failure.message} (code ${
-						error.failure.code
-					})`,
+					`Couldn't clean the drive, ${error.message} (code ${error.code})`,
 				);
 			}
 		}
