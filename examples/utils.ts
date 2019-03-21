@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-import { FilterStream, ReadStream } from 'blockmap';
 import { delay } from 'bluebird';
 import { Spinner } from 'cli-spinner';
-import { EventEmitter } from 'events';
 import ProgressBar = require('progress');
 
-import { fs, multiWrite, sourceDestination, utils } from '../lib';
+import { fs, multiWrite, sourceDestination } from '../lib';
 
 const SPINNER_DELAY = 60;
 
@@ -103,21 +101,6 @@ function createProgressBar(
 			);
 		}
 		return [spinner, update];
-	}
-}
-
-function multiDestinationProgressBytes(
-	progress: multiWrite.MultiDestinationProgress,
-): number {
-	if (progress.sparse) {
-		return progress.bytes;
-	} else if (
-		progress.size === undefined &&
-		progress.rootStreamPosition !== undefined
-	) {
-		return progress.rootStreamPosition;
-	} else {
-		return progress.position;
 	}
 }
 
