@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import BlockMap = require('blockmap');
+import { BlockMap, FilterStream, ReadStream } from 'blockmap';
 import { fromCallback } from 'bluebird';
 import { sortBy } from 'lodash';
 import { posix } from 'path';
@@ -27,7 +27,7 @@ import {
 	ZipFile,
 } from 'yauzl';
 
-import { NO_MATCHING_FILE_MSG } from '../constants';
+import { CHUNK_SIZE, NO_MATCHING_FILE_MSG } from '../constants';
 import { getFileStreamFromZipStream } from '../zip';
 import { Metadata } from './metadata';
 import { SourceDestination } from './source-destination';
@@ -270,16 +270,18 @@ export class RandomAccessZipSource extends SourceSource {
 
 	public async createSparseReadStream(
 		generateChecksums = false,
-	): Promise<BlockMap.FilterStream> {
+	): Promise<FilterStream> {
 		const metadata = await this.getMetadata();
 		if (metadata.blockMap === undefined) {
 			throw new NotCapable();
 		}
 		// Verifying and generating checksums makes no sense, so we only verify if generateChecksums is false.
-		const transform = BlockMap.createFilterStream(metadata.blockMap, {
-			verify: !generateChecksums,
+		const transform = new FilterStream(
+			metadata.blockMap,
+			!generateChecksums,
 			generateChecksums,
-		});
+			CHUNK_SIZE,
+		);
 		const stream = await this.createReadStream(false);
 		stream.pipe(transform);
 		return transform;
@@ -300,7 +302,7 @@ export class RandomAccessZipSource extends SourceSource {
 		if (blockMap !== undefined) {
 			result.blockMap = BlockMap.parse(blockMap);
 			result.blockmappedSize =
-				result.blockMap.blockSize * result.blockMap.mappedBlockCount;
+				result.blockMap.blockSize * result.blockMap.mappedBlocksCount;
 		}
 		let manifest: any;
 		try {
@@ -374,7 +376,7 @@ export class ZipSource extends SourceSource {
 
 	public async createSparseReadStream(
 		generateChecksums = false,
-	): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
+	): Promise<FilterStream | ReadStream> {
 		await this.prepare();
 		return await this.implementation.createSparseReadStream(generateChecksums);
 	}

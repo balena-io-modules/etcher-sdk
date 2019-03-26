@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
+import { BlockMap, FilterStream, ReadStream } from 'blockmap';
 import { map } from 'bluebird';
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
 import { every, minBy } from 'lodash';
 import { PassThrough } from 'stream';
-
-import BlockMap = require('blockmap');
 
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
 import { VerificationError } from '../errors';
@@ -228,7 +227,7 @@ export class MultiDestination extends SourceDestination {
 
 	public async createSparseReadStream(
 		...args: any[]
-	): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
+	): Promise<FilterStream | ReadStream> {
 		// TODO: raise an error or a warning here
 		return await Array.from(this.activeDestinations)[0].createSparseReadStream(
 			...args,
