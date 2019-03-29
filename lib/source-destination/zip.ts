@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { BlockMap, FilterStream, ReadStream } from 'blockmap';
+import { BlockMap, Range } from 'blockmap';
 import { fromCallback } from 'bluebird';
 import { sortBy } from 'lodash';
 import { posix } from 'path';
@@ -27,15 +27,36 @@ import {
 	ZipFile,
 } from 'yauzl';
 
-import { CHUNK_SIZE, NO_MATCHING_FILE_MSG } from '../constants';
+import { NO_MATCHING_FILE_MSG } from '../constants';
 import { getFileStreamFromZipStream } from '../zip';
 import { Metadata } from './metadata';
 import { SourceDestination } from './source-destination';
 import { SourceSource } from './source-source';
 
 import { NotCapable } from '../errors';
+import {
+	blocksLength,
+	BlocksWithChecksum,
+	SparseReadable,
+} from '../sparse-stream/shared';
+import { SparseFilterStream } from '../sparse-stream/sparse-filter-stream';
 import { StreamLimiter } from '../stream-limiter';
 import { streamToBuffer } from '../utils';
+
+function blockmapToBlocks(blockmap: BlockMap): BlocksWithChecksum[] {
+	return blockmap.ranges.map(
+		(range: Range): BlocksWithChecksum => {
+			const offset = range.start * blockmap.blockSize;
+			const length = (range.end - range.start) * blockmap.blockSize;
+			const checksum = range.checksum;
+			const checksumType =
+				blockmap.checksumType === 'sha1' || blockmap.checksumType === 'sha256'
+					? blockmap.checksumType
+					: undefined;
+			return { checksum, checksumType, blocks: [{ offset, length }] };
+		},
+	);
+}
 
 export function matchSupportedExtensions(filename: string): boolean {
 	const extension = posix.extname(filename);
@@ -270,17 +291,16 @@ export class RandomAccessZipSource extends SourceSource {
 
 	public async createSparseReadStream(
 		generateChecksums = false,
-	): Promise<FilterStream> {
+	): Promise<SparseFilterStream> {
 		const metadata = await this.getMetadata();
-		if (metadata.blockMap === undefined) {
+		if (metadata.blocks === undefined) {
 			throw new NotCapable();
 		}
 		// Verifying and generating checksums makes no sense, so we only verify if generateChecksums is false.
-		const transform = new FilterStream(
-			metadata.blockMap,
+		const transform = new SparseFilterStream(
+			metadata.blocks,
 			!generateChecksums,
 			generateChecksums,
-			CHUNK_SIZE,
 		);
 		const stream = await this.createReadStream(false);
 		stream.pipe(transform);
@@ -301,8 +321,8 @@ export class RandomAccessZipSource extends SourceSource {
 		const blockMap = await this.getString(posix.join(prefix, 'image.bmap'));
 		if (blockMap !== undefined) {
 			result.blockMap = BlockMap.parse(blockMap);
-			result.blockmappedSize =
-				result.blockMap.blockSize * result.blockMap.mappedBlocksCount;
+			result.blocks = blockmapToBlocks(result.blockMap);
+			result.blockmappedSize = blocksLength(result.blocks);
 		}
 		let manifest: any;
 		try {
@@ -376,7 +396,7 @@ export class ZipSource extends SourceSource {
 
 	public async createSparseReadStream(
 		generateChecksums = false,
-	): Promise<FilterStream | ReadStream> {
+	): Promise<SparseReadable> {
 		await this.prepare();
 		return await this.implementation.createSparseReadStream(generateChecksums);
 	}

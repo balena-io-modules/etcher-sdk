@@ -306,7 +306,7 @@ async function pipeSparseSourceToDestination(
 ): Promise<void> {
 	// TODO: if verify is true, we must ensure that source and destination streams hash algorithms are the same
 	const [sourceStream, destinationStream] = await Promise.all([
-		source.createSparseReadStream(true),
+		source.createSparseReadStream(verify),
 		destination.createSparseWriteStream(),
 	]);
 	getRootStream(sourceStream).on('progress', (progress: ProgressEvent) => {
@@ -322,7 +322,7 @@ async function pipeSparseSourceToDestination(
 	});
 	if (verify) {
 		updateState('verifying');
-		const verifier = destination.createVerifier(sourceStream.blockMap);
+		const verifier = destination.createVerifier(sourceStream.blocks);
 		await runVerifier(verifier, onFail, onProgress);
 	}
 }

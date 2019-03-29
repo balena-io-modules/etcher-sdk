@@ -16,6 +16,8 @@
 
 import { BlockMap } from 'blockmap';
 
+import { BlocksWithChecksum } from '../sparse-stream/shared';
+
 export interface Metadata {
 	size?: number;
 	isSizeEstimated?: boolean;
@@ -23,6 +25,7 @@ export interface Metadata {
 	blockmappedSize?: number;
 	name?: string;
 	blockMap?: BlockMap;
+	blocks?: BlocksWithChecksum[];
 	instructions?: string;
 	logo?: string;
 	bytesToZeroOutFromTheBeginning?: number;

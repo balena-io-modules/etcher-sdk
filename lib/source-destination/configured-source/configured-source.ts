@@ -14,23 +14,29 @@
  * limitations under the License.
  */
 
-import { BlockMap, FilterStream, ReadStream } from 'blockmap';
 import { using } from 'bluebird';
 import * as _debug from 'debug';
 import { DiscardDiskChunk, Disk, ReadResult, WriteResult } from 'file-disk';
-import { cloneDeep } from 'lodash';
 import { getPartitions } from 'partitioninfo';
 import { AsyncFsLike, interact } from 'resin-image-fs';
 
 import { CHUNK_SIZE } from '../../constants';
 import { NotCapable } from '../../errors';
+import {
+	blocksLength,
+	BlocksWithChecksum,
+	ChecksumType,
+} from '../../sparse-stream/shared';
+import { SparseFilterStream } from '../../sparse-stream/sparse-filter-stream';
+import { SparseReadStream } from '../../sparse-stream/sparse-read-stream';
+
 import { Metadata } from '../metadata';
 import { SourceDestination } from '../source-destination';
 import { SourceSource } from '../source-source';
+
 import { configure as legacyConfigure } from './configure';
 
 const debug = _debug('etcher-sdk:configured-source');
-const BLOCK_SIZE = 512;
 
 export type ConfigureFunction = (disk: Disk, config: any) => Promise<void>;
 
@@ -87,6 +93,8 @@ export class ConfiguredSource extends SourceSource {
 		private createStreamFromDisk: boolean,
 		configure?: ConfigureFunction | 'legacy',
 		private config?: any,
+		private checksumType: ChecksumType = 'xxhash64',
+		private chunkSize = CHUNK_SIZE,
 	) {
 		super(source);
 		this.disk = new SourceDisk(source);
@@ -97,28 +105,23 @@ export class ConfiguredSource extends SourceSource {
 		}
 	}
 
-	private async getBlockmap(): Promise<BlockMap> {
-		const imageSize = (await this.source.getMetadata()).size;
-		if (imageSize === undefined) {
-			throw new NotCapable();
+	public async getBlocks(): Promise<BlocksWithChecksum[]> {
+		// Align ranges to this.chunkSize
+		const blocks = await this.disk.getRanges(this.chunkSize);
+		return blocks.map(block => ({ blocks: [block] }));
+	}
+
+	private async getBlocksWithChecksumType(
+		generateChecksums: boolean,
+	): Promise<BlocksWithChecksum[]> {
+		let blocks = await this.getBlocks();
+		if (generateChecksums) {
+			blocks = blocks.map(block => ({
+				...block,
+				checksumType: this.checksumType,
+			}));
 		}
-		const blockSize = BLOCK_SIZE;
-		const blocks = await this.disk.getRanges(blockSize);
-		const mappedBlocksCount =
-			blocks.map(b => b.length).reduce((a, b) => a + b, 0) / blockSize;
-		const ranges = blocks.map(b => ({
-			start: b.offset / blockSize,
-			end: (b.offset + b.length) / blockSize - 1,
-			checksum: '',
-		}));
-		const blocksCount = Math.ceil(imageSize / blockSize);
-		return new BlockMap({
-			blocksCount,
-			blockSize,
-			imageSize,
-			mappedBlocksCount,
-			ranges,
-		});
+		return blocks;
 	}
 
 	public async canRead(): Promise<boolean> {
@@ -156,28 +159,24 @@ export class ConfiguredSource extends SourceSource {
 
 	private async createSparseReadStreamFromDisk(
 		generateChecksums: boolean,
-	): Promise<ReadStream> {
-		return new ReadStream(
-			this.read.bind(this),
-			await this.getBlockmap(),
-			false,
-			generateChecksums,
-			0,
-			Infinity,
+	): Promise<SparseReadStream> {
+		return new SparseReadStream(
+			this,
+			await this.getBlocksWithChecksumType(generateChecksums), // blocks
 			CHUNK_SIZE,
+			false, // verify
+			generateChecksums,
 		);
 	}
 
 	private async createSparseReadStreamFromStream(
 		generateChecksums: boolean,
-	): Promise<FilterStream> {
+	): Promise<SparseFilterStream> {
 		const stream = await this.createReadStream();
-		const blockMap = await this.getBlockmap();
-		const transform = new FilterStream(
-			blockMap,
-			false,
+		const transform = new SparseFilterStream(
+			await this.getBlocksWithChecksumType(generateChecksums),
+			false, // verify
 			generateChecksums,
-			CHUNK_SIZE,
 		);
 		stream.on('error', transform.emit.bind(transform, 'error'));
 		stream.pipe(transform);
@@ -186,7 +185,7 @@ export class ConfiguredSource extends SourceSource {
 
 	public async createSparseReadStream(
 		generateChecksums: boolean,
-	): Promise<FilterStream | ReadStream> {
+	): Promise<SparseReadStream | SparseFilterStream> {
 		if (this.createStreamFromDisk) {
 			return await this.createSparseReadStreamFromDisk(generateChecksums);
 		} else {
@@ -195,11 +194,10 @@ export class ConfiguredSource extends SourceSource {
 	}
 
 	protected async _getMetadata(): Promise<Metadata> {
-		const metadata = cloneDeep(await this.source.getMetadata());
-		metadata.blockMap = await this.getBlockmap();
-		metadata.blockmappedSize =
-			metadata.blockMap.blockSize * metadata.blockMap.mappedBlocksCount;
-		return metadata;
+		const sourceMetadata = await this.source.getMetadata();
+		const blocks = await this.getBlocks();
+		const blockmappedSize = blocksLength(blocks);
+		return { ...sourceMetadata, blocks, blockmappedSize };
 	}
 
 	private async trimPartitions(): Promise<void> {

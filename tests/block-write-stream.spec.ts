@@ -24,9 +24,9 @@ import { Readable } from 'stream';
 
 import { BlockWriteStream } from '../lib/block-write-stream';
 import { CHUNK_SIZE as BLOCK_WRITE_STREAM_CHUNK_SIZE } from '../lib/constants';
-import { DestinationSparseWriteStream } from '../lib/destination-sparse-write-stream';
 import * as diskpart from '../lib/diskpart';
 import { readFile } from '../lib/fs';
+import { SparseWriteStream } from '../lib/sparse-stream/sparse-write-stream';
 import { tmpFileDisposer, TmpFileResult } from '../lib/tmp';
 import { blockDeviceFromFile, DEFAULT_IMAGE_TESTS_TIMEOUT } from './tester';
 
@@ -93,7 +93,7 @@ describe('block-write-stream', function() {
 		await using(tmpFileDisposer(false), async (file: TmpFileResult) => {
 			const destination = await blockDeviceFromFile(file.path);
 			await destination.open();
-			let output: BlockWriteStream | DestinationSparseWriteStream;
+			let output: BlockWriteStream | SparseWriteStream;
 			if (sparse) {
 				output = await destination.createSparseWriteStream();
 			} else {

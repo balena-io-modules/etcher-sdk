@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Chunk } from 'blockmap';
+import { SparseStreamChunk } from './sparse-stream/shared';
 
 export async function streamToBuffer(
 	stream: NodeJS.ReadableStream,
@@ -36,7 +36,7 @@ export async function streamToBuffer(
 export async function sparseStreamToBuffer(
 	stream: NodeJS.ReadableStream,
 ): Promise<Buffer> {
-	const chunks: Chunk[] = [];
+	const chunks: SparseStreamChunk[] = [];
 	await new Promise((resolve: () => void, reject: (error: Error) => void) => {
 		stream.on('error', reject);
 		stream.on('end', resolve);

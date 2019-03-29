@@ -14,19 +14,31 @@
  * limitations under the License.
  */
 
-import { FilterStream } from 'blockmap';
 import { promisify } from 'bluebird';
 import * as _ from 'lodash';
-import { BLOCK, Image as UDIFImage, SECTOR_SIZE } from 'udif';
+import { BLOCK, CHECKSUM_TYPE, Image as UDIFImage, SECTOR_SIZE } from 'udif';
 
 import { Metadata } from './metadata';
 import { SourceDestination, SourceDestinationFs } from './source-destination';
 import { SourceSource } from './source-source';
 
 import { NotCapable } from '../errors';
+import {
+	Block,
+	blocksLength,
+	BlocksWithChecksum,
+	SparseReadable,
+} from '../sparse-stream/shared';
 import { StreamLimiter } from '../stream-limiter';
 
 export class DmgSource extends SourceSource {
+	private static mappedBlockTypes = [
+		BLOCK.RAW,
+		BLOCK.UDCO,
+		BLOCK.UDZO,
+		BLOCK.UDBZ,
+		BLOCK.LZFSE,
+	];
 	public static requiresRandomReadableSource = true;
 	public static readonly mimetype = 'application/x-apple-diskimage';
 	private image: UDIFImage;
@@ -41,11 +53,7 @@ export class DmgSource extends SourceSource {
 	}
 
 	public async canCreateSparseReadStream() {
-		// TODO: We act like we can't create sparse streams because we have no way to verify
-		// flashed images.
-		// This is because node-udif does not use blockmap but implements its own BlockMap
-		// We need a function to extract a regular BlockMap from the UDIFImage.
-		return false;
+		return true;
 	}
 
 	public async createReadStream(
@@ -66,31 +74,45 @@ export class DmgSource extends SourceSource {
 
 	public async createSparseReadStream(
 		_generateChecksums: boolean,
-	): Promise<FilterStream> {
-		return this.image.createSparseReadStream();
+	): Promise<SparseReadable> {
+		return Object.assign(this.image.createSparseReadStream(), {
+			blocks: await this.getBlocks(),
+		});
 	}
 
-	public getMappedBlocksSize = () => {
-		return _(this.image.resourceFork.blkx)
-			.map('map.blocks')
-			.flatten()
-			.filter(
-				(blk: any) =>
-					[BLOCK.RAW, BLOCK.UDCO, BLOCK.UDZO, BLOCK.UDBZ, BLOCK.LZFSE].indexOf(
-						blk.type,
-					) !== -1,
-			)
-			.map(blk => blk.sectorCount * SECTOR_SIZE)
-			.sum();
-	};
+	public async getBlocks(): Promise<BlocksWithChecksum[]> {
+		const result: BlocksWithChecksum[] = [];
+		for (const blk of this.image.resourceFork.blkx) {
+			const childBlocks = blk.map.blocks.filter(b =>
+				DmgSource.mappedBlockTypes.includes(b.type),
+			);
+			if (childBlocks.length === 0) {
+				continue;
+			}
+			let checksumType: 'crc32' | undefined;
+			let checksum: string | undefined;
+			if (blk.map.checksum.type === CHECKSUM_TYPE.CRC32) {
+				checksumType = 'crc32';
+				checksum = blk.map.checksum.value;
+			}
+			const blocks: Block[] = [];
+			result.push({ checksumType, checksum, blocks });
+			for (const childBlk of childBlocks) {
+				const offset =
+					(blk.map.sectorNumber + childBlk.sectorNumber) * SECTOR_SIZE;
+				const length = childBlk.sectorCount * SECTOR_SIZE;
+				blocks.push({ offset, length });
+			}
+		}
+		return result;
+	}
 
 	protected async _getMetadata(): Promise<Metadata> {
+		const blocks = await this.getBlocks();
+		const blockmappedSize = blocksLength(blocks);
 		const compressedSize = (await this.source.getMetadata()).size;
-		return {
-			compressedSize,
-			size: this.image.getUncompressedSize(),
-			blockmappedSize: this.getMappedBlocksSize(),
-		};
+		const size = this.image.getUncompressedSize();
+		return { blocks, blockmappedSize, compressedSize, size };
 	}
 
 	protected async _open(): Promise<void> {

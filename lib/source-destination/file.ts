@@ -27,11 +27,11 @@ import { SourceDestination } from './source-destination';
 
 import { BlockReadStream, ProgressBlockReadStream } from '../block-read-stream';
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
-import {
-	DestinationSparseWriteStream,
-	ProgressDestinationSparseWriteStream,
-} from '../destination-sparse-write-stream';
 import { close, open, read, stat, write } from '../fs';
+import {
+	ProgressSparseWriteStream,
+	SparseWriteStream,
+} from '../sparse-stream/sparse-write-stream';
 
 export const ProgressWriteStream = makeClassEmitProgressEvents(
 	// type definitions for node 6 export fs.WriteStream as an interface, but it's a class.
@@ -143,10 +143,8 @@ export class File extends SourceDestination {
 		return stream;
 	}
 
-	public async createSparseWriteStream(): Promise<
-		DestinationSparseWriteStream
-	> {
-		const stream = new ProgressDestinationSparseWriteStream(this);
+	public async createSparseWriteStream(): Promise<SparseWriteStream> {
+		const stream = new ProgressSparseWriteStream(this);
 		stream.on('finish', stream.emit.bind(stream, 'done'));
 		return stream;
 	}

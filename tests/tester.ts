@@ -136,10 +136,14 @@ export async function testImageNoIt(
 		const canCreateSparseReadStream = await innerSource.canCreateSparseReadStream();
 		assert(canCreateSparseReadStream);
 		const sourceSparseStream = await innerSource.createSparseReadStream();
+
 		const sourceSparseStreamBuffer = await sparseStreamToBuffer(
 			sourceSparseStream,
 		);
-		expect(sourceSparseStreamBuffer).to.deep.equal(compareToData);
+		expect(sourceSparseStreamBuffer.length).to.be.at.most(compareToData.length);
+		expect(sourceSparseStreamBuffer).to.deep.equal(
+			compareToData.slice(0, sourceSparseStreamBuffer.length),
+		);
 	}
 
 	if (partitionsFile !== undefined || partitionTableType !== undefined) {
@@ -175,12 +179,14 @@ export function testImage(
 	partitionsFile?: string,
 	expectedMetadata: any = {},
 	innerSourceClass?: typeof sourceDestination.SourceSource,
+	only = false,
 ): void {
 	for (const sourceClass of [
 		sourceDestination.File,
 		sourceDestination.BlockDevice,
 	]) {
-		it(
+		const fn = only ? it.only : it;
+		fn(
 			`${testName} ${sourceClass.name}`,
 			testImageNoIt.bind(
 				null,
