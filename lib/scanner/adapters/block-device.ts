@@ -34,6 +34,15 @@ const USBBOOT_RPI_COMPUTE_MODULE_NAMES = [
 	'Linux File-Stor Gadget Media',
 ];
 
+function looksLikeComputeModule(description: string): boolean {
+	for (const name of USBBOOT_RPI_COMPUTE_MODULE_NAMES) {
+		if (description.startsWith(name)) {
+			return true;
+		}
+	}
+	return false;
+}
+
 const driveKey = (drive: $Drive) => {
 	return drive.device + '|' + drive.size + '|' + drive.description;
 };
@@ -128,7 +137,7 @@ export class BlockDeviceAdapter extends Adapter {
 					? drive.mountpoints.map(m => m.path).join(', ') // Windows
 					: drive.device;
 			const resultDrive: DrivelistDrive = { ...drive, displayName };
-			if (USBBOOT_RPI_COMPUTE_MODULE_NAMES.includes(resultDrive.description)) {
+			if (looksLikeComputeModule(resultDrive.description)) {
 				resultDrive.description = 'Compute Module';
 				// TODO: Should this be in the sdk?
 				resultDrive.icon = 'raspberrypi';
