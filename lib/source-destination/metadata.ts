@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import BlockMap = require('blockmap');
+import { BlockMap } from 'blockmap';
 
 export interface Metadata {
 	size?: number;

@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { BlockMap, FilterStream, ReadStream } from 'blockmap';
 import { using } from 'bluebird';
 import * as _debug from 'debug';
 import { DiscardDiskChunk, Disk, ReadResult, WriteResult } from 'file-disk';
@@ -21,11 +22,10 @@ import { cloneDeep } from 'lodash';
 import { getPartitions } from 'partitioninfo';
 import { AsyncFsLike, interact } from 'resin-image-fs';
 
-import BlockMap = require('blockmap');
-
+import { CHUNK_SIZE } from '../../constants';
 import { NotCapable } from '../../errors';
 import { Metadata } from '../metadata';
-import { SourceDestination, SourceDestinationFs } from '../source-destination';
+import { SourceDestination } from '../source-destination';
 import { SourceSource } from '../source-source';
 import { configure as legacyConfigure } from './configure';
 
@@ -98,7 +98,27 @@ export class ConfiguredSource extends SourceSource {
 	}
 
 	private async getBlockmap(): Promise<BlockMap> {
-		return await this.disk.getBlockMap(BLOCK_SIZE, false);
+		const imageSize = (await this.source.getMetadata()).size;
+		if (imageSize === undefined) {
+			throw new NotCapable();
+		}
+		const blockSize = BLOCK_SIZE;
+		const blocks = await this.disk.getRanges(blockSize);
+		const mappedBlocksCount =
+			blocks.map(b => b.length).reduce((a, b) => a + b, 0) / blockSize;
+		const ranges = blocks.map(b => ({
+			start: b.offset / blockSize,
+			end: (b.offset + b.length) / blockSize - 1,
+			checksum: '',
+		}));
+		const blocksCount = Math.ceil(imageSize / blockSize);
+		return new BlockMap({
+			blocksCount,
+			blockSize,
+			imageSize,
+			mappedBlocksCount,
+			ranges,
+		});
 	}
 
 	public async canRead(): Promise<boolean> {
@@ -136,25 +156,29 @@ export class ConfiguredSource extends SourceSource {
 
 	private async createSparseReadStreamFromDisk(
 		generateChecksums: boolean,
-	): Promise<BlockMap.ReadStream> {
-		return new BlockMap.ReadStream('', await this.getBlockmap(), {
-			verify: false,
+	): Promise<ReadStream> {
+		return new ReadStream(
+			this.read.bind(this),
+			await this.getBlockmap(),
+			false,
 			generateChecksums,
-			fs: new SourceDestinationFs(this),
-			chunkSize: 2 * 1024 * 1024, // TODO: constant
-			autoClose: false,
-		});
+			0,
+			Infinity,
+			CHUNK_SIZE,
+		);
 	}
 
 	private async createSparseReadStreamFromStream(
 		generateChecksums: boolean,
-	): Promise<BlockMap.FilterStream> {
+	): Promise<FilterStream> {
 		const stream = await this.createReadStream();
 		const blockMap = await this.getBlockmap();
-		const transform = BlockMap.createFilterStream(blockMap, {
-			verify: false,
+		const transform = new FilterStream(
+			blockMap,
+			false,
 			generateChecksums,
-		});
+			CHUNK_SIZE,
+		);
 		stream.on('error', transform.emit.bind(transform, 'error'));
 		stream.pipe(transform);
 		return transform;
@@ -162,7 +186,7 @@ export class ConfiguredSource extends SourceSource {
 
 	public async createSparseReadStream(
 		generateChecksums: boolean,
-	): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
+	): Promise<FilterStream | ReadStream> {
 		if (this.createStreamFromDisk) {
 			return await this.createSparseReadStreamFromDisk(generateChecksums);
 		} else {
@@ -174,7 +198,7 @@ export class ConfiguredSource extends SourceSource {
 		const metadata = cloneDeep(await this.source.getMetadata());
 		metadata.blockMap = await this.getBlockmap();
 		metadata.blockmappedSize =
-			metadata.blockMap.blockSize * metadata.blockMap.mappedBlockCount;
+			metadata.blockMap.blockSize * metadata.blockMap.mappedBlocksCount;
 		return metadata;
 	}
 
@@ -198,12 +222,9 @@ export class ConfiguredSource extends SourceSource {
 		}
 		const discards = this.disk.getDiscardedChunks();
 		const discardedBytes = discards
-			.map((d: DiscardDiskChunk) => {
-				return d.end - d.start + 1;
-			})
-			.reduce((a: number, b: number) => {
-				return a + b;
-			}); // TODO: discarededBytes in metadata ?
+			.map((d: DiscardDiskChunk) => d.end - d.start + 1)
+			.reduce((a: number, b: number) => a + b, 0);
+		// TODO: discarededBytes in metadata ?
 		const metadata = await this.getMetadata();
 		if (metadata.size !== undefined) {
 			const percentage = Math.round((discardedBytes / metadata.size) * 100);

@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { BlockMap, FilterStream, ReadStream } from 'blockmap';
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
 import * as fileType from 'file-type';
@@ -22,9 +23,7 @@ import { extname } from 'path';
 import { arch } from 'process';
 import { Stream as HashStream } from 'xxhash';
 
-import BlockMap = require('blockmap');
-
-import { PROGRESS_EMISSION_INTERVAL } from '../constants';
+import { CHUNK_SIZE, PROGRESS_EMISSION_INTERVAL } from '../constants';
 import {
 	ChecksumVerificationError,
 	NotCapable,
@@ -145,9 +144,6 @@ export abstract class Verifier extends EventEmitter {
 		stream.once('error', () => {
 			stream.unpipe(meter);
 			meter.end();
-			if (stream instanceof BlockMap.ReadStream) {
-				stream.destroy();
-			}
 		});
 		stream.pipe(meter);
 	}
@@ -199,18 +195,29 @@ export class SparseStreamVerifier extends Verifier {
 	}
 
 	public async run(): Promise<void> {
-		let stream: BlockMap.ReadStream | BlockMap.FilterStream;
+		let stream: ReadStream | FilterStream;
 		if (await this.source.canRead()) {
-			stream = new BlockMap.ReadStream('', this.blockMap, {
-				fs: new SourceDestinationFs(this.source),
-			});
+			stream = new ReadStream(
+				this.source.read.bind(this.source),
+				this.blockMap,
+				true,
+				false,
+				0,
+				Infinity,
+				CHUNK_SIZE,
+			);
 			stream.on('error', this.wrapErrorAndEmit.bind(this));
 		} else if (await this.source.canCreateReadStream()) {
 			// TODO: will this ever be used?
 			// if yes, originalStream should be unpiped from the transform and destroyed on error
 			const originalStream = await this.source.createReadStream();
 			originalStream.on('error', this.emit.bind(this, 'error'));
-			const transform = BlockMap.createFilterStream(this.blockMap);
+			const transform = new FilterStream(
+				this.blockMap,
+				true,
+				false,
+				CHUNK_SIZE,
+			);
 			transform.on('error', this.wrapErrorAndEmit.bind(this));
 			originalStream.pipe(transform);
 			stream = transform;
@@ -310,7 +317,7 @@ export class SourceDestination extends EventEmitter {
 
 	public async createSparseReadStream(
 		_generateChecksums = false,
-	): Promise<BlockMap.FilterStream | BlockMap.ReadStream> {
+	): Promise<FilterStream | ReadStream> {
 		throw new NotCapable();
 	}
 
