@@ -97,12 +97,25 @@ export class DmgSource extends SourceSource {
 			}
 			const blocks: Block[] = [];
 			result.push({ checksumType, checksum, blocks });
+			let lastBlock: Block | undefined;
 			for (const childBlk of childBlocks) {
 				const offset =
 					(blk.map.sectorNumber + childBlk.sectorNumber) * SECTOR_SIZE;
 				const length = childBlk.sectorCount * SECTOR_SIZE;
-				blocks.push({ offset, length });
+				if (lastBlock === undefined) {
+					// First iteration of the loop
+					lastBlock = { offset, length };
+				} else if (lastBlock.offset + lastBlock.length === offset) {
+					// Last block and this block are adjacent, increase last block's length
+					lastBlock.length += length;
+				} else {
+					// Last block and this block are not adjacent:
+					blocks.push(lastBlock);
+					lastBlock = { offset, length };
+				}
 			}
+			// ! because we know lastBlock can't be undefined
+			blocks.push(lastBlock!);
 		}
 		return result;
 	}

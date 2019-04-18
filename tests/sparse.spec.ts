@@ -51,7 +51,7 @@ describe('sparse streams', function() {
 		const sourceSparseStream = await innerSource.createSparseReadStream();
 		assert(sourceSparseStream.blocks.length === 1);
 		assert(sourceSparseStream.blocks[0].checksum === '4c754335');
-		assert(sourceSparseStream.blocks[0].blocks.length === 512);
+		assert(sourceSparseStream.blocks[0].blocks.length === 1);
 
 		// Create a temporary destination file:
 		await using(tmpFileDisposer(false), async ({ path }: { path: string }) => {
