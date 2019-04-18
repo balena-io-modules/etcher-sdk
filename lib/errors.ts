@@ -16,6 +16,8 @@
 
 import { platform } from 'process';
 
+import { BlocksWithChecksum } from './sparse-stream/shared';
+
 export class NotCapable extends Error {}
 
 export class VerificationError extends Error {
@@ -31,6 +33,29 @@ export class ChecksumVerificationError extends VerificationError {
 		super(message);
 	}
 }
+
+function blocksVerificationErrorMessage(
+	blocksWithChecksum: BlocksWithChecksum,
+	checksum: string,
+) {
+	const start = blocksWithChecksum.blocks[0].offset;
+	const lastBlock =
+		blocksWithChecksum.blocks[blocksWithChecksum.blocks.length - 1];
+	const end = lastBlock.offset + lastBlock.length - 1;
+	return `Checksum does not match for range [${start}, ${end}]: "${
+		blocksWithChecksum.checksum
+	}" != "${checksum}"`;
+}
+
+export class BlocksVerificationError extends VerificationError {
+	constructor(
+		public readonly blocks: BlocksWithChecksum,
+		public readonly checksum: string,
+	) {
+		super(blocksVerificationErrorMessage(blocks, checksum));
+	}
+}
+
 /**
  * @summary Determine whether an error is considered a
  * transient occurrence, and the operation should be retried

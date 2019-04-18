@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { BlockMap, FilterStream, ReadStream } from 'blockmap';
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
 import * as fileType from 'file-type';
@@ -23,13 +22,16 @@ import { extname } from 'path';
 import { arch } from 'process';
 import { Stream as HashStream } from 'xxhash';
 
-import { CHUNK_SIZE, PROGRESS_EMISSION_INTERVAL } from '../constants';
 import {
-	ChecksumVerificationError,
-	NotCapable,
-	VerificationError,
-} from '../errors';
-import { SparseWriteStream } from '../sparse-write-stream';
+	CHUNK_SIZE,
+	PROGRESS_EMISSION_INTERVAL,
+	XXHASH_SEED,
+} from '../constants';
+import { ChecksumVerificationError, NotCapable } from '../errors';
+import { BlocksWithChecksum, SparseReadable } from '../sparse-stream/shared';
+import { SparseFilterStream } from '../sparse-stream/sparse-filter-stream';
+import { SparseReadStream } from '../sparse-stream/sparse-read-stream';
+import { SparseWritable } from '../sparse-stream/sparse-write-stream';
 import { streamToBuffer } from '../utils';
 
 import { Metadata } from './metadata';
@@ -40,8 +42,6 @@ import {
 } from './progress';
 import { SourceSource } from './source-source';
 
-// Seed value 0x45544348 = ASCII "ETCH"
-const SEED = 0x45544348;
 const BITS = arch === 'x64' || arch === 'aarch64' ? 64 : 32;
 
 export class CountingHashStream extends HashStream {
@@ -63,7 +63,7 @@ export const ProgressHashStream = makeClassEmitProgressEvents(
 );
 
 export function createHasher() {
-	const hasher = new ProgressHashStream(SEED, BITS, 'buffer');
+	const hasher = new ProgressHashStream(XXHASH_SEED, BITS, 'buffer');
 	hasher.on('finish', async () => {
 		const checksum = (await streamToBuffer(hasher)).toString('hex');
 		hasher.emit('checksum', checksum);
@@ -182,43 +182,44 @@ export class StreamVerifier extends Verifier {
 }
 
 export class SparseStreamVerifier extends Verifier {
-	constructor(private source: SourceDestination, private blockMap: BlockMap) {
+	constructor(
+		private source: SourceDestination,
+		private blocks: BlocksWithChecksum[],
+	) {
 		super();
 	}
 
-	private wrapErrorAndEmit(error: Error) {
-		// Transforms the error into a VerificationError if needed
-		if (error.message.startsWith('Invalid checksum')) {
-			error = new VerificationError(error.message);
-		}
-		this.emit('error', error);
-	}
-
 	public async run(): Promise<void> {
-		let stream: ReadStream | FilterStream;
+		let stream: SparseReadStream | SparseFilterStream;
 		if (await this.source.canRead()) {
-			stream = new ReadStream(
-				this.source.read.bind(this.source),
-				this.blockMap,
-				true,
-				false,
-				0,
-				Infinity,
+			stream = new SparseReadStream(
+				this.source,
+				this.blocks,
 				CHUNK_SIZE,
+				true, // verify
+				false, // generateChecksums
 			);
-			stream.on('error', this.wrapErrorAndEmit.bind(this));
+			stream.on('error', this.emit.bind(this, 'error'));
 		} else if (await this.source.canCreateReadStream()) {
-			// TODO: will this ever be used?
-			// if yes, originalStream should be unpiped from the transform and destroyed on error
 			const originalStream = await this.source.createReadStream();
-			originalStream.on('error', this.emit.bind(this, 'error'));
-			const transform = new FilterStream(
-				this.blockMap,
-				true,
-				false,
-				CHUNK_SIZE,
+			originalStream.once('error', (error: Error) => {
+				originalStream.unpipe(transform);
+				this.emit('error', error);
+			});
+			const transform = new SparseFilterStream(
+				this.blocks,
+				true, // verify
+				false, // generateChecksums
 			);
-			transform.on('error', this.wrapErrorAndEmit.bind(this));
+			transform.once('error', (error: Error) => {
+				originalStream.unpipe(transform);
+				// @ts-ignore
+				if (typeof originalStream.destroy === 'function') {
+					// @ts-ignore
+					originalStream.destroy();
+				}
+				this.emit('error', error);
+			});
 			originalStream.pipe(transform);
 			stream = transform;
 		} else {
@@ -317,7 +318,11 @@ export class SourceDestination extends EventEmitter {
 
 	public async createSparseReadStream(
 		_generateChecksums = false,
-	): Promise<FilterStream | ReadStream> {
+	): Promise<SparseReadable> {
+		throw new NotCapable();
+	}
+
+	public async getBlocks(): Promise<BlocksWithChecksum[]> {
 		throw new NotCapable();
 	}
 
@@ -325,7 +330,7 @@ export class SourceDestination extends EventEmitter {
 		throw new NotCapable();
 	}
 
-	public async createSparseWriteStream(): Promise<SparseWriteStream> {
+	public async createSparseWriteStream(): Promise<SparseWritable> {
 		throw new NotCapable();
 	}
 
@@ -352,18 +357,25 @@ export class SourceDestination extends EventEmitter {
 	}
 
 	public createVerifier(
-		checksumOrBlockmap: string | BlockMap,
+		checksumOrBlocks: string | BlocksWithChecksum[],
 		size?: number,
 	): Verifier {
-		if (checksumOrBlockmap instanceof BlockMap) {
-			return new SparseStreamVerifier(this, checksumOrBlockmap);
+		if (Array.isArray(checksumOrBlocks)) {
+			for (const block of checksumOrBlocks) {
+				if (block.checksumType === undefined || block.checksum === undefined) {
+					throw new Error(
+						'Block is missing checksum or checksumType attributes, can not create verifier',
+					);
+				}
+			}
+			return new SparseStreamVerifier(this, checksumOrBlocks);
 		} else {
 			if (size === undefined) {
 				throw new Error(
 					'A size argument is required for creating a stream checksum verifier',
 				);
 			}
-			return new StreamVerifier(this, checksumOrBlockmap, size);
+			return new StreamVerifier(this, checksumOrBlocks, size);
 		}
 	}
 

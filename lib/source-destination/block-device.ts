@@ -24,12 +24,12 @@ import {
 	BlockWriteStream,
 	ProgressBlockWriteStream,
 } from '../block-write-stream';
-import {
-	DestinationSparseWriteStream,
-	ProgressDestinationSparseWriteStream,
-} from '../destination-sparse-write-stream';
 import { clean } from '../diskpart';
 import { AdapterSourceDestination } from '../scanner/adapters/adapter';
+import {
+	ProgressSparseWriteStream,
+	SparseWriteStream,
+} from '../sparse-stream/sparse-write-stream';
 
 import { File } from './file';
 import { Metadata } from './metadata';
@@ -107,10 +107,8 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return stream;
 	}
 
-	public async createSparseWriteStream(): Promise<
-		DestinationSparseWriteStream
-	> {
-		const stream = new ProgressDestinationSparseWriteStream(
+	public async createSparseWriteStream(): Promise<SparseWriteStream> {
+		const stream = new ProgressSparseWriteStream(
 			this,
 			platform() === 'win32' ? WIN32_FIRST_BYTES_TO_KEEP : 0,
 		);

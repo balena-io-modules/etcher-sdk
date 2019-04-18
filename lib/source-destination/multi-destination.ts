@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { BlockMap, FilterStream, ReadStream } from 'blockmap';
 import { map } from 'bluebird';
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
@@ -23,7 +22,8 @@ import { PassThrough } from 'stream';
 
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
 import { VerificationError } from '../errors';
-import { SparseWriteStream } from '../sparse-write-stream';
+import { BlocksWithChecksum, SparseReadable } from '../sparse-stream/shared';
+import { SparseWritable } from '../sparse-stream/sparse-write-stream';
 import { difference } from '../utils';
 import { ProgressEvent } from './progress';
 import { SourceDestination, Verifier } from './source-destination';
@@ -44,12 +44,12 @@ export class MultiDestinationVerifier extends Verifier {
 
 	constructor(
 		source: MultiDestination,
-		checksumOrBlockmap: string | BlockMap,
+		checksumOrBlocks: string | BlocksWithChecksum[],
 		size?: number,
 	) {
 		super();
 		for (const dest of source.activeDestinations) {
-			const verifier = dest.createVerifier(checksumOrBlockmap, size);
+			const verifier = dest.createVerifier(checksumOrBlocks, size);
 			verifier.on('error', (error: Error) => {
 				this.oneVerifierFinished(verifier);
 				source.destinationError(dest, error, this);
@@ -225,9 +225,7 @@ export class MultiDestination extends SourceDestination {
 		);
 	}
 
-	public async createSparseReadStream(
-		...args: any[]
-	): Promise<FilterStream | ReadStream> {
+	public async createSparseReadStream(...args: any[]): Promise<SparseReadable> {
 		// TODO: raise an error or a warning here
 		return await Array.from(this.activeDestinations)[0].createSparseReadStream(
 			...args,
@@ -307,15 +305,15 @@ export class MultiDestination extends SourceDestination {
 		return await this.createStream('createWriteStream');
 	}
 
-	public async createSparseWriteStream(): Promise<SparseWriteStream> {
+	public async createSparseWriteStream(): Promise<SparseWritable> {
 		return await this.createStream('createSparseWriteStream');
 	}
 
 	public createVerifier(
-		checksumOrBlockmap: string | BlockMap,
+		checksumOrBlocks: string | BlocksWithChecksum[],
 		size?: number,
 	): Verifier {
-		return new MultiDestinationVerifier(this, checksumOrBlockmap, size);
+		return new MultiDestinationVerifier(this, checksumOrBlocks, size);
 	}
 
 	protected async _open(): Promise<void> {

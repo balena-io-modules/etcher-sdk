@@ -43,7 +43,7 @@ describe('dmg support', function() {
 			compressionMethod,
 			join(DMG_PATH, `etcher-test-${compressionMethod}.dmg`),
 			join(IMAGES_PATH, 'etcher-test.img'),
-			false, // alsoTestSparseStream  // TODO: test it once DmgSource.canCreateSparseReadStream() returns true
+			true, // alsoTestSparseStream
 			true, // shouldHaveSize
 			true, // shouldHaveCompressedSize
 			'mbr', // partitionTableType
