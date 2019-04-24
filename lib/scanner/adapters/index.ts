@@ -16,5 +16,6 @@
 
 export * from './adapter';
 export * from './block-device';
-export * from './usbboot';
 export * from './driverless';
+export * from './remote';
+export * from './usbboot';
