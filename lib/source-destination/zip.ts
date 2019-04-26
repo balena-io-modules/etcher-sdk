@@ -47,7 +47,7 @@ function blockmapToBlocks(blockmap: BlockMap): BlocksWithChecksum[] {
 	return blockmap.ranges.map(
 		(range: Range): BlocksWithChecksum => {
 			const offset = range.start * blockmap.blockSize;
-			const length = (range.end - range.start) * blockmap.blockSize;
+			const length = (range.end - range.start + 1) * blockmap.blockSize;
 			const checksum = range.checksum;
 			const checksumType =
 				blockmap.checksumType === 'sha1' || blockmap.checksumType === 'sha256'
