@@ -78,14 +78,18 @@ describe('metadata zip', function() {
 	const blockMap = parse(
 		outdent`
 			<?xml version="1.0" ?>
-			<bmap version="1.3">
+			<bmap version="2.0">
 			    <ImageSize> 5242880 </ImageSize>
 			    <BlockSize> 4096 </BlockSize>
 			    <BlocksCount> 1280 </BlocksCount>
-			    <MappedBlocksCount> 1280 </MappedBlocksCount>
-			    <BmapFileSHA1> cc6f077565c73a46198777b259c231875df4e709 </BmapFileSHA1>
+			    <MappedBlocksCount> 21   </MappedBlocksCount>
+			    <ChecksumType> sha256 </ChecksumType>
+			    <BmapFileChecksum> d053dda8082cd20a4867b716143dd76295b60a63be92fdfb5b2e1666243ae3b7 </BmapFileChecksum>
 			    <BlockMap>
-			        <Range sha1="7b7d6e1fc44ef224a8c57d3ec6ffc3717c428a14"> 0-1280 </Range>
+			        <Range chksum="ce55029ab3dd4875edbf69fcc5d1942bb2abaf2cf88b87ae7016609b3feb5028"> 0-3 </Range>
+			        <Range chksum="2d4be254f0330b3f01f89bc2dc2a1c69c8e0a196810bf3398cc5bb234ba6dd26"> 16-23 </Range>
+			        <Range chksum="5729edacf57e5785d73831d666b07009692a870159327a43366a788cd9fb5cd7"> 272-279 </Range>
+			        <Range chksum="ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"> 1279 </Range>
 			    </BlockMap>
 			</bmap>
 
