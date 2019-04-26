@@ -142,95 +142,107 @@ describe('sparse streams', function() {
 		'xxhash64',
 		'crc32',
 	];
-	for (const checksumType of checksumTypes) {
-		it(`${checksumType} hasher`, async () => {
-			const source = new sourceDestination.File(
-				DISK_PATH,
-				sourceDestination.File.OpenFlags.Read,
-			);
-			const trimmedSource = new sourceDestination.ConfiguredSource(
-				source,
-				true,
-				true,
-				undefined,
-				undefined,
-				checksumType,
-				1, // Don't align blocks
-			);
-			await trimmedSource.open();
-			const sourceSparseStream = await trimmedSource.createSparseReadStream(
-				true,
-			);
-			assert(sourceSparseStream.blocks.length === 15);
-			for (const block of sourceSparseStream.blocks) {
-				assert(block.checksumType === checksumType);
-				assert(block.checksum === undefined);
-				assert(block.blocks.length === 1);
-			}
-			await using(
-				tmpFileDisposer(false),
-				async ({ path }: { path: string }) => {
-					const destination = new sourceDestination.File(
-						path,
-						sourceDestination.File.OpenFlags.ReadWrite,
+	for (const alignment of [1, 1024 ** 2]) {
+		for (const createStreamFromDisk of [false, true]) {
+			for (const checksumType of checksumTypes) {
+				it(`${checksumType} hasher, createStreamFromDisk=${createStreamFromDisk}, alignment=${alignment}`, async () => {
+					const source = new sourceDestination.File(
+						DISK_PATH,
+						sourceDestination.File.OpenFlags.Read,
 					);
-					await destination.open();
-					// Test sparse write stream
-					const destinationStream = await destination.createSparseWriteStream();
-					await new Promise((resolve, reject) => {
-						sourceSparseStream.on('error', reject);
-						destinationStream.on('error', reject);
-						destinationStream.on('done', resolve);
-						sourceSparseStream.pipe(destinationStream);
-					});
-
-					// Checksums should have been generated
-					for (const block of sourceSparseStream.blocks) {
-						assert(block.checksum !== undefined);
+					const trimmedSource = new sourceDestination.ConfiguredSource(
+						source,
+						true,
+						createStreamFromDisk,
+						undefined,
+						undefined,
+						checksumType,
+						alignment,
+					);
+					await trimmedSource.open();
+					const sourceSparseStream = await trimmedSource.createSparseReadStream(
+						true,
+					);
+					if (alignment === 1) {
+						assert(sourceSparseStream.blocks.length === 15);
+					} else {
+						assert(sourceSparseStream.blocks.length === 1);
 					}
+					for (const block of sourceSparseStream.blocks) {
+						assert(block.checksumType === checksumType);
+						assert(block.checksum === undefined);
+						assert(block.blocks.length === 1);
+					}
+					await using(
+						tmpFileDisposer(false),
+						async ({ path }: { path: string }) => {
+							const destination = new sourceDestination.File(
+								path,
+								sourceDestination.File.OpenFlags.ReadWrite,
+							);
+							await destination.open();
+							// Test sparse write stream
+							const destinationStream = await destination.createSparseWriteStream();
+							await new Promise((resolve, reject) => {
+								sourceSparseStream.on('error', reject);
+								destinationStream.on('error', reject);
+								destinationStream.on('done', resolve);
+								sourceSparseStream.pipe(destinationStream);
+							});
 
-					// Test sparse verifier for randomly readable destination
-					// (This tests SparseReadStream)
-					const verifier = destination.createVerifier(
-						sourceSparseStream.blocks,
+							// Checksums should have been generated
+							for (const block of sourceSparseStream.blocks) {
+								assert(block.checksum !== undefined);
+							}
+
+							// Test sparse verifier for randomly readable destination
+							// (This tests SparseReadStream)
+							const verifier = destination.createVerifier(
+								sourceSparseStream.blocks,
+							);
+							await new Promise((resolve, reject) => {
+								verifier.on('error', reject);
+								verifier.on('finish', resolve);
+								verifier.run();
+							});
+
+							// Test sparse verifier for non randomly readable destination
+							// (This tests SparseFilterStream)
+							const canReadStub = stub(destination, 'canRead');
+							canReadStub.resolves(false);
+							const verifier2 = destination.createVerifier(
+								sourceSparseStream.blocks,
+							);
+							await new Promise((resolve, reject) => {
+								verifier2.on('error', reject);
+								verifier2.on('finish', resolve);
+								verifier2.run();
+							});
+							canReadStub.restore();
+
+							// Test sparse verifier with wrong checksum
+							const wrongBlocks = cloneDeep(sourceSparseStream.blocks);
+							wrongBlocks[0].checksum = 'wrong';
+							const brokenVerifier = destination.createVerifier(wrongBlocks);
+							const verifierError: Error = await new Promise(
+								(resolve, reject) => {
+									brokenVerifier.on('finish', () => {
+										reject(
+											new Error('There should have been a checksum mismatch'),
+										);
+									});
+									brokenVerifier.on('error', (error: Error) => {
+										resolve(error);
+									});
+									brokenVerifier.run();
+								},
+							);
+							assert(verifierError instanceof BlocksVerificationError);
+						},
 					);
-					await new Promise((resolve, reject) => {
-						verifier.on('error', reject);
-						verifier.on('finish', resolve);
-						verifier.run();
-					});
-
-					// Test sparse verifier for non randomly readable destination
-					// (This tests SparseFilterStream)
-					const canReadStub = stub(destination, 'canRead');
-					canReadStub.resolves(false);
-					const verifier2 = destination.createVerifier(
-						sourceSparseStream.blocks,
-					);
-					await new Promise((resolve, reject) => {
-						verifier2.on('error', reject);
-						verifier2.on('finish', resolve);
-						verifier2.run();
-					});
-					canReadStub.restore();
-
-					// Test sparse verifier with wrong checksum
-					const wrongBlocks = cloneDeep(sourceSparseStream.blocks);
-					wrongBlocks[0].checksum = 'wrong';
-					const brokenVerifier = destination.createVerifier(wrongBlocks);
-					const verifierError: Error = await new Promise((resolve, reject) => {
-						brokenVerifier.on('finish', () => {
-							reject(new Error('There should have been a checksum mismatch'));
-						});
-						brokenVerifier.on('error', (error: Error) => {
-							resolve(error);
-						});
-						brokenVerifier.run();
-					});
-					assert(verifierError instanceof BlocksVerificationError);
-				},
-			);
-		});
+				});
+			}
+		}
 	}
 
 	it('blockmap in a zip file', async () => {

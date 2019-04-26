@@ -63,7 +63,7 @@ export class SparseFilterStream extends Transform implements SparseReadable {
 	}
 
 	private __transform(buffer: Buffer): void {
-		while (buffer.length > 0) {
+		while (true) {
 			if (this.state === undefined) {
 				// No current block means we're done reading
 				this.position += buffer.length;
@@ -76,6 +76,9 @@ export class SparseFilterStream extends Transform implements SparseReadable {
 				// The current position is after the current block: go to the next block
 				this.nextBlock();
 				continue;
+			}
+			if (buffer.length === 0) {
+				return;
 			}
 			if (this.position < this.state.subBlock.offset) {
 				// Skip bytes before the current block
