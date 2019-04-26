@@ -29,8 +29,8 @@ declare module 'dnssd' {
 	}
 
 	export class ServiceType {
-		name: string;
-		protocol: string;
+		public name: string;
+		public protocol: string;
 	}
 
 	export class Browser extends EventEmitter {
@@ -48,7 +48,11 @@ declare module 'dnssd' {
 	}
 
 	export class Advertisement extends EventEmitter {
-		constructor(serviceType: ServiceType, port: number, options?: AdvertisementOptions);
+		constructor(
+			serviceType: ServiceType,
+			port: number,
+			options?: AdvertisementOptions,
+		);
 		public start(): void;
 		public stop(forceImmediately?: boolean, callback?: () => void): void;
 	}

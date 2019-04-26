@@ -19,7 +19,7 @@ import { RemoteServer } from '../lib/remote-server';
 
 async function main() {
 	const adapters: scanner$.adapters.Adapter[] = [];
-	adapters.push(new scanner$.adapters.RemoteAdapter);
+	adapters.push(new scanner$.adapters.RemoteAdapter());
 	const scanner = new scanner$.Scanner(adapters);
 	scanner.on('attach', (device: scanner$.adapters.AdapterSourceDestination) => {
 		console.log('attach', device);

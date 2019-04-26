@@ -19,6 +19,8 @@ import { Browser, Service, tcp } from 'dnssd';
 
 import { Adapter } from './adapter';
 
+import { RemoteClient } from '../../remote-server';
+
 export class RemoteAdapter extends Adapter {
 	// Emits 'attach', 'detach', 'ready' and 'error' events
 	private browser: Browser;
@@ -30,9 +32,11 @@ export class RemoteAdapter extends Adapter {
 
 	private createBrowser() {
 		console.log('create');
-		this.browser = new Browser(tcp('etcher'));  // TODO: use constant from remote-server
+		this.browser = new Browser(tcp('etcher')); // TODO: use constant from remote-server
 		this.browser.on('serviceUp', (service: Service) => {
 			console.log('service up', service);
+			const client = new RemoteClient(service.host, service.port);
+			console.log(client);
 		});
 		this.browser.on('serviceDown', (service: Service) => {
 			console.log('service down', service);
@@ -43,14 +47,14 @@ export class RemoteAdapter extends Adapter {
 			console.log('error', error);
 			// TODO: detach all devices
 			this.browser.removeAllListeners();
-			await delay(1000);  // TODO: constant
+			await delay(1000); // TODO: constant
 			this.createBrowser();
 		});
 		this.browser.start();
 	}
 
 	public start(): void {
-		//this.browser.start();
+		// this.browser.start();
 	}
 
 	public stop(): void {
