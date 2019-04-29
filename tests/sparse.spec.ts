@@ -242,13 +242,18 @@ describe('sparse streams', function() {
 		assert(innerSource instanceof sourceDestination.ZipSource);
 
 		const sourceSparseStream = await innerSource.createSparseReadStream();
-		assert(sourceSparseStream.blocks.length === 1);
-		assert(sourceSparseStream.blocks[0].checksumType === 'sha1');
-		assert(
-			sourceSparseStream.blocks[0].checksum ===
-				'7b7d6e1fc44ef224a8c57d3ec6ffc3717c428a14',
-		);
-		assert(sourceSparseStream.blocks[0].blocks.length === 1);
+		assert(sourceSparseStream.blocks.length === 4);
+		const checksums = [
+			'ce55029ab3dd4875edbf69fcc5d1942bb2abaf2cf88b87ae7016609b3feb5028',
+			'2d4be254f0330b3f01f89bc2dc2a1c69c8e0a196810bf3398cc5bb234ba6dd26',
+			'5729edacf57e5785d73831d666b07009692a870159327a43366a788cd9fb5cd7',
+			'ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7',
+		];
+		for (const [i, block] of sourceSparseStream.blocks.entries()) {
+			assert(block.checksumType === 'sha256');
+			assert(block.checksum === checksums[i]);
+			assert(block.blocks.length === 1);
+		}
 
 		// Create a temporary destination file:
 		await using(tmpFileDisposer(false), async ({ path }: { path: string }) => {
@@ -303,7 +308,7 @@ describe('sparse streams', function() {
 			assert(verifierError instanceof BlocksVerificationError);
 			assert(
 				verifierError.message ===
-					'Checksum does not match for range [0, 5242879]: "wrong" != "7b7d6e1fc44ef224a8c57d3ec6ffc3717c428a14"',
+					'Checksum does not match for range [0, 16383]: "wrong" != "ce55029ab3dd4875edbf69fcc5d1942bb2abaf2cf88b87ae7016609b3feb5028"',
 			);
 		});
 	});
