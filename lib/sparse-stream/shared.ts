@@ -16,6 +16,7 @@
 
 import { crc32 } from 'crc';
 import { createHash, Hash } from 'crypto';
+import { padStart } from 'lodash';
 import * as XXHash from 'xxhash';
 import { XXHash64 } from 'xxhash';
 
@@ -58,7 +59,7 @@ class CRC32Hasher {
 	}
 
 	public digest(_encoding: 'hex'): string {
-		return this.value.toString(16);
+		return padStart(this.value.toString(16), 8, '0');
 	}
 }
 
