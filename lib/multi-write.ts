@@ -143,7 +143,10 @@ export async function pipeSourceToDestinations(
 	}
 
 	function _onProgress(progress: ProgressEvent) {
-		if (state.size === undefined && sourceMetadata.size !== undefined) {
+		if (
+			sourceMetadata.isSizeEstimated === false &&
+			sourceMetadata.size !== undefined
+		) {
 			state.size = sourceMetadata.size;
 		}
 		const totalSpeed = progress.speed * state.active;
@@ -223,7 +226,8 @@ async function pipeRegularSourceToDestination(
 	_onRootStreamProgress: (progress: ProgressEvent) => void,
 ): Promise<void> {
 	let lastPosition = 0;
-	const emitSourceProgress = sourceMetadata.size === undefined;
+	const emitSourceProgress =
+		sourceMetadata.size === undefined || sourceMetadata.isSizeEstimated;
 	const [sourceStream, destinationStream] = await Promise.all([
 		source.createReadStream(emitSourceProgress),
 		destination.createWriteStream(),
@@ -285,8 +289,12 @@ async function pipeRegularSourceToDestination(
 			}
 		},
 	);
-	if (sourceMetadata.size === undefined) {
+	if (
+		sourceMetadata.size === undefined ||
+		sourceMetadata.isSizeEstimated === true
+	) {
 		sourceMetadata.size = lastPosition;
+		sourceMetadata.isSizeEstimated = false;
 	}
 	if (verify && checksum) {
 		updateState('verifying');
