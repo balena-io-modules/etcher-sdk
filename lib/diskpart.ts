@@ -15,7 +15,7 @@
  */
 
 import { delay, using } from 'bluebird';
-import { exec } from 'child_process';
+import { execFile, ExecFileOptions } from 'child_process';
 import * as _debug from 'debug';
 import { platform } from 'os';
 
@@ -33,16 +33,25 @@ interface ExecResult {
 	stderr: string;
 }
 
-const execAsync = async (command: string): Promise<ExecResult> => {
+const execFileAsync = async (
+	command: string,
+	args: string[] = [],
+	options: ExecFileOptions = {},
+): Promise<ExecResult> => {
 	return await new Promise(
 		(resolve: (res: ExecResult) => void, reject: (err: Error) => void) => {
-			exec(command, (error: Error, stdout: string, stderr: string) => {
-				if (error) {
-					reject(error);
-					return;
-				}
-				resolve({ stdout, stderr });
-			});
+			execFile(
+				command,
+				args,
+				options,
+				(error: Error, stdout: string, stderr: string) => {
+					if (error) {
+						reject(error);
+					} else {
+						resolve({ stdout, stderr });
+					}
+				},
+			);
 		},
 	);
 };
@@ -57,7 +66,10 @@ const runDiskpart = async (commands: string[]): Promise<void> => {
 	}
 	await using(tmpFileDisposer(false), async (file: TmpFileResult) => {
 		await writeFile(file.path, commands.join('\r\n'));
-		const { stdout, stderr } = await execAsync(`diskpart /s ${file.path}`);
+		const { stdout, stderr } = await execFileAsync('diskpart', [
+			'/s',
+			file.path,
+		]);
 		debug('stdout:', stdout);
 		debug('stderr:', stderr);
 	});
