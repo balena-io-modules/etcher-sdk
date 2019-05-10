@@ -242,6 +242,7 @@ export class ConfiguredSource extends SourceSource {
 		if (this.shouldTrimPartitions) {
 			await this.trimPartitions();
 		}
+		this.disk.recordReads = false;
 	}
 
 	protected async _close(): Promise<void> {
