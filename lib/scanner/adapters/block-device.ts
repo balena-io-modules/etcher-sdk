@@ -29,6 +29,7 @@ const USBBOOT_RPI_COMPUTE_MODULE_NAMES = [
 	'0001',
 	'RPi-MSD- 0001',
 	'File-Stor Gadget',
+	'Linux File-Stor_Gadget',
 	'Linux File-Stor Gadget',
 	'Linux File-Stor Gadget USB Device',
 	'Linux File-Stor Gadget Media',
