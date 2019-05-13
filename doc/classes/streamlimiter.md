@@ -1,0 +1,1380 @@
+[etcher-sdk](../README.md) > [StreamLimiter](../classes/streamlimiter.md)
+
+# Class: StreamLimiter
+
+## Hierarchy
+
+ `Transform`
+
+**↳ StreamLimiter**
+
+## Implements
+
+* `ReadableStream`
+* `Writable`
+
+## Index
+
+### Constructors
+
+* [constructor](streamlimiter.md#constructor)
+
+### Properties
+
+* [maxBytes](streamlimiter.md#maxbytes)
+* [readable](streamlimiter.md#readable)
+* [stream](streamlimiter.md#stream)
+* [writable](streamlimiter.md#writable)
+* [defaultMaxListeners](streamlimiter.md#defaultmaxlisteners)
+
+### Methods
+
+* [_read](streamlimiter.md#_read)
+* [_transform](streamlimiter.md#_transform)
+* [_write](streamlimiter.md#_write)
+* [addListener](streamlimiter.md#addlistener)
+* [emit](streamlimiter.md#emit)
+* [end](streamlimiter.md#end)
+* [eventNames](streamlimiter.md#eventnames)
+* [getMaxListeners](streamlimiter.md#getmaxlisteners)
+* [isPaused](streamlimiter.md#ispaused)
+* [listenerCount](streamlimiter.md#listenercount)
+* [listeners](streamlimiter.md#listeners)
+* [on](streamlimiter.md#on)
+* [once](streamlimiter.md#once)
+* [pause](streamlimiter.md#pause)
+* [pipe](streamlimiter.md#pipe)
+* [prependListener](streamlimiter.md#prependlistener)
+* [prependOnceListener](streamlimiter.md#prependoncelistener)
+* [push](streamlimiter.md#push)
+* [read](streamlimiter.md#read)
+* [removeAllListeners](streamlimiter.md#removealllisteners)
+* [removeListener](streamlimiter.md#removelistener)
+* [resume](streamlimiter.md#resume)
+* [setDefaultEncoding](streamlimiter.md#setdefaultencoding)
+* [setEncoding](streamlimiter.md#setencoding)
+* [setMaxListeners](streamlimiter.md#setmaxlisteners)
+* [unpipe](streamlimiter.md#unpipe)
+* [unshift](streamlimiter.md#unshift)
+* [wrap](streamlimiter.md#wrap)
+* [write](streamlimiter.md#write)
+* [listenerCount](streamlimiter.md#listenercount-1)
+
+---
+
+## Constructors
+
+<a id="constructor"></a>
+
+###  constructor
+
+⊕ **new StreamLimiter**(stream: *`ReadableStream`*, maxBytes: *`number`*): [StreamLimiter](streamlimiter.md)
+
+*Overrides Transform.__constructor*
+
+*Defined in [stream-limiter.ts:22](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/stream-limiter.ts#L22)*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| stream | `ReadableStream` |
+| maxBytes | `number` |
+
+**Returns:** [StreamLimiter](streamlimiter.md)
+
+___
+
+## Properties
+
+<a id="maxbytes"></a>
+
+### `<Private>` maxBytes
+
+**● maxBytes**: *`number`*
+
+*Defined in [stream-limiter.ts:23](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/stream-limiter.ts#L23)*
+
+___
+<a id="readable"></a>
+
+###  readable
+
+**● readable**: *`boolean`*
+
+*Inherited from Readable.readable*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3718*
+
+___
+<a id="stream"></a>
+
+### `<Private>` stream
+
+**● stream**: *`ReadableStream`*
+
+*Defined in [stream-limiter.ts:23](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/stream-limiter.ts#L23)*
+
+___
+<a id="writable"></a>
+
+###  writable
+
+**● writable**: *`boolean`*
+
+*Inherited from Duplex.writable*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3885*
+
+___
+<a id="defaultmaxlisteners"></a>
+
+### `<Static>` defaultMaxListeners
+
+**● defaultMaxListeners**: *`number`*
+
+*Inherited from EventEmitter.defaultMaxListeners*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:715*
+
+___
+
+## Methods
+
+<a id="_read"></a>
+
+###  _read
+
+▸ **_read**(size: *`number`*): `void`
+
+*Inherited from Readable._read*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3720*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| size | `number` |
+
+**Returns:** `void`
+
+___
+<a id="_transform"></a>
+
+###  _transform
+
+▸ **_transform**(buffer: *`Buffer`*, _encoding: *`string`*, callback: *`function`*): `void`
+
+*Overrides Transform._transform*
+
+*Defined in [stream-limiter.ts:29](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/stream-limiter.ts#L29)*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| buffer | `Buffer` |
+| _encoding | `string` |
+| callback | `function` |
+
+**Returns:** `void`
+
+___
+<a id="_write"></a>
+
+###  _write
+
+▸ **_write**(chunk: *`any`*, encoding: *`string`*, callback: *`Function`*): `void`
+
+*Inherited from Duplex._write*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3887*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| chunk | `any` |
+| encoding | `string` |
+| callback | `Function` |
+
+**Returns:** `void`
+
+___
+<a id="addlistener"></a>
+
+###  addListener
+
+▸ **addListener**(event: *`string`*, listener: *`Function`*): `this`
+
+▸ **addListener**(event: *"close"*, listener: *`function`*): `this`
+
+▸ **addListener**(event: *"data"*, listener: *`function`*): `this`
+
+▸ **addListener**(event: *"end"*, listener: *`function`*): `this`
+
+▸ **addListener**(event: *"readable"*, listener: *`function`*): `this`
+
+▸ **addListener**(event: *"error"*, listener: *`function`*): `this`
+
+*Inherited from Readable.addListener*
+
+*Overrides EventEmitter.addListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3741*
+
+Event emitter The defined events on documents including:
+
+1.  close
+2.  data
+3.  end
+4.  readable
+5.  error
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | `string` |
+| listener | `Function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.addListener*
+
+*Overrides EventEmitter.addListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3742*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "close" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.addListener*
+
+*Overrides EventEmitter.addListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3743*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "data" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.addListener*
+
+*Overrides EventEmitter.addListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3744*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "end" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.addListener*
+
+*Overrides EventEmitter.addListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3745*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "readable" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.addListener*
+
+*Overrides EventEmitter.addListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3746*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "error" |
+| listener | `function` |
+
+**Returns:** `this`
+
+___
+<a id="emit"></a>
+
+###  emit
+
+▸ **emit**(event: *`string` \| `symbol`*, ...args: *`any`[]*): `boolean`
+
+▸ **emit**(event: *"close"*): `boolean`
+
+▸ **emit**(event: *"data"*, chunk: *`Buffer` \| `string`*): `boolean`
+
+▸ **emit**(event: *"end"*): `boolean`
+
+▸ **emit**(event: *"readable"*): `boolean`
+
+▸ **emit**(event: *"error"*, err: *`Error`*): `boolean`
+
+*Inherited from Readable.emit*
+
+*Overrides EventEmitter.emit*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3748*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | `string` \| `symbol` |
+| `Rest` args | `any`[] |
+
+**Returns:** `boolean`
+
+*Inherited from Readable.emit*
+
+*Overrides EventEmitter.emit*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3749*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "close" |
+
+**Returns:** `boolean`
+
+*Inherited from Readable.emit*
+
+*Overrides EventEmitter.emit*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3750*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "data" |
+| chunk | `Buffer` \| `string` |
+
+**Returns:** `boolean`
+
+*Inherited from Readable.emit*
+
+*Overrides EventEmitter.emit*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3751*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "end" |
+
+**Returns:** `boolean`
+
+*Inherited from Readable.emit*
+
+*Overrides EventEmitter.emit*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3752*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "readable" |
+
+**Returns:** `boolean`
+
+*Inherited from Readable.emit*
+
+*Overrides EventEmitter.emit*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3753*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "error" |
+| err | `Error` |
+
+**Returns:** `boolean`
+
+___
+<a id="end"></a>
+
+###  end
+
+▸ **end**(cb?: *`Function`*): `void`
+
+▸ **end**(chunk: *`any`*, cb?: *`Function`*): `void`
+
+▸ **end**(chunk: *`any`*, encoding?: *`undefined` \| `string`*, cb?: *`Function`*): `void`
+
+*Inherited from Duplex.end*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3891*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| `Optional` cb | `Function` |
+
+**Returns:** `void`
+
+*Inherited from Duplex.end*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3892*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| chunk | `any` |
+| `Optional` cb | `Function` |
+
+**Returns:** `void`
+
+*Inherited from Duplex.end*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3893*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| chunk | `any` |
+| `Optional` encoding | `undefined` \| `string` |
+| `Optional` cb | `Function` |
+
+**Returns:** `void`
+
+___
+<a id="eventnames"></a>
+
+###  eventNames
+
+▸ **eventNames**(): (`string` \| `symbol`)[]
+
+*Inherited from EventEmitter.eventNames*
+
+*Overrides EventEmitter.eventNames*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:728*
+
+**Returns:** (`string` \| `symbol`)[]
+
+___
+<a id="getmaxlisteners"></a>
+
+###  getMaxListeners
+
+▸ **getMaxListeners**(): `number`
+
+*Inherited from EventEmitter.getMaxListeners*
+
+*Overrides EventEmitter.getMaxListeners*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:725*
+
+**Returns:** `number`
+
+___
+<a id="ispaused"></a>
+
+###  isPaused
+
+▸ **isPaused**(): `boolean`
+
+*Inherited from Readable.isPaused*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3725*
+
+**Returns:** `boolean`
+
+___
+<a id="listenercount"></a>
+
+###  listenerCount
+
+▸ **listenerCount**(type: *`string` \| `symbol`*): `number`
+
+*Inherited from EventEmitter.listenerCount*
+
+*Overrides EventEmitter.listenerCount*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:729*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| type | `string` \| `symbol` |
+
+**Returns:** `number`
+
+___
+<a id="listeners"></a>
+
+###  listeners
+
+▸ **listeners**(event: *`string` \| `symbol`*): `Function`[]
+
+*Inherited from EventEmitter.listeners*
+
+*Overrides EventEmitter.listeners*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:726*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | `string` \| `symbol` |
+
+**Returns:** `Function`[]
+
+___
+<a id="on"></a>
+
+###  on
+
+▸ **on**(event: *`string`*, listener: *`Function`*): `this`
+
+▸ **on**(event: *"close"*, listener: *`function`*): `this`
+
+▸ **on**(event: *"data"*, listener: *`function`*): `this`
+
+▸ **on**(event: *"end"*, listener: *`function`*): `this`
+
+▸ **on**(event: *"readable"*, listener: *`function`*): `this`
+
+▸ **on**(event: *"error"*, listener: *`function`*): `this`
+
+*Inherited from Readable.on*
+
+*Overrides EventEmitter.on*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3755*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | `string` |
+| listener | `Function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.on*
+
+*Overrides EventEmitter.on*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3756*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "close" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.on*
+
+*Overrides EventEmitter.on*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3757*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "data" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.on*
+
+*Overrides EventEmitter.on*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3758*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "end" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.on*
+
+*Overrides EventEmitter.on*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3759*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "readable" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.on*
+
+*Overrides EventEmitter.on*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3760*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "error" |
+| listener | `function` |
+
+**Returns:** `this`
+
+___
+<a id="once"></a>
+
+###  once
+
+▸ **once**(event: *`string`*, listener: *`Function`*): `this`
+
+▸ **once**(event: *"close"*, listener: *`function`*): `this`
+
+▸ **once**(event: *"data"*, listener: *`function`*): `this`
+
+▸ **once**(event: *"end"*, listener: *`function`*): `this`
+
+▸ **once**(event: *"readable"*, listener: *`function`*): `this`
+
+▸ **once**(event: *"error"*, listener: *`function`*): `this`
+
+*Inherited from Readable.once*
+
+*Overrides EventEmitter.once*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3762*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | `string` |
+| listener | `Function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.once*
+
+*Overrides EventEmitter.once*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3763*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "close" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.once*
+
+*Overrides EventEmitter.once*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3764*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "data" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.once*
+
+*Overrides EventEmitter.once*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3765*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "end" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.once*
+
+*Overrides EventEmitter.once*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3766*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "readable" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.once*
+
+*Overrides EventEmitter.once*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3767*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "error" |
+| listener | `function` |
+
+**Returns:** `this`
+
+___
+<a id="pause"></a>
+
+###  pause
+
+▸ **pause**(): `this`
+
+*Inherited from Readable.pause*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3723*
+
+**Returns:** `this`
+
+___
+<a id="pipe"></a>
+
+###  pipe
+
+▸ **pipe**<`T`>(destination: *`T`*, options?: *`undefined` \| `object`*): `T`
+
+*Inherited from Readable.pipe*
+
+*Overrides internal.pipe*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3726*
+
+**Type parameters:**
+
+#### T :  `WritableStream`
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| destination | `T` |
+| `Optional` options | `undefined` \| `object` |
+
+**Returns:** `T`
+
+___
+<a id="prependlistener"></a>
+
+###  prependListener
+
+▸ **prependListener**(event: *`string`*, listener: *`Function`*): `this`
+
+▸ **prependListener**(event: *"close"*, listener: *`function`*): `this`
+
+▸ **prependListener**(event: *"data"*, listener: *`function`*): `this`
+
+▸ **prependListener**(event: *"end"*, listener: *`function`*): `this`
+
+▸ **prependListener**(event: *"readable"*, listener: *`function`*): `this`
+
+▸ **prependListener**(event: *"error"*, listener: *`function`*): `this`
+
+*Inherited from Readable.prependListener*
+
+*Overrides EventEmitter.prependListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3769*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | `string` |
+| listener | `Function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.prependListener*
+
+*Overrides EventEmitter.prependListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3770*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "close" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.prependListener*
+
+*Overrides EventEmitter.prependListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3771*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "data" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.prependListener*
+
+*Overrides EventEmitter.prependListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3772*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "end" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.prependListener*
+
+*Overrides EventEmitter.prependListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3773*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "readable" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.prependListener*
+
+*Overrides EventEmitter.prependListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3774*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "error" |
+| listener | `function` |
+
+**Returns:** `this`
+
+___
+<a id="prependoncelistener"></a>
+
+###  prependOnceListener
+
+▸ **prependOnceListener**(event: *`string`*, listener: *`Function`*): `this`
+
+▸ **prependOnceListener**(event: *"close"*, listener: *`function`*): `this`
+
+▸ **prependOnceListener**(event: *"data"*, listener: *`function`*): `this`
+
+▸ **prependOnceListener**(event: *"end"*, listener: *`function`*): `this`
+
+▸ **prependOnceListener**(event: *"readable"*, listener: *`function`*): `this`
+
+▸ **prependOnceListener**(event: *"error"*, listener: *`function`*): `this`
+
+*Inherited from Readable.prependOnceListener*
+
+*Overrides EventEmitter.prependOnceListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3776*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | `string` |
+| listener | `Function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.prependOnceListener*
+
+*Overrides EventEmitter.prependOnceListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3777*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "close" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.prependOnceListener*
+
+*Overrides EventEmitter.prependOnceListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3778*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "data" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.prependOnceListener*
+
+*Overrides EventEmitter.prependOnceListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3779*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "end" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.prependOnceListener*
+
+*Overrides EventEmitter.prependOnceListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3780*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "readable" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.prependOnceListener*
+
+*Overrides EventEmitter.prependOnceListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3781*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "error" |
+| listener | `function` |
+
+**Returns:** `this`
+
+___
+<a id="push"></a>
+
+###  push
+
+▸ **push**(chunk: *`any`*, encoding?: *`undefined` \| `string`*): `boolean`
+
+*Inherited from Readable.push*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3730*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| chunk | `any` |
+| `Optional` encoding | `undefined` \| `string` |
+
+**Returns:** `boolean`
+
+___
+<a id="read"></a>
+
+###  read
+
+▸ **read**(size?: *`undefined` \| `number`*): `any`
+
+*Inherited from Readable.read*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3721*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| `Optional` size | `undefined` \| `number` |
+
+**Returns:** `any`
+
+___
+<a id="removealllisteners"></a>
+
+###  removeAllListeners
+
+▸ **removeAllListeners**(event?: *`string` \| `symbol`*): `this`
+
+*Inherited from EventEmitter.removeAllListeners*
+
+*Overrides EventEmitter.removeAllListeners*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:723*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| `Optional` event | `string` \| `symbol` |
+
+**Returns:** `this`
+
+___
+<a id="removelistener"></a>
+
+###  removeListener
+
+▸ **removeListener**(event: *`string`*, listener: *`Function`*): `this`
+
+▸ **removeListener**(event: *"close"*, listener: *`function`*): `this`
+
+▸ **removeListener**(event: *"data"*, listener: *`function`*): `this`
+
+▸ **removeListener**(event: *"end"*, listener: *`function`*): `this`
+
+▸ **removeListener**(event: *"readable"*, listener: *`function`*): `this`
+
+▸ **removeListener**(event: *"error"*, listener: *`function`*): `this`
+
+*Inherited from Readable.removeListener*
+
+*Overrides EventEmitter.removeListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3783*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | `string` |
+| listener | `Function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.removeListener*
+
+*Overrides EventEmitter.removeListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3784*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "close" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.removeListener*
+
+*Overrides EventEmitter.removeListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3785*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "data" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.removeListener*
+
+*Overrides EventEmitter.removeListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3786*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "end" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.removeListener*
+
+*Overrides EventEmitter.removeListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3787*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "readable" |
+| listener | `function` |
+
+**Returns:** `this`
+
+*Inherited from Readable.removeListener*
+
+*Overrides EventEmitter.removeListener*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3788*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| event | "error" |
+| listener | `function` |
+
+**Returns:** `this`
+
+___
+<a id="resume"></a>
+
+###  resume
+
+▸ **resume**(): `this`
+
+*Inherited from Readable.resume*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3724*
+
+**Returns:** `this`
+
+___
+<a id="setdefaultencoding"></a>
+
+###  setDefaultEncoding
+
+▸ **setDefaultEncoding**(encoding: *`string`*): `this`
+
+*Inherited from Duplex.setDefaultEncoding*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3890*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| encoding | `string` |
+
+**Returns:** `this`
+
+___
+<a id="setencoding"></a>
+
+###  setEncoding
+
+▸ **setEncoding**(encoding: *`string`*): `void`
+
+*Inherited from Readable.setEncoding*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3722*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| encoding | `string` |
+
+**Returns:** `void`
+
+___
+<a id="setmaxlisteners"></a>
+
+###  setMaxListeners
+
+▸ **setMaxListeners**(n: *`number`*): `this`
+
+*Inherited from EventEmitter.setMaxListeners*
+
+*Overrides EventEmitter.setMaxListeners*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:724*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| n | `number` |
+
+**Returns:** `this`
+
+___
+<a id="unpipe"></a>
+
+###  unpipe
+
+▸ **unpipe**<`T`>(destination?: *[T]()*): `void`
+
+*Inherited from Readable.unpipe*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3727*
+
+**Type parameters:**
+
+#### T :  `WritableStream`
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| `Optional` destination | [T]() |
+
+**Returns:** `void`
+
+___
+<a id="unshift"></a>
+
+###  unshift
+
+▸ **unshift**(chunk: *`any`*): `void`
+
+*Inherited from Readable.unshift*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3728*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| chunk | `any` |
+
+**Returns:** `void`
+
+___
+<a id="wrap"></a>
+
+###  wrap
+
+▸ **wrap**(oldStream: *`ReadableStream`*): `Readable`
+
+*Inherited from Readable.wrap*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3729*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| oldStream | `ReadableStream` |
+
+**Returns:** `Readable`
+
+___
+<a id="write"></a>
+
+###  write
+
+▸ **write**(chunk: *`any`*, cb?: *`Function`*): `boolean`
+
+▸ **write**(chunk: *`any`*, encoding?: *`undefined` \| `string`*, cb?: *`Function`*): `boolean`
+
+*Inherited from Duplex.write*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3888*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| chunk | `any` |
+| `Optional` cb | `Function` |
+
+**Returns:** `boolean`
+
+*Inherited from Duplex.write*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:3889*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| chunk | `any` |
+| `Optional` encoding | `undefined` \| `string` |
+| `Optional` cb | `Function` |
+
+**Returns:** `boolean`
+
+___
+<a id="listenercount-1"></a>
+
+### `<Static>` listenerCount
+
+▸ **listenerCount**(emitter: *`EventEmitter`*, event: *`string` \| `symbol`*): `number`
+
+*Inherited from EventEmitter.listenerCount*
+
+*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:714*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| emitter | `EventEmitter` |
+| event | `string` \| `symbol` |
+
+**Returns:** `number`
+
+___
+
