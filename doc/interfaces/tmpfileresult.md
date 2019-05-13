@@ -1,0 +1,38 @@
+[etcher-sdk](../README.md) > [TmpFileResult](../interfaces/tmpfileresult.md)
+
+# Interface: TmpFileResult
+
+## Hierarchy
+
+**TmpFileResult**
+
+## Index
+
+### Properties
+
+* [fd](tmpfileresult.md#fd)
+* [path](tmpfileresult.md#path)
+
+---
+
+## Properties
+
+<a id="fd"></a>
+
+### `<Optional>` fd
+
+**● fd**: *`undefined` \| `number`*
+
+*Defined in [tmp.ts:34](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/tmp.ts#L34)*
+
+___
+<a id="path"></a>
+
+###  path
+
+**● path**: *`string`*
+
+*Defined in [tmp.ts:33](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/tmp.ts#L33)*
+
+___
+
