@@ -27,7 +27,7 @@
 
 **● value**: *`number`*
 
-*Defined in [sparse-stream/shared.ts:55](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/shared.ts#L55)*
+*Defined in [sparse-stream/shared.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/shared.ts#L55)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 ▸ **digest**(_encoding: *"hex"*): `string`
 
-*Defined in [sparse-stream/shared.ts:61](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/shared.ts#L61)*
+*Defined in [sparse-stream/shared.ts:61](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/shared.ts#L61)*
 
 **Parameters:**
 
@@ -56,7 +56,7 @@ ___
 
 ▸ **update**(data: *`Buffer`*): `void`
 
-*Defined in [sparse-stream/shared.ts:57](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/shared.ts#L57)*
+*Defined in [sparse-stream/shared.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/shared.ts#L57)*
 
 **Parameters:**
 

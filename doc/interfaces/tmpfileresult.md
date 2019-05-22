@@ -23,7 +23,7 @@
 
 **● fd**: *`undefined` \| `number`*
 
-*Defined in [tmp.ts:34](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/tmp.ts#L34)*
+*Defined in [tmp.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/tmp.ts#L34)*
 
 ___
 <a id="path"></a>
@@ -32,7 +32,7 @@ ___
 
 **● path**: *`string`*
 
-*Defined in [tmp.ts:33](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/tmp.ts#L33)*
+*Defined in [tmp.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/tmp.ts#L33)*
 
 ___
 

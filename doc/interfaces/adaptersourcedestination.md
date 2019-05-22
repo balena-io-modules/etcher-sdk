@@ -80,7 +80,7 @@
 
 **● description**: *`string`*
 
-*Defined in [scanner/adapters/adapter.ts:27](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/scanner/adapters/adapter.ts#L27)*
+*Defined in [scanner/adapters/adapter.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/adapter.ts#L27)*
 
 ___
 <a id="device"></a>
@@ -89,7 +89,7 @@ ___
 
 **● device**: *`string` \| `null`*
 
-*Defined in [scanner/adapters/adapter.ts:24](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/scanner/adapters/adapter.ts#L24)*
+*Defined in [scanner/adapters/adapter.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/adapter.ts#L24)*
 
 ___
 <a id="devicepath"></a>
@@ -98,7 +98,7 @@ ___
 
 **● devicePath**: *`string` \| `null`*
 
-*Defined in [scanner/adapters/adapter.ts:25](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/scanner/adapters/adapter.ts#L25)*
+*Defined in [scanner/adapters/adapter.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/adapter.ts#L25)*
 
 ___
 <a id="emitsprogress"></a>
@@ -107,7 +107,7 @@ ___
 
 **● emitsProgress**: *`boolean`*
 
-*Defined in [scanner/adapters/adapter.ts:30](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/scanner/adapters/adapter.ts#L30)*
+*Defined in [scanner/adapters/adapter.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/adapter.ts#L30)*
 
 ___
 <a id="issystem"></a>
@@ -116,7 +116,7 @@ ___
 
 **● isSystem**: *`boolean`*
 
-*Defined in [scanner/adapters/adapter.ts:26](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/scanner/adapters/adapter.ts#L26)*
+*Defined in [scanner/adapters/adapter.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/adapter.ts#L26)*
 
 ___
 <a id="mountpoints"></a>
@@ -125,7 +125,7 @@ ___
 
 **● mountpoints**: *`Array`<`object`>*
 
-*Defined in [scanner/adapters/adapter.ts:28](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/scanner/adapters/adapter.ts#L28)*
+*Defined in [scanner/adapters/adapter.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/adapter.ts#L28)*
 
 ___
 <a id="raw"></a>
@@ -134,7 +134,7 @@ ___
 
 **● raw**: *`string` \| `null`*
 
-*Defined in [scanner/adapters/adapter.ts:23](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/scanner/adapters/adapter.ts#L23)*
+*Defined in [scanner/adapters/adapter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/adapter.ts#L23)*
 
 ___
 <a id="size"></a>
@@ -143,7 +143,7 @@ ___
 
 **● size**: *`number` \| `null`*
 
-*Defined in [scanner/adapters/adapter.ts:29](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/scanner/adapters/adapter.ts#L29)*
+*Defined in [scanner/adapters/adapter.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/adapter.ts#L29)*
 
 ___
 <a id="defaultmaxlisteners"></a>
@@ -176,7 +176,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[imageExtensions](../classes/sourcedestination.md#imageextensions)*
 
-*Defined in [source-destination/source-destination.ts:234](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L234)*
+*Defined in [source-destination/source-destination.ts:234](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L234)*
 
 ___
 <a id="mimetype"></a>
@@ -187,7 +187,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[mimetype](../classes/sourcedestination.md#mimetype)*
 
-*Defined in [source-destination/source-destination.ts:246](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L246)*
+*Defined in [source-destination/source-destination.ts:246](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L246)*
 
 ___
 
@@ -201,7 +201,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[_close](../classes/sourcedestination.md#_close)*
 
-*Defined in [source-destination/source-destination.ts:355](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L355)*
+*Defined in [source-destination/source-destination.ts:355](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L355)*
 
 **Returns:** `Promise`<`void`>
 
@@ -214,7 +214,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[_getMetadata](../classes/sourcedestination.md#_getmetadata)*
 
-*Defined in [source-destination/source-destination.ts:289](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L289)*
+*Defined in [source-destination/source-destination.ts:289](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L289)*
 
 **Returns:** `Promise`<[Metadata](metadata.md)>
 
@@ -227,7 +227,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[_open](../classes/sourcedestination.md#_open)*
 
-*Defined in [source-destination/source-destination.ts:351](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L351)*
+*Defined in [source-destination/source-destination.ts:351](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L351)*
 
 **Returns:** `Promise`<`void`>
 
@@ -262,7 +262,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[canCreateReadStream](../classes/sourcedestination.md#cancreatereadstream)*
 
-*Defined in [source-destination/source-destination.ts:266](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L266)*
+*Defined in [source-destination/source-destination.ts:266](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L266)*
 
 **Returns:** `Promise`<`boolean`>
 
@@ -275,7 +275,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[canCreateSparseReadStream](../classes/sourcedestination.md#cancreatesparsereadstream)*
 
-*Defined in [source-destination/source-destination.ts:270](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L270)*
+*Defined in [source-destination/source-destination.ts:270](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L270)*
 
 **Returns:** `Promise`<`boolean`>
 
@@ -288,7 +288,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[canCreateSparseWriteStream](../classes/sourcedestination.md#cancreatesparsewritestream)*
 
-*Defined in [source-destination/source-destination.ts:278](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L278)*
+*Defined in [source-destination/source-destination.ts:278](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L278)*
 
 **Returns:** `Promise`<`boolean`>
 
@@ -301,7 +301,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[canCreateWriteStream](../classes/sourcedestination.md#cancreatewritestream)*
 
-*Defined in [source-destination/source-destination.ts:274](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L274)*
+*Defined in [source-destination/source-destination.ts:274](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L274)*
 
 **Returns:** `Promise`<`boolean`>
 
@@ -314,7 +314,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[canRead](../classes/sourcedestination.md#canread)*
 
-*Defined in [source-destination/source-destination.ts:258](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L258)*
+*Defined in [source-destination/source-destination.ts:258](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L258)*
 
 **Returns:** `Promise`<`boolean`>
 
@@ -327,7 +327,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[canWrite](../classes/sourcedestination.md#canwrite)*
 
-*Defined in [source-destination/source-destination.ts:262](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L262)*
+*Defined in [source-destination/source-destination.ts:262](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L262)*
 
 **Returns:** `Promise`<`boolean`>
 
@@ -340,7 +340,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[close](../classes/sourcedestination.md#close)*
 
-*Defined in [source-destination/source-destination.ts:344](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L344)*
+*Defined in [source-destination/source-destination.ts:344](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L344)*
 
 **Returns:** `Promise`<`void`>
 
@@ -353,7 +353,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[createReadStream](../classes/sourcedestination.md#createreadstream)*
 
-*Defined in [source-destination/source-destination.ts:311](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L311)*
+*Defined in [source-destination/source-destination.ts:311](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L311)*
 
 **Parameters:**
 
@@ -374,7 +374,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[createSparseReadStream](../classes/sourcedestination.md#createsparsereadstream)*
 
-*Defined in [source-destination/source-destination.ts:319](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L319)*
+*Defined in [source-destination/source-destination.ts:319](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L319)*
 
 **Parameters:**
 
@@ -393,7 +393,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[createSparseWriteStream](../classes/sourcedestination.md#createsparsewritestream)*
 
-*Defined in [source-destination/source-destination.ts:333](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L333)*
+*Defined in [source-destination/source-destination.ts:333](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L333)*
 
 **Returns:** `Promise`<[SparseWritable](sparsewritable.md)>
 
@@ -406,7 +406,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[createVerifier](../classes/sourcedestination.md#createverifier)*
 
-*Defined in [source-destination/source-destination.ts:359](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L359)*
+*Defined in [source-destination/source-destination.ts:359](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L359)*
 
 **Parameters:**
 
@@ -426,7 +426,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[createWriteStream](../classes/sourcedestination.md#createwritestream)*
 
-*Defined in [source-destination/source-destination.ts:329](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L329)*
+*Defined in [source-destination/source-destination.ts:329](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L329)*
 
 **Returns:** `Promise`<`WritableStream`>
 
@@ -476,7 +476,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[getBlocks](../classes/sourcedestination.md#getblocks)*
 
-*Defined in [source-destination/source-destination.ts:325](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L325)*
+*Defined in [source-destination/source-destination.ts:325](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L325)*
 
 **Returns:** `Promise`<[BlocksWithChecksum](blockswithchecksum.md)[]>
 
@@ -489,7 +489,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[getInnerSource](../classes/sourcedestination.md#getinnersource)*
 
-*Defined in [source-destination/source-destination.ts:426](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L426)*
+*Defined in [source-destination/source-destination.ts:426](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L426)*
 
 **Returns:** `Promise`<[SourceDestination](../classes/sourcedestination.md)>
 
@@ -517,7 +517,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[getMetadata](../classes/sourcedestination.md#getmetadata)*
 
-*Defined in [source-destination/source-destination.ts:282](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L282)*
+*Defined in [source-destination/source-destination.ts:282](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L282)*
 
 **Returns:** `Promise`<[Metadata](metadata.md)>
 
@@ -530,7 +530,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[getPartitionTable](../classes/sourcedestination.md#getpartitiontable)*
 
-*Defined in [source-destination/source-destination.ts:447](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L447)*
+*Defined in [source-destination/source-destination.ts:447](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L447)*
 
 **Returns:** `Promise`<`GetPartitionsResult` \| `undefined`>
 
@@ -629,7 +629,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[open](../classes/sourcedestination.md#open)*
 
-*Defined in [source-destination/source-destination.ts:337](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L337)*
+*Defined in [source-destination/source-destination.ts:337](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L337)*
 
 **Returns:** `Promise`<`void`>
 
@@ -686,7 +686,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[read](../classes/sourcedestination.md#read)*
 
-*Defined in [source-destination/source-destination.ts:293](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L293)*
+*Defined in [source-destination/source-destination.ts:293](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L293)*
 
 **Parameters:**
 
@@ -772,7 +772,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[write](../classes/sourcedestination.md#write)*
 
-*Defined in [source-destination/source-destination.ts:302](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L302)*
+*Defined in [source-destination/source-destination.ts:302](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L302)*
 
 **Parameters:**
 
@@ -814,7 +814,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[register](../classes/sourcedestination.md#register)*
 
-*Defined in [source-destination/source-destination.ts:252](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L252)*
+*Defined in [source-destination/source-destination.ts:252](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L252)*
 
 **Parameters:**
 

@@ -24,7 +24,7 @@
 
 **● blocks**: *[Block](block.md)[]*
 
-*Defined in [sparse-stream/shared.ts:41](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/shared.ts#L41)*
+*Defined in [sparse-stream/shared.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/shared.ts#L41)*
 
 ___
 <a id="checksum"></a>
@@ -33,7 +33,7 @@ ___
 
 **● checksum**: *`undefined` \| `string`*
 
-*Defined in [sparse-stream/shared.ts:40](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/shared.ts#L40)*
+*Defined in [sparse-stream/shared.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/shared.ts#L40)*
 
 ___
 <a id="checksumtype"></a>
@@ -42,7 +42,7 @@ ___
 
 **● checksumType**: *[ChecksumType](../#checksumtype)*
 
-*Defined in [sparse-stream/shared.ts:39](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/shared.ts#L39)*
+*Defined in [sparse-stream/shared.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/shared.ts#L39)*
 
 ___
 

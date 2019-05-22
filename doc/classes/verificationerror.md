@@ -32,7 +32,7 @@
 
 **● code**: *`string`* = "EVALIDATION"
 
-*Defined in [errors.ts:24](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/errors.ts#L24)*
+*Defined in [errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/errors.ts#L24)*
 
 ___
 <a id="message"></a>

@@ -23,7 +23,7 @@
 
 **● command**: *[OperationCommand](../#operationcommand)*
 
-*Defined in [source-destination/configured-source/configure.ts:31](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/configured-source/configure.ts#L31)*
+*Defined in [source-destination/configured-source/configure.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/configured-source/configure.ts#L31)*
 
 ___
 <a id="when"></a>
@@ -32,7 +32,7 @@ ___
 
 **● when**: *`any`*
 
-*Defined in [source-destination/configured-source/configure.ts:32](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/configured-source/configure.ts#L32)*
+*Defined in [source-destination/configured-source/configure.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/configured-source/configure.ts#L32)*
 
 ___
 
