@@ -55,7 +55,7 @@
 
 ⊕ **new MultiDestinationVerifier**(source: *[MultiDestination](multidestination.md)*, checksumOrBlocks: *`string` \| [BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]*, size?: *`undefined` \| `number`*): [MultiDestinationVerifier](multidestinationverifier.md)
 
-*Defined in [source-destination/multi-destination.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/multi-destination.ts#L43)*
+*Defined in [source-destination/multi-destination.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/multi-destination.ts#L43)*
 
 **Parameters:**
 
@@ -77,7 +77,7 @@ ___
 
 **● timer**: *`Timer`*
 
-*Defined in [source-destination/multi-destination.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/multi-destination.ts#L43)*
+*Defined in [source-destination/multi-destination.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/multi-destination.ts#L43)*
 
 ___
 <a id="verifiers"></a>
@@ -86,7 +86,7 @@ ___
 
 **● verifiers**: *`Set`<[Verifier](verifier.md)>* =  new Set()
 
-*Defined in [source-destination/multi-destination.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/multi-destination.ts#L42)*
+*Defined in [source-destination/multi-destination.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/multi-destination.ts#L42)*
 
 ___
 <a id="defaultmaxlisteners"></a>
@@ -97,7 +97,7 @@ ___
 
 *Inherited from EventEmitter.defaultMaxListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:715*
+*Defined in /node_modules/@types/node/index.d.ts:715*
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 *Overrides EventEmitter.addListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:717*
+*Defined in /node_modules/@types/node/index.d.ts:717*
 
 **Parameters:**
 
@@ -135,7 +135,7 @@ ___
 
 *Overrides EventEmitter.emit*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:727*
+*Defined in /node_modules/@types/node/index.d.ts:727*
 
 **Parameters:**
 
@@ -153,7 +153,7 @@ ___
 
 ▸ **emitProgress**(): `void`
 
-*Defined in [source-destination/multi-destination.ts:76](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/multi-destination.ts#L76)*
+*Defined in [source-destination/multi-destination.ts:76](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/multi-destination.ts#L76)*
 
 **Returns:** `void`
 
@@ -168,7 +168,7 @@ ___
 
 *Overrides EventEmitter.eventNames*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:728*
+*Defined in /node_modules/@types/node/index.d.ts:728*
 
 **Returns:** (`string` \| `symbol`)[]
 
@@ -183,7 +183,7 @@ ___
 
 *Overrides EventEmitter.getMaxListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:725*
+*Defined in /node_modules/@types/node/index.d.ts:725*
 
 **Returns:** `number`
 
@@ -196,7 +196,7 @@ ___
 
 *Inherited from [Verifier](verifier.md).[handleEventsAndPipe](verifier.md#handleeventsandpipe)*
 
-*Defined in [source-destination/source-destination.ts:134](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L134)*
+*Defined in [source-destination/source-destination.ts:134](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L134)*
 
 **Parameters:**
 
@@ -218,7 +218,7 @@ ___
 
 *Overrides EventEmitter.listenerCount*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:729*
+*Defined in /node_modules/@types/node/index.d.ts:729*
 
 **Parameters:**
 
@@ -239,7 +239,7 @@ ___
 
 *Overrides EventEmitter.listeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:726*
+*Defined in /node_modules/@types/node/index.d.ts:726*
 
 **Parameters:**
 
@@ -260,7 +260,7 @@ ___
 
 *Overrides EventEmitter.on*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:718*
+*Defined in /node_modules/@types/node/index.d.ts:718*
 
 **Parameters:**
 
@@ -282,7 +282,7 @@ ___
 
 *Overrides EventEmitter.once*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:719*
+*Defined in /node_modules/@types/node/index.d.ts:719*
 
 **Parameters:**
 
@@ -300,7 +300,7 @@ ___
 
 ▸ **oneVerifierFinished**(verifier: *[Verifier](verifier.md)*): `void`
 
-*Defined in [source-destination/multi-destination.ts:64](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/multi-destination.ts#L64)*
+*Defined in [source-destination/multi-destination.ts:64](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/multi-destination.ts#L64)*
 
 **Parameters:**
 
@@ -321,7 +321,7 @@ ___
 
 *Overrides EventEmitter.prependListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:720*
+*Defined in /node_modules/@types/node/index.d.ts:720*
 
 **Parameters:**
 
@@ -343,7 +343,7 @@ ___
 
 *Overrides EventEmitter.prependOnceListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:721*
+*Defined in /node_modules/@types/node/index.d.ts:721*
 
 **Parameters:**
 
@@ -365,7 +365,7 @@ ___
 
 *Overrides EventEmitter.removeAllListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:723*
+*Defined in /node_modules/@types/node/index.d.ts:723*
 
 **Parameters:**
 
@@ -386,7 +386,7 @@ ___
 
 *Overrides EventEmitter.removeListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:722*
+*Defined in /node_modules/@types/node/index.d.ts:722*
 
 **Parameters:**
 
@@ -406,7 +406,7 @@ ___
 
 *Overrides [Verifier](verifier.md).[run](verifier.md#run)*
 
-*Defined in [source-destination/multi-destination.ts:86](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/multi-destination.ts#L86)*
+*Defined in [source-destination/multi-destination.ts:86](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/multi-destination.ts#L86)*
 
 **Returns:** `Promise`<`void`>
 
@@ -421,7 +421,7 @@ ___
 
 *Overrides EventEmitter.setMaxListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:724*
+*Defined in /node_modules/@types/node/index.d.ts:724*
 
 **Parameters:**
 
@@ -440,7 +440,7 @@ ___
 
 *Inherited from EventEmitter.listenerCount*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:714*
+*Defined in /node_modules/@types/node/index.d.ts:714*
 
 **Parameters:**
 
@@ -463,7 +463,7 @@ ___
 
 *Inherited from [Verifier](verifier.md).[progress](verifier.md#progress)*
 
-*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L130)*
+*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L130)*
 
 <a id="progress.bytes"></a>
 
@@ -471,7 +471,7 @@ ___
 
 **● bytes**: *`number`* = 0
 
-*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L130)*
+*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L130)*
 
 ___
 <a id="progress.position"></a>
@@ -480,7 +480,7 @@ ___
 
 **● position**: *`number`* = 0
 
-*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L130)*
+*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L130)*
 
 ___
 <a id="progress.speed"></a>
@@ -489,7 +489,7 @@ ___
 
 **● speed**: *`number`* = 0
 
-*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L130)*
+*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L130)*
 
 ___
 

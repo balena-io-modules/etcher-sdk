@@ -52,7 +52,7 @@
 
 *Overrides Disk.__constructor*
 
-*Defined in [source-destination/configured-source/configured-source.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/configured-source/configured-source.ts#L43)*
+*Defined in [source-destination/configured-source/configured-source.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/configured-source/configured-source.ts#L43)*
 
 **Parameters:**
 
@@ -74,7 +74,7 @@ ___
 
 *Inherited from Disk.capacity*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/file-disk/build/index.d.ts:26*
+*Defined in /node_modules/file-disk/build/index.d.ts:26*
 
 ___
 <a id="discardiszero"></a>
@@ -85,7 +85,7 @@ ___
 
 *Inherited from Disk.discardIsZero*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/file-disk/build/index.d.ts:24*
+*Defined in /node_modules/file-disk/build/index.d.ts:24*
 
 ___
 <a id="knownchunks"></a>
@@ -96,7 +96,7 @@ ___
 
 *Inherited from Disk.knownChunks*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/file-disk/build/index.d.ts:25*
+*Defined in /node_modules/file-disk/build/index.d.ts:25*
 
 ___
 <a id="readonly"></a>
@@ -107,7 +107,7 @@ ___
 
 *Inherited from Disk.readOnly*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/file-disk/build/index.d.ts:21*
+*Defined in /node_modules/file-disk/build/index.d.ts:21*
 
 ___
 <a id="recordreads"></a>
@@ -118,7 +118,7 @@ ___
 
 *Inherited from Disk.recordReads*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/file-disk/build/index.d.ts:23*
+*Defined in /node_modules/file-disk/build/index.d.ts:23*
 
 ___
 <a id="recordwrites"></a>
@@ -129,7 +129,7 @@ ___
 
 *Inherited from Disk.recordWrites*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/file-disk/build/index.d.ts:22*
+*Defined in /node_modules/file-disk/build/index.d.ts:22*
 
 ___
 <a id="source"></a>
@@ -138,7 +138,7 @@ ___
 
 **● source**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [source-destination/configured-source/configured-source.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/configured-source/configured-source.ts#L44)*
+*Defined in [source-destination/configured-source/configured-source.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/configured-source/configured-source.ts#L44)*
 
 ___
 
@@ -152,7 +152,7 @@ ___
 
 *Overrides Disk._flush*
 
-*Defined in [source-destination/configured-source/configured-source.ts:80](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/configured-source/configured-source.ts#L80)*
+*Defined in [source-destination/configured-source/configured-source.ts:80](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/configured-source/configured-source.ts#L80)*
 
 **Returns:** `Promise`<`void`>
 
@@ -165,7 +165,7 @@ ___
 
 *Overrides Disk._getCapacity*
 
-*Defined in [source-destination/configured-source/configured-source.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/configured-source/configured-source.ts#L53)*
+*Defined in [source-destination/configured-source/configured-source.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/configured-source/configured-source.ts#L53)*
 
 **Returns:** `Promise`<`number`>
 
@@ -178,7 +178,7 @@ ___
 
 *Overrides Disk._read*
 
-*Defined in [source-destination/configured-source/configured-source.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/configured-source/configured-source.ts#L62)*
+*Defined in [source-destination/configured-source/configured-source.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/configured-source/configured-source.ts#L62)*
 
 **Parameters:**
 
@@ -200,7 +200,7 @@ ___
 
 *Overrides Disk._write*
 
-*Defined in [source-destination/configured-source/configured-source.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/configured-source/configured-source.ts#L71)*
+*Defined in [source-destination/configured-source/configured-source.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/configured-source/configured-source.ts#L71)*
 
 **Parameters:**
 
@@ -222,7 +222,7 @@ ___
 
 *Inherited from Disk.discard*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/file-disk/build/index.d.ts:36*
+*Defined in /node_modules/file-disk/build/index.d.ts:36*
 
 **Parameters:**
 
@@ -242,7 +242,7 @@ ___
 
 *Inherited from Disk.flush*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/file-disk/build/index.d.ts:35*
+*Defined in /node_modules/file-disk/build/index.d.ts:35*
 
 **Returns:** `Promise`<`void`>
 
@@ -255,7 +255,7 @@ ___
 
 *Inherited from Disk.getCapacity*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/file-disk/build/index.d.ts:37*
+*Defined in /node_modules/file-disk/build/index.d.ts:37*
 
 **Returns:** `Promise`<`number`>
 
@@ -268,7 +268,7 @@ ___
 
 *Inherited from Disk.getDiscardedChunks*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/file-disk/build/index.d.ts:39*
+*Defined in /node_modules/file-disk/build/index.d.ts:39*
 
 **Returns:** `DiskChunk`[]
 
@@ -281,7 +281,7 @@ ___
 
 *Inherited from Disk.getRanges*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/file-disk/build/index.d.ts:40*
+*Defined in /node_modules/file-disk/build/index.d.ts:40*
 
 **Parameters:**
 
@@ -300,7 +300,7 @@ ___
 
 *Inherited from Disk.getStream*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/file-disk/build/index.d.ts:38*
+*Defined in /node_modules/file-disk/build/index.d.ts:38*
 
 **Parameters:**
 
@@ -321,7 +321,7 @@ ___
 
 *Inherited from Disk.getTransformStream*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/file-disk/build/index.d.ts:32*
+*Defined in /node_modules/file-disk/build/index.d.ts:32*
 
 **Returns:** `Transform`
 
@@ -334,7 +334,7 @@ ___
 
 *Inherited from Disk.read*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/file-disk/build/index.d.ts:33*
+*Defined in /node_modules/file-disk/build/index.d.ts:33*
 
 **Parameters:**
 
@@ -356,7 +356,7 @@ ___
 
 *Inherited from Disk.write*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/file-disk/build/index.d.ts:34*
+*Defined in /node_modules/file-disk/build/index.d.ts:34*
 
 **Parameters:**
 

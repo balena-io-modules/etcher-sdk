@@ -33,7 +33,7 @@
 
 ⊕ **new ChecksumVerificationError**(message: *`string`*, checksum: *`string`*, expectedChecksum: *`string`*): [ChecksumVerificationError](checksumverificationerror.md)
 
-*Defined in [errors.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/errors.ts#L27)*
+*Defined in [errors.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/errors.ts#L27)*
 
 **Parameters:**
 
@@ -55,7 +55,7 @@ ___
 
 **● checksum**: *`string`*
 
-*Defined in [errors.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/errors.ts#L30)*
+*Defined in [errors.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/errors.ts#L30)*
 
 ___
 <a id="code"></a>
@@ -66,7 +66,7 @@ ___
 
 *Inherited from [VerificationError](verificationerror.md).[code](verificationerror.md#code)*
 
-*Defined in [errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/errors.ts#L24)*
+*Defined in [errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/errors.ts#L24)*
 
 ___
 <a id="expectedchecksum"></a>
@@ -75,7 +75,7 @@ ___
 
 **● expectedChecksum**: *`string`*
 
-*Defined in [errors.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/errors.ts#L31)*
+*Defined in [errors.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/errors.ts#L31)*
 
 ___
 <a id="message"></a>
@@ -86,7 +86,7 @@ ___
 
 *Inherited from Error.message*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:964*
+*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:964*
 
 ___
 <a id="name"></a>
@@ -97,7 +97,7 @@ ___
 
 *Inherited from Error.name*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:963*
+*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:963*
 
 ___
 <a id="stack"></a>
@@ -110,7 +110,7 @@ ___
 
 *Overrides Error.stack*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:965*
+*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:965*
 
 ___
 

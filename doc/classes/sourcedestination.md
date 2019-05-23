@@ -12,9 +12,9 @@
 
 ↳  [File](file.md)
 
-↳  [MultiDestination](multidestination.md)
-
 ↳  [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)
+
+↳  [MultiDestination](multidestination.md)
 
 ↳  [UsbbootDrive](usbbootdrive.md)
 
@@ -90,7 +90,7 @@
 
 **● isOpen**: *`boolean`* = false
 
-*Defined in [source-destination/source-destination.ts:250](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L250)*
+*Defined in [source-destination/source-destination.ts:250](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L250)*
 
 ___
 <a id="metadata"></a>
@@ -99,7 +99,7 @@ ___
 
 **● metadata**: *[Metadata](../interfaces/metadata.md)*
 
-*Defined in [source-destination/source-destination.ts:249](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L249)*
+*Defined in [source-destination/source-destination.ts:249](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L249)*
 
 ___
 <a id="defaultmaxlisteners"></a>
@@ -110,7 +110,7 @@ ___
 
 *Inherited from EventEmitter.defaultMaxListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:715*
+*Defined in /node_modules/@types/node/index.d.ts:715*
 
 ___
 <a id="imageextensions"></a>
@@ -130,7 +130,7 @@ ___
 		'wic',
 	]
 
-*Defined in [source-destination/source-destination.ts:234](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L234)*
+*Defined in [source-destination/source-destination.ts:234](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L234)*
 
 ___
 <a id="mimetype"></a>
@@ -139,7 +139,7 @@ ___
 
 **● mimetype**: *`undefined` \| `string`*
 
-*Defined in [source-destination/source-destination.ts:246](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L246)*
+*Defined in [source-destination/source-destination.ts:246](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L246)*
 
 ___
 <a id="mimetypes"></a>
@@ -148,7 +148,7 @@ ___
 
 **● mimetypes**: *`Map`<`string`, [SourceSource](sourcesource.md)>* =  new Map<string, typeof SourceSource>()
 
-*Defined in [source-destination/source-destination.ts:247](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L247)*
+*Defined in [source-destination/source-destination.ts:247](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L247)*
 
 ___
 
@@ -160,7 +160,7 @@ ___
 
 ▸ **_close**(): `Promise`<`void`>
 
-*Defined in [source-destination/source-destination.ts:355](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L355)*
+*Defined in [source-destination/source-destination.ts:355](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L355)*
 
 **Returns:** `Promise`<`void`>
 
@@ -171,7 +171,7 @@ ___
 
 ▸ **_getMetadata**(): `Promise`<[Metadata](../interfaces/metadata.md)>
 
-*Defined in [source-destination/source-destination.ts:289](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L289)*
+*Defined in [source-destination/source-destination.ts:289](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L289)*
 
 **Returns:** `Promise`<[Metadata](../interfaces/metadata.md)>
 
@@ -182,7 +182,7 @@ ___
 
 ▸ **_open**(): `Promise`<`void`>
 
-*Defined in [source-destination/source-destination.ts:351](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L351)*
+*Defined in [source-destination/source-destination.ts:351](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L351)*
 
 **Returns:** `Promise`<`void`>
 
@@ -197,7 +197,7 @@ ___
 
 *Overrides EventEmitter.addListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:717*
+*Defined in /node_modules/@types/node/index.d.ts:717*
 
 **Parameters:**
 
@@ -215,7 +215,7 @@ ___
 
 ▸ **canCreateReadStream**(): `Promise`<`boolean`>
 
-*Defined in [source-destination/source-destination.ts:266](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L266)*
+*Defined in [source-destination/source-destination.ts:266](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L266)*
 
 **Returns:** `Promise`<`boolean`>
 
@@ -226,7 +226,7 @@ ___
 
 ▸ **canCreateSparseReadStream**(): `Promise`<`boolean`>
 
-*Defined in [source-destination/source-destination.ts:270](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L270)*
+*Defined in [source-destination/source-destination.ts:270](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L270)*
 
 **Returns:** `Promise`<`boolean`>
 
@@ -237,7 +237,7 @@ ___
 
 ▸ **canCreateSparseWriteStream**(): `Promise`<`boolean`>
 
-*Defined in [source-destination/source-destination.ts:278](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L278)*
+*Defined in [source-destination/source-destination.ts:278](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L278)*
 
 **Returns:** `Promise`<`boolean`>
 
@@ -248,7 +248,7 @@ ___
 
 ▸ **canCreateWriteStream**(): `Promise`<`boolean`>
 
-*Defined in [source-destination/source-destination.ts:274](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L274)*
+*Defined in [source-destination/source-destination.ts:274](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L274)*
 
 **Returns:** `Promise`<`boolean`>
 
@@ -259,7 +259,7 @@ ___
 
 ▸ **canRead**(): `Promise`<`boolean`>
 
-*Defined in [source-destination/source-destination.ts:258](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L258)*
+*Defined in [source-destination/source-destination.ts:258](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L258)*
 
 **Returns:** `Promise`<`boolean`>
 
@@ -270,7 +270,7 @@ ___
 
 ▸ **canWrite**(): `Promise`<`boolean`>
 
-*Defined in [source-destination/source-destination.ts:262](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L262)*
+*Defined in [source-destination/source-destination.ts:262](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L262)*
 
 **Returns:** `Promise`<`boolean`>
 
@@ -281,7 +281,7 @@ ___
 
 ▸ **close**(): `Promise`<`void`>
 
-*Defined in [source-destination/source-destination.ts:344](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L344)*
+*Defined in [source-destination/source-destination.ts:344](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L344)*
 
 **Returns:** `Promise`<`void`>
 
@@ -292,7 +292,7 @@ ___
 
 ▸ **createReadStream**(_emitProgress?: *`boolean`*, _start?: *`number`*, _end?: *`undefined` \| `number`*): `Promise`<`ReadableStream`>
 
-*Defined in [source-destination/source-destination.ts:311](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L311)*
+*Defined in [source-destination/source-destination.ts:311](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L311)*
 
 **Parameters:**
 
@@ -311,7 +311,7 @@ ___
 
 ▸ **createSparseReadStream**(_generateChecksums?: *`boolean`*): `Promise`<[SparseReadable](../interfaces/sparsereadable.md)>
 
-*Defined in [source-destination/source-destination.ts:319](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L319)*
+*Defined in [source-destination/source-destination.ts:319](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L319)*
 
 **Parameters:**
 
@@ -328,7 +328,7 @@ ___
 
 ▸ **createSparseWriteStream**(): `Promise`<[SparseWritable](../interfaces/sparsewritable.md)>
 
-*Defined in [source-destination/source-destination.ts:333](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L333)*
+*Defined in [source-destination/source-destination.ts:333](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L333)*
 
 **Returns:** `Promise`<[SparseWritable](../interfaces/sparsewritable.md)>
 
@@ -339,7 +339,7 @@ ___
 
 ▸ **createVerifier**(checksumOrBlocks: *`string` \| [BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]*, size?: *`undefined` \| `number`*): [Verifier](verifier.md)
 
-*Defined in [source-destination/source-destination.ts:359](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L359)*
+*Defined in [source-destination/source-destination.ts:359](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L359)*
 
 **Parameters:**
 
@@ -357,7 +357,7 @@ ___
 
 ▸ **createWriteStream**(): `Promise`<`WritableStream`>
 
-*Defined in [source-destination/source-destination.ts:329](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L329)*
+*Defined in [source-destination/source-destination.ts:329](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L329)*
 
 **Returns:** `Promise`<`WritableStream`>
 
@@ -372,7 +372,7 @@ ___
 
 *Overrides EventEmitter.emit*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:727*
+*Defined in /node_modules/@types/node/index.d.ts:727*
 
 **Parameters:**
 
@@ -394,7 +394,7 @@ ___
 
 *Overrides EventEmitter.eventNames*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:728*
+*Defined in /node_modules/@types/node/index.d.ts:728*
 
 **Returns:** (`string` \| `symbol`)[]
 
@@ -405,7 +405,7 @@ ___
 
 ▸ **getBlocks**(): `Promise`<[BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]>
 
-*Defined in [source-destination/source-destination.ts:325](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L325)*
+*Defined in [source-destination/source-destination.ts:325](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L325)*
 
 **Returns:** `Promise`<[BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]>
 
@@ -416,7 +416,7 @@ ___
 
 ▸ **getInnerSource**(): `Promise`<[SourceDestination](sourcedestination.md)>
 
-*Defined in [source-destination/source-destination.ts:426](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L426)*
+*Defined in [source-destination/source-destination.ts:426](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L426)*
 
 **Returns:** `Promise`<[SourceDestination](sourcedestination.md)>
 
@@ -427,7 +427,7 @@ ___
 
 ▸ **getInnerSourceHelper**(mimetype?: *`undefined` \| `string`*): `Promise`<[SourceDestination](sourcedestination.md)>
 
-*Defined in [source-destination/source-destination.ts:409](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L409)*
+*Defined in [source-destination/source-destination.ts:409](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L409)*
 
 **Parameters:**
 
@@ -448,7 +448,7 @@ ___
 
 *Overrides EventEmitter.getMaxListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:725*
+*Defined in /node_modules/@types/node/index.d.ts:725*
 
 **Returns:** `number`
 
@@ -459,7 +459,7 @@ ___
 
 ▸ **getMetadata**(): `Promise`<[Metadata](../interfaces/metadata.md)>
 
-*Defined in [source-destination/source-destination.ts:282](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L282)*
+*Defined in [source-destination/source-destination.ts:282](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L282)*
 
 **Returns:** `Promise`<[Metadata](../interfaces/metadata.md)>
 
@@ -470,7 +470,7 @@ ___
 
 ▸ **getMimeTypeFromContent**(): `Promise`<`string` \| `undefined`>
 
-*Defined in [source-destination/source-destination.ts:393](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L393)*
+*Defined in [source-destination/source-destination.ts:393](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L393)*
 
 **Returns:** `Promise`<`string` \| `undefined`>
 
@@ -481,7 +481,7 @@ ___
 
 ▸ **getMimeTypeFromName**(): `Promise`<`string` \| `undefined`>
 
-*Defined in [source-destination/source-destination.ts:382](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L382)*
+*Defined in [source-destination/source-destination.ts:382](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L382)*
 
 **Returns:** `Promise`<`string` \| `undefined`>
 
@@ -492,7 +492,7 @@ ___
 
 ▸ **getPartitionTable**(): `Promise`<`GetPartitionsResult` \| `undefined`>
 
-*Defined in [source-destination/source-destination.ts:447](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L447)*
+*Defined in [source-destination/source-destination.ts:447](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L447)*
 
 **Returns:** `Promise`<`GetPartitionsResult` \| `undefined`>
 
@@ -507,7 +507,7 @@ ___
 
 *Overrides EventEmitter.listenerCount*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:729*
+*Defined in /node_modules/@types/node/index.d.ts:729*
 
 **Parameters:**
 
@@ -528,7 +528,7 @@ ___
 
 *Overrides EventEmitter.listeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:726*
+*Defined in /node_modules/@types/node/index.d.ts:726*
 
 **Parameters:**
 
@@ -549,7 +549,7 @@ ___
 
 *Overrides EventEmitter.on*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:718*
+*Defined in /node_modules/@types/node/index.d.ts:718*
 
 **Parameters:**
 
@@ -571,7 +571,7 @@ ___
 
 *Overrides EventEmitter.once*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:719*
+*Defined in /node_modules/@types/node/index.d.ts:719*
 
 **Parameters:**
 
@@ -589,7 +589,7 @@ ___
 
 ▸ **open**(): `Promise`<`void`>
 
-*Defined in [source-destination/source-destination.ts:337](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L337)*
+*Defined in [source-destination/source-destination.ts:337](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L337)*
 
 **Returns:** `Promise`<`void`>
 
@@ -604,7 +604,7 @@ ___
 
 *Overrides EventEmitter.prependListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:720*
+*Defined in /node_modules/@types/node/index.d.ts:720*
 
 **Parameters:**
 
@@ -626,7 +626,7 @@ ___
 
 *Overrides EventEmitter.prependOnceListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:721*
+*Defined in /node_modules/@types/node/index.d.ts:721*
 
 **Parameters:**
 
@@ -644,7 +644,7 @@ ___
 
 ▸ **read**(_buffer: *`Buffer`*, _bufferOffset: *`number`*, _length: *`number`*, _sourceOffset: *`number`*): `Promise`<`ReadResult`>
 
-*Defined in [source-destination/source-destination.ts:293](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L293)*
+*Defined in [source-destination/source-destination.ts:293](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L293)*
 
 **Parameters:**
 
@@ -668,7 +668,7 @@ ___
 
 *Overrides EventEmitter.removeAllListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:723*
+*Defined in /node_modules/@types/node/index.d.ts:723*
 
 **Parameters:**
 
@@ -689,7 +689,7 @@ ___
 
 *Overrides EventEmitter.removeListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:722*
+*Defined in /node_modules/@types/node/index.d.ts:722*
 
 **Parameters:**
 
@@ -711,7 +711,7 @@ ___
 
 *Overrides EventEmitter.setMaxListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:724*
+*Defined in /node_modules/@types/node/index.d.ts:724*
 
 **Parameters:**
 
@@ -728,7 +728,7 @@ ___
 
 ▸ **write**(_buffer: *`Buffer`*, _bufferOffset: *`number`*, _length: *`number`*, _fileOffset: *`number`*): `Promise`<`WriteResult`>
 
-*Defined in [source-destination/source-destination.ts:302](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L302)*
+*Defined in [source-destination/source-destination.ts:302](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L302)*
 
 **Parameters:**
 
@@ -750,7 +750,7 @@ ___
 
 *Inherited from EventEmitter.listenerCount*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:714*
+*Defined in /node_modules/@types/node/index.d.ts:714*
 
 **Parameters:**
 
@@ -768,7 +768,7 @@ ___
 
 ▸ **register**(Cls: *[SourceSource](sourcesource.md)*): `void`
 
-*Defined in [source-destination/source-destination.ts:252](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L252)*
+*Defined in [source-destination/source-destination.ts:252](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/source-destination.ts#L252)*
 
 **Parameters:**
 

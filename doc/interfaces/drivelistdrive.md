@@ -47,7 +47,7 @@
 
 *Inherited from Drive.blockSize*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:6*
+*Defined in /node_modules/drivelist/js/index.d.ts:6*
 
 ___
 <a id="bustype"></a>
@@ -58,7 +58,7 @@ ___
 
 *Inherited from Drive.busType*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:7*
+*Defined in /node_modules/drivelist/js/index.d.ts:7*
 
 ___
 <a id="busversion"></a>
@@ -69,7 +69,7 @@ ___
 
 *Inherited from Drive.busVersion*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:8*
+*Defined in /node_modules/drivelist/js/index.d.ts:8*
 
 ___
 <a id="description"></a>
@@ -80,7 +80,7 @@ ___
 
 *Inherited from Drive.description*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:9*
+*Defined in /node_modules/drivelist/js/index.d.ts:9*
 
 ___
 <a id="device"></a>
@@ -91,7 +91,7 @@ ___
 
 *Inherited from Drive.device*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:10*
+*Defined in /node_modules/drivelist/js/index.d.ts:10*
 
 ___
 <a id="devicepath"></a>
@@ -102,7 +102,7 @@ ___
 
 *Inherited from Drive.devicePath*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:11*
+*Defined in /node_modules/drivelist/js/index.d.ts:11*
 
 ___
 <a id="displayname"></a>
@@ -111,7 +111,7 @@ ___
 
 **● displayName**: *`string`*
 
-*Defined in [scanner/adapters/block-device.ts:52](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/block-device.ts#L52)*
+*Defined in [scanner/adapters/block-device.ts:52](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/adapters/block-device.ts#L52)*
 
 ___
 <a id="enumerator"></a>
@@ -122,7 +122,7 @@ ___
 
 *Inherited from Drive.enumerator*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:12*
+*Defined in /node_modules/drivelist/js/index.d.ts:12*
 
 ___
 <a id="error"></a>
@@ -133,7 +133,7 @@ ___
 
 *Inherited from Drive.error*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:13*
+*Defined in /node_modules/drivelist/js/index.d.ts:13*
 
 ___
 <a id="icon"></a>
@@ -142,7 +142,7 @@ ___
 
 **● icon**: *`undefined` \| `string`*
 
-*Defined in [scanner/adapters/block-device.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/block-device.ts#L53)*
+*Defined in [scanner/adapters/block-device.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/adapters/block-device.ts#L53)*
 
 ___
 <a id="iscard"></a>
@@ -153,7 +153,7 @@ ___
 
 *Inherited from Drive.isCard*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:14*
+*Defined in /node_modules/drivelist/js/index.d.ts:14*
 
 ___
 <a id="isreadonly"></a>
@@ -164,7 +164,7 @@ ___
 
 *Inherited from Drive.isReadOnly*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:15*
+*Defined in /node_modules/drivelist/js/index.d.ts:15*
 
 ___
 <a id="isremovable"></a>
@@ -175,7 +175,7 @@ ___
 
 *Inherited from Drive.isRemovable*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:16*
+*Defined in /node_modules/drivelist/js/index.d.ts:16*
 
 ___
 <a id="isscsi"></a>
@@ -186,7 +186,7 @@ ___
 
 *Inherited from Drive.isSCSI*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:17*
+*Defined in /node_modules/drivelist/js/index.d.ts:17*
 
 ___
 <a id="issystem"></a>
@@ -197,7 +197,7 @@ ___
 
 *Inherited from Drive.isSystem*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:18*
+*Defined in /node_modules/drivelist/js/index.d.ts:18*
 
 ___
 <a id="isuas"></a>
@@ -208,7 +208,7 @@ ___
 
 *Inherited from Drive.isUAS*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:19*
+*Defined in /node_modules/drivelist/js/index.d.ts:19*
 
 ___
 <a id="isusb"></a>
@@ -219,7 +219,7 @@ ___
 
 *Inherited from Drive.isUSB*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:20*
+*Defined in /node_modules/drivelist/js/index.d.ts:20*
 
 ___
 <a id="isvirtual"></a>
@@ -230,7 +230,7 @@ ___
 
 *Inherited from Drive.isVirtual*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:21*
+*Defined in /node_modules/drivelist/js/index.d.ts:21*
 
 ___
 <a id="logicalblocksize"></a>
@@ -241,7 +241,7 @@ ___
 
 *Inherited from Drive.logicalBlockSize*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:22*
+*Defined in /node_modules/drivelist/js/index.d.ts:22*
 
 ___
 <a id="mountpoints"></a>
@@ -252,7 +252,7 @@ ___
 
 *Inherited from Drive.mountpoints*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:23*
+*Defined in /node_modules/drivelist/js/index.d.ts:23*
 
 ___
 <a id="raw"></a>
@@ -263,7 +263,7 @@ ___
 
 *Inherited from Drive.raw*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:24*
+*Defined in /node_modules/drivelist/js/index.d.ts:24*
 
 ___
 <a id="size"></a>
@@ -274,7 +274,7 @@ ___
 
 *Inherited from Drive.size*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/drivelist/js/index.d.ts:25*
+*Defined in /node_modules/drivelist/js/index.d.ts:25*
 
 ___
 

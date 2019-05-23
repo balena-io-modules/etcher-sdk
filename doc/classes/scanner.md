@@ -52,7 +52,7 @@
 
 ⊕ **new Scanner**(adapters: *[Adapter](adapter.md)[]*): [Scanner](scanner.md)
 
-*Defined in [scanner/scanner.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/scanner.ts#L25)*
+*Defined in [scanner/scanner.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/scanner.ts#L25)*
 
 **Parameters:**
 
@@ -72,7 +72,7 @@ ___
 
 **● adapters**: *[Adapter](adapter.md)[]*
 
-*Defined in [scanner/scanner.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/scanner.ts#L27)*
+*Defined in [scanner/scanner.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/scanner.ts#L27)*
 
 ___
 <a id="drives"></a>
@@ -81,7 +81,7 @@ ___
 
 **● drives**: *`Set`<[AdapterSourceDestination](../interfaces/adaptersourcedestination.md)>* =  new Set()
 
-*Defined in [scanner/scanner.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/scanner.ts#L25)*
+*Defined in [scanner/scanner.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/scanner.ts#L25)*
 
 ___
 <a id="defaultmaxlisteners"></a>
@@ -92,7 +92,7 @@ ___
 
 *Inherited from EventEmitter.defaultMaxListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:715*
+*Defined in /node_modules/@types/node/index.d.ts:715*
 
 ___
 
@@ -108,7 +108,7 @@ ___
 
 *Overrides EventEmitter.addListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:717*
+*Defined in /node_modules/@types/node/index.d.ts:717*
 
 **Parameters:**
 
@@ -130,7 +130,7 @@ ___
 
 *Overrides EventEmitter.emit*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:727*
+*Defined in /node_modules/@types/node/index.d.ts:727*
 
 **Parameters:**
 
@@ -152,7 +152,7 @@ ___
 
 *Overrides EventEmitter.eventNames*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:728*
+*Defined in /node_modules/@types/node/index.d.ts:728*
 
 **Returns:** (`string` \| `symbol`)[]
 
@@ -163,7 +163,7 @@ ___
 
 ▸ **getBy**(field: *"raw" \| "device" \| "devicePath"*, value: *`string`*): [AdapterSourceDestination](../interfaces/adaptersourcedestination.md) \| `undefined`
 
-*Defined in [scanner/scanner.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/scanner.ts#L46)*
+*Defined in [scanner/scanner.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/scanner.ts#L46)*
 
 **Parameters:**
 
@@ -185,7 +185,7 @@ ___
 
 *Overrides EventEmitter.getMaxListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:725*
+*Defined in /node_modules/@types/node/index.d.ts:725*
 
 **Returns:** `number`
 
@@ -200,7 +200,7 @@ ___
 
 *Overrides EventEmitter.listenerCount*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:729*
+*Defined in /node_modules/@types/node/index.d.ts:729*
 
 **Parameters:**
 
@@ -221,7 +221,7 @@ ___
 
 *Overrides EventEmitter.listeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:726*
+*Defined in /node_modules/@types/node/index.d.ts:726*
 
 **Parameters:**
 
@@ -242,7 +242,7 @@ ___
 
 *Overrides EventEmitter.on*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:718*
+*Defined in /node_modules/@types/node/index.d.ts:718*
 
 **Parameters:**
 
@@ -260,7 +260,7 @@ ___
 
 ▸ **onAttach**(drive: *[AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*): `void`
 
-*Defined in [scanner/scanner.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/scanner.ts#L36)*
+*Defined in [scanner/scanner.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/scanner.ts#L36)*
 
 **Parameters:**
 
@@ -277,7 +277,7 @@ ___
 
 ▸ **onDetach**(drive: *[AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*): `void`
 
-*Defined in [scanner/scanner.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/scanner.ts#L41)*
+*Defined in [scanner/scanner.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/scanner.ts#L41)*
 
 **Parameters:**
 
@@ -298,7 +298,7 @@ ___
 
 *Overrides EventEmitter.once*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:719*
+*Defined in /node_modules/@types/node/index.d.ts:719*
 
 **Parameters:**
 
@@ -320,7 +320,7 @@ ___
 
 *Overrides EventEmitter.prependListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:720*
+*Defined in /node_modules/@types/node/index.d.ts:720*
 
 **Parameters:**
 
@@ -342,7 +342,7 @@ ___
 
 *Overrides EventEmitter.prependOnceListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:721*
+*Defined in /node_modules/@types/node/index.d.ts:721*
 
 **Parameters:**
 
@@ -364,7 +364,7 @@ ___
 
 *Overrides EventEmitter.removeAllListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:723*
+*Defined in /node_modules/@types/node/index.d.ts:723*
 
 **Parameters:**
 
@@ -385,7 +385,7 @@ ___
 
 *Overrides EventEmitter.removeListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:722*
+*Defined in /node_modules/@types/node/index.d.ts:722*
 
 **Parameters:**
 
@@ -407,7 +407,7 @@ ___
 
 *Overrides EventEmitter.setMaxListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:724*
+*Defined in /node_modules/@types/node/index.d.ts:724*
 
 **Parameters:**
 
@@ -424,7 +424,7 @@ ___
 
 ▸ **start**(): `Promise`<`void`>
 
-*Defined in [scanner/scanner.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/scanner.ts#L57)*
+*Defined in [scanner/scanner.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/scanner.ts#L57)*
 
 **Returns:** `Promise`<`void`>
 
@@ -435,7 +435,7 @@ ___
 
 ▸ **stop**(): `void`
 
-*Defined in [scanner/scanner.ts:74](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/scanner.ts#L74)*
+*Defined in [scanner/scanner.ts:74](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/scanner.ts#L74)*
 
 **Returns:** `void`
 
@@ -448,7 +448,7 @@ ___
 
 *Inherited from EventEmitter.listenerCount*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:714*
+*Defined in /node_modules/@types/node/index.d.ts:714*
 
 **Parameters:**
 
