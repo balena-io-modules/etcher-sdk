@@ -72,7 +72,7 @@
 
 *Overrides Readable.__constructor*
 
-*Defined in [sparse-stream/sparse-read-stream.ts:32](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-read-stream.ts#L32)*
+*Defined in [sparse-stream/sparse-read-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-read-stream.ts#L32)*
 
 **Parameters:**
 
@@ -99,7 +99,7 @@ ___
 
 *Implementation of [SparseReadable](../interfaces/sparsereadable.md).[blocks](../interfaces/sparsereadable.md#blocks)*
 
-*Defined in [sparse-stream/sparse-read-stream.ts:36](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-read-stream.ts#L36)*
+*Defined in [sparse-stream/sparse-read-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-read-stream.ts#L36)*
 
 ___
 <a id="chunksize"></a>
@@ -108,7 +108,7 @@ ___
 
 **● chunkSize**: *`number`*
 
-*Defined in [sparse-stream/sparse-read-stream.ts:37](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-read-stream.ts#L37)*
+*Defined in [sparse-stream/sparse-read-stream.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-read-stream.ts#L37)*
 
 ___
 <a id="positioninblock"></a>
@@ -117,7 +117,7 @@ ___
 
 **● positionInBlock**: *`number`* = 0
 
-*Defined in [sparse-stream/sparse-read-stream.ts:32](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-read-stream.ts#L32)*
+*Defined in [sparse-stream/sparse-read-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-read-stream.ts#L32)*
 
 ___
 <a id="readable"></a>
@@ -139,7 +139,7 @@ ___
 
 **● source**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [sparse-stream/sparse-read-stream.ts:35](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-read-stream.ts#L35)*
+*Defined in [sparse-stream/sparse-read-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-read-stream.ts#L35)*
 
 ___
 <a id="state"></a>
@@ -148,7 +148,7 @@ ___
 
 **● state**: *[SparseReaderState](../interfaces/sparsereaderstate.md)*
 
-*Defined in [sparse-stream/sparse-read-stream.ts:31](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-read-stream.ts#L31)*
+*Defined in [sparse-stream/sparse-read-stream.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-read-stream.ts#L31)*
 
 ___
 <a id="stateiterator"></a>
@@ -157,7 +157,7 @@ ___
 
 **● stateIterator**: *`Iterator`<[SparseReaderState](../interfaces/sparsereaderstate.md)>*
 
-*Defined in [sparse-stream/sparse-read-stream.ts:30](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-read-stream.ts#L30)*
+*Defined in [sparse-stream/sparse-read-stream.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-read-stream.ts#L30)*
 
 ___
 <a id="defaultmaxlisteners"></a>
@@ -180,7 +180,7 @@ ___
 
 ▸ **__read**(): `Promise`<[SparseStreamChunk](../interfaces/sparsestreamchunk.md) \| `null`>
 
-*Defined in [sparse-stream/sparse-read-stream.ts:65](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-read-stream.ts#L65)*
+*Defined in [sparse-stream/sparse-read-stream.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-read-stream.ts#L65)*
 
 **Returns:** `Promise`<[SparseStreamChunk](../interfaces/sparsestreamchunk.md) \| `null`>
 
@@ -193,7 +193,7 @@ ___
 
 *Overrides Readable._read*
 
-*Defined in [sparse-stream/sparse-read-stream.ts:51](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-read-stream.ts#L51)*
+*Defined in [sparse-stream/sparse-read-stream.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-read-stream.ts#L51)*
 
 **Returns:** `Promise`<`void`>
 
@@ -520,7 +520,7 @@ ___
 
 ▸ **nextBlock**(): `void`
 
-*Defined in [sparse-stream/sparse-read-stream.ts:60](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-read-stream.ts#L60)*
+*Defined in [sparse-stream/sparse-read-stream.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-read-stream.ts#L60)*
 
 **Returns:** `void`
 

@@ -72,7 +72,7 @@
 
 *Overrides Transform.__constructor*
 
-*Defined in [stream-limiter.ts:22](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/stream-limiter.ts#L22)*
+*Defined in [stream-limiter.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/stream-limiter.ts#L22)*
 
 **Parameters:**
 
@@ -93,7 +93,7 @@ ___
 
 **● maxBytes**: *`number`*
 
-*Defined in [stream-limiter.ts:23](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/stream-limiter.ts#L23)*
+*Defined in [stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/stream-limiter.ts#L23)*
 
 ___
 <a id="readable"></a>
@@ -113,7 +113,7 @@ ___
 
 **● stream**: *`ReadableStream`*
 
-*Defined in [stream-limiter.ts:23](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/stream-limiter.ts#L23)*
+*Defined in [stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/stream-limiter.ts#L23)*
 
 ___
 <a id="writable"></a>
@@ -168,7 +168,7 @@ ___
 
 *Overrides Transform._transform*
 
-*Defined in [stream-limiter.ts:29](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/stream-limiter.ts#L29)*
+*Defined in [stream-limiter.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/stream-limiter.ts#L29)*
 
 **Parameters:**
 

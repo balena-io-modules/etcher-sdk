@@ -39,7 +39,7 @@
 
 **● blockMap**: *`BlockMap`*
 
-*Defined in [source-destination/metadata.ts:27](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L27)*
+*Defined in [source-destination/metadata.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L27)*
 
 ___
 <a id="blockmappedsize"></a>
@@ -48,7 +48,7 @@ ___
 
 **● blockmappedSize**: *`undefined` \| `number`*
 
-*Defined in [source-destination/metadata.ts:25](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L25)*
+*Defined in [source-destination/metadata.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L25)*
 
 ___
 <a id="blocks"></a>
@@ -57,7 +57,7 @@ ___
 
 **● blocks**: *[BlocksWithChecksum](blockswithchecksum.md)[]*
 
-*Defined in [source-destination/metadata.ts:28](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L28)*
+*Defined in [source-destination/metadata.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L28)*
 
 ___
 <a id="bytestozerooutfromthebeginning"></a>
@@ -66,7 +66,7 @@ ___
 
 **● bytesToZeroOutFromTheBeginning**: *`undefined` \| `number`*
 
-*Defined in [source-destination/metadata.ts:31](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L31)*
+*Defined in [source-destination/metadata.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L31)*
 
 ___
 <a id="checksum"></a>
@@ -75,7 +75,7 @@ ___
 
 **● checksum**: *`undefined` \| `string`*
 
-*Defined in [source-destination/metadata.ts:32](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L32)*
+*Defined in [source-destination/metadata.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L32)*
 
 ___
 <a id="checksumtype"></a>
@@ -84,7 +84,7 @@ ___
 
 **● checksumType**: *`undefined` \| `string`*
 
-*Defined in [source-destination/metadata.ts:33](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L33)*
+*Defined in [source-destination/metadata.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L33)*
 
 ___
 <a id="compressedsize"></a>
@@ -93,7 +93,7 @@ ___
 
 **● compressedSize**: *`undefined` \| `number`*
 
-*Defined in [source-destination/metadata.ts:24](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L24)*
+*Defined in [source-destination/metadata.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L24)*
 
 ___
 <a id="instructions"></a>
@@ -102,7 +102,7 @@ ___
 
 **● instructions**: *`undefined` \| `string`*
 
-*Defined in [source-destination/metadata.ts:29](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L29)*
+*Defined in [source-destination/metadata.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L29)*
 
 ___
 <a id="isetch"></a>
@@ -111,7 +111,7 @@ ___
 
 **● isEtch**: *`undefined` \| `false` \| `true`*
 
-*Defined in [source-destination/metadata.ts:39](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L39)*
+*Defined in [source-destination/metadata.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L39)*
 
 ___
 <a id="issizeestimated"></a>
@@ -120,7 +120,7 @@ ___
 
 **● isSizeEstimated**: *`undefined` \| `false` \| `true`*
 
-*Defined in [source-destination/metadata.ts:23](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L23)*
+*Defined in [source-destination/metadata.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L23)*
 
 ___
 <a id="logo"></a>
@@ -129,7 +129,7 @@ ___
 
 **● logo**: *`undefined` \| `string`*
 
-*Defined in [source-destination/metadata.ts:30](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L30)*
+*Defined in [source-destination/metadata.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L30)*
 
 ___
 <a id="name"></a>
@@ -138,7 +138,7 @@ ___
 
 **● name**: *`undefined` \| `string`*
 
-*Defined in [source-destination/metadata.ts:26](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L26)*
+*Defined in [source-destination/metadata.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L26)*
 
 ___
 <a id="recommendeddrivesize"></a>
@@ -147,7 +147,7 @@ ___
 
 **● recommendedDriveSize**: *`undefined` \| `number`*
 
-*Defined in [source-destination/metadata.ts:34](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L34)*
+*Defined in [source-destination/metadata.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L34)*
 
 ___
 <a id="releasenotesurl"></a>
@@ -156,7 +156,7 @@ ___
 
 **● releaseNotesUrl**: *`undefined` \| `string`*
 
-*Defined in [source-destination/metadata.ts:35](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L35)*
+*Defined in [source-destination/metadata.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L35)*
 
 ___
 <a id="size"></a>
@@ -165,7 +165,7 @@ ___
 
 **● size**: *`undefined` \| `number`*
 
-*Defined in [source-destination/metadata.ts:22](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L22)*
+*Defined in [source-destination/metadata.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L22)*
 
 ___
 <a id="supporturl"></a>
@@ -174,7 +174,7 @@ ___
 
 **● supportUrl**: *`undefined` \| `string`*
 
-*Defined in [source-destination/metadata.ts:36](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L36)*
+*Defined in [source-destination/metadata.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L36)*
 
 ___
 <a id="url"></a>
@@ -183,7 +183,7 @@ ___
 
 **● url**: *`undefined` \| `string`*
 
-*Defined in [source-destination/metadata.ts:37](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L37)*
+*Defined in [source-destination/metadata.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L37)*
 
 ___
 <a id="version"></a>
@@ -192,7 +192,7 @@ ___
 
 **● version**: *`undefined` \| `string`*
 
-*Defined in [source-destination/metadata.ts:38](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/metadata.ts#L38)*
+*Defined in [source-destination/metadata.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/metadata.ts#L38)*
 
 ___
 

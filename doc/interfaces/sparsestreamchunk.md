@@ -23,7 +23,7 @@
 
 **● buffer**: *`Buffer`*
 
-*Defined in [sparse-stream/shared.ts:45](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/shared.ts#L45)*
+*Defined in [sparse-stream/shared.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/shared.ts#L45)*
 
 ___
 <a id="position"></a>
@@ -32,7 +32,7 @@ ___
 
 **● position**: *`number`*
 
-*Defined in [sparse-stream/shared.ts:46](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/shared.ts#L46)*
+*Defined in [sparse-stream/shared.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/shared.ts#L46)*
 
 ___
 

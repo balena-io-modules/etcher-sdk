@@ -79,7 +79,7 @@ ___
 
 **● bytesWritten**: *`number`* = 0
 
-*Defined in [source-destination/progress.ts:92](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/progress.ts#L92)*
+*Defined in [source-destination/progress.ts:92](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/progress.ts#L92)*
 
 ___
 <a id="position"></a>
@@ -88,7 +88,7 @@ ___
 
 **● position**: *`number` \| `undefined`*
 
-*Defined in [source-destination/progress.ts:93](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/progress.ts#L93)*
+*Defined in [source-destination/progress.ts:93](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/progress.ts#L93)*
 
 ___
 <a id="writable"></a>
@@ -124,7 +124,7 @@ ___
 
 *Overrides Writable._write*
 
-*Defined in [source-destination/progress.ts:95](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/progress.ts#L95)*
+*Defined in [source-destination/progress.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/progress.ts#L95)*
 
 **Parameters:**
 

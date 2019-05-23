@@ -35,7 +35,7 @@
 
 **● active**: *`number`*
 
-*Defined in [multi-write.ts:37](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/multi-write.ts#L37)*
+*Defined in [multi-write.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/multi-write.ts#L37)*
 
 ___
 <a id="blockmappedsize"></a>
@@ -44,7 +44,7 @@ ___
 
 **● blockmappedSize**: *`undefined` \| `number`*
 
-*Defined in [multi-write.ts:45](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/multi-write.ts#L45)*
+*Defined in [multi-write.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/multi-write.ts#L45)*
 
 ___
 <a id="compressedsize"></a>
@@ -53,7 +53,7 @@ ___
 
 **● compressedSize**: *`undefined` \| `number`*
 
-*Defined in [multi-write.ts:44](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/multi-write.ts#L44)*
+*Defined in [multi-write.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/multi-write.ts#L44)*
 
 ___
 <a id="failed"></a>
@@ -62,7 +62,7 @@ ___
 
 **● failed**: *`number`*
 
-*Defined in [multi-write.ts:40](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/multi-write.ts#L40)*
+*Defined in [multi-write.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/multi-write.ts#L40)*
 
 ___
 <a id="flashing"></a>
@@ -71,7 +71,7 @@ ___
 
 **● flashing**: *`number`*
 
-*Defined in [multi-write.ts:38](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/multi-write.ts#L38)*
+*Defined in [multi-write.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/multi-write.ts#L38)*
 
 ___
 <a id="rootstreamposition"></a>
@@ -80,7 +80,7 @@ ___
 
 **● rootStreamPosition**: *`undefined` \| `number`*
 
-*Defined in [multi-write.ts:47](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/multi-write.ts#L47)*
+*Defined in [multi-write.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/multi-write.ts#L47)*
 
 ___
 <a id="rootstreamspeed"></a>
@@ -89,7 +89,7 @@ ___
 
 **● rootStreamSpeed**: *`undefined` \| `number`*
 
-*Defined in [multi-write.ts:48](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/multi-write.ts#L48)*
+*Defined in [multi-write.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/multi-write.ts#L48)*
 
 ___
 <a id="size"></a>
@@ -98,7 +98,7 @@ ___
 
 **● size**: *`undefined` \| `number`*
 
-*Defined in [multi-write.ts:43](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/multi-write.ts#L43)*
+*Defined in [multi-write.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/multi-write.ts#L43)*
 
 ___
 <a id="sparse"></a>
@@ -107,7 +107,7 @@ ___
 
 **● sparse**: *`undefined` \| `false` \| `true`*
 
-*Defined in [multi-write.ts:46](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/multi-write.ts#L46)*
+*Defined in [multi-write.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/multi-write.ts#L46)*
 
 ___
 <a id="successful"></a>
@@ -116,7 +116,7 @@ ___
 
 **● successful**: *`number`*
 
-*Defined in [multi-write.ts:41](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/multi-write.ts#L41)*
+*Defined in [multi-write.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/multi-write.ts#L41)*
 
 ___
 <a id="type"></a>
@@ -125,7 +125,7 @@ ___
 
 **● type**: *[WriteStep](../#writestep)*
 
-*Defined in [multi-write.ts:42](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/multi-write.ts#L42)*
+*Defined in [multi-write.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/multi-write.ts#L42)*
 
 ___
 <a id="verifying"></a>
@@ -134,7 +134,7 @@ ___
 
 **● verifying**: *`number`*
 
-*Defined in [multi-write.ts:39](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/multi-write.ts#L39)*
+*Defined in [multi-write.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/multi-write.ts#L39)*
 
 ___
 

@@ -33,7 +33,7 @@
 
 ⊕ **new BlocksVerificationError**(blocks: *[BlocksWithChecksum](../interfaces/blockswithchecksum.md)*, checksum: *`string`*): [BlocksVerificationError](blocksverificationerror.md)
 
-*Defined in [errors.ts:50](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/errors.ts#L50)*
+*Defined in [errors.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/errors.ts#L50)*
 
 **Parameters:**
 
@@ -54,7 +54,7 @@ ___
 
 **● blocks**: *[BlocksWithChecksum](../interfaces/blockswithchecksum.md)*
 
-*Defined in [errors.ts:52](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/errors.ts#L52)*
+*Defined in [errors.ts:52](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/errors.ts#L52)*
 
 ___
 <a id="checksum"></a>
@@ -63,7 +63,7 @@ ___
 
 **● checksum**: *`string`*
 
-*Defined in [errors.ts:53](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/errors.ts#L53)*
+*Defined in [errors.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/errors.ts#L53)*
 
 ___
 <a id="code"></a>
@@ -74,7 +74,7 @@ ___
 
 *Inherited from [VerificationError](verificationerror.md).[code](verificationerror.md#code)*
 
-*Defined in [errors.ts:24](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/errors.ts#L24)*
+*Defined in [errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/errors.ts#L24)*
 
 ___
 <a id="message"></a>

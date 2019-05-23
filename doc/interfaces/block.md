@@ -23,7 +23,7 @@
 
 **● length**: *`number`*
 
-*Defined in [sparse-stream/shared.ts:35](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/shared.ts#L35)*
+*Defined in [sparse-stream/shared.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/shared.ts#L35)*
 
 ___
 <a id="offset"></a>
@@ -32,7 +32,7 @@ ___
 
 **● offset**: *`number`*
 
-*Defined in [sparse-stream/shared.ts:34](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/shared.ts#L34)*
+*Defined in [sparse-stream/shared.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/shared.ts#L34)*
 
 ___
 

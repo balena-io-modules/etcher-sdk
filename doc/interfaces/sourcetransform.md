@@ -104,7 +104,7 @@ ___
 
 **● sourceStream**: *`ReadableStream`*
 
-*Defined in [source-destination/compressed-source.ts:26](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/compressed-source.ts#L26)*
+*Defined in [source-destination/compressed-source.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/compressed-source.ts#L26)*
 
 ___
 <a id="writable"></a>

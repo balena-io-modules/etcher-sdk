@@ -73,7 +73,7 @@
 
 *Overrides Transform.__constructor*
 
-*Defined in [/home/alexis/dev/resin.io/etcher-sdk-2/typings/xxhash/index.d.ts:12](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/typings/xxhash/index.d.ts#L12)*
+*Defined in [/home/alexis/dev/resin.io/etcher-sdk-2/typings/xxhash/index.d.ts:12](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/typings/xxhash/index.d.ts#L12)*
 
 **Parameters:**
 
@@ -95,7 +95,7 @@ ___
 
 **● bytesWritten**: *`number`* = 0
 
-*Defined in [source-destination/source-destination.ts:48](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L48)*
+*Defined in [source-destination/source-destination.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L48)*
 
 ___
 <a id="readable"></a>
@@ -161,7 +161,7 @@ ___
 
 *Overrides Transform._transform*
 
-*Defined in [source-destination/source-destination.ts:50](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/source-destination/source-destination.ts#L50)*
+*Defined in [source-destination/source-destination.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/source-destination.ts#L50)*
 
 **Parameters:**
 

@@ -69,7 +69,7 @@
 
 *Overrides Writable.__constructor*
 
-*Defined in [sparse-stream/sparse-write-stream.ts:22](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-write-stream.ts#L22)*
+*Defined in [sparse-stream/sparse-write-stream.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-write-stream.ts#L22)*
 
 **Parameters:**
 
@@ -91,7 +91,7 @@ ___
 
 **● _firstChunks**: *[SparseStreamChunk](../interfaces/sparsestreamchunk.md)[]* =  []
 
-*Defined in [sparse-stream/sparse-write-stream.ts:22](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-write-stream.ts#L22)*
+*Defined in [sparse-stream/sparse-write-stream.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-write-stream.ts#L22)*
 
 ___
 <a id="byteswritten"></a>
@@ -100,7 +100,7 @@ ___
 
 **● bytesWritten**: *`number`* = 0
 
-*Defined in [sparse-stream/sparse-write-stream.ts:21](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-write-stream.ts#L21)*
+*Defined in [sparse-stream/sparse-write-stream.ts:21](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-write-stream.ts#L21)*
 
 ___
 <a id="destination"></a>
@@ -109,7 +109,7 @@ ___
 
 **● destination**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [sparse-stream/sparse-write-stream.ts:25](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-write-stream.ts#L25)*
+*Defined in [sparse-stream/sparse-write-stream.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-write-stream.ts#L25)*
 
 ___
 <a id="firstbytestokeep"></a>
@@ -118,7 +118,7 @@ ___
 
 **● firstBytesToKeep**: *`number`*
 
-*Defined in [sparse-stream/sparse-write-stream.ts:26](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-write-stream.ts#L26)*
+*Defined in [sparse-stream/sparse-write-stream.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-write-stream.ts#L26)*
 
 ___
 <a id="maxretries"></a>
@@ -127,7 +127,7 @@ ___
 
 **● maxRetries**: *`number`*
 
-*Defined in [sparse-stream/sparse-write-stream.ts:27](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-write-stream.ts#L27)*
+*Defined in [sparse-stream/sparse-write-stream.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-write-stream.ts#L27)*
 
 ___
 <a id="position"></a>
@@ -136,7 +136,7 @@ ___
 
 **● position**: *`number`*
 
-*Defined in [sparse-stream/sparse-write-stream.ts:20](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-write-stream.ts#L20)*
+*Defined in [sparse-stream/sparse-write-stream.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-write-stream.ts#L20)*
 
 ___
 <a id="writable"></a>
@@ -172,7 +172,7 @@ ___
 
 ▸ **__final**(): `Promise`<`void`>
 
-*Defined in [sparse-stream/sparse-write-stream.ts:101](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-write-stream.ts#L101)*
+*Defined in [sparse-stream/sparse-write-stream.ts:101](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-write-stream.ts#L101)*
 
 **Returns:** `Promise`<`void`>
 
@@ -183,7 +183,7 @@ ___
 
 ▸ **__write**(chunk: *[SparseStreamChunk](../interfaces/sparsestreamchunk.md)*): `Promise`<`void`>
 
-*Defined in [sparse-stream/sparse-write-stream.ts:65](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-write-stream.ts#L65)*
+*Defined in [sparse-stream/sparse-write-stream.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-write-stream.ts#L65)*
 
 **Parameters:**
 
@@ -200,7 +200,7 @@ ___
 
 ▸ **_final**(callback: *`function`*): `void`
 
-*Defined in [sparse-stream/sparse-write-stream.ts:115](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-write-stream.ts#L115)*
+*Defined in [sparse-stream/sparse-write-stream.ts:115](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-write-stream.ts#L115)*
 
 *__summary__*: Write buffered data before a stream ends, called by stream internals
 
@@ -221,7 +221,7 @@ ___
 
 *Overrides Writable._write*
 
-*Defined in [sparse-stream/sparse-write-stream.ts:93](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-write-stream.ts#L93)*
+*Defined in [sparse-stream/sparse-write-stream.ts:93](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-write-stream.ts#L93)*
 
 **Parameters:**
 
@@ -375,7 +375,7 @@ ___
 
 *Inherited from Writable.destroy*
 
-*Defined in [/home/alexis/dev/resin.io/etcher-sdk-2/typings/readable-stream/index.d.ts:18](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/typings/readable-stream/index.d.ts#L18)*
+*Defined in [/home/alexis/dev/resin.io/etcher-sdk-2/typings/readable-stream/index.d.ts:18](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/typings/readable-stream/index.d.ts#L18)*
 
 **Parameters:**
 
@@ -1392,7 +1392,7 @@ ___
 
 ▸ **writeChunk**(chunk: *[SparseStreamChunk](../interfaces/sparsestreamchunk.md)*, flushing?: *`boolean`*): `Promise`<`void`>
 
-*Defined in [sparse-stream/sparse-write-stream.ts:32](https://github.com/resin-io-modules/etcher-sdk/blob/e34af4f/lib/sparse-stream/sparse-write-stream.ts#L32)*
+*Defined in [sparse-stream/sparse-write-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/sparse-write-stream.ts#L32)*
 
 **Parameters:**
 
