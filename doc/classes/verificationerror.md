@@ -32,7 +32,7 @@
 
 **● code**: *`string`* = "EVALIDATION"
 
-*Defined in [errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/errors.ts#L24)*
+*Defined in [errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/errors.ts#L24)*
 
 ___
 <a id="message"></a>
@@ -43,7 +43,7 @@ ___
 
 *Inherited from Error.message*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:964*
+*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:964*
 
 ___
 <a id="name"></a>
@@ -54,7 +54,7 @@ ___
 
 *Inherited from Error.name*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:963*
+*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:963*
 
 ___
 <a id="stack"></a>
@@ -67,7 +67,7 @@ ___
 
 *Overrides Error.stack*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:965*
+*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:965*
 
 ___
 <a id="error"></a>
@@ -76,7 +76,7 @@ ___
 
 **● Error**: *`ErrorConstructor`*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:974*
+*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:974*
 
 ___
 

@@ -56,7 +56,7 @@
 
 **● blocks**: *[BlocksWithChecksum](blockswithchecksum.md)[]*
 
-*Defined in [sparse-stream/shared.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/shared.ts#L50)*
+*Defined in [sparse-stream/shared.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/sparse-stream/shared.ts#L50)*
 
 ___
 <a id="readable"></a>
@@ -67,7 +67,7 @@ ___
 
 *Inherited from ReadableStream.readable*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:386*
+*Defined in /node_modules/@types/node/index.d.ts:386*
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 *Inherited from EventEmitter.addListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:369*
+*Defined in /node_modules/@types/node/index.d.ts:369*
 
 **Parameters:**
 
@@ -101,7 +101,7 @@ ___
 
 *Inherited from EventEmitter.emit*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:377*
+*Defined in /node_modules/@types/node/index.d.ts:377*
 
 **Parameters:**
 
@@ -121,7 +121,7 @@ ___
 
 *Inherited from EventEmitter.eventNames*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:382*
+*Defined in /node_modules/@types/node/index.d.ts:382*
 
 **Returns:** (`string` \| `symbol`)[]
 
@@ -134,7 +134,7 @@ ___
 
 *Inherited from EventEmitter.getMaxListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:375*
+*Defined in /node_modules/@types/node/index.d.ts:375*
 
 **Returns:** `number`
 
@@ -147,7 +147,7 @@ ___
 
 *Inherited from ReadableStream.isPaused*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:391*
+*Defined in /node_modules/@types/node/index.d.ts:391*
 
 **Returns:** `boolean`
 
@@ -160,7 +160,7 @@ ___
 
 *Inherited from EventEmitter.listenerCount*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:378*
+*Defined in /node_modules/@types/node/index.d.ts:378*
 
 **Parameters:**
 
@@ -179,7 +179,7 @@ ___
 
 *Inherited from EventEmitter.listeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:376*
+*Defined in /node_modules/@types/node/index.d.ts:376*
 
 **Parameters:**
 
@@ -198,7 +198,7 @@ ___
 
 *Inherited from EventEmitter.on*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:370*
+*Defined in /node_modules/@types/node/index.d.ts:370*
 
 **Parameters:**
 
@@ -218,7 +218,7 @@ ___
 
 *Inherited from EventEmitter.once*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:371*
+*Defined in /node_modules/@types/node/index.d.ts:371*
 
 **Parameters:**
 
@@ -238,7 +238,7 @@ ___
 
 *Inherited from ReadableStream.pause*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:389*
+*Defined in /node_modules/@types/node/index.d.ts:389*
 
 **Returns:** `this`
 
@@ -251,7 +251,7 @@ ___
 
 *Inherited from ReadableStream.pipe*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:392*
+*Defined in /node_modules/@types/node/index.d.ts:392*
 
 **Type parameters:**
 
@@ -274,7 +274,7 @@ ___
 
 *Inherited from EventEmitter.prependListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:380*
+*Defined in /node_modules/@types/node/index.d.ts:380*
 
 **Parameters:**
 
@@ -294,7 +294,7 @@ ___
 
 *Inherited from EventEmitter.prependOnceListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:381*
+*Defined in /node_modules/@types/node/index.d.ts:381*
 
 **Parameters:**
 
@@ -312,7 +312,7 @@ ___
 
 ▸ **push**(chunk: *[SparseStreamChunk](sparsestreamchunk.md)*): `boolean`
 
-*Defined in [sparse-stream/shared.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/sparse-stream/shared.ts#L51)*
+*Defined in [sparse-stream/shared.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/sparse-stream/shared.ts#L51)*
 
 **Parameters:**
 
@@ -331,7 +331,7 @@ ___
 
 *Inherited from ReadableStream.read*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:387*
+*Defined in /node_modules/@types/node/index.d.ts:387*
 
 **Parameters:**
 
@@ -350,7 +350,7 @@ ___
 
 *Inherited from EventEmitter.removeAllListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:373*
+*Defined in /node_modules/@types/node/index.d.ts:373*
 
 **Parameters:**
 
@@ -369,7 +369,7 @@ ___
 
 *Inherited from EventEmitter.removeListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:372*
+*Defined in /node_modules/@types/node/index.d.ts:372*
 
 **Parameters:**
 
@@ -389,7 +389,7 @@ ___
 
 *Inherited from ReadableStream.resume*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:390*
+*Defined in /node_modules/@types/node/index.d.ts:390*
 
 **Returns:** `this`
 
@@ -402,7 +402,7 @@ ___
 
 *Inherited from ReadableStream.setEncoding*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:388*
+*Defined in /node_modules/@types/node/index.d.ts:388*
 
 **Parameters:**
 
@@ -421,7 +421,7 @@ ___
 
 *Inherited from EventEmitter.setMaxListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:374*
+*Defined in /node_modules/@types/node/index.d.ts:374*
 
 **Parameters:**
 
@@ -440,7 +440,7 @@ ___
 
 *Inherited from ReadableStream.unpipe*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:393*
+*Defined in /node_modules/@types/node/index.d.ts:393*
 
 **Type parameters:**
 
@@ -464,7 +464,7 @@ ___
 
 *Inherited from ReadableStream.unshift*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:394*
+*Defined in /node_modules/@types/node/index.d.ts:394*
 
 **Parameters:**
 
@@ -476,7 +476,7 @@ ___
 
 *Inherited from ReadableStream.unshift*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:395*
+*Defined in /node_modules/@types/node/index.d.ts:395*
 
 **Parameters:**
 
@@ -495,7 +495,7 @@ ___
 
 *Inherited from ReadableStream.wrap*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:396*
+*Defined in /node_modules/@types/node/index.d.ts:396*
 
 **Parameters:**
 

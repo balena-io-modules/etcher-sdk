@@ -50,7 +50,7 @@
 
 ⊕ **new SourceRandomAccessReader**(source: *[SourceDestination](sourcedestination.md)*): [SourceRandomAccessReader](sourcerandomaccessreader.md)
 
-*Defined in [source-destination/zip.ts:128](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/zip.ts#L128)*
+*Defined in [source-destination/zip.ts:128](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/zip.ts#L128)*
 
 **Parameters:**
 
@@ -70,7 +70,7 @@ ___
 
 **● source**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [source-destination/zip.ts:129](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/zip.ts#L129)*
+*Defined in [source-destination/zip.ts:129](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/zip.ts#L129)*
 
 ___
 <a id="defaultmaxlisteners"></a>
@@ -81,7 +81,7 @@ ___
 
 *Inherited from EventEmitter.defaultMaxListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:715*
+*Defined in /node_modules/@types/node/index.d.ts:715*
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 *Overrides RandomAccessReader._readStreamForRange*
 
-*Defined in [source-destination/zip.ts:133](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/source-destination/zip.ts#L133)*
+*Defined in [source-destination/zip.ts:133](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/zip.ts#L133)*
 
 **Parameters:**
 
@@ -117,7 +117,7 @@ ___
 
 *Overrides EventEmitter.addListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:717*
+*Defined in /node_modules/@types/node/index.d.ts:717*
 
 **Parameters:**
 
@@ -137,7 +137,7 @@ ___
 
 *Inherited from RandomAccessReader.close*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/yauzl/index.d.ts:15*
+*Defined in /node_modules/@types/yauzl/index.d.ts:15*
 
 **Parameters:**
 
@@ -156,7 +156,7 @@ ___
 
 *Inherited from RandomAccessReader.createReadStream*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/yauzl/index.d.ts:13*
+*Defined in /node_modules/@types/yauzl/index.d.ts:13*
 
 **Parameters:**
 
@@ -180,7 +180,7 @@ ___
 
 *Overrides EventEmitter.emit*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:727*
+*Defined in /node_modules/@types/node/index.d.ts:727*
 
 **Parameters:**
 
@@ -202,7 +202,7 @@ ___
 
 *Overrides EventEmitter.eventNames*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:728*
+*Defined in /node_modules/@types/node/index.d.ts:728*
 
 **Returns:** (`string` \| `symbol`)[]
 
@@ -217,7 +217,7 @@ ___
 
 *Overrides EventEmitter.getMaxListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:725*
+*Defined in /node_modules/@types/node/index.d.ts:725*
 
 **Returns:** `number`
 
@@ -232,7 +232,7 @@ ___
 
 *Overrides EventEmitter.listenerCount*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:729*
+*Defined in /node_modules/@types/node/index.d.ts:729*
 
 **Parameters:**
 
@@ -253,7 +253,7 @@ ___
 
 *Overrides EventEmitter.listeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:726*
+*Defined in /node_modules/@types/node/index.d.ts:726*
 
 **Parameters:**
 
@@ -274,7 +274,7 @@ ___
 
 *Overrides EventEmitter.on*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:718*
+*Defined in /node_modules/@types/node/index.d.ts:718*
 
 **Parameters:**
 
@@ -296,7 +296,7 @@ ___
 
 *Overrides EventEmitter.once*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:719*
+*Defined in /node_modules/@types/node/index.d.ts:719*
 
 **Parameters:**
 
@@ -318,7 +318,7 @@ ___
 
 *Overrides EventEmitter.prependListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:720*
+*Defined in /node_modules/@types/node/index.d.ts:720*
 
 **Parameters:**
 
@@ -340,7 +340,7 @@ ___
 
 *Overrides EventEmitter.prependOnceListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:721*
+*Defined in /node_modules/@types/node/index.d.ts:721*
 
 **Parameters:**
 
@@ -360,7 +360,7 @@ ___
 
 *Inherited from RandomAccessReader.read*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/yauzl/index.d.ts:14*
+*Defined in /node_modules/@types/yauzl/index.d.ts:14*
 
 **Parameters:**
 
@@ -385,7 +385,7 @@ ___
 
 *Overrides EventEmitter.removeAllListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:723*
+*Defined in /node_modules/@types/node/index.d.ts:723*
 
 **Parameters:**
 
@@ -406,7 +406,7 @@ ___
 
 *Overrides EventEmitter.removeListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:722*
+*Defined in /node_modules/@types/node/index.d.ts:722*
 
 **Parameters:**
 
@@ -428,7 +428,7 @@ ___
 
 *Overrides EventEmitter.setMaxListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:724*
+*Defined in /node_modules/@types/node/index.d.ts:724*
 
 **Parameters:**
 
@@ -447,7 +447,7 @@ ___
 
 *Inherited from EventEmitter.listenerCount*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:714*
+*Defined in /node_modules/@types/node/index.d.ts:714*
 
 **Parameters:**
 

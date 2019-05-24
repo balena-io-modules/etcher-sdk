@@ -50,7 +50,7 @@
 
 **● drives**: *`Map`<`string`, [DriverlessDevice](driverlessdevice.md)>* =  new Map()
 
-*Defined in [scanner/adapters/driverless.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/driverless.ts#L30)*
+*Defined in [scanner/adapters/driverless.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/adapters/driverless.ts#L30)*
 
 ___
 <a id="listdriverlessdevices"></a>
@@ -59,7 +59,7 @@ ___
 
 **● listDriverlessDevices**: *`any`*
 
-*Defined in [scanner/adapters/driverless.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/driverless.ts#L33)*
+*Defined in [scanner/adapters/driverless.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/adapters/driverless.ts#L33)*
 
 ___
 <a id="ready"></a>
@@ -68,7 +68,7 @@ ___
 
 **● ready**: *`boolean`* = false
 
-*Defined in [scanner/adapters/driverless.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/driverless.ts#L32)*
+*Defined in [scanner/adapters/driverless.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/adapters/driverless.ts#L32)*
 
 ___
 <a id="running"></a>
@@ -77,7 +77,7 @@ ___
 
 **● running**: *`boolean`* = false
 
-*Defined in [scanner/adapters/driverless.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/driverless.ts#L31)*
+*Defined in [scanner/adapters/driverless.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/adapters/driverless.ts#L31)*
 
 ___
 <a id="defaultmaxlisteners"></a>
@@ -88,7 +88,7 @@ ___
 
 *Inherited from EventEmitter.defaultMaxListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:715*
+*Defined in /node_modules/@types/node/index.d.ts:715*
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 *Overrides EventEmitter.addListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:717*
+*Defined in /node_modules/@types/node/index.d.ts:717*
 
 **Parameters:**
 
@@ -126,7 +126,7 @@ ___
 
 *Overrides EventEmitter.emit*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:727*
+*Defined in /node_modules/@types/node/index.d.ts:727*
 
 **Parameters:**
 
@@ -148,7 +148,7 @@ ___
 
 *Overrides EventEmitter.eventNames*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:728*
+*Defined in /node_modules/@types/node/index.d.ts:728*
 
 **Returns:** (`string` \| `symbol`)[]
 
@@ -163,7 +163,7 @@ ___
 
 *Overrides EventEmitter.getMaxListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:725*
+*Defined in /node_modules/@types/node/index.d.ts:725*
 
 **Returns:** `number`
 
@@ -174,7 +174,7 @@ ___
 
 ▸ **listDrives**(): `Map`<`string`, `WinUsbDriverlessDevice`>
 
-*Defined in [scanner/adapters/driverless.ts:88](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/driverless.ts#L88)*
+*Defined in [scanner/adapters/driverless.ts:88](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/adapters/driverless.ts#L88)*
 
 **Returns:** `Map`<`string`, `WinUsbDriverlessDevice`>
 
@@ -189,7 +189,7 @@ ___
 
 *Overrides EventEmitter.listenerCount*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:729*
+*Defined in /node_modules/@types/node/index.d.ts:729*
 
 **Parameters:**
 
@@ -210,7 +210,7 @@ ___
 
 *Overrides EventEmitter.listeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:726*
+*Defined in /node_modules/@types/node/index.d.ts:726*
 
 **Parameters:**
 
@@ -231,7 +231,7 @@ ___
 
 *Overrides EventEmitter.on*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:718*
+*Defined in /node_modules/@types/node/index.d.ts:718*
 
 **Parameters:**
 
@@ -253,7 +253,7 @@ ___
 
 *Overrides EventEmitter.once*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:719*
+*Defined in /node_modules/@types/node/index.d.ts:719*
 
 **Parameters:**
 
@@ -275,7 +275,7 @@ ___
 
 *Overrides EventEmitter.prependListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:720*
+*Defined in /node_modules/@types/node/index.d.ts:720*
 
 **Parameters:**
 
@@ -297,7 +297,7 @@ ___
 
 *Overrides EventEmitter.prependOnceListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:721*
+*Defined in /node_modules/@types/node/index.d.ts:721*
 
 **Parameters:**
 
@@ -319,7 +319,7 @@ ___
 
 *Overrides EventEmitter.removeAllListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:723*
+*Defined in /node_modules/@types/node/index.d.ts:723*
 
 **Parameters:**
 
@@ -340,7 +340,7 @@ ___
 
 *Overrides EventEmitter.removeListener*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:722*
+*Defined in /node_modules/@types/node/index.d.ts:722*
 
 **Parameters:**
 
@@ -358,7 +358,7 @@ ___
 
 ▸ **scan**(): `void`
 
-*Defined in [scanner/adapters/driverless.ts:63](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/driverless.ts#L63)*
+*Defined in [scanner/adapters/driverless.ts:63](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/adapters/driverless.ts#L63)*
 
 **Returns:** `void`
 
@@ -369,7 +369,7 @@ ___
 
 ▸ **scanLoop**(): `Promise`<`void`>
 
-*Defined in [scanner/adapters/driverless.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/driverless.ts#L46)*
+*Defined in [scanner/adapters/driverless.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/adapters/driverless.ts#L46)*
 
 **Returns:** `Promise`<`void`>
 
@@ -384,7 +384,7 @@ ___
 
 *Overrides EventEmitter.setMaxListeners*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:724*
+*Defined in /node_modules/@types/node/index.d.ts:724*
 
 **Parameters:**
 
@@ -403,7 +403,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[start](adapter.md#start)*
 
-*Defined in [scanner/adapters/driverless.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/driverless.ts#L35)*
+*Defined in [scanner/adapters/driverless.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/adapters/driverless.ts#L35)*
 
 **Returns:** `void`
 
@@ -416,7 +416,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[stop](adapter.md#stop)*
 
-*Defined in [scanner/adapters/driverless.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/1daa03e/lib/scanner/adapters/driverless.ts#L40)*
+*Defined in [scanner/adapters/driverless.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/adapters/driverless.ts#L40)*
 
 **Returns:** `void`
 
@@ -429,7 +429,7 @@ ___
 
 *Inherited from EventEmitter.listenerCount*
 
-*Defined in /home/alexis/dev/resin.io/etcher-sdk-2/node_modules/@types/node/index.d.ts:714*
+*Defined in /node_modules/@types/node/index.d.ts:714*
 
 **Parameters:**
 
