@@ -70,7 +70,7 @@
     "udif": "^0.15.7",
     "unbzip2-stream": "balena-io-modules/unbzip2-stream#942fc218013c14adab01cf693b0500cf6ac83193",
     "unzip-stream": "^0.3.0",
-    "xxhash": "balena-io-modules/node-xxhash#cc9d14d8409cd81e77ca1cfd6bcf58cccb68435e",
+    "xxhash": "^0.3.0",
     "yauzl": "^2.9.2"
   },
   "devDependencies": {
