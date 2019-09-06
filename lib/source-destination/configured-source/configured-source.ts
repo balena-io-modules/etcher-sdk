@@ -227,9 +227,7 @@ export class ConfiguredSource extends SourceSource {
 		if (metadata.size !== undefined) {
 			const percentage = Math.round((discardedBytes / metadata.size) * 100);
 			debug(
-				`discarded ${
-					discards.length
-				} chunks, ${discardedBytes} bytes, ${percentage}% of the image`,
+				`discarded ${discards.length} chunks, ${discardedBytes} bytes, ${percentage}% of the image`,
 			);
 		}
 	}

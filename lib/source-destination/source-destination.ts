@@ -168,9 +168,7 @@ export class StreamVerifier extends Verifier {
 				this.emit(
 					'error',
 					new ChecksumVerificationError(
-						`Source and destination checksums do not match: ${
-							this.checksum
-						} !== ${streamChecksum}`,
+						`Source and destination checksums do not match: ${this.checksum} !== ${streamChecksum}`,
 						streamChecksum,
 						this.checksum,
 					),
