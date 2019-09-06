@@ -42,9 +42,7 @@ function blocksVerificationErrorMessage(
 	const lastBlock =
 		blocksWithChecksum.blocks[blocksWithChecksum.blocks.length - 1];
 	const end = lastBlock.offset + lastBlock.length - 1;
-	return `Checksum does not match for range [${start}, ${end}]: "${
-		blocksWithChecksum.checksum
-	}" != "${checksum}"`;
+	return `Checksum does not match for range [${start}, ${end}]: "${blocksWithChecksum.checksum}" != "${checksum}"`;
 }
 
 export class BlocksVerificationError extends VerificationError {
