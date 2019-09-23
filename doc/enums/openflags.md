@@ -20,7 +20,7 @@
 
 **Read**:  =  fs.constants.O_RDONLY
 
-*Defined in [source-destination/file.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/file.ts#L47)*
+*Defined in [source-destination/file.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/file.ts#L47)*
 
 ___
 <a id="readwrite"></a>
@@ -29,7 +29,7 @@ ___
 
 **ReadWrite**:  =  fs.constants.O_RDWR | fs.constants.O_CREAT
 
-*Defined in [source-destination/file.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/file.ts#L48)*
+*Defined in [source-destination/file.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/file.ts#L48)*
 
 ___
 <a id="writedevice"></a>
@@ -40,7 +40,7 @@ ___
 		fs.constants.O_NONBLOCK |
 		fs.constants.O_SYNC
 
-*Defined in [source-destination/file.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/source-destination/file.ts#L49)*
+*Defined in [source-destination/file.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/file.ts#L49)*
 
 ___
 
