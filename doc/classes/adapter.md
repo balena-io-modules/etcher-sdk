@@ -331,7 +331,7 @@ ___
 
 ▸ **start**(): `void`
 
-*Defined in [scanner/adapters/adapter.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/adapters/adapter.ts#L34)*
+*Defined in [scanner/adapters/adapter.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/scanner/adapters/adapter.ts#L34)*
 
 **Returns:** `void`
 
@@ -342,7 +342,7 @@ ___
 
 ▸ **stop**(): `void`
 
-*Defined in [scanner/adapters/adapter.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/scanner/adapters/adapter.ts#L35)*
+*Defined in [scanner/adapters/adapter.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/scanner/adapters/adapter.ts#L35)*
 
 **Returns:** `void`
 

@@ -33,7 +33,7 @@
 
 ⊕ **new ChecksumVerificationError**(message: *`string`*, checksum: *`string`*, expectedChecksum: *`string`*): [ChecksumVerificationError](checksumverificationerror.md)
 
-*Defined in [errors.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/errors.ts#L27)*
+*Defined in [errors.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/errors.ts#L27)*
 
 **Parameters:**
 
@@ -55,7 +55,7 @@ ___
 
 **● checksum**: *`string`*
 
-*Defined in [errors.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/errors.ts#L30)*
+*Defined in [errors.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/errors.ts#L30)*
 
 ___
 <a id="code"></a>
@@ -66,7 +66,7 @@ ___
 
 *Inherited from [VerificationError](verificationerror.md).[code](verificationerror.md#code)*
 
-*Defined in [errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/errors.ts#L24)*
+*Defined in [errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/errors.ts#L24)*
 
 ___
 <a id="expectedchecksum"></a>
@@ -75,7 +75,7 @@ ___
 
 **● expectedChecksum**: *`string`*
 
-*Defined in [errors.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/a5ff273/lib/errors.ts#L31)*
+*Defined in [errors.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/errors.ts#L31)*
 
 ___
 <a id="message"></a>
