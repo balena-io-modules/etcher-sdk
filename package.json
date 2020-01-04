@@ -48,6 +48,7 @@
     "winusb-driver-generator": "^1.2.3"
   },
   "dependencies": {
+    "@balena/node-beaglebone-usbboot": "^1.0.3",
     "@balena/udif": "^1.1.1",
     "@ronomon/direct-io": "^3.0.1",
     "aws4-axios": "^2.0.1",
