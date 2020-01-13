@@ -23,7 +23,7 @@
 
 **● buffer**: *`Buffer`*
 
-*Defined in [sparse-stream/shared.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/sparse-stream/shared.ts#L45)*
+*Defined in [sparse-stream/shared.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/sparse-stream/shared.ts#L45)*
 
 ___
 <a id="position"></a>
@@ -32,7 +32,7 @@ ___
 
 **● position**: *`number`*
 
-*Defined in [sparse-stream/shared.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/sparse-stream/shared.ts#L46)*
+*Defined in [sparse-stream/shared.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/sparse-stream/shared.ts#L46)*
 
 ___
 

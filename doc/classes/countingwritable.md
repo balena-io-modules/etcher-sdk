@@ -59,7 +59,7 @@
 
 *Inherited from Writable.__constructor*
 
-*Defined in /node_modules/@types/node/index.d.ts:3800*
+*Defined in /node_modules/@types/node/base.d.ts:3770*
 
 **Parameters:**
 
@@ -79,7 +79,7 @@ ___
 
 **● bytesWritten**: *`number`* = 0
 
-*Defined in [source-destination/progress.ts:92](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/progress.ts#L92)*
+*Defined in [source-destination/progress.ts:92](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/progress.ts#L92)*
 
 ___
 <a id="position"></a>
@@ -88,7 +88,7 @@ ___
 
 **● position**: *`number` \| `undefined`*
 
-*Defined in [source-destination/progress.ts:93](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/progress.ts#L93)*
+*Defined in [source-destination/progress.ts:93](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/progress.ts#L93)*
 
 ___
 <a id="writable"></a>
@@ -99,7 +99,7 @@ ___
 
 *Inherited from Writable.writable*
 
-*Defined in /node_modules/@types/node/index.d.ts:3800*
+*Defined in /node_modules/@types/node/base.d.ts:3770*
 
 ___
 <a id="defaultmaxlisteners"></a>
@@ -110,7 +110,7 @@ ___
 
 *Inherited from EventEmitter.defaultMaxListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:715*
+*Defined in /node_modules/@types/node/base.d.ts:681*
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 *Overrides Writable._write*
 
-*Defined in [source-destination/progress.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/progress.ts#L95)*
+*Defined in [source-destination/progress.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/progress.ts#L95)*
 
 **Parameters:**
 
@@ -159,7 +159,7 @@ ___
 
 *Overrides EventEmitter.addListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3820*
+*Defined in /node_modules/@types/node/base.d.ts:3790*
 
 Event emitter The defined events on documents including:
 
@@ -183,7 +183,7 @@ Event emitter The defined events on documents including:
 
 *Overrides EventEmitter.addListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3821*
+*Defined in /node_modules/@types/node/base.d.ts:3791*
 
 **Parameters:**
 
@@ -198,7 +198,7 @@ Event emitter The defined events on documents including:
 
 *Overrides EventEmitter.addListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3822*
+*Defined in /node_modules/@types/node/base.d.ts:3792*
 
 **Parameters:**
 
@@ -213,7 +213,7 @@ Event emitter The defined events on documents including:
 
 *Overrides EventEmitter.addListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3823*
+*Defined in /node_modules/@types/node/base.d.ts:3793*
 
 **Parameters:**
 
@@ -228,7 +228,7 @@ Event emitter The defined events on documents including:
 
 *Overrides EventEmitter.addListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3824*
+*Defined in /node_modules/@types/node/base.d.ts:3794*
 
 **Parameters:**
 
@@ -243,7 +243,7 @@ Event emitter The defined events on documents including:
 
 *Overrides EventEmitter.addListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3825*
+*Defined in /node_modules/@types/node/base.d.ts:3795*
 
 **Parameters:**
 
@@ -258,7 +258,7 @@ Event emitter The defined events on documents including:
 
 *Overrides EventEmitter.addListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3826*
+*Defined in /node_modules/@types/node/base.d.ts:3796*
 
 **Parameters:**
 
@@ -292,7 +292,7 @@ ___
 
 *Overrides EventEmitter.emit*
 
-*Defined in /node_modules/@types/node/index.d.ts:3828*
+*Defined in /node_modules/@types/node/base.d.ts:3798*
 
 **Parameters:**
 
@@ -307,7 +307,7 @@ ___
 
 *Overrides EventEmitter.emit*
 
-*Defined in /node_modules/@types/node/index.d.ts:3829*
+*Defined in /node_modules/@types/node/base.d.ts:3799*
 
 **Parameters:**
 
@@ -321,7 +321,7 @@ ___
 
 *Overrides EventEmitter.emit*
 
-*Defined in /node_modules/@types/node/index.d.ts:3830*
+*Defined in /node_modules/@types/node/base.d.ts:3800*
 
 **Parameters:**
 
@@ -336,7 +336,7 @@ ___
 
 *Overrides EventEmitter.emit*
 
-*Defined in /node_modules/@types/node/index.d.ts:3831*
+*Defined in /node_modules/@types/node/base.d.ts:3801*
 
 **Parameters:**
 
@@ -351,7 +351,7 @@ ___
 
 *Overrides EventEmitter.emit*
 
-*Defined in /node_modules/@types/node/index.d.ts:3832*
+*Defined in /node_modules/@types/node/base.d.ts:3802*
 
 **Parameters:**
 
@@ -365,7 +365,7 @@ ___
 
 *Overrides EventEmitter.emit*
 
-*Defined in /node_modules/@types/node/index.d.ts:3833*
+*Defined in /node_modules/@types/node/base.d.ts:3803*
 
 **Parameters:**
 
@@ -380,7 +380,7 @@ ___
 
 *Overrides EventEmitter.emit*
 
-*Defined in /node_modules/@types/node/index.d.ts:3834*
+*Defined in /node_modules/@types/node/base.d.ts:3804*
 
 **Parameters:**
 
@@ -404,7 +404,7 @@ ___
 
 *Inherited from Writable.end*
 
-*Defined in /node_modules/@types/node/index.d.ts:3806*
+*Defined in /node_modules/@types/node/base.d.ts:3776*
 
 **Parameters:**
 
@@ -416,7 +416,7 @@ ___
 
 *Inherited from Writable.end*
 
-*Defined in /node_modules/@types/node/index.d.ts:3807*
+*Defined in /node_modules/@types/node/base.d.ts:3777*
 
 **Parameters:**
 
@@ -429,7 +429,7 @@ ___
 
 *Inherited from Writable.end*
 
-*Defined in /node_modules/@types/node/index.d.ts:3808*
+*Defined in /node_modules/@types/node/base.d.ts:3778*
 
 **Parameters:**
 
@@ -452,7 +452,7 @@ ___
 
 *Overrides EventEmitter.eventNames*
 
-*Defined in /node_modules/@types/node/index.d.ts:728*
+*Defined in /node_modules/@types/node/base.d.ts:694*
 
 **Returns:** (`string` \| `symbol`)[]
 
@@ -467,7 +467,7 @@ ___
 
 *Overrides EventEmitter.getMaxListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:725*
+*Defined in /node_modules/@types/node/base.d.ts:691*
 
 **Returns:** `number`
 
@@ -482,7 +482,7 @@ ___
 
 *Overrides EventEmitter.listenerCount*
 
-*Defined in /node_modules/@types/node/index.d.ts:729*
+*Defined in /node_modules/@types/node/base.d.ts:695*
 
 **Parameters:**
 
@@ -503,7 +503,7 @@ ___
 
 *Overrides EventEmitter.listeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:726*
+*Defined in /node_modules/@types/node/base.d.ts:692*
 
 **Parameters:**
 
@@ -536,7 +536,7 @@ ___
 
 *Overrides EventEmitter.on*
 
-*Defined in /node_modules/@types/node/index.d.ts:3836*
+*Defined in /node_modules/@types/node/base.d.ts:3806*
 
 **Parameters:**
 
@@ -551,7 +551,7 @@ ___
 
 *Overrides EventEmitter.on*
 
-*Defined in /node_modules/@types/node/index.d.ts:3837*
+*Defined in /node_modules/@types/node/base.d.ts:3807*
 
 **Parameters:**
 
@@ -566,7 +566,7 @@ ___
 
 *Overrides EventEmitter.on*
 
-*Defined in /node_modules/@types/node/index.d.ts:3838*
+*Defined in /node_modules/@types/node/base.d.ts:3808*
 
 **Parameters:**
 
@@ -581,7 +581,7 @@ ___
 
 *Overrides EventEmitter.on*
 
-*Defined in /node_modules/@types/node/index.d.ts:3839*
+*Defined in /node_modules/@types/node/base.d.ts:3809*
 
 **Parameters:**
 
@@ -596,7 +596,7 @@ ___
 
 *Overrides EventEmitter.on*
 
-*Defined in /node_modules/@types/node/index.d.ts:3840*
+*Defined in /node_modules/@types/node/base.d.ts:3810*
 
 **Parameters:**
 
@@ -611,7 +611,7 @@ ___
 
 *Overrides EventEmitter.on*
 
-*Defined in /node_modules/@types/node/index.d.ts:3841*
+*Defined in /node_modules/@types/node/base.d.ts:3811*
 
 **Parameters:**
 
@@ -626,7 +626,7 @@ ___
 
 *Overrides EventEmitter.on*
 
-*Defined in /node_modules/@types/node/index.d.ts:3842*
+*Defined in /node_modules/@types/node/base.d.ts:3812*
 
 **Parameters:**
 
@@ -660,7 +660,7 @@ ___
 
 *Overrides EventEmitter.once*
 
-*Defined in /node_modules/@types/node/index.d.ts:3844*
+*Defined in /node_modules/@types/node/base.d.ts:3814*
 
 **Parameters:**
 
@@ -675,7 +675,7 @@ ___
 
 *Overrides EventEmitter.once*
 
-*Defined in /node_modules/@types/node/index.d.ts:3845*
+*Defined in /node_modules/@types/node/base.d.ts:3815*
 
 **Parameters:**
 
@@ -690,7 +690,7 @@ ___
 
 *Overrides EventEmitter.once*
 
-*Defined in /node_modules/@types/node/index.d.ts:3846*
+*Defined in /node_modules/@types/node/base.d.ts:3816*
 
 **Parameters:**
 
@@ -705,7 +705,7 @@ ___
 
 *Overrides EventEmitter.once*
 
-*Defined in /node_modules/@types/node/index.d.ts:3847*
+*Defined in /node_modules/@types/node/base.d.ts:3817*
 
 **Parameters:**
 
@@ -720,7 +720,7 @@ ___
 
 *Overrides EventEmitter.once*
 
-*Defined in /node_modules/@types/node/index.d.ts:3848*
+*Defined in /node_modules/@types/node/base.d.ts:3818*
 
 **Parameters:**
 
@@ -735,7 +735,7 @@ ___
 
 *Overrides EventEmitter.once*
 
-*Defined in /node_modules/@types/node/index.d.ts:3849*
+*Defined in /node_modules/@types/node/base.d.ts:3819*
 
 **Parameters:**
 
@@ -750,7 +750,7 @@ ___
 
 *Overrides EventEmitter.once*
 
-*Defined in /node_modules/@types/node/index.d.ts:3850*
+*Defined in /node_modules/@types/node/base.d.ts:3820*
 
 **Parameters:**
 
@@ -770,7 +770,7 @@ ___
 
 *Inherited from internal.pipe*
 
-*Defined in /node_modules/@types/node/index.d.ts:3703*
+*Defined in /node_modules/@types/node/base.d.ts:3673*
 
 **Type parameters:**
 
@@ -807,7 +807,7 @@ ___
 
 *Overrides EventEmitter.prependListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3852*
+*Defined in /node_modules/@types/node/base.d.ts:3822*
 
 **Parameters:**
 
@@ -822,7 +822,7 @@ ___
 
 *Overrides EventEmitter.prependListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3853*
+*Defined in /node_modules/@types/node/base.d.ts:3823*
 
 **Parameters:**
 
@@ -837,7 +837,7 @@ ___
 
 *Overrides EventEmitter.prependListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3854*
+*Defined in /node_modules/@types/node/base.d.ts:3824*
 
 **Parameters:**
 
@@ -852,7 +852,7 @@ ___
 
 *Overrides EventEmitter.prependListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3855*
+*Defined in /node_modules/@types/node/base.d.ts:3825*
 
 **Parameters:**
 
@@ -867,7 +867,7 @@ ___
 
 *Overrides EventEmitter.prependListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3856*
+*Defined in /node_modules/@types/node/base.d.ts:3826*
 
 **Parameters:**
 
@@ -882,7 +882,7 @@ ___
 
 *Overrides EventEmitter.prependListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3857*
+*Defined in /node_modules/@types/node/base.d.ts:3827*
 
 **Parameters:**
 
@@ -897,7 +897,7 @@ ___
 
 *Overrides EventEmitter.prependListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3858*
+*Defined in /node_modules/@types/node/base.d.ts:3828*
 
 **Parameters:**
 
@@ -931,7 +931,7 @@ ___
 
 *Overrides EventEmitter.prependOnceListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3860*
+*Defined in /node_modules/@types/node/base.d.ts:3830*
 
 **Parameters:**
 
@@ -946,7 +946,7 @@ ___
 
 *Overrides EventEmitter.prependOnceListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3861*
+*Defined in /node_modules/@types/node/base.d.ts:3831*
 
 **Parameters:**
 
@@ -961,7 +961,7 @@ ___
 
 *Overrides EventEmitter.prependOnceListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3862*
+*Defined in /node_modules/@types/node/base.d.ts:3832*
 
 **Parameters:**
 
@@ -976,7 +976,7 @@ ___
 
 *Overrides EventEmitter.prependOnceListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3863*
+*Defined in /node_modules/@types/node/base.d.ts:3833*
 
 **Parameters:**
 
@@ -991,7 +991,7 @@ ___
 
 *Overrides EventEmitter.prependOnceListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3864*
+*Defined in /node_modules/@types/node/base.d.ts:3834*
 
 **Parameters:**
 
@@ -1006,7 +1006,7 @@ ___
 
 *Overrides EventEmitter.prependOnceListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3865*
+*Defined in /node_modules/@types/node/base.d.ts:3835*
 
 **Parameters:**
 
@@ -1021,7 +1021,7 @@ ___
 
 *Overrides EventEmitter.prependOnceListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3866*
+*Defined in /node_modules/@types/node/base.d.ts:3836*
 
 **Parameters:**
 
@@ -1043,7 +1043,7 @@ ___
 
 *Overrides EventEmitter.removeAllListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:723*
+*Defined in /node_modules/@types/node/base.d.ts:689*
 
 **Parameters:**
 
@@ -1076,7 +1076,7 @@ ___
 
 *Overrides EventEmitter.removeListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3868*
+*Defined in /node_modules/@types/node/base.d.ts:3838*
 
 **Parameters:**
 
@@ -1091,7 +1091,7 @@ ___
 
 *Overrides EventEmitter.removeListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3869*
+*Defined in /node_modules/@types/node/base.d.ts:3839*
 
 **Parameters:**
 
@@ -1106,7 +1106,7 @@ ___
 
 *Overrides EventEmitter.removeListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3870*
+*Defined in /node_modules/@types/node/base.d.ts:3840*
 
 **Parameters:**
 
@@ -1121,7 +1121,7 @@ ___
 
 *Overrides EventEmitter.removeListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3871*
+*Defined in /node_modules/@types/node/base.d.ts:3841*
 
 **Parameters:**
 
@@ -1136,7 +1136,7 @@ ___
 
 *Overrides EventEmitter.removeListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3872*
+*Defined in /node_modules/@types/node/base.d.ts:3842*
 
 **Parameters:**
 
@@ -1151,7 +1151,7 @@ ___
 
 *Overrides EventEmitter.removeListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3873*
+*Defined in /node_modules/@types/node/base.d.ts:3843*
 
 **Parameters:**
 
@@ -1166,7 +1166,7 @@ ___
 
 *Overrides EventEmitter.removeListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:3874*
+*Defined in /node_modules/@types/node/base.d.ts:3844*
 
 **Parameters:**
 
@@ -1186,7 +1186,7 @@ ___
 
 *Inherited from Writable.setDefaultEncoding*
 
-*Defined in /node_modules/@types/node/index.d.ts:3805*
+*Defined in /node_modules/@types/node/base.d.ts:3775*
 
 **Parameters:**
 
@@ -1207,7 +1207,7 @@ ___
 
 *Overrides EventEmitter.setMaxListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:724*
+*Defined in /node_modules/@types/node/base.d.ts:690*
 
 **Parameters:**
 
@@ -1228,7 +1228,7 @@ ___
 
 *Inherited from Writable.write*
 
-*Defined in /node_modules/@types/node/index.d.ts:3803*
+*Defined in /node_modules/@types/node/base.d.ts:3773*
 
 **Parameters:**
 
@@ -1241,7 +1241,7 @@ ___
 
 *Inherited from Writable.write*
 
-*Defined in /node_modules/@types/node/index.d.ts:3804*
+*Defined in /node_modules/@types/node/base.d.ts:3774*
 
 **Parameters:**
 
@@ -1262,7 +1262,7 @@ ___
 
 *Inherited from EventEmitter.listenerCount*
 
-*Defined in /node_modules/@types/node/index.d.ts:714*
+*Defined in /node_modules/@types/node/base.d.ts:680*
 
 **Parameters:**
 

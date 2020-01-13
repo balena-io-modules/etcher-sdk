@@ -54,7 +54,7 @@
 
 ⊕ **new BlockDeviceAdapter**(includeSystemDrives?: *`function`*): [BlockDeviceAdapter](blockdeviceadapter.md)
 
-*Defined in [scanner/adapters/block-device.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/scanner/adapters/block-device.ts#L60)*
+*Defined in [scanner/adapters/block-device.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/scanner/adapters/block-device.ts#L60)*
 
 **Parameters:**
 
@@ -74,7 +74,7 @@ ___
 
 **● drives**: *`Map`<`string`, [BlockDevice](blockdevice.md)>* =  new Map()
 
-*Defined in [scanner/adapters/block-device.ts:58](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/scanner/adapters/block-device.ts#L58)*
+*Defined in [scanner/adapters/block-device.ts:58](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/scanner/adapters/block-device.ts#L58)*
 
 ___
 <a id="includesystemdrives"></a>
@@ -83,7 +83,7 @@ ___
 
 **● includeSystemDrives**: *`function`*
 
-*Defined in [scanner/adapters/block-device.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/scanner/adapters/block-device.ts#L62)*
+*Defined in [scanner/adapters/block-device.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/scanner/adapters/block-device.ts#L62)*
 
 #### Type declaration
 ▸(): `boolean`
@@ -97,7 +97,7 @@ ___
 
 **● ready**: *`boolean`* = false
 
-*Defined in [scanner/adapters/block-device.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/scanner/adapters/block-device.ts#L60)*
+*Defined in [scanner/adapters/block-device.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/scanner/adapters/block-device.ts#L60)*
 
 ___
 <a id="running"></a>
@@ -106,7 +106,7 @@ ___
 
 **● running**: *`boolean`* = false
 
-*Defined in [scanner/adapters/block-device.ts:59](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/scanner/adapters/block-device.ts#L59)*
+*Defined in [scanner/adapters/block-device.ts:59](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/scanner/adapters/block-device.ts#L59)*
 
 ___
 <a id="defaultmaxlisteners"></a>
@@ -117,7 +117,7 @@ ___
 
 *Inherited from EventEmitter.defaultMaxListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:715*
+*Defined in /node_modules/@types/node/base.d.ts:681*
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 *Overrides EventEmitter.addListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:717*
+*Defined in /node_modules/@types/node/base.d.ts:683*
 
 **Parameters:**
 
@@ -155,7 +155,7 @@ ___
 
 *Overrides EventEmitter.emit*
 
-*Defined in /node_modules/@types/node/index.d.ts:727*
+*Defined in /node_modules/@types/node/base.d.ts:693*
 
 **Parameters:**
 
@@ -177,7 +177,7 @@ ___
 
 *Overrides EventEmitter.eventNames*
 
-*Defined in /node_modules/@types/node/index.d.ts:728*
+*Defined in /node_modules/@types/node/base.d.ts:694*
 
 **Returns:** (`string` \| `symbol`)[]
 
@@ -192,7 +192,7 @@ ___
 
 *Overrides EventEmitter.getMaxListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:725*
+*Defined in /node_modules/@types/node/base.d.ts:691*
 
 **Returns:** `number`
 
@@ -203,7 +203,7 @@ ___
 
 ▸ **listDrives**(): `Promise`<`Map`<`string`, [DrivelistDrive](../interfaces/drivelistdrive.md)>>
 
-*Defined in [scanner/adapters/block-device.ts:107](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/scanner/adapters/block-device.ts#L107)*
+*Defined in [scanner/adapters/block-device.ts:107](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/scanner/adapters/block-device.ts#L107)*
 
 **Returns:** `Promise`<`Map`<`string`, [DrivelistDrive](../interfaces/drivelistdrive.md)>>
 
@@ -218,7 +218,7 @@ ___
 
 *Overrides EventEmitter.listenerCount*
 
-*Defined in /node_modules/@types/node/index.d.ts:729*
+*Defined in /node_modules/@types/node/base.d.ts:695*
 
 **Parameters:**
 
@@ -239,7 +239,7 @@ ___
 
 *Overrides EventEmitter.listeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:726*
+*Defined in /node_modules/@types/node/base.d.ts:692*
 
 **Parameters:**
 
@@ -260,7 +260,7 @@ ___
 
 *Overrides EventEmitter.on*
 
-*Defined in /node_modules/@types/node/index.d.ts:718*
+*Defined in /node_modules/@types/node/base.d.ts:684*
 
 **Parameters:**
 
@@ -282,7 +282,7 @@ ___
 
 *Overrides EventEmitter.once*
 
-*Defined in /node_modules/@types/node/index.d.ts:719*
+*Defined in /node_modules/@types/node/base.d.ts:685*
 
 **Parameters:**
 
@@ -304,7 +304,7 @@ ___
 
 *Overrides EventEmitter.prependListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:720*
+*Defined in /node_modules/@types/node/base.d.ts:686*
 
 **Parameters:**
 
@@ -326,7 +326,7 @@ ___
 
 *Overrides EventEmitter.prependOnceListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:721*
+*Defined in /node_modules/@types/node/base.d.ts:687*
 
 **Parameters:**
 
@@ -348,7 +348,7 @@ ___
 
 *Overrides EventEmitter.removeAllListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:723*
+*Defined in /node_modules/@types/node/base.d.ts:689*
 
 **Parameters:**
 
@@ -369,7 +369,7 @@ ___
 
 *Overrides EventEmitter.removeListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:722*
+*Defined in /node_modules/@types/node/base.d.ts:688*
 
 **Parameters:**
 
@@ -387,7 +387,7 @@ ___
 
 ▸ **scan**(): `Promise`<`void`>
 
-*Defined in [scanner/adapters/block-device.ts:88](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/scanner/adapters/block-device.ts#L88)*
+*Defined in [scanner/adapters/block-device.ts:88](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/scanner/adapters/block-device.ts#L88)*
 
 **Returns:** `Promise`<`void`>
 
@@ -398,7 +398,7 @@ ___
 
 ▸ **scanLoop**(): `Promise`<`void`>
 
-*Defined in [scanner/adapters/block-device.ts:77](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/scanner/adapters/block-device.ts#L77)*
+*Defined in [scanner/adapters/block-device.ts:77](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/scanner/adapters/block-device.ts#L77)*
 
 **Returns:** `Promise`<`void`>
 
@@ -413,7 +413,7 @@ ___
 
 *Overrides EventEmitter.setMaxListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:724*
+*Defined in /node_modules/@types/node/base.d.ts:690*
 
 **Parameters:**
 
@@ -432,7 +432,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[start](adapter.md#start)*
 
-*Defined in [scanner/adapters/block-device.ts:66](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/scanner/adapters/block-device.ts#L66)*
+*Defined in [scanner/adapters/block-device.ts:66](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/scanner/adapters/block-device.ts#L66)*
 
 **Returns:** `void`
 
@@ -445,7 +445,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[stop](adapter.md#stop)*
 
-*Defined in [scanner/adapters/block-device.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/scanner/adapters/block-device.ts#L71)*
+*Defined in [scanner/adapters/block-device.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/scanner/adapters/block-device.ts#L71)*
 
 **Returns:** `void`
 
@@ -458,7 +458,7 @@ ___
 
 *Inherited from EventEmitter.listenerCount*
 
-*Defined in /node_modules/@types/node/index.d.ts:714*
+*Defined in /node_modules/@types/node/base.d.ts:680*
 
 **Parameters:**
 

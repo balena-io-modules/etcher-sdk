@@ -49,7 +49,7 @@
 
 *Inherited from WritableStream.writable*
 
-*Defined in /node_modules/@types/node/index.d.ts:400*
+*Defined in /node_modules/@types/node/base.d.ts:367*
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 ▸ **_write**(chunk: *[SparseStreamChunk](sparsestreamchunk.md)*, encoding: *`string`*, callback: *`function`*): `void`
 
-*Defined in [sparse-stream/sparse-write-stream.ts:12](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/sparse-stream/sparse-write-stream.ts#L12)*
+*Defined in [sparse-stream/sparse-write-stream.ts:12](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/sparse-stream/sparse-write-stream.ts#L12)*
 
 **Parameters:**
 
@@ -82,7 +82,7 @@ ___
 
 *Inherited from EventEmitter.addListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:369*
+*Defined in /node_modules/@types/node/base.d.ts:336*
 
 **Parameters:**
 
@@ -102,7 +102,7 @@ ___
 
 *Inherited from EventEmitter.emit*
 
-*Defined in /node_modules/@types/node/index.d.ts:377*
+*Defined in /node_modules/@types/node/base.d.ts:344*
 
 **Parameters:**
 
@@ -128,7 +128,7 @@ ___
 
 *Inherited from WritableStream.end*
 
-*Defined in /node_modules/@types/node/index.d.ts:403*
+*Defined in /node_modules/@types/node/base.d.ts:370*
 
 **Parameters:**
 
@@ -140,7 +140,7 @@ ___
 
 *Inherited from WritableStream.end*
 
-*Defined in /node_modules/@types/node/index.d.ts:404*
+*Defined in /node_modules/@types/node/base.d.ts:371*
 
 **Parameters:**
 
@@ -153,7 +153,7 @@ ___
 
 *Inherited from WritableStream.end*
 
-*Defined in /node_modules/@types/node/index.d.ts:405*
+*Defined in /node_modules/@types/node/base.d.ts:372*
 
 **Parameters:**
 
@@ -166,7 +166,7 @@ ___
 
 *Inherited from WritableStream.end*
 
-*Defined in /node_modules/@types/node/index.d.ts:406*
+*Defined in /node_modules/@types/node/base.d.ts:373*
 
 **Parameters:**
 
@@ -187,7 +187,7 @@ ___
 
 *Inherited from EventEmitter.eventNames*
 
-*Defined in /node_modules/@types/node/index.d.ts:382*
+*Defined in /node_modules/@types/node/base.d.ts:349*
 
 **Returns:** (`string` \| `symbol`)[]
 
@@ -200,7 +200,7 @@ ___
 
 *Inherited from EventEmitter.getMaxListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:375*
+*Defined in /node_modules/@types/node/base.d.ts:342*
 
 **Returns:** `number`
 
@@ -213,7 +213,7 @@ ___
 
 *Inherited from EventEmitter.listenerCount*
 
-*Defined in /node_modules/@types/node/index.d.ts:378*
+*Defined in /node_modules/@types/node/base.d.ts:345*
 
 **Parameters:**
 
@@ -232,7 +232,7 @@ ___
 
 *Inherited from EventEmitter.listeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:376*
+*Defined in /node_modules/@types/node/base.d.ts:343*
 
 **Parameters:**
 
@@ -251,7 +251,7 @@ ___
 
 *Inherited from EventEmitter.on*
 
-*Defined in /node_modules/@types/node/index.d.ts:370*
+*Defined in /node_modules/@types/node/base.d.ts:337*
 
 **Parameters:**
 
@@ -271,7 +271,7 @@ ___
 
 *Inherited from EventEmitter.once*
 
-*Defined in /node_modules/@types/node/index.d.ts:371*
+*Defined in /node_modules/@types/node/base.d.ts:338*
 
 **Parameters:**
 
@@ -291,7 +291,7 @@ ___
 
 *Inherited from EventEmitter.prependListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:380*
+*Defined in /node_modules/@types/node/base.d.ts:347*
 
 **Parameters:**
 
@@ -311,7 +311,7 @@ ___
 
 *Inherited from EventEmitter.prependOnceListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:381*
+*Defined in /node_modules/@types/node/base.d.ts:348*
 
 **Parameters:**
 
@@ -331,7 +331,7 @@ ___
 
 *Inherited from EventEmitter.removeAllListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:373*
+*Defined in /node_modules/@types/node/base.d.ts:340*
 
 **Parameters:**
 
@@ -350,7 +350,7 @@ ___
 
 *Inherited from EventEmitter.removeListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:372*
+*Defined in /node_modules/@types/node/base.d.ts:339*
 
 **Parameters:**
 
@@ -370,7 +370,7 @@ ___
 
 *Inherited from EventEmitter.setMaxListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:374*
+*Defined in /node_modules/@types/node/base.d.ts:341*
 
 **Parameters:**
 
@@ -391,7 +391,7 @@ ___
 
 *Inherited from WritableStream.write*
 
-*Defined in /node_modules/@types/node/index.d.ts:401*
+*Defined in /node_modules/@types/node/base.d.ts:368*
 
 **Parameters:**
 
@@ -404,7 +404,7 @@ ___
 
 *Inherited from WritableStream.write*
 
-*Defined in /node_modules/@types/node/index.d.ts:402*
+*Defined in /node_modules/@types/node/base.d.ts:369*
 
 **Parameters:**
 
