@@ -56,7 +56,7 @@
 
 **● blocks**: *[BlocksWithChecksum](blockswithchecksum.md)[]*
 
-*Defined in [sparse-stream/shared.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/sparse-stream/shared.ts#L50)*
+*Defined in [sparse-stream/shared.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/sparse-stream/shared.ts#L50)*
 
 ___
 <a id="readable"></a>
@@ -67,7 +67,7 @@ ___
 
 *Inherited from ReadableStream.readable*
 
-*Defined in /node_modules/@types/node/index.d.ts:386*
+*Defined in /node_modules/@types/node/base.d.ts:353*
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 *Inherited from EventEmitter.addListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:369*
+*Defined in /node_modules/@types/node/base.d.ts:336*
 
 **Parameters:**
 
@@ -101,7 +101,7 @@ ___
 
 *Inherited from EventEmitter.emit*
 
-*Defined in /node_modules/@types/node/index.d.ts:377*
+*Defined in /node_modules/@types/node/base.d.ts:344*
 
 **Parameters:**
 
@@ -121,7 +121,7 @@ ___
 
 *Inherited from EventEmitter.eventNames*
 
-*Defined in /node_modules/@types/node/index.d.ts:382*
+*Defined in /node_modules/@types/node/base.d.ts:349*
 
 **Returns:** (`string` \| `symbol`)[]
 
@@ -134,7 +134,7 @@ ___
 
 *Inherited from EventEmitter.getMaxListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:375*
+*Defined in /node_modules/@types/node/base.d.ts:342*
 
 **Returns:** `number`
 
@@ -147,7 +147,7 @@ ___
 
 *Inherited from ReadableStream.isPaused*
 
-*Defined in /node_modules/@types/node/index.d.ts:391*
+*Defined in /node_modules/@types/node/base.d.ts:358*
 
 **Returns:** `boolean`
 
@@ -160,7 +160,7 @@ ___
 
 *Inherited from EventEmitter.listenerCount*
 
-*Defined in /node_modules/@types/node/index.d.ts:378*
+*Defined in /node_modules/@types/node/base.d.ts:345*
 
 **Parameters:**
 
@@ -179,7 +179,7 @@ ___
 
 *Inherited from EventEmitter.listeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:376*
+*Defined in /node_modules/@types/node/base.d.ts:343*
 
 **Parameters:**
 
@@ -198,7 +198,7 @@ ___
 
 *Inherited from EventEmitter.on*
 
-*Defined in /node_modules/@types/node/index.d.ts:370*
+*Defined in /node_modules/@types/node/base.d.ts:337*
 
 **Parameters:**
 
@@ -218,7 +218,7 @@ ___
 
 *Inherited from EventEmitter.once*
 
-*Defined in /node_modules/@types/node/index.d.ts:371*
+*Defined in /node_modules/@types/node/base.d.ts:338*
 
 **Parameters:**
 
@@ -238,7 +238,7 @@ ___
 
 *Inherited from ReadableStream.pause*
 
-*Defined in /node_modules/@types/node/index.d.ts:389*
+*Defined in /node_modules/@types/node/base.d.ts:356*
 
 **Returns:** `this`
 
@@ -251,7 +251,7 @@ ___
 
 *Inherited from ReadableStream.pipe*
 
-*Defined in /node_modules/@types/node/index.d.ts:392*
+*Defined in /node_modules/@types/node/base.d.ts:359*
 
 **Type parameters:**
 
@@ -274,7 +274,7 @@ ___
 
 *Inherited from EventEmitter.prependListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:380*
+*Defined in /node_modules/@types/node/base.d.ts:347*
 
 **Parameters:**
 
@@ -294,7 +294,7 @@ ___
 
 *Inherited from EventEmitter.prependOnceListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:381*
+*Defined in /node_modules/@types/node/base.d.ts:348*
 
 **Parameters:**
 
@@ -312,7 +312,7 @@ ___
 
 ▸ **push**(chunk: *[SparseStreamChunk](sparsestreamchunk.md)*): `boolean`
 
-*Defined in [sparse-stream/shared.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/sparse-stream/shared.ts#L51)*
+*Defined in [sparse-stream/shared.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/sparse-stream/shared.ts#L51)*
 
 **Parameters:**
 
@@ -331,7 +331,7 @@ ___
 
 *Inherited from ReadableStream.read*
 
-*Defined in /node_modules/@types/node/index.d.ts:387*
+*Defined in /node_modules/@types/node/base.d.ts:354*
 
 **Parameters:**
 
@@ -350,7 +350,7 @@ ___
 
 *Inherited from EventEmitter.removeAllListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:373*
+*Defined in /node_modules/@types/node/base.d.ts:340*
 
 **Parameters:**
 
@@ -369,7 +369,7 @@ ___
 
 *Inherited from EventEmitter.removeListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:372*
+*Defined in /node_modules/@types/node/base.d.ts:339*
 
 **Parameters:**
 
@@ -389,7 +389,7 @@ ___
 
 *Inherited from ReadableStream.resume*
 
-*Defined in /node_modules/@types/node/index.d.ts:390*
+*Defined in /node_modules/@types/node/base.d.ts:357*
 
 **Returns:** `this`
 
@@ -402,7 +402,7 @@ ___
 
 *Inherited from ReadableStream.setEncoding*
 
-*Defined in /node_modules/@types/node/index.d.ts:388*
+*Defined in /node_modules/@types/node/base.d.ts:355*
 
 **Parameters:**
 
@@ -421,7 +421,7 @@ ___
 
 *Inherited from EventEmitter.setMaxListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:374*
+*Defined in /node_modules/@types/node/base.d.ts:341*
 
 **Parameters:**
 
@@ -440,7 +440,7 @@ ___
 
 *Inherited from ReadableStream.unpipe*
 
-*Defined in /node_modules/@types/node/index.d.ts:393*
+*Defined in /node_modules/@types/node/base.d.ts:360*
 
 **Type parameters:**
 
@@ -464,7 +464,7 @@ ___
 
 *Inherited from ReadableStream.unshift*
 
-*Defined in /node_modules/@types/node/index.d.ts:394*
+*Defined in /node_modules/@types/node/base.d.ts:361*
 
 **Parameters:**
 
@@ -476,7 +476,7 @@ ___
 
 *Inherited from ReadableStream.unshift*
 
-*Defined in /node_modules/@types/node/index.d.ts:395*
+*Defined in /node_modules/@types/node/base.d.ts:362*
 
 **Parameters:**
 
@@ -495,7 +495,7 @@ ___
 
 *Inherited from ReadableStream.wrap*
 
-*Defined in /node_modules/@types/node/index.d.ts:396*
+*Defined in /node_modules/@types/node/base.d.ts:363*
 
 **Parameters:**
 

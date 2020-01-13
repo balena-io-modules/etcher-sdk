@@ -53,7 +53,7 @@
 
 ⊕ **new SparseStreamVerifier**(source: *[SourceDestination](sourcedestination.md)*, blocks: *[BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]*): [SparseStreamVerifier](sparsestreamverifier.md)
 
-*Defined in [source-destination/source-destination.ts:182](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/source-destination.ts#L182)*
+*Defined in [source-destination/source-destination.ts:182](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/source-destination.ts#L182)*
 
 **Parameters:**
 
@@ -74,7 +74,7 @@ ___
 
 **● blocks**: *[BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]*
 
-*Defined in [source-destination/source-destination.ts:185](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/source-destination.ts#L185)*
+*Defined in [source-destination/source-destination.ts:185](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/source-destination.ts#L185)*
 
 ___
 <a id="source"></a>
@@ -83,7 +83,7 @@ ___
 
 **● source**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [source-destination/source-destination.ts:184](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/source-destination.ts#L184)*
+*Defined in [source-destination/source-destination.ts:184](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/source-destination.ts#L184)*
 
 ___
 <a id="defaultmaxlisteners"></a>
@@ -94,7 +94,7 @@ ___
 
 *Inherited from EventEmitter.defaultMaxListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:715*
+*Defined in /node_modules/@types/node/base.d.ts:681*
 
 ___
 
@@ -110,7 +110,7 @@ ___
 
 *Overrides EventEmitter.addListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:717*
+*Defined in /node_modules/@types/node/base.d.ts:683*
 
 **Parameters:**
 
@@ -132,7 +132,7 @@ ___
 
 *Overrides EventEmitter.emit*
 
-*Defined in /node_modules/@types/node/index.d.ts:727*
+*Defined in /node_modules/@types/node/base.d.ts:693*
 
 **Parameters:**
 
@@ -154,7 +154,7 @@ ___
 
 *Overrides EventEmitter.eventNames*
 
-*Defined in /node_modules/@types/node/index.d.ts:728*
+*Defined in /node_modules/@types/node/base.d.ts:694*
 
 **Returns:** (`string` \| `symbol`)[]
 
@@ -169,7 +169,7 @@ ___
 
 *Overrides EventEmitter.getMaxListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:725*
+*Defined in /node_modules/@types/node/base.d.ts:691*
 
 **Returns:** `number`
 
@@ -182,7 +182,7 @@ ___
 
 *Inherited from [Verifier](verifier.md).[handleEventsAndPipe](verifier.md#handleeventsandpipe)*
 
-*Defined in [source-destination/source-destination.ts:134](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/source-destination.ts#L134)*
+*Defined in [source-destination/source-destination.ts:134](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/source-destination.ts#L134)*
 
 **Parameters:**
 
@@ -204,7 +204,7 @@ ___
 
 *Overrides EventEmitter.listenerCount*
 
-*Defined in /node_modules/@types/node/index.d.ts:729*
+*Defined in /node_modules/@types/node/base.d.ts:695*
 
 **Parameters:**
 
@@ -225,7 +225,7 @@ ___
 
 *Overrides EventEmitter.listeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:726*
+*Defined in /node_modules/@types/node/base.d.ts:692*
 
 **Parameters:**
 
@@ -246,7 +246,7 @@ ___
 
 *Overrides EventEmitter.on*
 
-*Defined in /node_modules/@types/node/index.d.ts:718*
+*Defined in /node_modules/@types/node/base.d.ts:684*
 
 **Parameters:**
 
@@ -268,7 +268,7 @@ ___
 
 *Overrides EventEmitter.once*
 
-*Defined in /node_modules/@types/node/index.d.ts:719*
+*Defined in /node_modules/@types/node/base.d.ts:685*
 
 **Parameters:**
 
@@ -290,7 +290,7 @@ ___
 
 *Overrides EventEmitter.prependListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:720*
+*Defined in /node_modules/@types/node/base.d.ts:686*
 
 **Parameters:**
 
@@ -312,7 +312,7 @@ ___
 
 *Overrides EventEmitter.prependOnceListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:721*
+*Defined in /node_modules/@types/node/base.d.ts:687*
 
 **Parameters:**
 
@@ -334,7 +334,7 @@ ___
 
 *Overrides EventEmitter.removeAllListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:723*
+*Defined in /node_modules/@types/node/base.d.ts:689*
 
 **Parameters:**
 
@@ -355,7 +355,7 @@ ___
 
 *Overrides EventEmitter.removeListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:722*
+*Defined in /node_modules/@types/node/base.d.ts:688*
 
 **Parameters:**
 
@@ -375,7 +375,7 @@ ___
 
 *Overrides [Verifier](verifier.md).[run](verifier.md#run)*
 
-*Defined in [source-destination/source-destination.ts:190](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/source-destination.ts#L190)*
+*Defined in [source-destination/source-destination.ts:190](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/source-destination.ts#L190)*
 
 **Returns:** `Promise`<`void`>
 
@@ -390,7 +390,7 @@ ___
 
 *Overrides EventEmitter.setMaxListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:724*
+*Defined in /node_modules/@types/node/base.d.ts:690*
 
 **Parameters:**
 
@@ -409,7 +409,7 @@ ___
 
 *Inherited from EventEmitter.listenerCount*
 
-*Defined in /node_modules/@types/node/index.d.ts:714*
+*Defined in /node_modules/@types/node/base.d.ts:680*
 
 **Parameters:**
 
@@ -432,7 +432,7 @@ ___
 
 *Inherited from [Verifier](verifier.md).[progress](verifier.md#progress)*
 
-*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/source-destination.ts#L130)*
+*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/source-destination.ts#L130)*
 
 <a id="progress.bytes"></a>
 
@@ -440,7 +440,7 @@ ___
 
 **● bytes**: *`number`* = 0
 
-*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/source-destination.ts#L130)*
+*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/source-destination.ts#L130)*
 
 ___
 <a id="progress.position"></a>
@@ -449,7 +449,7 @@ ___
 
 **● position**: *`number`* = 0
 
-*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/source-destination.ts#L130)*
+*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/source-destination.ts#L130)*
 
 ___
 <a id="progress.speed"></a>
@@ -458,7 +458,7 @@ ___
 
 **● speed**: *`number`* = 0
 
-*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/source-destination.ts#L130)*
+*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/source-destination.ts#L130)*
 
 ___
 
