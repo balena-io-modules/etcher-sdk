@@ -51,7 +51,7 @@
 
 *Inherited from EventEmitter.defaultMaxListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:715*
+*Defined in /node_modules/@types/node/base.d.ts:681*
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 *Overrides EventEmitter.addListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:717*
+*Defined in /node_modules/@types/node/base.d.ts:683*
 
 **Parameters:**
 
@@ -89,7 +89,7 @@ ___
 
 *Overrides EventEmitter.emit*
 
-*Defined in /node_modules/@types/node/index.d.ts:727*
+*Defined in /node_modules/@types/node/base.d.ts:693*
 
 **Parameters:**
 
@@ -111,7 +111,7 @@ ___
 
 *Overrides EventEmitter.eventNames*
 
-*Defined in /node_modules/@types/node/index.d.ts:728*
+*Defined in /node_modules/@types/node/base.d.ts:694*
 
 **Returns:** (`string` \| `symbol`)[]
 
@@ -126,7 +126,7 @@ ___
 
 *Overrides EventEmitter.getMaxListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:725*
+*Defined in /node_modules/@types/node/base.d.ts:691*
 
 **Returns:** `number`
 
@@ -141,7 +141,7 @@ ___
 
 *Overrides EventEmitter.listenerCount*
 
-*Defined in /node_modules/@types/node/index.d.ts:729*
+*Defined in /node_modules/@types/node/base.d.ts:695*
 
 **Parameters:**
 
@@ -162,7 +162,7 @@ ___
 
 *Overrides EventEmitter.listeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:726*
+*Defined in /node_modules/@types/node/base.d.ts:692*
 
 **Parameters:**
 
@@ -183,7 +183,7 @@ ___
 
 *Overrides EventEmitter.on*
 
-*Defined in /node_modules/@types/node/index.d.ts:718*
+*Defined in /node_modules/@types/node/base.d.ts:684*
 
 **Parameters:**
 
@@ -205,7 +205,7 @@ ___
 
 *Overrides EventEmitter.once*
 
-*Defined in /node_modules/@types/node/index.d.ts:719*
+*Defined in /node_modules/@types/node/base.d.ts:685*
 
 **Parameters:**
 
@@ -227,7 +227,7 @@ ___
 
 *Overrides EventEmitter.prependListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:720*
+*Defined in /node_modules/@types/node/base.d.ts:686*
 
 **Parameters:**
 
@@ -249,7 +249,7 @@ ___
 
 *Overrides EventEmitter.prependOnceListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:721*
+*Defined in /node_modules/@types/node/base.d.ts:687*
 
 **Parameters:**
 
@@ -271,7 +271,7 @@ ___
 
 *Overrides EventEmitter.removeAllListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:723*
+*Defined in /node_modules/@types/node/base.d.ts:689*
 
 **Parameters:**
 
@@ -292,7 +292,7 @@ ___
 
 *Overrides EventEmitter.removeListener*
 
-*Defined in /node_modules/@types/node/index.d.ts:722*
+*Defined in /node_modules/@types/node/base.d.ts:688*
 
 **Parameters:**
 
@@ -314,7 +314,7 @@ ___
 
 *Overrides EventEmitter.setMaxListeners*
 
-*Defined in /node_modules/@types/node/index.d.ts:724*
+*Defined in /node_modules/@types/node/base.d.ts:690*
 
 **Parameters:**
 
@@ -331,7 +331,7 @@ ___
 
 ▸ **start**(): `void`
 
-*Defined in [scanner/adapters/adapter.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/scanner/adapters/adapter.ts#L34)*
+*Defined in [scanner/adapters/adapter.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/scanner/adapters/adapter.ts#L34)*
 
 **Returns:** `void`
 
@@ -342,7 +342,7 @@ ___
 
 ▸ **stop**(): `void`
 
-*Defined in [scanner/adapters/adapter.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/scanner/adapters/adapter.ts#L35)*
+*Defined in [scanner/adapters/adapter.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/scanner/adapters/adapter.ts#L35)*
 
 **Returns:** `void`
 
@@ -355,7 +355,7 @@ ___
 
 *Inherited from EventEmitter.listenerCount*
 
-*Defined in /node_modules/@types/node/index.d.ts:714*
+*Defined in /node_modules/@types/node/base.d.ts:680*
 
 **Parameters:**
 

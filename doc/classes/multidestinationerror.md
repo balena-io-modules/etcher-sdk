@@ -33,7 +33,7 @@
 
 ⊕ **new MultiDestinationError**(error: *`Error`*, destination: *[SourceDestination](sourcedestination.md)*): [MultiDestinationError](multidestinationerror.md)
 
-*Defined in [source-destination/multi-destination.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/multi-destination.ts#L35)*
+*Defined in [source-destination/multi-destination.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/multi-destination.ts#L35)*
 
 **Parameters:**
 
@@ -54,7 +54,7 @@ ___
 
 **● destination**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [source-destination/multi-destination.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/multi-destination.ts#L36)*
+*Defined in [source-destination/multi-destination.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/multi-destination.ts#L36)*
 
 ___
 <a id="error"></a>
@@ -63,7 +63,7 @@ ___
 
 **● error**: *`Error`*
 
-*Defined in [source-destination/multi-destination.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/5821ce5/lib/source-destination/multi-destination.ts#L36)*
+*Defined in [source-destination/multi-destination.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/multi-destination.ts#L36)*
 
 ___
 <a id="message"></a>

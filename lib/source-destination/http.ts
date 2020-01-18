@@ -15,6 +15,9 @@
  */
 
 import axios from 'axios';
+// Always use the node adapter (even in a browser)
+// @ts-ignore
+import * as axiosNodeAdapter from 'axios/lib/adapters/http';
 import { ReadResult } from 'file-disk';
 import { basename } from 'path';
 import { unescape } from 'querystring';
@@ -22,6 +25,8 @@ import { parse } from 'url';
 
 import { Metadata } from './metadata';
 import { SourceDestination } from './source-destination';
+
+axios.defaults.adapter = axiosNodeAdapter;
 
 export class Http extends SourceDestination {
 	// Only implements reading for now
