@@ -111,7 +111,7 @@ ___
 
 **● displayName**: *`string`*
 
-*Defined in [scanner/adapters/block-device.ts:52](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/scanner/adapters/block-device.ts#L52)*
+*Defined in [scanner/adapters/block-device.ts:52](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/scanner/adapters/block-device.ts#L52)*
 
 ___
 <a id="enumerator"></a>
@@ -142,7 +142,7 @@ ___
 
 **● icon**: *`undefined` \| `string`*
 
-*Defined in [scanner/adapters/block-device.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/scanner/adapters/block-device.ts#L53)*
+*Defined in [scanner/adapters/block-device.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/scanner/adapters/block-device.ts#L53)*
 
 ___
 <a id="iscard"></a>

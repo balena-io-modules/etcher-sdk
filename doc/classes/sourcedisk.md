@@ -52,7 +52,7 @@
 
 *Overrides Disk.__constructor*
 
-*Defined in [source-destination/configured-source/configured-source.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/configured-source/configured-source.ts#L43)*
+*Defined in [source-destination/configured-source/configured-source.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/configured-source.ts#L43)*
 
 **Parameters:**
 
@@ -138,7 +138,7 @@ ___
 
 **● source**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [source-destination/configured-source/configured-source.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/configured-source/configured-source.ts#L44)*
+*Defined in [source-destination/configured-source/configured-source.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/configured-source.ts#L44)*
 
 ___
 
@@ -152,7 +152,7 @@ ___
 
 *Overrides Disk._flush*
 
-*Defined in [source-destination/configured-source/configured-source.ts:80](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/configured-source/configured-source.ts#L80)*
+*Defined in [source-destination/configured-source/configured-source.ts:80](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/configured-source.ts#L80)*
 
 **Returns:** `Promise`<`void`>
 
@@ -165,7 +165,7 @@ ___
 
 *Overrides Disk._getCapacity*
 
-*Defined in [source-destination/configured-source/configured-source.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/configured-source/configured-source.ts#L53)*
+*Defined in [source-destination/configured-source/configured-source.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/configured-source.ts#L53)*
 
 **Returns:** `Promise`<`number`>
 
@@ -178,7 +178,7 @@ ___
 
 *Overrides Disk._read*
 
-*Defined in [source-destination/configured-source/configured-source.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/configured-source/configured-source.ts#L62)*
+*Defined in [source-destination/configured-source/configured-source.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/configured-source.ts#L62)*
 
 **Parameters:**
 
@@ -200,7 +200,7 @@ ___
 
 *Overrides Disk._write*
 
-*Defined in [source-destination/configured-source/configured-source.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/configured-source/configured-source.ts#L71)*
+*Defined in [source-destination/configured-source/configured-source.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/configured-source.ts#L71)*
 
 **Parameters:**
 

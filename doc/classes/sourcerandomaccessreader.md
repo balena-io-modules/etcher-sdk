@@ -50,7 +50,7 @@
 
 ⊕ **new SourceRandomAccessReader**(source: *[SourceDestination](sourcedestination.md)*): [SourceRandomAccessReader](sourcerandomaccessreader.md)
 
-*Defined in [source-destination/zip.ts:128](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/zip.ts#L128)*
+*Defined in [source-destination/zip.ts:128](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/zip.ts#L128)*
 
 **Parameters:**
 
@@ -70,7 +70,7 @@ ___
 
 **● source**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [source-destination/zip.ts:129](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/zip.ts#L129)*
+*Defined in [source-destination/zip.ts:129](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/zip.ts#L129)*
 
 ___
 <a id="defaultmaxlisteners"></a>
@@ -95,7 +95,7 @@ ___
 
 *Overrides RandomAccessReader._readStreamForRange*
 
-*Defined in [source-destination/zip.ts:133](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/zip.ts#L133)*
+*Defined in [source-destination/zip.ts:133](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/zip.ts#L133)*
 
 **Parameters:**
 
