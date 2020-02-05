@@ -23,10 +23,12 @@ import { fs, multiWrite, sourceDestination } from '../lib';
 const SPINNER_DELAY = 60;
 
 export async function readJsonFile(path: string): Promise<any> {
-	return JSON.parse((await fs.readFile(path, {
-		encoding: 'utf8',
-		flag: 'r',
-	})) as string);
+	return JSON.parse(
+		(await fs.readFile(path, {
+			encoding: 'utf8',
+			flag: 'r',
+		})) as string,
+	);
 }
 
 export async function wrapper(main: (args: any) => Promise<void>, args: any) {

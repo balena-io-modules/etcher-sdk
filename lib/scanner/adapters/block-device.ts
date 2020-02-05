@@ -116,18 +116,20 @@ export class BlockDeviceAdapter extends Adapter {
 		}
 		for (const drive of drives) {
 			if (
-				!// Always ignore RAID attached devices, as they are in danger-country;
-				// Even flashing RAIDs intentionally can have unintended effects
-				(
-					drive.busType !== 'RAID' &&
-					// Exclude errored drives
-					!drive.error &&
-					// Exclude system drives if needed
-					(this.includeSystemDrives() || !drive.isSystem) &&
-					// Exclude drives with no size
-					typeof drive.size === 'number' &&
-					// Exclude virtual drives (DMG, TimeMachine, ... on macOS)
-					!drive.isVirtual
+				!(
+					// Always ignore RAID attached devices, as they are in danger-country;
+					// Even flashing RAIDs intentionally can have unintended effects
+					(
+						drive.busType !== 'RAID' &&
+						// Exclude errored drives
+						!drive.error &&
+						// Exclude system drives if needed
+						(this.includeSystemDrives() || !drive.isSystem) &&
+						// Exclude drives with no size
+						typeof drive.size === 'number' &&
+						// Exclude virtual drives (DMG, TimeMachine, ... on macOS)
+						!drive.isVirtual
+					)
 				)
 			) {
 				continue;
