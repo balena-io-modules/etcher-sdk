@@ -17,7 +17,7 @@
 import { using } from 'bluebird';
 import * as _debug from 'debug';
 import { DiscardDiskChunk, Disk, ReadResult, WriteResult } from 'file-disk';
-import { getPartitions } from 'partitioninfo';
+import { getPartitions, GPTPartition, MBRPartition } from 'partitioninfo';
 import { AsyncFsLike, interact } from 'resin-image-fs';
 
 import { CHUNK_SIZE } from '../../constants';
@@ -201,9 +201,15 @@ export class ConfiguredSource extends SourceSource {
 	}
 
 	private async trimPartitions(): Promise<void> {
-		const { partitions } = await getPartitions(this.disk, {
-			includeExtended: false,
-		});
+		let partitions: GPTPartition[] | MBRPartition[];
+		try {
+			({ partitions } = await getPartitions(this.disk, {
+				includeExtended: false,
+			}));
+		} catch (error) {
+			debug("Couldn't read partition table", error);
+			return;
+		}
 		for (const partition of partitions) {
 			try {
 				await using(

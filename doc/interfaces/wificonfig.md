@@ -27,7 +27,7 @@
 
 **● gateway**: *`undefined` \| `string`*
 
-*Defined in [source-destination/configured-source/operations/configure.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/configured-source/operations/configure.ts#L38)*
+*Defined in [source-destination/configured-source/operations/configure.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/operations/configure.ts#L38)*
 
 ___
 <a id="ip"></a>
@@ -36,7 +36,7 @@ ___
 
 **● ip**: *`undefined` \| `string`*
 
-*Defined in [source-destination/configured-source/operations/configure.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/configured-source/operations/configure.ts#L36)*
+*Defined in [source-destination/configured-source/operations/configure.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/operations/configure.ts#L36)*
 
 ___
 <a id="netmask"></a>
@@ -45,7 +45,7 @@ ___
 
 **● netmask**: *`undefined` \| `string`*
 
-*Defined in [source-destination/configured-source/operations/configure.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/configured-source/operations/configure.ts#L37)*
+*Defined in [source-destination/configured-source/operations/configure.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/operations/configure.ts#L37)*
 
 ___
 <a id="routemetric"></a>
@@ -54,7 +54,7 @@ ___
 
 **● routeMetric**: *`number` \| `string`*
 
-*Defined in [source-destination/configured-source/operations/configure.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/configured-source/operations/configure.ts#L35)*
+*Defined in [source-destination/configured-source/operations/configure.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/operations/configure.ts#L35)*
 
 ___
 <a id="wifikey"></a>
@@ -63,7 +63,7 @@ ___
 
 **● wifiKey**: *`undefined` \| `string`*
 
-*Defined in [source-destination/configured-source/operations/configure.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/configured-source/operations/configure.ts#L34)*
+*Defined in [source-destination/configured-source/operations/configure.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/operations/configure.ts#L34)*
 
 ___
 <a id="wifissid"></a>
@@ -72,7 +72,7 @@ ___
 
 **● wifiSsid**: *`string`*
 
-*Defined in [source-destination/configured-source/operations/configure.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/source-destination/configured-source/operations/configure.ts#L33)*
+*Defined in [source-destination/configured-source/operations/configure.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/operations/configure.ts#L33)*
 
 ___
 

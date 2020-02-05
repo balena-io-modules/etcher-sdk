@@ -61,7 +61,7 @@ ___
 
 ▸ **_write**(chunk: *[SparseStreamChunk](sparsestreamchunk.md)*, encoding: *`string`*, callback: *`function`*): `void`
 
-*Defined in [sparse-stream/sparse-write-stream.ts:12](https://github.com/balena-io-modules/etcher-sdk/blob/050d15d/lib/sparse-stream/sparse-write-stream.ts#L12)*
+*Defined in [sparse-stream/sparse-write-stream.ts:12](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/sparse-stream/sparse-write-stream.ts#L12)*
 
 **Parameters:**
 
