@@ -6,7 +6,7 @@
 set -e
 set -u
 
-DEFAULT_CMD=./build-linux-examples.sh
+DEFAULT_CMD=./build-macos-examples.sh
 CMD=${@:-$DEFAULT_CMD}
 
 DOCKER=docker
