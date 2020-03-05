@@ -81,7 +81,7 @@ export class BlockWriteStream extends Writable {
 
 	private async writeBuffers(): Promise<void> {
 		if (this._bytes >= CHUNK_SIZE) {
-			let block = Buffer.concat(this._buffers);
+			let block = Buffer.concat(this._buffers, this._bytes);
 			const length =
 				Math.floor(block.length / this.destination.blockSize) *
 				this.destination.blockSize;
