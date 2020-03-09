@@ -14,6 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import * as xxhash from 'xxhash';
+
+export type XXHash = typeof xxhash;
+
 import { once } from 'lodash';
 
 export const getRaspberrypiUsbboot = once(() => {
@@ -23,3 +27,7 @@ export const getRaspberrypiUsbboot = once(() => {
 		console.warn('Failed to import node-raspberrypi-usbboot:', e);
 	}
 });
+
+export const getXXHash = once(
+	() => require('xxhash') as typeof import('xxhash'),
+);
