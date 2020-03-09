@@ -1,48 +1,39 @@
-[etcher-sdk](../README.md) > [SparseReaderState](../interfaces/sparsereaderstate.md)
+[etcher-sdk](../README.md) › [SparseReaderState](sparsereaderstate.md)
 
 # Interface: SparseReaderState
 
 ## Hierarchy
 
-**SparseReaderState**
+* **SparseReaderState**
 
 ## Index
 
 ### Properties
 
 * [block](sparsereaderstate.md#block)
-* [hasher](sparsereaderstate.md#hasher)
+* [hasher](sparsereaderstate.md#optional-hasher)
 * [subBlock](sparsereaderstate.md#subblock)
-
----
 
 ## Properties
 
-<a id="block"></a>
-
 ###  block
 
-**● block**: *[BlocksWithChecksum](blockswithchecksum.md)*
+• **block**: *[BlocksWithChecksum](blockswithchecksum.md)*
 
-*Defined in [sparse-stream/shared.ts:81](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/sparse-stream/shared.ts#L81)*
-
-___
-<a id="hasher"></a>
-
-### `<Optional>` hasher
-
-**● hasher**: *[AnyHasher](../#anyhasher)*
-
-*Defined in [sparse-stream/shared.ts:83](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/sparse-stream/shared.ts#L83)*
+*Defined in [lib/sparse-stream/shared.ts:81](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/shared.ts#L81)*
 
 ___
-<a id="subblock"></a>
+
+### `Optional` hasher
+
+• **hasher**? : *[AnyHasher](../README.md#anyhasher)*
+
+*Defined in [lib/sparse-stream/shared.ts:83](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/shared.ts#L83)*
+
+___
 
 ###  subBlock
 
-**● subBlock**: *[Block](block.md)*
+• **subBlock**: *[Block](block.md)*
 
-*Defined in [sparse-stream/shared.ts:82](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/sparse-stream/shared.ts#L82)*
-
-___
-
+*Defined in [lib/sparse-stream/shared.ts:82](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/shared.ts#L82)*

@@ -1,10 +1,10 @@
-[etcher-sdk](../README.md) > [SourceDestinationFs](../classes/sourcedestinationfs.md)
+[etcher-sdk](../README.md) › [SourceDestinationFs](sourcedestinationfs.md)
 
 # Class: SourceDestinationFs
 
 ## Hierarchy
 
-**SourceDestinationFs**
+* **SourceDestinationFs**
 
 ## Index
 
@@ -14,7 +14,7 @@
 
 ### Properties
 
-* [source](sourcedestinationfs.md#source)
+* [source](sourcedestinationfs.md#private-source)
 
 ### Methods
 
@@ -23,117 +23,136 @@
 * [open](sourcedestinationfs.md#open)
 * [read](sourcedestinationfs.md#read)
 
----
-
 ## Constructors
-
-<a id="constructor"></a>
 
 ###  constructor
 
-⊕ **new SourceDestinationFs**(source: *[SourceDestination](sourcedestination.md)*): [SourceDestinationFs](sourcedestinationfs.md)
+\+ **new SourceDestinationFs**(`source`: [SourceDestination](sourcedestination.md)): *[SourceDestinationFs](sourcedestinationfs.md)*
 
-*Defined in [source-destination/source-destination.ts:74](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L74)*
+*Defined in [lib/source-destination/source-destination.ts:74](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L74)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| source | [SourceDestination](sourcedestination.md) |
+Name | Type |
+------ | ------ |
+`source` | [SourceDestination](sourcedestination.md) |
 
-**Returns:** [SourceDestinationFs](sourcedestinationfs.md)
-
-___
+**Returns:** *[SourceDestinationFs](sourcedestinationfs.md)*
 
 ## Properties
 
-<a id="source"></a>
+### `Private` source
 
-### `<Private>` source
+• **source**: *[SourceDestination](sourcedestination.md)*
 
-**● source**: *[SourceDestination](sourcedestination.md)*
-
-*Defined in [source-destination/source-destination.ts:76](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L76)*
-
-___
+*Defined in [lib/source-destination/source-destination.ts:76](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L76)*
 
 ## Methods
 
-<a id="close"></a>
-
 ###  close
 
-▸ **close**(_fd: *`number`*, callback: *`function`*): `void`
+▸ **close**(`_fd`: number, `callback`: function): *void*
 
-*Defined in [source-destination/source-destination.ts:86](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L86)*
+*Defined in [lib/source-destination/source-destination.ts:86](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L86)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| _fd | `number` |
-| callback | `function` |
+▪ **_fd**: *number*
 
-**Returns:** `void`
+▪ **callback**: *function*
+
+▸ (`error`: [Error](notcapable.md#static-error) | null): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`error` | [Error](notcapable.md#static-error) &#124; null |
+
+**Returns:** *void*
 
 ___
-<a id="fstat"></a>
 
 ###  fstat
 
-▸ **fstat**(_fd: *`number`*, callback: *`function`*): `void`
+▸ **fstat**(`_fd`: number, `callback`: function): *void*
 
-*Defined in [source-destination/source-destination.ts:90](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L90)*
+*Defined in [lib/source-destination/source-destination.ts:90](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L90)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| _fd | `number` |
-| callback | `function` |
+▪ **_fd**: *number*
 
-**Returns:** `void`
+▪ **callback**: *function*
+
+▸ (`error`: [Error](notcapable.md#static-error) | null, `stats?`: undefined | object): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`error` | [Error](notcapable.md#static-error) &#124; null |
+`stats?` | undefined &#124; object |
+
+**Returns:** *void*
 
 ___
-<a id="open"></a>
 
 ###  open
 
-▸ **open**(_path: *`string`*, _options: *`any`*, callback: *`function`*): `void`
+▸ **open**(`_path`: string, `_options`: any, `callback`: function): *void*
 
-*Defined in [source-destination/source-destination.ts:78](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L78)*
+*Defined in [lib/source-destination/source-destination.ts:78](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L78)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| _path | `string` |
-| _options | `any` |
-| callback | `function` |
+▪ **_path**: *string*
 
-**Returns:** `void`
+▪ **_options**: *any*
+
+▪ **callback**: *function*
+
+▸ (`error`: [Error](notcapable.md#static-error) | null, `fd?`: undefined | number): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`error` | [Error](notcapable.md#static-error) &#124; null |
+`fd?` | undefined &#124; number |
+
+**Returns:** *void*
 
 ___
-<a id="read"></a>
 
 ###  read
 
-▸ **read**(_fd: *`number`*, buffer: *`Buffer`*, bufferOffset: *`number`*, length: *`number`*, sourceOffset: *`number`*, callback: *`function`*): `void`
+▸ **read**(`_fd`: number, `buffer`: Buffer, `bufferOffset`: number, `length`: number, `sourceOffset`: number, `callback`: function): *void*
 
-*Defined in [source-destination/source-destination.ts:106](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L106)*
+*Defined in [lib/source-destination/source-destination.ts:106](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L106)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| _fd | `number` |
-| buffer | `Buffer` |
-| bufferOffset | `number` |
-| length | `number` |
-| sourceOffset | `number` |
-| callback | `function` |
+▪ **_fd**: *number*
 
-**Returns:** `void`
+▪ **buffer**: *Buffer*
 
-___
+▪ **bufferOffset**: *number*
 
+▪ **length**: *number*
+
+▪ **sourceOffset**: *number*
+
+▪ **callback**: *function*
+
+▸ (`error`: [Error](notcapable.md#static-error) | null, `bytesRead?`: undefined | number, `buffer?`: Buffer): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`error` | [Error](notcapable.md#static-error) &#124; null |
+`bytesRead?` | undefined &#124; number |
+`buffer?` | Buffer |
+
+**Returns:** *void*

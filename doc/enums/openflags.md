@@ -1,4 +1,4 @@
-[etcher-sdk](../README.md) > [OpenFlags](../enums/openflags.md)
+[etcher-sdk](../README.md) › [OpenFlags](openflags.md)
 
 # Enumeration: OpenFlags
 
@@ -10,37 +10,28 @@
 * [ReadWrite](openflags.md#readwrite)
 * [WriteDevice](openflags.md#writedevice)
 
----
-
 ## Enumeration members
-
-<a id="read"></a>
 
 ###  Read
 
-**Read**:  =  fs.constants.O_RDONLY
+• **Read**: = fs.constants.O_RDONLY
 
-*Defined in [source-destination/file.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/file.ts#L47)*
+*Defined in [lib/source-destination/file.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/file.ts#L47)*
 
 ___
-<a id="readwrite"></a>
 
 ###  ReadWrite
 
-**ReadWrite**:  =  fs.constants.O_RDWR | fs.constants.O_CREAT
+• **ReadWrite**: = fs.constants.O_RDWR | fs.constants.O_CREAT
 
-*Defined in [source-destination/file.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/file.ts#L48)*
+*Defined in [lib/source-destination/file.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/file.ts#L48)*
 
 ___
-<a id="writedevice"></a>
 
 ###  WriteDevice
 
-**WriteDevice**:  =  fs.constants.O_RDWR |
+• **WriteDevice**: = fs.constants.O_RDWR |
 		fs.constants.O_NONBLOCK |
 		fs.constants.O_SYNC
 
-*Defined in [source-destination/file.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/file.ts#L49)*
-
-___
-
+*Defined in [lib/source-destination/file.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/file.ts#L49)*

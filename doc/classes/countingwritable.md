@@ -1,16 +1,16 @@
-[etcher-sdk](../README.md) > [CountingWritable](../classes/countingwritable.md)
+[etcher-sdk](../README.md) › [CountingWritable](countingwritable.md)
 
 # Class: CountingWritable
 
 ## Hierarchy
 
- `Writable`
+* Writable
 
-**↳ CountingWritable**
+  ↳ **CountingWritable**
 
 ## Implements
 
-* `WritableStream`
+* WritableStream
 
 ## Index
 
@@ -23,7 +23,7 @@
 * [bytesWritten](countingwritable.md#byteswritten)
 * [position](countingwritable.md#position)
 * [writable](countingwritable.md#writable)
-* [defaultMaxListeners](countingwritable.md#defaultmaxlisteners)
+* [defaultMaxListeners](countingwritable.md#static-defaultmaxlisteners)
 
 ### Methods
 
@@ -45,1233 +45,1338 @@
 * [setDefaultEncoding](countingwritable.md#setdefaultencoding)
 * [setMaxListeners](countingwritable.md#setmaxlisteners)
 * [write](countingwritable.md#write)
-* [listenerCount](countingwritable.md#listenercount-1)
-
----
+* [listenerCount](countingwritable.md#static-listenercount)
 
 ## Constructors
 
-<a id="constructor"></a>
-
 ###  constructor
 
-⊕ **new CountingWritable**(opts?: *`WritableOptions`*): [CountingWritable](countingwritable.md)
+\+ **new CountingWritable**(`opts?`: WritableOptions): *[CountingWritable](countingwritable.md)*
 
-*Inherited from Writable.__constructor*
+*Inherited from [CountingWritable](countingwritable.md).[constructor](countingwritable.md#constructor)*
 
-*Defined in /node_modules/@types/node/base.d.ts:3770*
+Defined in node_modules/@types/node/base.d.ts:3770
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| `Optional` opts | `WritableOptions` |
+Name | Type |
+------ | ------ |
+`opts?` | WritableOptions |
 
-**Returns:** [CountingWritable](countingwritable.md)
-
-___
+**Returns:** *[CountingWritable](countingwritable.md)*
 
 ## Properties
 
-<a id="byteswritten"></a>
-
 ###  bytesWritten
 
-**● bytesWritten**: *`number`* = 0
+• **bytesWritten**: *number* = 0
 
-*Defined in [source-destination/progress.ts:92](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/progress.ts#L92)*
+*Defined in [lib/source-destination/progress.ts:92](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/progress.ts#L92)*
 
 ___
-<a id="position"></a>
 
 ###  position
 
-**● position**: *`number` \| `undefined`*
+• **position**: *number | undefined*
 
-*Defined in [source-destination/progress.ts:93](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/progress.ts#L93)*
+*Defined in [lib/source-destination/progress.ts:93](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/progress.ts#L93)*
 
 ___
-<a id="writable"></a>
 
 ###  writable
 
-**● writable**: *`boolean`*
+• **writable**: *boolean*
 
-*Inherited from Writable.writable*
+*Inherited from [CountingWritable](countingwritable.md).[writable](countingwritable.md#writable)*
 
-*Defined in /node_modules/@types/node/base.d.ts:3770*
-
-___
-<a id="defaultmaxlisteners"></a>
-
-### `<Static>` defaultMaxListeners
-
-**● defaultMaxListeners**: *`number`*
-
-*Inherited from EventEmitter.defaultMaxListeners*
-
-*Defined in /node_modules/@types/node/base.d.ts:681*
+Defined in node_modules/@types/node/base.d.ts:3770
 
 ___
+
+### `Static` defaultMaxListeners
+
+▪ **defaultMaxListeners**: *number*
+
+*Inherited from [CountingWritable](countingwritable.md).[defaultMaxListeners](countingwritable.md#static-defaultmaxlisteners)*
+
+Defined in node_modules/@types/node/base.d.ts:681
 
 ## Methods
 
-<a id="_write"></a>
-
 ###  _write
 
-▸ **_write**(chunk: *`Buffer` \| `Chunk`*, _enc: *`string`*, callback: *`function`*): `void`
+▸ **_write**(`chunk`: Buffer | Chunk, `_enc`: string, `callback`: function): *void*
 
-*Overrides Writable._write*
+*Overrides void*
 
-*Defined in [source-destination/progress.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/progress.ts#L95)*
+*Defined in [lib/source-destination/progress.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/progress.ts#L95)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| chunk | `Buffer` \| `Chunk` |
-| _enc | `string` |
-| callback | `function` |
+▪ **chunk**: *Buffer | Chunk*
 
-**Returns:** `void`
+▪ **_enc**: *string*
+
+▪ **callback**: *function*
+
+▸ (`err?`: [Error](notcapable.md#static-error) | undefined): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`err?` | [Error](notcapable.md#static-error) &#124; undefined |
+
+**Returns:** *void*
 
 ___
-<a id="addlistener"></a>
 
 ###  addListener
 
-▸ **addListener**(event: *`string`*, listener: *`Function`*): `this`
+▸ **addListener**(`event`: string, `listener`: Function): *this*
 
-▸ **addListener**(event: *"close"*, listener: *`function`*): `this`
+*Inherited from [CountingWritable](countingwritable.md).[addListener](countingwritable.md#addlistener)*
 
-▸ **addListener**(event: *"drain"*, listener: *`function`*): `this`
+*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-▸ **addListener**(event: *"error"*, listener: *`function`*): `this`
+Defined in node_modules/@types/node/base.d.ts:3790
 
-▸ **addListener**(event: *"finish"*, listener: *`function`*): `this`
-
-▸ **addListener**(event: *"pipe"*, listener: *`function`*): `this`
-
-▸ **addListener**(event: *"unpipe"*, listener: *`function`*): `this`
-
-*Inherited from Writable.addListener*
-
-*Overrides EventEmitter.addListener*
-
-*Defined in /node_modules/@types/node/base.d.ts:3790*
-
-Event emitter The defined events on documents including:
-
-1.  close
-2.  drain
-3.  error
-4.  finish
-5.  pipe
-6.  unpipe
+Event emitter
+The defined events on documents including:
+  1. close
+  2. drain
+  3. error
+  4. finish
+  5. pipe
+  6. unpipe
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
-*Inherited from Writable.addListener*
+▸ **addListener**(`event`: "close", `listener`: function): *this*
 
-*Overrides EventEmitter.addListener*
+*Inherited from [CountingWritable](countingwritable.md).[addListener](countingwritable.md#addlistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:3791*
+*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| event | "close" |
-| listener | `function` |
-
-**Returns:** `this`
-
-*Inherited from Writable.addListener*
-
-*Overrides EventEmitter.addListener*
-
-*Defined in /node_modules/@types/node/base.d.ts:3792*
+Defined in node_modules/@types/node/base.d.ts:3791
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "drain" |
-| listener | `function` |
+▪ **event**: *"close"*
 
-**Returns:** `this`
+▪ **listener**: *function*
 
-*Inherited from Writable.addListener*
+▸ (): *void*
 
-*Overrides EventEmitter.addListener*
+**Returns:** *this*
 
-*Defined in /node_modules/@types/node/base.d.ts:3793*
+▸ **addListener**(`event`: "drain", `listener`: function): *this*
 
-**Parameters:**
+*Inherited from [CountingWritable](countingwritable.md).[addListener](countingwritable.md#addlistener)*
 
-| Name | Type |
-| ------ | ------ |
-| event | "error" |
-| listener | `function` |
+*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-**Returns:** `this`
-
-*Inherited from Writable.addListener*
-
-*Overrides EventEmitter.addListener*
-
-*Defined in /node_modules/@types/node/base.d.ts:3794*
+Defined in node_modules/@types/node/base.d.ts:3792
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "finish" |
-| listener | `function` |
+▪ **event**: *"drain"*
 
-**Returns:** `this`
+▪ **listener**: *function*
 
-*Inherited from Writable.addListener*
+▸ (): *void*
 
-*Overrides EventEmitter.addListener*
+**Returns:** *this*
 
-*Defined in /node_modules/@types/node/base.d.ts:3795*
+▸ **addListener**(`event`: "error", `listener`: function): *this*
 
-**Parameters:**
+*Inherited from [CountingWritable](countingwritable.md).[addListener](countingwritable.md#addlistener)*
 
-| Name | Type |
-| ------ | ------ |
-| event | "pipe" |
-| listener | `function` |
+*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-**Returns:** `this`
-
-*Inherited from Writable.addListener*
-
-*Overrides EventEmitter.addListener*
-
-*Defined in /node_modules/@types/node/base.d.ts:3796*
+Defined in node_modules/@types/node/base.d.ts:3793
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "unpipe" |
-| listener | `function` |
+▪ **event**: *"error"*
 
-**Returns:** `this`
+▪ **listener**: *function*
+
+▸ (`err`: [Error](notcapable.md#static-error)): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`err` | [Error](notcapable.md#static-error) |
+
+**Returns:** *this*
+
+▸ **addListener**(`event`: "finish", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[addListener](countingwritable.md#addlistener)*
+
+*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+
+Defined in node_modules/@types/node/base.d.ts:3794
+
+**Parameters:**
+
+▪ **event**: *"finish"*
+
+▪ **listener**: *function*
+
+▸ (): *void*
+
+**Returns:** *this*
+
+▸ **addListener**(`event`: "pipe", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[addListener](countingwritable.md#addlistener)*
+
+*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+
+Defined in node_modules/@types/node/base.d.ts:3795
+
+**Parameters:**
+
+▪ **event**: *"pipe"*
+
+▪ **listener**: *function*
+
+▸ (`src`: Readable): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`src` | Readable |
+
+**Returns:** *this*
+
+▸ **addListener**(`event`: "unpipe", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[addListener](countingwritable.md#addlistener)*
+
+*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+
+Defined in node_modules/@types/node/base.d.ts:3796
+
+**Parameters:**
+
+▪ **event**: *"unpipe"*
+
+▪ **listener**: *function*
+
+▸ (`src`: Readable): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`src` | Readable |
+
+**Returns:** *this*
 
 ___
-<a id="emit"></a>
 
 ###  emit
 
-▸ **emit**(event: *`string` \| `symbol`*, ...args: *`any`[]*): `boolean`
+▸ **emit**(`event`: string | symbol, ...`args`: any[]): *boolean*
 
-▸ **emit**(event: *"close"*): `boolean`
+*Inherited from [CountingWritable](countingwritable.md).[emit](countingwritable.md#emit)*
 
-▸ **emit**(event: *"drain"*, chunk: *`Buffer` \| `string`*): `boolean`
+*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-▸ **emit**(event: *"error"*, err: *`Error`*): `boolean`
-
-▸ **emit**(event: *"finish"*): `boolean`
-
-▸ **emit**(event: *"pipe"*, src: *`Readable`*): `boolean`
-
-▸ **emit**(event: *"unpipe"*, src: *`Readable`*): `boolean`
-
-*Inherited from Writable.emit*
-
-*Overrides EventEmitter.emit*
-
-*Defined in /node_modules/@types/node/base.d.ts:3798*
+Defined in node_modules/@types/node/base.d.ts:3798
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| `Rest` args | `any`[] |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`...args` | any[] |
 
-**Returns:** `boolean`
+**Returns:** *boolean*
 
-*Inherited from Writable.emit*
+▸ **emit**(`event`: "close"): *boolean*
 
-*Overrides EventEmitter.emit*
+*Inherited from [CountingWritable](countingwritable.md).[emit](countingwritable.md#emit)*
 
-*Defined in /node_modules/@types/node/base.d.ts:3799*
+*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| event | "close" |
-
-**Returns:** `boolean`
-
-*Inherited from Writable.emit*
-
-*Overrides EventEmitter.emit*
-
-*Defined in /node_modules/@types/node/base.d.ts:3800*
+Defined in node_modules/@types/node/base.d.ts:3799
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "drain" |
-| chunk | `Buffer` \| `string` |
+Name | Type |
+------ | ------ |
+`event` | "close" |
 
-**Returns:** `boolean`
+**Returns:** *boolean*
 
-*Inherited from Writable.emit*
+▸ **emit**(`event`: "drain", `chunk`: Buffer | string): *boolean*
 
-*Overrides EventEmitter.emit*
+*Inherited from [CountingWritable](countingwritable.md).[emit](countingwritable.md#emit)*
 
-*Defined in /node_modules/@types/node/base.d.ts:3801*
+*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| event | "error" |
-| err | `Error` |
-
-**Returns:** `boolean`
-
-*Inherited from Writable.emit*
-
-*Overrides EventEmitter.emit*
-
-*Defined in /node_modules/@types/node/base.d.ts:3802*
+Defined in node_modules/@types/node/base.d.ts:3800
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "finish" |
+Name | Type |
+------ | ------ |
+`event` | "drain" |
+`chunk` | Buffer &#124; string |
 
-**Returns:** `boolean`
+**Returns:** *boolean*
 
-*Inherited from Writable.emit*
+▸ **emit**(`event`: "error", `err`: [Error](notcapable.md#static-error)): *boolean*
 
-*Overrides EventEmitter.emit*
+*Inherited from [CountingWritable](countingwritable.md).[emit](countingwritable.md#emit)*
 
-*Defined in /node_modules/@types/node/base.d.ts:3803*
+*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| event | "pipe" |
-| src | `Readable` |
-
-**Returns:** `boolean`
-
-*Inherited from Writable.emit*
-
-*Overrides EventEmitter.emit*
-
-*Defined in /node_modules/@types/node/base.d.ts:3804*
+Defined in node_modules/@types/node/base.d.ts:3801
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "unpipe" |
-| src | `Readable` |
+Name | Type |
+------ | ------ |
+`event` | "error" |
+`err` | [Error](notcapable.md#static-error) |
 
-**Returns:** `boolean`
+**Returns:** *boolean*
+
+▸ **emit**(`event`: "finish"): *boolean*
+
+*Inherited from [CountingWritable](countingwritable.md).[emit](countingwritable.md#emit)*
+
+*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+
+Defined in node_modules/@types/node/base.d.ts:3802
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`event` | "finish" |
+
+**Returns:** *boolean*
+
+▸ **emit**(`event`: "pipe", `src`: Readable): *boolean*
+
+*Inherited from [CountingWritable](countingwritable.md).[emit](countingwritable.md#emit)*
+
+*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+
+Defined in node_modules/@types/node/base.d.ts:3803
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`event` | "pipe" |
+`src` | Readable |
+
+**Returns:** *boolean*
+
+▸ **emit**(`event`: "unpipe", `src`: Readable): *boolean*
+
+*Inherited from [CountingWritable](countingwritable.md).[emit](countingwritable.md#emit)*
+
+*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+
+Defined in node_modules/@types/node/base.d.ts:3804
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`event` | "unpipe" |
+`src` | Readable |
+
+**Returns:** *boolean*
 
 ___
-<a id="end"></a>
 
 ###  end
 
-▸ **end**(cb?: *`Function`*): `void`
+▸ **end**(`cb?`: Function): *void*
 
-▸ **end**(chunk: *`any`*, cb?: *`Function`*): `void`
+*Inherited from [CountingWritable](countingwritable.md).[end](countingwritable.md#end)*
 
-▸ **end**(chunk: *`any`*, encoding?: *`undefined` \| `string`*, cb?: *`Function`*): `void`
-
-*Inherited from Writable.end*
-
-*Defined in /node_modules/@types/node/base.d.ts:3776*
+Defined in node_modules/@types/node/base.d.ts:3776
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| `Optional` cb | `Function` |
+Name | Type |
+------ | ------ |
+`cb?` | Function |
 
-**Returns:** `void`
+**Returns:** *void*
 
-*Inherited from Writable.end*
+▸ **end**(`chunk`: any, `cb?`: Function): *void*
 
-*Defined in /node_modules/@types/node/base.d.ts:3777*
+*Inherited from [CountingWritable](countingwritable.md).[end](countingwritable.md#end)*
 
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| chunk | `any` |
-| `Optional` cb | `Function` |
-
-**Returns:** `void`
-
-*Inherited from Writable.end*
-
-*Defined in /node_modules/@types/node/base.d.ts:3778*
+Defined in node_modules/@types/node/base.d.ts:3777
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| chunk | `any` |
-| `Optional` encoding | `undefined` \| `string` |
-| `Optional` cb | `Function` |
+Name | Type |
+------ | ------ |
+`chunk` | any |
+`cb?` | Function |
 
-**Returns:** `void`
+**Returns:** *void*
+
+▸ **end**(`chunk`: any, `encoding?`: undefined | string, `cb?`: Function): *void*
+
+*Inherited from [CountingWritable](countingwritable.md).[end](countingwritable.md#end)*
+
+Defined in node_modules/@types/node/base.d.ts:3778
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`chunk` | any |
+`encoding?` | undefined &#124; string |
+`cb?` | Function |
+
+**Returns:** *void*
 
 ___
-<a id="eventnames"></a>
 
 ###  eventNames
 
-▸ **eventNames**(): (`string` \| `symbol`)[]
+▸ **eventNames**(): *string | symbol[]*
 
-*Inherited from EventEmitter.eventNames*
+*Inherited from [CountingWritable](countingwritable.md).[eventNames](countingwritable.md#eventnames)*
 
-*Overrides EventEmitter.eventNames*
+Defined in node_modules/@types/node/base.d.ts:694
 
-*Defined in /node_modules/@types/node/base.d.ts:694*
-
-**Returns:** (`string` \| `symbol`)[]
+**Returns:** *string | symbol[]*
 
 ___
-<a id="getmaxlisteners"></a>
 
 ###  getMaxListeners
 
-▸ **getMaxListeners**(): `number`
+▸ **getMaxListeners**(): *number*
 
-*Inherited from EventEmitter.getMaxListeners*
+*Inherited from [CountingWritable](countingwritable.md).[getMaxListeners](countingwritable.md#getmaxlisteners)*
 
-*Overrides EventEmitter.getMaxListeners*
+Defined in node_modules/@types/node/base.d.ts:691
 
-*Defined in /node_modules/@types/node/base.d.ts:691*
-
-**Returns:** `number`
+**Returns:** *number*
 
 ___
-<a id="listenercount"></a>
 
 ###  listenerCount
 
-▸ **listenerCount**(type: *`string` \| `symbol`*): `number`
+▸ **listenerCount**(`type`: string | symbol): *number*
 
-*Inherited from EventEmitter.listenerCount*
+*Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
 
-*Overrides EventEmitter.listenerCount*
-
-*Defined in /node_modules/@types/node/base.d.ts:695*
+Defined in node_modules/@types/node/base.d.ts:695
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| type | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`type` | string &#124; symbol |
 
-**Returns:** `number`
+**Returns:** *number*
 
 ___
-<a id="listeners"></a>
 
 ###  listeners
 
-▸ **listeners**(event: *`string` \| `symbol`*): `Function`[]
+▸ **listeners**(`event`: string | symbol): *Function[]*
 
-*Inherited from EventEmitter.listeners*
+*Inherited from [CountingWritable](countingwritable.md).[listeners](countingwritable.md#listeners)*
 
-*Overrides EventEmitter.listeners*
-
-*Defined in /node_modules/@types/node/base.d.ts:692*
+Defined in node_modules/@types/node/base.d.ts:692
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
 
-**Returns:** `Function`[]
+**Returns:** *Function[]*
 
 ___
-<a id="on"></a>
 
 ###  on
 
-▸ **on**(event: *`string`*, listener: *`Function`*): `this`
+▸ **on**(`event`: string, `listener`: Function): *this*
 
-▸ **on**(event: *"close"*, listener: *`function`*): `this`
+*Inherited from [CountingWritable](countingwritable.md).[on](countingwritable.md#on)*
 
-▸ **on**(event: *"drain"*, listener: *`function`*): `this`
+*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-▸ **on**(event: *"error"*, listener: *`function`*): `this`
-
-▸ **on**(event: *"finish"*, listener: *`function`*): `this`
-
-▸ **on**(event: *"pipe"*, listener: *`function`*): `this`
-
-▸ **on**(event: *"unpipe"*, listener: *`function`*): `this`
-
-*Inherited from Writable.on*
-
-*Overrides EventEmitter.on*
-
-*Defined in /node_modules/@types/node/base.d.ts:3806*
+Defined in node_modules/@types/node/base.d.ts:3806
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
-*Inherited from Writable.on*
+▸ **on**(`event`: "close", `listener`: function): *this*
 
-*Overrides EventEmitter.on*
+*Inherited from [CountingWritable](countingwritable.md).[on](countingwritable.md#on)*
 
-*Defined in /node_modules/@types/node/base.d.ts:3807*
+*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| event | "close" |
-| listener | `function` |
-
-**Returns:** `this`
-
-*Inherited from Writable.on*
-
-*Overrides EventEmitter.on*
-
-*Defined in /node_modules/@types/node/base.d.ts:3808*
+Defined in node_modules/@types/node/base.d.ts:3807
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "drain" |
-| listener | `function` |
+▪ **event**: *"close"*
 
-**Returns:** `this`
+▪ **listener**: *function*
 
-*Inherited from Writable.on*
+▸ (): *void*
 
-*Overrides EventEmitter.on*
+**Returns:** *this*
 
-*Defined in /node_modules/@types/node/base.d.ts:3809*
+▸ **on**(`event`: "drain", `listener`: function): *this*
 
-**Parameters:**
+*Inherited from [CountingWritable](countingwritable.md).[on](countingwritable.md#on)*
 
-| Name | Type |
-| ------ | ------ |
-| event | "error" |
-| listener | `function` |
+*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-**Returns:** `this`
-
-*Inherited from Writable.on*
-
-*Overrides EventEmitter.on*
-
-*Defined in /node_modules/@types/node/base.d.ts:3810*
+Defined in node_modules/@types/node/base.d.ts:3808
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "finish" |
-| listener | `function` |
+▪ **event**: *"drain"*
 
-**Returns:** `this`
+▪ **listener**: *function*
 
-*Inherited from Writable.on*
+▸ (): *void*
 
-*Overrides EventEmitter.on*
+**Returns:** *this*
 
-*Defined in /node_modules/@types/node/base.d.ts:3811*
+▸ **on**(`event`: "error", `listener`: function): *this*
 
-**Parameters:**
+*Inherited from [CountingWritable](countingwritable.md).[on](countingwritable.md#on)*
 
-| Name | Type |
-| ------ | ------ |
-| event | "pipe" |
-| listener | `function` |
+*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-**Returns:** `this`
-
-*Inherited from Writable.on*
-
-*Overrides EventEmitter.on*
-
-*Defined in /node_modules/@types/node/base.d.ts:3812*
+Defined in node_modules/@types/node/base.d.ts:3809
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "unpipe" |
-| listener | `function` |
+▪ **event**: *"error"*
 
-**Returns:** `this`
+▪ **listener**: *function*
+
+▸ (`err`: [Error](notcapable.md#static-error)): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`err` | [Error](notcapable.md#static-error) |
+
+**Returns:** *this*
+
+▸ **on**(`event`: "finish", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[on](countingwritable.md#on)*
+
+*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+
+Defined in node_modules/@types/node/base.d.ts:3810
+
+**Parameters:**
+
+▪ **event**: *"finish"*
+
+▪ **listener**: *function*
+
+▸ (): *void*
+
+**Returns:** *this*
+
+▸ **on**(`event`: "pipe", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[on](countingwritable.md#on)*
+
+*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+
+Defined in node_modules/@types/node/base.d.ts:3811
+
+**Parameters:**
+
+▪ **event**: *"pipe"*
+
+▪ **listener**: *function*
+
+▸ (`src`: Readable): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`src` | Readable |
+
+**Returns:** *this*
+
+▸ **on**(`event`: "unpipe", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[on](countingwritable.md#on)*
+
+*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+
+Defined in node_modules/@types/node/base.d.ts:3812
+
+**Parameters:**
+
+▪ **event**: *"unpipe"*
+
+▪ **listener**: *function*
+
+▸ (`src`: Readable): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`src` | Readable |
+
+**Returns:** *this*
 
 ___
-<a id="once"></a>
 
 ###  once
 
-▸ **once**(event: *`string`*, listener: *`Function`*): `this`
+▸ **once**(`event`: string, `listener`: Function): *this*
 
-▸ **once**(event: *"close"*, listener: *`function`*): `this`
+*Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#once)*
 
-▸ **once**(event: *"drain"*, listener: *`function`*): `this`
+*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-▸ **once**(event: *"error"*, listener: *`function`*): `this`
-
-▸ **once**(event: *"finish"*, listener: *`function`*): `this`
-
-▸ **once**(event: *"pipe"*, listener: *`function`*): `this`
-
-▸ **once**(event: *"unpipe"*, listener: *`function`*): `this`
-
-*Inherited from Writable.once*
-
-*Overrides EventEmitter.once*
-
-*Defined in /node_modules/@types/node/base.d.ts:3814*
+Defined in node_modules/@types/node/base.d.ts:3814
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
-*Inherited from Writable.once*
+▸ **once**(`event`: "close", `listener`: function): *this*
 
-*Overrides EventEmitter.once*
+*Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#once)*
 
-*Defined in /node_modules/@types/node/base.d.ts:3815*
+*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| event | "close" |
-| listener | `function` |
-
-**Returns:** `this`
-
-*Inherited from Writable.once*
-
-*Overrides EventEmitter.once*
-
-*Defined in /node_modules/@types/node/base.d.ts:3816*
+Defined in node_modules/@types/node/base.d.ts:3815
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "drain" |
-| listener | `function` |
+▪ **event**: *"close"*
 
-**Returns:** `this`
+▪ **listener**: *function*
 
-*Inherited from Writable.once*
+▸ (): *void*
 
-*Overrides EventEmitter.once*
+**Returns:** *this*
 
-*Defined in /node_modules/@types/node/base.d.ts:3817*
+▸ **once**(`event`: "drain", `listener`: function): *this*
 
-**Parameters:**
+*Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#once)*
 
-| Name | Type |
-| ------ | ------ |
-| event | "error" |
-| listener | `function` |
+*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-**Returns:** `this`
-
-*Inherited from Writable.once*
-
-*Overrides EventEmitter.once*
-
-*Defined in /node_modules/@types/node/base.d.ts:3818*
+Defined in node_modules/@types/node/base.d.ts:3816
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "finish" |
-| listener | `function` |
+▪ **event**: *"drain"*
 
-**Returns:** `this`
+▪ **listener**: *function*
 
-*Inherited from Writable.once*
+▸ (): *void*
 
-*Overrides EventEmitter.once*
+**Returns:** *this*
 
-*Defined in /node_modules/@types/node/base.d.ts:3819*
+▸ **once**(`event`: "error", `listener`: function): *this*
 
-**Parameters:**
+*Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#once)*
 
-| Name | Type |
-| ------ | ------ |
-| event | "pipe" |
-| listener | `function` |
+*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-**Returns:** `this`
-
-*Inherited from Writable.once*
-
-*Overrides EventEmitter.once*
-
-*Defined in /node_modules/@types/node/base.d.ts:3820*
+Defined in node_modules/@types/node/base.d.ts:3817
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "unpipe" |
-| listener | `function` |
+▪ **event**: *"error"*
 
-**Returns:** `this`
+▪ **listener**: *function*
+
+▸ (`err`: [Error](notcapable.md#static-error)): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`err` | [Error](notcapable.md#static-error) |
+
+**Returns:** *this*
+
+▸ **once**(`event`: "finish", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#once)*
+
+*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+
+Defined in node_modules/@types/node/base.d.ts:3818
+
+**Parameters:**
+
+▪ **event**: *"finish"*
+
+▪ **listener**: *function*
+
+▸ (): *void*
+
+**Returns:** *this*
+
+▸ **once**(`event`: "pipe", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#once)*
+
+*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+
+Defined in node_modules/@types/node/base.d.ts:3819
+
+**Parameters:**
+
+▪ **event**: *"pipe"*
+
+▪ **listener**: *function*
+
+▸ (`src`: Readable): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`src` | Readable |
+
+**Returns:** *this*
+
+▸ **once**(`event`: "unpipe", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#once)*
+
+*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+
+Defined in node_modules/@types/node/base.d.ts:3820
+
+**Parameters:**
+
+▪ **event**: *"unpipe"*
+
+▪ **listener**: *function*
+
+▸ (`src`: Readable): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`src` | Readable |
+
+**Returns:** *this*
 
 ___
-<a id="pipe"></a>
 
 ###  pipe
 
-▸ **pipe**<`T`>(destination: *`T`*, options?: *`undefined` \| `object`*): `T`
+▸ **pipe**<**T**>(`destination`: T, `options?`: undefined | object): *T*
 
-*Inherited from internal.pipe*
+*Inherited from [CountingWritable](countingwritable.md).[pipe](countingwritable.md#pipe)*
 
-*Defined in /node_modules/@types/node/base.d.ts:3673*
+Defined in node_modules/@types/node/base.d.ts:3673
 
 **Type parameters:**
 
-#### T :  `WritableStream`
+▪ **T**: *WritableStream*
+
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| destination | `T` |
-| `Optional` options | `undefined` \| `object` |
+Name | Type |
+------ | ------ |
+`destination` | T |
+`options?` | undefined &#124; object |
 
-**Returns:** `T`
+**Returns:** *T*
 
 ___
-<a id="prependlistener"></a>
 
 ###  prependListener
 
-▸ **prependListener**(event: *`string`*, listener: *`Function`*): `this`
+▸ **prependListener**(`event`: string, `listener`: Function): *this*
 
-▸ **prependListener**(event: *"close"*, listener: *`function`*): `this`
+*Inherited from [CountingWritable](countingwritable.md).[prependListener](countingwritable.md#prependlistener)*
 
-▸ **prependListener**(event: *"drain"*, listener: *`function`*): `this`
+*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-▸ **prependListener**(event: *"error"*, listener: *`function`*): `this`
-
-▸ **prependListener**(event: *"finish"*, listener: *`function`*): `this`
-
-▸ **prependListener**(event: *"pipe"*, listener: *`function`*): `this`
-
-▸ **prependListener**(event: *"unpipe"*, listener: *`function`*): `this`
-
-*Inherited from Writable.prependListener*
-
-*Overrides EventEmitter.prependListener*
-
-*Defined in /node_modules/@types/node/base.d.ts:3822*
+Defined in node_modules/@types/node/base.d.ts:3822
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
-*Inherited from Writable.prependListener*
+▸ **prependListener**(`event`: "close", `listener`: function): *this*
 
-*Overrides EventEmitter.prependListener*
+*Inherited from [CountingWritable](countingwritable.md).[prependListener](countingwritable.md#prependlistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:3823*
+*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| event | "close" |
-| listener | `function` |
-
-**Returns:** `this`
-
-*Inherited from Writable.prependListener*
-
-*Overrides EventEmitter.prependListener*
-
-*Defined in /node_modules/@types/node/base.d.ts:3824*
+Defined in node_modules/@types/node/base.d.ts:3823
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "drain" |
-| listener | `function` |
+▪ **event**: *"close"*
 
-**Returns:** `this`
+▪ **listener**: *function*
 
-*Inherited from Writable.prependListener*
+▸ (): *void*
 
-*Overrides EventEmitter.prependListener*
+**Returns:** *this*
 
-*Defined in /node_modules/@types/node/base.d.ts:3825*
+▸ **prependListener**(`event`: "drain", `listener`: function): *this*
 
-**Parameters:**
+*Inherited from [CountingWritable](countingwritable.md).[prependListener](countingwritable.md#prependlistener)*
 
-| Name | Type |
-| ------ | ------ |
-| event | "error" |
-| listener | `function` |
+*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-**Returns:** `this`
-
-*Inherited from Writable.prependListener*
-
-*Overrides EventEmitter.prependListener*
-
-*Defined in /node_modules/@types/node/base.d.ts:3826*
+Defined in node_modules/@types/node/base.d.ts:3824
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "finish" |
-| listener | `function` |
+▪ **event**: *"drain"*
 
-**Returns:** `this`
+▪ **listener**: *function*
 
-*Inherited from Writable.prependListener*
+▸ (): *void*
 
-*Overrides EventEmitter.prependListener*
+**Returns:** *this*
 
-*Defined in /node_modules/@types/node/base.d.ts:3827*
+▸ **prependListener**(`event`: "error", `listener`: function): *this*
 
-**Parameters:**
+*Inherited from [CountingWritable](countingwritable.md).[prependListener](countingwritable.md#prependlistener)*
 
-| Name | Type |
-| ------ | ------ |
-| event | "pipe" |
-| listener | `function` |
+*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-**Returns:** `this`
-
-*Inherited from Writable.prependListener*
-
-*Overrides EventEmitter.prependListener*
-
-*Defined in /node_modules/@types/node/base.d.ts:3828*
+Defined in node_modules/@types/node/base.d.ts:3825
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "unpipe" |
-| listener | `function` |
+▪ **event**: *"error"*
 
-**Returns:** `this`
+▪ **listener**: *function*
+
+▸ (`err`: [Error](notcapable.md#static-error)): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`err` | [Error](notcapable.md#static-error) |
+
+**Returns:** *this*
+
+▸ **prependListener**(`event`: "finish", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[prependListener](countingwritable.md#prependlistener)*
+
+*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
+
+Defined in node_modules/@types/node/base.d.ts:3826
+
+**Parameters:**
+
+▪ **event**: *"finish"*
+
+▪ **listener**: *function*
+
+▸ (): *void*
+
+**Returns:** *this*
+
+▸ **prependListener**(`event`: "pipe", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[prependListener](countingwritable.md#prependlistener)*
+
+*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
+
+Defined in node_modules/@types/node/base.d.ts:3827
+
+**Parameters:**
+
+▪ **event**: *"pipe"*
+
+▪ **listener**: *function*
+
+▸ (`src`: Readable): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`src` | Readable |
+
+**Returns:** *this*
+
+▸ **prependListener**(`event`: "unpipe", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[prependListener](countingwritable.md#prependlistener)*
+
+*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
+
+Defined in node_modules/@types/node/base.d.ts:3828
+
+**Parameters:**
+
+▪ **event**: *"unpipe"*
+
+▪ **listener**: *function*
+
+▸ (`src`: Readable): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`src` | Readable |
+
+**Returns:** *this*
 
 ___
-<a id="prependoncelistener"></a>
 
 ###  prependOnceListener
 
-▸ **prependOnceListener**(event: *`string`*, listener: *`Function`*): `this`
+▸ **prependOnceListener**(`event`: string, `listener`: Function): *this*
 
-▸ **prependOnceListener**(event: *"close"*, listener: *`function`*): `this`
+*Inherited from [CountingWritable](countingwritable.md).[prependOnceListener](countingwritable.md#prependoncelistener)*
 
-▸ **prependOnceListener**(event: *"drain"*, listener: *`function`*): `this`
+*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-▸ **prependOnceListener**(event: *"error"*, listener: *`function`*): `this`
-
-▸ **prependOnceListener**(event: *"finish"*, listener: *`function`*): `this`
-
-▸ **prependOnceListener**(event: *"pipe"*, listener: *`function`*): `this`
-
-▸ **prependOnceListener**(event: *"unpipe"*, listener: *`function`*): `this`
-
-*Inherited from Writable.prependOnceListener*
-
-*Overrides EventEmitter.prependOnceListener*
-
-*Defined in /node_modules/@types/node/base.d.ts:3830*
+Defined in node_modules/@types/node/base.d.ts:3830
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
-*Inherited from Writable.prependOnceListener*
+▸ **prependOnceListener**(`event`: "close", `listener`: function): *this*
 
-*Overrides EventEmitter.prependOnceListener*
+*Inherited from [CountingWritable](countingwritable.md).[prependOnceListener](countingwritable.md#prependoncelistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:3831*
+*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| event | "close" |
-| listener | `function` |
-
-**Returns:** `this`
-
-*Inherited from Writable.prependOnceListener*
-
-*Overrides EventEmitter.prependOnceListener*
-
-*Defined in /node_modules/@types/node/base.d.ts:3832*
+Defined in node_modules/@types/node/base.d.ts:3831
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "drain" |
-| listener | `function` |
+▪ **event**: *"close"*
 
-**Returns:** `this`
+▪ **listener**: *function*
 
-*Inherited from Writable.prependOnceListener*
+▸ (): *void*
 
-*Overrides EventEmitter.prependOnceListener*
+**Returns:** *this*
 
-*Defined in /node_modules/@types/node/base.d.ts:3833*
+▸ **prependOnceListener**(`event`: "drain", `listener`: function): *this*
 
-**Parameters:**
+*Inherited from [CountingWritable](countingwritable.md).[prependOnceListener](countingwritable.md#prependoncelistener)*
 
-| Name | Type |
-| ------ | ------ |
-| event | "error" |
-| listener | `function` |
+*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-**Returns:** `this`
-
-*Inherited from Writable.prependOnceListener*
-
-*Overrides EventEmitter.prependOnceListener*
-
-*Defined in /node_modules/@types/node/base.d.ts:3834*
+Defined in node_modules/@types/node/base.d.ts:3832
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "finish" |
-| listener | `function` |
+▪ **event**: *"drain"*
 
-**Returns:** `this`
+▪ **listener**: *function*
 
-*Inherited from Writable.prependOnceListener*
+▸ (): *void*
 
-*Overrides EventEmitter.prependOnceListener*
+**Returns:** *this*
 
-*Defined in /node_modules/@types/node/base.d.ts:3835*
+▸ **prependOnceListener**(`event`: "error", `listener`: function): *this*
 
-**Parameters:**
+*Inherited from [CountingWritable](countingwritable.md).[prependOnceListener](countingwritable.md#prependoncelistener)*
 
-| Name | Type |
-| ------ | ------ |
-| event | "pipe" |
-| listener | `function` |
+*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-**Returns:** `this`
-
-*Inherited from Writable.prependOnceListener*
-
-*Overrides EventEmitter.prependOnceListener*
-
-*Defined in /node_modules/@types/node/base.d.ts:3836*
+Defined in node_modules/@types/node/base.d.ts:3833
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "unpipe" |
-| listener | `function` |
+▪ **event**: *"error"*
 
-**Returns:** `this`
+▪ **listener**: *function*
+
+▸ (`err`: [Error](notcapable.md#static-error)): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`err` | [Error](notcapable.md#static-error) |
+
+**Returns:** *this*
+
+▸ **prependOnceListener**(`event`: "finish", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[prependOnceListener](countingwritable.md#prependoncelistener)*
+
+*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+
+Defined in node_modules/@types/node/base.d.ts:3834
+
+**Parameters:**
+
+▪ **event**: *"finish"*
+
+▪ **listener**: *function*
+
+▸ (): *void*
+
+**Returns:** *this*
+
+▸ **prependOnceListener**(`event`: "pipe", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[prependOnceListener](countingwritable.md#prependoncelistener)*
+
+*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+
+Defined in node_modules/@types/node/base.d.ts:3835
+
+**Parameters:**
+
+▪ **event**: *"pipe"*
+
+▪ **listener**: *function*
+
+▸ (`src`: Readable): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`src` | Readable |
+
+**Returns:** *this*
+
+▸ **prependOnceListener**(`event`: "unpipe", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[prependOnceListener](countingwritable.md#prependoncelistener)*
+
+*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+
+Defined in node_modules/@types/node/base.d.ts:3836
+
+**Parameters:**
+
+▪ **event**: *"unpipe"*
+
+▪ **listener**: *function*
+
+▸ (`src`: Readable): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`src` | Readable |
+
+**Returns:** *this*
 
 ___
-<a id="removealllisteners"></a>
 
 ###  removeAllListeners
 
-▸ **removeAllListeners**(event?: *`string` \| `symbol`*): `this`
+▸ **removeAllListeners**(`event?`: string | symbol): *this*
 
-*Inherited from EventEmitter.removeAllListeners*
+*Inherited from [CountingWritable](countingwritable.md).[removeAllListeners](countingwritable.md#removealllisteners)*
 
-*Overrides EventEmitter.removeAllListeners*
-
-*Defined in /node_modules/@types/node/base.d.ts:689*
+Defined in node_modules/@types/node/base.d.ts:689
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| `Optional` event | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`event?` | string &#124; symbol |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="removelistener"></a>
 
 ###  removeListener
 
-▸ **removeListener**(event: *`string`*, listener: *`Function`*): `this`
+▸ **removeListener**(`event`: string, `listener`: Function): *this*
 
-▸ **removeListener**(event: *"close"*, listener: *`function`*): `this`
+*Inherited from [CountingWritable](countingwritable.md).[removeListener](countingwritable.md#removelistener)*
 
-▸ **removeListener**(event: *"drain"*, listener: *`function`*): `this`
+*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-▸ **removeListener**(event: *"error"*, listener: *`function`*): `this`
-
-▸ **removeListener**(event: *"finish"*, listener: *`function`*): `this`
-
-▸ **removeListener**(event: *"pipe"*, listener: *`function`*): `this`
-
-▸ **removeListener**(event: *"unpipe"*, listener: *`function`*): `this`
-
-*Inherited from Writable.removeListener*
-
-*Overrides EventEmitter.removeListener*
-
-*Defined in /node_modules/@types/node/base.d.ts:3838*
+Defined in node_modules/@types/node/base.d.ts:3838
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
-*Inherited from Writable.removeListener*
+▸ **removeListener**(`event`: "close", `listener`: function): *this*
 
-*Overrides EventEmitter.removeListener*
+*Inherited from [CountingWritable](countingwritable.md).[removeListener](countingwritable.md#removelistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:3839*
+*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| event | "close" |
-| listener | `function` |
-
-**Returns:** `this`
-
-*Inherited from Writable.removeListener*
-
-*Overrides EventEmitter.removeListener*
-
-*Defined in /node_modules/@types/node/base.d.ts:3840*
+Defined in node_modules/@types/node/base.d.ts:3839
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "drain" |
-| listener | `function` |
+▪ **event**: *"close"*
 
-**Returns:** `this`
+▪ **listener**: *function*
 
-*Inherited from Writable.removeListener*
+▸ (): *void*
 
-*Overrides EventEmitter.removeListener*
+**Returns:** *this*
 
-*Defined in /node_modules/@types/node/base.d.ts:3841*
+▸ **removeListener**(`event`: "drain", `listener`: function): *this*
 
-**Parameters:**
+*Inherited from [CountingWritable](countingwritable.md).[removeListener](countingwritable.md#removelistener)*
 
-| Name | Type |
-| ------ | ------ |
-| event | "error" |
-| listener | `function` |
+*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-**Returns:** `this`
-
-*Inherited from Writable.removeListener*
-
-*Overrides EventEmitter.removeListener*
-
-*Defined in /node_modules/@types/node/base.d.ts:3842*
+Defined in node_modules/@types/node/base.d.ts:3840
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "finish" |
-| listener | `function` |
+▪ **event**: *"drain"*
 
-**Returns:** `this`
+▪ **listener**: *function*
 
-*Inherited from Writable.removeListener*
+▸ (): *void*
 
-*Overrides EventEmitter.removeListener*
+**Returns:** *this*
 
-*Defined in /node_modules/@types/node/base.d.ts:3843*
+▸ **removeListener**(`event`: "error", `listener`: function): *this*
 
-**Parameters:**
+*Inherited from [CountingWritable](countingwritable.md).[removeListener](countingwritable.md#removelistener)*
 
-| Name | Type |
-| ------ | ------ |
-| event | "pipe" |
-| listener | `function` |
+*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-**Returns:** `this`
-
-*Inherited from Writable.removeListener*
-
-*Overrides EventEmitter.removeListener*
-
-*Defined in /node_modules/@types/node/base.d.ts:3844*
+Defined in node_modules/@types/node/base.d.ts:3841
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | "unpipe" |
-| listener | `function` |
+▪ **event**: *"error"*
 
-**Returns:** `this`
+▪ **listener**: *function*
+
+▸ (`err`: [Error](notcapable.md#static-error)): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`err` | [Error](notcapable.md#static-error) |
+
+**Returns:** *this*
+
+▸ **removeListener**(`event`: "finish", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[removeListener](countingwritable.md#removelistener)*
+
+*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+
+Defined in node_modules/@types/node/base.d.ts:3842
+
+**Parameters:**
+
+▪ **event**: *"finish"*
+
+▪ **listener**: *function*
+
+▸ (): *void*
+
+**Returns:** *this*
+
+▸ **removeListener**(`event`: "pipe", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[removeListener](countingwritable.md#removelistener)*
+
+*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+
+Defined in node_modules/@types/node/base.d.ts:3843
+
+**Parameters:**
+
+▪ **event**: *"pipe"*
+
+▪ **listener**: *function*
+
+▸ (`src`: Readable): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`src` | Readable |
+
+**Returns:** *this*
+
+▸ **removeListener**(`event`: "unpipe", `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[removeListener](countingwritable.md#removelistener)*
+
+*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+
+Defined in node_modules/@types/node/base.d.ts:3844
+
+**Parameters:**
+
+▪ **event**: *"unpipe"*
+
+▪ **listener**: *function*
+
+▸ (`src`: Readable): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`src` | Readable |
+
+**Returns:** *this*
 
 ___
-<a id="setdefaultencoding"></a>
 
 ###  setDefaultEncoding
 
-▸ **setDefaultEncoding**(encoding: *`string`*): `this`
+▸ **setDefaultEncoding**(`encoding`: string): *this*
 
-*Inherited from Writable.setDefaultEncoding*
+*Inherited from [CountingWritable](countingwritable.md).[setDefaultEncoding](countingwritable.md#setdefaultencoding)*
 
-*Defined in /node_modules/@types/node/base.d.ts:3775*
+Defined in node_modules/@types/node/base.d.ts:3775
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| encoding | `string` |
+Name | Type |
+------ | ------ |
+`encoding` | string |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="setmaxlisteners"></a>
 
 ###  setMaxListeners
 
-▸ **setMaxListeners**(n: *`number`*): `this`
+▸ **setMaxListeners**(`n`: number): *this*
 
-*Inherited from EventEmitter.setMaxListeners*
+*Inherited from [CountingWritable](countingwritable.md).[setMaxListeners](countingwritable.md#setmaxlisteners)*
 
-*Overrides EventEmitter.setMaxListeners*
-
-*Defined in /node_modules/@types/node/base.d.ts:690*
+Defined in node_modules/@types/node/base.d.ts:690
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| n | `number` |
+Name | Type |
+------ | ------ |
+`n` | number |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="write"></a>
 
 ###  write
 
-▸ **write**(chunk: *`any`*, cb?: *`Function`*): `boolean`
+▸ **write**(`chunk`: any, `cb?`: Function): *boolean*
 
-▸ **write**(chunk: *`any`*, encoding?: *`undefined` \| `string`*, cb?: *`Function`*): `boolean`
+*Inherited from [CountingWritable](countingwritable.md).[write](countingwritable.md#write)*
 
-*Inherited from Writable.write*
-
-*Defined in /node_modules/@types/node/base.d.ts:3773*
+Defined in node_modules/@types/node/base.d.ts:3773
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| chunk | `any` |
-| `Optional` cb | `Function` |
+Name | Type |
+------ | ------ |
+`chunk` | any |
+`cb?` | Function |
 
-**Returns:** `boolean`
+**Returns:** *boolean*
 
-*Inherited from Writable.write*
+▸ **write**(`chunk`: any, `encoding?`: undefined | string, `cb?`: Function): *boolean*
 
-*Defined in /node_modules/@types/node/base.d.ts:3774*
+*Inherited from [CountingWritable](countingwritable.md).[write](countingwritable.md#write)*
 
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| chunk | `any` |
-| `Optional` encoding | `undefined` \| `string` |
-| `Optional` cb | `Function` |
-
-**Returns:** `boolean`
-
-___
-<a id="listenercount-1"></a>
-
-### `<Static>` listenerCount
-
-▸ **listenerCount**(emitter: *`EventEmitter`*, event: *`string` \| `symbol`*): `number`
-
-*Inherited from EventEmitter.listenerCount*
-
-*Defined in /node_modules/@types/node/base.d.ts:680*
+Defined in node_modules/@types/node/base.d.ts:3774
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| emitter | `EventEmitter` |
-| event | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`chunk` | any |
+`encoding?` | undefined &#124; string |
+`cb?` | Function |
 
-**Returns:** `number`
+**Returns:** *boolean*
 
 ___
 
+### `Static` listenerCount
+
+▸ **listenerCount**(`emitter`: EventEmitter, `event`: string | symbol): *number*
+
+*Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
+
+Defined in node_modules/@types/node/base.d.ts:680
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`emitter` | EventEmitter |
+`event` | string &#124; symbol |
+
+**Returns:** *number*

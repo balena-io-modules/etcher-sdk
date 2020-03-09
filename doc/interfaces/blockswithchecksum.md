@@ -1,48 +1,39 @@
-[etcher-sdk](../README.md) > [BlocksWithChecksum](../interfaces/blockswithchecksum.md)
+[etcher-sdk](../README.md) › [BlocksWithChecksum](blockswithchecksum.md)
 
 # Interface: BlocksWithChecksum
 
 ## Hierarchy
 
-**BlocksWithChecksum**
+* **BlocksWithChecksum**
 
 ## Index
 
 ### Properties
 
 * [blocks](blockswithchecksum.md#blocks)
-* [checksum](blockswithchecksum.md#checksum)
-* [checksumType](blockswithchecksum.md#checksumtype)
-
----
+* [checksum](blockswithchecksum.md#optional-checksum)
+* [checksumType](blockswithchecksum.md#optional-checksumtype)
 
 ## Properties
 
-<a id="blocks"></a>
-
 ###  blocks
 
-**● blocks**: *[Block](block.md)[]*
+• **blocks**: *[Block](block.md)[]*
 
-*Defined in [sparse-stream/shared.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/sparse-stream/shared.ts#L41)*
-
-___
-<a id="checksum"></a>
-
-### `<Optional>` checksum
-
-**● checksum**: *`undefined` \| `string`*
-
-*Defined in [sparse-stream/shared.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/sparse-stream/shared.ts#L40)*
-
-___
-<a id="checksumtype"></a>
-
-### `<Optional>` checksumType
-
-**● checksumType**: *[ChecksumType](../#checksumtype)*
-
-*Defined in [sparse-stream/shared.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/sparse-stream/shared.ts#L39)*
+*Defined in [lib/sparse-stream/shared.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/shared.ts#L41)*
 
 ___
 
+### `Optional` checksum
+
+• **checksum**? : *undefined | string*
+
+*Defined in [lib/sparse-stream/shared.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/shared.ts#L40)*
+
+___
+
+### `Optional` checksumType
+
+• **checksumType**? : *[ChecksumType](../README.md#checksumtype)*
+
+*Defined in [lib/sparse-stream/shared.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/shared.ts#L39)*
