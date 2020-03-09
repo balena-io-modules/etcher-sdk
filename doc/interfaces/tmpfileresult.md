@@ -1,38 +1,30 @@
-[etcher-sdk](../README.md) > [TmpFileResult](../interfaces/tmpfileresult.md)
+[etcher-sdk](../README.md) › [TmpFileResult](tmpfileresult.md)
 
 # Interface: TmpFileResult
 
 ## Hierarchy
 
-**TmpFileResult**
+* **TmpFileResult**
 
 ## Index
 
 ### Properties
 
-* [fd](tmpfileresult.md#fd)
+* [fd](tmpfileresult.md#optional-fd)
 * [path](tmpfileresult.md#path)
-
----
 
 ## Properties
 
-<a id="fd"></a>
+### `Optional` fd
 
-### `<Optional>` fd
+• **fd**? : *undefined | number*
 
-**● fd**: *`undefined` \| `number`*
-
-*Defined in [tmp.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/tmp.ts#L34)*
+*Defined in [lib/tmp.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/tmp.ts#L34)*
 
 ___
-<a id="path"></a>
 
 ###  path
 
-**● path**: *`string`*
+• **path**: *string*
 
-*Defined in [tmp.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/tmp.ts#L33)*
-
-___
-
+*Defined in [lib/tmp.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/tmp.ts#L33)*

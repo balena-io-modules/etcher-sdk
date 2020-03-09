@@ -1,12 +1,12 @@
-[etcher-sdk](../README.md) > [BlockDeviceAdapter](../classes/blockdeviceadapter.md)
+[etcher-sdk](../README.md) › [BlockDeviceAdapter](blockdeviceadapter.md)
 
 # Class: BlockDeviceAdapter
 
 ## Hierarchy
 
-↳  [Adapter](adapter.md)
+  ↳ [Adapter](adapter.md)
 
-**↳ BlockDeviceAdapter**
+  ↳ **BlockDeviceAdapter**
 
 ## Index
 
@@ -16,11 +16,11 @@
 
 ### Properties
 
-* [drives](blockdeviceadapter.md#drives)
+* [drives](blockdeviceadapter.md#private-drives)
 * [includeSystemDrives](blockdeviceadapter.md#includesystemdrives)
-* [ready](blockdeviceadapter.md#ready)
-* [running](blockdeviceadapter.md#running)
-* [defaultMaxListeners](blockdeviceadapter.md#defaultmaxlisteners)
+* [ready](blockdeviceadapter.md#private-ready)
+* [running](blockdeviceadapter.md#private-running)
+* [defaultMaxListeners](blockdeviceadapter.md#static-defaultmaxlisteners)
 
 ### Methods
 
@@ -28,7 +28,7 @@
 * [emit](blockdeviceadapter.md#emit)
 * [eventNames](blockdeviceadapter.md#eventnames)
 * [getMaxListeners](blockdeviceadapter.md#getmaxlisteners)
-* [listDrives](blockdeviceadapter.md#listdrives)
+* [listDrives](blockdeviceadapter.md#private-listdrives)
 * [listenerCount](blockdeviceadapter.md#listenercount)
 * [listeners](blockdeviceadapter.md#listeners)
 * [on](blockdeviceadapter.md#on)
@@ -37,437 +37,399 @@
 * [prependOnceListener](blockdeviceadapter.md#prependoncelistener)
 * [removeAllListeners](blockdeviceadapter.md#removealllisteners)
 * [removeListener](blockdeviceadapter.md#removelistener)
-* [scan](blockdeviceadapter.md#scan)
-* [scanLoop](blockdeviceadapter.md#scanloop)
+* [scan](blockdeviceadapter.md#private-scan)
+* [scanLoop](blockdeviceadapter.md#private-scanloop)
 * [setMaxListeners](blockdeviceadapter.md#setmaxlisteners)
 * [start](blockdeviceadapter.md#start)
 * [stop](blockdeviceadapter.md#stop)
-* [listenerCount](blockdeviceadapter.md#listenercount-1)
-
----
+* [listenerCount](blockdeviceadapter.md#static-listenercount)
 
 ## Constructors
 
-<a id="constructor"></a>
-
 ###  constructor
 
-⊕ **new BlockDeviceAdapter**(includeSystemDrives?: *`function`*): [BlockDeviceAdapter](blockdeviceadapter.md)
+\+ **new BlockDeviceAdapter**(`includeSystemDrives`: function): *[BlockDeviceAdapter](blockdeviceadapter.md)*
 
-*Defined in [scanner/adapters/block-device.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/scanner/adapters/block-device.ts#L60)*
+*Defined in [lib/scanner/adapters/block-device.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/scanner/adapters/block-device.ts#L60)*
 
 **Parameters:**
 
-| Name | Type | Default value |
-| ------ | ------ | ------ |
-| `Default value` includeSystemDrives | `function` |  () &#x3D;&gt; false |
+▪`Default value`  **includeSystemDrives**: *function*= () => false
 
-**Returns:** [BlockDeviceAdapter](blockdeviceadapter.md)
+▸ (): *boolean*
 
-___
+**Returns:** *[BlockDeviceAdapter](blockdeviceadapter.md)*
 
 ## Properties
 
-<a id="drives"></a>
+### `Private` drives
 
-### `<Private>` drives
+• **drives**: *Map‹string, [BlockDevice](blockdevice.md)›* = new Map()
 
-**● drives**: *`Map`<`string`, [BlockDevice](blockdevice.md)>* =  new Map()
-
-*Defined in [scanner/adapters/block-device.ts:58](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/scanner/adapters/block-device.ts#L58)*
+*Defined in [lib/scanner/adapters/block-device.ts:58](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/scanner/adapters/block-device.ts#L58)*
 
 ___
-<a id="includesystemdrives"></a>
 
 ###  includeSystemDrives
 
-**● includeSystemDrives**: *`function`*
+• **includeSystemDrives**: *function*
 
-*Defined in [scanner/adapters/block-device.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/scanner/adapters/block-device.ts#L62)*
+*Defined in [lib/scanner/adapters/block-device.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/scanner/adapters/block-device.ts#L62)*
 
-#### Type declaration
-▸(): `boolean`
+#### Type declaration:
 
-**Returns:** `boolean`
-
-___
-<a id="ready"></a>
-
-### `<Private>` ready
-
-**● ready**: *`boolean`* = false
-
-*Defined in [scanner/adapters/block-device.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/scanner/adapters/block-device.ts#L60)*
+▸ (): *boolean*
 
 ___
-<a id="running"></a>
 
-### `<Private>` running
+### `Private` ready
 
-**● running**: *`boolean`* = false
+• **ready**: *boolean* = false
 
-*Defined in [scanner/adapters/block-device.ts:59](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/scanner/adapters/block-device.ts#L59)*
-
-___
-<a id="defaultmaxlisteners"></a>
-
-### `<Static>` defaultMaxListeners
-
-**● defaultMaxListeners**: *`number`*
-
-*Inherited from EventEmitter.defaultMaxListeners*
-
-*Defined in /node_modules/@types/node/base.d.ts:681*
+*Defined in [lib/scanner/adapters/block-device.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/scanner/adapters/block-device.ts#L60)*
 
 ___
+
+### `Private` running
+
+• **running**: *boolean* = false
+
+*Defined in [lib/scanner/adapters/block-device.ts:59](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/scanner/adapters/block-device.ts#L59)*
+
+___
+
+### `Static` defaultMaxListeners
+
+▪ **defaultMaxListeners**: *number*
+
+*Inherited from [CountingWritable](countingwritable.md).[defaultMaxListeners](countingwritable.md#static-defaultmaxlisteners)*
+
+Defined in node_modules/@types/node/base.d.ts:681
 
 ## Methods
 
-<a id="addlistener"></a>
-
 ###  addListener
 
-▸ **addListener**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **addListener**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.addListener*
+*Inherited from [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-*Overrides EventEmitter.addListener*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:683*
+Defined in node_modules/@types/node/base.d.ts:683
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="emit"></a>
 
 ###  emit
 
-▸ **emit**(event: *`string` \| `symbol`*, ...args: *`any`[]*): `boolean`
+▸ **emit**(`event`: string | symbol, ...`args`: any[]): *boolean*
 
-*Inherited from EventEmitter.emit*
+*Inherited from [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-*Overrides EventEmitter.emit*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
-*Defined in /node_modules/@types/node/base.d.ts:693*
+Defined in node_modules/@types/node/base.d.ts:693
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| `Rest` args | `any`[] |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`...args` | any[] |
 
-**Returns:** `boolean`
+**Returns:** *boolean*
 
 ___
-<a id="eventnames"></a>
 
 ###  eventNames
 
-▸ **eventNames**(): (`string` \| `symbol`)[]
+▸ **eventNames**(): *string | symbol[]*
 
-*Inherited from EventEmitter.eventNames*
+*Inherited from [CountingWritable](countingwritable.md).[eventNames](countingwritable.md#eventnames)*
 
-*Overrides EventEmitter.eventNames*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[eventNames](../interfaces/sparsereadable.md#eventnames)*
 
-*Defined in /node_modules/@types/node/base.d.ts:694*
+Defined in node_modules/@types/node/base.d.ts:694
 
-**Returns:** (`string` \| `symbol`)[]
+**Returns:** *string | symbol[]*
 
 ___
-<a id="getmaxlisteners"></a>
 
 ###  getMaxListeners
 
-▸ **getMaxListeners**(): `number`
+▸ **getMaxListeners**(): *number*
 
-*Inherited from EventEmitter.getMaxListeners*
+*Inherited from [CountingWritable](countingwritable.md).[getMaxListeners](countingwritable.md#getmaxlisteners)*
 
-*Overrides EventEmitter.getMaxListeners*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[getMaxListeners](../interfaces/sparsereadable.md#getmaxlisteners)*
 
-*Defined in /node_modules/@types/node/base.d.ts:691*
+Defined in node_modules/@types/node/base.d.ts:691
 
-**Returns:** `number`
-
-___
-<a id="listdrives"></a>
-
-### `<Private>` listDrives
-
-▸ **listDrives**(): `Promise`<`Map`<`string`, [DrivelistDrive](../interfaces/drivelistdrive.md)>>
-
-*Defined in [scanner/adapters/block-device.ts:107](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/scanner/adapters/block-device.ts#L107)*
-
-**Returns:** `Promise`<`Map`<`string`, [DrivelistDrive](../interfaces/drivelistdrive.md)>>
+**Returns:** *number*
 
 ___
-<a id="listenercount"></a>
+
+### `Private` listDrives
+
+▸ **listDrives**(): *Promise‹Map‹string, [DrivelistDrive](../interfaces/drivelistdrive.md)››*
+
+*Defined in [lib/scanner/adapters/block-device.ts:107](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/scanner/adapters/block-device.ts#L107)*
+
+**Returns:** *Promise‹Map‹string, [DrivelistDrive](../interfaces/drivelistdrive.md)››*
+
+___
 
 ###  listenerCount
 
-▸ **listenerCount**(type: *`string` \| `symbol`*): `number`
+▸ **listenerCount**(`type`: string | symbol): *number*
 
-*Inherited from EventEmitter.listenerCount*
+*Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
 
-*Overrides EventEmitter.listenerCount*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[listenerCount](../interfaces/sparsereadable.md#listenercount)*
 
-*Defined in /node_modules/@types/node/base.d.ts:695*
+Defined in node_modules/@types/node/base.d.ts:695
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| type | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`type` | string &#124; symbol |
 
-**Returns:** `number`
+**Returns:** *number*
 
 ___
-<a id="listeners"></a>
 
 ###  listeners
 
-▸ **listeners**(event: *`string` \| `symbol`*): `Function`[]
+▸ **listeners**(`event`: string | symbol): *Function[]*
 
-*Inherited from EventEmitter.listeners*
+*Inherited from [CountingWritable](countingwritable.md).[listeners](countingwritable.md#listeners)*
 
-*Overrides EventEmitter.listeners*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[listeners](../interfaces/sparsereadable.md#listeners)*
 
-*Defined in /node_modules/@types/node/base.d.ts:692*
+Defined in node_modules/@types/node/base.d.ts:692
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
 
-**Returns:** `Function`[]
+**Returns:** *Function[]*
 
 ___
-<a id="on"></a>
 
 ###  on
 
-▸ **on**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **on**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.on*
+*Inherited from [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-*Overrides EventEmitter.on*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
-*Defined in /node_modules/@types/node/base.d.ts:684*
+Defined in node_modules/@types/node/base.d.ts:684
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="once"></a>
 
 ###  once
 
-▸ **once**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **once**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.once*
+*Inherited from [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-*Overrides EventEmitter.once*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
-*Defined in /node_modules/@types/node/base.d.ts:685*
+Defined in node_modules/@types/node/base.d.ts:685
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="prependlistener"></a>
 
 ###  prependListener
 
-▸ **prependListener**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **prependListener**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.prependListener*
+*Inherited from [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-*Overrides EventEmitter.prependListener*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:686*
+Defined in node_modules/@types/node/base.d.ts:686
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="prependoncelistener"></a>
 
 ###  prependOnceListener
 
-▸ **prependOnceListener**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **prependOnceListener**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.prependOnceListener*
+*Inherited from [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-*Overrides EventEmitter.prependOnceListener*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:687*
+Defined in node_modules/@types/node/base.d.ts:687
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="removealllisteners"></a>
 
 ###  removeAllListeners
 
-▸ **removeAllListeners**(event?: *`string` \| `symbol`*): `this`
+▸ **removeAllListeners**(`event?`: string | symbol): *this*
 
-*Inherited from EventEmitter.removeAllListeners*
+*Inherited from [CountingWritable](countingwritable.md).[removeAllListeners](countingwritable.md#removealllisteners)*
 
-*Overrides EventEmitter.removeAllListeners*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeAllListeners](../interfaces/sparsereadable.md#removealllisteners)*
 
-*Defined in /node_modules/@types/node/base.d.ts:689*
+Defined in node_modules/@types/node/base.d.ts:689
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| `Optional` event | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`event?` | string &#124; symbol |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="removelistener"></a>
 
 ###  removeListener
 
-▸ **removeListener**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **removeListener**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.removeListener*
+*Inherited from [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-*Overrides EventEmitter.removeListener*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:688*
+Defined in node_modules/@types/node/base.d.ts:688
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
-
-___
-<a id="scan"></a>
-
-### `<Private>` scan
-
-▸ **scan**(): `Promise`<`void`>
-
-*Defined in [scanner/adapters/block-device.ts:88](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/scanner/adapters/block-device.ts#L88)*
-
-**Returns:** `Promise`<`void`>
+**Returns:** *this*
 
 ___
-<a id="scanloop"></a>
 
-### `<Private>` scanLoop
+### `Private` scan
 
-▸ **scanLoop**(): `Promise`<`void`>
+▸ **scan**(): *Promise‹void›*
 
-*Defined in [scanner/adapters/block-device.ts:77](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/scanner/adapters/block-device.ts#L77)*
+*Defined in [lib/scanner/adapters/block-device.ts:88](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/scanner/adapters/block-device.ts#L88)*
 
-**Returns:** `Promise`<`void`>
+**Returns:** *Promise‹void›*
 
 ___
-<a id="setmaxlisteners"></a>
+
+### `Private` scanLoop
+
+▸ **scanLoop**(): *Promise‹void›*
+
+*Defined in [lib/scanner/adapters/block-device.ts:77](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/scanner/adapters/block-device.ts#L77)*
+
+**Returns:** *Promise‹void›*
+
+___
 
 ###  setMaxListeners
 
-▸ **setMaxListeners**(n: *`number`*): `this`
+▸ **setMaxListeners**(`n`: number): *this*
 
-*Inherited from EventEmitter.setMaxListeners*
+*Inherited from [CountingWritable](countingwritable.md).[setMaxListeners](countingwritable.md#setmaxlisteners)*
 
-*Overrides EventEmitter.setMaxListeners*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[setMaxListeners](../interfaces/sparsereadable.md#setmaxlisteners)*
 
-*Defined in /node_modules/@types/node/base.d.ts:690*
+Defined in node_modules/@types/node/base.d.ts:690
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| n | `number` |
+Name | Type |
+------ | ------ |
+`n` | number |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="start"></a>
 
 ###  start
 
-▸ **start**(): `void`
+▸ **start**(): *void*
 
-*Overrides [Adapter](adapter.md).[start](adapter.md#start)*
+*Overrides [Adapter](adapter.md).[start](adapter.md#abstract-start)*
 
-*Defined in [scanner/adapters/block-device.ts:66](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/scanner/adapters/block-device.ts#L66)*
+*Defined in [lib/scanner/adapters/block-device.ts:66](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/scanner/adapters/block-device.ts#L66)*
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="stop"></a>
 
 ###  stop
 
-▸ **stop**(): `void`
+▸ **stop**(): *void*
 
-*Overrides [Adapter](adapter.md).[stop](adapter.md#stop)*
+*Overrides [Adapter](adapter.md).[stop](adapter.md#abstract-stop)*
 
-*Defined in [scanner/adapters/block-device.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/scanner/adapters/block-device.ts#L71)*
+*Defined in [lib/scanner/adapters/block-device.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/scanner/adapters/block-device.ts#L71)*
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="listenercount-1"></a>
 
-### `<Static>` listenerCount
+### `Static` listenerCount
 
-▸ **listenerCount**(emitter: *`EventEmitter`*, event: *`string` \| `symbol`*): `number`
+▸ **listenerCount**(`emitter`: EventEmitter, `event`: string | symbol): *number*
 
-*Inherited from EventEmitter.listenerCount*
+*Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
 
-*Defined in /node_modules/@types/node/base.d.ts:680*
+Defined in node_modules/@types/node/base.d.ts:680
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| emitter | `EventEmitter` |
-| event | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`emitter` | EventEmitter |
+`event` | string &#124; symbol |
 
-**Returns:** `number`
-
-___
-
+**Returns:** *number*

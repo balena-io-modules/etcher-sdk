@@ -1,10 +1,10 @@
-[etcher-sdk](../README.md) > [Operation](../interfaces/operation.md)
+[etcher-sdk](../README.md) › [Operation](operation.md)
 
 # Interface: Operation
 
 ## Hierarchy
 
-**Operation**
+* **Operation**
 
 ## Index
 
@@ -13,26 +13,18 @@
 * [command](operation.md#command)
 * [when](operation.md#when)
 
----
-
 ## Properties
-
-<a id="command"></a>
 
 ###  command
 
-**● command**: *[OperationCommand](../#operationcommand)*
+• **command**: *[OperationCommand](../README.md#operationcommand)*
 
-*Defined in [source-destination/configured-source/configure.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/configure.ts#L31)*
+*Defined in [lib/source-destination/configured-source/configure.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/configured-source/configure.ts#L31)*
 
 ___
-<a id="when"></a>
 
 ###  when
 
-**● when**: *`any`*
+• **when**: *any*
 
-*Defined in [source-destination/configured-source/configure.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/configure.ts#L32)*
-
-___
-
+*Defined in [lib/source-destination/configured-source/configure.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/configured-source/configure.ts#L32)*

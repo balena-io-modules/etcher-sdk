@@ -1,12 +1,12 @@
-[etcher-sdk](../README.md) > [StreamVerifier](../classes/streamverifier.md)
+[etcher-sdk](../README.md) › [StreamVerifier](streamverifier.md)
 
 # Class: StreamVerifier
 
 ## Hierarchy
 
-↳  [Verifier](verifier.md)
+  ↳ [Verifier](verifier.md)
 
-**↳ StreamVerifier**
+  ↳ **StreamVerifier**
 
 ## Index
 
@@ -16,10 +16,10 @@
 
 ### Properties
 
-* [checksum](streamverifier.md#checksum)
-* [size](streamverifier.md#size)
-* [source](streamverifier.md#source)
-* [defaultMaxListeners](streamverifier.md#defaultmaxlisteners)
+* [checksum](streamverifier.md#private-checksum)
+* [size](streamverifier.md#private-size)
+* [source](streamverifier.md#private-source)
+* [defaultMaxListeners](streamverifier.md#static-defaultmaxlisteners)
 
 ### Methods
 
@@ -27,7 +27,7 @@
 * [emit](streamverifier.md#emit)
 * [eventNames](streamverifier.md#eventnames)
 * [getMaxListeners](streamverifier.md#getmaxlisteners)
-* [handleEventsAndPipe](streamverifier.md#handleeventsandpipe)
+* [handleEventsAndPipe](streamverifier.md#protected-handleeventsandpipe)
 * [listenerCount](streamverifier.md#listenercount)
 * [listeners](streamverifier.md#listeners)
 * [on](streamverifier.md#on)
@@ -38,440 +38,393 @@
 * [removeListener](streamverifier.md#removelistener)
 * [run](streamverifier.md#run)
 * [setMaxListeners](streamverifier.md#setmaxlisteners)
-* [listenerCount](streamverifier.md#listenercount-1)
+* [listenerCount](streamverifier.md#static-listenercount)
 
 ### Object literals
 
 * [progress](streamverifier.md#progress)
 
----
-
 ## Constructors
-
-<a id="constructor"></a>
 
 ###  constructor
 
-⊕ **new StreamVerifier**(source: *[SourceDestination](sourcedestination.md)*, checksum: *`string`*, size: *`number`*): [StreamVerifier](streamverifier.md)
+\+ **new StreamVerifier**(`source`: [SourceDestination](sourcedestination.md), `checksum`: string, `size`: number): *[StreamVerifier](streamverifier.md)*
 
-*Defined in [source-destination/source-destination.ts:152](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L152)*
+*Defined in [lib/source-destination/source-destination.ts:152](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L152)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| source | [SourceDestination](sourcedestination.md) |
-| checksum | `string` |
-| size | `number` |
+Name | Type |
+------ | ------ |
+`source` | [SourceDestination](sourcedestination.md) |
+`checksum` | string |
+`size` | number |
 
-**Returns:** [StreamVerifier](streamverifier.md)
-
-___
+**Returns:** *[StreamVerifier](streamverifier.md)*
 
 ## Properties
 
-<a id="checksum"></a>
+### `Private` checksum
 
-### `<Private>` checksum
+• **checksum**: *string*
 
-**● checksum**: *`string`*
-
-*Defined in [source-destination/source-destination.ts:155](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L155)*
+*Defined in [lib/source-destination/source-destination.ts:155](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L155)*
 
 ___
-<a id="size"></a>
 
-### `<Private>` size
+### `Private` size
 
-**● size**: *`number`*
+• **size**: *number*
 
-*Defined in [source-destination/source-destination.ts:156](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L156)*
-
-___
-<a id="source"></a>
-
-### `<Private>` source
-
-**● source**: *[SourceDestination](sourcedestination.md)*
-
-*Defined in [source-destination/source-destination.ts:154](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L154)*
+*Defined in [lib/source-destination/source-destination.ts:156](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L156)*
 
 ___
-<a id="defaultmaxlisteners"></a>
 
-### `<Static>` defaultMaxListeners
+### `Private` source
 
-**● defaultMaxListeners**: *`number`*
+• **source**: *[SourceDestination](sourcedestination.md)*
 
-*Inherited from EventEmitter.defaultMaxListeners*
-
-*Defined in /node_modules/@types/node/base.d.ts:681*
+*Defined in [lib/source-destination/source-destination.ts:154](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L154)*
 
 ___
+
+### `Static` defaultMaxListeners
+
+▪ **defaultMaxListeners**: *number*
+
+*Inherited from [CountingWritable](countingwritable.md).[defaultMaxListeners](countingwritable.md#static-defaultmaxlisteners)*
+
+Defined in node_modules/@types/node/base.d.ts:681
 
 ## Methods
 
-<a id="addlistener"></a>
-
 ###  addListener
 
-▸ **addListener**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **addListener**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.addListener*
+*Inherited from [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-*Overrides EventEmitter.addListener*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:683*
+Defined in node_modules/@types/node/base.d.ts:683
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="emit"></a>
 
 ###  emit
 
-▸ **emit**(event: *`string` \| `symbol`*, ...args: *`any`[]*): `boolean`
+▸ **emit**(`event`: string | symbol, ...`args`: any[]): *boolean*
 
-*Inherited from EventEmitter.emit*
+*Inherited from [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-*Overrides EventEmitter.emit*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
-*Defined in /node_modules/@types/node/base.d.ts:693*
+Defined in node_modules/@types/node/base.d.ts:693
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| `Rest` args | `any`[] |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`...args` | any[] |
 
-**Returns:** `boolean`
+**Returns:** *boolean*
 
 ___
-<a id="eventnames"></a>
 
 ###  eventNames
 
-▸ **eventNames**(): (`string` \| `symbol`)[]
+▸ **eventNames**(): *string | symbol[]*
 
-*Inherited from EventEmitter.eventNames*
+*Inherited from [CountingWritable](countingwritable.md).[eventNames](countingwritable.md#eventnames)*
 
-*Overrides EventEmitter.eventNames*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[eventNames](../interfaces/sparsereadable.md#eventnames)*
 
-*Defined in /node_modules/@types/node/base.d.ts:694*
+Defined in node_modules/@types/node/base.d.ts:694
 
-**Returns:** (`string` \| `symbol`)[]
+**Returns:** *string | symbol[]*
 
 ___
-<a id="getmaxlisteners"></a>
 
 ###  getMaxListeners
 
-▸ **getMaxListeners**(): `number`
+▸ **getMaxListeners**(): *number*
 
-*Inherited from EventEmitter.getMaxListeners*
+*Inherited from [CountingWritable](countingwritable.md).[getMaxListeners](countingwritable.md#getmaxlisteners)*
 
-*Overrides EventEmitter.getMaxListeners*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[getMaxListeners](../interfaces/sparsereadable.md#getmaxlisteners)*
 
-*Defined in /node_modules/@types/node/base.d.ts:691*
+Defined in node_modules/@types/node/base.d.ts:691
 
-**Returns:** `number`
+**Returns:** *number*
 
 ___
-<a id="handleeventsandpipe"></a>
 
-### `<Protected>` handleEventsAndPipe
+### `Protected` handleEventsAndPipe
 
-▸ **handleEventsAndPipe**(stream: *`ReadableStream`*, meter: *`WritableStream`*): `void`
+▸ **handleEventsAndPipe**(`stream`: ReadableStream, `meter`: WritableStream): *void*
 
-*Inherited from [Verifier](verifier.md).[handleEventsAndPipe](verifier.md#handleeventsandpipe)*
+*Inherited from [Verifier](verifier.md).[handleEventsAndPipe](verifier.md#protected-handleeventsandpipe)*
 
-*Defined in [source-destination/source-destination.ts:134](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L134)*
+*Defined in [lib/source-destination/source-destination.ts:134](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L134)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| stream | `ReadableStream` |
-| meter | `WritableStream` |
+Name | Type |
+------ | ------ |
+`stream` | ReadableStream |
+`meter` | WritableStream |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="listenercount"></a>
 
 ###  listenerCount
 
-▸ **listenerCount**(type: *`string` \| `symbol`*): `number`
+▸ **listenerCount**(`type`: string | symbol): *number*
 
-*Inherited from EventEmitter.listenerCount*
+*Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
 
-*Overrides EventEmitter.listenerCount*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[listenerCount](../interfaces/sparsereadable.md#listenercount)*
 
-*Defined in /node_modules/@types/node/base.d.ts:695*
+Defined in node_modules/@types/node/base.d.ts:695
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| type | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`type` | string &#124; symbol |
 
-**Returns:** `number`
+**Returns:** *number*
 
 ___
-<a id="listeners"></a>
 
 ###  listeners
 
-▸ **listeners**(event: *`string` \| `symbol`*): `Function`[]
+▸ **listeners**(`event`: string | symbol): *Function[]*
 
-*Inherited from EventEmitter.listeners*
+*Inherited from [CountingWritable](countingwritable.md).[listeners](countingwritable.md#listeners)*
 
-*Overrides EventEmitter.listeners*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[listeners](../interfaces/sparsereadable.md#listeners)*
 
-*Defined in /node_modules/@types/node/base.d.ts:692*
+Defined in node_modules/@types/node/base.d.ts:692
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
 
-**Returns:** `Function`[]
+**Returns:** *Function[]*
 
 ___
-<a id="on"></a>
 
 ###  on
 
-▸ **on**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **on**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.on*
+*Inherited from [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-*Overrides EventEmitter.on*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
-*Defined in /node_modules/@types/node/base.d.ts:684*
+Defined in node_modules/@types/node/base.d.ts:684
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="once"></a>
 
 ###  once
 
-▸ **once**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **once**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.once*
+*Inherited from [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-*Overrides EventEmitter.once*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
-*Defined in /node_modules/@types/node/base.d.ts:685*
+Defined in node_modules/@types/node/base.d.ts:685
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="prependlistener"></a>
 
 ###  prependListener
 
-▸ **prependListener**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **prependListener**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.prependListener*
+*Inherited from [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-*Overrides EventEmitter.prependListener*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:686*
+Defined in node_modules/@types/node/base.d.ts:686
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="prependoncelistener"></a>
 
 ###  prependOnceListener
 
-▸ **prependOnceListener**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **prependOnceListener**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.prependOnceListener*
+*Inherited from [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-*Overrides EventEmitter.prependOnceListener*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:687*
+Defined in node_modules/@types/node/base.d.ts:687
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="removealllisteners"></a>
 
 ###  removeAllListeners
 
-▸ **removeAllListeners**(event?: *`string` \| `symbol`*): `this`
+▸ **removeAllListeners**(`event?`: string | symbol): *this*
 
-*Inherited from EventEmitter.removeAllListeners*
+*Inherited from [CountingWritable](countingwritable.md).[removeAllListeners](countingwritable.md#removealllisteners)*
 
-*Overrides EventEmitter.removeAllListeners*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeAllListeners](../interfaces/sparsereadable.md#removealllisteners)*
 
-*Defined in /node_modules/@types/node/base.d.ts:689*
+Defined in node_modules/@types/node/base.d.ts:689
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| `Optional` event | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`event?` | string &#124; symbol |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="removelistener"></a>
 
 ###  removeListener
 
-▸ **removeListener**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **removeListener**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.removeListener*
+*Inherited from [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-*Overrides EventEmitter.removeListener*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:688*
+Defined in node_modules/@types/node/base.d.ts:688
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="run"></a>
 
 ###  run
 
-▸ **run**(): `Promise`<`void`>
+▸ **run**(): *Promise‹void›*
 
-*Overrides [Verifier](verifier.md).[run](verifier.md#run)*
+*Overrides [Verifier](verifier.md).[run](verifier.md#abstract-run)*
 
-*Defined in [source-destination/source-destination.ts:161](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L161)*
+*Defined in [lib/source-destination/source-destination.ts:161](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L161)*
 
-**Returns:** `Promise`<`void`>
+**Returns:** *Promise‹void›*
 
 ___
-<a id="setmaxlisteners"></a>
 
 ###  setMaxListeners
 
-▸ **setMaxListeners**(n: *`number`*): `this`
+▸ **setMaxListeners**(`n`: number): *this*
 
-*Inherited from EventEmitter.setMaxListeners*
+*Inherited from [CountingWritable](countingwritable.md).[setMaxListeners](countingwritable.md#setmaxlisteners)*
 
-*Overrides EventEmitter.setMaxListeners*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[setMaxListeners](../interfaces/sparsereadable.md#setmaxlisteners)*
 
-*Defined in /node_modules/@types/node/base.d.ts:690*
-
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| n | `number` |
-
-**Returns:** `this`
-
-___
-<a id="listenercount-1"></a>
-
-### `<Static>` listenerCount
-
-▸ **listenerCount**(emitter: *`EventEmitter`*, event: *`string` \| `symbol`*): `number`
-
-*Inherited from EventEmitter.listenerCount*
-
-*Defined in /node_modules/@types/node/base.d.ts:680*
+Defined in node_modules/@types/node/base.d.ts:690
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| emitter | `EventEmitter` |
-| event | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`n` | number |
 
-**Returns:** `number`
+**Returns:** *this*
 
 ___
+
+### `Static` listenerCount
+
+▸ **listenerCount**(`emitter`: EventEmitter, `event`: string | symbol): *number*
+
+*Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
+
+Defined in node_modules/@types/node/base.d.ts:680
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`emitter` | EventEmitter |
+`event` | string &#124; symbol |
+
+**Returns:** *number*
 
 ## Object literals
 
-<a id="progress"></a>
-
 ###  progress
 
-**progress**: *`object`*
+### ▪ **progress**: *object*
 
 *Inherited from [Verifier](verifier.md).[progress](verifier.md#progress)*
 
-*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L130)*
+*Defined in [lib/source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L130)*
 
-<a id="progress.bytes"></a>
+###  bytes
 
-####  bytes
+• **bytes**: *number* = 0
 
-**● bytes**: *`number`* = 0
+*Defined in [lib/source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L130)*
 
-*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L130)*
+###  position
 
-___
-<a id="progress.position"></a>
+• **position**: *number* = 0
 
-####  position
+*Defined in [lib/source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L130)*
 
-**● position**: *`number`* = 0
+###  speed
 
-*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L130)*
+• **speed**: *number* = 0
 
-___
-<a id="progress.speed"></a>
-
-####  speed
-
-**● speed**: *`number`* = 0
-
-*Defined in [source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L130)*
-
-___
-
-___
-
+*Defined in [lib/source-destination/source-destination.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L130)*

@@ -1,12 +1,12 @@
-[etcher-sdk](../README.md) > [DrivelistDrive](../interfaces/drivelistdrive.md)
+[etcher-sdk](../README.md) › [DrivelistDrive](drivelistdrive.md)
 
 # Interface: DrivelistDrive
 
 ## Hierarchy
 
- `Drive`
+* Drive
 
-**↳ DrivelistDrive**
+  ↳ **DrivelistDrive**
 
 ## Index
 
@@ -21,7 +21,7 @@
 * [displayName](drivelistdrive.md#displayname)
 * [enumerator](drivelistdrive.md#enumerator)
 * [error](drivelistdrive.md#error)
-* [icon](drivelistdrive.md#icon)
+* [icon](drivelistdrive.md#optional-icon)
 * [isCard](drivelistdrive.md#iscard)
 * [isReadOnly](drivelistdrive.md#isreadonly)
 * [isRemovable](drivelistdrive.md#isremovable)
@@ -35,246 +35,218 @@
 * [raw](drivelistdrive.md#raw)
 * [size](drivelistdrive.md#size)
 
----
-
 ## Properties
-
-<a id="blocksize"></a>
 
 ###  blockSize
 
-**● blockSize**: *`number`*
+• **blockSize**: *number*
 
-*Inherited from Drive.blockSize*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[blockSize](drivelistdrive.md#blocksize)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:6*
+Defined in node_modules/drivelist/js/index.d.ts:6
 
 ___
-<a id="bustype"></a>
 
 ###  busType
 
-**● busType**: *`string`*
+• **busType**: *string*
 
-*Inherited from Drive.busType*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[busType](drivelistdrive.md#bustype)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:7*
+Defined in node_modules/drivelist/js/index.d.ts:7
 
 ___
-<a id="busversion"></a>
 
 ###  busVersion
 
-**● busVersion**: *`null`*
+• **busVersion**: *null*
 
-*Inherited from Drive.busVersion*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[busVersion](drivelistdrive.md#busversion)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:8*
+Defined in node_modules/drivelist/js/index.d.ts:8
 
 ___
-<a id="description"></a>
 
 ###  description
 
-**● description**: *`string`*
+• **description**: *string*
 
-*Inherited from Drive.description*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[description](drivelistdrive.md#description)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:9*
+Defined in node_modules/drivelist/js/index.d.ts:9
 
 ___
-<a id="device"></a>
 
 ###  device
 
-**● device**: *`string`*
+• **device**: *string*
 
-*Inherited from Drive.device*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[device](drivelistdrive.md#device)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:10*
+Defined in node_modules/drivelist/js/index.d.ts:10
 
 ___
-<a id="devicepath"></a>
 
 ###  devicePath
 
-**● devicePath**: *`string` \| `null`*
+• **devicePath**: *string | null*
 
-*Inherited from Drive.devicePath*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[devicePath](drivelistdrive.md#devicepath)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:11*
+Defined in node_modules/drivelist/js/index.d.ts:11
 
 ___
-<a id="displayname"></a>
 
 ###  displayName
 
-**● displayName**: *`string`*
+• **displayName**: *string*
 
-*Defined in [scanner/adapters/block-device.ts:52](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/scanner/adapters/block-device.ts#L52)*
+*Defined in [lib/scanner/adapters/block-device.ts:52](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/scanner/adapters/block-device.ts#L52)*
 
 ___
-<a id="enumerator"></a>
 
 ###  enumerator
 
-**● enumerator**: *`string`*
+• **enumerator**: *string*
 
-*Inherited from Drive.enumerator*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[enumerator](drivelistdrive.md#enumerator)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:12*
+Defined in node_modules/drivelist/js/index.d.ts:12
 
 ___
-<a id="error"></a>
 
 ###  error
 
-**● error**: *`null`*
+• **error**: *null*
 
-*Inherited from Drive.error*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[error](drivelistdrive.md#error)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:13*
-
-___
-<a id="icon"></a>
-
-### `<Optional>` icon
-
-**● icon**: *`undefined` \| `string`*
-
-*Defined in [scanner/adapters/block-device.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/scanner/adapters/block-device.ts#L53)*
+Defined in node_modules/drivelist/js/index.d.ts:13
 
 ___
-<a id="iscard"></a>
+
+### `Optional` icon
+
+• **icon**? : *undefined | string*
+
+*Defined in [lib/scanner/adapters/block-device.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/scanner/adapters/block-device.ts#L53)*
+
+___
 
 ###  isCard
 
-**● isCard**: *`null`*
+• **isCard**: *null*
 
-*Inherited from Drive.isCard*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[isCard](drivelistdrive.md#iscard)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:14*
+Defined in node_modules/drivelist/js/index.d.ts:14
 
 ___
-<a id="isreadonly"></a>
 
 ###  isReadOnly
 
-**● isReadOnly**: *`boolean`*
+• **isReadOnly**: *boolean*
 
-*Inherited from Drive.isReadOnly*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[isReadOnly](drivelistdrive.md#isreadonly)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:15*
+Defined in node_modules/drivelist/js/index.d.ts:15
 
 ___
-<a id="isremovable"></a>
 
 ###  isRemovable
 
-**● isRemovable**: *`boolean`*
+• **isRemovable**: *boolean*
 
-*Inherited from Drive.isRemovable*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[isRemovable](drivelistdrive.md#isremovable)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:16*
+Defined in node_modules/drivelist/js/index.d.ts:16
 
 ___
-<a id="isscsi"></a>
 
 ###  isSCSI
 
-**● isSCSI**: *`boolean` \| `null`*
+• **isSCSI**: *boolean | null*
 
-*Inherited from Drive.isSCSI*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[isSCSI](drivelistdrive.md#isscsi)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:17*
+Defined in node_modules/drivelist/js/index.d.ts:17
 
 ___
-<a id="issystem"></a>
 
 ###  isSystem
 
-**● isSystem**: *`boolean`*
+• **isSystem**: *boolean*
 
-*Inherited from Drive.isSystem*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[isSystem](drivelistdrive.md#issystem)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:18*
+Defined in node_modules/drivelist/js/index.d.ts:18
 
 ___
-<a id="isuas"></a>
 
 ###  isUAS
 
-**● isUAS**: *`null`*
+• **isUAS**: *null*
 
-*Inherited from Drive.isUAS*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[isUAS](drivelistdrive.md#isuas)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:19*
+Defined in node_modules/drivelist/js/index.d.ts:19
 
 ___
-<a id="isusb"></a>
 
 ###  isUSB
 
-**● isUSB**: *`boolean` \| `null`*
+• **isUSB**: *boolean | null*
 
-*Inherited from Drive.isUSB*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[isUSB](drivelistdrive.md#isusb)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:20*
+Defined in node_modules/drivelist/js/index.d.ts:20
 
 ___
-<a id="isvirtual"></a>
 
 ###  isVirtual
 
-**● isVirtual**: *`boolean` \| `null`*
+• **isVirtual**: *boolean | null*
 
-*Inherited from Drive.isVirtual*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[isVirtual](drivelistdrive.md#isvirtual)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:21*
+Defined in node_modules/drivelist/js/index.d.ts:21
 
 ___
-<a id="logicalblocksize"></a>
 
 ###  logicalBlockSize
 
-**● logicalBlockSize**: *`number`*
+• **logicalBlockSize**: *number*
 
-*Inherited from Drive.logicalBlockSize*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[logicalBlockSize](drivelistdrive.md#logicalblocksize)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:22*
+Defined in node_modules/drivelist/js/index.d.ts:22
 
 ___
-<a id="mountpoints"></a>
 
 ###  mountpoints
 
-**● mountpoints**: *`Mountpoint`[]*
+• **mountpoints**: *Mountpoint[]*
 
-*Inherited from Drive.mountpoints*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[mountpoints](drivelistdrive.md#mountpoints)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:23*
+Defined in node_modules/drivelist/js/index.d.ts:23
 
 ___
-<a id="raw"></a>
 
 ###  raw
 
-**● raw**: *`string`*
+• **raw**: *string*
 
-*Inherited from Drive.raw*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[raw](drivelistdrive.md#raw)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:24*
+Defined in node_modules/drivelist/js/index.d.ts:24
 
 ___
-<a id="size"></a>
 
 ###  size
 
-**● size**: *`number` \| `null`*
+• **size**: *number | null*
 
-*Inherited from Drive.size*
+*Inherited from [DrivelistDrive](drivelistdrive.md).[size](drivelistdrive.md#size)*
 
-*Defined in /node_modules/drivelist/js/index.d.ts:25*
-
-___
-
+Defined in node_modules/drivelist/js/index.d.ts:25

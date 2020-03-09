@@ -1,10 +1,10 @@
-[etcher-sdk](../README.md) > [SparseStreamChunk](../interfaces/sparsestreamchunk.md)
+[etcher-sdk](../README.md) › [SparseStreamChunk](sparsestreamchunk.md)
 
 # Interface: SparseStreamChunk
 
 ## Hierarchy
 
-**SparseStreamChunk**
+* **SparseStreamChunk**
 
 ## Index
 
@@ -13,26 +13,18 @@
 * [buffer](sparsestreamchunk.md#buffer)
 * [position](sparsestreamchunk.md#position)
 
----
-
 ## Properties
-
-<a id="buffer"></a>
 
 ###  buffer
 
-**● buffer**: *`Buffer`*
+• **buffer**: *Buffer*
 
-*Defined in [sparse-stream/shared.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/sparse-stream/shared.ts#L45)*
+*Defined in [lib/sparse-stream/shared.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/shared.ts#L45)*
 
 ___
-<a id="position"></a>
 
 ###  position
 
-**● position**: *`number`*
+• **position**: *number*
 
-*Defined in [sparse-stream/shared.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/sparse-stream/shared.ts#L46)*
-
-___
-
+*Defined in [lib/sparse-stream/shared.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/shared.ts#L46)*

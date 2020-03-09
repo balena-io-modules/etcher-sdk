@@ -1,70 +1,58 @@
-[etcher-sdk](../README.md) > [CRC32Hasher](../classes/crc32hasher.md)
+[etcher-sdk](../README.md) › [CRC32Hasher](crc32hasher.md)
 
 # Class: CRC32Hasher
 
 ## Hierarchy
 
-**CRC32Hasher**
+* **CRC32Hasher**
 
 ## Index
 
 ### Properties
 
-* [value](crc32hasher.md#value)
+* [value](crc32hasher.md#private-value)
 
 ### Methods
 
 * [digest](crc32hasher.md#digest)
 * [update](crc32hasher.md#update)
 
----
-
 ## Properties
 
-<a id="value"></a>
+### `Private` value
 
-### `<Private>` value
+• **value**: *number*
 
-**● value**: *`number`*
-
-*Defined in [sparse-stream/shared.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/sparse-stream/shared.ts#L55)*
-
-___
+*Defined in [lib/sparse-stream/shared.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/shared.ts#L55)*
 
 ## Methods
 
-<a id="digest"></a>
-
 ###  digest
 
-▸ **digest**(_encoding: *"hex"*): `string`
+▸ **digest**(`_encoding`: "hex"): *string*
 
-*Defined in [sparse-stream/shared.ts:61](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/sparse-stream/shared.ts#L61)*
+*Defined in [lib/sparse-stream/shared.ts:61](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/shared.ts#L61)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| _encoding | "hex" |
+Name | Type |
+------ | ------ |
+`_encoding` | "hex" |
 
-**Returns:** `string`
+**Returns:** *string*
 
 ___
-<a id="update"></a>
 
 ###  update
 
-▸ **update**(data: *`Buffer`*): `void`
+▸ **update**(`data`: Buffer): *void*
 
-*Defined in [sparse-stream/shared.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/sparse-stream/shared.ts#L57)*
+*Defined in [lib/sparse-stream/shared.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/shared.ts#L57)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| data | `Buffer` |
+Name | Type |
+------ | ------ |
+`data` | Buffer |
 
-**Returns:** `void`
-
-___
-
+**Returns:** *void*

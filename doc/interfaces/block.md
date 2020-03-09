@@ -1,10 +1,10 @@
-[etcher-sdk](../README.md) > [Block](../interfaces/block.md)
+[etcher-sdk](../README.md) › [Block](block.md)
 
 # Interface: Block
 
 ## Hierarchy
 
-**Block**
+* **Block**
 
 ## Index
 
@@ -13,26 +13,18 @@
 * [length](block.md#length)
 * [offset](block.md#offset)
 
----
-
 ## Properties
-
-<a id="length"></a>
 
 ###  length
 
-**● length**: *`number`*
+• **length**: *number*
 
-*Defined in [sparse-stream/shared.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/sparse-stream/shared.ts#L35)*
+*Defined in [lib/sparse-stream/shared.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/shared.ts#L35)*
 
 ___
-<a id="offset"></a>
 
 ###  offset
 
-**● offset**: *`number`*
+• **offset**: *number*
 
-*Defined in [sparse-stream/shared.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/sparse-stream/shared.ts#L34)*
-
-___
-
+*Defined in [lib/sparse-stream/shared.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/shared.ts#L34)*

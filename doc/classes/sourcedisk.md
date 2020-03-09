@@ -1,12 +1,12 @@
-[etcher-sdk](../README.md) > [SourceDisk](../classes/sourcedisk.md)
+[etcher-sdk](../README.md) › [SourceDisk](sourcedisk.md)
 
 # Class: SourceDisk
 
 ## Hierarchy
 
- `Disk`
+* Disk
 
-**↳ SourceDisk**
+  ↳ **SourceDisk**
 
 ## Index
 
@@ -22,14 +22,14 @@
 * [readOnly](sourcedisk.md#readonly)
 * [recordReads](sourcedisk.md#recordreads)
 * [recordWrites](sourcedisk.md#recordwrites)
-* [source](sourcedisk.md#source)
+* [source](sourcedisk.md#private-source)
 
 ### Methods
 
-* [_flush](sourcedisk.md#_flush)
-* [_getCapacity](sourcedisk.md#_getcapacity)
-* [_read](sourcedisk.md#_read)
-* [_write](sourcedisk.md#_write)
+* [_flush](sourcedisk.md#protected-_flush)
+* [_getCapacity](sourcedisk.md#protected-_getcapacity)
+* [_read](sourcedisk.md#protected-_read)
+* [_write](sourcedisk.md#protected-_write)
 * [discard](sourcedisk.md#discard)
 * [flush](sourcedisk.md#flush)
 * [getCapacity](sourcedisk.md#getcapacity)
@@ -40,334 +40,301 @@
 * [read](sourcedisk.md#read)
 * [write](sourcedisk.md#write)
 
----
-
 ## Constructors
-
-<a id="constructor"></a>
 
 ###  constructor
 
-⊕ **new SourceDisk**(source: *[SourceDestination](sourcedestination.md)*): [SourceDisk](sourcedisk.md)
+\+ **new SourceDisk**(`source`: [SourceDestination](sourcedestination.md)): *[SourceDisk](sourcedisk.md)*
 
-*Overrides Disk.__constructor*
+*Overrides void*
 
-*Defined in [source-destination/configured-source/configured-source.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/configured-source.ts#L43)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/configured-source/configured-source.ts#L43)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| source | [SourceDestination](sourcedestination.md) |
+Name | Type |
+------ | ------ |
+`source` | [SourceDestination](sourcedestination.md) |
 
-**Returns:** [SourceDisk](sourcedisk.md)
-
-___
+**Returns:** *[SourceDisk](sourcedisk.md)*
 
 ## Properties
 
-<a id="capacity"></a>
-
 ###  capacity
 
-**● capacity**: *`number` \| `null`*
+• **capacity**: *number | null*
 
-*Inherited from Disk.capacity*
+*Inherited from [SourceDisk](sourcedisk.md).[capacity](sourcedisk.md#capacity)*
 
-*Defined in /node_modules/file-disk/build/index.d.ts:26*
+Defined in node_modules/file-disk/build/index.d.ts:26
 
 ___
-<a id="discardiszero"></a>
 
 ###  discardIsZero
 
-**● discardIsZero**: *`boolean`*
+• **discardIsZero**: *boolean*
 
-*Inherited from Disk.discardIsZero*
+*Inherited from [SourceDisk](sourcedisk.md).[discardIsZero](sourcedisk.md#discardiszero)*
 
-*Defined in /node_modules/file-disk/build/index.d.ts:24*
+Defined in node_modules/file-disk/build/index.d.ts:24
 
 ___
-<a id="knownchunks"></a>
 
 ###  knownChunks
 
-**● knownChunks**: *`DiskChunk`[]*
+• **knownChunks**: *DiskChunk[]*
 
-*Inherited from Disk.knownChunks*
+*Inherited from [SourceDisk](sourcedisk.md).[knownChunks](sourcedisk.md#knownchunks)*
 
-*Defined in /node_modules/file-disk/build/index.d.ts:25*
+Defined in node_modules/file-disk/build/index.d.ts:25
 
 ___
-<a id="readonly"></a>
 
 ###  readOnly
 
-**● readOnly**: *`boolean`*
+• **readOnly**: *boolean*
 
-*Inherited from Disk.readOnly*
+*Inherited from [SourceDisk](sourcedisk.md).[readOnly](sourcedisk.md#readonly)*
 
-*Defined in /node_modules/file-disk/build/index.d.ts:21*
+Defined in node_modules/file-disk/build/index.d.ts:21
 
 ___
-<a id="recordreads"></a>
 
 ###  recordReads
 
-**● recordReads**: *`boolean`*
+• **recordReads**: *boolean*
 
-*Inherited from Disk.recordReads*
+*Inherited from [SourceDisk](sourcedisk.md).[recordReads](sourcedisk.md#recordreads)*
 
-*Defined in /node_modules/file-disk/build/index.d.ts:23*
+Defined in node_modules/file-disk/build/index.d.ts:23
 
 ___
-<a id="recordwrites"></a>
 
 ###  recordWrites
 
-**● recordWrites**: *`boolean`*
+• **recordWrites**: *boolean*
 
-*Inherited from Disk.recordWrites*
+*Inherited from [SourceDisk](sourcedisk.md).[recordWrites](sourcedisk.md#recordwrites)*
 
-*Defined in /node_modules/file-disk/build/index.d.ts:22*
-
-___
-<a id="source"></a>
-
-### `<Private>` source
-
-**● source**: *[SourceDestination](sourcedestination.md)*
-
-*Defined in [source-destination/configured-source/configured-source.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/configured-source.ts#L44)*
+Defined in node_modules/file-disk/build/index.d.ts:22
 
 ___
+
+### `Private` source
+
+• **source**: *[SourceDestination](sourcedestination.md)*
+
+*Defined in [lib/source-destination/configured-source/configured-source.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/configured-source/configured-source.ts#L44)*
 
 ## Methods
 
-<a id="_flush"></a>
+### `Protected` _flush
 
-### `<Protected>` _flush
+▸ **_flush**(): *Promise‹void›*
 
-▸ **_flush**(): `Promise`<`void`>
+*Overrides void*
 
-*Overrides Disk._flush*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:80](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/configured-source/configured-source.ts#L80)*
 
-*Defined in [source-destination/configured-source/configured-source.ts:80](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/configured-source.ts#L80)*
-
-**Returns:** `Promise`<`void`>
+**Returns:** *Promise‹void›*
 
 ___
-<a id="_getcapacity"></a>
 
-### `<Protected>` _getCapacity
+### `Protected` _getCapacity
 
-▸ **_getCapacity**(): `Promise`<`number`>
+▸ **_getCapacity**(): *Promise‹number›*
 
-*Overrides Disk._getCapacity*
+*Overrides void*
 
-*Defined in [source-destination/configured-source/configured-source.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/configured-source.ts#L53)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/configured-source/configured-source.ts#L53)*
 
-**Returns:** `Promise`<`number`>
+**Returns:** *Promise‹number›*
 
 ___
-<a id="_read"></a>
 
-### `<Protected>` _read
+### `Protected` _read
 
-▸ **_read**(buffer: *`Buffer`*, bufferOffset: *`number`*, length: *`number`*, fileOffset: *`number`*): `Promise`<`ReadResult`>
+▸ **_read**(`buffer`: Buffer, `bufferOffset`: number, `length`: number, `fileOffset`: number): *Promise‹ReadResult›*
 
-*Overrides Disk._read*
+*Overrides void*
 
-*Defined in [source-destination/configured-source/configured-source.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/configured-source.ts#L62)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/configured-source/configured-source.ts#L62)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| buffer | `Buffer` |
-| bufferOffset | `number` |
-| length | `number` |
-| fileOffset | `number` |
+Name | Type |
+------ | ------ |
+`buffer` | Buffer |
+`bufferOffset` | number |
+`length` | number |
+`fileOffset` | number |
 
-**Returns:** `Promise`<`ReadResult`>
+**Returns:** *Promise‹ReadResult›*
 
 ___
-<a id="_write"></a>
 
-### `<Protected>` _write
+### `Protected` _write
 
-▸ **_write**(_buffer: *`Buffer`*, _bufferOffset: *`number`*, _length: *`number`*, _fileOffset: *`number`*): `Promise`<`WriteResult`>
+▸ **_write**(`_buffer`: Buffer, `_bufferOffset`: number, `_length`: number, `_fileOffset`: number): *Promise‹WriteResult›*
 
-*Overrides Disk._write*
+*Overrides void*
 
-*Defined in [source-destination/configured-source/configured-source.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/configured-source.ts#L71)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/configured-source/configured-source.ts#L71)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| _buffer | `Buffer` |
-| _bufferOffset | `number` |
-| _length | `number` |
-| _fileOffset | `number` |
+Name | Type |
+------ | ------ |
+`_buffer` | Buffer |
+`_bufferOffset` | number |
+`_length` | number |
+`_fileOffset` | number |
 
-**Returns:** `Promise`<`WriteResult`>
+**Returns:** *Promise‹WriteResult›*
 
 ___
-<a id="discard"></a>
 
 ###  discard
 
-▸ **discard**(offset: *`number`*, length: *`number`*): `Promise`<`void`>
+▸ **discard**(`offset`: number, `length`: number): *Promise‹void›*
 
-*Inherited from Disk.discard*
+*Inherited from [SourceDisk](sourcedisk.md).[discard](sourcedisk.md#discard)*
 
-*Defined in /node_modules/file-disk/build/index.d.ts:36*
+Defined in node_modules/file-disk/build/index.d.ts:36
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| offset | `number` |
-| length | `number` |
+Name | Type |
+------ | ------ |
+`offset` | number |
+`length` | number |
 
-**Returns:** `Promise`<`void`>
+**Returns:** *Promise‹void›*
 
 ___
-<a id="flush"></a>
 
 ###  flush
 
-▸ **flush**(): `Promise`<`void`>
+▸ **flush**(): *Promise‹void›*
 
-*Inherited from Disk.flush*
+*Inherited from [SourceDisk](sourcedisk.md).[flush](sourcedisk.md#flush)*
 
-*Defined in /node_modules/file-disk/build/index.d.ts:35*
+Defined in node_modules/file-disk/build/index.d.ts:35
 
-**Returns:** `Promise`<`void`>
+**Returns:** *Promise‹void›*
 
 ___
-<a id="getcapacity"></a>
 
 ###  getCapacity
 
-▸ **getCapacity**(): `Promise`<`number`>
+▸ **getCapacity**(): *Promise‹number›*
 
-*Inherited from Disk.getCapacity*
+*Inherited from [SourceDisk](sourcedisk.md).[getCapacity](sourcedisk.md#getcapacity)*
 
-*Defined in /node_modules/file-disk/build/index.d.ts:37*
+Defined in node_modules/file-disk/build/index.d.ts:37
 
-**Returns:** `Promise`<`number`>
+**Returns:** *Promise‹number›*
 
 ___
-<a id="getdiscardedchunks"></a>
 
 ###  getDiscardedChunks
 
-▸ **getDiscardedChunks**(): `DiskChunk`[]
+▸ **getDiscardedChunks**(): *DiskChunk[]*
 
-*Inherited from Disk.getDiscardedChunks*
+*Inherited from [SourceDisk](sourcedisk.md).[getDiscardedChunks](sourcedisk.md#getdiscardedchunks)*
 
-*Defined in /node_modules/file-disk/build/index.d.ts:39*
+Defined in node_modules/file-disk/build/index.d.ts:39
 
-**Returns:** `DiskChunk`[]
+**Returns:** *DiskChunk[]*
 
 ___
-<a id="getranges"></a>
 
 ###  getRanges
 
-▸ **getRanges**(blockSize: *`number`*): `Promise`<`Range`[]>
+▸ **getRanges**(`blockSize`: number): *Promise‹Range[]›*
 
-*Inherited from Disk.getRanges*
+*Inherited from [SourceDisk](sourcedisk.md).[getRanges](sourcedisk.md#getranges)*
 
-*Defined in /node_modules/file-disk/build/index.d.ts:40*
+Defined in node_modules/file-disk/build/index.d.ts:40
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| blockSize | `number` |
+Name | Type |
+------ | ------ |
+`blockSize` | number |
 
-**Returns:** `Promise`<`Range`[]>
+**Returns:** *Promise‹Range[]›*
 
 ___
-<a id="getstream"></a>
 
 ###  getStream
 
-▸ **getStream**(position?: *`undefined` \| `number`*, length?: *`number` \| `null`*, highWaterMark?: *`undefined` \| `number`*): `Promise`<`DiskStream`>
+▸ **getStream**(`position?`: undefined | number, `length?`: number | null, `highWaterMark?`: undefined | number): *Promise‹DiskStream›*
 
-*Inherited from Disk.getStream*
+*Inherited from [SourceDisk](sourcedisk.md).[getStream](sourcedisk.md#getstream)*
 
-*Defined in /node_modules/file-disk/build/index.d.ts:38*
+Defined in node_modules/file-disk/build/index.d.ts:38
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| `Optional` position | `undefined` \| `number` |
-| `Optional` length | `number` \| `null` |
-| `Optional` highWaterMark | `undefined` \| `number` |
+Name | Type |
+------ | ------ |
+`position?` | undefined &#124; number |
+`length?` | number &#124; null |
+`highWaterMark?` | undefined &#124; number |
 
-**Returns:** `Promise`<`DiskStream`>
+**Returns:** *Promise‹DiskStream›*
 
 ___
-<a id="gettransformstream"></a>
 
 ###  getTransformStream
 
-▸ **getTransformStream**(): `Transform`
+▸ **getTransformStream**(): *Transform*
 
-*Inherited from Disk.getTransformStream*
+*Inherited from [SourceDisk](sourcedisk.md).[getTransformStream](sourcedisk.md#gettransformstream)*
 
-*Defined in /node_modules/file-disk/build/index.d.ts:32*
+Defined in node_modules/file-disk/build/index.d.ts:32
 
-**Returns:** `Transform`
+**Returns:** *Transform*
 
 ___
-<a id="read"></a>
 
 ###  read
 
-▸ **read**(buffer: *`Buffer`*, _bufferOffset: *`number`*, length: *`number`*, fileOffset: *`number`*): `Promise`<`fs.ReadResult`>
+▸ **read**(`buffer`: Buffer, `_bufferOffset`: number, `length`: number, `fileOffset`: number): *Promise‹ReadResult›*
 
-*Inherited from Disk.read*
+*Inherited from [SourceDisk](sourcedisk.md).[read](sourcedisk.md#read)*
 
-*Defined in /node_modules/file-disk/build/index.d.ts:33*
+Defined in node_modules/file-disk/build/index.d.ts:33
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| buffer | `Buffer` |
-| _bufferOffset | `number` |
-| length | `number` |
-| fileOffset | `number` |
+Name | Type |
+------ | ------ |
+`buffer` | Buffer |
+`_bufferOffset` | number |
+`length` | number |
+`fileOffset` | number |
 
-**Returns:** `Promise`<`fs.ReadResult`>
+**Returns:** *Promise‹ReadResult›*
 
 ___
-<a id="write"></a>
 
 ###  write
 
-▸ **write**(buffer: *`Buffer`*, bufferOffset: *`number`*, length: *`number`*, fileOffset: *`number`*): `Promise`<`fs.WriteResult`>
+▸ **write**(`buffer`: Buffer, `bufferOffset`: number, `length`: number, `fileOffset`: number): *Promise‹WriteResult›*
 
-*Inherited from Disk.write*
+*Inherited from [SourceDisk](sourcedisk.md).[write](sourcedisk.md#write)*
 
-*Defined in /node_modules/file-disk/build/index.d.ts:34*
+Defined in node_modules/file-disk/build/index.d.ts:34
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| buffer | `Buffer` |
-| bufferOffset | `number` |
-| length | `number` |
-| fileOffset | `number` |
+Name | Type |
+------ | ------ |
+`buffer` | Buffer |
+`bufferOffset` | number |
+`length` | number |
+`fileOffset` | number |
 
-**Returns:** `Promise`<`fs.WriteResult`>
-
-___
-
+**Returns:** *Promise‹WriteResult›*

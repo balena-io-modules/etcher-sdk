@@ -1,16 +1,16 @@
-[etcher-sdk](../README.md) > [VerificationError](../classes/verificationerror.md)
+[etcher-sdk](../README.md) › [VerificationError](verificationerror.md)
 
 # Class: VerificationError
 
 ## Hierarchy
 
- `Error`
+* [Error](notcapable.md#static-error)
 
-**↳ VerificationError**
+  ↳ **VerificationError**
 
-↳  [ChecksumVerificationError](checksumverificationerror.md)
+  ↳ [ChecksumVerificationError](checksumverificationerror.md)
 
-↳  [BlocksVerificationError](blocksverificationerror.md)
+  ↳ [BlocksVerificationError](blocksverificationerror.md)
 
 ## Index
 
@@ -19,64 +19,53 @@
 * [code](verificationerror.md#code)
 * [message](verificationerror.md#message)
 * [name](verificationerror.md#name)
-* [stack](verificationerror.md#stack)
-* [Error](verificationerror.md#error)
-
----
+* [stack](verificationerror.md#optional-stack)
+* [Error](verificationerror.md#static-error)
 
 ## Properties
 
-<a id="code"></a>
-
 ###  code
 
-**● code**: *`string`* = "EVALIDATION"
+• **code**: *string* = "EVALIDATION"
 
-*Defined in [errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/errors.ts#L24)*
+*Defined in [lib/errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/errors.ts#L24)*
 
 ___
-<a id="message"></a>
 
 ###  message
 
-**● message**: *`string`*
+• **message**: *string*
 
-*Inherited from Error.message*
+*Inherited from [NotCapable](notcapable.md).[message](notcapable.md#message)*
 
-*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:964*
+Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:974
 
 ___
-<a id="name"></a>
 
 ###  name
 
-**● name**: *`string`*
+• **name**: *string*
 
-*Inherited from Error.name*
+*Inherited from [NotCapable](notcapable.md).[name](notcapable.md#name)*
 
-*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:963*
-
-___
-<a id="stack"></a>
-
-### `<Optional>` stack
-
-**● stack**: *`undefined` \| `string`*
-
-*Inherited from Error.stack*
-
-*Overrides Error.stack*
-
-*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:965*
-
-___
-<a id="error"></a>
-
-### `<Static>` Error
-
-**● Error**: *`ErrorConstructor`*
-
-*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:974*
+Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:973
 
 ___
 
+### `Optional` stack
+
+• **stack**? : *undefined | string*
+
+*Inherited from [NotCapable](notcapable.md).[stack](notcapable.md#optional-stack)*
+
+*Overrides [NotCapable](notcapable.md).[stack](notcapable.md#optional-stack)*
+
+Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:975
+
+___
+
+### `Static` Error
+
+▪ **Error**: *ErrorConstructor*
+
+Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:984

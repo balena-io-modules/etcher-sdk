@@ -1,10 +1,10 @@
-[etcher-sdk](../README.md) > [ProgressEvent](../interfaces/progressevent.md)
+[etcher-sdk](../README.md) › [ProgressEvent](progressevent.md)
 
 # Interface: ProgressEvent
 
 ## Hierarchy
 
-**ProgressEvent**
+* **ProgressEvent**
 
 ## Index
 
@@ -14,35 +14,26 @@
 * [position](progressevent.md#position)
 * [speed](progressevent.md#speed)
 
----
-
 ## Properties
-
-<a id="bytes"></a>
 
 ###  bytes
 
-**● bytes**: *`number`*
+• **bytes**: *number*
 
-*Defined in [source-destination/progress.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/progress.ts#L29)*
+*Defined in [lib/source-destination/progress.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/progress.ts#L29)*
 
 ___
-<a id="position"></a>
 
 ###  position
 
-**● position**: *`number`*
+• **position**: *number*
 
-*Defined in [source-destination/progress.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/progress.ts#L28)*
+*Defined in [lib/source-destination/progress.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/progress.ts#L28)*
 
 ___
-<a id="speed"></a>
 
 ###  speed
 
-**● speed**: *`number`*
+• **speed**: *number*
 
-*Defined in [source-destination/progress.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/progress.ts#L30)*
-
-___
-
+*Defined in [lib/source-destination/progress.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/progress.ts#L30)*

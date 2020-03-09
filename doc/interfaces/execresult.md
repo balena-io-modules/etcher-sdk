@@ -1,10 +1,10 @@
-[etcher-sdk](../README.md) > [ExecResult](../interfaces/execresult.md)
+[etcher-sdk](../README.md) › [ExecResult](execresult.md)
 
 # Interface: ExecResult
 
 ## Hierarchy
 
-**ExecResult**
+* **ExecResult**
 
 ## Index
 
@@ -13,26 +13,18 @@
 * [stderr](execresult.md#stderr)
 * [stdout](execresult.md#stdout)
 
----
-
 ## Properties
-
-<a id="stderr"></a>
 
 ###  stderr
 
-**● stderr**: *`string`*
+• **stderr**: *string*
 
-*Defined in [diskpart.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/diskpart.ts#L33)*
+*Defined in [lib/diskpart.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/diskpart.ts#L33)*
 
 ___
-<a id="stdout"></a>
 
 ###  stdout
 
-**● stdout**: *`string`*
+• **stdout**: *string*
 
-*Defined in [diskpart.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/diskpart.ts#L32)*
-
-___
-
+*Defined in [lib/diskpart.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/diskpart.ts#L32)*

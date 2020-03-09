@@ -1,12 +1,12 @@
-[etcher-sdk](../README.md) > [SparseReadable](../interfaces/sparsereadable.md)
+[etcher-sdk](../README.md) › [SparseReadable](sparsereadable.md)
 
 # Interface: SparseReadable
 
 ## Hierarchy
 
- `ReadableStream`
+* ReadableStream
 
-**↳ SparseReadable**
+  ↳ **SparseReadable**
 
 ## Implemented by
 
@@ -46,464 +46,432 @@
 * [unshift](sparsereadable.md#unshift)
 * [wrap](sparsereadable.md#wrap)
 
----
-
 ## Properties
-
-<a id="blocks"></a>
 
 ###  blocks
 
-**● blocks**: *[BlocksWithChecksum](blockswithchecksum.md)[]*
+• **blocks**: *[BlocksWithChecksum](blockswithchecksum.md)[]*
 
-*Defined in [sparse-stream/shared.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/sparse-stream/shared.ts#L50)*
+*Defined in [lib/sparse-stream/shared.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/shared.ts#L50)*
 
 ___
-<a id="readable"></a>
 
 ###  readable
 
-**● readable**: *`boolean`*
+• **readable**: *boolean*
 
-*Inherited from ReadableStream.readable*
+*Inherited from [SparseReadable](sparsereadable.md).[readable](sparsereadable.md#readable)*
 
-*Defined in /node_modules/@types/node/base.d.ts:353*
-
-___
+Defined in node_modules/@types/node/base.d.ts:353
 
 ## Methods
 
-<a id="addlistener"></a>
-
 ###  addListener
 
-▸ **addListener**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **addListener**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.addListener*
+*Inherited from [SparseReadable](sparsereadable.md).[addListener](sparsereadable.md#addlistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:336*
+Defined in node_modules/@types/node/base.d.ts:336
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="emit"></a>
 
 ###  emit
 
-▸ **emit**(event: *`string` \| `symbol`*, ...args: *`any`[]*): `boolean`
+▸ **emit**(`event`: string | symbol, ...`args`: any[]): *boolean*
 
-*Inherited from EventEmitter.emit*
+*Inherited from [SparseReadable](sparsereadable.md).[emit](sparsereadable.md#emit)*
 
-*Defined in /node_modules/@types/node/base.d.ts:344*
+Defined in node_modules/@types/node/base.d.ts:344
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| `Rest` args | `any`[] |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`...args` | any[] |
 
-**Returns:** `boolean`
+**Returns:** *boolean*
 
 ___
-<a id="eventnames"></a>
 
 ###  eventNames
 
-▸ **eventNames**(): (`string` \| `symbol`)[]
+▸ **eventNames**(): *string | symbol[]*
 
-*Inherited from EventEmitter.eventNames*
+*Inherited from [SparseReadable](sparsereadable.md).[eventNames](sparsereadable.md#eventnames)*
 
-*Defined in /node_modules/@types/node/base.d.ts:349*
+Defined in node_modules/@types/node/base.d.ts:349
 
-**Returns:** (`string` \| `symbol`)[]
+**Returns:** *string | symbol[]*
 
 ___
-<a id="getmaxlisteners"></a>
 
 ###  getMaxListeners
 
-▸ **getMaxListeners**(): `number`
+▸ **getMaxListeners**(): *number*
 
-*Inherited from EventEmitter.getMaxListeners*
+*Inherited from [SparseReadable](sparsereadable.md).[getMaxListeners](sparsereadable.md#getmaxlisteners)*
 
-*Defined in /node_modules/@types/node/base.d.ts:342*
+Defined in node_modules/@types/node/base.d.ts:342
 
-**Returns:** `number`
+**Returns:** *number*
 
 ___
-<a id="ispaused"></a>
 
 ###  isPaused
 
-▸ **isPaused**(): `boolean`
+▸ **isPaused**(): *boolean*
 
-*Inherited from ReadableStream.isPaused*
+*Inherited from [SparseReadable](sparsereadable.md).[isPaused](sparsereadable.md#ispaused)*
 
-*Defined in /node_modules/@types/node/base.d.ts:358*
+Defined in node_modules/@types/node/base.d.ts:358
 
-**Returns:** `boolean`
+**Returns:** *boolean*
 
 ___
-<a id="listenercount"></a>
 
 ###  listenerCount
 
-▸ **listenerCount**(type: *`string` \| `symbol`*): `number`
+▸ **listenerCount**(`type`: string | symbol): *number*
 
-*Inherited from EventEmitter.listenerCount*
+*Inherited from [SparseReadable](sparsereadable.md).[listenerCount](sparsereadable.md#listenercount)*
 
-*Defined in /node_modules/@types/node/base.d.ts:345*
+Defined in node_modules/@types/node/base.d.ts:345
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| type | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`type` | string &#124; symbol |
 
-**Returns:** `number`
+**Returns:** *number*
 
 ___
-<a id="listeners"></a>
 
 ###  listeners
 
-▸ **listeners**(event: *`string` \| `symbol`*): `Function`[]
+▸ **listeners**(`event`: string | symbol): *Function[]*
 
-*Inherited from EventEmitter.listeners*
+*Inherited from [SparseReadable](sparsereadable.md).[listeners](sparsereadable.md#listeners)*
 
-*Defined in /node_modules/@types/node/base.d.ts:343*
+Defined in node_modules/@types/node/base.d.ts:343
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
 
-**Returns:** `Function`[]
+**Returns:** *Function[]*
 
 ___
-<a id="on"></a>
 
 ###  on
 
-▸ **on**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **on**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.on*
+*Inherited from [SparseReadable](sparsereadable.md).[on](sparsereadable.md#on)*
 
-*Defined in /node_modules/@types/node/base.d.ts:337*
+Defined in node_modules/@types/node/base.d.ts:337
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="once"></a>
 
 ###  once
 
-▸ **once**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **once**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.once*
+*Inherited from [SparseReadable](sparsereadable.md).[once](sparsereadable.md#once)*
 
-*Defined in /node_modules/@types/node/base.d.ts:338*
+Defined in node_modules/@types/node/base.d.ts:338
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="pause"></a>
 
 ###  pause
 
-▸ **pause**(): `this`
+▸ **pause**(): *this*
 
-*Inherited from ReadableStream.pause*
+*Inherited from [SparseReadable](sparsereadable.md).[pause](sparsereadable.md#pause)*
 
-*Defined in /node_modules/@types/node/base.d.ts:356*
+Defined in node_modules/@types/node/base.d.ts:356
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="pipe"></a>
 
 ###  pipe
 
-▸ **pipe**<`T`>(destination: *`T`*, options?: *`undefined` \| `object`*): `T`
+▸ **pipe**<**T**>(`destination`: T, `options?`: undefined | object): *T*
 
-*Inherited from ReadableStream.pipe*
+*Inherited from [SparseReadable](sparsereadable.md).[pipe](sparsereadable.md#pipe)*
 
-*Defined in /node_modules/@types/node/base.d.ts:359*
+Defined in node_modules/@types/node/base.d.ts:359
 
 **Type parameters:**
 
-#### T :  `WritableStream`
+▪ **T**: *WritableStream*
+
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| destination | `T` |
-| `Optional` options | `undefined` \| `object` |
+Name | Type |
+------ | ------ |
+`destination` | T |
+`options?` | undefined &#124; object |
 
-**Returns:** `T`
+**Returns:** *T*
 
 ___
-<a id="prependlistener"></a>
 
 ###  prependListener
 
-▸ **prependListener**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **prependListener**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.prependListener*
+*Inherited from [SparseReadable](sparsereadable.md).[prependListener](sparsereadable.md#prependlistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:347*
+Defined in node_modules/@types/node/base.d.ts:347
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="prependoncelistener"></a>
 
 ###  prependOnceListener
 
-▸ **prependOnceListener**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **prependOnceListener**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.prependOnceListener*
+*Inherited from [SparseReadable](sparsereadable.md).[prependOnceListener](sparsereadable.md#prependoncelistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:348*
+Defined in node_modules/@types/node/base.d.ts:348
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="push"></a>
 
 ###  push
 
-▸ **push**(chunk: *[SparseStreamChunk](sparsestreamchunk.md)*): `boolean`
+▸ **push**(`chunk`: [SparseStreamChunk](sparsestreamchunk.md)): *boolean*
 
-*Defined in [sparse-stream/shared.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/sparse-stream/shared.ts#L51)*
+*Defined in [lib/sparse-stream/shared.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/shared.ts#L51)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| chunk | [SparseStreamChunk](sparsestreamchunk.md) |
+Name | Type |
+------ | ------ |
+`chunk` | [SparseStreamChunk](sparsestreamchunk.md) |
 
-**Returns:** `boolean`
+**Returns:** *boolean*
 
 ___
-<a id="read"></a>
 
 ###  read
 
-▸ **read**(size?: *`undefined` \| `number`*): `string` \| `Buffer`
+▸ **read**(`size?`: undefined | number): *string | Buffer*
 
-*Inherited from ReadableStream.read*
+*Inherited from [SparseReadable](sparsereadable.md).[read](sparsereadable.md#read)*
 
-*Defined in /node_modules/@types/node/base.d.ts:354*
+Defined in node_modules/@types/node/base.d.ts:354
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| `Optional` size | `undefined` \| `number` |
+Name | Type |
+------ | ------ |
+`size?` | undefined &#124; number |
 
-**Returns:** `string` \| `Buffer`
+**Returns:** *string | Buffer*
 
 ___
-<a id="removealllisteners"></a>
 
 ###  removeAllListeners
 
-▸ **removeAllListeners**(event?: *`string` \| `symbol`*): `this`
+▸ **removeAllListeners**(`event?`: string | symbol): *this*
 
-*Inherited from EventEmitter.removeAllListeners*
+*Inherited from [SparseReadable](sparsereadable.md).[removeAllListeners](sparsereadable.md#removealllisteners)*
 
-*Defined in /node_modules/@types/node/base.d.ts:340*
+Defined in node_modules/@types/node/base.d.ts:340
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| `Optional` event | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`event?` | string &#124; symbol |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="removelistener"></a>
 
 ###  removeListener
 
-▸ **removeListener**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **removeListener**(`event`: string | symbol, `listener`: Function): *this*
 
-*Inherited from EventEmitter.removeListener*
+*Inherited from [SparseReadable](sparsereadable.md).[removeListener](sparsereadable.md#removelistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:339*
+Defined in node_modules/@types/node/base.d.ts:339
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="resume"></a>
 
 ###  resume
 
-▸ **resume**(): `this`
+▸ **resume**(): *this*
 
-*Inherited from ReadableStream.resume*
+*Inherited from [SparseReadable](sparsereadable.md).[resume](sparsereadable.md#resume)*
 
-*Defined in /node_modules/@types/node/base.d.ts:357*
+Defined in node_modules/@types/node/base.d.ts:357
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="setencoding"></a>
 
 ###  setEncoding
 
-▸ **setEncoding**(encoding: *`string` \| `null`*): `void`
+▸ **setEncoding**(`encoding`: string | null): *void*
 
-*Inherited from ReadableStream.setEncoding*
+*Inherited from [SparseReadable](sparsereadable.md).[setEncoding](sparsereadable.md#setencoding)*
 
-*Defined in /node_modules/@types/node/base.d.ts:355*
+Defined in node_modules/@types/node/base.d.ts:355
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| encoding | `string` \| `null` |
+Name | Type |
+------ | ------ |
+`encoding` | string &#124; null |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="setmaxlisteners"></a>
 
 ###  setMaxListeners
 
-▸ **setMaxListeners**(n: *`number`*): `this`
+▸ **setMaxListeners**(`n`: number): *this*
 
-*Inherited from EventEmitter.setMaxListeners*
+*Inherited from [SparseReadable](sparsereadable.md).[setMaxListeners](sparsereadable.md#setmaxlisteners)*
 
-*Defined in /node_modules/@types/node/base.d.ts:341*
+Defined in node_modules/@types/node/base.d.ts:341
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| n | `number` |
+Name | Type |
+------ | ------ |
+`n` | number |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="unpipe"></a>
 
 ###  unpipe
 
-▸ **unpipe**<`T`>(destination?: *[T]()*): `void`
+▸ **unpipe**<**T**>(`destination?`: T): *void*
 
-*Inherited from ReadableStream.unpipe*
+*Inherited from [SparseReadable](sparsereadable.md).[unpipe](sparsereadable.md#unpipe)*
 
-*Defined in /node_modules/@types/node/base.d.ts:360*
+Defined in node_modules/@types/node/base.d.ts:360
 
 **Type parameters:**
 
-#### T :  `WritableStream`
+▪ **T**: *WritableStream*
+
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| `Optional` destination | [T]() |
+Name | Type |
+------ | ------ |
+`destination?` | T |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="unshift"></a>
 
 ###  unshift
 
-▸ **unshift**(chunk: *`string`*): `void`
+▸ **unshift**(`chunk`: string): *void*
 
-▸ **unshift**(chunk: *`Buffer`*): `void`
+*Inherited from [SparseReadable](sparsereadable.md).[unshift](sparsereadable.md#unshift)*
 
-*Inherited from ReadableStream.unshift*
-
-*Defined in /node_modules/@types/node/base.d.ts:361*
+Defined in node_modules/@types/node/base.d.ts:361
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| chunk | `string` |
+Name | Type |
+------ | ------ |
+`chunk` | string |
 
-**Returns:** `void`
+**Returns:** *void*
 
-*Inherited from ReadableStream.unshift*
+▸ **unshift**(`chunk`: Buffer): *void*
 
-*Defined in /node_modules/@types/node/base.d.ts:362*
+*Inherited from [SparseReadable](sparsereadable.md).[unshift](sparsereadable.md#unshift)*
+
+Defined in node_modules/@types/node/base.d.ts:362
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| chunk | `Buffer` |
+Name | Type |
+------ | ------ |
+`chunk` | Buffer |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="wrap"></a>
 
 ###  wrap
 
-▸ **wrap**(oldStream: *`ReadableStream`*): `ReadableStream`
+▸ **wrap**(`oldStream`: ReadableStream): *ReadableStream*
 
-*Inherited from ReadableStream.wrap*
+*Inherited from [SparseReadable](sparsereadable.md).[wrap](sparsereadable.md#wrap)*
 
-*Defined in /node_modules/@types/node/base.d.ts:363*
+Defined in node_modules/@types/node/base.d.ts:363
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| oldStream | `ReadableStream` |
+Name | Type |
+------ | ------ |
+`oldStream` | ReadableStream |
 
-**Returns:** `ReadableStream`
-
-___
-
+**Returns:** *ReadableStream*

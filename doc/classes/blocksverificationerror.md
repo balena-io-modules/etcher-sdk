@@ -1,12 +1,12 @@
-[etcher-sdk](../README.md) > [BlocksVerificationError](../classes/blocksverificationerror.md)
+[etcher-sdk](../README.md) › [BlocksVerificationError](blocksverificationerror.md)
 
 # Class: BlocksVerificationError
 
 ## Hierarchy
 
-↳  [VerificationError](verificationerror.md)
+  ↳ [VerificationError](verificationerror.md)
 
-**↳ BlocksVerificationError**
+  ↳ **BlocksVerificationError**
 
 ## Index
 
@@ -21,95 +21,77 @@
 * [code](blocksverificationerror.md#code)
 * [message](blocksverificationerror.md#message)
 * [name](blocksverificationerror.md#name)
-* [stack](blocksverificationerror.md#stack)
-
----
+* [stack](blocksverificationerror.md#optional-stack)
 
 ## Constructors
 
-<a id="constructor"></a>
-
 ###  constructor
 
-⊕ **new BlocksVerificationError**(blocks: *[BlocksWithChecksum](../interfaces/blockswithchecksum.md)*, checksum: *`string`*): [BlocksVerificationError](blocksverificationerror.md)
+\+ **new BlocksVerificationError**(`blocks`: [BlocksWithChecksum](../interfaces/blockswithchecksum.md), `checksum`: string): *[BlocksVerificationError](blocksverificationerror.md)*
 
-*Defined in [errors.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/errors.ts#L48)*
+*Defined in [lib/errors.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/errors.ts#L48)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| blocks | [BlocksWithChecksum](../interfaces/blockswithchecksum.md) |
-| checksum | `string` |
+Name | Type |
+------ | ------ |
+`blocks` | [BlocksWithChecksum](../interfaces/blockswithchecksum.md) |
+`checksum` | string |
 
-**Returns:** [BlocksVerificationError](blocksverificationerror.md)
-
-___
+**Returns:** *[BlocksVerificationError](blocksverificationerror.md)*
 
 ## Properties
 
-<a id="blocks"></a>
-
 ###  blocks
 
-**● blocks**: *[BlocksWithChecksum](../interfaces/blockswithchecksum.md)*
+• **blocks**: *[BlocksWithChecksum](../interfaces/blockswithchecksum.md)*
 
-*Defined in [errors.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/errors.ts#L50)*
+*Defined in [lib/errors.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/errors.ts#L50)*
 
 ___
-<a id="checksum"></a>
 
 ###  checksum
 
-**● checksum**: *`string`*
+• **checksum**: *string*
 
-*Defined in [errors.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/errors.ts#L51)*
+*Defined in [lib/errors.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/errors.ts#L51)*
 
 ___
-<a id="code"></a>
 
 ###  code
 
-**● code**: *`string`* = "EVALIDATION"
+• **code**: *string* = "EVALIDATION"
 
 *Inherited from [VerificationError](verificationerror.md).[code](verificationerror.md#code)*
 
-*Defined in [errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/errors.ts#L24)*
+*Defined in [lib/errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/errors.ts#L24)*
 
 ___
-<a id="message"></a>
 
 ###  message
 
-**● message**: *`string`*
+• **message**: *string*
 
-*Inherited from Error.message*
+*Inherited from [NotCapable](notcapable.md).[message](notcapable.md#message)*
 
-*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:964*
+Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:974
 
 ___
-<a id="name"></a>
 
 ###  name
 
-**● name**: *`string`*
+• **name**: *string*
 
-*Inherited from Error.name*
+*Inherited from [NotCapable](notcapable.md).[name](notcapable.md#name)*
 
-*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:963*
-
-___
-<a id="stack"></a>
-
-### `<Optional>` stack
-
-**● stack**: *`undefined` \| `string`*
-
-*Inherited from Error.stack*
-
-*Overrides Error.stack*
-
-*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:965*
+Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:973
 
 ___
 
+### `Optional` stack
+
+• **stack**? : *undefined | string*
+
+*Inherited from [NotCapable](notcapable.md).[stack](notcapable.md#optional-stack)*
+
+Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:975

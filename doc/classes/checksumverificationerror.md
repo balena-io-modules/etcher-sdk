@@ -1,12 +1,12 @@
-[etcher-sdk](../README.md) > [ChecksumVerificationError](../classes/checksumverificationerror.md)
+[etcher-sdk](../README.md) › [ChecksumVerificationError](checksumverificationerror.md)
 
 # Class: ChecksumVerificationError
 
 ## Hierarchy
 
-↳  [VerificationError](verificationerror.md)
+  ↳ [VerificationError](verificationerror.md)
 
-**↳ ChecksumVerificationError**
+  ↳ **ChecksumVerificationError**
 
 ## Index
 
@@ -21,96 +21,78 @@
 * [expectedChecksum](checksumverificationerror.md#expectedchecksum)
 * [message](checksumverificationerror.md#message)
 * [name](checksumverificationerror.md#name)
-* [stack](checksumverificationerror.md#stack)
-
----
+* [stack](checksumverificationerror.md#optional-stack)
 
 ## Constructors
 
-<a id="constructor"></a>
-
 ###  constructor
 
-⊕ **new ChecksumVerificationError**(message: *`string`*, checksum: *`string`*, expectedChecksum: *`string`*): [ChecksumVerificationError](checksumverificationerror.md)
+\+ **new ChecksumVerificationError**(`message`: string, `checksum`: string, `expectedChecksum`: string): *[ChecksumVerificationError](checksumverificationerror.md)*
 
-*Defined in [errors.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/errors.ts#L27)*
+*Defined in [lib/errors.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/errors.ts#L27)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| message | `string` |
-| checksum | `string` |
-| expectedChecksum | `string` |
+Name | Type |
+------ | ------ |
+`message` | string |
+`checksum` | string |
+`expectedChecksum` | string |
 
-**Returns:** [ChecksumVerificationError](checksumverificationerror.md)
-
-___
+**Returns:** *[ChecksumVerificationError](checksumverificationerror.md)*
 
 ## Properties
 
-<a id="checksum"></a>
-
 ###  checksum
 
-**● checksum**: *`string`*
+• **checksum**: *string*
 
-*Defined in [errors.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/errors.ts#L30)*
+*Defined in [lib/errors.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/errors.ts#L30)*
 
 ___
-<a id="code"></a>
 
 ###  code
 
-**● code**: *`string`* = "EVALIDATION"
+• **code**: *string* = "EVALIDATION"
 
 *Inherited from [VerificationError](verificationerror.md).[code](verificationerror.md#code)*
 
-*Defined in [errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/errors.ts#L24)*
+*Defined in [lib/errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/errors.ts#L24)*
 
 ___
-<a id="expectedchecksum"></a>
 
 ###  expectedChecksum
 
-**● expectedChecksum**: *`string`*
+• **expectedChecksum**: *string*
 
-*Defined in [errors.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/errors.ts#L31)*
+*Defined in [lib/errors.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/errors.ts#L31)*
 
 ___
-<a id="message"></a>
 
 ###  message
 
-**● message**: *`string`*
+• **message**: *string*
 
-*Inherited from Error.message*
+*Inherited from [NotCapable](notcapable.md).[message](notcapable.md#message)*
 
-*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:964*
+Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:974
 
 ___
-<a id="name"></a>
 
 ###  name
 
-**● name**: *`string`*
+• **name**: *string*
 
-*Inherited from Error.name*
+*Inherited from [NotCapable](notcapable.md).[name](notcapable.md#name)*
 
-*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:963*
-
-___
-<a id="stack"></a>
-
-### `<Optional>` stack
-
-**● stack**: *`undefined` \| `string`*
-
-*Inherited from Error.stack*
-
-*Overrides Error.stack*
-
-*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:965*
+Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:973
 
 ___
 
+### `Optional` stack
+
+• **stack**? : *undefined | string*
+
+*Inherited from [NotCapable](notcapable.md).[stack](notcapable.md#optional-stack)*
+
+Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:975

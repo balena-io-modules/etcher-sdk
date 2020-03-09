@@ -1,10 +1,10 @@
-[etcher-sdk](../README.md) > [PipeSourceToDestinationsResult](../interfaces/pipesourcetodestinationsresult.md)
+[etcher-sdk](../README.md) › [PipeSourceToDestinationsResult](pipesourcetodestinationsresult.md)
 
 # Interface: PipeSourceToDestinationsResult
 
 ## Hierarchy
 
-**PipeSourceToDestinationsResult**
+* **PipeSourceToDestinationsResult**
 
 ## Index
 
@@ -13,26 +13,18 @@
 * [bytesWritten](pipesourcetodestinationsresult.md#byteswritten)
 * [failures](pipesourcetodestinationsresult.md#failures)
 
----
-
 ## Properties
-
-<a id="byteswritten"></a>
 
 ###  bytesWritten
 
-**● bytesWritten**: *`number`*
+• **bytesWritten**: *number*
 
-*Defined in [multi-write.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/multi-write.ts#L69)*
+*Defined in [lib/multi-write.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/multi-write.ts#L69)*
 
 ___
-<a id="failures"></a>
 
 ###  failures
 
-**● failures**: *`Map`<[SourceDestination](../classes/sourcedestination.md), `Error`>*
+• **failures**: *Map‹[SourceDestination](../classes/sourcedestination.md), [Error](../classes/notcapable.md#static-error)›*
 
-*Defined in [multi-write.ts:68](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/multi-write.ts#L68)*
-
-___
-
+*Defined in [lib/multi-write.ts:68](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/multi-write.ts#L68)*

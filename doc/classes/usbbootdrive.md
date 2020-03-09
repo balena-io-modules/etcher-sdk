@@ -1,12 +1,12 @@
-[etcher-sdk](../README.md) > [UsbbootDrive](../classes/usbbootdrive.md)
+[etcher-sdk](../README.md) › [UsbbootDrive](usbbootdrive.md)
 
 # Class: UsbbootDrive
 
 ## Hierarchy
 
-↳  [SourceDestination](sourcedestination.md)
+  ↳ [SourceDestination](sourcedestination.md)
 
-**↳ UsbbootDrive**
+  ↳ **UsbbootDrive**
 
 ## Implements
 
@@ -33,15 +33,15 @@
 * [raw](usbbootdrive.md#raw)
 * [size](usbbootdrive.md#size)
 * [usbDevice](usbbootdrive.md#usbdevice)
-* [defaultMaxListeners](usbbootdrive.md#defaultmaxlisteners)
-* [imageExtensions](usbbootdrive.md#imageextensions)
-* [mimetype](usbbootdrive.md#mimetype)
+* [defaultMaxListeners](usbbootdrive.md#static-defaultmaxlisteners)
+* [imageExtensions](usbbootdrive.md#static-imageextensions)
+* [mimetype](usbbootdrive.md#static-optional-mimetype)
 
 ### Methods
 
-* [_close](usbbootdrive.md#_close)
-* [_getMetadata](usbbootdrive.md#_getmetadata)
-* [_open](usbbootdrive.md#_open)
+* [_close](usbbootdrive.md#protected-_close)
+* [_getMetadata](usbbootdrive.md#protected-_getmetadata)
+* [_open](usbbootdrive.md#protected-_open)
 * [addListener](usbbootdrive.md#addlistener)
 * [canCreateReadStream](usbbootdrive.md#cancreatereadstream)
 * [canCreateSparseReadStream](usbbootdrive.md#cancreatesparsereadstream)
@@ -74,184 +74,162 @@
 * [removeListener](usbbootdrive.md#removelistener)
 * [setMaxListeners](usbbootdrive.md#setmaxlisteners)
 * [write](usbbootdrive.md#write)
-* [listenerCount](usbbootdrive.md#listenercount-1)
-* [register](usbbootdrive.md#register)
-
----
+* [listenerCount](usbbootdrive.md#static-listenercount)
+* [register](usbbootdrive.md#static-register)
 
 ## Constructors
 
-<a id="constructor"></a>
-
 ###  constructor
 
-⊕ **new UsbbootDrive**(usbDevice: *`UsbbootDevice`*): [UsbbootDrive](usbbootdrive.md)
+\+ **new UsbbootDrive**(`usbDevice`: UsbbootDevice): *[UsbbootDrive](usbbootdrive.md)*
 
-*Defined in [source-destination/usbboot.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/usbboot.ts#L35)*
+*Defined in [lib/source-destination/usbboot.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/usbboot.ts#L35)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| usbDevice | `UsbbootDevice` |
+Name | Type |
+------ | ------ |
+`usbDevice` | UsbbootDevice |
 
-**Returns:** [UsbbootDrive](usbbootdrive.md)
-
-___
+**Returns:** *[UsbbootDrive](usbbootdrive.md)*
 
 ## Properties
 
-<a id="description"></a>
-
 ###  description
 
-**● description**: *`string`* = "Compute Module"
+• **description**: *string* = "Compute Module"
 
 *Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[description](../interfaces/adaptersourcedestination.md#description)*
 
-*Defined in [source-destination/usbboot.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/usbboot.ts#L30)*
+*Defined in [lib/source-destination/usbboot.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/usbboot.ts#L30)*
 
 ___
-<a id="device"></a>
 
 ###  device
 
-**● device**: *`null`* =  null
+• **device**: *null* = null
 
 *Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[device](../interfaces/adaptersourcedestination.md#device)*
 
-*Defined in [source-destination/usbboot.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/usbboot.ts#L26)*
+*Defined in [lib/source-destination/usbboot.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/usbboot.ts#L26)*
 
 ___
-<a id="devicepath"></a>
 
 ###  devicePath
 
-**● devicePath**: *`null`* =  null
+• **devicePath**: *null* = null
 
 *Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[devicePath](../interfaces/adaptersourcedestination.md#devicepath)*
 
-*Defined in [source-destination/usbboot.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/usbboot.ts#L27)*
+*Defined in [lib/source-destination/usbboot.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/usbboot.ts#L27)*
 
 ___
-<a id="disabled"></a>
 
 ###  disabled
 
-**● disabled**: *`boolean`* = true
+• **disabled**: *boolean* = true
 
-*Defined in [source-destination/usbboot.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/usbboot.ts#L33)*
+*Defined in [lib/source-destination/usbboot.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/usbboot.ts#L33)*
 
 ___
-<a id="displayname"></a>
 
 ###  displayName
 
-**● displayName**: *`string`* = "Initializing device"
+• **displayName**: *string* = "Initializing device"
 
-*Defined in [source-destination/usbboot.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/usbboot.ts#L25)*
+*Defined in [lib/source-destination/usbboot.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/usbboot.ts#L25)*
 
 ___
-<a id="emitsprogress"></a>
 
 ###  emitsProgress
 
-**● emitsProgress**: *`boolean`* = true
+• **emitsProgress**: *boolean* = true
 
 *Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[emitsProgress](../interfaces/adaptersourcedestination.md#emitsprogress)*
 
-*Defined in [source-destination/usbboot.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/usbboot.ts#L35)*
+*Defined in [lib/source-destination/usbboot.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/usbboot.ts#L35)*
 
 ___
-<a id="icon"></a>
 
 ###  icon
 
-**● icon**: *`string`* = "loading"
+• **icon**: *string* = "loading"
 
-*Defined in [source-destination/usbboot.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/usbboot.ts#L28)*
+*Defined in [lib/source-destination/usbboot.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/usbboot.ts#L28)*
 
 ___
-<a id="isreadonly"></a>
 
 ###  isReadOnly
 
-**● isReadOnly**: *`boolean`* = false
+• **isReadOnly**: *boolean* = false
 
-*Defined in [source-destination/usbboot.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/usbboot.ts#L32)*
+*Defined in [lib/source-destination/usbboot.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/usbboot.ts#L32)*
 
 ___
-<a id="issystem"></a>
 
 ###  isSystem
 
-**● isSystem**: *`boolean`* = false
+• **isSystem**: *boolean* = false
 
 *Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[isSystem](../interfaces/adaptersourcedestination.md#issystem)*
 
-*Defined in [source-destination/usbboot.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/usbboot.ts#L29)*
+*Defined in [lib/source-destination/usbboot.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/usbboot.ts#L29)*
 
 ___
-<a id="mountpoints"></a>
 
 ###  mountpoints
 
-**● mountpoints**: *`never`[]* =  []
+• **mountpoints**: *never[]* = []
 
 *Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[mountpoints](../interfaces/adaptersourcedestination.md#mountpoints)*
 
-*Defined in [source-destination/usbboot.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/usbboot.ts#L31)*
+*Defined in [lib/source-destination/usbboot.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/usbboot.ts#L31)*
 
 ___
-<a id="raw"></a>
 
 ###  raw
 
-**● raw**: *`null`* =  null
+• **raw**: *null* = null
 
 *Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[raw](../interfaces/adaptersourcedestination.md#raw)*
 
-*Defined in [source-destination/usbboot.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/usbboot.ts#L24)*
+*Defined in [lib/source-destination/usbboot.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/usbboot.ts#L24)*
 
 ___
-<a id="size"></a>
 
 ###  size
 
-**● size**: *`null`* =  null
+• **size**: *null* = null
 
 *Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[size](../interfaces/adaptersourcedestination.md#size)*
 
-*Defined in [source-destination/usbboot.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/usbboot.ts#L34)*
+*Defined in [lib/source-destination/usbboot.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/usbboot.ts#L34)*
 
 ___
-<a id="usbdevice"></a>
 
 ###  usbDevice
 
-**● usbDevice**: *`UsbbootDevice`*
+• **usbDevice**: *UsbbootDevice*
 
-*Defined in [source-destination/usbboot.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/usbboot.ts#L37)*
-
-___
-<a id="defaultmaxlisteners"></a>
-
-### `<Static>` defaultMaxListeners
-
-**● defaultMaxListeners**: *`number`*
-
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[defaultMaxListeners](../interfaces/adaptersourcedestination.md#defaultmaxlisteners)*
-
-*Inherited from EventEmitter.defaultMaxListeners*
-
-*Defined in /node_modules/@types/node/base.d.ts:681*
+*Defined in [lib/source-destination/usbboot.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/usbboot.ts#L37)*
 
 ___
-<a id="imageextensions"></a>
 
-### `<Static>` imageExtensions
+### `Static` defaultMaxListeners
 
-**● imageExtensions**: *`string`[]* =  [
+▪ **defaultMaxListeners**: *number*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[defaultMaxListeners](../interfaces/adaptersourcedestination.md#static-defaultmaxlisteners)*
+
+*Inherited from [CountingWritable](countingwritable.md).[defaultMaxListeners](countingwritable.md#static-defaultmaxlisteners)*
+
+Defined in node_modules/@types/node/base.d.ts:681
+
+___
+
+### `Static` imageExtensions
+
+▪ **imageExtensions**: *string[]* = [
 		'img',
 		'iso',
 		'bin',
@@ -264,733 +242,689 @@ ___
 		'wic',
 	]
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[imageExtensions](../interfaces/adaptersourcedestination.md#imageextensions)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[imageExtensions](../interfaces/adaptersourcedestination.md#static-imageextensions)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[imageExtensions](sourcedestination.md#imageextensions)*
+*Inherited from [SourceSource](sourcesource.md).[imageExtensions](sourcesource.md#static-imageextensions)*
 
-*Defined in [source-destination/source-destination.ts:232](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L232)*
-
-___
-<a id="mimetype"></a>
-
-### `<Static>``<Optional>` mimetype
-
-**● mimetype**: *`undefined` \| `string`*
-
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[mimetype](../interfaces/adaptersourcedestination.md#mimetype)*
-
-*Inherited from [SourceDestination](sourcedestination.md).[mimetype](sourcedestination.md#mimetype)*
-
-*Defined in [source-destination/source-destination.ts:244](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L244)*
+*Defined in [lib/source-destination/source-destination.ts:232](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L232)*
 
 ___
+
+### `Static` `Optional` mimetype
+
+▪ **mimetype**? : *undefined | string*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[mimetype](../interfaces/adaptersourcedestination.md#static-optional-mimetype)*
+
+*Inherited from [SourceSource](sourcesource.md).[mimetype](sourcesource.md#static-optional-mimetype)*
+
+*Defined in [lib/source-destination/source-destination.ts:244](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L244)*
 
 ## Methods
 
-<a id="_close"></a>
+### `Protected` _close
 
-### `<Protected>` _close
+▸ **_close**(): *Promise‹void›*
 
-▸ **_close**(): `Promise`<`void`>
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[_close](../interfaces/adaptersourcedestination.md#_close)*
+*Inherited from [SourceDestination](sourcedestination.md).[_close](sourcedestination.md#protected-_close)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[_close](sourcedestination.md#_close)*
+*Defined in [lib/source-destination/source-destination.ts:353](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L353)*
 
-*Defined in [source-destination/source-destination.ts:353](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L353)*
-
-**Returns:** `Promise`<`void`>
+**Returns:** *Promise‹void›*
 
 ___
-<a id="_getmetadata"></a>
 
-### `<Protected>` _getMetadata
+### `Protected` _getMetadata
 
-▸ **_getMetadata**(): `Promise`<[Metadata](../interfaces/metadata.md)>
+▸ **_getMetadata**(): *Promise‹[Metadata](../interfaces/metadata.md)›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[_getMetadata](../interfaces/adaptersourcedestination.md#_getmetadata)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[_getMetadata](sourcedestination.md#_getmetadata)*
+*Inherited from [SourceSource](sourcesource.md).[_getMetadata](sourcesource.md#protected-_getmetadata)*
 
-*Defined in [source-destination/source-destination.ts:287](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L287)*
+*Defined in [lib/source-destination/source-destination.ts:287](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L287)*
 
-**Returns:** `Promise`<[Metadata](../interfaces/metadata.md)>
-
-___
-<a id="_open"></a>
-
-### `<Protected>` _open
-
-▸ **_open**(): `Promise`<`void`>
-
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[_open](../interfaces/adaptersourcedestination.md#_open)*
-
-*Inherited from [SourceDestination](sourcedestination.md).[_open](sourcedestination.md#_open)*
-
-*Defined in [source-destination/source-destination.ts:349](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L349)*
-
-**Returns:** `Promise`<`void`>
+**Returns:** *Promise‹[Metadata](../interfaces/metadata.md)›*
 
 ___
-<a id="addlistener"></a>
+
+### `Protected` _open
+
+▸ **_open**(): *Promise‹void›*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
+
+*Inherited from [SourceDestination](sourcedestination.md).[_open](sourcedestination.md#protected-_open)*
+
+*Defined in [lib/source-destination/source-destination.ts:349](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L349)*
+
+**Returns:** *Promise‹void›*
+
+___
 
 ###  addListener
 
-▸ **addListener**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **addListener**(`event`: string | symbol, `listener`: Function): *this*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[addListener](../interfaces/adaptersourcedestination.md#addlistener)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from EventEmitter.addListener*
+*Inherited from [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-*Overrides EventEmitter.addListener*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:683*
+Defined in node_modules/@types/node/base.d.ts:683
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="cancreatereadstream"></a>
 
 ###  canCreateReadStream
 
-▸ **canCreateReadStream**(): `Promise`<`boolean`>
+▸ **canCreateReadStream**(): *Promise‹boolean›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[canCreateReadStream](../interfaces/adaptersourcedestination.md#cancreatereadstream)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[canCreateReadStream](sourcedestination.md#cancreatereadstream)*
+*Inherited from [SourceSource](sourcesource.md).[canCreateReadStream](sourcesource.md#cancreatereadstream)*
 
-*Defined in [source-destination/source-destination.ts:264](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L264)*
+*Defined in [lib/source-destination/source-destination.ts:264](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L264)*
 
-**Returns:** `Promise`<`boolean`>
+**Returns:** *Promise‹boolean›*
 
 ___
-<a id="cancreatesparsereadstream"></a>
 
 ###  canCreateSparseReadStream
 
-▸ **canCreateSparseReadStream**(): `Promise`<`boolean`>
+▸ **canCreateSparseReadStream**(): *Promise‹boolean›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[canCreateSparseReadStream](../interfaces/adaptersourcedestination.md#cancreatesparsereadstream)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[canCreateSparseReadStream](sourcedestination.md#cancreatesparsereadstream)*
+*Inherited from [SourceSource](sourcesource.md).[canCreateSparseReadStream](sourcesource.md#cancreatesparsereadstream)*
 
-*Defined in [source-destination/source-destination.ts:268](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L268)*
+*Defined in [lib/source-destination/source-destination.ts:268](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L268)*
 
-**Returns:** `Promise`<`boolean`>
+**Returns:** *Promise‹boolean›*
 
 ___
-<a id="cancreatesparsewritestream"></a>
 
 ###  canCreateSparseWriteStream
 
-▸ **canCreateSparseWriteStream**(): `Promise`<`boolean`>
+▸ **canCreateSparseWriteStream**(): *Promise‹boolean›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[canCreateSparseWriteStream](../interfaces/adaptersourcedestination.md#cancreatesparsewritestream)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[canCreateSparseWriteStream](sourcedestination.md#cancreatesparsewritestream)*
+*Inherited from [SourceSource](sourcesource.md).[canCreateSparseWriteStream](sourcesource.md#cancreatesparsewritestream)*
 
-*Defined in [source-destination/source-destination.ts:276](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L276)*
+*Defined in [lib/source-destination/source-destination.ts:276](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L276)*
 
-**Returns:** `Promise`<`boolean`>
+**Returns:** *Promise‹boolean›*
 
 ___
-<a id="cancreatewritestream"></a>
 
 ###  canCreateWriteStream
 
-▸ **canCreateWriteStream**(): `Promise`<`boolean`>
+▸ **canCreateWriteStream**(): *Promise‹boolean›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[canCreateWriteStream](../interfaces/adaptersourcedestination.md#cancreatewritestream)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[canCreateWriteStream](sourcedestination.md#cancreatewritestream)*
+*Inherited from [SourceSource](sourcesource.md).[canCreateWriteStream](sourcesource.md#cancreatewritestream)*
 
-*Defined in [source-destination/source-destination.ts:272](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L272)*
+*Defined in [lib/source-destination/source-destination.ts:272](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L272)*
 
-**Returns:** `Promise`<`boolean`>
+**Returns:** *Promise‹boolean›*
 
 ___
-<a id="canread"></a>
 
 ###  canRead
 
-▸ **canRead**(): `Promise`<`boolean`>
+▸ **canRead**(): *Promise‹boolean›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[canRead](../interfaces/adaptersourcedestination.md#canread)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[canRead](sourcedestination.md#canread)*
+*Inherited from [SourceSource](sourcesource.md).[canRead](sourcesource.md#canread)*
 
-*Defined in [source-destination/source-destination.ts:256](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L256)*
+*Defined in [lib/source-destination/source-destination.ts:256](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L256)*
 
-**Returns:** `Promise`<`boolean`>
+**Returns:** *Promise‹boolean›*
 
 ___
-<a id="canwrite"></a>
 
 ###  canWrite
 
-▸ **canWrite**(): `Promise`<`boolean`>
+▸ **canWrite**(): *Promise‹boolean›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[canWrite](../interfaces/adaptersourcedestination.md#canwrite)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[canWrite](sourcedestination.md#canwrite)*
+*Inherited from [SourceSource](sourcesource.md).[canWrite](sourcesource.md#canwrite)*
 
-*Defined in [source-destination/source-destination.ts:260](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L260)*
+*Defined in [lib/source-destination/source-destination.ts:260](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L260)*
 
-**Returns:** `Promise`<`boolean`>
+**Returns:** *Promise‹boolean›*
 
 ___
-<a id="close"></a>
 
 ###  close
 
-▸ **close**(): `Promise`<`void`>
+▸ **close**(): *Promise‹void›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[close](../interfaces/adaptersourcedestination.md#close)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[close](sourcedestination.md#close)*
+*Inherited from [SourceSource](sourcesource.md).[close](sourcesource.md#close)*
 
-*Defined in [source-destination/source-destination.ts:342](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L342)*
+*Defined in [lib/source-destination/source-destination.ts:342](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L342)*
 
-**Returns:** `Promise`<`void`>
+**Returns:** *Promise‹void›*
 
 ___
-<a id="createreadstream"></a>
 
 ###  createReadStream
 
-▸ **createReadStream**(_emitProgress?: *`boolean`*, _start?: *`number`*, _end?: *`undefined` \| `number`*): `Promise`<`ReadableStream`>
+▸ **createReadStream**(`_emitProgress`: boolean, `_start`: number, `_end?`: undefined | number): *Promise‹ReadableStream›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[createReadStream](../interfaces/adaptersourcedestination.md#createreadstream)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[createReadStream](sourcedestination.md#createreadstream)*
+*Inherited from [SourceSource](sourcesource.md).[createReadStream](sourcesource.md#createreadstream)*
 
-*Defined in [source-destination/source-destination.ts:309](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L309)*
+*Defined in [lib/source-destination/source-destination.ts:309](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L309)*
 
 **Parameters:**
 
-| Name | Type | Default value |
-| ------ | ------ | ------ |
-| `Default value` _emitProgress | `boolean` | false |
-| `Default value` _start | `number` | 0 |
-| `Optional` _end | `undefined` \| `number` | - |
+Name | Type | Default |
+------ | ------ | ------ |
+`_emitProgress` | boolean | false |
+`_start` | number | 0 |
+`_end?` | undefined &#124; number | - |
 
-**Returns:** `Promise`<`ReadableStream`>
+**Returns:** *Promise‹ReadableStream›*
 
 ___
-<a id="createsparsereadstream"></a>
 
 ###  createSparseReadStream
 
-▸ **createSparseReadStream**(_generateChecksums?: *`boolean`*): `Promise`<[SparseReadable](../interfaces/sparsereadable.md)>
+▸ **createSparseReadStream**(`_generateChecksums`: boolean): *Promise‹[SparseReadable](../interfaces/sparsereadable.md)›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[createSparseReadStream](../interfaces/adaptersourcedestination.md#createsparsereadstream)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[createSparseReadStream](sourcedestination.md#createsparsereadstream)*
+*Inherited from [SourceSource](sourcesource.md).[createSparseReadStream](sourcesource.md#createsparsereadstream)*
 
-*Defined in [source-destination/source-destination.ts:317](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L317)*
+*Defined in [lib/source-destination/source-destination.ts:317](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L317)*
 
 **Parameters:**
 
-| Name | Type | Default value |
-| ------ | ------ | ------ |
-| `Default value` _generateChecksums | `boolean` | false |
+Name | Type | Default |
+------ | ------ | ------ |
+`_generateChecksums` | boolean | false |
 
-**Returns:** `Promise`<[SparseReadable](../interfaces/sparsereadable.md)>
+**Returns:** *Promise‹[SparseReadable](../interfaces/sparsereadable.md)›*
 
 ___
-<a id="createsparsewritestream"></a>
 
 ###  createSparseWriteStream
 
-▸ **createSparseWriteStream**(): `Promise`<[SparseWritable](../interfaces/sparsewritable.md)>
+▸ **createSparseWriteStream**(): *Promise‹[SparseWritable](../interfaces/sparsewritable.md)›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[createSparseWriteStream](../interfaces/adaptersourcedestination.md#createsparsewritestream)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[createSparseWriteStream](sourcedestination.md#createsparsewritestream)*
+*Inherited from [SourceSource](sourcesource.md).[createSparseWriteStream](sourcesource.md#createsparsewritestream)*
 
-*Defined in [source-destination/source-destination.ts:331](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L331)*
+*Defined in [lib/source-destination/source-destination.ts:331](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L331)*
 
-**Returns:** `Promise`<[SparseWritable](../interfaces/sparsewritable.md)>
+**Returns:** *Promise‹[SparseWritable](../interfaces/sparsewritable.md)›*
 
 ___
-<a id="createverifier"></a>
 
 ###  createVerifier
 
-▸ **createVerifier**(checksumOrBlocks: *`string` \| [BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]*, size?: *`undefined` \| `number`*): [Verifier](verifier.md)
+▸ **createVerifier**(`checksumOrBlocks`: string | [BlocksWithChecksum](../interfaces/blockswithchecksum.md)[], `size?`: undefined | number): *[Verifier](verifier.md)*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[createVerifier](../interfaces/adaptersourcedestination.md#createverifier)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[createVerifier](sourcedestination.md#createverifier)*
+*Inherited from [SourceSource](sourcesource.md).[createVerifier](sourcesource.md#createverifier)*
 
-*Defined in [source-destination/source-destination.ts:357](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L357)*
+*Defined in [lib/source-destination/source-destination.ts:357](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L357)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| checksumOrBlocks | `string` \| [BlocksWithChecksum](../interfaces/blockswithchecksum.md)[] |
-| `Optional` size | `undefined` \| `number` |
+Name | Type |
+------ | ------ |
+`checksumOrBlocks` | string &#124; [BlocksWithChecksum](../interfaces/blockswithchecksum.md)[] |
+`size?` | undefined &#124; number |
 
-**Returns:** [Verifier](verifier.md)
+**Returns:** *[Verifier](verifier.md)*
 
 ___
-<a id="createwritestream"></a>
 
 ###  createWriteStream
 
-▸ **createWriteStream**(): `Promise`<`WritableStream`>
+▸ **createWriteStream**(): *Promise‹WritableStream›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[createWriteStream](../interfaces/adaptersourcedestination.md#createwritestream)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[createWriteStream](sourcedestination.md#createwritestream)*
+*Inherited from [SourceSource](sourcesource.md).[createWriteStream](sourcesource.md#createwritestream)*
 
-*Defined in [source-destination/source-destination.ts:327](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L327)*
+*Defined in [lib/source-destination/source-destination.ts:327](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L327)*
 
-**Returns:** `Promise`<`WritableStream`>
+**Returns:** *Promise‹WritableStream›*
 
 ___
-<a id="emit"></a>
 
 ###  emit
 
-▸ **emit**(event: *`string` \| `symbol`*, ...args: *`any`[]*): `boolean`
+▸ **emit**(`event`: string | symbol, ...`args`: any[]): *boolean*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[emit](../interfaces/adaptersourcedestination.md#emit)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from EventEmitter.emit*
+*Inherited from [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-*Overrides EventEmitter.emit*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
-*Defined in /node_modules/@types/node/base.d.ts:693*
+Defined in node_modules/@types/node/base.d.ts:693
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| `Rest` args | `any`[] |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`...args` | any[] |
 
-**Returns:** `boolean`
+**Returns:** *boolean*
 
 ___
-<a id="eventnames"></a>
 
 ###  eventNames
 
-▸ **eventNames**(): (`string` \| `symbol`)[]
+▸ **eventNames**(): *string | symbol[]*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[eventNames](../interfaces/adaptersourcedestination.md#eventnames)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from EventEmitter.eventNames*
+*Inherited from [CountingWritable](countingwritable.md).[eventNames](countingwritable.md#eventnames)*
 
-*Overrides EventEmitter.eventNames*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[eventNames](../interfaces/sparsereadable.md#eventnames)*
 
-*Defined in /node_modules/@types/node/base.d.ts:694*
+Defined in node_modules/@types/node/base.d.ts:694
 
-**Returns:** (`string` \| `symbol`)[]
+**Returns:** *string | symbol[]*
 
 ___
-<a id="getblocks"></a>
 
 ###  getBlocks
 
-▸ **getBlocks**(): `Promise`<[BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]>
+▸ **getBlocks**(): *Promise‹[BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[getBlocks](../interfaces/adaptersourcedestination.md#getblocks)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[getBlocks](sourcedestination.md#getblocks)*
+*Inherited from [SourceSource](sourcesource.md).[getBlocks](sourcesource.md#getblocks)*
 
-*Defined in [source-destination/source-destination.ts:323](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L323)*
+*Defined in [lib/source-destination/source-destination.ts:323](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L323)*
 
-**Returns:** `Promise`<[BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]>
+**Returns:** *Promise‹[BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]›*
 
 ___
-<a id="getinnersource"></a>
 
 ###  getInnerSource
 
-▸ **getInnerSource**(): `Promise`<[SourceDestination](sourcedestination.md)>
+▸ **getInnerSource**(): *Promise‹[SourceDestination](sourcedestination.md)›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[getInnerSource](../interfaces/adaptersourcedestination.md#getinnersource)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[getInnerSource](sourcedestination.md#getinnersource)*
+*Inherited from [SourceSource](sourcesource.md).[getInnerSource](sourcesource.md#getinnersource)*
 
-*Defined in [source-destination/source-destination.ts:424](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L424)*
+*Defined in [lib/source-destination/source-destination.ts:424](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L424)*
 
-**Returns:** `Promise`<[SourceDestination](sourcedestination.md)>
+**Returns:** *Promise‹[SourceDestination](sourcedestination.md)›*
 
 ___
-<a id="getmaxlisteners"></a>
 
 ###  getMaxListeners
 
-▸ **getMaxListeners**(): `number`
+▸ **getMaxListeners**(): *number*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[getMaxListeners](../interfaces/adaptersourcedestination.md#getmaxlisteners)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from EventEmitter.getMaxListeners*
+*Inherited from [CountingWritable](countingwritable.md).[getMaxListeners](countingwritable.md#getmaxlisteners)*
 
-*Overrides EventEmitter.getMaxListeners*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[getMaxListeners](../interfaces/sparsereadable.md#getmaxlisteners)*
 
-*Defined in /node_modules/@types/node/base.d.ts:691*
+Defined in node_modules/@types/node/base.d.ts:691
 
-**Returns:** `number`
+**Returns:** *number*
 
 ___
-<a id="getmetadata"></a>
 
 ###  getMetadata
 
-▸ **getMetadata**(): `Promise`<[Metadata](../interfaces/metadata.md)>
+▸ **getMetadata**(): *Promise‹[Metadata](../interfaces/metadata.md)›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[getMetadata](../interfaces/adaptersourcedestination.md#getmetadata)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[getMetadata](sourcedestination.md#getmetadata)*
+*Inherited from [SourceSource](sourcesource.md).[getMetadata](sourcesource.md#getmetadata)*
 
-*Defined in [source-destination/source-destination.ts:280](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L280)*
+*Defined in [lib/source-destination/source-destination.ts:280](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L280)*
 
-**Returns:** `Promise`<[Metadata](../interfaces/metadata.md)>
+**Returns:** *Promise‹[Metadata](../interfaces/metadata.md)›*
 
 ___
-<a id="getpartitiontable"></a>
 
 ###  getPartitionTable
 
-▸ **getPartitionTable**(): `Promise`<`GetPartitionsResult` \| `undefined`>
+▸ **getPartitionTable**(): *Promise‹GetPartitionsResult | undefined›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[getPartitionTable](../interfaces/adaptersourcedestination.md#getpartitiontable)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[getPartitionTable](sourcedestination.md#getpartitiontable)*
+*Inherited from [SourceSource](sourcesource.md).[getPartitionTable](sourcesource.md#getpartitiontable)*
 
-*Defined in [source-destination/source-destination.ts:445](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L445)*
+*Defined in [lib/source-destination/source-destination.ts:445](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L445)*
 
-**Returns:** `Promise`<`GetPartitionsResult` \| `undefined`>
+**Returns:** *Promise‹GetPartitionsResult | undefined›*
 
 ___
-<a id="listenercount"></a>
 
 ###  listenerCount
 
-▸ **listenerCount**(type: *`string` \| `symbol`*): `number`
+▸ **listenerCount**(`type`: string | symbol): *number*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[listenerCount](../interfaces/adaptersourcedestination.md#listenercount)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from EventEmitter.listenerCount*
+*Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
 
-*Overrides EventEmitter.listenerCount*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[listenerCount](../interfaces/sparsereadable.md#listenercount)*
 
-*Defined in /node_modules/@types/node/base.d.ts:695*
+Defined in node_modules/@types/node/base.d.ts:695
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| type | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`type` | string &#124; symbol |
 
-**Returns:** `number`
+**Returns:** *number*
 
 ___
-<a id="listeners"></a>
 
 ###  listeners
 
-▸ **listeners**(event: *`string` \| `symbol`*): `Function`[]
+▸ **listeners**(`event`: string | symbol): *Function[]*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[listeners](../interfaces/adaptersourcedestination.md#listeners)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from EventEmitter.listeners*
+*Inherited from [CountingWritable](countingwritable.md).[listeners](countingwritable.md#listeners)*
 
-*Overrides EventEmitter.listeners*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[listeners](../interfaces/sparsereadable.md#listeners)*
 
-*Defined in /node_modules/@types/node/base.d.ts:692*
+Defined in node_modules/@types/node/base.d.ts:692
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
 
-**Returns:** `Function`[]
+**Returns:** *Function[]*
 
 ___
-<a id="on"></a>
 
 ###  on
 
-▸ **on**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **on**(`event`: string | symbol, `listener`: Function): *this*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[on](../interfaces/adaptersourcedestination.md#on)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from EventEmitter.on*
+*Inherited from [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-*Overrides EventEmitter.on*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
-*Defined in /node_modules/@types/node/base.d.ts:684*
+Defined in node_modules/@types/node/base.d.ts:684
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="once"></a>
 
 ###  once
 
-▸ **once**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **once**(`event`: string | symbol, `listener`: Function): *this*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[once](../interfaces/adaptersourcedestination.md#once)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from EventEmitter.once*
+*Inherited from [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-*Overrides EventEmitter.once*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
-*Defined in /node_modules/@types/node/base.d.ts:685*
+Defined in node_modules/@types/node/base.d.ts:685
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="open"></a>
 
 ###  open
 
-▸ **open**(): `Promise`<`void`>
+▸ **open**(): *Promise‹void›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[open](../interfaces/adaptersourcedestination.md#open)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[open](sourcedestination.md#open)*
+*Inherited from [SourceSource](sourcesource.md).[open](sourcesource.md#open)*
 
-*Defined in [source-destination/source-destination.ts:335](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L335)*
+*Defined in [lib/source-destination/source-destination.ts:335](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L335)*
 
-**Returns:** `Promise`<`void`>
+**Returns:** *Promise‹void›*
 
 ___
-<a id="prependlistener"></a>
 
 ###  prependListener
 
-▸ **prependListener**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **prependListener**(`event`: string | symbol, `listener`: Function): *this*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[prependListener](../interfaces/adaptersourcedestination.md#prependlistener)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from EventEmitter.prependListener*
+*Inherited from [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-*Overrides EventEmitter.prependListener*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:686*
+Defined in node_modules/@types/node/base.d.ts:686
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="prependoncelistener"></a>
 
 ###  prependOnceListener
 
-▸ **prependOnceListener**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **prependOnceListener**(`event`: string | symbol, `listener`: Function): *this*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[prependOnceListener](../interfaces/adaptersourcedestination.md#prependoncelistener)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from EventEmitter.prependOnceListener*
+*Inherited from [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-*Overrides EventEmitter.prependOnceListener*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:687*
+Defined in node_modules/@types/node/base.d.ts:687
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="read"></a>
 
 ###  read
 
-▸ **read**(_buffer: *`Buffer`*, _bufferOffset: *`number`*, _length: *`number`*, _sourceOffset: *`number`*): `Promise`<`ReadResult`>
+▸ **read**(`_buffer`: Buffer, `_bufferOffset`: number, `_length`: number, `_sourceOffset`: number): *Promise‹ReadResult›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[read](../interfaces/adaptersourcedestination.md#read)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[read](sourcedestination.md#read)*
+*Inherited from [SourceSource](sourcesource.md).[read](sourcesource.md#read)*
 
-*Defined in [source-destination/source-destination.ts:291](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L291)*
+*Defined in [lib/source-destination/source-destination.ts:291](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L291)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| _buffer | `Buffer` |
-| _bufferOffset | `number` |
-| _length | `number` |
-| _sourceOffset | `number` |
+Name | Type |
+------ | ------ |
+`_buffer` | Buffer |
+`_bufferOffset` | number |
+`_length` | number |
+`_sourceOffset` | number |
 
-**Returns:** `Promise`<`ReadResult`>
+**Returns:** *Promise‹ReadResult›*
 
 ___
-<a id="removealllisteners"></a>
 
 ###  removeAllListeners
 
-▸ **removeAllListeners**(event?: *`string` \| `symbol`*): `this`
+▸ **removeAllListeners**(`event?`: string | symbol): *this*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[removeAllListeners](../interfaces/adaptersourcedestination.md#removealllisteners)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from EventEmitter.removeAllListeners*
+*Inherited from [CountingWritable](countingwritable.md).[removeAllListeners](countingwritable.md#removealllisteners)*
 
-*Overrides EventEmitter.removeAllListeners*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeAllListeners](../interfaces/sparsereadable.md#removealllisteners)*
 
-*Defined in /node_modules/@types/node/base.d.ts:689*
+Defined in node_modules/@types/node/base.d.ts:689
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| `Optional` event | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`event?` | string &#124; symbol |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="removelistener"></a>
 
 ###  removeListener
 
-▸ **removeListener**(event: *`string` \| `symbol`*, listener: *`Function`*): `this`
+▸ **removeListener**(`event`: string | symbol, `listener`: Function): *this*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[removeListener](../interfaces/adaptersourcedestination.md#removelistener)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from EventEmitter.removeListener*
+*Inherited from [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-*Overrides EventEmitter.removeListener*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
-*Defined in /node_modules/@types/node/base.d.ts:688*
+Defined in node_modules/@types/node/base.d.ts:688
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| event | `string` \| `symbol` |
-| listener | `Function` |
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+`listener` | Function |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="setmaxlisteners"></a>
 
 ###  setMaxListeners
 
-▸ **setMaxListeners**(n: *`number`*): `this`
+▸ **setMaxListeners**(`n`: number): *this*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[setMaxListeners](../interfaces/adaptersourcedestination.md#setmaxlisteners)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from EventEmitter.setMaxListeners*
+*Inherited from [CountingWritable](countingwritable.md).[setMaxListeners](countingwritable.md#setmaxlisteners)*
 
-*Overrides EventEmitter.setMaxListeners*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[setMaxListeners](../interfaces/sparsereadable.md#setmaxlisteners)*
 
-*Defined in /node_modules/@types/node/base.d.ts:690*
+Defined in node_modules/@types/node/base.d.ts:690
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| n | `number` |
+Name | Type |
+------ | ------ |
+`n` | number |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="write"></a>
 
 ###  write
 
-▸ **write**(_buffer: *`Buffer`*, _bufferOffset: *`number`*, _length: *`number`*, _fileOffset: *`number`*): `Promise`<`WriteResult`>
+▸ **write**(`_buffer`: Buffer, `_bufferOffset`: number, `_length`: number, `_fileOffset`: number): *Promise‹WriteResult›*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[write](../interfaces/adaptersourcedestination.md#write)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[write](sourcedestination.md#write)*
+*Inherited from [SourceSource](sourcesource.md).[write](sourcesource.md#write)*
 
-*Defined in [source-destination/source-destination.ts:300](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L300)*
-
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| _buffer | `Buffer` |
-| _bufferOffset | `number` |
-| _length | `number` |
-| _fileOffset | `number` |
-
-**Returns:** `Promise`<`WriteResult`>
-
-___
-<a id="listenercount-1"></a>
-
-### `<Static>` listenerCount
-
-▸ **listenerCount**(emitter: *`EventEmitter`*, event: *`string` \| `symbol`*): `number`
-
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[listenerCount](../interfaces/adaptersourcedestination.md#listenercount-1)*
-
-*Inherited from EventEmitter.listenerCount*
-
-*Defined in /node_modules/@types/node/base.d.ts:680*
+*Defined in [lib/source-destination/source-destination.ts:300](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L300)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| emitter | `EventEmitter` |
-| event | `string` \| `symbol` |
+Name | Type |
+------ | ------ |
+`_buffer` | Buffer |
+`_bufferOffset` | number |
+`_length` | number |
+`_fileOffset` | number |
 
-**Returns:** `number`
+**Returns:** *Promise‹WriteResult›*
 
 ___
-<a id="register"></a>
 
-### `<Static>` register
+### `Static` listenerCount
 
-▸ **register**(Cls: *[SourceSource](sourcesource.md)*): `void`
+▸ **listenerCount**(`emitter`: EventEmitter, `event`: string | symbol): *number*
 
-*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[register](../interfaces/adaptersourcedestination.md#register)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Inherited from [SourceDestination](sourcedestination.md).[register](sourcedestination.md#register)*
+*Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
 
-*Defined in [source-destination/source-destination.ts:250](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/source-destination.ts#L250)*
+Defined in node_modules/@types/node/base.d.ts:680
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| Cls | [SourceSource](sourcesource.md) |
+Name | Type |
+------ | ------ |
+`emitter` | EventEmitter |
+`event` | string &#124; symbol |
 
-**Returns:** `void`
+**Returns:** *number*
 
 ___
 
+### `Static` register
+
+▸ **register**(`Cls`: typeof SourceSource): *void*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
+
+*Inherited from [SourceSource](sourcesource.md).[register](sourcesource.md#static-register)*
+
+*Defined in [lib/source-destination/source-destination.ts:250](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L250)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`Cls` | typeof SourceSource |
+
+**Returns:** *void*

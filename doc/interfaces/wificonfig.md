@@ -1,78 +1,66 @@
-[etcher-sdk](../README.md) > [WifiConfig](../interfaces/wificonfig.md)
+[etcher-sdk](../README.md) › [WifiConfig](wificonfig.md)
 
 # Interface: WifiConfig
 
 ## Hierarchy
 
-**WifiConfig**
+* **WifiConfig**
 
 ## Index
 
 ### Properties
 
-* [gateway](wificonfig.md#gateway)
-* [ip](wificonfig.md#ip)
-* [netmask](wificonfig.md#netmask)
-* [routeMetric](wificonfig.md#routemetric)
-* [wifiKey](wificonfig.md#wifikey)
+* [gateway](wificonfig.md#optional-gateway)
+* [ip](wificonfig.md#optional-ip)
+* [netmask](wificonfig.md#optional-netmask)
+* [routeMetric](wificonfig.md#optional-routemetric)
+* [wifiKey](wificonfig.md#optional-wifikey)
 * [wifiSsid](wificonfig.md#wifissid)
-
----
 
 ## Properties
 
-<a id="gateway"></a>
+### `Optional` gateway
 
-### `<Optional>` gateway
+• **gateway**? : *undefined | string*
 
-**● gateway**: *`undefined` \| `string`*
-
-*Defined in [source-destination/configured-source/operations/configure.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/operations/configure.ts#L38)*
+*Defined in [lib/source-destination/configured-source/operations/configure.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/configured-source/operations/configure.ts#L38)*
 
 ___
-<a id="ip"></a>
 
-### `<Optional>` ip
+### `Optional` ip
 
-**● ip**: *`undefined` \| `string`*
+• **ip**? : *undefined | string*
 
-*Defined in [source-destination/configured-source/operations/configure.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/operations/configure.ts#L36)*
-
-___
-<a id="netmask"></a>
-
-### `<Optional>` netmask
-
-**● netmask**: *`undefined` \| `string`*
-
-*Defined in [source-destination/configured-source/operations/configure.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/operations/configure.ts#L37)*
+*Defined in [lib/source-destination/configured-source/operations/configure.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/configured-source/operations/configure.ts#L36)*
 
 ___
-<a id="routemetric"></a>
 
-### `<Optional>` routeMetric
+### `Optional` netmask
 
-**● routeMetric**: *`number` \| `string`*
+• **netmask**? : *undefined | string*
 
-*Defined in [source-destination/configured-source/operations/configure.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/operations/configure.ts#L35)*
-
-___
-<a id="wifikey"></a>
-
-### `<Optional>` wifiKey
-
-**● wifiKey**: *`undefined` \| `string`*
-
-*Defined in [source-destination/configured-source/operations/configure.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/operations/configure.ts#L34)*
+*Defined in [lib/source-destination/configured-source/operations/configure.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/configured-source/operations/configure.ts#L37)*
 
 ___
-<a id="wifissid"></a>
+
+### `Optional` routeMetric
+
+• **routeMetric**? : *number | string*
+
+*Defined in [lib/source-destination/configured-source/operations/configure.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/configured-source/operations/configure.ts#L35)*
+
+___
+
+### `Optional` wifiKey
+
+• **wifiKey**? : *undefined | string*
+
+*Defined in [lib/source-destination/configured-source/operations/configure.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/configured-source/operations/configure.ts#L34)*
+
+___
 
 ###  wifiSsid
 
-**● wifiSsid**: *`string`*
+• **wifiSsid**: *string*
 
-*Defined in [source-destination/configured-source/operations/configure.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/configured-source/operations/configure.ts#L33)*
-
-___
-
+*Defined in [lib/source-destination/configured-source/operations/configure.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/configured-source/operations/configure.ts#L33)*

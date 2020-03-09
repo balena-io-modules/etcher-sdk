@@ -1,12 +1,12 @@
-[etcher-sdk](../README.md) > [MultiDestinationError](../classes/multidestinationerror.md)
+[etcher-sdk](../README.md) › [MultiDestinationError](multidestinationerror.md)
 
 # Class: MultiDestinationError
 
 ## Hierarchy
 
- `Error`
+* [Error](notcapable.md#static-error)
 
-**↳ MultiDestinationError**
+  ↳ **MultiDestinationError**
 
 ## Index
 
@@ -20,94 +20,78 @@
 * [error](multidestinationerror.md#error)
 * [message](multidestinationerror.md#message)
 * [name](multidestinationerror.md#name)
-* [stack](multidestinationerror.md#stack)
-* [Error](multidestinationerror.md#error-1)
-
----
+* [stack](multidestinationerror.md#optional-stack)
+* [Error](multidestinationerror.md#static-error)
 
 ## Constructors
 
-<a id="constructor"></a>
-
 ###  constructor
 
-⊕ **new MultiDestinationError**(error: *`Error`*, destination: *[SourceDestination](sourcedestination.md)*): [MultiDestinationError](multidestinationerror.md)
+\+ **new MultiDestinationError**(`error`: [Error](notcapable.md#static-error), `destination`: [SourceDestination](sourcedestination.md)): *[MultiDestinationError](multidestinationerror.md)*
 
-*Defined in [source-destination/multi-destination.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/multi-destination.ts#L35)*
+*Defined in [lib/source-destination/multi-destination.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/multi-destination.ts#L35)*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| error | `Error` |
-| destination | [SourceDestination](sourcedestination.md) |
+Name | Type |
+------ | ------ |
+`error` | [Error](notcapable.md#static-error) |
+`destination` | [SourceDestination](sourcedestination.md) |
 
-**Returns:** [MultiDestinationError](multidestinationerror.md)
-
-___
+**Returns:** *[MultiDestinationError](multidestinationerror.md)*
 
 ## Properties
 
-<a id="destination"></a>
-
 ###  destination
 
-**● destination**: *[SourceDestination](sourcedestination.md)*
+• **destination**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [source-destination/multi-destination.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/multi-destination.ts#L36)*
+*Defined in [lib/source-destination/multi-destination.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/multi-destination.ts#L36)*
 
 ___
-<a id="error"></a>
 
 ###  error
 
-**● error**: *`Error`*
+• **error**: *[Error](notcapable.md#static-error)*
 
-*Defined in [source-destination/multi-destination.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/6429a60/lib/source-destination/multi-destination.ts#L36)*
+*Defined in [lib/source-destination/multi-destination.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/multi-destination.ts#L36)*
 
 ___
-<a id="message"></a>
 
 ###  message
 
-**● message**: *`string`*
+• **message**: *string*
 
-*Inherited from Error.message*
+*Inherited from [NotCapable](notcapable.md).[message](notcapable.md#message)*
 
-*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:964*
+Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:974
 
 ___
-<a id="name"></a>
 
 ###  name
 
-**● name**: *`string`*
+• **name**: *string*
 
-*Inherited from Error.name*
+*Inherited from [NotCapable](notcapable.md).[name](notcapable.md#name)*
 
-*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:963*
-
-___
-<a id="stack"></a>
-
-### `<Optional>` stack
-
-**● stack**: *`undefined` \| `string`*
-
-*Inherited from Error.stack*
-
-*Overrides Error.stack*
-
-*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:965*
-
-___
-<a id="error-1"></a>
-
-### `<Static>` Error
-
-**● Error**: *`ErrorConstructor`*
-
-*Defined in /node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:974*
+Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:973
 
 ___
 
+### `Optional` stack
+
+• **stack**? : *undefined | string*
+
+*Inherited from [NotCapable](notcapable.md).[stack](notcapable.md#optional-stack)*
+
+*Overrides [NotCapable](notcapable.md).[stack](notcapable.md#optional-stack)*
+
+Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:975
+
+___
+
+### `Static` Error
+
+▪ **Error**: *ErrorConstructor*
+
+Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:984
