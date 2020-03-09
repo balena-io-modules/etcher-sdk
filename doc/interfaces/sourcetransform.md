@@ -95,7 +95,7 @@ ___
 
 • **sourceStream**: *ReadableStream*
 
-*Defined in [lib/source-destination/compressed-source.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/compressed-source.ts#L26)*
+*Defined in [lib/source-destination/compressed-source.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/compressed-source.ts#L26)*
 
 ___
 

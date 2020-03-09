@@ -71,7 +71,7 @@ Name | Type |
 
 • **bytesWritten**: *number* = 0
 
-*Defined in [lib/source-destination/progress.ts:92](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/progress.ts#L92)*
+*Defined in [lib/source-destination/progress.ts:92](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/progress.ts#L92)*
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 • **position**: *number | undefined*
 
-*Defined in [lib/source-destination/progress.ts:93](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/progress.ts#L93)*
+*Defined in [lib/source-destination/progress.ts:93](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/progress.ts#L93)*
 
 ___
 
@@ -109,7 +109,7 @@ Defined in node_modules/@types/node/base.d.ts:681
 
 *Overrides void*
 
-*Defined in [lib/source-destination/progress.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/progress.ts#L95)*
+*Defined in [lib/source-destination/progress.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/progress.ts#L95)*
 
 **Parameters:**
 

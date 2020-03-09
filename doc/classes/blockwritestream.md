@@ -66,7 +66,7 @@
 
 *Overrides [CountingWritable](countingwritable.md).[constructor](countingwritable.md#constructor)*
 
-*Defined in [lib/block-write-stream.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-write-stream.ts#L37)*
+*Defined in [lib/block-write-stream.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-write-stream.ts#L37)*
 
 **Parameters:**
 
@@ -84,7 +84,7 @@ Name | Type | Default |
 
 • **_buffers**: *Buffer[]* = []
 
-*Defined in [lib/block-write-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-write-stream.ts#L36)*
+*Defined in [lib/block-write-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-write-stream.ts#L36)*
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 • **_bytes**: *number* = 0
 
-*Defined in [lib/block-write-stream.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-write-stream.ts#L37)*
+*Defined in [lib/block-write-stream.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-write-stream.ts#L37)*
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 • **_firstBuffers**: *Buffer[]* = []
 
-*Defined in [lib/block-write-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-write-stream.ts#L35)*
+*Defined in [lib/block-write-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-write-stream.ts#L35)*
 
 ___
 
@@ -108,7 +108,7 @@ ___
 
 • **bytesWritten**: *number* = 0
 
-*Defined in [lib/block-write-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-write-stream.ts#L34)*
+*Defined in [lib/block-write-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-write-stream.ts#L34)*
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 • **destination**: *[BlockDevice](blockdevice.md)*
 
-*Defined in [lib/block-write-stream.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-write-stream.ts#L40)*
+*Defined in [lib/block-write-stream.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-write-stream.ts#L40)*
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 • **firstBytesToKeep**: *number*
 
-*Defined in [lib/block-write-stream.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-write-stream.ts#L41)*
+*Defined in [lib/block-write-stream.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-write-stream.ts#L41)*
 
 ___
 
@@ -132,7 +132,7 @@ ___
 
 • **maxRetries**: *number*
 
-*Defined in [lib/block-write-stream.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-write-stream.ts#L42)*
+*Defined in [lib/block-write-stream.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-write-stream.ts#L42)*
 
 ___
 
@@ -160,7 +160,7 @@ Defined in node_modules/@types/node/base.d.ts:681
 
 ▸ **__final**(): *Promise‹void›*
 
-*Defined in [lib/block-write-stream.ts:141](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-write-stream.ts#L141)*
+*Defined in [lib/block-write-stream.ts:141](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-write-stream.ts#L141)*
 
 **Returns:** *Promise‹void›*
 
@@ -170,7 +170,7 @@ ___
 
 ▸ **__write**(`buffer`: Buffer): *Promise‹void›*
 
-*Defined in [lib/block-write-stream.ts:102](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-write-stream.ts#L102)*
+*Defined in [lib/block-write-stream.ts:102](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-write-stream.ts#L102)*
 
 **Parameters:**
 
@@ -186,7 +186,7 @@ ___
 
 ▸ **_final**(`callback`: function): *void*
 
-*Defined in [lib/block-write-stream.ts:165](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-write-stream.ts#L165)*
+*Defined in [lib/block-write-stream.ts:165](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-write-stream.ts#L165)*
 
 **`summary`** Write buffered data before a stream ends, called by stream internals
 
@@ -212,7 +212,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/block-write-stream.ts:133](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-write-stream.ts#L133)*
+*Defined in [lib/block-write-stream.ts:133](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-write-stream.ts#L133)*
 
 **Parameters:**
 
@@ -396,7 +396,7 @@ ___
 
 *Inherited from [SparseWriteStream](sparsewritestream.md).[destroy](sparsewritestream.md#destroy)*
 
-*Defined in [typings/readable-stream/index.d.ts:18](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/typings/readable-stream/index.d.ts#L18)*
+*Defined in [typings/readable-stream/index.d.ts:18](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/typings/readable-stream/index.d.ts#L18)*
 
 **Parameters:**
 
@@ -1489,7 +1489,7 @@ ___
 
 ▸ **writeBuffers**(): *Promise‹void›*
 
-*Defined in [lib/block-write-stream.ts:82](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-write-stream.ts#L82)*
+*Defined in [lib/block-write-stream.ts:82](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-write-stream.ts#L82)*
 
 **Returns:** *Promise‹void›*
 
@@ -1499,7 +1499,7 @@ ___
 
 ▸ **writeChunk**(`buffer`: Buffer, `position`: number, `flushing`: boolean): *Promise‹void›*
 
-*Defined in [lib/block-write-stream.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-write-stream.ts#L50)*
+*Defined in [lib/block-write-stream.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-write-stream.ts#L50)*
 
 **Parameters:**
 

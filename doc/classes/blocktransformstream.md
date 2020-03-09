@@ -73,7 +73,7 @@
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [lib/block-transform-stream.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-transform-stream.ts#L23)*
+*Defined in [lib/block-transform-stream.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-transform-stream.ts#L23)*
 
 **Parameters:**
 
@@ -89,7 +89,7 @@ Name | Type |
 
 • **_buffers**: *Buffer[]* = []
 
-*Defined in [lib/block-transform-stream.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-transform-stream.ts#L22)*
+*Defined in [lib/block-transform-stream.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-transform-stream.ts#L22)*
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 • **_bytes**: *number* = 0
 
-*Defined in [lib/block-transform-stream.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-transform-stream.ts#L23)*
+*Defined in [lib/block-transform-stream.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-transform-stream.ts#L23)*
 
 ___
 
@@ -105,7 +105,7 @@ ___
 
 • **bytesRead**: *number* = 0
 
-*Defined in [lib/block-transform-stream.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-transform-stream.ts#L20)*
+*Defined in [lib/block-transform-stream.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-transform-stream.ts#L20)*
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 • **bytesWritten**: *number* = 0
 
-*Defined in [lib/block-transform-stream.ts:21](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-transform-stream.ts#L21)*
+*Defined in [lib/block-transform-stream.ts:21](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-transform-stream.ts#L21)*
 
 ___
 
@@ -121,7 +121,7 @@ ___
 
 • **chunkSize**: *number*
 
-*Defined in [lib/block-transform-stream.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-transform-stream.ts#L25)*
+*Defined in [lib/block-transform-stream.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-transform-stream.ts#L25)*
 
 ___
 
@@ -159,7 +159,7 @@ Defined in node_modules/@types/node/base.d.ts:681
 
 ▸ **_flush**(`callback`: function): *void*
 
-*Defined in [lib/block-transform-stream.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-transform-stream.ts#L71)*
+*Defined in [lib/block-transform-stream.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-transform-stream.ts#L71)*
 
 **Parameters:**
 
@@ -201,7 +201,7 @@ ___
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[_transform](../interfaces/sourcetransform.md#_transform)*
 
-*Defined in [lib/block-transform-stream.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-transform-stream.ts#L50)*
+*Defined in [lib/block-transform-stream.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-transform-stream.ts#L50)*
 
 **Parameters:**
 
@@ -1468,7 +1468,7 @@ ___
 
 ▸ **writeBuffers**(`flush`: boolean): *void*
 
-*Defined in [lib/block-transform-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/block-transform-stream.ts#L29)*
+*Defined in [lib/block-transform-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-transform-stream.ts#L29)*
 
 **Parameters:**
 

@@ -46,7 +46,7 @@
 
 \+ **new SourceRandomAccessReader**(`source`: [SourceDestination](sourcedestination.md)): *[SourceRandomAccessReader](sourcerandomaccessreader.md)*
 
-*Defined in [lib/source-destination/zip.ts:128](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/zip.ts#L128)*
+*Defined in [lib/source-destination/zip.ts:128](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/zip.ts#L128)*
 
 **Parameters:**
 
@@ -62,7 +62,7 @@ Name | Type |
 
 • **source**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [lib/source-destination/zip.ts:129](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/zip.ts#L129)*
+*Defined in [lib/source-destination/zip.ts:129](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/zip.ts#L129)*
 
 ___
 
@@ -82,7 +82,7 @@ Defined in node_modules/@types/node/base.d.ts:681
 
 *Overrides void*
 
-*Defined in [lib/source-destination/zip.ts:133](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/zip.ts#L133)*
+*Defined in [lib/source-destination/zip.ts:133](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/zip.ts#L133)*
 
 **Parameters:**
 
