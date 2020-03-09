@@ -15,10 +15,10 @@
  */
 
 import { delay } from 'bluebird';
-import { isUsbBootCapableUSBDevice } from 'node-raspberrypi-usbboot';
 import { platform } from 'process';
 import { DriverlessDevice as WinUsbDriverlessDevice } from 'winusb-driver-generator';
 
+import { getRaspberrypiUsbboot } from '../../lazy';
 import { DriverlessDevice } from '../../source-destination/driverless';
 import { difference } from '../../utils';
 import { Adapter } from './adapter';
@@ -86,8 +86,13 @@ class DriverlessDeviceAdapter$ extends Adapter {
 	}
 
 	private listDrives(): Map<string, WinUsbDriverlessDevice> {
-		const devices = this.listDriverlessDevices();
+		const isUsbBootCapableUSBDevice = getRaspberrypiUsbboot()
+			?.isUsbBootCapableUSBDevice;
 		const result = new Map<string, WinUsbDriverlessDevice>();
+		if (isUsbBootCapableUSBDevice == null) {
+			return result;
+		}
+		const devices = this.listDriverlessDevices();
 		for (const device of devices) {
 			if (isUsbBootCapableUSBDevice(device.vid, device.pid)) {
 				result.set(device.did, device);
