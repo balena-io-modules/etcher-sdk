@@ -69,7 +69,7 @@
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [typings/xxhash/index.d.ts:12](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/typings/xxhash/index.d.ts#L12)*
+*Defined in [typings/xxhash/index.d.ts:12](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/typings/xxhash/index.d.ts#L12)*
 
 **Parameters:**
 
@@ -87,7 +87,7 @@ Name | Type |
 
 • **bytesWritten**: *number* = 0
 
-*Defined in [lib/source-destination/source-destination.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L48)*
+*Defined in [lib/source-destination/source-destination.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/source-destination.ts#L48)*
 
 ___
 
@@ -145,7 +145,7 @@ ___
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[_transform](../interfaces/sourcetransform.md#_transform)*
 
-*Defined in [lib/source-destination/source-destination.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/source-destination/source-destination.ts#L50)*
+*Defined in [lib/source-destination/source-destination.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/source-destination.ts#L50)*
 
 **Parameters:**
 

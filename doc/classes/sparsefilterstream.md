@@ -73,7 +73,7 @@
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [lib/sparse-stream/sparse-filter-stream.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/sparse-filter-stream.ts#L30)*
+*Defined in [lib/sparse-stream/sparse-filter-stream.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/sparse-filter-stream.ts#L30)*
 
 **Parameters:**
 
@@ -94,7 +94,7 @@ Name | Type | Default |
 
 *Implementation of [SparseReadable](../interfaces/sparsereadable.md).[blocks](../interfaces/sparsereadable.md#blocks)*
 
-*Defined in [lib/sparse-stream/sparse-filter-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/sparse-filter-stream.ts#L33)*
+*Defined in [lib/sparse-stream/sparse-filter-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/sparse-filter-stream.ts#L33)*
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 • **position**: *number* = 0
 
-*Defined in [lib/sparse-stream/sparse-filter-stream.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/sparse-filter-stream.ts#L30)*
+*Defined in [lib/sparse-stream/sparse-filter-stream.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/sparse-filter-stream.ts#L30)*
 
 ___
 
@@ -122,7 +122,7 @@ ___
 
 • **state**? : *[SparseReaderState](../interfaces/sparsereaderstate.md)*
 
-*Defined in [lib/sparse-stream/sparse-filter-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/sparse-filter-stream.ts#L29)*
+*Defined in [lib/sparse-stream/sparse-filter-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/sparse-filter-stream.ts#L29)*
 
 ___
 
@@ -130,7 +130,7 @@ ___
 
 • **stateIterator**: *Iterator‹[SparseReaderState](../interfaces/sparsereaderstate.md)›*
 
-*Defined in [lib/sparse-stream/sparse-filter-stream.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/sparse-filter-stream.ts#L28)*
+*Defined in [lib/sparse-stream/sparse-filter-stream.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/sparse-filter-stream.ts#L28)*
 
 ___
 
@@ -158,7 +158,7 @@ Defined in node_modules/@types/node/base.d.ts:681
 
 ▸ **__transform**(`buffer`: Buffer): *void*
 
-*Defined in [lib/sparse-stream/sparse-filter-stream.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/sparse-filter-stream.ts#L65)*
+*Defined in [lib/sparse-stream/sparse-filter-stream.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/sparse-filter-stream.ts#L65)*
 
 **Parameters:**
 
@@ -194,7 +194,7 @@ ___
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[_transform](../interfaces/sourcetransform.md#_transform)*
 
-*Defined in [lib/sparse-stream/sparse-filter-stream.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/sparse-filter-stream.ts#L51)*
+*Defined in [lib/sparse-stream/sparse-filter-stream.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/sparse-filter-stream.ts#L51)*
 
 **Parameters:**
 
@@ -607,7 +607,7 @@ ___
 
 ▸ **nextBlock**(): *void*
 
-*Defined in [lib/sparse-stream/sparse-filter-stream.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/2f08b24/lib/sparse-stream/sparse-filter-stream.ts#L47)*
+*Defined in [lib/sparse-stream/sparse-filter-stream.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/sparse-filter-stream.ts#L47)*
 
 **Returns:** *void*
 

@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-import { crc32 } from 'crc';
 import { createHash, Hash } from 'crypto';
 import { padStart } from 'lodash';
 import * as XXHash from 'xxhash';
-import { XXHash64 } from 'xxhash';
 
 import { XXHASH_SEED } from '../constants';
 import { BlocksVerificationError } from '../errors';
+import { getCrc, getXXHash } from '../lazy';
 
 export type ChecksumType =
 	| 'crc32'
@@ -53,9 +52,10 @@ export interface SparseReadable extends NodeJS.ReadableStream {
 
 class CRC32Hasher {
 	private value: number;
+	private crc32 = getCrc().crc32;
 
 	public update(data: Buffer): void {
-		this.value = crc32(data, this.value);
+		this.value = this.crc32(data, this.value);
 	}
 
 	public digest(_encoding: 'hex'): string {
@@ -63,7 +63,7 @@ class CRC32Hasher {
 	}
 }
 
-type AnyHasher = CRC32Hasher | Hash | XXHash | XXHash64;
+type AnyHasher = CRC32Hasher | Hash | XXHash | XXHash.XXHash64;
 
 function createHasher(checksumType?: ChecksumType): undefined | AnyHasher {
 	if (checksumType === 'crc32') {
@@ -71,8 +71,10 @@ function createHasher(checksumType?: ChecksumType): undefined | AnyHasher {
 	} else if (checksumType === 'sha1' || checksumType === 'sha256') {
 		return createHash(checksumType);
 	} else if (checksumType === 'xxhash32') {
-		return new XXHash(XXHASH_SEED);
+		const xxHash = getXXHash();
+		return new xxHash(XXHASH_SEED);
 	} else if (checksumType === 'xxhash64') {
+		const { XXHash64 } = getXXHash();
 		return new XXHash64(XXHASH_SEED);
 	}
 }
