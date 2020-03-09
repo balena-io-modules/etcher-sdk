@@ -18,6 +18,7 @@ import * as xxhash from 'xxhash';
 
 export type XXHash = typeof xxhash;
 
+import { promisify } from 'bluebird';
 import { once } from 'lodash';
 
 export const getRaspberrypiUsbboot = once(() => {
@@ -30,4 +31,8 @@ export const getRaspberrypiUsbboot = once(() => {
 
 export const getXXHash = once(
 	() => require('xxhash') as typeof import('xxhash'),
+);
+
+export const getUnmountDisk = once(() =>
+	promisify((require('mountutils') as typeof import('mountutils')).unmountDisk),
 );

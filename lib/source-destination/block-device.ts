@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-import { delay, promisify } from 'bluebird';
+import { delay } from 'bluebird';
 import { Drive as DrivelistDrive } from 'drivelist';
 import { ReadResult, WriteResult } from 'file-disk';
-import { unmountDisk } from 'mountutils';
 import { platform } from 'os';
 
 import {
@@ -33,6 +32,7 @@ import {
 
 import { File } from './file';
 import { Metadata } from './metadata';
+import { getUnmountDisk } from '../lazy';
 
 /**
  * @summary Time, in milliseconds, to wait before unmounting on success
@@ -41,8 +41,6 @@ const UNMOUNT_ON_SUCCESS_TIMEOUT_MS = 2000;
 const DEFAULT_BLOCK_SIZE = 512;
 const WIN32_FIRST_BYTES_TO_KEEP = 64 * 1024;
 const USE_ALIGNED_IO = platform() === 'win32' || platform() === 'darwin';
-
-const unmountDiskAsync = promisify(unmountDisk);
 
 export class BlockDevice extends File implements AdapterSourceDestination {
 	public emitsProgress = false;
@@ -118,7 +116,8 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 
 	protected async _open(): Promise<void> {
 		if (platform() !== 'win32') {
-			await unmountDiskAsync(this.drive.device);
+			const unmountDisk = getUnmountDisk();
+			await unmountDisk(this.drive.device);
 		}
 		await clean(this.drive.device);
 		await super._open();
@@ -132,7 +131,8 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		// right afterwards.
 		if (this.unmountOnSuccess) {
 			await delay(UNMOUNT_ON_SUCCESS_TIMEOUT_MS);
-			await unmountDiskAsync(this.drive.device);
+			const unmountDisk = getUnmountDisk();
+			await unmountDisk(this.drive.device);
 		}
 	}
 
