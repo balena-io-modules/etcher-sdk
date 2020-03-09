@@ -36,3 +36,5 @@ export const getXXHash = once(
 export const getUnmountDisk = once(() =>
 	promisify((require('mountutils') as typeof import('mountutils')).unmountDisk),
 );
+
+export const getCrc = once(() => require('crc') as typeof import('crc'));

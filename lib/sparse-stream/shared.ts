@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-import { crc32 } from 'crc';
 import { createHash, Hash } from 'crypto';
 import { padStart } from 'lodash';
 import * as XXHash from 'xxhash';
 
 import { XXHASH_SEED } from '../constants';
 import { BlocksVerificationError } from '../errors';
-import { getXXHash } from '../lazy';
+import { getCrc, getXXHash } from '../lazy';
 
 export type ChecksumType =
 	| 'crc32'
@@ -53,9 +52,10 @@ export interface SparseReadable extends NodeJS.ReadableStream {
 
 class CRC32Hasher {
 	private value: number;
+	private crc32 = getCrc().crc32;
 
 	public update(data: Buffer): void {
-		this.value = crc32(data, this.value);
+		this.value = this.crc32(data, this.value);
 	}
 
 	public digest(_encoding: 'hex'): string {

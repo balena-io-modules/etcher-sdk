@@ -30,9 +30,9 @@ import {
 	SparseWriteStream,
 } from '../sparse-stream/sparse-write-stream';
 
+import { getUnmountDisk } from '../lazy';
 import { File } from './file';
 import { Metadata } from './metadata';
-import { getUnmountDisk } from '../lazy';
 
 /**
  * @summary Time, in milliseconds, to wait before unmounting on success
