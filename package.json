@@ -49,6 +49,7 @@
     "winusb-driver-generator": "^1.2.3"
   },
   "dependencies": {
+    "@ronomon/direct-io": "^3.0.1",
     "axios": "^0.18.0",
     "blockmap": "^4.0.0",
     "bluebird": "^3.5.1",
@@ -65,6 +66,7 @@
     "partitioninfo": "^5.3.4",
     "readable-stream": "^2.3.6",
     "resin-image-fs": "^5.0.8",
+    "rwmutex": "^1.0.0",
     "speedometer": "^1.0.0",
     "udif": "^0.15.7",
     "unbzip2-stream": "balena-io-modules/unbzip2-stream#942fc218013c14adab01cf693b0500cf6ac83193",
