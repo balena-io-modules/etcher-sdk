@@ -49,7 +49,6 @@
     "winusb-driver-generator": "^1.2.3"
   },
   "dependencies": {
-    "@types/node": "^6.0.112",
     "axios": "^0.18.0",
     "blockmap": "^4.0.0",
     "bluebird": "^3.5.1",
@@ -82,6 +81,7 @@
     "@types/file-type": "^5.2.1",
     "@types/lodash": "^4.14.108",
     "@types/mocha": "^5.2.4",
+    "@types/node": "^8.10.59",
     "@types/progress": "^2.0.1",
     "@types/sinon": "^5.0.1",
     "@types/yargs": "^11.0.0",

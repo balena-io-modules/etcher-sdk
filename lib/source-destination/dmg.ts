@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { promisify } from 'bluebird';
 import * as _ from 'lodash';
 import { BLOCK, CHECKSUM_TYPE, Image as UDIFImage, SECTOR_SIZE } from 'udif';
+import { promisify } from 'util';
 
 import { Metadata } from './metadata';
 import { SourceDestination, SourceDestinationFs } from './source-destination';

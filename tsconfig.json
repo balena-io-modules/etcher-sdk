@@ -5,21 +5,13 @@
 		"outDir": "build",
 		"sourceMap": true,
 		"declaration": true,
-		"target": "es6",
+		"target": "es2017",
 		"noImplicitAny": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"strictNullChecks": true,
-		"lib": [
-			"es2016"
-		]
+		"strictNullChecks": true
 	},
 	"include": [
 		"lib"
-	],
-	"exclude": [
-		"node_modules",
-		"build",
-		"tests"
 	]
 }

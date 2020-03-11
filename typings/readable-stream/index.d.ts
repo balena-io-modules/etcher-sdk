@@ -13,8 +13,5 @@ declare module 'readable-stream' {
 
 	export class Transform extends NodeJSTransform {}
 
-	export class Writable extends NodeJSWritable {
-		// destroy does not exist in node 6 Writable
-		public destroy(error?: Error): this;
-	}
+	export class Writable extends NodeJSWritable {}
 }

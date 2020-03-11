@@ -34,8 +34,6 @@ import {
 } from '../sparse-stream/sparse-write-stream';
 
 export const ProgressWriteStream = makeClassEmitProgressEvents(
-	// type definitions for node 6 export fs.WriteStream as an interface, but it's a class.
-	// @ts-ignore
 	fs.WriteStream,
 	'bytesWritten',
 	'bytesWritten',
@@ -135,6 +133,7 @@ export class File extends SourceDestination {
 	}
 
 	public async createWriteStream(): Promise<NodeJS.WritableStream> {
+		// @ts-ignore: @types/node is wrong about fs.WriteStream constructor: it takes 2 arguments, the first one is the file path
 		const stream = new ProgressWriteStream(null, {
 			fd: this.fd,
 			autoClose: false,
