@@ -20,6 +20,7 @@ import { Transform } from 'stream';
 import { NotCapable } from '../errors';
 import { StreamLimiter } from '../stream-limiter';
 import { Metadata } from './metadata';
+import { CreateReadStreamOptions } from './source-destination';
 import { SourceSource } from './source-source';
 
 export interface SourceTransform extends Transform {
@@ -51,15 +52,15 @@ export abstract class CompressedSource extends SourceSource {
 		return true;
 	}
 
-	public async createReadStream(
+	public async createReadStream({
 		emitProgress = false,
 		start = 0,
-		end?: number,
-	): Promise<SourceTransform> {
+		end,
+	}: CreateReadStreamOptions = {}): Promise<SourceTransform> {
 		if (start !== 0) {
 			throw new NotCapable();
 		}
-		const stream = await this.source.createReadStream(emitProgress);
+		const stream = await this.source.createReadStream({ emitProgress });
 		// as any because we need to add the sourceStream property
 		const transform = this.createTransform() as any;
 		stream.pipe(transform);

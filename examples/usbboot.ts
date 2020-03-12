@@ -86,7 +86,6 @@ async function main() {
 		console.log(`Writing image ${argv[2]}`);
 		let source: sourceDestination.SourceDestination = new sourceDestination.File(
 			argv[2],
-			sourceDestination.File.OpenFlags.Read,
 		);
 		if (await source.canRead()) {
 			source = new sourceDestination.ConfiguredSource(source, true, true);

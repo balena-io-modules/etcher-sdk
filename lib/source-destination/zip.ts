@@ -30,9 +30,14 @@ import {
 import { NO_MATCHING_FILE_MSG } from '../constants';
 import { getFileStreamFromZipStream } from '../zip';
 import { Metadata } from './metadata';
-import { SourceDestination } from './source-destination';
+import {
+	CreateReadStreamOptions,
+	CreateSparseReadStreamOptions,
+	SourceDestination,
+} from './source-destination';
 import { SourceSource } from './source-source';
 
+import { BlockTransformStream } from '../block-transform-stream';
 import { NotCapable } from '../errors';
 import {
 	blocksLength,
@@ -83,7 +88,7 @@ export class StreamZipSource extends SourceSource {
 	private async getEntry(): Promise<ZipStreamEntry> {
 		if (this.entry === undefined) {
 			const entry = await getFileStreamFromZipStream(
-				await this.source.createReadStream(false),
+				await this.source.createReadStream(),
 				this.match,
 			);
 			this.entry = entry;
@@ -98,11 +103,10 @@ export class StreamZipSource extends SourceSource {
 		return this.entry;
 	}
 
-	public async createReadStream(
-		_emitProgress = false,
+	public async createReadStream({
 		start = 0,
-		end?: number,
-	): Promise<NodeJS.ReadableStream> {
+		end,
+	}: CreateReadStreamOptions = {}): Promise<NodeJS.ReadableStream> {
 		if (start !== 0) {
 			throw new NotCapable();
 		}
@@ -136,7 +140,7 @@ class SourceRandomAccessReader extends RandomAccessReader {
 		// Workaround this method not being async with a passthrough stream
 		const passthrough = new PassThrough();
 		this.source
-			.createReadStream(false, start, end - 1)
+			.createReadStream({ start, end: end - 1 })
 			.then(stream => {
 				stream.on('error', passthrough.emit.bind(passthrough, 'error'));
 				stream.pipe(passthrough);
@@ -268,11 +272,12 @@ export class RandomAccessZipSource extends SourceSource {
 		}
 	}
 
-	public async createReadStream(
-		_emitProgress = false,
+	public async createReadStream({
 		start = 0,
-		end?: number,
-	): Promise<NodeJS.ReadableStream> {
+		end,
+		alignment,
+		numBuffers,
+	}: CreateReadStreamOptions): Promise<NodeJS.ReadableStream> {
 		if (start !== 0) {
 			throw new NotCapable();
 		}
@@ -284,25 +289,34 @@ export class RandomAccessZipSource extends SourceSource {
 		if (end !== undefined) {
 			// TODO: handle errors on stream after transform finish event
 			const transform = new StreamLimiter(stream, end + 1);
-			return transform;
+			return BlockTransformStream.alignIfNeeded(
+				transform,
+				alignment,
+				numBuffers,
+			);
 		}
-		return stream;
+		return BlockTransformStream.alignIfNeeded(stream, alignment, numBuffers);
 	}
 
-	public async createSparseReadStream(
+	public async createSparseReadStream({
 		generateChecksums = false,
-	): Promise<SparseFilterStream> {
+		alignment,
+		numBuffers,
+	}: CreateSparseReadStreamOptions = {}): Promise<SparseFilterStream> {
 		const metadata = await this.getMetadata();
 		if (metadata.blocks === undefined) {
 			throw new NotCapable();
 		}
 		// Verifying and generating checksums makes no sense, so we only verify if generateChecksums is false.
-		const transform = new SparseFilterStream(
-			metadata.blocks,
-			!generateChecksums,
+		const transform = new SparseFilterStream({
+			blocks: metadata.blocks,
+			verify: !generateChecksums,
 			generateChecksums,
-		);
-		const stream = await this.createReadStream(false);
+		});
+		const stream = await this.createReadStream({
+			alignment,
+			numBuffers,
+		});
 		stream.pipe(transform);
 		return transform;
 	}
@@ -347,6 +361,7 @@ export class RandomAccessZipSource extends SourceSource {
 
 export class ZipSource extends SourceSource {
 	public static readonly mimetype = 'application/zip';
+	private ready: Promise<void>;
 	private implementation: RandomAccessZipSource | StreamZipSource;
 
 	constructor(
@@ -355,54 +370,63 @@ export class ZipSource extends SourceSource {
 		private match: (filename: string) => boolean = matchSupportedExtensions,
 	) {
 		super(source);
+		this.ready = this.prepare();
 	}
 
 	private async prepare() {
-		if (this.implementation === undefined) {
-			if (!this.preferStreamSource && (await this.source.canRead())) {
-				this.implementation = new RandomAccessZipSource(
-					this.source,
-					this.match,
-				);
-			} else {
-				this.implementation = new StreamZipSource(this.source, this.match);
-			}
+		if (!this.preferStreamSource && (await this.source.canRead())) {
+			this.implementation = new RandomAccessZipSource(this.source, this.match);
+		} else {
+			this.implementation = new StreamZipSource(this.source, this.match);
 		}
 	}
 
 	public async canCreateReadStream(): Promise<boolean> {
-		await this.prepare();
+		await this.ready;
 		return await this.implementation.canCreateReadStream();
 	}
 
 	public async open(): Promise<void> {
-		await this.prepare();
+		await this.ready;
 		return await this.implementation.open();
 	}
 
 	public async canCreateSparseReadStream(): Promise<boolean> {
-		await this.prepare();
+		await this.ready;
 		return await this.implementation.canCreateSparseReadStream();
 	}
 
-	public async createReadStream(
+	public async createReadStream({
 		emitProgress = false,
 		start = 0,
-		end?: number,
-	): Promise<NodeJS.ReadableStream> {
-		await this.prepare();
-		return await this.implementation.createReadStream(emitProgress, start, end);
+		end,
+		alignment,
+		numBuffers,
+	}: CreateReadStreamOptions = {}): Promise<NodeJS.ReadableStream> {
+		await this.ready;
+		const stream = await this.implementation.createReadStream({
+			emitProgress,
+			start,
+			end,
+		});
+		return BlockTransformStream.alignIfNeeded(stream, alignment, numBuffers);
 	}
 
-	public async createSparseReadStream(
+	public async createSparseReadStream({
 		generateChecksums = false,
-	): Promise<SparseReadable> {
-		await this.prepare();
-		return await this.implementation.createSparseReadStream(generateChecksums);
+		alignment,
+		numBuffers,
+	}: CreateSparseReadStreamOptions = {}): Promise<SparseReadable> {
+		await this.ready;
+		return await this.implementation.createSparseReadStream({
+			generateChecksums,
+			alignment,
+			numBuffers,
+		});
 	}
 
 	protected async _getMetadata(): Promise<Metadata> {
-		await this.prepare();
+		await this.ready;
 		return await this.implementation.getMetadata();
 	}
 }

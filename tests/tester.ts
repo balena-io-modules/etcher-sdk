@@ -67,7 +67,7 @@ export async function blockDeviceFromFile(
 		isVirtual: false,
 		logicalBlockSize: 512,
 	};
-	return new FakeBlockDevice(drive);
+	return new FakeBlockDevice(drive, false, true, false);
 }
 
 export async function testImageNoIt(
@@ -86,10 +86,7 @@ export async function testImageNoIt(
 ): Promise<void> {
 	let source: sourceDestination.File | sourceDestination.BlockDevice;
 	if (sourceClass === sourceDestination.File) {
-		source = new sourceDestination.File(
-			imagePath,
-			sourceDestination.File.OpenFlags.Read,
-		);
+		source = new sourceDestination.File(imagePath);
 	} else {
 		source = await blockDeviceFromFile(imagePath);
 	}
@@ -103,10 +100,7 @@ export async function testImageNoIt(
 	const sourceMetadata = await innerSource.getMetadata();
 	const sourceStat = await stat(imagePath);
 
-	const compareSource = new sourceDestination.File(
-		compareToPath,
-		sourceDestination.File.OpenFlags.Read,
-	);
+	const compareSource = new sourceDestination.File(compareToPath);
 	await compareSource.open();
 	const compareMetadata = await compareSource.getMetadata();
 	const compareStat = await stat(compareToPath);
@@ -214,10 +208,7 @@ export function expectSourceSourceError(
 	message: string,
 ) {
 	it(testName, async function() {
-		const source = new sourceDestination.File(
-			filePath,
-			sourceDestination.File.OpenFlags.Read,
-		);
+		const source = new sourceDestination.File(filePath);
 		await source.open();
 		const innerSource = new Cls(source);
 		try {
@@ -238,10 +229,7 @@ export function expectGetInnerSourceError(
 	message: string,
 ) {
 	it(testName, async function() {
-		const source = new sourceDestination.File(
-			filePath,
-			sourceDestination.File.OpenFlags.Read,
-		);
+		const source = new sourceDestination.File(filePath);
 		try {
 			await source.getInnerSource();
 		} catch (error) {

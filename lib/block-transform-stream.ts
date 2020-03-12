@@ -16,60 +16,92 @@
 
 import { Transform } from 'readable-stream';
 
+import { AlignedReadableState } from './aligned-lockable-buffer';
+import { CHUNK_SIZE } from './constants';
+
 export class BlockTransformStream extends Transform {
 	public bytesRead = 0;
 	public bytesWritten = 0;
-	private _buffers: Buffer[] = [];
-	private _bytes = 0;
+	private chunkSize: number;
+	private alignedReadableState: AlignedReadableState;
+	private inputBuffers: Buffer[] = [];
+	private inputBytes = 0;
 
-	constructor(private chunkSize: number) {
-		super();
+	constructor({
+		chunkSize,
+		alignment,
+		numBuffers = 2,
+	}: {
+		chunkSize: number;
+		alignment: number;
+		numBuffers?: number;
+	}) {
+		super({ objectMode: true, highWaterMark: numBuffers - 1 });
+		this.chunkSize = chunkSize;
+		this.alignedReadableState = new AlignedReadableState(
+			chunkSize,
+			alignment,
+			numBuffers,
+		);
 	}
 
-	private writeBuffers(flush = false) {
-		if (flush || this._bytes >= this.chunkSize) {
-			let block = Buffer.concat(this._buffers, this._bytes);
+	private async writeBuffers(flush = false): Promise<void> {
+		if (flush || this.inputBytes >= this.chunkSize) {
+			// TODO optimize
+			let block = Buffer.concat(this.inputBuffers, this.inputBytes);
 			const length = flush
 				? block.length
 				: Math.floor(block.length / this.chunkSize) * this.chunkSize;
 
-			this._buffers.length = 0;
-			this._bytes = 0;
+			this.inputBuffers.length = 0;
+			this.inputBytes = 0;
 
 			if (block.length !== length) {
-				this._buffers.push(block.slice(length));
-				this._bytes += block.length - length;
+				this.inputBuffers.push(block.slice(length));
+				this.inputBytes += block.length - length;
 				block = block.slice(0, length);
 			}
 
-			this.bytesWritten += block.length;
-			this.push(block);
+			const alignedBuffer = this.alignedReadableState.getCurrentBuffer();
+			const unlock = await alignedBuffer.lock();
+			block.copy(alignedBuffer);
+			unlock();
+			this.bytesWritten += length;
+			this.push(alignedBuffer.slice(0, length));
 		}
 	}
 
-	public _transform(
+	public async _transform(
 		chunk: Buffer,
 		_encoding: string,
 		callback: (error?: Error) => void,
-	) {
+	): Promise<void> {
 		this.bytesRead += chunk.length;
-		if (
-			this._bytes === 0 &&
-			chunk.length >= this.chunkSize &&
-			chunk.length % this.chunkSize === 0
-		) {
-			this.bytesWritten += chunk.length;
-			this.push(chunk);
-		} else {
-			this._buffers.push(chunk);
-			this._bytes += chunk.length;
-			this.writeBuffers();
-		}
+		this.inputBuffers.push(chunk);
+		this.inputBytes += chunk.length;
+		await this.writeBuffers();
 		callback();
 	}
 
-	public _flush(callback: (error?: Error) => void) {
-		this.writeBuffers(true);
+	public async _flush(callback: (error?: Error) => void): Promise<void> {
+		await this.writeBuffers(true);
 		callback();
+	}
+
+	public static alignIfNeeded(
+		stream: NodeJS.ReadableStream,
+		alignment?: number,
+		numBuffers?: number,
+	) {
+		if (alignment === undefined) {
+			return stream;
+		}
+		const transform = new BlockTransformStream({
+			chunkSize: CHUNK_SIZE,
+			alignment,
+			numBuffers,
+		});
+		stream.pipe(transform);
+		return transform;
 	}
 }

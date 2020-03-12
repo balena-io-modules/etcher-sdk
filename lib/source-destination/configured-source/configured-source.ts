@@ -31,7 +31,11 @@ import { SparseFilterStream } from '../../sparse-stream/sparse-filter-stream';
 import { SparseReadStream } from '../../sparse-stream/sparse-read-stream';
 
 import { Metadata } from '../metadata';
-import { SourceDestination } from '../source-destination';
+import {
+	CreateReadStreamOptions,
+	CreateSparseReadStreamOptions,
+	SourceDestination,
+} from '../source-destination';
 import { SourceSource } from '../source-source';
 
 import { configure as legacyConfigure } from './configure';
@@ -146,9 +150,9 @@ export class ConfiguredSource extends SourceSource {
 	}
 
 	public async createReadStream(
-		...args: any[]
+		options: CreateReadStreamOptions,
 	): Promise<NodeJS.ReadableStream> {
-		const imageStream = await this.source.createReadStream(...args);
+		const imageStream = await this.source.createReadStream(options);
 		const transform = this.disk.getTransformStream();
 		imageStream.on('error', (err: Error) => {
 			transform.emit('error', err);
@@ -159,37 +163,58 @@ export class ConfiguredSource extends SourceSource {
 
 	private async createSparseReadStreamFromDisk(
 		generateChecksums: boolean,
+		alignment?: number,
+		numBuffers = 2,
 	): Promise<SparseReadStream> {
-		return new SparseReadStream(
-			this,
-			await this.getBlocksWithChecksumType(generateChecksums), // blocks
-			CHUNK_SIZE,
-			false, // verify
+		return new SparseReadStream({
+			source: this,
+			blocks: await this.getBlocksWithChecksumType(generateChecksums), // blocks
+			chunkSize: CHUNK_SIZE,
+			verify: false,
 			generateChecksums,
-		);
+			alignment,
+			numBuffers,
+		});
 	}
 
 	private async createSparseReadStreamFromStream(
 		generateChecksums: boolean,
+		alignment?: number,
+		numBuffers = 2,
 	): Promise<SparseFilterStream> {
-		const stream = await this.createReadStream();
-		const transform = new SparseFilterStream(
-			await this.getBlocksWithChecksumType(generateChecksums),
-			false, // verify
+		const stream = await this.createReadStream({
+			alignment,
+			numBuffers,
+		});
+		const transform = new SparseFilterStream({
+			blocks: await this.getBlocksWithChecksumType(generateChecksums),
+			verify: false,
 			generateChecksums,
-		);
+		});
 		stream.on('error', transform.emit.bind(transform, 'error'));
 		stream.pipe(transform);
 		return transform;
 	}
 
-	public async createSparseReadStream(
-		generateChecksums: boolean,
-	): Promise<SparseReadStream | SparseFilterStream> {
+	public async createSparseReadStream({
+		generateChecksums = false,
+		alignment,
+		numBuffers = 2,
+	}: CreateSparseReadStreamOptions = {}): Promise<
+		SparseReadStream | SparseFilterStream
+	> {
 		if (this.createStreamFromDisk) {
-			return await this.createSparseReadStreamFromDisk(generateChecksums);
+			return await this.createSparseReadStreamFromDisk(
+				generateChecksums,
+				alignment,
+				numBuffers,
+			);
 		} else {
-			return await this.createSparseReadStreamFromStream(generateChecksums);
+			return await this.createSparseReadStreamFromStream(
+				generateChecksums,
+				alignment,
+				numBuffers,
+			);
 		}
 	}
 

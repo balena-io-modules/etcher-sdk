@@ -14,23 +14,25 @@
  * limitations under the License.
  */
 
+import { getAlignedBuffer, O_EXLOCK } from '@ronomon/direct-io';
 import { delay } from 'bluebird';
 import { Drive as DrivelistDrive } from 'drivelist';
 import { ReadResult, WriteResult } from 'file-disk';
+import * as fs from 'fs';
 import { platform } from 'os';
 
 import {
 	BlockWriteStream,
 	ProgressBlockWriteStream,
 } from '../block-write-stream';
+import { DEFAULT_ALIGNMENT } from '../constants';
 import { clean } from '../diskpart';
+import { getUnmountDisk } from '../lazy';
 import { AdapterSourceDestination } from '../scanner/adapters/adapter';
 import {
 	ProgressSparseWriteStream,
 	SparseWriteStream,
 } from '../sparse-stream/sparse-write-stream';
-
-import { getUnmountDisk } from '../lazy';
 import { File } from './file';
 import { Metadata } from './metadata';
 
@@ -38,16 +40,40 @@ import { Metadata } from './metadata';
  * @summary Time, in milliseconds, to wait before unmounting on success
  */
 const UNMOUNT_ON_SUCCESS_TIMEOUT_MS = 2000;
-const DEFAULT_BLOCK_SIZE = 512;
 const WIN32_FIRST_BYTES_TO_KEEP = 64 * 1024;
-const USE_ALIGNED_IO = platform() === 'win32' || platform() === 'darwin';
 
 export class BlockDevice extends File implements AdapterSourceDestination {
 	public emitsProgress = false;
+	public readonly alignment: number;
 
-	constructor(private drive: DrivelistDrive, private unmountOnSuccess = false) {
-		super(drive.raw, File.OpenFlags.WriteDevice);
-		this.blockSize = drive.blockSize || DEFAULT_BLOCK_SIZE;
+	constructor(
+		private drive: DrivelistDrive,
+		private unmountOnSuccess = false,
+		oWrite = false,
+		public readonly oDirect = true,
+	) {
+		super(drive.raw, oWrite);
+		this.alignment = drive.blockSize || DEFAULT_ALIGNMENT;
+	}
+
+	public getAlignment() {
+		if (this.oDirect) {
+			return this.alignment;
+		}
+	}
+
+	protected getOpenFlags() {
+		// tslint:disable:no-bitwise
+		let flags = super.getOpenFlags();
+		if (this.oDirect) {
+			flags |=
+				fs.constants.O_DIRECT | fs.constants.O_SYNC | fs.constants.O_NONBLOCK;
+		}
+		if (this.oWrite) {
+			flags |= platform() === 'linux' ? fs.constants.O_EXCL : O_EXLOCK;
+		}
+		// tslint:enable:no-bitwise
+		return flags;
 	}
 
 	get isSystem(): boolean {
@@ -96,20 +122,26 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return !this.drive.isReadOnly;
 	}
 
-	public async createWriteStream(): Promise<BlockWriteStream> {
-		const stream = new ProgressBlockWriteStream(
-			this,
-			platform() === 'win32' ? WIN32_FIRST_BYTES_TO_KEEP : 0,
-		);
+	public async createWriteStream({
+		highWaterMark,
+	}: { highWaterMark?: number } = {}): Promise<BlockWriteStream> {
+		const stream = new ProgressBlockWriteStream({
+			destination: this,
+			delayFirstBuffer: platform() === 'win32',
+			highWaterMark,
+		});
 		stream.on('finish', stream.emit.bind(stream, 'done'));
 		return stream;
 	}
 
-	public async createSparseWriteStream(): Promise<SparseWriteStream> {
-		const stream = new ProgressSparseWriteStream(
-			this,
-			platform() === 'win32' ? WIN32_FIRST_BYTES_TO_KEEP : 0,
-		);
+	public async createSparseWriteStream({
+		highWaterMark,
+	}: { highWaterMark?: number } = {}): Promise<SparseWriteStream> {
+		const stream = new ProgressSparseWriteStream({
+			destination: this,
+			firstBytesToKeep: platform() === 'win32' ? WIN32_FIRST_BYTES_TO_KEEP : 0,
+			highWaterMark,
+		});
 		stream.on('finish', stream.emit.bind(stream, 'done'));
 		return stream;
 	}
@@ -137,15 +169,15 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 	}
 
 	private offsetIsAligned(offset: number): boolean {
-		return offset % this.blockSize === 0;
+		return offset % this.alignment === 0;
 	}
 
 	private alignOffsetBefore(offset: number): number {
-		return Math.floor(offset / this.blockSize) * this.blockSize;
+		return Math.floor(offset / this.alignment) * this.alignment;
 	}
 
 	private alignOffsetAfter(offset: number): number {
-		return Math.ceil(offset / this.blockSize) * this.blockSize;
+		return Math.ceil(offset / this.alignment) * this.alignment;
 	}
 
 	private async alignedRead(
@@ -156,7 +188,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 	): Promise<ReadResult> {
 		const start = this.alignOffsetBefore(sourceOffset);
 		const end = this.alignOffsetAfter(sourceOffset + length);
-		const alignedBuffer = Buffer.allocUnsafe(end - start);
+		const alignedBuffer = getAlignedBuffer(end - start, this.alignment);
 		const { bytesRead } = await super.read(
 			alignedBuffer,
 			0,
@@ -174,10 +206,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		length: number,
 		sourceOffset: number,
 	): Promise<ReadResult> {
-		if (
-			USE_ALIGNED_IO &&
-			!(this.offsetIsAligned(sourceOffset) && this.offsetIsAligned(length))
-		) {
+		if (!(this.offsetIsAligned(sourceOffset) && this.offsetIsAligned(length))) {
 			return await this.alignedRead(buffer, bufferOffset, length, sourceOffset);
 		} else {
 			return await super.read(buffer, bufferOffset, length, sourceOffset);
@@ -192,7 +221,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 	): Promise<WriteResult> {
 		const start = this.alignOffsetBefore(fileOffset);
 		const end = this.alignOffsetAfter(fileOffset + length);
-		const alignedBuffer = Buffer.allocUnsafe(end - start);
+		const alignedBuffer = getAlignedBuffer(end - start, this.alignment);
 		await super.read(alignedBuffer, 0, alignedBuffer.length, start);
 		const offset = fileOffset - start;
 		buffer.copy(alignedBuffer, offset, bufferOffset, length);
@@ -206,10 +235,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		length: number,
 		fileOffset: number,
 	): Promise<WriteResult> {
-		if (
-			USE_ALIGNED_IO &&
-			!(this.offsetIsAligned(fileOffset) && this.offsetIsAligned(length))
-		) {
+		if (!(this.offsetIsAligned(fileOffset) && this.offsetIsAligned(length))) {
 			return await this.alignedWrite(buffer, bufferOffset, length, fileOffset);
 		} else {
 			return await super.write(buffer, bufferOffset, length, fileOffset);

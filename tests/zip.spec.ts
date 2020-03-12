@@ -105,10 +105,7 @@ describe('zip support', function() {
 	for (const preferStreamSource of [false, true]) {
 		it(`should fail to read from a zip file containing no archive (use stream=${preferStreamSource})`, async () => {
 			const source = new sourceDestination.ZipSource(
-				new sourceDestination.File(
-					join(ZIP_PATH, 'zip-directory-empty.zip'),
-					sourceDestination.File.OpenFlags.Read,
-				),
+				new sourceDestination.File(join(ZIP_PATH, 'zip-directory-empty.zip')),
 				preferStreamSource,
 				() => false, // Don't match any filename
 			);

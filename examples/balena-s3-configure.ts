@@ -48,10 +48,7 @@ const main = async ({
 			config !== undefined ? { config: await readJsonFile(config) } : undefined,
 		);
 	}
-	const destination = new sourceDestination.File(
-		fileDestination,
-		sourceDestination.File.OpenFlags.ReadWrite,
-	);
+	const destination = new sourceDestination.File(fileDestination, true);
 	await pipeSourceToDestinationsWithProgressBar(source, [destination], verify);
 };
 

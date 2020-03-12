@@ -33,12 +33,8 @@ const main = async ({
 }: any) => {
 	let source: sourceDestination.SourceDestination = new sourceDestination.File(
 		fileSource,
-		sourceDestination.File.OpenFlags.Read,
 	);
-	const destination = new sourceDestination.File(
-		fileDestination,
-		sourceDestination.File.OpenFlags.ReadWrite,
-	);
+	const destination = new sourceDestination.File(fileDestination, true);
 	source = await source.getInnerSource();
 	const canRead = await source.canRead();
 	if (trim || config !== undefined) {

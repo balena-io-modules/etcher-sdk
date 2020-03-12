@@ -18,6 +18,7 @@ import { createHash, Hash } from 'crypto';
 import { padStart } from 'lodash';
 import * as XXHash from 'xxhash';
 
+import { AlignedLockableBuffer } from '../aligned-lockable-buffer';
 import { XXHASH_SEED } from '../constants';
 import { BlocksVerificationError } from '../errors';
 import { getCrc, getXXHash } from '../lazy';
@@ -41,13 +42,21 @@ export interface BlocksWithChecksum {
 }
 
 export interface SparseStreamChunk {
-	buffer: Buffer;
+	buffer: Buffer | AlignedLockableBuffer;
 	position: number;
 }
 
 export interface SparseReadable extends NodeJS.ReadableStream {
 	blocks: BlocksWithChecksum[];
 	push(chunk: SparseStreamChunk): boolean;
+}
+
+export interface SparseWritable extends NodeJS.WritableStream {
+	_write(
+		chunk: SparseStreamChunk,
+		encoding: string,
+		callback: (err?: Error | void) => void,
+	): void;
 }
 
 class CRC32Hasher {

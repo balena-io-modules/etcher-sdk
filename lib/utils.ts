@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { isAlignedLockableBuffer } from './aligned-lockable-buffer';
 import { SparseStreamChunk } from './sparse-stream/shared';
 
 export async function streamToBuffer(
@@ -23,7 +24,18 @@ export async function streamToBuffer(
 		(resolve: (buffer: Buffer) => void, reject: (error: Error) => void) => {
 			const chunks: Buffer[] = [];
 			stream.on('error', reject);
-			stream.on('data', chunks.push.bind(chunks));
+			stream.on('data', async (chunk: Buffer) => {
+				let data: Buffer;
+				if (isAlignedLockableBuffer(chunk)) {
+					const unlock = await chunk.rlock();
+					data = Buffer.allocUnsafe(chunk.length);
+					chunk.copy(data);
+					unlock();
+				} else {
+					data = chunk;
+				}
+				chunks.push(data);
+			});
 			stream.on('end', () => {
 				resolve(Buffer.concat(chunks));
 			});
@@ -40,7 +52,16 @@ export async function sparseStreamToBuffer(
 	await new Promise((resolve: () => void, reject: (error: Error) => void) => {
 		stream.on('error', reject);
 		stream.on('end', resolve);
-		stream.on('data', chunks.push.bind(chunks));
+		stream.on('data', async (chunk: SparseStreamChunk) => {
+			if (isAlignedLockableBuffer(chunk.buffer)) {
+				const unlock = await chunk.buffer.rlock();
+				const data = Buffer.allocUnsafe(chunk.buffer.length);
+				chunk.buffer.copy(data);
+				unlock();
+				chunk.buffer = data;
+			}
+			chunks.push(chunk);
+		});
 	});
 	if (chunks.length === 0) {
 		return Buffer.alloc(0);
@@ -71,4 +92,8 @@ export async function asCallback<T>(
 	} catch (error) {
 		callback(error);
 	}
+}
+
+export function noop() {
+	// noop
 }

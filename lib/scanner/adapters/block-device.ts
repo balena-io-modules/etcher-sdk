@@ -59,7 +59,12 @@ export class BlockDeviceAdapter extends Adapter {
 	private running = false;
 	private ready = false;
 
-	constructor(public includeSystemDrives: () => boolean = () => false) {
+	constructor(
+		public includeSystemDrives: () => boolean = () => false,
+		private unmountOnSuccess = false,
+		private oWrite = false,
+		private oDirect = true,
+	) {
 		super();
 	}
 
@@ -97,7 +102,12 @@ export class BlockDeviceAdapter extends Adapter {
 			}
 			for (const added of difference(newDevices, oldDevices)) {
 				const drive = drives.get(added);
-				const blockDevice = new BlockDevice(drive!);
+				const blockDevice = new BlockDevice(
+					drive!,
+					this.unmountOnSuccess,
+					this.oWrite,
+					this.oDirect,
+				);
 				this.emit('attach', blockDevice);
 				this.drives.set(added, blockDevice);
 			}

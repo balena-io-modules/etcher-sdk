@@ -85,7 +85,11 @@ export async function pipeSourceToDestinations(
 	onFail: OnFailFunction,
 	onProgress: OnProgressFunction,
 	verify = false,
+	numBuffers = 16,
 ): Promise<PipeSourceToDestinationsResult> {
+	if (numBuffers < 2) {
+		numBuffers = 2;
+	}
 	const destination = new MultiDestination(destinations);
 	const failures: Map<SourceDestination, Error> = new Map();
 	let bytesWritten = 0;
@@ -193,6 +197,7 @@ export async function pipeSourceToDestinations(
 			source,
 			destination,
 			verify,
+			numBuffers,
 			updateState,
 			_onFail,
 			_onProgress,
@@ -204,6 +209,7 @@ export async function pipeSourceToDestinations(
 			sourceMetadata,
 			destination,
 			verify,
+			numBuffers,
 			updateState,
 			_onFail,
 			_onProgress,
@@ -220,6 +226,7 @@ async function pipeRegularSourceToDestination(
 	sourceMetadata: Metadata,
 	destination: MultiDestination,
 	verify: boolean,
+	numBuffers: number,
 	updateState: (state?: WriteStep) => void,
 	onFail: (error: MultiDestinationError) => void,
 	onProgress: (progress: ProgressEvent) => void,
@@ -228,9 +235,15 @@ async function pipeRegularSourceToDestination(
 	let lastPosition = 0;
 	const emitSourceProgress =
 		sourceMetadata.size === undefined || sourceMetadata.isSizeEstimated;
+	const alignment = destination.getAlignment();
+	const highWaterMark = alignment === undefined ? undefined : numBuffers - 1;
 	const [sourceStream, destinationStream] = await Promise.all([
-		source.createReadStream(emitSourceProgress),
-		destination.createWriteStream(),
+		source.createReadStream({
+			emitProgress: emitSourceProgress,
+			alignment,
+			numBuffers,
+		}),
+		destination.createWriteStream({ highWaterMark }),
 	]);
 	getRootStream(sourceStream).on('progress', (progress: ProgressEvent) => {
 		_onRootStreamProgress(progress);
@@ -276,13 +289,22 @@ async function pipeRegularSourceToDestination(
 				onProgress(progress);
 			});
 			if (
-				!(sourceStream instanceof BlockReadStream) &&
-				destination.destinations.size > 1
+				alignment !== undefined &&
+				!(
+					sourceStream instanceof BlockReadStream ||
+					sourceStream instanceof BlockTransformStream
+				)
 			) {
-				// Chunk the input stream in a transform if it's not a block read stream, avoiding
-				// chunking it in each destination stream.
+				// The destination needs data to be aligned and it isn't.
+				// Pass it through a BlockTransformStream to align it.
 				sourceStream
-					.pipe(new BlockTransformStream(CHUNK_SIZE))
+					.pipe(
+						new BlockTransformStream({
+							chunkSize: CHUNK_SIZE,
+							alignment,
+							numBuffers,
+						}),
+					)
 					.pipe(destinationStream);
 			} else {
 				sourceStream.pipe(destinationStream);
@@ -305,17 +327,23 @@ async function pipeRegularSourceToDestination(
 
 async function pipeSparseSourceToDestination(
 	source: SourceDestination,
-	destination: SourceDestination,
+	destination: MultiDestination,
 	verify: boolean,
+	numBuffers: number,
 	updateState: (state?: WriteStep) => void,
 	onFail: (error: MultiDestinationError) => void,
 	onProgress: (progress: ProgressEvent) => void,
 	_onRootStreamProgress: (progress: ProgressEvent) => void,
 ): Promise<void> {
-	// TODO: if verify is true, we must ensure that source and destination streams hash algorithms are the same
+	const alignment = destination.getAlignment();
+	const highWaterMark = alignment === undefined ? undefined : numBuffers - 1;
 	const [sourceStream, destinationStream] = await Promise.all([
-		source.createSparseReadStream(verify),
-		destination.createSparseWriteStream(),
+		source.createSparseReadStream({
+			generateChecksums: verify,
+			alignment,
+			numBuffers,
+		}),
+		destination.createSparseWriteStream({ highWaterMark }),
 	]);
 	getRootStream(sourceStream).on('progress', (progress: ProgressEvent) => {
 		_onRootStreamProgress(progress);

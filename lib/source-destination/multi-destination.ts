@@ -23,10 +23,16 @@ import { PassThrough } from 'stream';
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
 import { VerificationError } from '../errors';
 import { BlocksWithChecksum, SparseReadable } from '../sparse-stream/shared';
-import { SparseWritable } from '../sparse-stream/sparse-write-stream';
+import { SparseWritable } from '../sparse-stream/shared';
 import { difference } from '../utils';
+import { BlockDevice } from './block-device';
 import { ProgressEvent } from './progress';
-import { SourceDestination, Verifier } from './source-destination';
+import {
+	CreateReadStreamOptions,
+	CreateSparseReadStreamOptions,
+	SourceDestination,
+	Verifier,
+} from './source-destination';
 
 function isntNull(x: any) {
 	return x !== null;
@@ -108,9 +114,21 @@ export class MultiDestination extends SourceDestination {
 		if (destinations.length === 0) {
 			throw new Error('At least one destination is required');
 		}
-		destinations.map((destination: SourceDestination) => {
+		for (const destination of destinations) {
 			this.destinations.add(destination);
-		});
+		}
+	}
+
+	public getAlignment(): number | undefined {
+		const alignments: number[] = [];
+		for (const destination of this.destinations.values()) {
+			if (destination instanceof BlockDevice) {
+				alignments.push(destination.alignment);
+			}
+		}
+		if (alignments.length) {
+			return Math.max(...alignments);
+		}
 	}
 
 	public destinationError(
@@ -217,23 +235,26 @@ export class MultiDestination extends SourceDestination {
 	}
 
 	public async createReadStream(
-		...args: any[]
+		options: CreateReadStreamOptions,
 	): Promise<NodeJS.ReadableStream> {
 		// TODO: raise an error or a warning here
 		return await Array.from(this.activeDestinations)[0].createReadStream(
-			...args,
+			options,
 		);
 	}
 
-	public async createSparseReadStream(...args: any[]): Promise<SparseReadable> {
+	public async createSparseReadStream(
+		options: CreateSparseReadStreamOptions,
+	): Promise<SparseReadable> {
 		// TODO: raise an error or a warning here
 		return await Array.from(this.activeDestinations)[0].createSparseReadStream(
-			...args,
+			options,
 		);
 	}
 
 	private async createStream(
 		methodName: 'createWriteStream' | 'createSparseWriteStream',
+		...args: any[]
 	) {
 		const passthrough = new PassThrough({
 			objectMode: methodName === 'createSparseWriteStream',
@@ -275,7 +296,7 @@ export class MultiDestination extends SourceDestination {
 		await map(
 			this.activeDestinations,
 			async (destination: SourceDestination) => {
-				const stream = await destination[methodName]();
+				const stream = await destination[methodName](...args);
 				progresses.set(stream, null);
 				stream.on('progress', (progressEvent: ProgressEvent) => {
 					progresses.set(stream, progressEvent);
@@ -301,12 +322,16 @@ export class MultiDestination extends SourceDestination {
 		return passthrough;
 	}
 
-	public async createWriteStream(): Promise<NodeJS.WritableStream> {
-		return await this.createStream('createWriteStream');
+	public async createWriteStream(
+		...args: any[]
+	): Promise<NodeJS.WritableStream> {
+		return await this.createStream('createWriteStream', ...args);
 	}
 
-	public async createSparseWriteStream(): Promise<SparseWritable> {
-		return await this.createStream('createSparseWriteStream');
+	public async createSparseWriteStream(
+		...args: any[]
+	): Promise<SparseWritable> {
+		return await this.createStream('createSparseWriteStream', ...args);
 	}
 
 	public createVerifier(

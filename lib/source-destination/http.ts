@@ -24,7 +24,10 @@ import { unescape } from 'querystring';
 import { parse } from 'url';
 
 import { Metadata } from './metadata';
-import { SourceDestination } from './source-destination';
+import {
+	CreateReadStreamOptions,
+	SourceDestination,
+} from './source-destination';
 
 axios.defaults.adapter = axiosNodeAdapter;
 
@@ -107,11 +110,11 @@ export class Http extends SourceDestination {
 		return { bytesRead, buffer };
 	}
 
-	public async createReadStream(
+	public async createReadStream({
 		emitProgress = false,
 		start = 0,
-		end?: number,
-	): Promise<NodeJS.ReadableStream> {
+		end,
+	}: CreateReadStreamOptions = {}): Promise<NodeJS.ReadableStream> {
 		const response = await axios({
 			method: 'get',
 			url: this.url,

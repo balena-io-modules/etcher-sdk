@@ -15,83 +15,67 @@
  */
 
 import { ReadResult, WriteResult } from 'file-disk';
-// Can't use "import { constants, ReadStream, WriteStream } from 'fs';"
-// as ReadStream and WriteStream are defined as interfaces in @types/node
-// and are not imported in the generated js. They are classes, not interfaces.
-import * as fs from 'fs';
+import { constants, ReadStream, WriteStream } from 'fs';
 import { basename } from 'path';
 
 import { Metadata } from './metadata';
 import { makeClassEmitProgressEvents } from './progress';
-import { SourceDestination } from './source-destination';
+import {
+	CreateReadStreamOptions,
+	SourceDestination,
+} from './source-destination';
 
 import { BlockReadStream, ProgressBlockReadStream } from '../block-read-stream';
-import { PROGRESS_EMISSION_INTERVAL } from '../constants';
+import { CHUNK_SIZE, PROGRESS_EMISSION_INTERVAL } from '../constants';
 import { close, open, read, stat, write } from '../fs';
 import {
 	ProgressSparseWriteStream,
 	SparseWriteStream,
 } from '../sparse-stream/sparse-write-stream';
 
+export const ProgressReadStream = makeClassEmitProgressEvents(
+	ReadStream,
+	'bytesRead',
+	'bytesRead',
+	PROGRESS_EMISSION_INTERVAL,
+);
+
 export const ProgressWriteStream = makeClassEmitProgressEvents(
-	fs.WriteStream,
+	WriteStream,
 	'bytesWritten',
 	'bytesWritten',
 	PROGRESS_EMISSION_INTERVAL,
 );
 
-// tslint:disable:no-bitwise
-enum OpenFlags {
-	Read = fs.constants.O_RDONLY,
-	ReadWrite = fs.constants.O_RDWR | fs.constants.O_CREAT,
-	WriteDevice = fs.constants.O_RDWR |
-		fs.constants.O_NONBLOCK |
-		fs.constants.O_SYNC,
-}
-// tslint:enable:no-bitwise
-
 export class File extends SourceDestination {
-	public static readonly OpenFlags = OpenFlags;
 	protected fd: number;
-	public blockSize = 512;
 
-	constructor(private path: string, private flags: OpenFlags) {
+	constructor(public readonly path: string, public readonly oWrite = false) {
 		super();
 	}
 
-	private _canRead() {
-		return (
-			this.flags === File.OpenFlags.Read ||
-			this.flags === File.OpenFlags.ReadWrite ||
-			this.flags === File.OpenFlags.WriteDevice
-		);
-	}
-
-	private _canWrite() {
-		return (
-			this.flags === File.OpenFlags.ReadWrite ||
-			this.flags === File.OpenFlags.WriteDevice
-		);
+	protected getOpenFlags() {
+		return this.oWrite ? constants.O_RDWR : constants.O_RDONLY;
 	}
 
 	public async canRead(): Promise<boolean> {
-		return this._canRead();
+		return true;
 	}
 
 	public async canWrite(): Promise<boolean> {
-		return this._canWrite();
+		return this.oWrite;
 	}
 
 	public async canCreateReadStream(): Promise<boolean> {
-		return this._canRead();
+		return true;
 	}
 
 	public async canCreateWriteStream(): Promise<boolean> {
-		return this._canWrite();
+		return await this.canWrite();
 	}
 
 	public async canCreateSparseWriteStream(): Promise<boolean> {
-		return this._canWrite();
+		return await this.canWrite();
 	}
 
 	protected async _getMetadata(): Promise<Metadata> {
@@ -119,37 +103,82 @@ export class File extends SourceDestination {
 		return await write(this.fd, buffer, bufferOffset, length, fileOffset);
 	}
 
-	public async createReadStream(
+	private streamOptions(start?: number, end?: number) {
+		// TODO: pass fs: SourceDestinationFs(this) instead of fd (only works with node >= v13.6.0)
+		return {
+			fd: this.fd,
+			highWaterMark: CHUNK_SIZE,
+			autoClose: false,
+			start,
+			end,
+		};
+	}
+
+	public async createReadStream({
 		emitProgress = false,
 		start = 0,
-		end?: number,
-	): Promise<NodeJS.ReadableStream> {
+		end,
+		alignment,
+		numBuffers,
+	}: CreateReadStreamOptions = {}): Promise<NodeJS.ReadableStream> {
 		await this.open();
-		if (emitProgress) {
-			return new ProgressBlockReadStream(this, start, end);
+		if (alignment !== undefined) {
+			if (emitProgress) {
+				return new ProgressBlockReadStream({
+					source: this,
+					alignment,
+					start,
+					end,
+					numBuffers,
+				});
+			} else {
+				return new BlockReadStream({
+					source: this,
+					alignment,
+					start,
+					end,
+					numBuffers,
+				});
+			}
 		} else {
-			return new BlockReadStream(this, start, end);
+			const options = this.streamOptions(start, end);
+			if (emitProgress) {
+				// @ts-ignore: @types/node is wrong about fs.WriteStream constructor: it takes 2 arguments, the first one is the file path
+				return new ProgressReadStream(null, options);
+			} else {
+				// @ts-ignore: @types/node is wrong about fs.WriteStream constructor: it takes 2 arguments, the first one is the file path
+				return new ReadStream(null, options);
+			}
 		}
 	}
 
-	public async createWriteStream(): Promise<NodeJS.WritableStream> {
+	public async createWriteStream({
+		highWaterMark,
+	}: { highWaterMark?: number } = {}): Promise<NodeJS.WritableStream> {
+		// TODO: use SourceDestinationFs (implement write) when node 14 becomes LTS
 		// @ts-ignore: @types/node is wrong about fs.WriteStream constructor: it takes 2 arguments, the first one is the file path
 		const stream = new ProgressWriteStream(null, {
 			fd: this.fd,
 			autoClose: false,
+			highWaterMark,
 		});
 		stream.on('finish', stream.emit.bind(stream, 'done'));
 		return stream;
 	}
 
-	public async createSparseWriteStream(): Promise<SparseWriteStream> {
-		const stream = new ProgressSparseWriteStream(this);
+	public async createSparseWriteStream({
+		highWaterMark,
+	}: { highWaterMark?: number } = {}): Promise<SparseWriteStream> {
+		const stream = new ProgressSparseWriteStream({
+			destination: this,
+			highWaterMark,
+		});
 		stream.on('finish', stream.emit.bind(stream, 'done'));
 		return stream;
 	}
 
 	protected async _open(): Promise<void> {
-		this.fd = await open(this.path, this.flags);
+		this.fd = await open(this.path, this.getOpenFlags());
 	}
 
 	protected async _close(): Promise<void> {

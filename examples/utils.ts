@@ -110,12 +110,21 @@ export async function pipeSourceToDestinationsWithProgressBar(
 	source: sourceDestination.SourceDestination,
 	destinations: sourceDestination.SourceDestination[],
 	verify = false,
+	numBuffers = 16,
 ): Promise<multiWrite.PipeSourceToDestinationsResult> {
 	function onFail(
 		destination: sourceDestination.SourceDestination,
 		error: Error,
 	) {
-		console.error(`Error "${error}" on ${destination}`);
+		let name: string;
+		if (destination instanceof sourceDestination.BlockDevice) {
+			name = destination.device;
+		} else if (destination instanceof sourceDestination.File) {
+			name = destination.path;
+		} else {
+			name = destination.toString();
+		}
+		console.error(`Error "${error}" on ${name}`);
 	}
 	let step: multiWrite.WriteStep;
 	let progressBar: any | ProgressBar | Spinner;
@@ -143,6 +152,7 @@ export async function pipeSourceToDestinationsWithProgressBar(
 		onFail,
 		onProgress,
 		verify,
+		numBuffers,
 	);
 	// Sleep here to be sure the last spinner title was shown.
 	await delay(SPINNER_DELAY);
