@@ -46,7 +46,7 @@
 
 \+ **new SourceRandomAccessReader**(`source`: [SourceDestination](sourcedestination.md)): *[SourceRandomAccessReader](sourcerandomaccessreader.md)*
 
-*Defined in [lib/source-destination/zip.ts:128](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/zip.ts#L128)*
+*Defined in [lib/source-destination/zip.ts:132](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/zip.ts#L132)*
 
 **Parameters:**
 
@@ -62,7 +62,7 @@ Name | Type |
 
 • **source**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [lib/source-destination/zip.ts:129](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/zip.ts#L129)*
+*Defined in [lib/source-destination/zip.ts:133](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/zip.ts#L133)*
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[defaultMaxListeners](countingwritable.md#static-defaultmaxlisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:681
+Defined in node_modules/@types/node/base.d.ts:896
 
 ## Methods
 
@@ -82,7 +82,7 @@ Defined in node_modules/@types/node/base.d.ts:681
 
 *Overrides void*
 
-*Defined in [lib/source-destination/zip.ts:133](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/zip.ts#L133)*
+*Defined in [lib/source-destination/zip.ts:137](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/zip.ts#L137)*
 
 **Parameters:**
 
@@ -97,20 +97,27 @@ ___
 
 ###  addListener
 
-▸ **addListener**(`event`: string | symbol, `listener`: Function): *this*
+▸ **addListener**(`event`: string | symbol, `listener`: function): *this*
 
 *Inherited from [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:683
+Defined in node_modules/@types/node/base.d.ts:898
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string &#124; symbol |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -169,7 +176,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
-Defined in node_modules/@types/node/base.d.ts:693
+Defined in node_modules/@types/node/base.d.ts:908
 
 **Parameters:**
 
@@ -184,15 +191,15 @@ ___
 
 ###  eventNames
 
-▸ **eventNames**(): *string | symbol[]*
+▸ **eventNames**(): *Array‹string | symbol›*
 
 *Inherited from [CountingWritable](countingwritable.md).[eventNames](countingwritable.md#eventnames)*
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[eventNames](../interfaces/sparsereadable.md#eventnames)*
 
-Defined in node_modules/@types/node/base.d.ts:694
+Defined in node_modules/@types/node/base.d.ts:909
 
-**Returns:** *string | symbol[]*
+**Returns:** *Array‹string | symbol›*
 
 ___
 
@@ -204,7 +211,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[getMaxListeners](../interfaces/sparsereadable.md#getmaxlisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:691
+Defined in node_modules/@types/node/base.d.ts:906
 
 **Returns:** *number*
 
@@ -218,7 +225,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[listenerCount](../interfaces/sparsereadable.md#listenercount)*
 
-Defined in node_modules/@types/node/base.d.ts:695
+Defined in node_modules/@types/node/base.d.ts:910
 
 **Parameters:**
 
@@ -238,7 +245,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[listeners](../interfaces/sparsereadable.md#listeners)*
 
-Defined in node_modules/@types/node/base.d.ts:692
+Defined in node_modules/@types/node/base.d.ts:907
 
 **Parameters:**
 
@@ -252,20 +259,27 @@ ___
 
 ###  on
 
-▸ **on**(`event`: string | symbol, `listener`: Function): *this*
+▸ **on**(`event`: string | symbol, `listener`: function): *this*
 
 *Inherited from [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
-Defined in node_modules/@types/node/base.d.ts:684
+Defined in node_modules/@types/node/base.d.ts:899
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string &#124; symbol |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -273,20 +287,27 @@ ___
 
 ###  once
 
-▸ **once**(`event`: string | symbol, `listener`: Function): *this*
+▸ **once**(`event`: string | symbol, `listener`: function): *this*
 
 *Inherited from [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
-Defined in node_modules/@types/node/base.d.ts:685
+Defined in node_modules/@types/node/base.d.ts:900
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string &#124; symbol |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -294,20 +315,27 @@ ___
 
 ###  prependListener
 
-▸ **prependListener**(`event`: string | symbol, `listener`: Function): *this*
+▸ **prependListener**(`event`: string | symbol, `listener`: function): *this*
 
 *Inherited from [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:686
+Defined in node_modules/@types/node/base.d.ts:901
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string &#124; symbol |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -315,20 +343,27 @@ ___
 
 ###  prependOnceListener
 
-▸ **prependOnceListener**(`event`: string | symbol, `listener`: Function): *this*
+▸ **prependOnceListener**(`event`: string | symbol, `listener`: function): *this*
 
 *Inherited from [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:687
+Defined in node_modules/@types/node/base.d.ts:902
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string &#124; symbol |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -336,7 +371,7 @@ ___
 
 ###  read
 
-▸ **read**(`buffer`: Buffer, `offset`: number, `length`: number, `position`: number, `callback`: function): *void*
+▸ **read**(`buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer), `offset`: number, `length`: number, `position`: number, `callback`: function): *void*
 
 *Inherited from [SourceRandomAccessReader](sourcerandomaccessreader.md).[read](sourcerandomaccessreader.md#read)*
 
@@ -344,7 +379,7 @@ Defined in node_modules/@types/yauzl/index.d.ts:14
 
 **Parameters:**
 
-▪ **buffer**: *Buffer*
+▪ **buffer**: *[Buffer](../interfaces/alignedlockablebuffer.md#buffer)*
 
 ▪ **offset**: *number*
 
@@ -374,7 +409,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeAllListeners](../interfaces/sparsereadable.md#removealllisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:689
+Defined in node_modules/@types/node/base.d.ts:904
 
 **Parameters:**
 
@@ -388,20 +423,27 @@ ___
 
 ###  removeListener
 
-▸ **removeListener**(`event`: string | symbol, `listener`: Function): *this*
+▸ **removeListener**(`event`: string | symbol, `listener`: function): *this*
 
 *Inherited from [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:688
+Defined in node_modules/@types/node/base.d.ts:903
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string &#124; symbol |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -415,7 +457,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[setMaxListeners](../interfaces/sparsereadable.md#setmaxlisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:690
+Defined in node_modules/@types/node/base.d.ts:905
 
 **Parameters:**
 
@@ -433,7 +475,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
 
-Defined in node_modules/@types/node/base.d.ts:680
+Defined in node_modules/@types/node/base.d.ts:895
 
 **Parameters:**
 

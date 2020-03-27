@@ -24,7 +24,7 @@
 
 • **crc32**: *crc32* = getCrc().crc32
 
-*Defined in [lib/sparse-stream/shared.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/shared.ts#L55)*
+*Defined in [lib/sparse-stream/shared.ts:64](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/shared.ts#L64)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 • **value**: *number*
 
-*Defined in [lib/sparse-stream/shared.ts:54](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/shared.ts#L54)*
+*Defined in [lib/sparse-stream/shared.ts:63](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/shared.ts#L63)*
 
 ## Methods
 
@@ -40,7 +40,7 @@ ___
 
 ▸ **digest**(`_encoding`: "hex"): *string*
 
-*Defined in [lib/sparse-stream/shared.ts:61](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/shared.ts#L61)*
+*Defined in [lib/sparse-stream/shared.ts:70](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/shared.ts#L70)*
 
 **Parameters:**
 
@@ -54,14 +54,14 @@ ___
 
 ###  update
 
-▸ **update**(`data`: Buffer): *void*
+▸ **update**(`data`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer)): *void*
 
-*Defined in [lib/sparse-stream/shared.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/shared.ts#L57)*
+*Defined in [lib/sparse-stream/shared.ts:66](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/shared.ts#L66)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`data` | Buffer |
+`data` | [Buffer](../interfaces/alignedlockablebuffer.md#buffer) |
 
 **Returns:** *void*

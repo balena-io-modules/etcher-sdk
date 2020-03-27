@@ -23,12 +23,18 @@
 * [bytesWritten](countingwritable.md#byteswritten)
 * [position](countingwritable.md#position)
 * [writable](countingwritable.md#writable)
+* [writableHighWaterMark](countingwritable.md#writablehighwatermark)
 * [defaultMaxListeners](countingwritable.md#static-defaultmaxlisteners)
 
 ### Methods
 
+* [_destroy](countingwritable.md#_destroy)
+* [_final](countingwritable.md#_final)
 * [_write](countingwritable.md#_write)
+* [_writev](countingwritable.md#optional-_writev)
 * [addListener](countingwritable.md#addlistener)
+* [cork](countingwritable.md#cork)
+* [destroy](countingwritable.md#destroy)
 * [emit](countingwritable.md#emit)
 * [end](countingwritable.md#end)
 * [eventNames](countingwritable.md#eventnames)
@@ -44,6 +50,7 @@
 * [removeListener](countingwritable.md#removelistener)
 * [setDefaultEncoding](countingwritable.md#setdefaultencoding)
 * [setMaxListeners](countingwritable.md#setmaxlisteners)
+* [uncork](countingwritable.md#uncork)
 * [write](countingwritable.md#write)
 * [listenerCount](countingwritable.md#static-listenercount)
 
@@ -55,7 +62,7 @@
 
 *Inherited from [CountingWritable](countingwritable.md).[constructor](countingwritable.md#constructor)*
 
-Defined in node_modules/@types/node/base.d.ts:3770
+Defined in node_modules/@types/node/base.d.ts:5509
 
 **Parameters:**
 
@@ -71,7 +78,7 @@ Name | Type |
 
 • **bytesWritten**: *number* = 0
 
-*Defined in [lib/source-destination/progress.ts:92](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/progress.ts#L92)*
+*Defined in [lib/source-destination/progress.ts:92](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/progress.ts#L92)*
 
 ___
 
@@ -79,7 +86,7 @@ ___
 
 • **position**: *number | undefined*
 
-*Defined in [lib/source-destination/progress.ts:93](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/progress.ts#L93)*
+*Defined in [lib/source-destination/progress.ts:93](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/progress.ts#L93)*
 
 ___
 
@@ -89,7 +96,17 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[writable](countingwritable.md#writable)*
 
-Defined in node_modules/@types/node/base.d.ts:3770
+Defined in node_modules/@types/node/base.d.ts:5508
+
+___
+
+###  writableHighWaterMark
+
+• **writableHighWaterMark**: *number*
+
+*Inherited from [CountingWritable](countingwritable.md).[writableHighWaterMark](countingwritable.md#writablehighwatermark)*
+
+Defined in node_modules/@types/node/base.d.ts:5509
 
 ___
 
@@ -99,21 +116,65 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[defaultMaxListeners](countingwritable.md#static-defaultmaxlisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:681
+Defined in node_modules/@types/node/base.d.ts:896
 
 ## Methods
 
-###  _write
+###  _destroy
 
-▸ **_write**(`chunk`: Buffer | Chunk, `_enc`: string, `callback`: function): *void*
+▸ **_destroy**(`error`: [Error](notcapable.md#static-error) | null, `callback`: function): *void*
 
-*Overrides void*
+*Inherited from [CountingWritable](countingwritable.md).[_destroy](countingwritable.md#_destroy)*
 
-*Defined in [lib/source-destination/progress.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/progress.ts#L95)*
+Defined in node_modules/@types/node/base.d.ts:5513
 
 **Parameters:**
 
-▪ **chunk**: *Buffer | Chunk*
+▪ **error**: *[Error](notcapable.md#static-error) | null*
+
+▪ **callback**: *function*
+
+▸ (`error?`: [Error](notcapable.md#static-error)): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`error?` | [Error](notcapable.md#static-error) |
+
+**Returns:** *void*
+
+___
+
+###  _final
+
+▸ **_final**(`callback`: Function): *void*
+
+*Inherited from [CountingWritable](countingwritable.md).[_final](countingwritable.md#_final)*
+
+Defined in node_modules/@types/node/base.d.ts:5514
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`callback` | Function |
+
+**Returns:** *void*
+
+___
+
+###  _write
+
+▸ **_write**(`chunk`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer) | Chunk, `_enc`: string, `callback`: function): *void*
+
+*Overrides void*
+
+*Defined in [lib/source-destination/progress.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/progress.ts#L95)*
+
+**Parameters:**
+
+▪ **chunk**: *[Buffer](../interfaces/alignedlockablebuffer.md#buffer) | Chunk*
 
 ▪ **_enc**: *string*
 
@@ -131,31 +192,64 @@ Name | Type |
 
 ___
 
-###  addListener
+### `Optional` _writev
 
-▸ **addListener**(`event`: string, `listener`: Function): *this*
+▸ **_writev**(`chunks`: Array‹object›, `callback`: function): *void*
 
-*Inherited from [CountingWritable](countingwritable.md).[addListener](countingwritable.md#addlistener)*
+*Inherited from [CountingWritable](countingwritable.md).[_writev](countingwritable.md#optional-_writev)*
 
-*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+Defined in node_modules/@types/node/base.d.ts:5512
 
-Defined in node_modules/@types/node/base.d.ts:3790
+**Parameters:**
 
-Event emitter
-The defined events on documents including:
-  1. close
-  2. drain
-  3. error
-  4. finish
-  5. pipe
-  6. unpipe
+▪ **chunks**: *Array‹object›*
+
+▪ **callback**: *function*
+
+▸ (`err?`: [Error](notcapable.md#static-error)): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string |
-`listener` | Function |
+`err?` | [Error](notcapable.md#static-error) |
+
+**Returns:** *void*
+
+___
+
+###  addListener
+
+▸ **addListener**(`event`: string, `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[addListener](countingwritable.md#addlistener)*
+
+*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+
+Defined in node_modules/@types/node/base.d.ts:5535
+
+Event emitter
+The defined events on documents including:
+1. close
+2. drain
+3. error
+4. finish
+5. pipe
+6. unpipe
+
+**Parameters:**
+
+▪ **event**: *string*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -165,7 +259,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3791
+Defined in node_modules/@types/node/base.d.ts:5536
 
 **Parameters:**
 
@@ -183,7 +277,7 @@ Defined in node_modules/@types/node/base.d.ts:3791
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3792
+Defined in node_modules/@types/node/base.d.ts:5537
 
 **Parameters:**
 
@@ -201,7 +295,7 @@ Defined in node_modules/@types/node/base.d.ts:3792
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3793
+Defined in node_modules/@types/node/base.d.ts:5538
 
 **Parameters:**
 
@@ -225,7 +319,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3794
+Defined in node_modules/@types/node/base.d.ts:5539
 
 **Parameters:**
 
@@ -243,7 +337,7 @@ Defined in node_modules/@types/node/base.d.ts:3794
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3795
+Defined in node_modules/@types/node/base.d.ts:5540
 
 **Parameters:**
 
@@ -267,7 +361,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3796
+Defined in node_modules/@types/node/base.d.ts:5541
 
 **Parameters:**
 
@@ -287,6 +381,36 @@ Name | Type |
 
 ___
 
+###  cork
+
+▸ **cork**(): *void*
+
+*Inherited from [CountingWritable](countingwritable.md).[cork](countingwritable.md#cork)*
+
+Defined in node_modules/@types/node/base.d.ts:5521
+
+**Returns:** *void*
+
+___
+
+###  destroy
+
+▸ **destroy**(`error?`: [Error](notcapable.md#static-error)): *void*
+
+*Inherited from [CountingWritable](countingwritable.md).[destroy](countingwritable.md#destroy)*
+
+Defined in node_modules/@types/node/base.d.ts:5523
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`error?` | [Error](notcapable.md#static-error) |
+
+**Returns:** *void*
+
+___
+
 ###  emit
 
 ▸ **emit**(`event`: string | symbol, ...`args`: any[]): *boolean*
@@ -295,7 +419,7 @@ ___
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/base.d.ts:3798
+Defined in node_modules/@types/node/base.d.ts:5543
 
 **Parameters:**
 
@@ -312,7 +436,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/base.d.ts:3799
+Defined in node_modules/@types/node/base.d.ts:5544
 
 **Parameters:**
 
@@ -322,20 +446,20 @@ Name | Type |
 
 **Returns:** *boolean*
 
-▸ **emit**(`event`: "drain", `chunk`: Buffer | string): *boolean*
+▸ **emit**(`event`: "drain", `chunk`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer) | string): *boolean*
 
 *Inherited from [CountingWritable](countingwritable.md).[emit](countingwritable.md#emit)*
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/base.d.ts:3800
+Defined in node_modules/@types/node/base.d.ts:5545
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `event` | "drain" |
-`chunk` | Buffer &#124; string |
+`chunk` | [Buffer](../interfaces/alignedlockablebuffer.md#buffer) &#124; string |
 
 **Returns:** *boolean*
 
@@ -345,7 +469,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/base.d.ts:3801
+Defined in node_modules/@types/node/base.d.ts:5546
 
 **Parameters:**
 
@@ -362,7 +486,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/base.d.ts:3802
+Defined in node_modules/@types/node/base.d.ts:5547
 
 **Parameters:**
 
@@ -378,7 +502,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/base.d.ts:3803
+Defined in node_modules/@types/node/base.d.ts:5548
 
 **Parameters:**
 
@@ -395,7 +519,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/base.d.ts:3804
+Defined in node_modules/@types/node/base.d.ts:5549
 
 **Parameters:**
 
@@ -414,7 +538,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[end](countingwritable.md#end)*
 
-Defined in node_modules/@types/node/base.d.ts:3776
+Defined in node_modules/@types/node/base.d.ts:5518
 
 **Parameters:**
 
@@ -428,7 +552,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[end](countingwritable.md#end)*
 
-Defined in node_modules/@types/node/base.d.ts:3777
+Defined in node_modules/@types/node/base.d.ts:5519
 
 **Parameters:**
 
@@ -443,7 +567,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[end](countingwritable.md#end)*
 
-Defined in node_modules/@types/node/base.d.ts:3778
+Defined in node_modules/@types/node/base.d.ts:5520
 
 **Parameters:**
 
@@ -459,13 +583,13 @@ ___
 
 ###  eventNames
 
-▸ **eventNames**(): *string | symbol[]*
+▸ **eventNames**(): *Array‹string | symbol›*
 
 *Inherited from [CountingWritable](countingwritable.md).[eventNames](countingwritable.md#eventnames)*
 
-Defined in node_modules/@types/node/base.d.ts:694
+Defined in node_modules/@types/node/base.d.ts:909
 
-**Returns:** *string | symbol[]*
+**Returns:** *Array‹string | symbol›*
 
 ___
 
@@ -475,7 +599,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[getMaxListeners](countingwritable.md#getmaxlisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:691
+Defined in node_modules/@types/node/base.d.ts:906
 
 **Returns:** *number*
 
@@ -487,7 +611,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
 
-Defined in node_modules/@types/node/base.d.ts:695
+Defined in node_modules/@types/node/base.d.ts:910
 
 **Parameters:**
 
@@ -505,7 +629,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[listeners](countingwritable.md#listeners)*
 
-Defined in node_modules/@types/node/base.d.ts:692
+Defined in node_modules/@types/node/base.d.ts:907
 
 **Parameters:**
 
@@ -519,20 +643,27 @@ ___
 
 ###  on
 
-▸ **on**(`event`: string, `listener`: Function): *this*
+▸ **on**(`event`: string, `listener`: function): *this*
 
 *Inherited from [CountingWritable](countingwritable.md).[on](countingwritable.md#on)*
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/base.d.ts:3806
+Defined in node_modules/@types/node/base.d.ts:5551
+
+**Parameters:**
+
+▪ **event**: *string*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -542,7 +673,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/base.d.ts:3807
+Defined in node_modules/@types/node/base.d.ts:5552
 
 **Parameters:**
 
@@ -560,7 +691,7 @@ Defined in node_modules/@types/node/base.d.ts:3807
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/base.d.ts:3808
+Defined in node_modules/@types/node/base.d.ts:5553
 
 **Parameters:**
 
@@ -578,7 +709,7 @@ Defined in node_modules/@types/node/base.d.ts:3808
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/base.d.ts:3809
+Defined in node_modules/@types/node/base.d.ts:5554
 
 **Parameters:**
 
@@ -602,7 +733,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/base.d.ts:3810
+Defined in node_modules/@types/node/base.d.ts:5555
 
 **Parameters:**
 
@@ -620,7 +751,7 @@ Defined in node_modules/@types/node/base.d.ts:3810
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/base.d.ts:3811
+Defined in node_modules/@types/node/base.d.ts:5556
 
 **Parameters:**
 
@@ -644,7 +775,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/base.d.ts:3812
+Defined in node_modules/@types/node/base.d.ts:5557
 
 **Parameters:**
 
@@ -666,20 +797,27 @@ ___
 
 ###  once
 
-▸ **once**(`event`: string, `listener`: Function): *this*
+▸ **once**(`event`: string, `listener`: function): *this*
 
 *Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#once)*
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/base.d.ts:3814
+Defined in node_modules/@types/node/base.d.ts:5559
+
+**Parameters:**
+
+▪ **event**: *string*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -689,7 +827,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/base.d.ts:3815
+Defined in node_modules/@types/node/base.d.ts:5560
 
 **Parameters:**
 
@@ -707,7 +845,7 @@ Defined in node_modules/@types/node/base.d.ts:3815
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/base.d.ts:3816
+Defined in node_modules/@types/node/base.d.ts:5561
 
 **Parameters:**
 
@@ -725,7 +863,7 @@ Defined in node_modules/@types/node/base.d.ts:3816
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/base.d.ts:3817
+Defined in node_modules/@types/node/base.d.ts:5562
 
 **Parameters:**
 
@@ -749,7 +887,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/base.d.ts:3818
+Defined in node_modules/@types/node/base.d.ts:5563
 
 **Parameters:**
 
@@ -767,7 +905,7 @@ Defined in node_modules/@types/node/base.d.ts:3818
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/base.d.ts:3819
+Defined in node_modules/@types/node/base.d.ts:5564
 
 **Parameters:**
 
@@ -791,7 +929,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/base.d.ts:3820
+Defined in node_modules/@types/node/base.d.ts:5565
 
 **Parameters:**
 
@@ -817,7 +955,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[pipe](countingwritable.md#pipe)*
 
-Defined in node_modules/@types/node/base.d.ts:3673
+Defined in node_modules/@types/node/base.d.ts:5407
 
 **Type parameters:**
 
@@ -836,20 +974,27 @@ ___
 
 ###  prependListener
 
-▸ **prependListener**(`event`: string, `listener`: Function): *this*
+▸ **prependListener**(`event`: string, `listener`: function): *this*
 
 *Inherited from [CountingWritable](countingwritable.md).[prependListener](countingwritable.md#prependlistener)*
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3822
+Defined in node_modules/@types/node/base.d.ts:5567
+
+**Parameters:**
+
+▪ **event**: *string*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -859,7 +1004,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3823
+Defined in node_modules/@types/node/base.d.ts:5568
 
 **Parameters:**
 
@@ -877,7 +1022,7 @@ Defined in node_modules/@types/node/base.d.ts:3823
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3824
+Defined in node_modules/@types/node/base.d.ts:5569
 
 **Parameters:**
 
@@ -895,7 +1040,7 @@ Defined in node_modules/@types/node/base.d.ts:3824
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3825
+Defined in node_modules/@types/node/base.d.ts:5570
 
 **Parameters:**
 
@@ -919,7 +1064,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3826
+Defined in node_modules/@types/node/base.d.ts:5571
 
 **Parameters:**
 
@@ -937,7 +1082,7 @@ Defined in node_modules/@types/node/base.d.ts:3826
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3827
+Defined in node_modules/@types/node/base.d.ts:5572
 
 **Parameters:**
 
@@ -961,7 +1106,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3828
+Defined in node_modules/@types/node/base.d.ts:5573
 
 **Parameters:**
 
@@ -983,20 +1128,27 @@ ___
 
 ###  prependOnceListener
 
-▸ **prependOnceListener**(`event`: string, `listener`: Function): *this*
+▸ **prependOnceListener**(`event`: string, `listener`: function): *this*
 
 *Inherited from [CountingWritable](countingwritable.md).[prependOnceListener](countingwritable.md#prependoncelistener)*
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3830
+Defined in node_modules/@types/node/base.d.ts:5575
+
+**Parameters:**
+
+▪ **event**: *string*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -1006,7 +1158,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3831
+Defined in node_modules/@types/node/base.d.ts:5576
 
 **Parameters:**
 
@@ -1024,7 +1176,7 @@ Defined in node_modules/@types/node/base.d.ts:3831
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3832
+Defined in node_modules/@types/node/base.d.ts:5577
 
 **Parameters:**
 
@@ -1042,7 +1194,7 @@ Defined in node_modules/@types/node/base.d.ts:3832
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3833
+Defined in node_modules/@types/node/base.d.ts:5578
 
 **Parameters:**
 
@@ -1066,7 +1218,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3834
+Defined in node_modules/@types/node/base.d.ts:5579
 
 **Parameters:**
 
@@ -1084,7 +1236,7 @@ Defined in node_modules/@types/node/base.d.ts:3834
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3835
+Defined in node_modules/@types/node/base.d.ts:5580
 
 **Parameters:**
 
@@ -1108,7 +1260,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3836
+Defined in node_modules/@types/node/base.d.ts:5581
 
 **Parameters:**
 
@@ -1134,7 +1286,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[removeAllListeners](countingwritable.md#removealllisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:689
+Defined in node_modules/@types/node/base.d.ts:904
 
 **Parameters:**
 
@@ -1148,20 +1300,27 @@ ___
 
 ###  removeListener
 
-▸ **removeListener**(`event`: string, `listener`: Function): *this*
+▸ **removeListener**(`event`: string, `listener`: function): *this*
 
 *Inherited from [CountingWritable](countingwritable.md).[removeListener](countingwritable.md#removelistener)*
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3838
+Defined in node_modules/@types/node/base.d.ts:5583
+
+**Parameters:**
+
+▪ **event**: *string*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -1171,7 +1330,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3839
+Defined in node_modules/@types/node/base.d.ts:5584
 
 **Parameters:**
 
@@ -1189,7 +1348,7 @@ Defined in node_modules/@types/node/base.d.ts:3839
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3840
+Defined in node_modules/@types/node/base.d.ts:5585
 
 **Parameters:**
 
@@ -1207,7 +1366,7 @@ Defined in node_modules/@types/node/base.d.ts:3840
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3841
+Defined in node_modules/@types/node/base.d.ts:5586
 
 **Parameters:**
 
@@ -1231,7 +1390,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3842
+Defined in node_modules/@types/node/base.d.ts:5587
 
 **Parameters:**
 
@@ -1249,7 +1408,7 @@ Defined in node_modules/@types/node/base.d.ts:3842
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3843
+Defined in node_modules/@types/node/base.d.ts:5588
 
 **Parameters:**
 
@@ -1273,7 +1432,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3844
+Defined in node_modules/@types/node/base.d.ts:5589
 
 **Parameters:**
 
@@ -1299,7 +1458,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[setDefaultEncoding](countingwritable.md#setdefaultencoding)*
 
-Defined in node_modules/@types/node/base.d.ts:3775
+Defined in node_modules/@types/node/base.d.ts:5517
 
 **Parameters:**
 
@@ -1317,7 +1476,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[setMaxListeners](countingwritable.md#setmaxlisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:690
+Defined in node_modules/@types/node/base.d.ts:905
 
 **Parameters:**
 
@@ -1329,13 +1488,25 @@ Name | Type |
 
 ___
 
+###  uncork
+
+▸ **uncork**(): *void*
+
+*Inherited from [CountingWritable](countingwritable.md).[uncork](countingwritable.md#uncork)*
+
+Defined in node_modules/@types/node/base.d.ts:5522
+
+**Returns:** *void*
+
+___
+
 ###  write
 
 ▸ **write**(`chunk`: any, `cb?`: Function): *boolean*
 
 *Inherited from [CountingWritable](countingwritable.md).[write](countingwritable.md#write)*
 
-Defined in node_modules/@types/node/base.d.ts:3773
+Defined in node_modules/@types/node/base.d.ts:5515
 
 **Parameters:**
 
@@ -1350,7 +1521,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[write](countingwritable.md#write)*
 
-Defined in node_modules/@types/node/base.d.ts:3774
+Defined in node_modules/@types/node/base.d.ts:5516
 
 **Parameters:**
 
@@ -1370,7 +1541,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
 
-Defined in node_modules/@types/node/base.d.ts:680
+Defined in node_modules/@types/node/base.d.ts:895
 
 **Parameters:**
 

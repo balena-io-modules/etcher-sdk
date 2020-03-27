@@ -29,7 +29,7 @@
 
 \+ **new ChecksumVerificationError**(`message`: string, `checksum`: string, `expectedChecksum`: string): *[ChecksumVerificationError](checksumverificationerror.md)*
 
-*Defined in [lib/errors.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/errors.ts#L27)*
+*Defined in [lib/errors.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/errors.ts#L27)*
 
 **Parameters:**
 
@@ -47,7 +47,7 @@ Name | Type |
 
 • **checksum**: *string*
 
-*Defined in [lib/errors.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/errors.ts#L30)*
+*Defined in [lib/errors.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/errors.ts#L30)*
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 *Inherited from [VerificationError](verificationerror.md).[code](verificationerror.md#code)*
 
-*Defined in [lib/errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/errors.ts#L24)*
+*Defined in [lib/errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/errors.ts#L24)*
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 • **expectedChecksum**: *string*
 
-*Defined in [lib/errors.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/errors.ts#L31)*
+*Defined in [lib/errors.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/errors.ts#L31)*
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 *Inherited from [NotCapable](notcapable.md).[message](notcapable.md#message)*
 
-Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:974
+Defined in node_modules/typescript/lib/lib.es5.d.ts:974
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 *Inherited from [NotCapable](notcapable.md).[name](notcapable.md#name)*
 
-Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:973
+Defined in node_modules/typescript/lib/lib.es5.d.ts:973
 
 ___
 
@@ -95,4 +95,4 @@ ___
 
 *Inherited from [NotCapable](notcapable.md).[stack](notcapable.md#optional-stack)*
 
-Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:975
+Defined in node_modules/typescript/lib/lib.es5.d.ts:975

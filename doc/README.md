@@ -4,13 +4,10 @@
 
 ## Index
 
-### Enumerations
-
-* [OpenFlags](enums/openflags.md)
-
 ### Classes
 
 * [Adapter](classes/adapter.md)
+* [AlignedReadableState](classes/alignedreadablestate.md)
 * [BZip2Source](classes/bzip2source.md)
 * [BalenaS3Source](classes/balenas3source.md)
 * [BlockDevice](classes/blockdevice.md)
@@ -46,6 +43,7 @@
 * [SparseFilterStream](classes/sparsefilterstream.md)
 * [SparseReadStream](classes/sparsereadstream.md)
 * [SparseStreamVerifier](classes/sparsestreamverifier.md)
+* [SparseTransformStream](classes/sparsetransformstream.md)
 * [SparseWriteStream](classes/sparsewritestream.md)
 * [StreamLimiter](classes/streamlimiter.md)
 * [StreamVerifier](classes/streamverifier.md)
@@ -60,8 +58,11 @@
 ### Interfaces
 
 * [AdapterSourceDestination](interfaces/adaptersourcedestination.md)
+* [AlignedLockableBuffer](interfaces/alignedlockablebuffer.md)
 * [Block](interfaces/block.md)
 * [BlocksWithChecksum](interfaces/blockswithchecksum.md)
+* [CreateReadStreamOptions](interfaces/createreadstreamoptions.md)
+* [CreateSparseReadStreamOptions](interfaces/createsparsereadstreamoptions.md)
 * [DrivelistDrive](interfaces/drivelistdrive.md)
 * [ExecResult](interfaces/execresult.md)
 * [Metadata](interfaces/metadata.md)
@@ -95,7 +96,7 @@
 
 * [BITS](README.md#const-bits)
 * [CHUNK_SIZE](README.md#const-chunk_size)
-* [DEFAULT_BLOCK_SIZE](README.md#const-default_block_size)
+* [DEFAULT_ALIGNMENT](README.md#const-default_alignment)
 * [DISKPART_DELAY](README.md#const-diskpart_delay)
 * [DISKPART_RETRIES](README.md#const-diskpart_retries)
 * [DriverlessDeviceAdapter](README.md#const-driverlessdeviceadapter)
@@ -109,39 +110,52 @@
 * [ProgressBlockReadStream](README.md#const-progressblockreadstream)
 * [ProgressBlockWriteStream](README.md#const-progressblockwritestream)
 * [ProgressHashStream](README.md#const-progresshashstream)
+* [ProgressReadStream](README.md#const-progressreadstream)
+* [ProgressSparseTransformStream](README.md#const-progresssparsetransformstream)
 * [ProgressSparseWriteStream](README.md#const-progresssparsewritestream)
 * [ProgressWritable](README.md#const-progresswritable)
 * [ProgressWriteStream](README.md#const-progresswritestream)
 * [RETRY_BASE_TIMEOUT](README.md#const-retry_base_timeout)
+* [RWMutex](README.md#rwmutex)
 * [SCAN_INTERVAL](README.md#const-scan_interval)
 * [TMP_DIR](README.md#const-tmp_dir)
 * [TMP_RANDOM_BYTES](README.md#const-tmp_random_bytes)
 * [TRIES](README.md#const-tries)
 * [UNMOUNT_ON_SUCCESS_TIMEOUT_MS](README.md#const-unmount_on_success_timeout_ms)
 * [USBBOOT_RPI_COMPUTE_MODULE_NAMES](README.md#const-usbboot_rpi_compute_module_names)
-* [USE_ALIGNED_IO](README.md#const-use_aligned_io)
 * [WIN32_FIRST_BYTES_TO_KEEP](README.md#const-win32_first_bytes_to_keep)
 * [XXHASH_SEED](README.md#const-xxhash_seed)
+* [close](README.md#const-close)
 * [debug](README.md#const-debug)
+* [fstat](README.md#const-fstat)
+* [fsync](README.md#const-fsync)
 * [getCrc](README.md#const-getcrc)
 * [getRaspberrypiUsbboot](README.md#const-getraspberrypiusbboot)
 * [getUnmountDisk](README.md#const-getunmountdisk)
 * [getXXHash](README.md#const-getxxhash)
+* [open](README.md#const-open)
 * [parseFileIndexAsync](README.md#const-parsefileindexasync)
+* [read](README.md#const-read)
+* [readFile](README.md#const-readfile)
 * [speedometer](README.md#speedometer)
+* [stat](README.md#const-stat)
 * [unbzip2Stream](README.md#unbzip2stream)
+* [unlink](README.md#const-unlink)
+* [write](README.md#const-write)
+* [writeFile](README.md#const-writefile)
 * [zlib](README.md#zlib)
 
 ### Functions
 
 * [asCallback](README.md#ascallback)
+* [attachMutex](README.md#attachmutex)
 * [blockmapToBlocks](README.md#blockmaptoblocks)
 * [blocksLength](README.md#blockslength)
 * [blocksVerificationErrorMessage](README.md#blocksverificationerrormessage)
 * [clean](README.md#const-clean)
-* [close](README.md#close)
 * [configure](README.md#const-configure)
 * [copy](README.md#const-copy)
+* [createBuffer](README.md#createbuffer)
 * [createHasher](README.md#createhasher)
 * [createNetworkConfigFiles](README.md#const-createnetworkconfigfiles)
 * [createSparseReaderStateIterator](README.md#createsparsereaderstateiterator)
@@ -150,13 +164,12 @@
 * [execFileAsync](README.md#const-execfileasync)
 * [execute](README.md#const-execute)
 * [executeOperation](README.md#const-executeoperation)
-* [fstat](README.md#fstat)
-* [fsync](README.md#fsync)
 * [getDiskDeviceType](README.md#const-getdiskdevicetype)
 * [getEta](README.md#geteta)
 * [getFileStreamFromZipStream](README.md#const-getfilestreamfromzipstream)
 * [getPartitionIndex](README.md#const-getpartitionindex)
 * [getRootStream](README.md#getrootstream)
+* [isAlignedLockableBuffer](README.md#isalignedlockablebuffer)
 * [isSourceTransform](README.md#issourcetransform)
 * [isTransientError](README.md#istransienterror)
 * [isntNull](README.md#isntnull)
@@ -164,25 +177,19 @@
 * [makeClassEmitProgressEvents](README.md#makeclassemitprogressevents)
 * [matchSupportedExtensions](README.md#matchsupportedextensions)
 * [nmWifiConfig](README.md#const-nmwificonfig)
-* [open](README.md#open)
+* [noop](README.md#noop)
 * [pad](README.md#const-pad)
 * [pipeRegularSourceToDestination](README.md#piperegularsourcetodestination)
 * [pipeSourceToDestinations](README.md#pipesourcetodestinations)
 * [pipeSparseSourceToDestination](README.md#pipesparsesourcetodestination)
 * [randomFilePath](README.md#const-randomfilepath)
-* [read](README.md#read)
-* [readFile](README.md#readfile)
 * [runDiskpart](README.md#const-rundiskpart)
 * [runVerifier](README.md#runverifier)
 * [sparseStreamToBuffer](README.md#sparsestreamtobuffer)
-* [stat](README.md#stat)
 * [streamToBuffer](README.md#streamtobuffer)
 * [tmpFile](README.md#const-tmpfile)
 * [tmpFileDisposer](README.md#const-tmpfiledisposer)
-* [unlink](README.md#unlink)
 * [verifyOrGenerateChecksum](README.md#verifyorgeneratechecksum)
-* [write](README.md#write)
-* [writeFile](README.md#writefile)
 
 ### Object literals
 
@@ -194,7 +201,7 @@
 
 Ƭ **AnyHasher**: *[CRC32Hasher](classes/crc32hasher.md) | Hash | XXHash | XXHash64*
 
-*Defined in [lib/sparse-stream/shared.ts:66](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/shared.ts#L66)*
+*Defined in [lib/sparse-stream/shared.ts:75](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/shared.ts#L75)*
 
 ___
 
@@ -202,7 +209,7 @@ ___
 
 Ƭ **ChecksumType**: *"crc32" | "sha1" | "sha256" | "xxhash32" | "xxhash64"*
 
-*Defined in [lib/sparse-stream/shared.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/shared.ts#L25)*
+*Defined in [lib/sparse-stream/shared.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/shared.ts#L26)*
 
 ___
 
@@ -210,7 +217,7 @@ ___
 
 Ƭ **ConfigureFunction**: *function*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configured-source.ts#L41)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/configured-source.ts#L45)*
 
 #### Type declaration:
 
@@ -229,7 +236,7 @@ ___
 
 Ƭ **Constructor**: *object*
 
-*Defined in [lib/source-destination/progress.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/progress.ts#L25)*
+*Defined in [lib/source-destination/progress.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/progress.ts#L25)*
 
 #### Type declaration:
 
@@ -239,7 +246,7 @@ ___
 
 Ƭ **Name**: *"balena" | "resin"*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/balena-s3-source.ts#L25)*
+*Defined in [lib/source-destination/balena-s3-source.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/balena-s3-source.ts#L28)*
 
 ___
 
@@ -247,7 +254,7 @@ ___
 
 Ƭ **OnFailFunction**: *function*
 
-*Defined in [lib/multi-write.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/multi-write.ts#L60)*
+*Defined in [lib/multi-write.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/multi-write.ts#L60)*
 
 #### Type declaration:
 
@@ -266,7 +273,7 @@ ___
 
 Ƭ **OnProgressFunction**: *function*
 
-*Defined in [lib/multi-write.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/multi-write.ts#L65)*
+*Defined in [lib/multi-write.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/multi-write.ts#L65)*
 
 #### Type declaration:
 
@@ -284,7 +291,7 @@ ___
 
 Ƭ **OperationCommand**: *"configure" | "copy"*
 
-*Defined in [lib/source-destination/configured-source/configure.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configure.ts#L28)*
+*Defined in [lib/source-destination/configured-source/configure.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/configure.ts#L28)*
 
 ___
 
@@ -292,7 +299,7 @@ ___
 
 Ƭ **WriteStep**: *"flashing" | "verifying" | "finished"*
 
-*Defined in [lib/multi-write.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/multi-write.ts#L34)*
+*Defined in [lib/multi-write.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/multi-write.ts#L34)*
 
 ___
 
@@ -300,7 +307,7 @@ ___
 
 Ƭ **XXHash**: *typeof xxhash*
 
-*Defined in [lib/lazy.ts:19](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/lazy.ts#L19)*
+*Defined in [lib/lazy.ts:21](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/lazy.ts#L21)*
 
 ## Variables
 
@@ -308,7 +315,7 @@ ___
 
 • **BITS**: *64 | 32* = arch === 'x64' || arch === 'aarch64' ? 64 : 32
 
-*Defined in [lib/source-destination/source-destination.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/source-destination.ts#L45)*
+*Defined in [lib/source-destination/source-destination.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/source-destination.ts#L45)*
 
 ___
 
@@ -316,15 +323,15 @@ ___
 
 • **CHUNK_SIZE**: *number* = 1024 ** 2
 
-*Defined in [lib/constants.ts:19](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/constants.ts#L19)*
+*Defined in [lib/constants.ts:19](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/constants.ts#L19)*
 
 ___
 
-### `Const` DEFAULT_BLOCK_SIZE
+### `Const` DEFAULT_ALIGNMENT
 
-• **DEFAULT_BLOCK_SIZE**: *512* = 512
+• **DEFAULT_ALIGNMENT**: *512* = 512
 
-*Defined in [lib/source-destination/block-device.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/block-device.ts#L41)*
+*Defined in [lib/constants.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/constants.ts#L23)*
 
 ___
 
@@ -332,7 +339,7 @@ ___
 
 • **DISKPART_DELAY**: *2000* = 2000
 
-*Defined in [lib/diskpart.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/diskpart.ts#L27)*
+*Defined in [lib/diskpart.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/diskpart.ts#L27)*
 
 ___
 
@@ -340,7 +347,7 @@ ___
 
 • **DISKPART_RETRIES**: *5* = 5
 
-*Defined in [lib/diskpart.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/diskpart.ts#L28)*
+*Defined in [lib/diskpart.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/diskpart.ts#L28)*
 
 ___
 
@@ -348,7 +355,7 @@ ___
 
 • **DriverlessDeviceAdapter**: *undefined | [DriverlessDeviceAdapter$](classes/driverlessdeviceadapter_.md)* = platform === 'win32' ? DriverlessDeviceAdapter$ : undefined
 
-*Defined in [lib/scanner/adapters/driverless.ts:105](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/scanner/adapters/driverless.ts#L105)*
+*Defined in [lib/scanner/adapters/driverless.ts:105](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/scanner/adapters/driverless.ts#L105)*
 
 ___
 
@@ -356,7 +363,7 @@ ___
 
 • **ISIZE_LENGTH**: *4* = 4
 
-*Defined in [lib/source-destination/gzip.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/gzip.ts#L23)*
+*Defined in [lib/source-destination/gzip.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/gzip.ts#L23)*
 
 ___
 
@@ -364,7 +371,7 @@ ___
 
 • **MBR_LAST_PRIMARY_PARTITION**: *4* = 4
 
-*Defined in [lib/source-destination/configured-source/configure.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configure.ts#L36)*
+*Defined in [lib/source-destination/configured-source/configure.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/configure.ts#L36)*
 
 ___
 
@@ -379,7 +386,7 @@ ___
 	'routeMetric',
 ]
 
-*Defined in [lib/source-destination/configured-source/operations/configure.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/operations/configure.ts#L23)*
+*Defined in [lib/source-destination/configured-source/operations/configure.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/operations/configure.ts#L23)*
 
 ___
 
@@ -387,7 +394,7 @@ ___
 
 • **NO_MATCHING_FILE_MSG**: *"Can't find a matching file in this zip archive"* = "Can't find a matching file in this zip archive"
 
-*Defined in [lib/constants.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/constants.ts#L20)*
+*Defined in [lib/constants.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/constants.ts#L20)*
 
 ___
 
@@ -395,7 +402,7 @@ ___
 
 • **PARTITION_FIELDS**: *string[]* = ['partition', 'to.partition', 'from.partition']
 
-*Defined in [lib/source-destination/configured-source/configure.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configure.ts#L35)*
+*Defined in [lib/source-destination/configured-source/configure.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/configure.ts#L35)*
 
 ___
 
@@ -403,7 +410,7 @@ ___
 
 • **PATTERN**: *RegExp‹›* = /PHYSICALDRIVE(\d+)/i
 
-*Defined in [lib/diskpart.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/diskpart.ts#L29)*
+*Defined in [lib/diskpart.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/diskpart.ts#L29)*
 
 ___
 
@@ -411,7 +418,7 @@ ___
 
 • **PROGRESS_EMISSION_INTERVAL**: *number* = 1000 / 2
 
-*Defined in [lib/constants.ts:17](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/constants.ts#L17)*
+*Defined in [lib/constants.ts:17](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/constants.ts#L17)*
 
 ___
 
@@ -424,7 +431,7 @@ ___
 	PROGRESS_EMISSION_INTERVAL,
 )
 
-*Defined in [lib/block-read-stream.ts:98](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-read-stream.ts#L98)*
+*Defined in [lib/block-read-stream.ts:118](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/block-read-stream.ts#L118)*
 
 ___
 
@@ -437,7 +444,7 @@ ___
 	PROGRESS_EMISSION_INTERVAL,
 )
 
-*Defined in [lib/block-write-stream.ts:170](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-write-stream.ts#L170)*
+*Defined in [lib/block-write-stream.ts:124](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/block-write-stream.ts#L124)*
 
 ___
 
@@ -450,7 +457,33 @@ ___
 	PROGRESS_EMISSION_INTERVAL,
 )
 
-*Defined in [lib/source-destination/source-destination.ts:58](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/source-destination.ts#L58)*
+*Defined in [lib/source-destination/source-destination.ts:58](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/source-destination.ts#L58)*
+
+___
+
+### `Const` ProgressReadStream
+
+• **ProgressReadStream**: *(Anonymous class) & ReadStream* = makeClassEmitProgressEvents(
+	ReadStream,
+	'bytesRead',
+	'bytesRead',
+	PROGRESS_EMISSION_INTERVAL,
+)
+
+*Defined in [lib/source-destination/file.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/file.ts#L36)*
+
+___
+
+### `Const` ProgressSparseTransformStream
+
+• **ProgressSparseTransformStream**: *(Anonymous class) & [SparseTransformStream](classes/sparsetransformstream.md)* = makeClassEmitProgressEvents(
+	SparseTransformStream,
+	'bytesWritten',
+	'position',
+	PROGRESS_EMISSION_INTERVAL,
+)
+
+*Defined in [lib/sparse-stream/sparse-transform-stream.ts:81](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/sparse-transform-stream.ts#L81)*
 
 ___
 
@@ -463,7 +496,7 @@ ___
 	PROGRESS_EMISSION_INTERVAL,
 )
 
-*Defined in [lib/sparse-stream/sparse-write-stream.ts:120](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/sparse-write-stream.ts#L120)*
+*Defined in [lib/sparse-stream/sparse-write-stream.ts:148](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/sparse-write-stream.ts#L148)*
 
 ___
 
@@ -476,22 +509,20 @@ ___
 	PROGRESS_EMISSION_INTERVAL,
 )
 
-*Defined in [lib/source-destination/progress.ts:110](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/progress.ts#L110)*
+*Defined in [lib/source-destination/progress.ts:110](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/progress.ts#L110)*
 
 ___
 
 ### `Const` ProgressWriteStream
 
-• **ProgressWriteStream**: *any* = makeClassEmitProgressEvents(
-	// type definitions for node 6 export fs.WriteStream as an interface, but it's a class.
-	// @ts-ignore
-	fs.WriteStream,
+• **ProgressWriteStream**: *(Anonymous class) & WriteStream* = makeClassEmitProgressEvents(
+	WriteStream,
 	'bytesWritten',
 	'bytesWritten',
 	PROGRESS_EMISSION_INTERVAL,
 )
 
-*Defined in [lib/source-destination/file.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/file.ts#L36)*
+*Defined in [lib/source-destination/file.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/file.ts#L43)*
 
 ___
 
@@ -499,7 +530,15 @@ ___
 
 • **RETRY_BASE_TIMEOUT**: *100* = 100
 
-*Defined in [lib/constants.ts:18](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/constants.ts#L18)*
+*Defined in [lib/constants.ts:18](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/constants.ts#L18)*
+
+___
+
+###  RWMutex
+
+• **RWMutex**: *[RWMutex](README.md#rwmutex)*
+
+*Defined in [lib/aligned-lockable-buffer.ts:2](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/aligned-lockable-buffer.ts#L2)*
 
 ___
 
@@ -507,9 +546,9 @@ ___
 
 • **SCAN_INTERVAL**: *1000* = 1000
 
-*Defined in [lib/scanner/adapters/block-device.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/scanner/adapters/block-device.ts#L27)*
+*Defined in [lib/scanner/adapters/block-device.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/scanner/adapters/block-device.ts#L27)*
 
-*Defined in [lib/scanner/adapters/driverless.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/scanner/adapters/driverless.ts#L26)*
+*Defined in [lib/scanner/adapters/driverless.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/scanner/adapters/driverless.ts#L26)*
 
 ___
 
@@ -517,7 +556,7 @@ ___
 
 • **TMP_DIR**: *string* = tmpdir()
 
-*Defined in [lib/tmp.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/tmp.ts#L25)*
+*Defined in [lib/tmp.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/tmp.ts#L25)*
 
 ___
 
@@ -525,7 +564,7 @@ ___
 
 • **TMP_RANDOM_BYTES**: *6* = 6
 
-*Defined in [lib/tmp.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/tmp.ts#L24)*
+*Defined in [lib/tmp.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/tmp.ts#L24)*
 
 ___
 
@@ -533,7 +572,7 @@ ___
 
 • **TRIES**: *5* = 5
 
-*Defined in [lib/tmp.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/tmp.ts#L26)*
+*Defined in [lib/tmp.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/tmp.ts#L26)*
 
 ___
 
@@ -541,7 +580,7 @@ ___
 
 • **UNMOUNT_ON_SUCCESS_TIMEOUT_MS**: *2000* = 2000
 
-*Defined in [lib/source-destination/block-device.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/block-device.ts#L40)*
+*Defined in [lib/source-destination/block-device.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/block-device.ts#L42)*
 
 **`summary`** Time, in milliseconds, to wait before unmounting on success
 
@@ -559,15 +598,7 @@ ___
 	'Linux File-Stor Gadget Media',
 ]
 
-*Defined in [lib/scanner/adapters/block-device.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/scanner/adapters/block-device.ts#L28)*
-
-___
-
-### `Const` USE_ALIGNED_IO
-
-• **USE_ALIGNED_IO**: *boolean* = platform() === 'win32' || platform() === 'darwin'
-
-*Defined in [lib/source-destination/block-device.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/block-device.ts#L43)*
+*Defined in [lib/scanner/adapters/block-device.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/scanner/adapters/block-device.ts#L28)*
 
 ___
 
@@ -575,7 +606,7 @@ ___
 
 • **WIN32_FIRST_BYTES_TO_KEEP**: *number* = 64 * 1024
 
-*Defined in [lib/source-destination/block-device.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/block-device.ts#L42)*
+*Defined in [lib/source-destination/block-device.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/block-device.ts#L43)*
 
 ___
 
@@ -583,7 +614,15 @@ ___
 
 • **XXHASH_SEED**: *1163150152* = 1163150152
 
-*Defined in [lib/constants.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/constants.ts#L22)*
+*Defined in [lib/constants.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/constants.ts#L22)*
+
+___
+
+### `Const` close
+
+• **close**: *__promisify__* = promisify(fs.close)
+
+*Defined in [lib/fs.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/fs.ts#L20)*
 
 ___
 
@@ -591,15 +630,31 @@ ___
 
 • **debug**: *IDebugger* = _debug('etcher-sdk:configured-source')
 
-*Defined in [lib/diskpart.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/diskpart.ts#L25)*
+*Defined in [lib/diskpart.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/diskpart.ts#L25)*
 
-*Defined in [lib/block-write-stream.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/block-write-stream.ts#L31)*
+*Defined in [lib/block-write-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/block-write-stream.ts#L29)*
 
-*Defined in [lib/scanner/adapters/block-device.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/scanner/adapters/block-device.ts#L25)*
+*Defined in [lib/scanner/adapters/block-device.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/scanner/adapters/block-device.ts#L25)*
 
-*Defined in [lib/scanner/scanner.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/scanner/scanner.ts#L22)*
+*Defined in [lib/scanner/scanner.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/scanner/scanner.ts#L22)*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configured-source.ts#L39)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/configured-source.ts#L43)*
+
+___
+
+### `Const` fstat
+
+• **fstat**: *__promisify__* = promisify(fs.fstat)
+
+*Defined in [lib/fs.ts:21](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/fs.ts#L21)*
+
+___
+
+### `Const` fsync
+
+• **fsync**: *__promisify__* = promisify(fs.fsync)
+
+*Defined in [lib/fs.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/fs.ts#L22)*
 
 ___
 
@@ -607,7 +662,7 @@ ___
 
 • **getCrc**: *(Anonymous function)* = once(() => require('crc') as typeof import('crc'))
 
-*Defined in [lib/lazy.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/lazy.ts#L40)*
+*Defined in [lib/lazy.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/lazy.ts#L39)*
 
 ___
 
@@ -621,7 +676,7 @@ ___
 	}
 })
 
-*Defined in [lib/lazy.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/lazy.ts#L24)*
+*Defined in [lib/lazy.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/lazy.ts#L23)*
 
 ___
 
@@ -631,7 +686,7 @@ ___
 	promisify((require('mountutils') as typeof import('mountutils')).unmountDisk),
 )
 
-*Defined in [lib/lazy.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/lazy.ts#L36)*
+*Defined in [lib/lazy.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/lazy.ts#L35)*
 
 ___
 
@@ -641,7 +696,15 @@ ___
 	() => require('xxhash') as typeof import('xxhash'),
 )
 
-*Defined in [lib/lazy.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/lazy.ts#L32)*
+*Defined in [lib/lazy.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/lazy.ts#L31)*
+
+___
+
+### `Const` open
+
+• **open**: *__promisify__* = promisify(fs.open)
+
+*Defined in [lib/fs.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/fs.ts#L23)*
 
 ___
 
@@ -649,17 +712,33 @@ ___
 
 • **parseFileIndexAsync**: *function* = promisify(parseFileIndex)
 
-*Defined in [lib/source-destination/xz.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/xz.ts#L24)*
+*Defined in [lib/source-destination/xz.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/xz.ts#L24)*
 
 #### Type declaration:
 
-▸ (`arg1`: A1): *Bluebird‹T›*
+▸ (`arg1`: T1): *Promise‹TResult›*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`arg1` | A1 |
+`arg1` | T1 |
+
+___
+
+### `Const` read
+
+• **read**: *__promisify__* = promisify(fs.read)
+
+*Defined in [lib/fs.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/fs.ts#L24)*
+
+___
+
+### `Const` readFile
+
+• **readFile**: *__promisify__* = promisify(fs.readFile)
+
+*Defined in [lib/fs.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/fs.ts#L25)*
 
 ___
 
@@ -667,7 +746,15 @@ ___
 
 • **speedometer**: *[speedometer](README.md#speedometer)*
 
-*Defined in [lib/source-destination/progress.ts:21](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/progress.ts#L21)*
+*Defined in [lib/source-destination/progress.ts:21](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/progress.ts#L21)*
+
+___
+
+### `Const` stat
+
+• **stat**: *__promisify__* = promisify(fs.stat)
+
+*Defined in [lib/fs.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/fs.ts#L26)*
 
 ___
 
@@ -675,7 +762,31 @@ ___
 
 • **unbzip2Stream**: *[unbzip2Stream](README.md#unbzip2stream)*
 
-*Defined in [lib/source-destination/bzip2.ts:18](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/bzip2.ts#L18)*
+*Defined in [lib/source-destination/bzip2.ts:18](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/bzip2.ts#L18)*
+
+___
+
+### `Const` unlink
+
+• **unlink**: *__promisify__* = promisify(fs.unlink)
+
+*Defined in [lib/fs.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/fs.ts#L27)*
+
+___
+
+### `Const` write
+
+• **write**: *__promisify__* = promisify(fs.write)
+
+*Defined in [lib/fs.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/fs.ts#L28)*
+
+___
+
+### `Const` writeFile
+
+• **writeFile**: *__promisify__* = promisify(fs.writeFile)
+
+*Defined in [lib/fs.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/fs.ts#L29)*
 
 ___
 
@@ -683,32 +794,54 @@ ___
 
 • **zlib**: *"zlib"*
 
-*Defined in [lib/stream-limiter.ts:18](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/stream-limiter.ts#L18)*
+*Defined in [lib/stream-limiter.ts:18](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/stream-limiter.ts#L18)*
 
 ## Functions
 
 ###  asCallback
 
-▸ **asCallback**(`promise`: Promise‹any›, `callback`: function): *void*
+▸ **asCallback**<**T**>(`promise`: Promise‹T›, `callback`: function): *Promise‹void›*
 
-*Defined in [lib/utils.ts:64](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/utils.ts#L64)*
+*Defined in [lib/utils.ts:85](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/utils.ts#L85)*
+
+**Type parameters:**
+
+▪ **T**
 
 **Parameters:**
 
-▪ **promise**: *Promise‹any›*
+▪ **promise**: *Promise‹T›*
 
 ▪ **callback**: *function*
 
-▸ (`error`: [Error](classes/notcapable.md#static-error) | void, `value?`: any): *void*
+▸ (`error`: [Error](classes/notcapable.md#static-error) | void, `value?`: T): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `error` | [Error](classes/notcapable.md#static-error) &#124; void |
-`value?` | any |
+`value?` | T |
 
-**Returns:** *void*
+**Returns:** *Promise‹void›*
+
+___
+
+###  attachMutex
+
+▸ **attachMutex**(`buf`: [Buffer](interfaces/alignedlockablebuffer.md#buffer), `mutex`: [RWMutex](README.md#rwmutex), `alignment`: number): *[AlignedLockableBuffer](interfaces/alignedlockablebuffer.md)*
+
+*Defined in [lib/aligned-lockable-buffer.ts:11](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/aligned-lockable-buffer.ts#L11)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`buf` | [Buffer](interfaces/alignedlockablebuffer.md#buffer) |
+`mutex` | [RWMutex](README.md#rwmutex) |
+`alignment` | number |
+
+**Returns:** *[AlignedLockableBuffer](interfaces/alignedlockablebuffer.md)*
 
 ___
 
@@ -716,7 +849,7 @@ ___
 
 ▸ **blockmapToBlocks**(`blockmap`: BlockMap): *[BlocksWithChecksum](interfaces/blockswithchecksum.md)[]*
 
-*Defined in [lib/source-destination/zip.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/zip.ts#L46)*
+*Defined in [lib/source-destination/zip.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/zip.ts#L51)*
 
 **Parameters:**
 
@@ -732,7 +865,7 @@ ___
 
 ▸ **blocksLength**(`blocks`: [BlocksWithChecksum](interfaces/blockswithchecksum.md)[]): *number*
 
-*Defined in [lib/sparse-stream/shared.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/shared.ts#L130)*
+*Defined in [lib/sparse-stream/shared.ts:139](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/shared.ts#L139)*
 
 **Parameters:**
 
@@ -748,7 +881,7 @@ ___
 
 ▸ **blocksVerificationErrorMessage**(`blocksWithChecksum`: [BlocksWithChecksum](interfaces/blockswithchecksum.md), `checksum`: string): *string*
 
-*Defined in [lib/errors.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/errors.ts#L37)*
+*Defined in [lib/errors.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/errors.ts#L37)*
 
 **Parameters:**
 
@@ -765,7 +898,7 @@ ___
 
 ▸ **clean**(`device`: string): *Promise‹void›*
 
-*Defined in [lib/diskpart.ts:86](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/diskpart.ts#L86)*
+*Defined in [lib/diskpart.ts:86](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/diskpart.ts#L86)*
 
 **`summary`** Clean a device's partition tables
 
@@ -784,27 +917,11 @@ Name | Type | Description |
 
 ___
 
-###  close
-
-▸ **close**(`fd`: number): *Promise‹void›*
-
-*Defined in [lib/fs.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/fs.ts#L20)*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`fd` | number |
-
-**Returns:** *Promise‹void›*
-
-___
-
 ### `Const` configure
 
 ▸ **configure**(`disk`: Disk, `options`: object): *Promise‹void›*
 
-*Defined in [lib/source-destination/configured-source/configure.ts:87](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configure.ts#L87)*
+*Defined in [lib/source-destination/configured-source/configure.ts:87](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/configure.ts#L87)*
 
 **Parameters:**
 
@@ -824,7 +941,7 @@ ___
 
 ▸ **copy**(`sourceFs`: AsyncFsLike, `sourcePath`: string, `destinationFs`: AsyncFsLike, `destinationPath`: string): *Promise‹void›*
 
-*Defined in [lib/source-destination/configured-source/operations/copy.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/operations/copy.ts#L22)*
+*Defined in [lib/source-destination/configured-source/operations/copy.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/operations/copy.ts#L22)*
 
 **Parameters:**
 
@@ -839,11 +956,28 @@ Name | Type |
 
 ___
 
+###  createBuffer
+
+▸ **createBuffer**(`size`: number, `alignment`: number): *[AlignedLockableBuffer](interfaces/alignedlockablebuffer.md)*
+
+*Defined in [lib/aligned-lockable-buffer.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/aligned-lockable-buffer.ts#L28)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`size` | number |
+`alignment` | number |
+
+**Returns:** *[AlignedLockableBuffer](interfaces/alignedlockablebuffer.md)*
+
+___
+
 ###  createHasher
 
 ▸ **createHasher**(`checksumType?`: [ChecksumType](README.md#checksumtype)): *undefined | [AnyHasher](README.md#anyhasher)*
 
-*Defined in [lib/sparse-stream/shared.ts:68](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/shared.ts#L68)*
+*Defined in [lib/sparse-stream/shared.ts:77](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/shared.ts#L77)*
 
 **Parameters:**
 
@@ -859,7 +993,7 @@ ___
 
 ▸ **createNetworkConfigFiles**(`networks`: any): *object*
 
-*Defined in [lib/source-destination/configured-source/operations/configure.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/operations/configure.ts#L95)*
+*Defined in [lib/source-destination/configured-source/operations/configure.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/operations/configure.ts#L95)*
 
 **Parameters:**
 
@@ -887,7 +1021,7 @@ ___
 
 ▸ **createSparseReaderStateIterator**(`blocks`: [BlocksWithChecksum](interfaces/blockswithchecksum.md)[], `verify`: boolean, `generateChecksums`: boolean): *Iterator‹[SparseReaderState](interfaces/sparsereaderstate.md)›*
 
-*Defined in [lib/sparse-stream/shared.ts:88](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/shared.ts#L88)*
+*Defined in [lib/sparse-stream/shared.ts:97](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/shared.ts#L97)*
 
 **Parameters:**
 
@@ -905,7 +1039,7 @@ ___
 
 ▸ **difference**<**T**>(`setA`: Set‹T›, `setB`: Set‹T›): *Set‹T›*
 
-*Defined in [lib/utils.ts:56](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/utils.ts#L56)*
+*Defined in [lib/utils.ts:77](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/utils.ts#L77)*
 
 **Type parameters:**
 
@@ -926,7 +1060,7 @@ ___
 
 ▸ **driveKey**(`drive`: $Drive): *string*
 
-*Defined in [lib/scanner/adapters/block-device.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/scanner/adapters/block-device.ts#L47)*
+*Defined in [lib/scanner/adapters/block-device.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/scanner/adapters/block-device.ts#L47)*
 
 **Parameters:**
 
@@ -942,7 +1076,7 @@ ___
 
 ▸ **execFileAsync**(`command`: string, `args`: string[], `options`: ExecFileOptions): *Promise‹[ExecResult](interfaces/execresult.md)›*
 
-*Defined in [lib/diskpart.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/diskpart.ts#L36)*
+*Defined in [lib/diskpart.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/diskpart.ts#L36)*
 
 **Parameters:**
 
@@ -960,7 +1094,7 @@ ___
 
 ▸ **execute**(`operation`: any, `disk`: Disk): *Promise‹void›*
 
-*Defined in [lib/source-destination/configured-source/operations/configure.ts:114](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/operations/configure.ts#L114)*
+*Defined in [lib/source-destination/configured-source/operations/configure.ts:114](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/operations/configure.ts#L114)*
 
 **Parameters:**
 
@@ -973,7 +1107,7 @@ Name | Type |
 
 ▸ **execute**(`operation`: any, `disk`: Disk): *Promise‹void›*
 
-*Defined in [lib/source-destination/configured-source/operations/copy.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/operations/copy.ts#L39)*
+*Defined in [lib/source-destination/configured-source/operations/copy.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/operations/copy.ts#L39)*
 
 **Parameters:**
 
@@ -990,7 +1124,7 @@ ___
 
 ▸ **executeOperation**(`operation`: [Operation](interfaces/operation.md), `disk`: Disk): *Promise‹void›*
 
-*Defined in [lib/source-destination/configured-source/configure.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configure.ts#L43)*
+*Defined in [lib/source-destination/configured-source/configure.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/configure.ts#L43)*
 
 **Parameters:**
 
@@ -1003,43 +1137,11 @@ Name | Type |
 
 ___
 
-###  fstat
-
-▸ **fstat**(`fd`: number): *Promise‹Stats›*
-
-*Defined in [lib/fs.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/fs.ts#L32)*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`fd` | number |
-
-**Returns:** *Promise‹Stats›*
-
-___
-
-###  fsync
-
-▸ **fsync**(`fd`: number): *Promise‹void›*
-
-*Defined in [lib/fs.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/fs.ts#L46)*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`fd` | number |
-
-**Returns:** *Promise‹void›*
-
-___
-
 ### `Const` getDiskDeviceType
 
 ▸ **getDiskDeviceType**(`disk`: Disk): *Promise‹any›*
 
-*Defined in [lib/source-destination/configured-source/configure.ts:68](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configure.ts#L68)*
+*Defined in [lib/source-destination/configured-source/configure.ts:68](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/configure.ts#L68)*
 
 **Parameters:**
 
@@ -1055,7 +1157,7 @@ ___
 
 ▸ **getEta**(`current`: number, `total`: number, `speed`: number): *number | undefined*
 
-*Defined in [lib/multi-write.ts:72](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/multi-write.ts#L72)*
+*Defined in [lib/multi-write.ts:72](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/multi-write.ts#L72)*
 
 **Parameters:**
 
@@ -1073,7 +1175,7 @@ ___
 
 ▸ **getFileStreamFromZipStream**(`zipStream`: ReadableStream, `match`: function): *Promise‹ZipStreamEntry›*
 
-*Defined in [lib/zip.ts:21](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/zip.ts#L21)*
+*Defined in [lib/zip.ts:21](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/zip.ts#L21)*
 
 **Parameters:**
 
@@ -1097,7 +1199,7 @@ ___
 
 ▸ **getPartitionIndex**(`partition`: number | object): *number*
 
-*Defined in [lib/source-destination/configured-source/configure.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configure.ts#L50)*
+*Defined in [lib/source-destination/configured-source/configure.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/configure.ts#L50)*
 
 **Parameters:**
 
@@ -1113,7 +1215,7 @@ ___
 
 ▸ **getRootStream**(`stream`: ReadableStream): *ReadableStream*
 
-*Defined in [lib/source-destination/compressed-source.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/compressed-source.ts#L33)*
+*Defined in [lib/source-destination/compressed-source.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/compressed-source.ts#L34)*
 
 **Parameters:**
 
@@ -1125,11 +1227,27 @@ Name | Type |
 
 ___
 
+###  isAlignedLockableBuffer
+
+▸ **isAlignedLockableBuffer**(`buffer`: [Buffer](interfaces/alignedlockablebuffer.md#buffer)): *buffer is AlignedLockableBuffer*
+
+*Defined in [lib/aligned-lockable-buffer.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/aligned-lockable-buffer.ts#L39)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`buffer` | [Buffer](interfaces/alignedlockablebuffer.md#buffer) |
+
+**Returns:** *buffer is AlignedLockableBuffer*
+
+___
+
 ###  isSourceTransform
 
 ▸ **isSourceTransform**(`stream`: any): *stream is SourceTransform*
 
-*Defined in [lib/source-destination/compressed-source.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/compressed-source.ts#L29)*
+*Defined in [lib/source-destination/compressed-source.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/compressed-source.ts#L30)*
 
 **Parameters:**
 
@@ -1145,7 +1263,7 @@ ___
 
 ▸ **isTransientError**(`error`: ErrnoException): *boolean*
 
-*Defined in [lib/errors.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/errors.ts#L65)*
+*Defined in [lib/errors.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/errors.ts#L65)*
 
 **`summary`** Determine whether an error is considered a
 transient occurrence, and the operation should be retried
@@ -1168,7 +1286,7 @@ ___
 
 ▸ **isntNull**(`x`: any): *boolean*
 
-*Defined in [lib/source-destination/multi-destination.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/multi-destination.ts#L31)*
+*Defined in [lib/source-destination/multi-destination.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/multi-destination.ts#L37)*
 
 **Parameters:**
 
@@ -1184,7 +1302,7 @@ ___
 
 ▸ **looksLikeComputeModule**(`description`: string): *boolean*
 
-*Defined in [lib/scanner/adapters/block-device.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/scanner/adapters/block-device.ts#L38)*
+*Defined in [lib/scanner/adapters/block-device.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/scanner/adapters/block-device.ts#L38)*
 
 **Parameters:**
 
@@ -1200,7 +1318,7 @@ ___
 
 ▸ **makeClassEmitProgressEvents**<**T**>(`Cls`: T, `attribute`: string, `positionAttribute`: string, `interval`: number): *(Anonymous class) & T*
 
-*Defined in [lib/source-destination/progress.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/progress.ts#L33)*
+*Defined in [lib/source-destination/progress.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/progress.ts#L33)*
 
 **Type parameters:**
 
@@ -1223,7 +1341,7 @@ ___
 
 ▸ **matchSupportedExtensions**(`filename`: string): *boolean*
 
-*Defined in [lib/source-destination/zip.ts:61](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/zip.ts#L61)*
+*Defined in [lib/source-destination/zip.ts:66](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/zip.ts#L66)*
 
 **Parameters:**
 
@@ -1239,7 +1357,7 @@ ___
 
 ▸ **nmWifiConfig**(`index`: number, `options`: [WifiConfig](interfaces/wificonfig.md)): *string*
 
-*Defined in [lib/source-destination/configured-source/operations/configure.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/operations/configure.ts#L41)*
+*Defined in [lib/source-destination/configured-source/operations/configure.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/operations/configure.ts#L41)*
 
 **Parameters:**
 
@@ -1252,21 +1370,13 @@ Name | Type |
 
 ___
 
-###  open
+###  noop
 
-▸ **open**(`path`: string | Buffer, `flags`: string | number, `mode`: number): *Promise‹number›*
+▸ **noop**(): *void*
 
-*Defined in [lib/fs.ts:58](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/fs.ts#L58)*
+*Defined in [lib/utils.ts:97](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/utils.ts#L97)*
 
-**Parameters:**
-
-Name | Type | Default |
------- | ------ | ------ |
-`path` | string &#124; Buffer | - |
-`flags` | string &#124; number | - |
-`mode` | number | 438 |
-
-**Returns:** *Promise‹number›*
+**Returns:** *void*
 
 ___
 
@@ -1274,7 +1384,7 @@ ___
 
 ▸ **pad**(`num`: number): *string*
 
-*Defined in [lib/source-destination/configured-source/operations/configure.ts:110](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/operations/configure.ts#L110)*
+*Defined in [lib/source-destination/configured-source/operations/configure.ts:110](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/operations/configure.ts#L110)*
 
 **Parameters:**
 
@@ -1288,9 +1398,9 @@ ___
 
 ###  pipeRegularSourceToDestination
 
-▸ **pipeRegularSourceToDestination**(`source`: [SourceDestination](classes/sourcedestination.md), `sourceMetadata`: [Metadata](interfaces/metadata.md), `destination`: [MultiDestination](classes/multidestination.md), `verify`: boolean, `updateState`: function, `onFail`: function, `onProgress`: function, `_onRootStreamProgress`: function): *Promise‹void›*
+▸ **pipeRegularSourceToDestination**(`source`: [SourceDestination](classes/sourcedestination.md), `sourceMetadata`: [Metadata](interfaces/metadata.md), `destination`: [MultiDestination](classes/multidestination.md), `verify`: boolean, `numBuffers`: number, `updateState`: function, `onFail`: function, `onProgress`: function, `_onRootStreamProgress`: function): *Promise‹void›*
 
-*Defined in [lib/multi-write.ts:218](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/multi-write.ts#L218)*
+*Defined in [lib/multi-write.ts:224](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/multi-write.ts#L224)*
 
 **Parameters:**
 
@@ -1301,6 +1411,8 @@ ___
 ▪ **destination**: *[MultiDestination](classes/multidestination.md)*
 
 ▪ **verify**: *boolean*
+
+▪ **numBuffers**: *number*
 
 ▪ **updateState**: *function*
 
@@ -1348,9 +1460,9 @@ ___
 
 ###  pipeSourceToDestinations
 
-▸ **pipeSourceToDestinations**(`source`: [SourceDestination](classes/sourcedestination.md), `destinations`: [SourceDestination](classes/sourcedestination.md)[], `onFail`: [OnFailFunction](README.md#onfailfunction), `onProgress`: [OnProgressFunction](README.md#onprogressfunction), `verify`: boolean): *Promise‹[PipeSourceToDestinationsResult](interfaces/pipesourcetodestinationsresult.md)›*
+▸ **pipeSourceToDestinations**(`source`: [SourceDestination](classes/sourcedestination.md), `destinations`: [SourceDestination](classes/sourcedestination.md)[], `onFail`: [OnFailFunction](README.md#onfailfunction), `onProgress`: [OnProgressFunction](README.md#onprogressfunction), `verify`: boolean, `numBuffers`: number): *Promise‹[PipeSourceToDestinationsResult](interfaces/pipesourcetodestinationsresult.md)›*
 
-*Defined in [lib/multi-write.ts:82](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/multi-write.ts#L82)*
+*Defined in [lib/multi-write.ts:82](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/multi-write.ts#L82)*
 
 **Parameters:**
 
@@ -1361,6 +1473,7 @@ Name | Type | Default |
 `onFail` | [OnFailFunction](README.md#onfailfunction) | - |
 `onProgress` | [OnProgressFunction](README.md#onprogressfunction) | - |
 `verify` | boolean | false |
+`numBuffers` | number | 16 |
 
 **Returns:** *Promise‹[PipeSourceToDestinationsResult](interfaces/pipesourcetodestinationsresult.md)›*
 
@@ -1368,17 +1481,19 @@ ___
 
 ###  pipeSparseSourceToDestination
 
-▸ **pipeSparseSourceToDestination**(`source`: [SourceDestination](classes/sourcedestination.md), `destination`: [SourceDestination](classes/sourcedestination.md), `verify`: boolean, `updateState`: function, `onFail`: function, `onProgress`: function, `_onRootStreamProgress`: function): *Promise‹void›*
+▸ **pipeSparseSourceToDestination**(`source`: [SourceDestination](classes/sourcedestination.md), `destination`: [MultiDestination](classes/multidestination.md), `verify`: boolean, `numBuffers`: number, `updateState`: function, `onFail`: function, `onProgress`: function, `_onRootStreamProgress`: function): *Promise‹void›*
 
-*Defined in [lib/multi-write.ts:306](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/multi-write.ts#L306)*
+*Defined in [lib/multi-write.ts:328](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/multi-write.ts#L328)*
 
 **Parameters:**
 
 ▪ **source**: *[SourceDestination](classes/sourcedestination.md)*
 
-▪ **destination**: *[SourceDestination](classes/sourcedestination.md)*
+▪ **destination**: *[MultiDestination](classes/multidestination.md)*
 
 ▪ **verify**: *boolean*
+
+▪ **numBuffers**: *number*
 
 ▪ **updateState**: *function*
 
@@ -1428,49 +1543,9 @@ ___
 
 ▸ **randomFilePath**(): *string*
 
-*Defined in [lib/tmp.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/tmp.ts#L28)*
+*Defined in [lib/tmp.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/tmp.ts#L28)*
 
 **Returns:** *string*
-
-___
-
-###  read
-
-▸ **read**(`fd`: number, `buf`: Buffer, `offset`: number, `length`: number, `position`: number): *Promise‹ReadResult›*
-
-*Defined in [lib/fs.ts:76](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/fs.ts#L76)*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`fd` | number |
-`buf` | Buffer |
-`offset` | number |
-`length` | number |
-`position` | number |
-
-**Returns:** *Promise‹ReadResult›*
-
-___
-
-###  readFile
-
-▸ **readFile**(`path`: string, `options`: object | undefined): *Promise‹string | Buffer›*
-
-*Defined in [lib/fs.ts:103](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/fs.ts#L103)*
-
-**Parameters:**
-
-Name | Type | Default |
------- | ------ | ------ |
-`path` | string | - |
-`options` | object &#124; undefined | {
-		encoding: null,
-		flag: 'r',
-	} |
-
-**Returns:** *Promise‹string | Buffer›*
 
 ___
 
@@ -1478,7 +1553,7 @@ ___
 
 ▸ **runDiskpart**(`commands`: string[]): *Promise‹void›*
 
-*Defined in [lib/diskpart.ts:63](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/diskpart.ts#L63)*
+*Defined in [lib/diskpart.ts:63](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/diskpart.ts#L63)*
 
 **`summary`** Run a diskpart script
 
@@ -1496,7 +1571,7 @@ ___
 
 ▸ **runVerifier**(`verifier`: [Verifier](classes/verifier.md), `onFail`: function, `onProgress`: function): *Promise‹void›*
 
-*Defined in [lib/multi-write.ts:338](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/multi-write.ts#L338)*
+*Defined in [lib/multi-write.ts:366](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/multi-write.ts#L366)*
 
 **Parameters:**
 
@@ -1528,9 +1603,9 @@ ___
 
 ###  sparseStreamToBuffer
 
-▸ **sparseStreamToBuffer**(`stream`: ReadableStream): *Promise‹Buffer›*
+▸ **sparseStreamToBuffer**(`stream`: ReadableStream): *Promise‹[Buffer](interfaces/alignedlockablebuffer.md#buffer)›*
 
-*Defined in [lib/utils.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/utils.ts#L36)*
+*Defined in [lib/utils.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/utils.ts#L48)*
 
 **Parameters:**
 
@@ -1538,31 +1613,15 @@ Name | Type |
 ------ | ------ |
 `stream` | ReadableStream |
 
-**Returns:** *Promise‹Buffer›*
-
-___
-
-###  stat
-
-▸ **stat**(`path`: string | Buffer): *Promise‹Stats›*
-
-*Defined in [lib/fs.ts:126](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/fs.ts#L126)*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`path` | string &#124; Buffer |
-
-**Returns:** *Promise‹Stats›*
+**Returns:** *Promise‹[Buffer](interfaces/alignedlockablebuffer.md#buffer)›*
 
 ___
 
 ###  streamToBuffer
 
-▸ **streamToBuffer**(`stream`: ReadableStream): *Promise‹Buffer›*
+▸ **streamToBuffer**(`stream`: ReadableStream): *Promise‹[Buffer](interfaces/alignedlockablebuffer.md#buffer)›*
 
-*Defined in [lib/utils.ts:19](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/utils.ts#L19)*
+*Defined in [lib/utils.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/utils.ts#L20)*
 
 **Parameters:**
 
@@ -1570,7 +1629,7 @@ Name | Type |
 ------ | ------ |
 `stream` | ReadableStream |
 
-**Returns:** *Promise‹Buffer›*
+**Returns:** *Promise‹[Buffer](interfaces/alignedlockablebuffer.md#buffer)›*
 
 ___
 
@@ -1578,7 +1637,7 @@ ___
 
 ▸ **tmpFile**(`keepOpen`: boolean): *Promise‹[TmpFileResult](interfaces/tmpfileresult.md)›*
 
-*Defined in [lib/tmp.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/tmp.ts#L37)*
+*Defined in [lib/tmp.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/tmp.ts#L37)*
 
 **Parameters:**
 
@@ -1594,7 +1653,7 @@ ___
 
 ▸ **tmpFileDisposer**(`keepOpen`: boolean): *Disposer‹[TmpFileResult](interfaces/tmpfileresult.md)›*
 
-*Defined in [lib/tmp.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/tmp.ts#L65)*
+*Defined in [lib/tmp.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/tmp.ts#L65)*
 
 **Parameters:**
 
@@ -1606,27 +1665,11 @@ Name | Type | Default |
 
 ___
 
-###  unlink
-
-▸ **unlink**(`path`: string | Buffer): *Promise‹void›*
-
-*Defined in [lib/fs.ts:156](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/fs.ts#L156)*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`path` | string &#124; Buffer |
-
-**Returns:** *Promise‹void›*
-
-___
-
 ###  verifyOrGenerateChecksum
 
 ▸ **verifyOrGenerateChecksum**(`hasher`: [AnyHasher](README.md#anyhasher) | undefined, `blocks`: [BlocksWithChecksum](interfaces/blockswithchecksum.md), `verify`: boolean, `generateChecksums`: boolean): *void*
 
-*Defined in [lib/sparse-stream/shared.ts:114](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/shared.ts#L114)*
+*Defined in [lib/sparse-stream/shared.ts:123](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/shared.ts#L123)*
 
 **Parameters:**
 
@@ -1639,66 +1682,22 @@ Name | Type |
 
 **Returns:** *void*
 
-___
-
-###  write
-
-▸ **write**(`fd`: number, `buf`: Buffer, `offset`: number, `length`: number, `position`: number): *Promise‹WriteResult›*
-
-*Defined in [lib/fs.ts:168](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/fs.ts#L168)*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`fd` | number |
-`buf` | Buffer |
-`offset` | number |
-`length` | number |
-`position` | number |
-
-**Returns:** *Promise‹WriteResult›*
-
-___
-
-###  writeFile
-
-▸ **writeFile**(`path`: string, `data`: string | Buffer, `options`: object): *Promise‹void›*
-
-*Defined in [lib/fs.ts:140](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/fs.ts#L140)*
-
-**Parameters:**
-
-▪ **path**: *string*
-
-▪ **data**: *string | Buffer*
-
-▪`Default value`  **options**: *object*= { encoding: 'utf8', mode: 0o666, flag: 'w' }
-
-Name | Type | Default |
------- | ------ | ------ |
-`encoding` | string | "utf8" |
-`flag` | string | "w" |
-`mode` | number | 438 |
-
-**Returns:** *Promise‹void›*
-
 ## Object literals
 
 ### `Const` ACTIONS
 
 ### ▪ **ACTIONS**: *object*
 
-*Defined in [lib/source-destination/configured-source/configure.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configure.ts#L38)*
+*Defined in [lib/source-destination/configured-source/configure.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/configure.ts#L38)*
 
 ###  configure
 
 • **configure**: *execute* = configureAction
 
-*Defined in [lib/source-destination/configured-source/configure.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configure.ts#L39)*
+*Defined in [lib/source-destination/configured-source/configure.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/configure.ts#L39)*
 
 ###  copy
 
 • **copy**: *execute* = copyAction
 
-*Defined in [lib/source-destination/configured-source/configure.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configure.ts#L40)*
+*Defined in [lib/source-destination/configured-source/configure.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/configured-source/configure.ts#L40)*

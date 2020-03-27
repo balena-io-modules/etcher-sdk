@@ -1,107 +1,141 @@
-[etcher-sdk](../README.md) › [CountingHashStream](countinghashstream.md)
+[etcher-sdk](../README.md) › [SparseTransformStream](sparsetransformstream.md)
 
-# Class: CountingHashStream
+# Class: SparseTransformStream
 
 ## Hierarchy
 
-* Stream
+* Transform
 
-  ↳ **CountingHashStream**
+  ↳ **SparseTransformStream**
 
 ## Implements
 
 * ReadableStream
 * Writable
+* [SparseWritable](../interfaces/sparsewritable.md)
+* [SparseReadable](../interfaces/sparsereadable.md)
 
 ## Index
 
 ### Constructors
 
-* [constructor](countinghashstream.md#constructor)
+* [constructor](sparsetransformstream.md#constructor)
 
 ### Properties
 
-* [bytesWritten](countinghashstream.md#byteswritten)
-* [readable](countinghashstream.md#readable)
-* [readableHighWaterMark](countinghashstream.md#readablehighwatermark)
-* [writable](countinghashstream.md#writable)
-* [writableHighWaterMark](countinghashstream.md#writablehighwatermark)
-* [defaultMaxListeners](countinghashstream.md#static-defaultmaxlisteners)
+* [alignedReadableState](sparsetransformstream.md#private-alignedreadablestate)
+* [blocks](sparsetransformstream.md#blocks)
+* [bytesWritten](sparsetransformstream.md#byteswritten)
+* [position](sparsetransformstream.md#position)
+* [readable](sparsetransformstream.md#readable)
+* [readableHighWaterMark](sparsetransformstream.md#readablehighwatermark)
+* [writable](sparsetransformstream.md#writable)
+* [writableHighWaterMark](sparsetransformstream.md#writablehighwatermark)
+* [defaultMaxListeners](sparsetransformstream.md#static-defaultmaxlisteners)
 
 ### Methods
 
-* [_destroy](countinghashstream.md#_destroy)
-* [_final](countinghashstream.md#_final)
-* [_read](countinghashstream.md#_read)
-* [_transform](countinghashstream.md#_transform)
-* [_write](countinghashstream.md#_write)
-* [_writev](countinghashstream.md#optional-_writev)
-* [addListener](countinghashstream.md#addlistener)
-* [cork](countinghashstream.md#cork)
-* [destroy](countinghashstream.md#destroy)
-* [emit](countinghashstream.md#emit)
-* [end](countinghashstream.md#end)
-* [eventNames](countinghashstream.md#eventnames)
-* [getMaxListeners](countinghashstream.md#getmaxlisteners)
-* [isPaused](countinghashstream.md#ispaused)
-* [listenerCount](countinghashstream.md#listenercount)
-* [listeners](countinghashstream.md#listeners)
-* [on](countinghashstream.md#on)
-* [once](countinghashstream.md#once)
-* [pause](countinghashstream.md#pause)
-* [pipe](countinghashstream.md#pipe)
-* [prependListener](countinghashstream.md#prependlistener)
-* [prependOnceListener](countinghashstream.md#prependoncelistener)
-* [push](countinghashstream.md#push)
-* [read](countinghashstream.md#read)
-* [removeAllListeners](countinghashstream.md#removealllisteners)
-* [removeListener](countinghashstream.md#removelistener)
-* [resume](countinghashstream.md#resume)
-* [setDefaultEncoding](countinghashstream.md#setdefaultencoding)
-* [setEncoding](countinghashstream.md#setencoding)
-* [setMaxListeners](countinghashstream.md#setmaxlisteners)
-* [uncork](countinghashstream.md#uncork)
-* [unpipe](countinghashstream.md#unpipe)
-* [unshift](countinghashstream.md#unshift)
-* [wrap](countinghashstream.md#wrap)
-* [write](countinghashstream.md#write)
-* [listenerCount](countinghashstream.md#static-listenercount)
+* [_destroy](sparsetransformstream.md#_destroy)
+* [_final](sparsetransformstream.md#_final)
+* [_read](sparsetransformstream.md#_read)
+* [_transform](sparsetransformstream.md#_transform)
+* [_write](sparsetransformstream.md#_write)
+* [_writev](sparsetransformstream.md#optional-_writev)
+* [addListener](sparsetransformstream.md#addlistener)
+* [cork](sparsetransformstream.md#cork)
+* [destroy](sparsetransformstream.md#destroy)
+* [emit](sparsetransformstream.md#emit)
+* [end](sparsetransformstream.md#end)
+* [eventNames](sparsetransformstream.md#eventnames)
+* [getMaxListeners](sparsetransformstream.md#getmaxlisteners)
+* [isPaused](sparsetransformstream.md#ispaused)
+* [listenerCount](sparsetransformstream.md#listenercount)
+* [listeners](sparsetransformstream.md#listeners)
+* [on](sparsetransformstream.md#on)
+* [once](sparsetransformstream.md#once)
+* [pause](sparsetransformstream.md#pause)
+* [pipe](sparsetransformstream.md#pipe)
+* [prependListener](sparsetransformstream.md#prependlistener)
+* [prependOnceListener](sparsetransformstream.md#prependoncelistener)
+* [push](sparsetransformstream.md#push)
+* [read](sparsetransformstream.md#read)
+* [removeAllListeners](sparsetransformstream.md#removealllisteners)
+* [removeListener](sparsetransformstream.md#removelistener)
+* [resume](sparsetransformstream.md#resume)
+* [setDefaultEncoding](sparsetransformstream.md#setdefaultencoding)
+* [setEncoding](sparsetransformstream.md#setencoding)
+* [setMaxListeners](sparsetransformstream.md#setmaxlisteners)
+* [uncork](sparsetransformstream.md#uncork)
+* [unpipe](sparsetransformstream.md#unpipe)
+* [unshift](sparsetransformstream.md#unshift)
+* [wrap](sparsetransformstream.md#wrap)
+* [write](sparsetransformstream.md#write)
+* [listenerCount](sparsetransformstream.md#static-listenercount)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new CountingHashStream**(`seed`: number, `bits?`: undefined | number, `enc?`: undefined | string): *[CountingHashStream](countinghashstream.md)*
-
-*Inherited from [CountingHashStream](countinghashstream.md).[constructor](countinghashstream.md#constructor)*
+\+ **new SparseTransformStream**(`__namedParameters`: object): *[SparseTransformStream](sparsetransformstream.md)*
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [typings/xxhash/index.d.ts:12](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/typings/xxhash/index.d.ts#L12)*
+*Defined in [lib/sparse-stream/sparse-transform-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/sparse-transform-stream.ts#L35)*
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`seed` | number |
-`bits?` | undefined &#124; number |
-`enc?` | undefined &#124; string |
+▪ **__namedParameters**: *object*
 
-**Returns:** *[CountingHashStream](countinghashstream.md)*
+Name | Type | Default |
+------ | ------ | ------ |
+`alignment` | number | - |
+`blocks` | [BlocksWithChecksum](../interfaces/blockswithchecksum.md)[] | - |
+`chunkSize` | number | - |
+`numBuffers` | number | 2 |
+
+**Returns:** *[SparseTransformStream](sparsetransformstream.md)*
 
 ## Properties
+
+### `Private` alignedReadableState
+
+• **alignedReadableState**: *[AlignedReadableState](alignedreadablestate.md)*
+
+*Defined in [lib/sparse-stream/sparse-transform-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/sparse-transform-stream.ts#L35)*
+
+___
+
+###  blocks
+
+• **blocks**: *[BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]*
+
+*Implementation of [SparseReadable](../interfaces/sparsereadable.md).[blocks](../interfaces/sparsereadable.md#blocks)*
+
+*Defined in [lib/sparse-stream/sparse-transform-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/sparse-transform-stream.ts#L32)*
+
+___
 
 ###  bytesWritten
 
 • **bytesWritten**: *number* = 0
 
-*Defined in [lib/source-destination/source-destination.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/source-destination.ts#L48)*
+*Defined in [lib/sparse-stream/sparse-transform-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/sparse-transform-stream.ts#L34)*
+
+___
+
+###  position
+
+• **position**: *number* = 0
+
+*Defined in [lib/sparse-stream/sparse-transform-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/sparse-transform-stream.ts#L33)*
 
 ___
 
 ###  readable
 
 • **readable**: *boolean*
+
+*Implementation of [SparseReadable](../interfaces/sparsereadable.md).[readable](../interfaces/sparsereadable.md#readable)*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[readable](sparsefilterstream.md#readable)*
 
@@ -122,6 +156,8 @@ ___
 ###  writable
 
 • **writable**: *boolean*
+
+*Implementation of [SparseWritable](../interfaces/sparsewritable.md).[writable](../interfaces/sparsewritable.md#writable)*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[writable](sparsefilterstream.md#writable)*
 
@@ -215,23 +251,29 @@ ___
 
 ###  _transform
 
-▸ **_transform**(`chunk`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer), `encoding`: string, `callback`: function): *void*
+▸ **_transform**(`chunk`: [SparseStreamChunk](../interfaces/sparsestreamchunk.md), `_encoding`: string, `callback`: function): *Promise‹void›*
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[_transform](../interfaces/sourcetransform.md#_transform)*
 
-*Defined in [lib/source-destination/source-destination.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/source-destination.ts#L50)*
+*Defined in [lib/sparse-stream/sparse-transform-stream.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/sparse-transform-stream.ts#L57)*
 
 **Parameters:**
 
-▪ **chunk**: *[Buffer](../interfaces/alignedlockablebuffer.md#buffer)*
+▪ **chunk**: *[SparseStreamChunk](../interfaces/sparsestreamchunk.md)*
 
-▪ **encoding**: *string*
+▪ **_encoding**: *string*
 
 ▪ **callback**: *function*
 
-▸ (): *void*
+▸ (`error?`: [Error](notcapable.md#static-error)): *void*
 
-**Returns:** *void*
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`error?` | [Error](notcapable.md#static-error) |
+
+**Returns:** *Promise‹void›*
 
 ___
 
@@ -463,6 +505,8 @@ ___
 
 ▸ **emit**(`event`: string | symbol, ...`args`: any[]): *boolean*
 
+*Implementation of [SparseReadable](../interfaces/sparsereadable.md)*
+
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[emit](sparsefilterstream.md#emit)*
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
@@ -566,6 +610,8 @@ ___
 
 ▸ **end**(`cb?`: Function): *void*
 
+*Implementation of [SparseWritable](../interfaces/sparsewritable.md)*
+
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[end](sparsefilterstream.md#end)*
 
 Defined in node_modules/@types/node/base.d.ts:5610
@@ -615,6 +661,8 @@ ___
 
 ▸ **eventNames**(): *Array‹string | symbol›*
 
+*Implementation of [SparseReadable](../interfaces/sparsereadable.md)*
+
 *Inherited from [CountingWritable](countingwritable.md).[eventNames](countingwritable.md#eventnames)*
 
 Defined in node_modules/@types/node/base.d.ts:909
@@ -626,6 +674,8 @@ ___
 ###  getMaxListeners
 
 ▸ **getMaxListeners**(): *number*
+
+*Implementation of [SparseReadable](../interfaces/sparsereadable.md)*
 
 *Inherited from [CountingWritable](countingwritable.md).[getMaxListeners](countingwritable.md#getmaxlisteners)*
 
@@ -639,6 +689,8 @@ ___
 
 ▸ **isPaused**(): *boolean*
 
+*Implementation of [SparseReadable](../interfaces/sparsereadable.md)*
+
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[isPaused](sparsefilterstream.md#ispaused)*
 
 Defined in node_modules/@types/node/base.d.ts:5430
@@ -650,6 +702,8 @@ ___
 ###  listenerCount
 
 ▸ **listenerCount**(`type`: string | symbol): *number*
+
+*Implementation of [SparseReadable](../interfaces/sparsereadable.md)*
 
 *Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
 
@@ -668,6 +722,8 @@ ___
 ###  listeners
 
 ▸ **listeners**(`event`: string | symbol): *Function[]*
+
+*Implementation of [SparseReadable](../interfaces/sparsereadable.md)*
 
 *Inherited from [CountingWritable](countingwritable.md).[listeners](countingwritable.md#listeners)*
 
@@ -946,6 +1002,8 @@ ___
 ###  pause
 
 ▸ **pause**(): *this*
+
+*Implementation of [SparseReadable](../interfaces/sparsereadable.md)*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[pause](sparsefilterstream.md#pause)*
 
@@ -1261,6 +1319,8 @@ ___
 
 ▸ **read**(`size?`: undefined | number): *any*
 
+*Implementation of [SparseReadable](../interfaces/sparsereadable.md)*
+
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[read](sparsefilterstream.md#read)*
 
 Defined in node_modules/@types/node/base.d.ts:5426
@@ -1278,6 +1338,8 @@ ___
 ###  removeAllListeners
 
 ▸ **removeAllListeners**(`event?`: string | symbol): *this*
+
+*Implementation of [SparseReadable](../interfaces/sparsereadable.md)*
 
 *Inherited from [CountingWritable](countingwritable.md).[removeAllListeners](countingwritable.md#removealllisteners)*
 
@@ -1427,6 +1489,8 @@ ___
 
 ▸ **resume**(): *this*
 
+*Implementation of [SparseReadable](../interfaces/sparsereadable.md)*
+
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[resume](sparsefilterstream.md#resume)*
 
 Defined in node_modules/@types/node/base.d.ts:5429
@@ -1457,6 +1521,8 @@ ___
 
 ▸ **setEncoding**(`encoding`: string): *this*
 
+*Implementation of [SparseReadable](../interfaces/sparsereadable.md)*
+
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[setEncoding](sparsefilterstream.md#setencoding)*
 
 Defined in node_modules/@types/node/base.d.ts:5427
@@ -1474,6 +1540,8 @@ ___
 ###  setMaxListeners
 
 ▸ **setMaxListeners**(`n`: number): *this*
+
+*Implementation of [SparseReadable](../interfaces/sparsereadable.md)*
 
 *Inherited from [CountingWritable](countingwritable.md).[setMaxListeners](countingwritable.md#setmaxlisteners)*
 
@@ -1504,6 +1572,8 @@ ___
 ###  unpipe
 
 ▸ **unpipe**<**T**>(`destination?`: T): *this*
+
+*Implementation of [SparseReadable](../interfaces/sparsereadable.md)*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[unpipe](sparsefilterstream.md#unpipe)*
 
@@ -1544,6 +1614,8 @@ ___
 ###  wrap
 
 ▸ **wrap**(`oldStream`: ReadableStream): *this*
+
+*Implementation of [SparseReadable](../interfaces/sparsereadable.md)*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[wrap](sparsefilterstream.md#wrap)*
 
