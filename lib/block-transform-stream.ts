@@ -18,6 +18,7 @@ import { Transform } from 'readable-stream';
 
 import { AlignedReadableState } from './aligned-lockable-buffer';
 import { CHUNK_SIZE } from './constants';
+import { asCallback } from './utils';
 
 export class BlockTransformStream extends Transform {
 	public bytesRead = 0;
@@ -64,8 +65,11 @@ export class BlockTransformStream extends Transform {
 
 			const alignedBuffer = this.alignedReadableState.getCurrentBuffer();
 			const unlock = await alignedBuffer.lock();
-			block.copy(alignedBuffer);
-			unlock();
+			try {
+				block.copy(alignedBuffer);
+			} finally {
+				unlock();
+			}
 			this.bytesWritten += length;
 			this.push(alignedBuffer.slice(0, length));
 		}
@@ -79,13 +83,11 @@ export class BlockTransformStream extends Transform {
 		this.bytesRead += chunk.length;
 		this.inputBuffers.push(chunk);
 		this.inputBytes += chunk.length;
-		await this.writeBuffers();
-		callback();
+		asCallback(this.writeBuffers(), callback);
 	}
 
 	public async _flush(callback: (error?: Error) => void): Promise<void> {
-		await this.writeBuffers(true);
-		callback();
+		asCallback(this.writeBuffers(true), callback);
 	}
 
 	public static alignIfNeeded(
@@ -101,6 +103,7 @@ export class BlockTransformStream extends Transform {
 			alignment,
 			numBuffers,
 		});
+		stream.on('error', transform.emit.bind(transform, 'error'));
 		stream.pipe(transform);
 		return transform;
 	}

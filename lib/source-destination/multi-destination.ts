@@ -120,15 +120,16 @@ export class MultiDestination extends SourceDestination {
 	}
 
 	public getAlignment(): number | undefined {
-		const alignments: number[] = [];
+		let max;
 		for (const destination of this.destinations.values()) {
-			if (destination instanceof BlockDevice) {
-				alignments.push(destination.alignment);
+			if (
+				destination instanceof BlockDevice &&
+				(max === undefined || destination.alignment > max)
+			) {
+				max = destination.alignment;
 			}
 		}
-		if (alignments.length) {
-			return Math.max(...alignments);
-		}
+		return max;
 	}
 
 	public destinationError(

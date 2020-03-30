@@ -8,20 +8,26 @@ export interface AlignedLockableBuffer extends Buffer {
 	slice: (start?: number, end?: number) => AlignedLockableBuffer;
 }
 
+function alignedLockableBufferSlice(
+	this: AlignedLockableBuffer,
+	start?: number,
+	end?: number,
+) {
+	const slice = Buffer.prototype.slice.call(this, start, end);
+	return attachMutex(slice, this.alignment, this.lock, this.rlock);
+}
+
 function attachMutex(
 	buf: Buffer,
-	mutex: RWMutex,
 	alignment: number,
+	lock: () => Promise<() => void>,
+	rlock: () => Promise<() => void>,
 ): AlignedLockableBuffer {
 	const buffer = buf as AlignedLockableBuffer;
 	buffer.alignment = alignment;
-	buffer.lock = mutex.lock.bind(mutex);
-	buffer.rlock = mutex.rlock.bind(mutex);
-	const bufferSlice = buffer.slice.bind(buffer);
-	buffer.slice = (...args) => {
-		const slice = bufferSlice(...args);
-		return attachMutex(slice, mutex, alignment);
-	};
+	buffer.lock = lock;
+	buffer.rlock = rlock;
+	buffer.slice = alignedLockableBufferSlice;
 	return buffer;
 }
 
@@ -29,17 +35,19 @@ export function createBuffer(
 	size: number,
 	alignment: number,
 ): AlignedLockableBuffer {
+	const mutex = new RWMutex();
 	return attachMutex(
 		getAlignedBuffer(size, alignment),
-		new RWMutex(),
 		alignment,
+		mutex.lock.bind(mutex),
+		mutex.rlock.bind(mutex),
 	);
 }
 
 export function isAlignedLockableBuffer(
 	buffer: Buffer,
 ): buffer is AlignedLockableBuffer {
-	return (buffer as AlignedLockableBuffer).rlock !== undefined;
+	return 'rlock' in buffer;
 }
 
 export class AlignedReadableState {
