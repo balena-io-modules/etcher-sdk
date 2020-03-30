@@ -140,7 +140,7 @@ export class SparseWriteStream extends Writable implements SparseWritable {
 	/**
 	 * @summary Write buffered data before a stream ends, called by stream internals
 	 */
-	public _final(callback: (error?: Error | void) => void) {
+	public _final(callback: (error?: Error | null) => void) {
 		asCallback(this.__final(), callback);
 	}
 }

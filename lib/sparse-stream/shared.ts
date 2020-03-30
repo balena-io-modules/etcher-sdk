@@ -55,7 +55,7 @@ export interface SparseWritable extends NodeJS.WritableStream {
 	_write(
 		chunk: SparseStreamChunk,
 		encoding: string,
-		callback: (err?: Error | void) => void,
+		callback: (err?: Error | void | null) => void,
 	): void;
 }
 

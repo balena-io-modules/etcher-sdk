@@ -16,10 +16,9 @@
 
 import { Disposer, resolve } from 'bluebird';
 import { randomBytes } from 'crypto';
+import { promises as fs } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
-
-import { close, open, unlink } from './fs';
 
 const TMP_RANDOM_BYTES = 6;
 const TMP_DIR = tmpdir();
@@ -31,17 +30,17 @@ const randomFilePath = (): string => {
 
 export interface TmpFileResult {
 	path: string;
-	fd?: number;
+	fileHandle?: fs.FileHandle;
 }
 
 export const tmpFile = async (keepOpen = true): Promise<TmpFileResult> => {
-	let fd: number | undefined;
+	let fileHandle: fs.FileHandle | undefined;
 	let path: string;
 	let ok = false;
 	for (let i = 0; i < TRIES; i++) {
 		path = randomFilePath();
 		try {
-			fd = await open(path, 'wx+');
+			fileHandle = await fs.open(path, 'wx+');
 			ok = true;
 			break;
 		} catch (error) {
@@ -55,18 +54,18 @@ export const tmpFile = async (keepOpen = true): Promise<TmpFileResult> => {
 			`Could not generate a temporary filename in ${TRIES} tries`,
 		);
 	}
-	if (!keepOpen && fd !== undefined) {
-		await close(fd);
-		fd = undefined;
+	if (!keepOpen && fileHandle !== undefined) {
+		await fileHandle.close();
+		fileHandle = undefined;
 	}
-	return { fd, path: path! };
+	return { fileHandle, path: path! };
 };
 
 export const tmpFileDisposer = (keepOpen = true): Disposer<TmpFileResult> => {
 	return resolve(tmpFile(keepOpen)).disposer(async (result: TmpFileResult) => {
-		if (keepOpen && result.fd !== undefined) {
-			await close(result.fd);
+		if (keepOpen && result.fileHandle !== undefined) {
+			await result.fileHandle.close();
 		}
-		await unlink(result.path);
+		await fs.unlink(result.path);
 	});
 };

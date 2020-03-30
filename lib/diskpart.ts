@@ -17,9 +17,9 @@
 import { delay, using } from 'bluebird';
 import { execFile, ExecFileOptions } from 'child_process';
 import * as _debug from 'debug';
+import { promises as fs } from 'fs';
 import { platform } from 'os';
 
-import { writeFile } from './fs';
 import { tmpFileDisposer, TmpFileResult } from './tmp';
 
 const debug = _debug('etcher-sdk:diskpart');
@@ -65,7 +65,7 @@ const runDiskpart = async (commands: string[]): Promise<void> => {
 		return;
 	}
 	await using(tmpFileDisposer(false), async (file: TmpFileResult) => {
-		await writeFile(file.path, commands.join('\r\n'));
+		await fs.writeFile(file.path, commands.join('\r\n'));
 		const { stdout, stderr } = await execFileAsync('diskpart', [
 			'/s',
 			file.path,

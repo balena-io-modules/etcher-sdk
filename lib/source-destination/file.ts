@@ -15,7 +15,7 @@
  */
 
 import { ReadResult, WriteResult } from 'file-disk';
-import { constants, ReadStream, WriteStream } from 'fs';
+import { constants, promises as fs, ReadStream, WriteStream } from 'fs';
 import { basename } from 'path';
 
 import { Metadata } from './metadata';
@@ -27,7 +27,6 @@ import {
 
 import { BlockReadStream, ProgressBlockReadStream } from '../block-read-stream';
 import { CHUNK_SIZE, PROGRESS_EMISSION_INTERVAL } from '../constants';
-import { close, open, read, stat, write } from '../fs';
 import {
 	ProgressSparseWriteStream,
 	SparseWriteStream,
@@ -48,7 +47,7 @@ export const ProgressWriteStream = makeClassEmitProgressEvents(
 );
 
 export class File extends SourceDestination {
-	protected fd: number;
+	protected fileHandle: fs.FileHandle;
 
 	constructor(public readonly path: string, public readonly oWrite = false) {
 		super();
@@ -80,7 +79,7 @@ export class File extends SourceDestination {
 
 	protected async _getMetadata(): Promise<Metadata> {
 		return {
-			size: (await stat(this.path)).size,
+			size: (await fs.stat(this.path)).size,
 			name: basename(this.path),
 		};
 	}
@@ -91,7 +90,12 @@ export class File extends SourceDestination {
 		length: number,
 		sourceOffset: number,
 	): Promise<ReadResult> {
-		return await read(this.fd, buffer, bufferOffset, length, sourceOffset);
+		return await this.fileHandle.read(
+			buffer,
+			bufferOffset,
+			length,
+			sourceOffset,
+		);
 	}
 
 	public async write(
@@ -100,13 +104,18 @@ export class File extends SourceDestination {
 		length: number,
 		fileOffset: number,
 	): Promise<WriteResult> {
-		return await write(this.fd, buffer, bufferOffset, length, fileOffset);
+		return await this.fileHandle.write(
+			buffer,
+			bufferOffset,
+			length,
+			fileOffset,
+		);
 	}
 
 	private streamOptions(start?: number, end?: number) {
 		// TODO: pass fs: SourceDestinationFs(this) instead of fd (only works with node >= v13.6.0)
 		return {
-			fd: this.fd,
+			fd: this.fileHandle.fd,
 			highWaterMark: CHUNK_SIZE,
 			autoClose: false,
 			start,
@@ -158,7 +167,7 @@ export class File extends SourceDestination {
 		// TODO: use SourceDestinationFs (implement write) when node 14 becomes LTS
 		// @ts-ignore: @types/node is wrong about fs.WriteStream constructor: it takes 2 arguments, the first one is the file path
 		const stream = new ProgressWriteStream(null, {
-			fd: this.fd,
+			fd: this.fileHandle.fd,
 			autoClose: false,
 			highWaterMark,
 		});
@@ -178,10 +187,10 @@ export class File extends SourceDestination {
 	}
 
 	protected async _open(): Promise<void> {
-		this.fd = await open(this.path, this.getOpenFlags());
+		this.fileHandle = await fs.open(this.path, this.getOpenFlags());
 	}
 
 	protected async _close(): Promise<void> {
-		await close(this.fd);
+		await this.fileHandle.close();
 	}
 }

@@ -17,6 +17,7 @@
 import { using } from 'bluebird';
 import { expect } from 'chai';
 import { randomFill } from 'crypto';
+import { promises as fs } from 'fs';
 import 'mocha';
 import * as os from 'os';
 import { spy, stub } from 'sinon';
@@ -27,7 +28,6 @@ import { createBuffer } from '../lib/aligned-lockable-buffer';
 import { BlockWriteStream } from '../lib/block-write-stream';
 import { CHUNK_SIZE as BLOCK_WRITE_STREAM_CHUNK_SIZE } from '../lib/constants';
 import * as diskpart from '../lib/diskpart';
-import { readFile } from '../lib/fs';
 import { SparseWriteStream } from '../lib/sparse-stream/sparse-write-stream';
 import { tmpFileDisposer, TmpFileResult } from '../lib/tmp';
 import { blockDeviceFromFile, DEFAULT_IMAGE_TESTS_TIMEOUT } from './tester';
@@ -70,7 +70,7 @@ function bufferToSparseStream(
 }
 
 async function expectFileToContain(path: string, data: Buffer): Promise<void> {
-	const fileData = await readFile(path);
+	const fileData = await fs.readFile(path);
 	expect(fileData.slice(0, data.length)).to.deep.equal(data);
 }
 

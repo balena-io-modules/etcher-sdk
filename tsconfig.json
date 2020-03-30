@@ -5,10 +5,11 @@
 		"outDir": "build",
 		"sourceMap": true,
 		"declaration": true,
-		"target": "es2017",
+		"target": "es2018",
 		"noImplicitAny": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
+		"skipLibCheck": true,
 		"strictNullChecks": true
 	},
 	"include": [

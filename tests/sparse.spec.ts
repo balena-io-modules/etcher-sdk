@@ -102,6 +102,7 @@ describe('sparse streams', function() {
 				verifierError.message ===
 					'Checksum does not match for range [0, 134217727]: "wrong" != "4c754335"',
 			);
+			await destination.close();
 		});
 
 		// Test regular streams
@@ -123,7 +124,9 @@ describe('sparse streams', function() {
 				verifier.on('finish', resolve);
 				verifier.run();
 			});
+			await destination.close();
 		});
+		await innerSource.close();
 	});
 
 	const checksumTypes: ChecksumType[] = [
@@ -225,6 +228,7 @@ describe('sparse streams', function() {
 							assert(verifierError instanceof BlocksVerificationError);
 						},
 					);
+					await trimmedSource.close();
 				});
 			}
 		}
@@ -302,5 +306,6 @@ describe('sparse streams', function() {
 					'Checksum does not match for range [0, 16383]: "wrong" != "ce55029ab3dd4875edbf69fcc5d1942bb2abaf2cf88b87ae7016609b3feb5028"',
 			);
 		});
+		await innerSource.close();
 	});
 });

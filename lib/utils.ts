@@ -84,7 +84,7 @@ export function difference<T>(setA: Set<T>, setB: Set<T>): Set<T> {
 
 export async function asCallback<T>(
 	promise: Promise<T>,
-	callback: (error: Error | void, value?: T) => void,
+	callback: (error: Error | void | null, value?: T) => void,
 ): Promise<void> {
 	try {
 		const value = await promise;

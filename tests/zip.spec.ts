@@ -115,6 +115,8 @@ describe('zip support', function() {
 			} catch (error) {
 				expect(error).to.be.instanceof(Error);
 				expect(error.message).to.equal(NO_MATCHING_FILE_MSG);
+			} finally {
+				await source.close();
 			}
 		});
 	}

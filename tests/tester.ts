@@ -15,13 +15,13 @@
  */
 import * as assert from 'assert';
 import { expect } from 'chai';
+import { promises as fs } from 'fs';
 import { entries } from 'lodash';
 import 'mocha';
 
 import { sourceDestination } from '../lib';
 import { SourceSource } from '../lib/source-destination/source-source';
 
-import { stat } from '../lib/fs';
 import { sparseStreamToBuffer, streamToBuffer } from '../lib/utils';
 
 export type PartitionTableType = 'mbr' | 'gpt';
@@ -52,7 +52,7 @@ export async function blockDeviceFromFile(
 		isSystem: false,
 		description: 'some description',
 		mountpoints: [],
-		size: (await stat(path)).size,
+		size: (await fs.stat(path)).size,
 		isReadOnly: false,
 		busType: 'UNKNOWN',
 		error: null,
@@ -98,12 +98,12 @@ export async function testImageNoIt(
 		await innerSource.open();
 	}
 	const sourceMetadata = await innerSource.getMetadata();
-	const sourceStat = await stat(imagePath);
+	const sourceStat = await fs.stat(imagePath);
 
 	const compareSource = new sourceDestination.File(compareToPath);
 	await compareSource.open();
 	const compareMetadata = await compareSource.getMetadata();
-	const compareStat = await stat(compareToPath);
+	const compareStat = await fs.stat(compareToPath);
 
 	if (shouldHaveCompressedSize === true) {
 		expect(sourceMetadata.compressedSize).to.equal(sourceStat.size);
@@ -159,7 +159,8 @@ export async function testImageNoIt(
 		}
 	}
 
-	// TODO: close sources
+	await source.close();
+	await compareSource.close();
 }
 
 export function testImage(
@@ -216,8 +217,9 @@ export function expectSourceSourceError(
 		} catch (error) {
 			expect(error).to.be.an.instanceof(Error);
 			expect(error.message).to.equal(message);
-			await source.close();
 			return;
+		} finally {
+			await source.close();
 		}
 		assert(false);
 	});

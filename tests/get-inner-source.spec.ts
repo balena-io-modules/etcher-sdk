@@ -48,8 +48,9 @@ describe('getInnerSource()', function() {
 				expect(error.message).to.equal(
 					'Can not read a DmgSource from a ZipSource.',
 				);
+			} finally {
+				await source.close();
 			}
-			await source.close();
 		});
 	}
 

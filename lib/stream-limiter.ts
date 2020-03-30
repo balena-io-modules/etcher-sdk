@@ -29,7 +29,7 @@ export class StreamLimiter extends Transform {
 	public _transform(
 		buffer: Buffer,
 		_encoding: string,
-		callback: (error?: Error | null, data?: Buffer) => void,
+		callback: (error?: Error, data?: Buffer) => void,
 	) {
 		const length = Math.min(buffer.length, this.maxBytes);
 		if (length > 0) {

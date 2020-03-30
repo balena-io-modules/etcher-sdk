@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
+import { promises as fs } from 'fs';
 import { Argv } from 'yargs';
 
-import { fs, sourceDestination } from '../lib';
+import { sourceDestination } from '../lib';
 
 import { pipeSourceToDestinationsWithProgressBar, wrapper } from './utils';
 
 const readJsonFile = async (path: string): Promise<any> => {
 	const data = await fs.readFile(path, { encoding: 'utf8', flag: 'r' });
-	return JSON.parse(data as string);
+	return JSON.parse(data);
 };
 
 const main = async ({

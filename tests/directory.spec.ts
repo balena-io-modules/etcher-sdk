@@ -36,6 +36,8 @@ describe('directory', function() {
 				'EISDIR: illegal operation on a directory, read',
 			);
 			expect(error.code).to.equal('EISDIR');
+		} finally {
+			await source.close();
 		}
 	});
 });

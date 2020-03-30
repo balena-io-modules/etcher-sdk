@@ -55,9 +55,9 @@ export class SparseFilterStream extends Transform implements SparseReadable {
 	public _transform(
 		chunk: Buffer,
 		_encoding: string,
-		callback: (error: Error | null) => void,
+		callback: (error?: Error) => void,
 	) {
-		let error: Error | null = null;
+		let error: Error | undefined;
 		try {
 			this.__transform(chunk);
 		} catch (err) {
