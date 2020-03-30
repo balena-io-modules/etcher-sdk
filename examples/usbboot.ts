@@ -22,7 +22,9 @@ import { pipeSourceToDestinationsWithProgressBar } from './utils';
 
 async function main() {
 	const adapters: scanner.adapters.Adapter[] = [
-		new scanner.adapters.BlockDeviceAdapter(() => false),
+		new scanner.adapters.BlockDeviceAdapter({
+			includeSystemDrives: () => false,
+		}),
 		new scanner.adapters.UsbbootDeviceAdapter(),
 	];
 	const deviceScanner = new scanner.Scanner(adapters);

@@ -19,7 +19,9 @@ import { scanner } from '../lib/';
 
 async function main() {
 	const adapters: scanner.adapters.Adapter[] = [
-		new scanner.adapters.BlockDeviceAdapter(() => true),
+		new scanner.adapters.BlockDeviceAdapter({
+			includeSystemDrives: () => true,
+		}),
 		new scanner.adapters.UsbbootDeviceAdapter(),
 	];
 	if (platform() === 'win32') {

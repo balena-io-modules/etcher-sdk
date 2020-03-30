@@ -40,7 +40,12 @@ const main = async ({
 	numBuffers: number;
 }) => {
 	const adapters = [
-		new scanner.adapters.BlockDeviceAdapter(() => false, false, true, true),
+		new scanner.adapters.BlockDeviceAdapter({
+			includeSystemDrives: () => false,
+			unmountOnSuccess: false,
+			write: true,
+			direct: true,
+		}),
 	];
 	const deviceScanner = new scanner.Scanner(adapters);
 	deviceScanner.on('error', console.error);

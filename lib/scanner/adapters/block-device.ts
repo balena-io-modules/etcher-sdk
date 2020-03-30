@@ -55,17 +55,30 @@ export interface DrivelistDrive extends $Drive {
 
 export class BlockDeviceAdapter extends Adapter {
 	// Emits 'attach', 'detach', 'ready' and 'error' events
+	public includeSystemDrives: () => boolean;
+	private unmountOnSuccess: boolean;
+	private oWrite: boolean;
+	private oDirect: boolean;
 	private drives: Map<string, BlockDevice> = new Map();
 	private running = false;
 	private ready = false;
 
-	constructor(
-		public includeSystemDrives: () => boolean = () => false,
-		private unmountOnSuccess = false,
-		private oWrite = false,
-		private oDirect = true,
-	) {
+	constructor({
+		includeSystemDrives = () => false,
+		unmountOnSuccess = false,
+		write = false,
+		direct = true,
+	}: {
+		includeSystemDrives?: () => boolean;
+		unmountOnSuccess?: boolean;
+		write?: boolean;
+		direct?: boolean;
+	}) {
 		super();
+		this.includeSystemDrives = includeSystemDrives;
+		this.unmountOnSuccess = unmountOnSuccess;
+		this.oWrite = write;
+		this.oDirect = direct;
 	}
 
 	public start(): void {

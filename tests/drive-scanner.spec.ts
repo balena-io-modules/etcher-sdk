@@ -25,7 +25,9 @@ async function createScanner(
 	includeSystemDrives = false,
 ): Promise<scanner.Scanner> {
 	const adapters: scanner.adapters.Adapter[] = [
-		new scanner.adapters.BlockDeviceAdapter(() => includeSystemDrives),
+		new scanner.adapters.BlockDeviceAdapter({
+			includeSystemDrives: () => includeSystemDrives,
+		}),
 	];
 	const driveScanner = new scanner.Scanner(adapters);
 	await new Promise((resolve, reject) => {
