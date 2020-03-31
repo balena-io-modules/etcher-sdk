@@ -19,6 +19,7 @@ import { Transform } from 'stream';
 import { AlignedReadableState } from '../aligned-lockable-buffer';
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
 import { makeClassEmitProgressEvents } from '../source-destination/progress';
+import { asCallback } from '../utils';
 import {
 	BlocksWithChecksum,
 	SparseReadable,
@@ -54,11 +55,7 @@ export class SparseTransformStream extends Transform
 		);
 	}
 
-	public async _transform(
-		chunk: SparseStreamChunk,
-		_encoding: string,
-		callback: (error?: Error) => void,
-	): Promise<void> {
+	private async __transform(chunk: SparseStreamChunk): Promise<void> {
 		this.position = chunk.position;
 		// This will fail if a chunk buffer is larger than chunkSize passed to the constructor
 		let buffer = this.alignedReadableState.getCurrentBuffer();
@@ -74,7 +71,14 @@ export class SparseTransformStream extends Transform
 		this.push({ position: chunk.position, buffer });
 		this.bytesWritten += chunk.buffer.length;
 		this.position += chunk.buffer.length;
-		callback();
+	}
+
+	public _transform(
+		chunk: SparseStreamChunk,
+		_encoding: string,
+		callback: (error?: Error) => void,
+	) {
+		asCallback(this.__transform(chunk), callback);
 	}
 }
 

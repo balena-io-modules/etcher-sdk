@@ -7,7 +7,7 @@ import { PROGRESS_EMISSION_INTERVAL, RETRY_BASE_TIMEOUT } from '../constants';
 import { isTransientError } from '../errors';
 import { makeClassEmitProgressEvents } from '../source-destination/progress';
 import { SourceDestination } from '../source-destination/source-destination';
-import { asCallback, noop } from '../utils';
+import { asCallback } from '../utils';
 import { SparseStreamChunk, SparseWritable } from './shared';
 
 export class SparseWriteStream extends Writable implements SparseWritable {
@@ -84,7 +84,7 @@ export class SparseWriteStream extends Writable implements SparseWritable {
 	private async __write(chunk: SparseStreamChunk): Promise<void> {
 		const unlock = isAlignedLockableBuffer(chunk.buffer)
 			? await chunk.buffer.rlock()
-			: noop;
+			: undefined;
 		try {
 			// Keep the first blocks in memory and write them once the rest has been written.
 			// This is to prevent Windows from mounting the device while we flash it.
@@ -114,14 +114,14 @@ export class SparseWriteStream extends Writable implements SparseWritable {
 				await this.writeChunk(chunk);
 			}
 		} finally {
-			unlock();
+			unlock?.();
 		}
 	}
 
 	public _write(
 		chunk: SparseStreamChunk,
 		_enc: string,
-		callback: (error: Error | undefined) => void,
+		callback: (error: Error | null) => void,
 	): void {
 		asCallback(this.__write(chunk), callback);
 	}

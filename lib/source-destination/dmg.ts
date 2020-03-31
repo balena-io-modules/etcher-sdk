@@ -96,6 +96,7 @@ export class DmgSource extends SourceSource {
 				alignment,
 				numBuffers,
 			});
+			stream.on('error', transform.emit.bind(transform, 'error'));
 			stream.pipe(transform);
 			return transform;
 		} else {

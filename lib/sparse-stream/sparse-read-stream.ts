@@ -21,7 +21,6 @@ import {
 	isAlignedLockableBuffer,
 } from '../aligned-lockable-buffer';
 import { SourceDestination } from '../source-destination/source-destination';
-import { noop } from '../utils';
 import {
 	BlocksWithChecksum,
 	createSparseReaderStateIterator,
@@ -102,7 +101,9 @@ export class SparseReadStream extends Readable implements SparseReadable {
 			this.alignedReadableState !== undefined
 				? this.alignedReadableState.getCurrentBuffer().slice(0, length)
 				: Buffer.allocUnsafe(length);
-		const unlock = isAlignedLockableBuffer(buffer) ? await buffer.lock() : noop;
+		const unlock = isAlignedLockableBuffer(buffer)
+			? await buffer.lock()
+			: undefined;
 		try {
 			await this.source.read(
 				buffer,
@@ -110,11 +111,9 @@ export class SparseReadStream extends Readable implements SparseReadable {
 				length,
 				this.state.subBlock.offset + this.positionInBlock,
 			);
-			if (this.state.hasher !== undefined) {
-				this.state.hasher.update(buffer);
-			}
+			this.state.hasher?.update(buffer);
 		} finally {
-			unlock();
+			unlock?.();
 		}
 		const chunk = {
 			buffer,

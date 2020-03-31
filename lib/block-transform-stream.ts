@@ -75,18 +75,18 @@ export class BlockTransformStream extends Transform {
 		}
 	}
 
-	public async _transform(
+	public _transform(
 		chunk: Buffer,
 		_encoding: string,
 		callback: (error?: Error) => void,
-	): Promise<void> {
+	) {
 		this.bytesRead += chunk.length;
 		this.inputBuffers.push(chunk);
 		this.inputBytes += chunk.length;
 		asCallback(this.writeBuffers(), callback);
 	}
 
-	public async _flush(callback: (error?: Error) => void): Promise<void> {
+	public _flush(callback: (error?: Error) => void) {
 		asCallback(this.writeBuffers(true), callback);
 	}
 

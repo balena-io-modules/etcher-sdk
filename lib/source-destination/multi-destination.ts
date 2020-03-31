@@ -324,13 +324,13 @@ export class MultiDestination extends SourceDestination {
 	}
 
 	public async createWriteStream(
-		...args: any[]
+		...args: Parameters<SourceDestination['createWriteStream']>
 	): Promise<NodeJS.WritableStream> {
 		return await this.createStream('createWriteStream', ...args);
 	}
 
 	public async createSparseWriteStream(
-		...args: any[]
+		...args: Parameters<SourceDestination['createSparseWriteStream']>
 	): Promise<SparseWritable> {
 		return await this.createStream('createSparseWriteStream', ...args);
 	}

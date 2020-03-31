@@ -84,16 +84,12 @@ export function difference<T>(setA: Set<T>, setB: Set<T>): Set<T> {
 
 export async function asCallback<T>(
 	promise: Promise<T>,
-	callback: (error: Error | void | null, value?: T) => void,
+	callback: (error?: Error | null, value?: T) => void,
 ): Promise<void> {
 	try {
 		const value = await promise;
-		callback(undefined, value);
+		callback(null, value);
 	} catch (error) {
 		callback(error);
 	}
-}
-
-export function noop() {
-	// noop
 }
