@@ -254,8 +254,20 @@ export class MultiDestination extends SourceDestination {
 	}
 
 	private async createStream(
+		methodName: 'createWriteStream',
+		...args: Parameters<SourceDestination['createWriteStream']>
+	): Promise<NodeJS.WritableStream>;
+
+	private async createStream(
+		methodName: 'createSparseWriteStream',
+		...args: Parameters<SourceDestination['createSparseWriteStream']>
+	): Promise<SparseWritable>;
+
+	private async createStream(
 		methodName: 'createWriteStream' | 'createSparseWriteStream',
-		...args: any[]
+		...args:
+			| Parameters<SourceDestination['createWriteStream']>
+			| Parameters<SourceDestination['createSparseWriteStream']>
 	) {
 		const passthrough = new PassThrough({
 			objectMode: methodName === 'createSparseWriteStream',

@@ -101,7 +101,7 @@ export class BlockReadStream extends Readable {
 		}
 		try {
 			const unlock = await buffer.lock();
-			let bytesRead: number;
+			let bytesRead;
 			try {
 				({ bytesRead } = await this.tryRead(buffer));
 			} finally {

@@ -28,9 +28,12 @@ export async function streamToBuffer(
 				let data: Buffer;
 				if (isAlignedLockableBuffer(chunk)) {
 					const unlock = await chunk.rlock();
-					data = Buffer.allocUnsafe(chunk.length);
-					chunk.copy(data);
-					unlock();
+					try {
+						data = Buffer.allocUnsafe(chunk.length);
+						chunk.copy(data);
+					} finally {
+						unlock();
+					}
 				} else {
 					data = chunk;
 				}
@@ -54,10 +57,20 @@ export async function sparseStreamToBuffer(
 		stream.on('end', resolve);
 		stream.on('data', async (chunk: SparseStreamChunk) => {
 			if (isAlignedLockableBuffer(chunk.buffer)) {
-				const unlock = await chunk.buffer.rlock();
-				const data = Buffer.allocUnsafe(chunk.buffer.length);
-				chunk.buffer.copy(data);
-				unlock();
+				let unlock;
+				try {
+					unlock = await chunk.buffer.rlock();
+				} catch (error) {
+					reject(error);
+					return;
+				}
+				let data;
+				try {
+					data = Buffer.allocUnsafe(chunk.buffer.length);
+					chunk.buffer.copy(data);
+				} finally {
+					unlock();
+				}
 				chunk.buffer = data;
 			}
 			chunks.push(chunk);
