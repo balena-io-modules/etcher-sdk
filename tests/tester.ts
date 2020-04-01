@@ -86,7 +86,7 @@ export async function testImageNoIt(
 ): Promise<void> {
 	let source: sourceDestination.File | sourceDestination.BlockDevice;
 	if (sourceClass === sourceDestination.File) {
-		source = new sourceDestination.File(imagePath);
+		source = new sourceDestination.File({ path: imagePath });
 	} else {
 		source = await blockDeviceFromFile(imagePath);
 	}
@@ -100,7 +100,7 @@ export async function testImageNoIt(
 	const sourceMetadata = await innerSource.getMetadata();
 	const sourceStat = await fs.stat(imagePath);
 
-	const compareSource = new sourceDestination.File(compareToPath);
+	const compareSource = new sourceDestination.File({ path: compareToPath });
 	await compareSource.open();
 	const compareMetadata = await compareSource.getMetadata();
 	const compareStat = await fs.stat(compareToPath);
@@ -209,7 +209,7 @@ export function expectSourceSourceError(
 	message: string,
 ) {
 	it(testName, async function() {
-		const source = new sourceDestination.File(filePath);
+		const source = new sourceDestination.File({ path: filePath });
 		await source.open();
 		const innerSource = new Cls(source);
 		try {
@@ -231,7 +231,7 @@ export function expectGetInnerSourceError(
 	message: string,
 ) {
 	it(testName, async function() {
-		const source = new sourceDestination.File(filePath);
+		const source = new sourceDestination.File({ path: filePath });
 		try {
 			await source.getInnerSource();
 		} catch (error) {

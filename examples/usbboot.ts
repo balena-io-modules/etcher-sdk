@@ -87,7 +87,9 @@ async function main() {
 	if (argv.length >= 3) {
 		console.log(`Writing image ${argv[2]}`);
 		let source: sourceDestination.SourceDestination = new sourceDestination.File(
-			argv[2],
+			{
+				path: argv[2],
+			},
 		);
 		if (await source.canRead()) {
 			source = new sourceDestination.ConfiguredSource(source, true, true);

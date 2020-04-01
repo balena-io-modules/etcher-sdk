@@ -47,10 +47,14 @@ export const ProgressWriteStream = makeClassEmitProgressEvents(
 );
 
 export class File extends SourceDestination {
+	public readonly path: string;
+	public readonly oWrite: boolean;
 	protected fileHandle: fs.FileHandle;
 
-	constructor(public readonly path: string, public readonly oWrite = false) {
+	constructor({ path, write = false }: { path: string; write?: boolean }) {
 		super();
+		this.path = path;
+		this.oWrite = write;
 	}
 
 	protected getOpenFlags() {

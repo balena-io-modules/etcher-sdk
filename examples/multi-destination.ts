@@ -54,9 +54,9 @@ const main = async ({
 	await new Promise(resolve => {
 		deviceScanner.on('ready', resolve);
 	});
-	let source: sourceDestination.SourceDestination = new sourceDestination.File(
-		sourceImage,
-	);
+	let source: sourceDestination.SourceDestination = new sourceDestination.File({
+		path: sourceImage,
+	});
 	source = await source.getInnerSource(); // getInnerSource will open the sources for you, no need to call open().
 	if (trim || config !== undefined) {
 		source = new sourceDestination.ConfiguredSource(

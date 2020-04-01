@@ -54,9 +54,9 @@ describe('dmg support', function() {
 	});
 
 	it('invalid dmg file', async function() {
-		const source = new sourceDestination.File(
-			join(DATA_PATH, 'unrecognized', 'invalid.dmg'),
-		);
+		const source = new sourceDestination.File({
+			path: join(DATA_PATH, 'unrecognized', 'invalid.dmg'),
+		});
 		await source.open();
 		const dmgSource = new sourceDestination.DmgSource(source);
 		try {

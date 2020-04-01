@@ -26,7 +26,7 @@ const IMAGES_PATH = join(DATA_PATH, 'images');
 
 describe('directory', function() {
 	it('should be rejected with an error', async function() {
-		const source = new sourceDestination.File(IMAGES_PATH);
+		const source = new sourceDestination.File({ path: IMAGES_PATH });
 		try {
 			await source.getInnerSource();
 			assert(false);

@@ -49,7 +49,10 @@ const main = async ({
 			config !== undefined ? { config: await readJsonFile(config) } : undefined,
 		);
 	}
-	const destination = new sourceDestination.File(fileDestination, true);
+	const destination = new sourceDestination.File({
+		path: fileDestination,
+		write: true,
+	});
 	await pipeSourceToDestinationsWithProgressBar(source, [destination], verify);
 };
 

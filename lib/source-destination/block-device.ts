@@ -52,7 +52,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		oWrite = false,
 		public readonly oDirect = true,
 	) {
-		super(drive.raw, oWrite);
+		super({ path: drive.raw, write: oWrite });
 		this.alignment = drive.blockSize || DEFAULT_ALIGNMENT;
 	}
 

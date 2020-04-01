@@ -31,10 +31,13 @@ const main = async ({
 	config,
 	verify,
 }: any) => {
-	let source: sourceDestination.SourceDestination = new sourceDestination.File(
-		fileSource,
-	);
-	const destination = new sourceDestination.File(fileDestination, true);
+	let source: sourceDestination.SourceDestination = new sourceDestination.File({
+		path: fileSource,
+	});
+	const destination = new sourceDestination.File({
+		path: fileDestination,
+		write: true,
+	});
 	source = await source.getInnerSource();
 	const canRead = await source.canRead();
 	if (trim || config !== undefined) {

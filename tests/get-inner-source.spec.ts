@@ -27,7 +27,9 @@ const DATA_PATH = join(__dirname, 'data', 'nested');
 describe('getInnerSource()', function() {
 	for (const filename of ['data.img.zip', 'data.img.zip.gz.bz2.xz']) {
 		it(`should work for ${filename}`, async function() {
-			const source = new sourceDestination.File(join(DATA_PATH, filename));
+			const source = new sourceDestination.File({
+				path: join(DATA_PATH, filename),
+			});
 			const innerSource = await source.getInnerSource();
 			const metadata = await innerSource.getMetadata();
 			const data = await streamToBuffer(await innerSource.createReadStream());
@@ -39,7 +41,9 @@ describe('getInnerSource()', function() {
 
 	for (const filename of ['data.dmg.zip', 'data.dmg.zip.gz.bz2.xz']) {
 		it(`should fail for ${filename}`, async function() {
-			const source = new sourceDestination.File(join(DATA_PATH, filename));
+			const source = new sourceDestination.File({
+				path: join(DATA_PATH, filename),
+			});
 			try {
 				await source.getInnerSource();
 				assert(false);
@@ -56,9 +60,9 @@ describe('getInnerSource()', function() {
 
 	it(`should work for a raw image with a .dmg extension`, async function() {
 		const filename = 'raw-image-not-a-dmg.dmg';
-		const source = new sourceDestination.File(
-			join(__dirname, 'data', 'images', filename),
-		);
+		const source = new sourceDestination.File({
+			path: join(__dirname, 'data', 'images', filename),
+		});
 		const innerSource = await source.getInnerSource();
 		const metadata = await innerSource.getMetadata();
 		const data = await streamToBuffer(await innerSource.createReadStream());
