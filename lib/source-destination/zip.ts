@@ -18,7 +18,7 @@ import { BlockMap, Range } from 'blockmap';
 import { fromCallback } from 'bluebird';
 import { sortBy } from 'lodash';
 import { posix } from 'path';
-import { PassThrough } from 'readable-stream';
+import { PassThrough } from 'stream';
 import { ZipStreamEntry } from 'unzip-stream';
 import {
 	Entry,

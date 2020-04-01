@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Transform } from 'readable-stream';
+import { Transform } from 'stream';
 import zlib = require('zlib');
 
 import { getRootStream } from './source-destination/compressed-source';

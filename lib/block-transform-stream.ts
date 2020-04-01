@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Transform } from 'readable-stream';
+import { Transform } from 'stream';
 
 import { AlignedReadableState } from './aligned-lockable-buffer';
 import { CHUNK_SIZE } from './constants';

@@ -16,7 +16,7 @@
 
 import { delay } from 'bluebird';
 import { ReadResult } from 'file-disk';
-import { Readable } from 'readable-stream';
+import { Readable } from 'stream';
 
 import { AlignedReadableState } from './aligned-lockable-buffer';
 import {

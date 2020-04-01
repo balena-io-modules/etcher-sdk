@@ -1,5 +1,5 @@
 declare module 'udif' {
-	import { Readable } from 'readable-stream';
+	import { Readable } from 'stream';
 
 	// Not the same as ../lib/sparse-stream/sparse-read-stream/SparseReadStream
 	// (no 'blocks' attribute)

@@ -1,6 +1,6 @@
 import { getAlignedBuffer } from '@ronomon/direct-io';
 import { delay } from 'bluebird';
-import { Writable } from 'readable-stream';
+import { Writable } from 'stream';
 
 import { isAlignedLockableBuffer } from '../aligned-lockable-buffer';
 import { PROGRESS_EMISSION_INTERVAL, RETRY_BASE_TIMEOUT } from '../constants';

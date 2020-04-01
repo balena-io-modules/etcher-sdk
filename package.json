@@ -64,7 +64,6 @@
     "node-raspberrypi-usbboot": "^0.2.4",
     "outdent": "^0.7.0",
     "partitioninfo": "^5.3.4",
-    "readable-stream": "^2.3.6",
     "resin-image-fs": "^5.0.8",
     "rwmutex": "^1.0.0",
     "speedometer": "^1.0.0",

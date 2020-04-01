@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Transform } from 'readable-stream';
+import { Transform } from 'stream';
 
 import {
 	BlocksWithChecksum,
