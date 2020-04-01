@@ -37,7 +37,6 @@ export class StreamLimiter extends Transform {
 		}
 		this.maxBytes -= length;
 		if (this.maxBytes === 0) {
-			// @ts-ignore
 			this.stream.unpipe(this);
 			this.push(null);
 			this.emit('finish');
