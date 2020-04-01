@@ -115,12 +115,12 @@ export class BlockDeviceAdapter extends Adapter {
 			}
 			for (const added of difference(newDevices, oldDevices)) {
 				const drive = drives.get(added);
-				const blockDevice = new BlockDevice(
-					drive!,
-					this.unmountOnSuccess,
-					this.oWrite,
-					this.oDirect,
-				);
+				const blockDevice = new BlockDevice({
+					drive: drive!,
+					unmountOnSuccess: this.unmountOnSuccess,
+					write: this.oWrite,
+					direct: this.oDirect,
+				});
 				this.emit('attach', blockDevice);
 				this.drives.set(added, blockDevice);
 			}

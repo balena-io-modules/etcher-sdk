@@ -67,7 +67,12 @@ export async function blockDeviceFromFile(
 		isVirtual: false,
 		logicalBlockSize: 512,
 	};
-	return new FakeBlockDevice(drive, false, true, false);
+	return new FakeBlockDevice({
+		drive,
+		unmountOnSuccess: false,
+		write: true,
+		direct: false,
+	});
 }
 
 export async function testImageNoIt(

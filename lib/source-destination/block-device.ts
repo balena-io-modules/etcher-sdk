@@ -43,16 +43,27 @@ const UNMOUNT_ON_SUCCESS_TIMEOUT_MS = 2000;
 const WIN32_FIRST_BYTES_TO_KEEP = 64 * 1024;
 
 export class BlockDevice extends File implements AdapterSourceDestination {
+	private drive: DrivelistDrive;
+	private unmountOnSuccess: boolean;
+	public readonly oDirect: boolean;
 	public emitsProgress = false;
 	public readonly alignment: number;
 
-	constructor(
-		private drive: DrivelistDrive,
-		private unmountOnSuccess = false,
-		oWrite = false,
-		public readonly oDirect = true,
-	) {
-		super({ path: drive.raw, write: oWrite });
+	constructor({
+		drive,
+		unmountOnSuccess = false,
+		write = false,
+		direct = true,
+	}: {
+		drive: DrivelistDrive;
+		unmountOnSuccess?: boolean;
+		write?: boolean;
+		direct?: boolean;
+	}) {
+		super({ path: drive.raw, write });
+		this.drive = drive;
+		this.unmountOnSuccess = unmountOnSuccess;
+		this.oDirect = direct;
 		this.alignment = drive.blockSize || DEFAULT_ALIGNMENT;
 	}
 
