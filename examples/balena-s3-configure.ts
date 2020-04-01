@@ -41,13 +41,16 @@ const main = async ({
 		buildId,
 	);
 	if (trim || config !== undefined) {
-		source = new sourceDestination.ConfiguredSource(
+		source = new sourceDestination.ConfiguredSource({
 			source,
-			trim,
-			false,
-			config !== undefined ? 'legacy' : undefined,
-			config !== undefined ? { config: await readJsonFile(config) } : undefined,
-		);
+			shouldTrimPartitions: trim,
+			createStreamFromDisk: false,
+			configure: config !== undefined ? 'legacy' : undefined,
+			config:
+				config !== undefined
+					? { config: await readJsonFile(config) }
+					: undefined,
+		});
 	}
 	const destination = new sourceDestination.File({
 		path: fileDestination,

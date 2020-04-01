@@ -87,20 +87,37 @@ export class SourceDisk extends Disk {
 }
 
 export class ConfiguredSource extends SourceSource {
+	private shouldTrimPartitions: boolean;
+	private createStreamFromDisk: boolean;
+	private config: any;
+	private checksumType: ChecksumType;
+	private chunkSize: number;
 	private disk: SourceDisk;
 	private configure?: ConfigureFunction;
 
-	constructor(
-		// source needs to implement read and createReadStream
-		source: SourceDestination,
-		private shouldTrimPartitions: boolean,
-		private createStreamFromDisk: boolean,
-		configure?: ConfigureFunction | 'legacy',
-		private config?: any,
-		private checksumType: ChecksumType = 'xxhash64',
-		private chunkSize = CHUNK_SIZE,
-	) {
+	constructor({
+		source, // source needs to implement read and createReadStream
+		shouldTrimPartitions,
+		createStreamFromDisk,
+		configure,
+		config,
+		checksumType = 'xxhash64',
+		chunkSize = CHUNK_SIZE,
+	}: {
+		source: SourceDestination;
+		shouldTrimPartitions: boolean;
+		createStreamFromDisk: boolean;
+		configure?: ConfigureFunction | 'legacy';
+		config?: any;
+		checksumType?: ChecksumType;
+		chunkSize?: number;
+	}) {
 		super(source);
+		this.shouldTrimPartitions = shouldTrimPartitions;
+		this.createStreamFromDisk = createStreamFromDisk;
+		this.config = config;
+		this.checksumType = checksumType;
+		this.chunkSize = chunkSize;
 		this.disk = new SourceDisk(source);
 		if (configure === 'legacy') {
 			this.configure = legacyConfigure;

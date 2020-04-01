@@ -92,7 +92,11 @@ async function main() {
 			},
 		);
 		if (await source.canRead()) {
-			source = new sourceDestination.ConfiguredSource(source, true, true);
+			source = new sourceDestination.ConfiguredSource({
+				source,
+				shouldTrimPartitions: true,
+				createStreamFromDisk: true,
+			});
 		}
 		pipeSourceToDestinationsWithProgressBar(source, [dest], true);
 	}

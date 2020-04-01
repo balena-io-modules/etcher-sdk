@@ -59,13 +59,16 @@ const main = async ({
 	});
 	source = await source.getInnerSource(); // getInnerSource will open the sources for you, no need to call open().
 	if (trim || config !== undefined) {
-		source = new sourceDestination.ConfiguredSource(
+		source = new sourceDestination.ConfiguredSource({
 			source,
-			trim,
-			true,
-			config !== undefined ? 'legacy' : undefined,
-			config !== undefined ? { config: await readJsonFile(config) } : undefined,
-		);
+			shouldTrimPartitions: trim,
+			createStreamFromDisk: true,
+			configure: config !== undefined ? 'legacy' : undefined,
+			config:
+				config !== undefined
+					? { config: await readJsonFile(config) }
+					: undefined,
+		});
 	}
 	const destinationDrives = Array.from(deviceScanner.drives.values()).filter(
 		drive => {

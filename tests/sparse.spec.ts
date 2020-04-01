@@ -141,15 +141,13 @@ describe('sparse streams', function() {
 			for (const checksumType of checksumTypes) {
 				it(`${checksumType} hasher, createStreamFromDisk=${createStreamFromDisk}, alignment=${alignment}`, async () => {
 					const source = new sourceDestination.File({ path: DISK_PATH });
-					const trimmedSource = new sourceDestination.ConfiguredSource(
+					const trimmedSource = new sourceDestination.ConfiguredSource({
 						source,
-						true,
+						shouldTrimPartitions: true,
 						createStreamFromDisk,
-						undefined,
-						undefined,
 						checksumType,
-						alignment,
-					);
+						chunkSize: alignment,
+					});
 					await trimmedSource.open();
 					const sourceSparseStream = await trimmedSource.createSparseReadStream(
 						{ generateChecksums: true },
