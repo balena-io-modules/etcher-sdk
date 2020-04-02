@@ -77,8 +77,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		// tslint:disable:no-bitwise
 		let flags = super.getOpenFlags();
 		if (this.oDirect) {
-			flags |=
-				fs.constants.O_DIRECT | fs.constants.O_SYNC | fs.constants.O_NONBLOCK;
+			flags |= fs.constants.O_DIRECT | fs.constants.O_SYNC;
 		}
 		if (this.oWrite) {
 			flags |= platform() === 'linux' ? fs.constants.O_EXCL : O_EXLOCK;

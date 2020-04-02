@@ -46,6 +46,8 @@ export const ProgressWriteStream = makeClassEmitProgressEvents(
 	PROGRESS_EMISSION_INTERVAL,
 );
 
+const READ_TRIES = 5;
+
 export class File extends SourceDestination {
 	public readonly path: string;
 	public readonly oWrite: boolean;
@@ -94,12 +96,47 @@ export class File extends SourceDestination {
 		length: number,
 		sourceOffset: number,
 	): Promise<ReadResult> {
-		return await this.fileHandle.read(
-			buffer,
-			bufferOffset,
-			length,
-			sourceOffset,
+		// In very rare occasions (happened on Linux with node 12 reading from a block device: O_DIRECT + O_SYNC into an aligned buffer),
+		// the read does not read the whole required length (up to 4KiB can be missing at the end of 1MiB reads).
+		// This was checked by filling the buffer with a specific pattern before reading and looking for this pattern
+		// in the buffer after the read.
+		// To mitigate this, we write a specific marker at the end of the buffer before reading and retry the read if
+		// it is still there after reading.
+		let result;
+		let tries = READ_TRIES;
+		const readEndMarker = Buffer.from(`not the correct data ${sourceOffset}`);
+		const markerPosition = bufferOffset + length - readEndMarker.length;
+		if (length >= readEndMarker.length) {
+			readEndMarker.copy(buffer, markerPosition);
+		}
+		do {
+			if (tries < READ_TRIES) {
+				console.warn('Incomptete read', {
+					path: this.path,
+					bufferOffset,
+					length,
+					sourceOffset,
+					bufferLength: buffer.length,
+				});
+			}
+			result = await this.fileHandle.read(
+				buffer,
+				bufferOffset,
+				length,
+				sourceOffset,
+			);
+			tries -= 1;
+		} while (
+			tries > 0 &&
+			length >= readEndMarker.length &&
+			result.bytesRead === length &&
+			readEndMarker.compare(
+				buffer,
+				markerPosition,
+				markerPosition + readEndMarker.length,
+			) === 0
 		);
+		return result;
 	}
 
 	public async write(

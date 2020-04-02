@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { fromCallback } from 'bluebird';
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
 import * as fileType from 'file-type';
@@ -22,6 +23,10 @@ import { extname } from 'path';
 import { arch } from 'process';
 import { Stream as HashStream } from 'xxhash';
 
+import {
+	AlignedLockableBuffer,
+	isAlignedLockableBuffer,
+} from '../aligned-lockable-buffer';
 import {
 	CHUNK_SIZE,
 	PROGRESS_EMISSION_INTERVAL,
@@ -32,7 +37,7 @@ import { BlocksWithChecksum, SparseReadable } from '../sparse-stream/shared';
 import { SparseWritable } from '../sparse-stream/shared';
 import { SparseFilterStream } from '../sparse-stream/sparse-filter-stream';
 import { SparseReadStream } from '../sparse-stream/sparse-read-stream';
-import { streamToBuffer } from '../utils';
+import { asCallback, streamToBuffer } from '../utils';
 
 import { Metadata } from './metadata';
 import {
@@ -47,11 +52,29 @@ const BITS = arch === 'x64' || arch === 'aarch64' ? 64 : 32;
 export class CountingHashStream extends HashStream {
 	public bytesWritten = 0;
 
-	public _transform(chunk: Buffer, encoding: string, callback: () => void) {
-		super._transform(chunk, encoding, () => {
-			callback();
-			this.bytesWritten += chunk.length;
-		});
+	public async __transform(
+		chunk: Buffer | AlignedLockableBuffer,
+		encoding: string,
+	): Promise<void> {
+		const unlock = isAlignedLockableBuffer(chunk)
+			? await chunk.rlock()
+			: undefined;
+		try {
+			await fromCallback((callback: (error?: Error) => void) => {
+				super._transform(chunk, encoding, callback);
+			});
+		} finally {
+			unlock?.();
+		}
+		this.bytesWritten += chunk.length;
+	}
+
+	public _transform(
+		chunk: Buffer | AlignedLockableBuffer,
+		encoding: string,
+		callback: (error?: Error) => void,
+	) {
+		asCallback(this.__transform(chunk, encoding), callback);
 	}
 }
 
