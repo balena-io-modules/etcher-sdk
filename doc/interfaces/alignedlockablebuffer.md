@@ -22,6 +22,7 @@
 * [buffer](alignedlockablebuffer.md#buffer)
 * [byteLength](alignedlockablebuffer.md#bytelength)
 * [byteOffset](alignedlockablebuffer.md#byteoffset)
+* [constructor](alignedlockablebuffer.md#constructor)
 * [length](alignedlockablebuffer.md#length)
 * [lock](alignedlockablebuffer.md#lock)
 * [rlock](alignedlockablebuffer.md#rlock)
@@ -116,7 +117,7 @@ ___
 
 • **Buffer**: *object*
 
-Defined in node_modules/@types/node/base.d.ts:153
+Defined in node_modules/@types/node/globals.d.ts:291
 
 Raw data is stored in instances of the Buffer class.
 A Buffer is similar to an array of integers but corresponds to a raw memory allocation outside the V8 heap.  A Buffer cannot be resized.
@@ -130,7 +131,7 @@ Valid string encodings: 'ascii'|'utf8'|'utf16le'|'ucs2'(alias of 'utf16le')|'bas
 
 * **new __type**(`array`: Uint8Array): *[Buffer](alignedlockablebuffer.md#buffer)*
 
-* **new __type**(`arrayBuffer`: ArrayBuffer): *[Buffer](alignedlockablebuffer.md#buffer)*
+* **new __type**(`arrayBuffer`: ArrayBuffer | SharedArrayBuffer): *[Buffer](alignedlockablebuffer.md#buffer)*
 
 * **new __type**(`array`: any[]): *[Buffer](alignedlockablebuffer.md#buffer)*
 
@@ -146,21 +147,27 @@ Valid string encodings: 'ascii'|'utf8'|'utf16le'|'ucs2'(alias of 'utf16le')|'bas
 
 * **allocUnsafeSlow**(`size`: number): *[Buffer](alignedlockablebuffer.md#buffer)*
 
-* **byteLength**(`string`: string | [Buffer](alignedlockablebuffer.md#buffer) | DataView | ArrayBuffer, `encoding?`: undefined | string): *number*
+* **byteLength**(`string`: string | NodeJS.TypedArray | DataView | ArrayBuffer | SharedArrayBuffer, `encoding?`: undefined | string): *number*
 
-* **compare**(`buf1`: [Buffer](alignedlockablebuffer.md#buffer), `buf2`: [Buffer](alignedlockablebuffer.md#buffer)): *number*
+* **compare**(`buf1`: Uint8Array, `buf2`: Uint8Array): *number*
 
-* **concat**(`list`: [Buffer](alignedlockablebuffer.md#buffer)[], `totalLength?`: undefined | number): *[Buffer](alignedlockablebuffer.md#buffer)*
+* **concat**(`list`: Uint8Array[], `totalLength?`: undefined | number): *[Buffer](alignedlockablebuffer.md#buffer)*
 
-* **from**(`arrayBuffer`: ArrayBuffer, `byteOffset?`: undefined | number, `length?`: undefined | number): *[Buffer](alignedlockablebuffer.md#buffer)*
+* **from**(`arrayBuffer`: ArrayBuffer | SharedArrayBuffer, `byteOffset?`: undefined | number, `length?`: undefined | number): *[Buffer](alignedlockablebuffer.md#buffer)*
 
-* **from**(`data`: any[] | string | [Buffer](alignedlockablebuffer.md#buffer) | ArrayBuffer): *[Buffer](alignedlockablebuffer.md#buffer)*
+* **from**(`data`: any[]): *[Buffer](alignedlockablebuffer.md#buffer)*
+
+* **from**(`data`: Uint8Array): *[Buffer](alignedlockablebuffer.md#buffer)*
+
+* **from**(`obj`: object | object, `byteOffset?`: undefined | number, `length?`: undefined | number): *[Buffer](alignedlockablebuffer.md#buffer)*
 
 * **from**(`str`: string, `encoding?`: undefined | string): *[Buffer](alignedlockablebuffer.md#buffer)*
 
 * **isBuffer**(`obj`: any): *obj is Buffer*
 
-* **isEncoding**(`encoding`: string): *boolean*
+* **isEncoding**(`encoding`: string): *boolean | undefined*
+
+* **of**(...`items`: number[]): *[Buffer](alignedlockablebuffer.md#buffer)*
 
 ___
 
@@ -168,7 +175,7 @@ ___
 
 • **alignment**: *number*
 
-*Defined in [lib/aligned-lockable-buffer.ts:5](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/aligned-lockable-buffer.ts#L5)*
+*Defined in [lib/aligned-lockable-buffer.ts:5](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/aligned-lockable-buffer.ts#L5)*
 
 ___
 
@@ -208,6 +215,16 @@ The offset in bytes of the array.
 
 ___
 
+###  constructor
+
+• **constructor**: *typeof Buffer*
+
+*Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[constructor](alignedlockablebuffer.md#constructor)*
+
+Defined in node_modules/@types/node/globals.d.ts:230
+
+___
+
 ###  length
 
 • **length**: *number*
@@ -224,7 +241,7 @@ ___
 
 • **lock**: *function*
 
-*Defined in [lib/aligned-lockable-buffer.ts:6](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/aligned-lockable-buffer.ts#L6)*
+*Defined in [lib/aligned-lockable-buffer.ts:6](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/aligned-lockable-buffer.ts#L6)*
 
 #### Type declaration:
 
@@ -236,7 +253,7 @@ ___
 
 • **rlock**: *function*
 
-*Defined in [lib/aligned-lockable-buffer.ts:7](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/aligned-lockable-buffer.ts#L7)*
+*Defined in [lib/aligned-lockable-buffer.ts:7](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/aligned-lockable-buffer.ts#L7)*
 
 #### Type declaration:
 
@@ -250,7 +267,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/aligned-lockable-buffer.ts:8](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/aligned-lockable-buffer.ts#L8)*
+*Defined in [lib/aligned-lockable-buffer.ts:8](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/aligned-lockable-buffer.ts#L8)*
 
 #### Type declaration:
 
@@ -267,17 +284,17 @@ Name | Type |
 
 ###  compare
 
-▸ **compare**(`otherBuffer`: [Buffer](alignedlockablebuffer.md#buffer), `targetStart?`: undefined | number, `targetEnd?`: undefined | number, `sourceStart?`: undefined | number, `sourceEnd?`: undefined | number): *number*
+▸ **compare**(`otherBuffer`: Uint8Array, `targetStart?`: undefined | number, `targetEnd?`: undefined | number, `sourceStart?`: undefined | number, `sourceEnd?`: undefined | number): *number*
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[compare](alignedlockablebuffer.md#compare)*
 
-Defined in node_modules/@types/node/base.d.ts:806
+Defined in node_modules/@types/node/globals.d.ts:235
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`otherBuffer` | [Buffer](alignedlockablebuffer.md#buffer) |
+`otherBuffer` | Uint8Array |
 `targetStart?` | undefined &#124; number |
 `targetEnd?` | undefined &#124; number |
 `sourceStart?` | undefined &#124; number |
@@ -289,17 +306,17 @@ ___
 
 ###  copy
 
-▸ **copy**(`targetBuffer`: [Buffer](alignedlockablebuffer.md#buffer), `targetStart?`: undefined | number, `sourceStart?`: undefined | number, `sourceEnd?`: undefined | number): *number*
+▸ **copy**(`targetBuffer`: Uint8Array, `targetStart?`: undefined | number, `sourceStart?`: undefined | number, `sourceEnd?`: undefined | number): *number*
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[copy](alignedlockablebuffer.md#copy)*
 
-Defined in node_modules/@types/node/base.d.ts:807
+Defined in node_modules/@types/node/globals.d.ts:236
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`targetBuffer` | [Buffer](alignedlockablebuffer.md#buffer) |
+`targetBuffer` | Uint8Array |
 `targetStart?` | undefined &#124; number |
 `sourceStart?` | undefined &#124; number |
 `sourceEnd?` | undefined &#124; number |
@@ -337,7 +354,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[entries](alignedlockablebuffer.md#entries)*
 
-Defined in node_modules/@types/node/base.d.ts:851
+Defined in node_modules/@types/node/globals.d.ts:280
 
 **Returns:** *IterableIterator‹[number, number]›*
 
@@ -345,17 +362,17 @@ ___
 
 ###  equals
 
-▸ **equals**(`otherBuffer`: [Buffer](alignedlockablebuffer.md#buffer)): *boolean*
+▸ **equals**(`otherBuffer`: Uint8Array): *boolean*
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[equals](alignedlockablebuffer.md#equals)*
 
-Defined in node_modules/@types/node/base.d.ts:805
+Defined in node_modules/@types/node/globals.d.ts:234
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`otherBuffer` | [Buffer](alignedlockablebuffer.md#buffer) |
+`otherBuffer` | Uint8Array |
 
 **Returns:** *boolean*
 
@@ -406,7 +423,7 @@ ___
 
 *Overrides void*
 
-Defined in node_modules/@types/node/base.d.ts:848
+Defined in node_modules/@types/node/globals.d.ts:277
 
 **Parameters:**
 
@@ -574,7 +591,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[includes](alignedlockablebuffer.md#includes)*
 
-Defined in node_modules/@types/node/base.d.ts:852
+Defined in node_modules/@types/node/globals.d.ts:281
 
 **Parameters:**
 
@@ -590,19 +607,19 @@ ___
 
 ###  indexOf
 
-▸ **indexOf**(`value`: string | number | [Buffer](alignedlockablebuffer.md#buffer), `byteOffset?`: undefined | number, `encoding?`: undefined | string): *number*
+▸ **indexOf**(`value`: string | number | Uint8Array, `byteOffset?`: undefined | number, `encoding?`: undefined | string): *number*
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[indexOf](alignedlockablebuffer.md#indexof)*
 
 *Overrides void*
 
-Defined in node_modules/@types/node/base.d.ts:849
+Defined in node_modules/@types/node/globals.d.ts:278
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`value` | string &#124; number &#124; [Buffer](alignedlockablebuffer.md#buffer) |
+`value` | string &#124; number &#124; Uint8Array |
 `byteOffset?` | undefined &#124; number |
 `encoding?` | undefined &#124; string |
 
@@ -636,7 +653,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[keys](alignedlockablebuffer.md#keys)*
 
-Defined in node_modules/@types/node/base.d.ts:853
+Defined in node_modules/@types/node/globals.d.ts:282
 
 **Returns:** *IterableIterator‹number›*
 
@@ -644,19 +661,19 @@ ___
 
 ###  lastIndexOf
 
-▸ **lastIndexOf**(`value`: string | number | [Buffer](alignedlockablebuffer.md#buffer), `byteOffset?`: undefined | number, `encoding?`: undefined | string): *number*
+▸ **lastIndexOf**(`value`: string | number | Uint8Array, `byteOffset?`: undefined | number, `encoding?`: undefined | string): *number*
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[lastIndexOf](alignedlockablebuffer.md#lastindexof)*
 
 *Overrides void*
 
-Defined in node_modules/@types/node/base.d.ts:850
+Defined in node_modules/@types/node/globals.d.ts:279
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`value` | string &#124; number &#124; [Buffer](alignedlockablebuffer.md#buffer) |
+`value` | string &#124; number &#124; Uint8Array |
 `byteOffset?` | undefined &#124; number |
 `encoding?` | undefined &#124; string |
 
@@ -707,7 +724,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readDoubleBE](alignedlockablebuffer.md#readdoublebe)*
 
-Defined in node_modules/@types/node/base.d.ts:830
+Defined in node_modules/@types/node/globals.d.ts:259
 
 **Parameters:**
 
@@ -726,7 +743,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readDoubleLE](alignedlockablebuffer.md#readdoublele)*
 
-Defined in node_modules/@types/node/base.d.ts:829
+Defined in node_modules/@types/node/globals.d.ts:258
 
 **Parameters:**
 
@@ -745,7 +762,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readFloatBE](alignedlockablebuffer.md#readfloatbe)*
 
-Defined in node_modules/@types/node/base.d.ts:828
+Defined in node_modules/@types/node/globals.d.ts:257
 
 **Parameters:**
 
@@ -764,7 +781,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readFloatLE](alignedlockablebuffer.md#readfloatle)*
 
-Defined in node_modules/@types/node/base.d.ts:827
+Defined in node_modules/@types/node/globals.d.ts:256
 
 **Parameters:**
 
@@ -783,7 +800,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readInt16BE](alignedlockablebuffer.md#readint16be)*
 
-Defined in node_modules/@types/node/base.d.ts:824
+Defined in node_modules/@types/node/globals.d.ts:253
 
 **Parameters:**
 
@@ -802,7 +819,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readInt16LE](alignedlockablebuffer.md#readint16le)*
 
-Defined in node_modules/@types/node/base.d.ts:823
+Defined in node_modules/@types/node/globals.d.ts:252
 
 **Parameters:**
 
@@ -821,7 +838,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readInt32BE](alignedlockablebuffer.md#readint32be)*
 
-Defined in node_modules/@types/node/base.d.ts:826
+Defined in node_modules/@types/node/globals.d.ts:255
 
 **Parameters:**
 
@@ -840,7 +857,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readInt32LE](alignedlockablebuffer.md#readint32le)*
 
-Defined in node_modules/@types/node/base.d.ts:825
+Defined in node_modules/@types/node/globals.d.ts:254
 
 **Parameters:**
 
@@ -859,7 +876,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readInt8](alignedlockablebuffer.md#readint8)*
 
-Defined in node_modules/@types/node/base.d.ts:822
+Defined in node_modules/@types/node/globals.d.ts:251
 
 **Parameters:**
 
@@ -878,7 +895,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readIntBE](alignedlockablebuffer.md#readintbe)*
 
-Defined in node_modules/@types/node/base.d.ts:816
+Defined in node_modules/@types/node/globals.d.ts:245
 
 **Parameters:**
 
@@ -898,7 +915,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readIntLE](alignedlockablebuffer.md#readintle)*
 
-Defined in node_modules/@types/node/base.d.ts:815
+Defined in node_modules/@types/node/globals.d.ts:244
 
 **Parameters:**
 
@@ -918,7 +935,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readUInt16BE](alignedlockablebuffer.md#readuint16be)*
 
-Defined in node_modules/@types/node/base.d.ts:819
+Defined in node_modules/@types/node/globals.d.ts:248
 
 **Parameters:**
 
@@ -937,7 +954,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readUInt16LE](alignedlockablebuffer.md#readuint16le)*
 
-Defined in node_modules/@types/node/base.d.ts:818
+Defined in node_modules/@types/node/globals.d.ts:247
 
 **Parameters:**
 
@@ -956,7 +973,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readUInt32BE](alignedlockablebuffer.md#readuint32be)*
 
-Defined in node_modules/@types/node/base.d.ts:821
+Defined in node_modules/@types/node/globals.d.ts:250
 
 **Parameters:**
 
@@ -975,7 +992,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readUInt32LE](alignedlockablebuffer.md#readuint32le)*
 
-Defined in node_modules/@types/node/base.d.ts:820
+Defined in node_modules/@types/node/globals.d.ts:249
 
 **Parameters:**
 
@@ -994,7 +1011,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readUInt8](alignedlockablebuffer.md#readuint8)*
 
-Defined in node_modules/@types/node/base.d.ts:817
+Defined in node_modules/@types/node/globals.d.ts:246
 
 **Parameters:**
 
@@ -1013,7 +1030,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readUIntBE](alignedlockablebuffer.md#readuintbe)*
 
-Defined in node_modules/@types/node/base.d.ts:814
+Defined in node_modules/@types/node/globals.d.ts:243
 
 **Parameters:**
 
@@ -1033,7 +1050,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[readUIntLE](alignedlockablebuffer.md#readuintle)*
 
-Defined in node_modules/@types/node/base.d.ts:813
+Defined in node_modules/@types/node/globals.d.ts:242
 
 **Parameters:**
 
@@ -1365,7 +1382,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[swap16](alignedlockablebuffer.md#swap16)*
 
-Defined in node_modules/@types/node/base.d.ts:831
+Defined in node_modules/@types/node/globals.d.ts:260
 
 **Returns:** *[Buffer](alignedlockablebuffer.md#buffer)*
 
@@ -1377,7 +1394,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[swap32](alignedlockablebuffer.md#swap32)*
 
-Defined in node_modules/@types/node/base.d.ts:832
+Defined in node_modules/@types/node/globals.d.ts:261
 
 **Returns:** *[Buffer](alignedlockablebuffer.md#buffer)*
 
@@ -1389,7 +1406,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[swap64](alignedlockablebuffer.md#swap64)*
 
-Defined in node_modules/@types/node/base.d.ts:833
+Defined in node_modules/@types/node/globals.d.ts:262
 
 **Returns:** *[Buffer](alignedlockablebuffer.md#buffer)*
 
@@ -1401,7 +1418,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[toJSON](alignedlockablebuffer.md#tojson)*
 
-Defined in node_modules/@types/node/base.d.ts:804
+Defined in node_modules/@types/node/globals.d.ts:233
 
 **Returns:** *object*
 
@@ -1433,7 +1450,7 @@ ___
 
 *Overrides void*
 
-Defined in node_modules/@types/node/base.d.ts:803
+Defined in node_modules/@types/node/globals.d.ts:232
 
 **Parameters:**
 
@@ -1453,7 +1470,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[values](alignedlockablebuffer.md#values)*
 
-Defined in node_modules/@types/node/base.d.ts:854
+Defined in node_modules/@types/node/globals.d.ts:283
 
 **Returns:** *IterableIterator‹number›*
 
@@ -1465,7 +1482,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[write](alignedlockablebuffer.md#write)*
 
-Defined in node_modules/@types/node/base.d.ts:802
+Defined in node_modules/@types/node/globals.d.ts:231
 
 **Parameters:**
 
@@ -1486,7 +1503,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeDoubleBE](alignedlockablebuffer.md#writedoublebe)*
 
-Defined in node_modules/@types/node/base.d.ts:847
+Defined in node_modules/@types/node/globals.d.ts:276
 
 **Parameters:**
 
@@ -1506,7 +1523,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeDoubleLE](alignedlockablebuffer.md#writedoublele)*
 
-Defined in node_modules/@types/node/base.d.ts:846
+Defined in node_modules/@types/node/globals.d.ts:275
 
 **Parameters:**
 
@@ -1526,7 +1543,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeFloatBE](alignedlockablebuffer.md#writefloatbe)*
 
-Defined in node_modules/@types/node/base.d.ts:845
+Defined in node_modules/@types/node/globals.d.ts:274
 
 **Parameters:**
 
@@ -1546,7 +1563,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeFloatLE](alignedlockablebuffer.md#writefloatle)*
 
-Defined in node_modules/@types/node/base.d.ts:844
+Defined in node_modules/@types/node/globals.d.ts:273
 
 **Parameters:**
 
@@ -1566,7 +1583,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeInt16BE](alignedlockablebuffer.md#writeint16be)*
 
-Defined in node_modules/@types/node/base.d.ts:841
+Defined in node_modules/@types/node/globals.d.ts:270
 
 **Parameters:**
 
@@ -1586,7 +1603,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeInt16LE](alignedlockablebuffer.md#writeint16le)*
 
-Defined in node_modules/@types/node/base.d.ts:840
+Defined in node_modules/@types/node/globals.d.ts:269
 
 **Parameters:**
 
@@ -1606,7 +1623,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeInt32BE](alignedlockablebuffer.md#writeint32be)*
 
-Defined in node_modules/@types/node/base.d.ts:843
+Defined in node_modules/@types/node/globals.d.ts:272
 
 **Parameters:**
 
@@ -1626,7 +1643,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeInt32LE](alignedlockablebuffer.md#writeint32le)*
 
-Defined in node_modules/@types/node/base.d.ts:842
+Defined in node_modules/@types/node/globals.d.ts:271
 
 **Parameters:**
 
@@ -1646,7 +1663,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeInt8](alignedlockablebuffer.md#writeint8)*
 
-Defined in node_modules/@types/node/base.d.ts:839
+Defined in node_modules/@types/node/globals.d.ts:268
 
 **Parameters:**
 
@@ -1666,7 +1683,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeIntBE](alignedlockablebuffer.md#writeintbe)*
 
-Defined in node_modules/@types/node/base.d.ts:812
+Defined in node_modules/@types/node/globals.d.ts:241
 
 **Parameters:**
 
@@ -1687,7 +1704,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeIntLE](alignedlockablebuffer.md#writeintle)*
 
-Defined in node_modules/@types/node/base.d.ts:811
+Defined in node_modules/@types/node/globals.d.ts:240
 
 **Parameters:**
 
@@ -1708,7 +1725,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeUInt16BE](alignedlockablebuffer.md#writeuint16be)*
 
-Defined in node_modules/@types/node/base.d.ts:836
+Defined in node_modules/@types/node/globals.d.ts:265
 
 **Parameters:**
 
@@ -1728,7 +1745,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeUInt16LE](alignedlockablebuffer.md#writeuint16le)*
 
-Defined in node_modules/@types/node/base.d.ts:835
+Defined in node_modules/@types/node/globals.d.ts:264
 
 **Parameters:**
 
@@ -1748,7 +1765,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeUInt32BE](alignedlockablebuffer.md#writeuint32be)*
 
-Defined in node_modules/@types/node/base.d.ts:838
+Defined in node_modules/@types/node/globals.d.ts:267
 
 **Parameters:**
 
@@ -1768,7 +1785,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeUInt32LE](alignedlockablebuffer.md#writeuint32le)*
 
-Defined in node_modules/@types/node/base.d.ts:837
+Defined in node_modules/@types/node/globals.d.ts:266
 
 **Parameters:**
 
@@ -1788,7 +1805,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeUInt8](alignedlockablebuffer.md#writeuint8)*
 
-Defined in node_modules/@types/node/base.d.ts:834
+Defined in node_modules/@types/node/globals.d.ts:263
 
 **Parameters:**
 
@@ -1808,7 +1825,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeUIntBE](alignedlockablebuffer.md#writeuintbe)*
 
-Defined in node_modules/@types/node/base.d.ts:810
+Defined in node_modules/@types/node/globals.d.ts:239
 
 **Parameters:**
 
@@ -1829,7 +1846,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[writeUIntLE](alignedlockablebuffer.md#writeuintle)*
 
-Defined in node_modules/@types/node/base.d.ts:809
+Defined in node_modules/@types/node/globals.d.ts:238
 
 **Parameters:**
 

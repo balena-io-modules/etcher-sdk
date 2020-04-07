@@ -28,12 +28,14 @@
 * [getMaxListeners](usbbootdeviceadapter.md#getmaxlisteners)
 * [listenerCount](usbbootdeviceadapter.md#listenercount)
 * [listeners](usbbootdeviceadapter.md#listeners)
+* [off](usbbootdeviceadapter.md#off)
 * [on](usbbootdeviceadapter.md#on)
 * [onAttach](usbbootdeviceadapter.md#private-onattach)
 * [onDetach](usbbootdeviceadapter.md#private-ondetach)
 * [once](usbbootdeviceadapter.md#once)
 * [prependListener](usbbootdeviceadapter.md#prependlistener)
 * [prependOnceListener](usbbootdeviceadapter.md#prependoncelistener)
+* [rawListeners](usbbootdeviceadapter.md#rawlisteners)
 * [removeAllListeners](usbbootdeviceadapter.md#removealllisteners)
 * [removeListener](usbbootdeviceadapter.md#removelistener)
 * [setMaxListeners](usbbootdeviceadapter.md#setmaxlisteners)
@@ -47,7 +49,7 @@
 
 \+ **new UsbbootDeviceAdapter**(): *[UsbbootDeviceAdapter](usbbootdeviceadapter.md)*
 
-*Defined in [lib/scanner/adapters/usbboot.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/scanner/adapters/usbboot.ts#L28)*
+*Defined in [lib/scanner/adapters/usbboot.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/scanner/adapters/usbboot.ts#L28)*
 
 **Returns:** *[UsbbootDeviceAdapter](usbbootdeviceadapter.md)*
 
@@ -57,7 +59,7 @@
 
 • **drives**: *Map‹UsbbootDevice, [UsbbootDrive](usbbootdrive.md)›* = new Map()
 
-*Defined in [lib/scanner/adapters/usbboot.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/scanner/adapters/usbboot.ts#L27)*
+*Defined in [lib/scanner/adapters/usbboot.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/scanner/adapters/usbboot.ts#L27)*
 
 ___
 
@@ -65,7 +67,7 @@ ___
 
 • **scanner**: *UsbbootScannerType*
 
-*Defined in [lib/scanner/adapters/usbboot.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/scanner/adapters/usbboot.ts#L28)*
+*Defined in [lib/scanner/adapters/usbboot.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/scanner/adapters/usbboot.ts#L28)*
 
 ___
 
@@ -75,7 +77,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[defaultMaxListeners](countingwritable.md#static-defaultmaxlisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:896
+Defined in node_modules/@types/node/events.d.ts:18
 
 ## Methods
 
@@ -87,7 +89,7 @@ Defined in node_modules/@types/node/base.d.ts:896
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:898
+Defined in node_modules/@types/node/events.d.ts:20
 
 **Parameters:**
 
@@ -115,7 +117,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
-Defined in node_modules/@types/node/base.d.ts:908
+Defined in node_modules/@types/node/events.d.ts:32
 
 **Parameters:**
 
@@ -136,7 +138,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[eventNames](../interfaces/sparsereadable.md#eventnames)*
 
-Defined in node_modules/@types/node/base.d.ts:909
+Defined in node_modules/@types/node/events.d.ts:33
 
 **Returns:** *Array‹string | symbol›*
 
@@ -150,7 +152,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[getMaxListeners](../interfaces/sparsereadable.md#getmaxlisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:906
+Defined in node_modules/@types/node/events.d.ts:29
 
 **Returns:** *number*
 
@@ -164,7 +166,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[listenerCount](../interfaces/sparsereadable.md#listenercount)*
 
-Defined in node_modules/@types/node/base.d.ts:910
+Defined in node_modules/@types/node/events.d.ts:34
 
 **Parameters:**
 
@@ -184,7 +186,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[listeners](../interfaces/sparsereadable.md#listeners)*
 
-Defined in node_modules/@types/node/base.d.ts:907
+Defined in node_modules/@types/node/events.d.ts:30
 
 **Parameters:**
 
@@ -196,6 +198,34 @@ Name | Type |
 
 ___
 
+###  off
+
+▸ **off**(`event`: string | symbol, `listener`: function): *this*
+
+*Inherited from [CountingWritable](countingwritable.md).[off](countingwritable.md#off)*
+
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[off](../interfaces/sparsereadable.md#off)*
+
+Defined in node_modules/@types/node/events.d.ts:26
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`...args` | any[] |
+
+**Returns:** *this*
+
+___
+
 ###  on
 
 ▸ **on**(`event`: string | symbol, `listener`: function): *this*
@@ -204,7 +234,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
-Defined in node_modules/@types/node/base.d.ts:899
+Defined in node_modules/@types/node/events.d.ts:21
 
 **Parameters:**
 
@@ -228,7 +258,7 @@ ___
 
 ▸ **onAttach**(`device`: UsbbootDevice): *void*
 
-*Defined in [lib/scanner/adapters/usbboot.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/scanner/adapters/usbboot.ts#L53)*
+*Defined in [lib/scanner/adapters/usbboot.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/scanner/adapters/usbboot.ts#L53)*
 
 **Parameters:**
 
@@ -244,7 +274,7 @@ ___
 
 ▸ **onDetach**(`device`: UsbbootDevice): *void*
 
-*Defined in [lib/scanner/adapters/usbboot.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/scanner/adapters/usbboot.ts#L62)*
+*Defined in [lib/scanner/adapters/usbboot.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/scanner/adapters/usbboot.ts#L62)*
 
 **Parameters:**
 
@@ -264,7 +294,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
-Defined in node_modules/@types/node/base.d.ts:900
+Defined in node_modules/@types/node/events.d.ts:22
 
 **Parameters:**
 
@@ -292,7 +322,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:901
+Defined in node_modules/@types/node/events.d.ts:23
 
 **Parameters:**
 
@@ -320,7 +350,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:902
+Defined in node_modules/@types/node/events.d.ts:24
 
 **Parameters:**
 
@@ -340,6 +370,26 @@ Name | Type |
 
 ___
 
+###  rawListeners
+
+▸ **rawListeners**(`event`: string | symbol): *Function[]*
+
+*Inherited from [CountingWritable](countingwritable.md).[rawListeners](countingwritable.md#rawlisteners)*
+
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[rawListeners](../interfaces/sparsereadable.md#rawlisteners)*
+
+Defined in node_modules/@types/node/events.d.ts:31
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+
+**Returns:** *Function[]*
+
+___
+
 ###  removeAllListeners
 
 ▸ **removeAllListeners**(`event?`: string | symbol): *this*
@@ -348,7 +398,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeAllListeners](../interfaces/sparsereadable.md#removealllisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:904
+Defined in node_modules/@types/node/events.d.ts:27
 
 **Parameters:**
 
@@ -368,7 +418,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:903
+Defined in node_modules/@types/node/events.d.ts:25
 
 **Parameters:**
 
@@ -396,7 +446,7 @@ ___
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[setMaxListeners](../interfaces/sparsereadable.md#setmaxlisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:905
+Defined in node_modules/@types/node/events.d.ts:28
 
 **Parameters:**
 
@@ -414,7 +464,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[start](adapter.md#abstract-start)*
 
-*Defined in [lib/scanner/adapters/usbboot.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/scanner/adapters/usbboot.ts#L45)*
+*Defined in [lib/scanner/adapters/usbboot.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/scanner/adapters/usbboot.ts#L45)*
 
 **Returns:** *void*
 
@@ -426,7 +476,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[stop](adapter.md#abstract-stop)*
 
-*Defined in [lib/scanner/adapters/usbboot.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/scanner/adapters/usbboot.ts#L49)*
+*Defined in [lib/scanner/adapters/usbboot.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/scanner/adapters/usbboot.ts#L49)*
 
 **Returns:** *void*
 
@@ -438,7 +488,9 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
 
-Defined in node_modules/@types/node/base.d.ts:895
+Defined in node_modules/@types/node/events.d.ts:17
+
+**`deprecated`** since v4.0.0
 
 **Parameters:**
 

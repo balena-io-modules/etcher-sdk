@@ -20,7 +20,7 @@
 
 • **alignment**? : *undefined | number*
 
-*Defined in [lib/source-destination/source-destination.ts:247](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/source-destination.ts#L247)*
+*Defined in [lib/source-destination/source-destination.ts:270](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/source-destination.ts#L270)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **generateChecksums**? : *undefined | false | true*
 
-*Defined in [lib/source-destination/source-destination.ts:246](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/source-destination.ts#L246)*
+*Defined in [lib/source-destination/source-destination.ts:269](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/source-destination.ts#L269)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **numBuffers**? : *undefined | number*
 
-*Defined in [lib/source-destination/source-destination.ts:248](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/source-destination/source-destination.ts#L248)*
+*Defined in [lib/source-destination/source-destination.ts:271](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/source-destination.ts#L271)*

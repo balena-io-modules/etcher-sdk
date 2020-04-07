@@ -29,10 +29,12 @@
 * [getMaxListeners](sparsewritable.md#getmaxlisteners)
 * [listenerCount](sparsewritable.md#listenercount)
 * [listeners](sparsewritable.md#listeners)
+* [off](sparsewritable.md#off)
 * [on](sparsewritable.md#on)
 * [once](sparsewritable.md#once)
 * [prependListener](sparsewritable.md#prependlistener)
 * [prependOnceListener](sparsewritable.md#prependoncelistener)
+* [rawListeners](sparsewritable.md#rawlisteners)
 * [removeAllListeners](sparsewritable.md#removealllisteners)
 * [removeListener](sparsewritable.md#removelistener)
 * [setMaxListeners](sparsewritable.md#setmaxlisteners)
@@ -46,7 +48,7 @@
 
 *Inherited from [SparseWritable](sparsewritable.md).[writable](sparsewritable.md#writable)*
 
-Defined in node_modules/@types/node/base.d.ts:415
+Defined in node_modules/@types/node/globals.d.ts:584
 
 ## Methods
 
@@ -54,7 +56,7 @@ Defined in node_modules/@types/node/base.d.ts:415
 
 ▸ **_write**(`chunk`: [SparseStreamChunk](sparsestreamchunk.md), `encoding`: string, `callback`: function): *void*
 
-*Defined in [lib/sparse-stream/shared.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/1a7a17c/lib/sparse-stream/shared.ts#L55)*
+*Defined in [lib/sparse-stream/shared.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/shared.ts#L55)*
 
 **Parameters:**
 
@@ -64,13 +66,13 @@ Defined in node_modules/@types/node/base.d.ts:415
 
 ▪ **callback**: *function*
 
-▸ (`err?`: [Error](../classes/notcapable.md#static-error) | void): *void*
+▸ (`err?`: [Error](../classes/notcapable.md#static-error) | null): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`err?` | [Error](../classes/notcapable.md#static-error) &#124; void |
+`err?` | [Error](../classes/notcapable.md#static-error) &#124; null |
 
 **Returns:** *void*
 
@@ -82,7 +84,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[addListener](sparsereadable.md#addlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:384
+Defined in node_modules/@types/node/globals.d.ts:550
 
 **Parameters:**
 
@@ -108,7 +110,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[emit](sparsereadable.md#emit)*
 
-Defined in node_modules/@types/node/base.d.ts:392
+Defined in node_modules/@types/node/globals.d.ts:560
 
 **Parameters:**
 
@@ -127,7 +129,7 @@ ___
 
 *Inherited from [SparseWritable](sparsewritable.md).[end](sparsewritable.md#end)*
 
-Defined in node_modules/@types/node/base.d.ts:418
+Defined in node_modules/@types/node/globals.d.ts:587
 
 **Parameters:**
 
@@ -141,7 +143,7 @@ Name | Type |
 
 *Inherited from [SparseWritable](sparsewritable.md).[end](sparsewritable.md#end)*
 
-Defined in node_modules/@types/node/base.d.ts:419
+Defined in node_modules/@types/node/globals.d.ts:588
 
 **Parameters:**
 
@@ -156,7 +158,7 @@ Name | Type |
 
 *Inherited from [SparseWritable](sparsewritable.md).[end](sparsewritable.md#end)*
 
-Defined in node_modules/@types/node/base.d.ts:420
+Defined in node_modules/@types/node/globals.d.ts:589
 
 **Parameters:**
 
@@ -171,7 +173,7 @@ Name | Type |
 
 *Inherited from [SparseWritable](sparsewritable.md).[end](sparsewritable.md#end)*
 
-Defined in node_modules/@types/node/base.d.ts:421
+Defined in node_modules/@types/node/globals.d.ts:590
 
 **Parameters:**
 
@@ -191,7 +193,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[eventNames](sparsereadable.md#eventnames)*
 
-Defined in node_modules/@types/node/base.d.ts:397
+Defined in node_modules/@types/node/globals.d.ts:565
 
 **Returns:** *Array‹string | symbol›*
 
@@ -203,7 +205,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[getMaxListeners](sparsereadable.md#getmaxlisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:390
+Defined in node_modules/@types/node/globals.d.ts:557
 
 **Returns:** *number*
 
@@ -215,7 +217,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[listenerCount](sparsereadable.md#listenercount)*
 
-Defined in node_modules/@types/node/base.d.ts:393
+Defined in node_modules/@types/node/globals.d.ts:561
 
 **Parameters:**
 
@@ -233,7 +235,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[listeners](sparsereadable.md#listeners)*
 
-Defined in node_modules/@types/node/base.d.ts:391
+Defined in node_modules/@types/node/globals.d.ts:558
 
 **Parameters:**
 
@@ -245,13 +247,39 @@ Name | Type |
 
 ___
 
+###  off
+
+▸ **off**(`event`: string | symbol, `listener`: function): *this*
+
+*Inherited from [SparseReadable](sparsereadable.md).[off](sparsereadable.md#off)*
+
+Defined in node_modules/@types/node/globals.d.ts:554
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`...args` | any[] |
+
+**Returns:** *this*
+
+___
+
 ###  on
 
 ▸ **on**(`event`: string | symbol, `listener`: function): *this*
 
 *Inherited from [SparseReadable](sparsereadable.md).[on](sparsereadable.md#on)*
 
-Defined in node_modules/@types/node/base.d.ts:385
+Defined in node_modules/@types/node/globals.d.ts:551
 
 **Parameters:**
 
@@ -277,7 +305,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[once](sparsereadable.md#once)*
 
-Defined in node_modules/@types/node/base.d.ts:386
+Defined in node_modules/@types/node/globals.d.ts:552
 
 **Parameters:**
 
@@ -303,7 +331,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[prependListener](sparsereadable.md#prependlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:395
+Defined in node_modules/@types/node/globals.d.ts:563
 
 **Parameters:**
 
@@ -329,7 +357,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[prependOnceListener](sparsereadable.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:396
+Defined in node_modules/@types/node/globals.d.ts:564
 
 **Parameters:**
 
@@ -349,13 +377,31 @@ Name | Type |
 
 ___
 
+###  rawListeners
+
+▸ **rawListeners**(`event`: string | symbol): *Function[]*
+
+*Inherited from [SparseReadable](sparsereadable.md).[rawListeners](sparsereadable.md#rawlisteners)*
+
+Defined in node_modules/@types/node/globals.d.ts:559
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+
+**Returns:** *Function[]*
+
+___
+
 ###  removeAllListeners
 
 ▸ **removeAllListeners**(`event?`: string | symbol): *this*
 
 *Inherited from [SparseReadable](sparsereadable.md).[removeAllListeners](sparsereadable.md#removealllisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:388
+Defined in node_modules/@types/node/globals.d.ts:555
 
 **Parameters:**
 
@@ -373,7 +419,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[removeListener](sparsereadable.md#removelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:387
+Defined in node_modules/@types/node/globals.d.ts:553
 
 **Parameters:**
 
@@ -399,7 +445,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[setMaxListeners](sparsereadable.md#setmaxlisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:389
+Defined in node_modules/@types/node/globals.d.ts:556
 
 **Parameters:**
 
@@ -417,7 +463,7 @@ ___
 
 *Inherited from [SparseWritable](sparsewritable.md).[write](sparsewritable.md#write)*
 
-Defined in node_modules/@types/node/base.d.ts:416
+Defined in node_modules/@types/node/globals.d.ts:585
 
 **Parameters:**
 
@@ -432,7 +478,7 @@ Name | Type |
 
 *Inherited from [SparseWritable](sparsewritable.md).[write](sparsewritable.md#write)*
 
-Defined in node_modules/@types/node/base.d.ts:417
+Defined in node_modules/@types/node/globals.d.ts:586
 
 **Parameters:**
 
