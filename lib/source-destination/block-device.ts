@@ -80,7 +80,13 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 			flags |= fs.constants.O_DIRECT | fs.constants.O_SYNC;
 		}
 		if (this.oWrite) {
-			flags |= platform() === 'linux' ? fs.constants.O_EXCL : O_EXLOCK;
+			const plat = platform();
+			if (plat === 'linux') {
+				flags |= fs.constants.O_EXCL;
+			} else if (plat === 'darwin') {
+				flags |= O_EXLOCK;
+			}
+			// TODO: use O_EXCLOCK on windows too (getting EBUSY errors with it)
 		}
 		// tslint:enable:no-bitwise
 		return flags;
