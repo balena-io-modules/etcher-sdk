@@ -19,7 +19,7 @@
 
 • **bytesWritten**: *number*
 
-*Defined in [lib/multi-write.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/multi-write.ts#L69)*
+*Defined in [lib/multi-write.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/multi-write.ts#L69)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **failures**: *Map‹[SourceDestination](../classes/sourcedestination.md), [Error](../classes/notcapable.md#static-error)›*
 
-*Defined in [lib/multi-write.ts:68](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/multi-write.ts#L68)*
+*Defined in [lib/multi-write.ts:68](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/multi-write.ts#L68)*

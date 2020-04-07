@@ -23,16 +23,27 @@
 
 * [maxBytes](streamlimiter.md#private-maxbytes)
 * [readable](streamlimiter.md#readable)
+* [readableHighWaterMark](streamlimiter.md#readablehighwatermark)
+* [readableLength](streamlimiter.md#readablelength)
 * [stream](streamlimiter.md#private-stream)
 * [writable](streamlimiter.md#writable)
+* [writableHighWaterMark](streamlimiter.md#writablehighwatermark)
+* [writableLength](streamlimiter.md#writablelength)
 * [defaultMaxListeners](streamlimiter.md#static-defaultmaxlisteners)
 
 ### Methods
 
+* [[Symbol.asyncIterator]](streamlimiter.md#[symbol.asynciterator])
+* [_destroy](streamlimiter.md#_destroy)
+* [_final](streamlimiter.md#_final)
+* [_flush](streamlimiter.md#_flush)
 * [_read](streamlimiter.md#_read)
 * [_transform](streamlimiter.md#_transform)
 * [_write](streamlimiter.md#_write)
+* [_writev](streamlimiter.md#optional-_writev)
 * [addListener](streamlimiter.md#addlistener)
+* [cork](streamlimiter.md#cork)
+* [destroy](streamlimiter.md#destroy)
 * [emit](streamlimiter.md#emit)
 * [end](streamlimiter.md#end)
 * [eventNames](streamlimiter.md#eventnames)
@@ -40,6 +51,7 @@
 * [isPaused](streamlimiter.md#ispaused)
 * [listenerCount](streamlimiter.md#listenercount)
 * [listeners](streamlimiter.md#listeners)
+* [off](streamlimiter.md#off)
 * [on](streamlimiter.md#on)
 * [once](streamlimiter.md#once)
 * [pause](streamlimiter.md#pause)
@@ -47,6 +59,7 @@
 * [prependListener](streamlimiter.md#prependlistener)
 * [prependOnceListener](streamlimiter.md#prependoncelistener)
 * [push](streamlimiter.md#push)
+* [rawListeners](streamlimiter.md#rawlisteners)
 * [read](streamlimiter.md#read)
 * [removeAllListeners](streamlimiter.md#removealllisteners)
 * [removeListener](streamlimiter.md#removelistener)
@@ -54,6 +67,7 @@
 * [setDefaultEncoding](streamlimiter.md#setdefaultencoding)
 * [setEncoding](streamlimiter.md#setencoding)
 * [setMaxListeners](streamlimiter.md#setmaxlisteners)
+* [uncork](streamlimiter.md#uncork)
 * [unpipe](streamlimiter.md#unpipe)
 * [unshift](streamlimiter.md#unshift)
 * [wrap](streamlimiter.md#wrap)
@@ -68,7 +82,7 @@
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [lib/stream-limiter.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/stream-limiter.ts#L22)*
+*Defined in [lib/stream-limiter.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/stream-limiter.ts#L22)*
 
 **Parameters:**
 
@@ -85,7 +99,7 @@ Name | Type |
 
 • **maxBytes**: *number*
 
-*Defined in [lib/stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/stream-limiter.ts#L23)*
+*Defined in [lib/stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/stream-limiter.ts#L23)*
 
 ___
 
@@ -95,7 +109,27 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[readable](sparsefilterstream.md#readable)*
 
-Defined in node_modules/@types/node/base.d.ts:3688
+Defined in node_modules/@types/node/stream.d.ts:20
+
+___
+
+###  readableHighWaterMark
+
+• **readableHighWaterMark**: *number*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableHighWaterMark](sparsefilterstream.md#readablehighwatermark)*
+
+Defined in node_modules/@types/node/stream.d.ts:21
+
+___
+
+###  readableLength
+
+• **readableLength**: *number*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableLength](sparsefilterstream.md#readablelength)*
+
+Defined in node_modules/@types/node/stream.d.ts:22
 
 ___
 
@@ -103,7 +137,7 @@ ___
 
 • **stream**: *ReadableStream*
 
-*Defined in [lib/stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/stream-limiter.ts#L23)*
+*Defined in [lib/stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/stream-limiter.ts#L23)*
 
 ___
 
@@ -113,7 +147,27 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[writable](sparsefilterstream.md#writable)*
 
-Defined in node_modules/@types/node/base.d.ts:3855
+Defined in node_modules/@types/node/stream.d.ts:209
+
+___
+
+###  writableHighWaterMark
+
+• **writableHighWaterMark**: *number*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableHighWaterMark](sparsefilterstream.md#writablehighwatermark)*
+
+Defined in node_modules/@types/node/stream.d.ts:210
+
+___
+
+###  writableLength
+
+• **writableLength**: *number*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableLength](sparsefilterstream.md#writablelength)*
+
+Defined in node_modules/@types/node/stream.d.ts:211
 
 ___
 
@@ -123,9 +177,91 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[defaultMaxListeners](countingwritable.md#static-defaultmaxlisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:681
+Defined in node_modules/@types/node/events.d.ts:18
 
 ## Methods
+
+###  [Symbol.asyncIterator]
+
+▸ **[Symbol.asyncIterator]**(): *AsyncIterableIterator‹any›*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[[Symbol.asyncIterator]](sparsefilterstream.md#[symbol.asynciterator])*
+
+Defined in node_modules/@types/node/stream.d.ts:95
+
+**Returns:** *AsyncIterableIterator‹any›*
+
+___
+
+###  _destroy
+
+▸ **_destroy**(`error`: [Error](notcapable.md#static-error) | null, `callback`: function): *void*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[_destroy](sparsefilterstream.md#_destroy)*
+
+*Overrides [SparseReadStream](sparsereadstream.md).[_destroy](sparsereadstream.md#_destroy)*
+
+Defined in node_modules/@types/node/stream.d.ts:215
+
+**Parameters:**
+
+▪ **error**: *[Error](notcapable.md#static-error) | null*
+
+▪ **callback**: *function*
+
+▸ (`error`: [Error](notcapable.md#static-error) | null): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`error` | [Error](notcapable.md#static-error) &#124; null |
+
+**Returns:** *void*
+
+___
+
+###  _final
+
+▸ **_final**(`callback`: function): *void*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[_final](sparsefilterstream.md#_final)*
+
+Defined in node_modules/@types/node/stream.d.ts:216
+
+**Parameters:**
+
+▪ **callback**: *function*
+
+▸ (`error?`: [Error](notcapable.md#static-error) | null): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`error?` | [Error](notcapable.md#static-error) &#124; null |
+
+**Returns:** *void*
+
+___
+
+###  _flush
+
+▸ **_flush**(`callback`: TransformCallback): *void*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[_flush](sparsefilterstream.md#_flush)*
+
+Defined in node_modules/@types/node/stream.d.ts:242
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`callback` | TransformCallback |
+
+**Returns:** *void*
+
+___
 
 ###  _read
 
@@ -133,7 +269,7 @@ Defined in node_modules/@types/node/base.d.ts:681
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[_read](sparsefilterstream.md#_read)*
 
-Defined in node_modules/@types/node/base.d.ts:3690
+Defined in node_modules/@types/node/stream.d.ts:24
 
 **Parameters:**
 
@@ -147,28 +283,28 @@ ___
 
 ###  _transform
 
-▸ **_transform**(`buffer`: Buffer, `_encoding`: string, `callback`: function): *void*
+▸ **_transform**(`buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer), `_encoding`: string, `callback`: function): *void*
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[_transform](../interfaces/sourcetransform.md#_transform)*
 
-*Defined in [lib/stream-limiter.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/stream-limiter.ts#L29)*
+*Defined in [lib/stream-limiter.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/stream-limiter.ts#L29)*
 
 **Parameters:**
 
-▪ **buffer**: *Buffer*
+▪ **buffer**: *[Buffer](../interfaces/alignedlockablebuffer.md#buffer)*
 
 ▪ **_encoding**: *string*
 
 ▪ **callback**: *function*
 
-▸ (`error?`: [Error](notcapable.md#static-error) | null, `data?`: Buffer): *void*
+▸ (`error?`: [Error](notcapable.md#static-error), `data?`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer)): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`error?` | [Error](notcapable.md#static-error) &#124; null |
-`data?` | Buffer |
+`error?` | [Error](notcapable.md#static-error) |
+`data?` | [Buffer](../interfaces/alignedlockablebuffer.md#buffer) |
 
 **Returns:** *void*
 
@@ -176,19 +312,53 @@ ___
 
 ###  _write
 
-▸ **_write**(`chunk`: any, `encoding`: string, `callback`: Function): *void*
+▸ **_write**(`chunk`: any, `encoding`: string, `callback`: function): *void*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[_write](sparsefilterstream.md#_write)*
 
-Defined in node_modules/@types/node/base.d.ts:3857
+Defined in node_modules/@types/node/stream.d.ts:213
+
+**Parameters:**
+
+▪ **chunk**: *any*
+
+▪ **encoding**: *string*
+
+▪ **callback**: *function*
+
+▸ (`error?`: [Error](notcapable.md#static-error) | null): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`chunk` | any |
-`encoding` | string |
-`callback` | Function |
+`error?` | [Error](notcapable.md#static-error) &#124; null |
+
+**Returns:** *void*
+
+___
+
+### `Optional` _writev
+
+▸ **_writev**(`chunks`: Array‹object›, `callback`: function): *void*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[_writev](sparsefilterstream.md#optional-_writev)*
+
+Defined in node_modules/@types/node/stream.d.ts:214
+
+**Parameters:**
+
+▪ **chunks**: *Array‹object›*
+
+▪ **callback**: *function*
+
+▸ (`error?`: [Error](notcapable.md#static-error) | null): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`error?` | [Error](notcapable.md#static-error) &#124; null |
 
 **Returns:** *void*
 
@@ -196,38 +366,21 @@ ___
 
 ###  addListener
 
-▸ **addListener**(`event`: string, `listener`: Function): *this*
-
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[addListener](sparsefilterstream.md#addlistener)*
-
-*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
-
-Defined in node_modules/@types/node/base.d.ts:3711
-
-Event emitter
-The defined events on documents including:
-  1. close
-  2. data
-  3. end
-  4. readable
-  5. error
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`event` | string |
-`listener` | Function |
-
-**Returns:** *this*
-
 ▸ **addListener**(`event`: "close", `listener`: function): *this*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[addListener](sparsefilterstream.md#addlistener)*
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3712
+Defined in node_modules/@types/node/stream.d.ts:46
+
+Event emitter
+The defined events on documents including:
+1. close
+2. data
+3. end
+4. readable
+5. error
 
 **Parameters:**
 
@@ -245,7 +398,7 @@ Defined in node_modules/@types/node/base.d.ts:3712
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3713
+Defined in node_modules/@types/node/stream.d.ts:47
 
 **Parameters:**
 
@@ -253,13 +406,13 @@ Defined in node_modules/@types/node/base.d.ts:3713
 
 ▪ **listener**: *function*
 
-▸ (`chunk`: Buffer | string): *void*
+▸ (`chunk`: any): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`chunk` | Buffer &#124; string |
+`chunk` | any |
 
 **Returns:** *this*
 
@@ -269,7 +422,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3714
+Defined in node_modules/@types/node/stream.d.ts:48
 
 **Parameters:**
 
@@ -287,7 +440,7 @@ Defined in node_modules/@types/node/base.d.ts:3714
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3715
+Defined in node_modules/@types/node/stream.d.ts:49
 
 **Parameters:**
 
@@ -305,7 +458,7 @@ Defined in node_modules/@types/node/base.d.ts:3715
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3716
+Defined in node_modules/@types/node/stream.d.ts:50
 
 **Parameters:**
 
@@ -323,26 +476,63 @@ Name | Type |
 
 **Returns:** *this*
 
-___
+▸ **addListener**(`event`: string | symbol, `listener`: function): *this*
 
-###  emit
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[addListener](sparsefilterstream.md#addlistener)*
 
-▸ **emit**(`event`: string | symbol, ...`args`: any[]): *boolean*
+*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[emit](sparsefilterstream.md#emit)*
+Defined in node_modules/@types/node/stream.d.ts:51
 
-*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+**Parameters:**
 
-Defined in node_modules/@types/node/base.d.ts:3718
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string &#124; symbol |
 `...args` | any[] |
 
-**Returns:** *boolean*
+**Returns:** *this*
+
+___
+
+###  cork
+
+▸ **cork**(): *void*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[cork](sparsefilterstream.md#cork)*
+
+Defined in node_modules/@types/node/stream.d.ts:223
+
+**Returns:** *void*
+
+___
+
+###  destroy
+
+▸ **destroy**(`error?`: [Error](notcapable.md#static-error)): *void*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[destroy](sparsefilterstream.md#destroy)*
+
+Defined in node_modules/@types/node/stream.d.ts:35
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`error?` | [Error](notcapable.md#static-error) |
+
+**Returns:** *void*
+
+___
+
+###  emit
 
 ▸ **emit**(`event`: "close"): *boolean*
 
@@ -350,7 +540,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/base.d.ts:3719
+Defined in node_modules/@types/node/stream.d.ts:53
 
 **Parameters:**
 
@@ -360,20 +550,20 @@ Name | Type |
 
 **Returns:** *boolean*
 
-▸ **emit**(`event`: "data", `chunk`: Buffer | string): *boolean*
+▸ **emit**(`event`: "data", `chunk`: any): *boolean*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[emit](sparsefilterstream.md#emit)*
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/base.d.ts:3720
+Defined in node_modules/@types/node/stream.d.ts:54
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `event` | "data" |
-`chunk` | Buffer &#124; string |
+`chunk` | any |
 
 **Returns:** *boolean*
 
@@ -383,7 +573,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/base.d.ts:3721
+Defined in node_modules/@types/node/stream.d.ts:55
 
 **Parameters:**
 
@@ -399,7 +589,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/base.d.ts:3722
+Defined in node_modules/@types/node/stream.d.ts:56
 
 **Parameters:**
 
@@ -415,7 +605,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/base.d.ts:3723
+Defined in node_modules/@types/node/stream.d.ts:57
 
 **Parameters:**
 
@@ -426,44 +616,61 @@ Name | Type |
 
 **Returns:** *boolean*
 
-___
+▸ **emit**(`event`: string | symbol, ...`args`: any[]): *boolean*
 
-###  end
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[emit](sparsefilterstream.md#emit)*
 
-▸ **end**(`cb?`: Function): *void*
+*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[end](sparsefilterstream.md#end)*
-
-Defined in node_modules/@types/node/base.d.ts:3861
+Defined in node_modules/@types/node/stream.d.ts:58
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`cb?` | Function |
+`event` | string &#124; symbol |
+`...args` | any[] |
 
-**Returns:** *void*
+**Returns:** *boolean*
 
-▸ **end**(`chunk`: any, `cb?`: Function): *void*
+___
+
+###  end
+
+▸ **end**(`cb?`: undefined | function): *void*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[end](sparsefilterstream.md#end)*
 
-Defined in node_modules/@types/node/base.d.ts:3862
+Defined in node_modules/@types/node/stream.d.ts:220
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`cb?` | undefined &#124; function |
+
+**Returns:** *void*
+
+▸ **end**(`chunk`: any, `cb?`: undefined | function): *void*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[end](sparsefilterstream.md#end)*
+
+Defined in node_modules/@types/node/stream.d.ts:221
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `chunk` | any |
-`cb?` | Function |
+`cb?` | undefined &#124; function |
 
 **Returns:** *void*
 
-▸ **end**(`chunk`: any, `encoding?`: undefined | string, `cb?`: Function): *void*
+▸ **end**(`chunk`: any, `encoding?`: undefined | string, `cb?`: undefined | function): *void*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[end](sparsefilterstream.md#end)*
 
-Defined in node_modules/@types/node/base.d.ts:3863
+Defined in node_modules/@types/node/stream.d.ts:222
 
 **Parameters:**
 
@@ -471,7 +678,7 @@ Name | Type |
 ------ | ------ |
 `chunk` | any |
 `encoding?` | undefined &#124; string |
-`cb?` | Function |
+`cb?` | undefined &#124; function |
 
 **Returns:** *void*
 
@@ -479,13 +686,13 @@ ___
 
 ###  eventNames
 
-▸ **eventNames**(): *string | symbol[]*
+▸ **eventNames**(): *Array‹string | symbol›*
 
 *Inherited from [CountingWritable](countingwritable.md).[eventNames](countingwritable.md#eventnames)*
 
-Defined in node_modules/@types/node/base.d.ts:694
+Defined in node_modules/@types/node/events.d.ts:33
 
-**Returns:** *string | symbol[]*
+**Returns:** *Array‹string | symbol›*
 
 ___
 
@@ -495,7 +702,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[getMaxListeners](countingwritable.md#getmaxlisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:691
+Defined in node_modules/@types/node/events.d.ts:29
 
 **Returns:** *number*
 
@@ -507,7 +714,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[isPaused](sparsefilterstream.md#ispaused)*
 
-Defined in node_modules/@types/node/base.d.ts:3695
+Defined in node_modules/@types/node/stream.d.ts:29
 
 **Returns:** *boolean*
 
@@ -519,7 +726,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
 
-Defined in node_modules/@types/node/base.d.ts:695
+Defined in node_modules/@types/node/events.d.ts:34
 
 **Parameters:**
 
@@ -537,7 +744,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[listeners](countingwritable.md#listeners)*
 
-Defined in node_modules/@types/node/base.d.ts:692
+Defined in node_modules/@types/node/events.d.ts:30
 
 **Parameters:**
 
@@ -549,24 +756,33 @@ Name | Type |
 
 ___
 
-###  on
+###  off
 
-▸ **on**(`event`: string, `listener`: Function): *this*
+▸ **off**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[on](sparsefilterstream.md#on)*
+*Inherited from [CountingWritable](countingwritable.md).[off](countingwritable.md#off)*
 
-*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+Defined in node_modules/@types/node/events.d.ts:26
 
-Defined in node_modules/@types/node/base.d.ts:3725
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
+
+___
+
+###  on
 
 ▸ **on**(`event`: "close", `listener`: function): *this*
 
@@ -574,7 +790,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/base.d.ts:3726
+Defined in node_modules/@types/node/stream.d.ts:60
 
 **Parameters:**
 
@@ -592,7 +808,7 @@ Defined in node_modules/@types/node/base.d.ts:3726
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/base.d.ts:3727
+Defined in node_modules/@types/node/stream.d.ts:61
 
 **Parameters:**
 
@@ -600,13 +816,13 @@ Defined in node_modules/@types/node/base.d.ts:3727
 
 ▪ **listener**: *function*
 
-▸ (`chunk`: Buffer | string): *void*
+▸ (`chunk`: any): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`chunk` | Buffer &#124; string |
+`chunk` | any |
 
 **Returns:** *this*
 
@@ -616,7 +832,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/base.d.ts:3728
+Defined in node_modules/@types/node/stream.d.ts:62
 
 **Parameters:**
 
@@ -634,7 +850,7 @@ Defined in node_modules/@types/node/base.d.ts:3728
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/base.d.ts:3729
+Defined in node_modules/@types/node/stream.d.ts:63
 
 **Parameters:**
 
@@ -652,7 +868,7 @@ Defined in node_modules/@types/node/base.d.ts:3729
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/base.d.ts:3730
+Defined in node_modules/@types/node/stream.d.ts:64
 
 **Parameters:**
 
@@ -670,26 +886,33 @@ Name | Type |
 
 **Returns:** *this*
 
-___
+▸ **on**(`event`: string | symbol, `listener`: function): *this*
 
-###  once
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[on](sparsefilterstream.md#on)*
 
-▸ **once**(`event`: string, `listener`: Function): *this*
+*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[once](sparsefilterstream.md#once)*
+Defined in node_modules/@types/node/stream.d.ts:65
 
-*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+**Parameters:**
 
-Defined in node_modules/@types/node/base.d.ts:3732
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
+
+___
+
+###  once
 
 ▸ **once**(`event`: "close", `listener`: function): *this*
 
@@ -697,7 +920,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/base.d.ts:3733
+Defined in node_modules/@types/node/stream.d.ts:67
 
 **Parameters:**
 
@@ -715,7 +938,7 @@ Defined in node_modules/@types/node/base.d.ts:3733
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/base.d.ts:3734
+Defined in node_modules/@types/node/stream.d.ts:68
 
 **Parameters:**
 
@@ -723,13 +946,13 @@ Defined in node_modules/@types/node/base.d.ts:3734
 
 ▪ **listener**: *function*
 
-▸ (`chunk`: Buffer | string): *void*
+▸ (`chunk`: any): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`chunk` | Buffer &#124; string |
+`chunk` | any |
 
 **Returns:** *this*
 
@@ -739,7 +962,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/base.d.ts:3735
+Defined in node_modules/@types/node/stream.d.ts:69
 
 **Parameters:**
 
@@ -757,7 +980,7 @@ Defined in node_modules/@types/node/base.d.ts:3735
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/base.d.ts:3736
+Defined in node_modules/@types/node/stream.d.ts:70
 
 **Parameters:**
 
@@ -775,7 +998,7 @@ Defined in node_modules/@types/node/base.d.ts:3736
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/base.d.ts:3737
+Defined in node_modules/@types/node/stream.d.ts:71
 
 **Parameters:**
 
@@ -793,6 +1016,30 @@ Name | Type |
 
 **Returns:** *this*
 
+▸ **once**(`event`: string | symbol, `listener`: function): *this*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[once](sparsefilterstream.md#once)*
+
+*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+
+Defined in node_modules/@types/node/stream.d.ts:72
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`...args` | any[] |
+
+**Returns:** *this*
+
 ___
 
 ###  pause
@@ -801,7 +1048,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[pause](sparsefilterstream.md#pause)*
 
-Defined in node_modules/@types/node/base.d.ts:3693
+Defined in node_modules/@types/node/stream.d.ts:27
 
 **Returns:** *this*
 
@@ -811,11 +1058,9 @@ ___
 
 ▸ **pipe**<**T**>(`destination`: T, `options?`: undefined | object): *T*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[pipe](sparsefilterstream.md#pipe)*
+*Inherited from [CountingWritable](countingwritable.md).[pipe](countingwritable.md#pipe)*
 
-*Overrides [CountingWritable](countingwritable.md).[pipe](countingwritable.md#pipe)*
-
-Defined in node_modules/@types/node/base.d.ts:3696
+Defined in node_modules/@types/node/stream.d.ts:5
 
 **Type parameters:**
 
@@ -834,30 +1079,13 @@ ___
 
 ###  prependListener
 
-▸ **prependListener**(`event`: string, `listener`: Function): *this*
-
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[prependListener](sparsefilterstream.md#prependlistener)*
-
-*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
-
-Defined in node_modules/@types/node/base.d.ts:3739
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`event` | string |
-`listener` | Function |
-
-**Returns:** *this*
-
 ▸ **prependListener**(`event`: "close", `listener`: function): *this*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[prependListener](sparsefilterstream.md#prependlistener)*
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3740
+Defined in node_modules/@types/node/stream.d.ts:74
 
 **Parameters:**
 
@@ -875,7 +1103,7 @@ Defined in node_modules/@types/node/base.d.ts:3740
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3741
+Defined in node_modules/@types/node/stream.d.ts:75
 
 **Parameters:**
 
@@ -883,13 +1111,13 @@ Defined in node_modules/@types/node/base.d.ts:3741
 
 ▪ **listener**: *function*
 
-▸ (`chunk`: Buffer | string): *void*
+▸ (`chunk`: any): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`chunk` | Buffer &#124; string |
+`chunk` | any |
 
 **Returns:** *this*
 
@@ -899,7 +1127,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3742
+Defined in node_modules/@types/node/stream.d.ts:76
 
 **Parameters:**
 
@@ -917,7 +1145,7 @@ Defined in node_modules/@types/node/base.d.ts:3742
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3743
+Defined in node_modules/@types/node/stream.d.ts:77
 
 **Parameters:**
 
@@ -935,7 +1163,7 @@ Defined in node_modules/@types/node/base.d.ts:3743
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3744
+Defined in node_modules/@types/node/stream.d.ts:78
 
 **Parameters:**
 
@@ -953,26 +1181,33 @@ Name | Type |
 
 **Returns:** *this*
 
-___
+▸ **prependListener**(`event`: string | symbol, `listener`: function): *this*
 
-###  prependOnceListener
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[prependListener](sparsefilterstream.md#prependlistener)*
 
-▸ **prependOnceListener**(`event`: string, `listener`: Function): *this*
+*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[prependOnceListener](sparsefilterstream.md#prependoncelistener)*
+Defined in node_modules/@types/node/stream.d.ts:79
 
-*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+**Parameters:**
 
-Defined in node_modules/@types/node/base.d.ts:3746
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
+
+___
+
+###  prependOnceListener
 
 ▸ **prependOnceListener**(`event`: "close", `listener`: function): *this*
 
@@ -980,7 +1215,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3747
+Defined in node_modules/@types/node/stream.d.ts:81
 
 **Parameters:**
 
@@ -998,7 +1233,7 @@ Defined in node_modules/@types/node/base.d.ts:3747
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3748
+Defined in node_modules/@types/node/stream.d.ts:82
 
 **Parameters:**
 
@@ -1006,13 +1241,13 @@ Defined in node_modules/@types/node/base.d.ts:3748
 
 ▪ **listener**: *function*
 
-▸ (`chunk`: Buffer | string): *void*
+▸ (`chunk`: any): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`chunk` | Buffer &#124; string |
+`chunk` | any |
 
 **Returns:** *this*
 
@@ -1022,7 +1257,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3749
+Defined in node_modules/@types/node/stream.d.ts:83
 
 **Parameters:**
 
@@ -1040,7 +1275,7 @@ Defined in node_modules/@types/node/base.d.ts:3749
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3750
+Defined in node_modules/@types/node/stream.d.ts:84
 
 **Parameters:**
 
@@ -1058,7 +1293,7 @@ Defined in node_modules/@types/node/base.d.ts:3750
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3751
+Defined in node_modules/@types/node/stream.d.ts:85
 
 **Parameters:**
 
@@ -1076,6 +1311,30 @@ Name | Type |
 
 **Returns:** *this*
 
+▸ **prependOnceListener**(`event`: string | symbol, `listener`: function): *this*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[prependOnceListener](sparsefilterstream.md#prependoncelistener)*
+
+*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+
+Defined in node_modules/@types/node/stream.d.ts:86
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`...args` | any[] |
+
+**Returns:** *this*
+
 ___
 
 ###  push
@@ -1084,7 +1343,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[push](sparsefilterstream.md#push)*
 
-Defined in node_modules/@types/node/base.d.ts:3700
+Defined in node_modules/@types/node/stream.d.ts:33
 
 **Parameters:**
 
@@ -1097,13 +1356,31 @@ Name | Type |
 
 ___
 
+###  rawListeners
+
+▸ **rawListeners**(`event`: string | symbol): *Function[]*
+
+*Inherited from [CountingWritable](countingwritable.md).[rawListeners](countingwritable.md#rawlisteners)*
+
+Defined in node_modules/@types/node/events.d.ts:31
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+
+**Returns:** *Function[]*
+
+___
+
 ###  read
 
 ▸ **read**(`size?`: undefined | number): *any*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[read](sparsefilterstream.md#read)*
 
-Defined in node_modules/@types/node/base.d.ts:3691
+Defined in node_modules/@types/node/stream.d.ts:25
 
 **Parameters:**
 
@@ -1121,7 +1398,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[removeAllListeners](countingwritable.md#removealllisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:689
+Defined in node_modules/@types/node/events.d.ts:27
 
 **Parameters:**
 
@@ -1135,30 +1412,13 @@ ___
 
 ###  removeListener
 
-▸ **removeListener**(`event`: string, `listener`: Function): *this*
-
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[removeListener](sparsefilterstream.md#removelistener)*
-
-*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
-
-Defined in node_modules/@types/node/base.d.ts:3753
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`event` | string |
-`listener` | Function |
-
-**Returns:** *this*
-
 ▸ **removeListener**(`event`: "close", `listener`: function): *this*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[removeListener](sparsefilterstream.md#removelistener)*
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3754
+Defined in node_modules/@types/node/stream.d.ts:88
 
 **Parameters:**
 
@@ -1176,7 +1436,7 @@ Defined in node_modules/@types/node/base.d.ts:3754
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3755
+Defined in node_modules/@types/node/stream.d.ts:89
 
 **Parameters:**
 
@@ -1184,13 +1444,13 @@ Defined in node_modules/@types/node/base.d.ts:3755
 
 ▪ **listener**: *function*
 
-▸ (`chunk`: Buffer | string): *void*
+▸ (`chunk`: any): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`chunk` | Buffer &#124; string |
+`chunk` | any |
 
 **Returns:** *this*
 
@@ -1200,7 +1460,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3756
+Defined in node_modules/@types/node/stream.d.ts:90
 
 **Parameters:**
 
@@ -1218,7 +1478,7 @@ Defined in node_modules/@types/node/base.d.ts:3756
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3757
+Defined in node_modules/@types/node/stream.d.ts:91
 
 **Parameters:**
 
@@ -1236,7 +1496,7 @@ Defined in node_modules/@types/node/base.d.ts:3757
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:3758
+Defined in node_modules/@types/node/stream.d.ts:92
 
 **Parameters:**
 
@@ -1254,6 +1514,30 @@ Name | Type |
 
 **Returns:** *this*
 
+▸ **removeListener**(`event`: string | symbol, `listener`: function): *this*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[removeListener](sparsefilterstream.md#removelistener)*
+
+*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+
+Defined in node_modules/@types/node/stream.d.ts:93
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`...args` | any[] |
+
+**Returns:** *this*
+
 ___
 
 ###  resume
@@ -1262,7 +1546,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[resume](sparsefilterstream.md#resume)*
 
-Defined in node_modules/@types/node/base.d.ts:3694
+Defined in node_modules/@types/node/stream.d.ts:28
 
 **Returns:** *this*
 
@@ -1274,7 +1558,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[setDefaultEncoding](sparsefilterstream.md#setdefaultencoding)*
 
-Defined in node_modules/@types/node/base.d.ts:3860
+Defined in node_modules/@types/node/stream.d.ts:219
 
 **Parameters:**
 
@@ -1288,11 +1572,11 @@ ___
 
 ###  setEncoding
 
-▸ **setEncoding**(`encoding`: string): *void*
+▸ **setEncoding**(`encoding`: string): *this*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[setEncoding](sparsefilterstream.md#setencoding)*
 
-Defined in node_modules/@types/node/base.d.ts:3692
+Defined in node_modules/@types/node/stream.d.ts:26
 
 **Parameters:**
 
@@ -1300,7 +1584,7 @@ Name | Type |
 ------ | ------ |
 `encoding` | string |
 
-**Returns:** *void*
+**Returns:** *this*
 
 ___
 
@@ -1310,7 +1594,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[setMaxListeners](countingwritable.md#setmaxlisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:690
+Defined in node_modules/@types/node/events.d.ts:28
 
 **Parameters:**
 
@@ -1322,25 +1606,33 @@ Name | Type |
 
 ___
 
+###  uncork
+
+▸ **uncork**(): *void*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[uncork](sparsefilterstream.md#uncork)*
+
+Defined in node_modules/@types/node/stream.d.ts:224
+
+**Returns:** *void*
+
+___
+
 ###  unpipe
 
-▸ **unpipe**<**T**>(`destination?`: T): *void*
+▸ **unpipe**(`destination?`: NodeJS.WritableStream): *this*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[unpipe](sparsefilterstream.md#unpipe)*
 
-Defined in node_modules/@types/node/base.d.ts:3697
-
-**Type parameters:**
-
-▪ **T**: *WritableStream*
+Defined in node_modules/@types/node/stream.d.ts:30
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`destination?` | T |
+`destination?` | NodeJS.WritableStream |
 
-**Returns:** *void*
+**Returns:** *this*
 
 ___
 
@@ -1350,7 +1642,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[unshift](sparsefilterstream.md#unshift)*
 
-Defined in node_modules/@types/node/base.d.ts:3698
+Defined in node_modules/@types/node/stream.d.ts:31
 
 **Parameters:**
 
@@ -1364,11 +1656,11 @@ ___
 
 ###  wrap
 
-▸ **wrap**(`oldStream`: ReadableStream): *Readable*
+▸ **wrap**(`oldStream`: ReadableStream): *this*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[wrap](sparsefilterstream.md#wrap)*
 
-Defined in node_modules/@types/node/base.d.ts:3699
+Defined in node_modules/@types/node/stream.d.ts:32
 
 **Parameters:**
 
@@ -1376,32 +1668,32 @@ Name | Type |
 ------ | ------ |
 `oldStream` | ReadableStream |
 
-**Returns:** *Readable*
+**Returns:** *this*
 
 ___
 
 ###  write
 
-▸ **write**(`chunk`: any, `cb?`: Function): *boolean*
+▸ **write**(`chunk`: any, `cb?`: undefined | function): *boolean*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[write](sparsefilterstream.md#write)*
 
-Defined in node_modules/@types/node/base.d.ts:3858
+Defined in node_modules/@types/node/stream.d.ts:217
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `chunk` | any |
-`cb?` | Function |
+`cb?` | undefined &#124; function |
 
 **Returns:** *boolean*
 
-▸ **write**(`chunk`: any, `encoding?`: undefined | string, `cb?`: Function): *boolean*
+▸ **write**(`chunk`: any, `encoding?`: undefined | string, `cb?`: undefined | function): *boolean*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[write](sparsefilterstream.md#write)*
 
-Defined in node_modules/@types/node/base.d.ts:3859
+Defined in node_modules/@types/node/stream.d.ts:218
 
 **Parameters:**
 
@@ -1409,7 +1701,7 @@ Name | Type |
 ------ | ------ |
 `chunk` | any |
 `encoding?` | undefined &#124; string |
-`cb?` | Function |
+`cb?` | undefined &#124; function |
 
 **Returns:** *boolean*
 
@@ -1421,7 +1713,9 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
 
-Defined in node_modules/@types/node/base.d.ts:680
+Defined in node_modules/@types/node/events.d.ts:17
+
+**`deprecated`** since v4.0.0
 
 **Parameters:**
 

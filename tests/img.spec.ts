@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { createReadStream, createWriteStream } from 'fs';
+import { createReadStream, createWriteStream, promises as fs } from 'fs';
 import 'mocha';
 import { join } from 'path';
 import { createGunzip } from 'zlib';
@@ -26,7 +26,6 @@ import {
 } from './tester';
 
 import { sourceDestination } from '../lib';
-import { unlink } from '../lib/fs';
 import { tmpFile } from '../lib/tmp';
 
 const DATA_PATH = join(__dirname, 'data');
@@ -53,7 +52,7 @@ describe('img', function() {
 	});
 
 	after(async function() {
-		await unlink(gunzippedFilePath as string);
+		await fs.unlink(gunzippedFilePath as string);
 	});
 
 	testImage(

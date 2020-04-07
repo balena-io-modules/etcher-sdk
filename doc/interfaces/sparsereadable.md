@@ -12,6 +12,7 @@
 
 * [SparseFilterStream](../classes/sparsefilterstream.md)
 * [SparseReadStream](../classes/sparsereadstream.md)
+* [SparseTransformStream](../classes/sparsetransformstream.md)
 
 ## Index
 
@@ -22,6 +23,7 @@
 
 ### Methods
 
+* [[Symbol.asyncIterator]](sparsereadable.md#[symbol.asynciterator])
 * [addListener](sparsereadable.md#addlistener)
 * [emit](sparsereadable.md#emit)
 * [eventNames](sparsereadable.md#eventnames)
@@ -29,6 +31,7 @@
 * [isPaused](sparsereadable.md#ispaused)
 * [listenerCount](sparsereadable.md#listenercount)
 * [listeners](sparsereadable.md#listeners)
+* [off](sparsereadable.md#off)
 * [on](sparsereadable.md#on)
 * [once](sparsereadable.md#once)
 * [pause](sparsereadable.md#pause)
@@ -36,6 +39,7 @@
 * [prependListener](sparsereadable.md#prependlistener)
 * [prependOnceListener](sparsereadable.md#prependoncelistener)
 * [push](sparsereadable.md#push)
+* [rawListeners](sparsereadable.md#rawlisteners)
 * [read](sparsereadable.md#read)
 * [removeAllListeners](sparsereadable.md#removealllisteners)
 * [removeListener](sparsereadable.md#removelistener)
@@ -52,7 +56,7 @@
 
 • **blocks**: *[BlocksWithChecksum](blockswithchecksum.md)[]*
 
-*Defined in [lib/sparse-stream/shared.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/shared.ts#L49)*
+*Defined in [lib/sparse-stream/shared.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/shared.ts#L50)*
 
 ___
 
@@ -62,24 +66,43 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[readable](sparsereadable.md#readable)*
 
-Defined in node_modules/@types/node/base.d.ts:353
+Defined in node_modules/@types/node/globals.d.ts:569
 
 ## Methods
 
+###  [Symbol.asyncIterator]
+
+▸ **[Symbol.asyncIterator]**(): *AsyncIterableIterator‹string | [Buffer](alignedlockablebuffer.md#buffer)›*
+
+*Inherited from [SparseReadable](sparsereadable.md).[[Symbol.asyncIterator]](sparsereadable.md#[symbol.asynciterator])*
+
+Defined in node_modules/@types/node/globals.d.ts:580
+
+**Returns:** *AsyncIterableIterator‹string | [Buffer](alignedlockablebuffer.md#buffer)›*
+
+___
+
 ###  addListener
 
-▸ **addListener**(`event`: string | symbol, `listener`: Function): *this*
+▸ **addListener**(`event`: string | symbol, `listener`: function): *this*
 
 *Inherited from [SparseReadable](sparsereadable.md).[addListener](sparsereadable.md#addlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:336
+Defined in node_modules/@types/node/globals.d.ts:550
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string &#124; symbol |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -91,7 +114,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[emit](sparsereadable.md#emit)*
 
-Defined in node_modules/@types/node/base.d.ts:344
+Defined in node_modules/@types/node/globals.d.ts:560
 
 **Parameters:**
 
@@ -106,13 +129,13 @@ ___
 
 ###  eventNames
 
-▸ **eventNames**(): *string | symbol[]*
+▸ **eventNames**(): *Array‹string | symbol›*
 
 *Inherited from [SparseReadable](sparsereadable.md).[eventNames](sparsereadable.md#eventnames)*
 
-Defined in node_modules/@types/node/base.d.ts:349
+Defined in node_modules/@types/node/globals.d.ts:565
 
-**Returns:** *string | symbol[]*
+**Returns:** *Array‹string | symbol›*
 
 ___
 
@@ -122,7 +145,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[getMaxListeners](sparsereadable.md#getmaxlisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:342
+Defined in node_modules/@types/node/globals.d.ts:557
 
 **Returns:** *number*
 
@@ -134,7 +157,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[isPaused](sparsereadable.md#ispaused)*
 
-Defined in node_modules/@types/node/base.d.ts:358
+Defined in node_modules/@types/node/globals.d.ts:574
 
 **Returns:** *boolean*
 
@@ -146,7 +169,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[listenerCount](sparsereadable.md#listenercount)*
 
-Defined in node_modules/@types/node/base.d.ts:345
+Defined in node_modules/@types/node/globals.d.ts:561
 
 **Parameters:**
 
@@ -164,7 +187,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[listeners](sparsereadable.md#listeners)*
 
-Defined in node_modules/@types/node/base.d.ts:343
+Defined in node_modules/@types/node/globals.d.ts:558
 
 **Parameters:**
 
@@ -176,20 +199,53 @@ Name | Type |
 
 ___
 
-###  on
+###  off
 
-▸ **on**(`event`: string | symbol, `listener`: Function): *this*
+▸ **off**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [SparseReadable](sparsereadable.md).[on](sparsereadable.md#on)*
+*Inherited from [SparseReadable](sparsereadable.md).[off](sparsereadable.md#off)*
 
-Defined in node_modules/@types/node/base.d.ts:337
+Defined in node_modules/@types/node/globals.d.ts:554
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string &#124; symbol |
-`listener` | Function |
+`...args` | any[] |
+
+**Returns:** *this*
+
+___
+
+###  on
+
+▸ **on**(`event`: string | symbol, `listener`: function): *this*
+
+*Inherited from [SparseReadable](sparsereadable.md).[on](sparsereadable.md#on)*
+
+Defined in node_modules/@types/node/globals.d.ts:551
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -197,18 +253,25 @@ ___
 
 ###  once
 
-▸ **once**(`event`: string | symbol, `listener`: Function): *this*
+▸ **once**(`event`: string | symbol, `listener`: function): *this*
 
 *Inherited from [SparseReadable](sparsereadable.md).[once](sparsereadable.md#once)*
 
-Defined in node_modules/@types/node/base.d.ts:338
+Defined in node_modules/@types/node/globals.d.ts:552
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string &#124; symbol |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -220,7 +283,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[pause](sparsereadable.md#pause)*
 
-Defined in node_modules/@types/node/base.d.ts:356
+Defined in node_modules/@types/node/globals.d.ts:572
 
 **Returns:** *this*
 
@@ -232,7 +295,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[pipe](sparsereadable.md#pipe)*
 
-Defined in node_modules/@types/node/base.d.ts:359
+Defined in node_modules/@types/node/globals.d.ts:575
 
 **Type parameters:**
 
@@ -251,18 +314,25 @@ ___
 
 ###  prependListener
 
-▸ **prependListener**(`event`: string | symbol, `listener`: Function): *this*
+▸ **prependListener**(`event`: string | symbol, `listener`: function): *this*
 
 *Inherited from [SparseReadable](sparsereadable.md).[prependListener](sparsereadable.md#prependlistener)*
 
-Defined in node_modules/@types/node/base.d.ts:347
+Defined in node_modules/@types/node/globals.d.ts:563
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string &#124; symbol |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -270,18 +340,25 @@ ___
 
 ###  prependOnceListener
 
-▸ **prependOnceListener**(`event`: string | symbol, `listener`: Function): *this*
+▸ **prependOnceListener**(`event`: string | symbol, `listener`: function): *this*
 
 *Inherited from [SparseReadable](sparsereadable.md).[prependOnceListener](sparsereadable.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:348
+Defined in node_modules/@types/node/globals.d.ts:564
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string &#124; symbol |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -291,7 +368,7 @@ ___
 
 ▸ **push**(`chunk`: [SparseStreamChunk](sparsestreamchunk.md)): *boolean*
 
-*Defined in [lib/sparse-stream/shared.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/sparse-stream/shared.ts#L50)*
+*Defined in [lib/sparse-stream/shared.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/shared.ts#L51)*
 
 **Parameters:**
 
@@ -303,13 +380,31 @@ Name | Type |
 
 ___
 
+###  rawListeners
+
+▸ **rawListeners**(`event`: string | symbol): *Function[]*
+
+*Inherited from [SparseReadable](sparsereadable.md).[rawListeners](sparsereadable.md#rawlisteners)*
+
+Defined in node_modules/@types/node/globals.d.ts:559
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`event` | string &#124; symbol |
+
+**Returns:** *Function[]*
+
+___
+
 ###  read
 
-▸ **read**(`size?`: undefined | number): *string | Buffer*
+▸ **read**(`size?`: undefined | number): *string | [Buffer](alignedlockablebuffer.md#buffer)*
 
 *Inherited from [SparseReadable](sparsereadable.md).[read](sparsereadable.md#read)*
 
-Defined in node_modules/@types/node/base.d.ts:354
+Defined in node_modules/@types/node/globals.d.ts:570
 
 **Parameters:**
 
@@ -317,7 +412,7 @@ Name | Type |
 ------ | ------ |
 `size?` | undefined &#124; number |
 
-**Returns:** *string | Buffer*
+**Returns:** *string | [Buffer](alignedlockablebuffer.md#buffer)*
 
 ___
 
@@ -327,7 +422,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[removeAllListeners](sparsereadable.md#removealllisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:340
+Defined in node_modules/@types/node/globals.d.ts:555
 
 **Parameters:**
 
@@ -341,18 +436,25 @@ ___
 
 ###  removeListener
 
-▸ **removeListener**(`event`: string | symbol, `listener`: Function): *this*
+▸ **removeListener**(`event`: string | symbol, `listener`: function): *this*
 
 *Inherited from [SparseReadable](sparsereadable.md).[removeListener](sparsereadable.md#removelistener)*
 
-Defined in node_modules/@types/node/base.d.ts:339
+Defined in node_modules/@types/node/globals.d.ts:553
+
+**Parameters:**
+
+▪ **event**: *string | symbol*
+
+▪ **listener**: *function*
+
+▸ (...`args`: any[]): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | string &#124; symbol |
-`listener` | Function |
+`...args` | any[] |
 
 **Returns:** *this*
 
@@ -364,7 +466,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[resume](sparsereadable.md#resume)*
 
-Defined in node_modules/@types/node/base.d.ts:357
+Defined in node_modules/@types/node/globals.d.ts:573
 
 **Returns:** *this*
 
@@ -372,19 +474,19 @@ ___
 
 ###  setEncoding
 
-▸ **setEncoding**(`encoding`: string | null): *void*
+▸ **setEncoding**(`encoding`: string): *this*
 
 *Inherited from [SparseReadable](sparsereadable.md).[setEncoding](sparsereadable.md#setencoding)*
 
-Defined in node_modules/@types/node/base.d.ts:355
+Defined in node_modules/@types/node/globals.d.ts:571
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`encoding` | string &#124; null |
+`encoding` | string |
 
-**Returns:** *void*
+**Returns:** *this*
 
 ___
 
@@ -394,7 +496,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[setMaxListeners](sparsereadable.md#setmaxlisteners)*
 
-Defined in node_modules/@types/node/base.d.ts:341
+Defined in node_modules/@types/node/globals.d.ts:556
 
 **Parameters:**
 
@@ -408,23 +510,19 @@ ___
 
 ###  unpipe
 
-▸ **unpipe**<**T**>(`destination?`: T): *void*
+▸ **unpipe**(`destination?`: WritableStream): *this*
 
 *Inherited from [SparseReadable](sparsereadable.md).[unpipe](sparsereadable.md#unpipe)*
 
-Defined in node_modules/@types/node/base.d.ts:360
-
-**Type parameters:**
-
-▪ **T**: *WritableStream*
+Defined in node_modules/@types/node/globals.d.ts:576
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`destination?` | T |
+`destination?` | WritableStream |
 
-**Returns:** *void*
+**Returns:** *this*
 
 ___
 
@@ -434,7 +532,7 @@ ___
 
 *Inherited from [SparseReadable](sparsereadable.md).[unshift](sparsereadable.md#unshift)*
 
-Defined in node_modules/@types/node/base.d.ts:361
+Defined in node_modules/@types/node/globals.d.ts:577
 
 **Parameters:**
 
@@ -444,17 +542,17 @@ Name | Type |
 
 **Returns:** *void*
 
-▸ **unshift**(`chunk`: Buffer): *void*
+▸ **unshift**(`chunk`: [Buffer](alignedlockablebuffer.md#buffer)): *void*
 
 *Inherited from [SparseReadable](sparsereadable.md).[unshift](sparsereadable.md#unshift)*
 
-Defined in node_modules/@types/node/base.d.ts:362
+Defined in node_modules/@types/node/globals.d.ts:578
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`chunk` | Buffer |
+`chunk` | [Buffer](alignedlockablebuffer.md#buffer) |
 
 **Returns:** *void*
 
@@ -462,11 +560,11 @@ ___
 
 ###  wrap
 
-▸ **wrap**(`oldStream`: ReadableStream): *ReadableStream*
+▸ **wrap**(`oldStream`: ReadableStream): *this*
 
 *Inherited from [SparseReadable](sparsereadable.md).[wrap](sparsereadable.md#wrap)*
 
-Defined in node_modules/@types/node/base.d.ts:363
+Defined in node_modules/@types/node/globals.d.ts:579
 
 **Parameters:**
 
@@ -474,4 +572,4 @@ Name | Type |
 ------ | ------ |
 `oldStream` | ReadableStream |
 
-**Returns:** *ReadableStream*
+**Returns:** *this*

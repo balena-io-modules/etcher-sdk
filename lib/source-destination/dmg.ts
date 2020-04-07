@@ -14,14 +14,21 @@
  * limitations under the License.
  */
 
-import { promisify } from 'bluebird';
 import * as _ from 'lodash';
 import { BLOCK, CHECKSUM_TYPE, Image as UDIFImage, SECTOR_SIZE } from 'udif';
+import { promisify } from 'util';
 
 import { Metadata } from './metadata';
-import { SourceDestination, SourceDestinationFs } from './source-destination';
+import {
+	CreateReadStreamOptions,
+	CreateSparseReadStreamOptions,
+	SourceDestination,
+	SourceDestinationFs,
+} from './source-destination';
 import { SourceSource } from './source-source';
 
+import { BlockTransformStream } from '../block-transform-stream';
+import { CHUNK_SIZE } from '../constants';
 import { NotCapable } from '../errors';
 import {
 	Block,
@@ -29,6 +36,7 @@ import {
 	BlocksWithChecksum,
 	SparseReadable,
 } from '../sparse-stream/shared';
+import { ProgressSparseTransformStream } from '../sparse-stream/sparse-transform-stream';
 import { StreamLimiter } from '../stream-limiter';
 
 export class DmgSource extends SourceSource {
@@ -56,11 +64,12 @@ export class DmgSource extends SourceSource {
 		return true;
 	}
 
-	public async createReadStream(
-		_emitProgress = false,
+	public async createReadStream({
 		start = 0,
-		end?: number,
-	): Promise<NodeJS.ReadableStream> {
+		end,
+		alignment,
+		numBuffers,
+	}: CreateReadStreamOptions = {}): Promise<NodeJS.ReadableStream> {
 		if (start !== 0) {
 			throw new NotCapable();
 		}
@@ -69,15 +78,30 @@ export class DmgSource extends SourceSource {
 			const transform = new StreamLimiter(stream, end + 1);
 			return transform;
 		}
-		return stream;
+		return BlockTransformStream.alignIfNeeded(stream, alignment, numBuffers);
 	}
 
-	public async createSparseReadStream(
-		_generateChecksums: boolean,
-	): Promise<SparseReadable> {
-		return Object.assign(this.image.createSparseReadStream(), {
-			blocks: await this.getBlocks(),
+	public async createSparseReadStream({
+		alignment,
+		numBuffers,
+	}: CreateSparseReadStreamOptions = {}): Promise<SparseReadable> {
+		const blocks = await this.getBlocks();
+		const stream = Object.assign(this.image.createSparseReadStream(), {
+			blocks,
 		});
+		if (alignment !== undefined) {
+			const transform = new ProgressSparseTransformStream({
+				blocks,
+				chunkSize: CHUNK_SIZE,
+				alignment,
+				numBuffers,
+			});
+			stream.on('error', transform.emit.bind(transform, 'error'));
+			stream.pipe(transform);
+			return transform;
+		} else {
+			return stream;
+		}
 	}
 
 	public async getBlocks(): Promise<BlocksWithChecksum[]> {

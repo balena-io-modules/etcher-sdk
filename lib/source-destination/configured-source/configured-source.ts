@@ -31,7 +31,11 @@ import { SparseFilterStream } from '../../sparse-stream/sparse-filter-stream';
 import { SparseReadStream } from '../../sparse-stream/sparse-read-stream';
 
 import { Metadata } from '../metadata';
-import { SourceDestination } from '../source-destination';
+import {
+	CreateReadStreamOptions,
+	CreateSparseReadStreamOptions,
+	SourceDestination,
+} from '../source-destination';
 import { SourceSource } from '../source-source';
 
 import { configure as legacyConfigure } from './configure';
@@ -83,20 +87,37 @@ export class SourceDisk extends Disk {
 }
 
 export class ConfiguredSource extends SourceSource {
+	private shouldTrimPartitions: boolean;
+	private createStreamFromDisk: boolean;
+	private config: any;
+	private checksumType: ChecksumType;
+	private chunkSize: number;
 	private disk: SourceDisk;
 	private configure?: ConfigureFunction;
 
-	constructor(
-		// source needs to implement read and createReadStream
-		source: SourceDestination,
-		private shouldTrimPartitions: boolean,
-		private createStreamFromDisk: boolean,
-		configure?: ConfigureFunction | 'legacy',
-		private config?: any,
-		private checksumType: ChecksumType = 'xxhash64',
-		private chunkSize = CHUNK_SIZE,
-	) {
+	constructor({
+		source, // source needs to implement read and createReadStream
+		shouldTrimPartitions,
+		createStreamFromDisk,
+		configure,
+		config,
+		checksumType = 'xxhash64',
+		chunkSize = CHUNK_SIZE,
+	}: {
+		source: SourceDestination;
+		shouldTrimPartitions: boolean;
+		createStreamFromDisk: boolean;
+		configure?: ConfigureFunction | 'legacy';
+		config?: any;
+		checksumType?: ChecksumType;
+		chunkSize?: number;
+	}) {
 		super(source);
+		this.shouldTrimPartitions = shouldTrimPartitions;
+		this.createStreamFromDisk = createStreamFromDisk;
+		this.config = config;
+		this.checksumType = checksumType;
+		this.chunkSize = chunkSize;
 		this.disk = new SourceDisk(source);
 		if (configure === 'legacy') {
 			this.configure = legacyConfigure;
@@ -146,9 +167,9 @@ export class ConfiguredSource extends SourceSource {
 	}
 
 	public async createReadStream(
-		...args: any[]
+		options: CreateReadStreamOptions,
 	): Promise<NodeJS.ReadableStream> {
-		const imageStream = await this.source.createReadStream(...args);
+		const imageStream = await this.source.createReadStream(options);
 		const transform = this.disk.getTransformStream();
 		imageStream.on('error', (err: Error) => {
 			transform.emit('error', err);
@@ -159,37 +180,58 @@ export class ConfiguredSource extends SourceSource {
 
 	private async createSparseReadStreamFromDisk(
 		generateChecksums: boolean,
+		alignment?: number,
+		numBuffers = 2,
 	): Promise<SparseReadStream> {
-		return new SparseReadStream(
-			this,
-			await this.getBlocksWithChecksumType(generateChecksums), // blocks
-			CHUNK_SIZE,
-			false, // verify
+		return new SparseReadStream({
+			source: this,
+			blocks: await this.getBlocksWithChecksumType(generateChecksums), // blocks
+			chunkSize: CHUNK_SIZE,
+			verify: false,
 			generateChecksums,
-		);
+			alignment,
+			numBuffers,
+		});
 	}
 
 	private async createSparseReadStreamFromStream(
 		generateChecksums: boolean,
+		alignment?: number,
+		numBuffers = 2,
 	): Promise<SparseFilterStream> {
-		const stream = await this.createReadStream();
-		const transform = new SparseFilterStream(
-			await this.getBlocksWithChecksumType(generateChecksums),
-			false, // verify
+		const stream = await this.createReadStream({
+			alignment,
+			numBuffers,
+		});
+		const transform = new SparseFilterStream({
+			blocks: await this.getBlocksWithChecksumType(generateChecksums),
+			verify: false,
 			generateChecksums,
-		);
+		});
 		stream.on('error', transform.emit.bind(transform, 'error'));
 		stream.pipe(transform);
 		return transform;
 	}
 
-	public async createSparseReadStream(
-		generateChecksums: boolean,
-	): Promise<SparseReadStream | SparseFilterStream> {
+	public async createSparseReadStream({
+		generateChecksums = false,
+		alignment,
+		numBuffers = 2,
+	}: CreateSparseReadStreamOptions = {}): Promise<
+		SparseReadStream | SparseFilterStream
+	> {
 		if (this.createStreamFromDisk) {
-			return await this.createSparseReadStreamFromDisk(generateChecksums);
+			return await this.createSparseReadStreamFromDisk(
+				generateChecksums,
+				alignment,
+				numBuffers,
+			);
 		} else {
-			return await this.createSparseReadStreamFromStream(generateChecksums);
+			return await this.createSparseReadStreamFromStream(
+				generateChecksums,
+				alignment,
+				numBuffers,
+			);
 		}
 	}
 

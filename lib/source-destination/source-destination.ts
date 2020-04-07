@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { fromCallback } from 'bluebird';
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
 import * as fileType from 'file-type';
@@ -23,16 +24,20 @@ import { arch } from 'process';
 import { Stream as HashStream } from 'xxhash';
 
 import {
+	AlignedLockableBuffer,
+	isAlignedLockableBuffer,
+} from '../aligned-lockable-buffer';
+import {
 	CHUNK_SIZE,
 	PROGRESS_EMISSION_INTERVAL,
 	XXHASH_SEED,
 } from '../constants';
 import { ChecksumVerificationError, NotCapable } from '../errors';
 import { BlocksWithChecksum, SparseReadable } from '../sparse-stream/shared';
+import { SparseWritable } from '../sparse-stream/shared';
 import { SparseFilterStream } from '../sparse-stream/sparse-filter-stream';
 import { SparseReadStream } from '../sparse-stream/sparse-read-stream';
-import { SparseWritable } from '../sparse-stream/sparse-write-stream';
-import { streamToBuffer } from '../utils';
+import { asCallback, streamToBuffer } from '../utils';
 
 import { Metadata } from './metadata';
 import {
@@ -47,11 +52,29 @@ const BITS = arch === 'x64' || arch === 'aarch64' ? 64 : 32;
 export class CountingHashStream extends HashStream {
 	public bytesWritten = 0;
 
-	public _transform(chunk: Buffer, encoding: string, callback: () => void) {
-		super._transform(chunk, encoding, () => {
-			callback();
-			this.bytesWritten += chunk.length;
-		});
+	public async __transform(
+		chunk: Buffer | AlignedLockableBuffer,
+		encoding: string,
+	): Promise<void> {
+		const unlock = isAlignedLockableBuffer(chunk)
+			? await chunk.rlock()
+			: undefined;
+		try {
+			await fromCallback((callback: (error?: Error) => void) => {
+				super._transform(chunk, encoding, callback);
+			});
+		} finally {
+			unlock?.();
+		}
+		this.bytesWritten += chunk.length;
+	}
+
+	public _transform(
+		chunk: Buffer | AlignedLockableBuffer,
+		encoding: string,
+		callback: (error?: Error) => void,
+	) {
+		asCallback(this.__transform(chunk, encoding), callback);
 	}
 }
 
@@ -159,7 +182,10 @@ export class StreamVerifier extends Verifier {
 	}
 
 	public async run(): Promise<void> {
-		const stream = await this.source.createReadStream(false, 0, this.size - 1);
+		const stream = await this.source.createReadStream({
+			end: this.size - 1,
+			alignment: this.source.getAlignment(),
+		});
 		stream.on('error', this.emit.bind(this, 'error'));
 		const hasher = createHasher();
 		hasher.on('error', this.emit.bind(this, 'error'));
@@ -188,15 +214,18 @@ export class SparseStreamVerifier extends Verifier {
 	}
 
 	public async run(): Promise<void> {
+		const alignment = this.source.getAlignment();
 		let stream: SparseReadStream | SparseFilterStream;
 		if (await this.source.canRead()) {
-			stream = new SparseReadStream(
-				this.source,
-				this.blocks,
-				CHUNK_SIZE,
-				true, // verify
-				false, // generateChecksums
-			);
+			stream = new SparseReadStream({
+				source: this.source,
+				blocks: this.blocks,
+				chunkSize: CHUNK_SIZE,
+				verify: true,
+				generateChecksums: false,
+				alignment,
+				numBuffers: 2,
+			});
 			stream.on('error', this.emit.bind(this, 'error'));
 		} else if (await this.source.canCreateReadStream()) {
 			const originalStream = await this.source.createReadStream();
@@ -204,11 +233,11 @@ export class SparseStreamVerifier extends Verifier {
 				originalStream.unpipe(transform);
 				this.emit('error', error);
 			});
-			const transform = new SparseFilterStream(
-				this.blocks,
-				true, // verify
-				false, // generateChecksums
-			);
+			const transform = new SparseFilterStream({
+				blocks: this.blocks,
+				verify: true,
+				generateChecksums: false,
+			});
 			transform.once('error', (error: Error) => {
 				originalStream.unpipe(transform);
 				// @ts-ignore
@@ -226,6 +255,20 @@ export class SparseStreamVerifier extends Verifier {
 		const meter = new ProgressWritable({ objectMode: true });
 		this.handleEventsAndPipe(stream, meter);
 	}
+}
+
+export interface CreateReadStreamOptions {
+	emitProgress?: boolean;
+	start?: number;
+	end?: number;
+	alignment?: number;
+	numBuffers?: number;
+}
+
+export interface CreateSparseReadStreamOptions {
+	generateChecksums?: boolean;
+	alignment?: number;
+	numBuffers?: number;
 }
 
 export class SourceDestination extends EventEmitter {
@@ -251,6 +294,10 @@ export class SourceDestination extends EventEmitter {
 		if (Cls.mimetype !== undefined) {
 			SourceDestination.mimetypes.set(Cls.mimetype, Cls);
 		}
+	}
+
+	public getAlignment(): number | undefined {
+		return undefined;
 	}
 
 	public async canRead(): Promise<boolean> {
@@ -307,15 +354,13 @@ export class SourceDestination extends EventEmitter {
 	}
 
 	public async createReadStream(
-		_emitProgress = false,
-		_start = 0,
-		_end?: number,
+		_options: CreateReadStreamOptions = {},
 	): Promise<NodeJS.ReadableStream> {
 		throw new NotCapable();
 	}
 
 	public async createSparseReadStream(
-		_generateChecksums = false,
+		_options: CreateSparseReadStreamOptions = {},
 	): Promise<SparseReadable> {
 		throw new NotCapable();
 	}
@@ -324,11 +369,15 @@ export class SourceDestination extends EventEmitter {
 		throw new NotCapable();
 	}
 
-	public async createWriteStream(): Promise<NodeJS.WritableStream> {
+	public async createWriteStream(
+		_options: { highWaterMark?: number } = {},
+	): Promise<NodeJS.WritableStream> {
 		throw new NotCapable();
 	}
 
-	public async createSparseWriteStream(): Promise<SparseWritable> {
+	public async createSparseWriteStream(
+		_options: { highWaterMark?: number } = {},
+	): Promise<SparseWritable> {
 		throw new NotCapable();
 	}
 
@@ -391,7 +440,9 @@ export class SourceDestination extends EventEmitter {
 	private async getMimeTypeFromContent(): Promise<string | undefined> {
 		let stream: NodeJS.ReadableStream;
 		try {
-			stream = await this.createReadStream(false, 0, 263); // TODO: constant
+			stream = await this.createReadStream({
+				end: 263, // TODO: constant
+			});
 		} catch (error) {
 			if (error instanceof NotCapable) {
 				return;
@@ -443,7 +494,9 @@ export class SourceDestination extends EventEmitter {
 	}
 
 	public async getPartitionTable(): Promise<GetPartitionsResult | undefined> {
-		const stream = await this.createReadStream(false, 0, 65535); // TODO: constant
+		const stream = await this.createReadStream({
+			end: 65535, // TODO: constant
+		});
 		const buffer = await streamToBuffer(stream);
 		try {
 			return await getPartitions(buffer, { getLogical: false });

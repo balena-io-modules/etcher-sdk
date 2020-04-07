@@ -20,7 +20,7 @@
 
 • **bytes**: *number*
 
-*Defined in [lib/source-destination/progress.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/progress.ts#L29)*
+*Defined in [lib/source-destination/progress.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/progress.ts#L29)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **position**: *number*
 
-*Defined in [lib/source-destination/progress.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/progress.ts#L28)*
+*Defined in [lib/source-destination/progress.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/progress.ts#L28)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **speed**: *number*
 
-*Defined in [lib/source-destination/progress.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/progress.ts#L30)*
+*Defined in [lib/source-destination/progress.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/progress.ts#L30)*

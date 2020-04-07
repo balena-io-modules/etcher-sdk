@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { promisify } from 'bluebird';
 import { createDecompressor, parseFileIndex } from 'lzma-native';
 import { Transform } from 'stream';
+import { promisify } from 'util';
 
 import { CompressedSource } from './compressed-source';
 import { SourceDestination } from './source-destination';

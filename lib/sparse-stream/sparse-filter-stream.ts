@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import { Transform } from 'readable-stream';
-import { TransformOptions } from 'stream';
+import { Transform } from 'stream';
 
 import {
 	BlocksWithChecksum,
@@ -25,17 +24,22 @@ import {
 } from './shared';
 
 export class SparseFilterStream extends Transform implements SparseReadable {
+	public readonly blocks: BlocksWithChecksum[];
 	private stateIterator: Iterator<SparseReaderState>;
 	private state?: SparseReaderState;
 	private position = 0;
 
-	constructor(
-		public readonly blocks: BlocksWithChecksum[],
-		verify: boolean,
-		generateChecksums: boolean,
-		options: TransformOptions = {},
-	) {
-		super({ ...options, objectMode: true });
+	constructor({
+		blocks,
+		verify,
+		generateChecksums,
+	}: {
+		blocks: BlocksWithChecksum[];
+		verify: boolean;
+		generateChecksums: boolean;
+	}) {
+		super({ objectMode: true });
+		this.blocks = blocks;
 		this.stateIterator = createSparseReaderStateIterator(
 			blocks,
 			verify,
@@ -51,9 +55,9 @@ export class SparseFilterStream extends Transform implements SparseReadable {
 	public _transform(
 		chunk: Buffer,
 		_encoding: string,
-		callback: (error: Error | null) => void,
+		callback: (error?: Error) => void,
 	) {
-		let error: Error | null = null;
+		let error: Error | undefined;
 		try {
 			this.__transform(chunk);
 		} catch (err) {

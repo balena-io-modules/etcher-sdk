@@ -28,7 +28,7 @@
 
 • **code**: *string* = "EVALIDATION"
 
-*Defined in [lib/errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/errors.ts#L24)*
+*Defined in [lib/errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/errors.ts#L24)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 *Inherited from [NotCapable](notcapable.md).[message](notcapable.md#message)*
 
-Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:974
+Defined in node_modules/typescript/lib/lib.es5.d.ts:974
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 *Inherited from [NotCapable](notcapable.md).[name](notcapable.md#name)*
 
-Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:973
+Defined in node_modules/typescript/lib/lib.es5.d.ts:973
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 *Overrides [NotCapable](notcapable.md).[stack](notcapable.md#optional-stack)*
 
-Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:975
+Defined in node_modules/typescript/lib/lib.es5.d.ts:975
 
 ___
 
@@ -68,4 +68,4 @@ ___
 
 ▪ **Error**: *ErrorConstructor*
 
-Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:984
+Defined in node_modules/typescript/lib/lib.es5.d.ts:984

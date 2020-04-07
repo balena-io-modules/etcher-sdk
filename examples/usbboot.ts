@@ -22,7 +22,9 @@ import { pipeSourceToDestinationsWithProgressBar } from './utils';
 
 async function main() {
 	const adapters: scanner.adapters.Adapter[] = [
-		new scanner.adapters.BlockDeviceAdapter(() => false),
+		new scanner.adapters.BlockDeviceAdapter({
+			includeSystemDrives: () => false,
+		}),
 		new scanner.adapters.UsbbootDeviceAdapter(),
 	];
 	const deviceScanner = new scanner.Scanner(adapters);
@@ -85,11 +87,16 @@ async function main() {
 	if (argv.length >= 3) {
 		console.log(`Writing image ${argv[2]}`);
 		let source: sourceDestination.SourceDestination = new sourceDestination.File(
-			argv[2],
-			sourceDestination.File.OpenFlags.Read,
+			{
+				path: argv[2],
+			},
 		);
 		if (await source.canRead()) {
-			source = new sourceDestination.ConfiguredSource(source, true, true);
+			source = new sourceDestination.ConfiguredSource({
+				source,
+				shouldTrimPartitions: true,
+				createStreamFromDisk: true,
+			});
 		}
 		pipeSourceToDestinationsWithProgressBar(source, [dest], true);
 	}

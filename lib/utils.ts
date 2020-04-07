@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { isAlignedLockableBuffer } from './aligned-lockable-buffer';
 import { SparseStreamChunk } from './sparse-stream/shared';
 
 export async function streamToBuffer(
@@ -23,7 +24,21 @@ export async function streamToBuffer(
 		(resolve: (buffer: Buffer) => void, reject: (error: Error) => void) => {
 			const chunks: Buffer[] = [];
 			stream.on('error', reject);
-			stream.on('data', chunks.push.bind(chunks));
+			stream.on('data', async (chunk: Buffer) => {
+				let data: Buffer;
+				if (isAlignedLockableBuffer(chunk)) {
+					const unlock = await chunk.rlock();
+					try {
+						data = Buffer.allocUnsafe(chunk.length);
+						chunk.copy(data);
+					} finally {
+						unlock();
+					}
+				} else {
+					data = chunk;
+				}
+				chunks.push(data);
+			});
 			stream.on('end', () => {
 				resolve(Buffer.concat(chunks));
 			});
@@ -40,7 +55,26 @@ export async function sparseStreamToBuffer(
 	await new Promise((resolve: () => void, reject: (error: Error) => void) => {
 		stream.on('error', reject);
 		stream.on('end', resolve);
-		stream.on('data', chunks.push.bind(chunks));
+		stream.on('data', async (chunk: SparseStreamChunk) => {
+			if (isAlignedLockableBuffer(chunk.buffer)) {
+				let unlock;
+				try {
+					unlock = await chunk.buffer.rlock();
+				} catch (error) {
+					reject(error);
+					return;
+				}
+				let data;
+				try {
+					data = Buffer.allocUnsafe(chunk.buffer.length);
+					chunk.buffer.copy(data);
+				} finally {
+					unlock();
+				}
+				chunk.buffer = data;
+			}
+			chunks.push(chunk);
+		});
 	});
 	if (chunks.length === 0) {
 		return Buffer.alloc(0);
@@ -61,13 +95,14 @@ export function difference<T>(setA: Set<T>, setB: Set<T>): Set<T> {
 	return _difference;
 }
 
-export function asCallback(
-	promise: Promise<any>,
-	callback: (error: Error | void, value?: any) => void,
-) {
-	promise
-		.then((value: any) => {
-			callback(undefined, value);
-		})
-		.catch(callback);
+export async function asCallback<T>(
+	promise: Promise<T>,
+	callback: (error?: Error | null, value?: T) => void,
+): Promise<void> {
+	try {
+		const value = await promise;
+		callback(null, value);
+	} catch (error) {
+		callback(error);
+	}
 }

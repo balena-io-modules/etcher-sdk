@@ -16,18 +16,19 @@
 
 import { delay } from 'bluebird';
 import { Spinner } from 'cli-spinner';
+import { promises as fs } from 'fs';
 import ProgressBar = require('progress');
 
-import { fs, multiWrite, sourceDestination } from '../lib';
+import { multiWrite, sourceDestination } from '../lib';
 
 const SPINNER_DELAY = 60;
 
 export async function readJsonFile(path: string): Promise<any> {
 	return JSON.parse(
-		(await fs.readFile(path, {
+		await fs.readFile(path, {
 			encoding: 'utf8',
 			flag: 'r',
-		})) as string,
+		}),
 	);
 }
 
@@ -110,12 +111,21 @@ export async function pipeSourceToDestinationsWithProgressBar(
 	source: sourceDestination.SourceDestination,
 	destinations: sourceDestination.SourceDestination[],
 	verify = false,
+	numBuffers = 16,
 ): Promise<multiWrite.PipeSourceToDestinationsResult> {
 	function onFail(
 		destination: sourceDestination.SourceDestination,
 		error: Error,
 	) {
-		console.error(`Error "${error}" on ${destination}`);
+		let name: string;
+		if (destination instanceof sourceDestination.BlockDevice) {
+			name = destination.device;
+		} else if (destination instanceof sourceDestination.File) {
+			name = destination.path;
+		} else {
+			name = destination.toString();
+		}
+		console.error(`Error "${error}" on ${name}`);
 	}
 	let step: multiWrite.WriteStep;
 	let progressBar: any | ProgressBar | Spinner;
@@ -143,6 +153,7 @@ export async function pipeSourceToDestinationsWithProgressBar(
 		onFail,
 		onProgress,
 		verify,
+		numBuffers,
 	);
 	// Sleep here to be sure the last spinner title was shown.
 	await delay(SPINNER_DELAY);

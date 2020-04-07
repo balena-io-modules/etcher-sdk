@@ -22,10 +22,10 @@ import { pipeSourceToDestinationsWithProgressBar, wrapper } from './utils';
 
 const main = async ({ zipSource, fileDestination, verify }: any) => {
 	const sourceHttp = new sourceDestination.Http(zipSource);
-	const destinationFile = new sourceDestination.File(
-		fileDestination,
-		sourceDestination.File.OpenFlags.ReadWrite,
-	);
+	const destinationFile = new sourceDestination.File({
+		path: fileDestination,
+		write: true,
+	});
 	const sourceZip = await sourceHttp.getInnerSource();
 	await pipeSourceToDestinationsWithProgressBar(
 		sourceZip,

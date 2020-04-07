@@ -16,32 +16,28 @@
 
 import { using } from 'bluebird';
 import { expect } from 'chai';
-import { randomBytes as randomBytesNode } from 'crypto';
+import { randomFill } from 'crypto';
+import { promises as fs } from 'fs';
 import 'mocha';
 import * as os from 'os';
 import { spy, stub } from 'sinon';
 import { Readable } from 'stream';
+import { promisify } from 'util';
 
+import { createBuffer } from '../lib/aligned-lockable-buffer';
 import { BlockWriteStream } from '../lib/block-write-stream';
 import { CHUNK_SIZE as BLOCK_WRITE_STREAM_CHUNK_SIZE } from '../lib/constants';
 import * as diskpart from '../lib/diskpart';
-import { readFile } from '../lib/fs';
 import { SparseWriteStream } from '../lib/sparse-stream/sparse-write-stream';
 import { tmpFileDisposer, TmpFileResult } from '../lib/tmp';
 import { blockDeviceFromFile, DEFAULT_IMAGE_TESTS_TIMEOUT } from './tester';
 
-async function randomBytes(size: number): Promise<Buffer> {
-	return await new Promise(
-		(resolve: (stats: Buffer) => void, reject: (err: Error) => void) => {
-			randomBytesNode(size, (err: Error, buffer: Buffer) => {
-				if (err) {
-					reject(err);
-					return;
-				}
-				resolve(buffer);
-			});
-		},
-	);
+const randomFillAsync = promisify(randomFill);
+
+async function randomBytes(size: number, alignment: number): Promise<Buffer> {
+	const buffer = createBuffer(size, alignment);
+	await randomFillAsync(buffer);
+	return buffer;
 }
 
 function* bufferChunks(buffer: Buffer, chunkSize: number) {
@@ -74,7 +70,7 @@ function bufferToSparseStream(
 }
 
 async function expectFileToContain(path: string, data: Buffer): Promise<void> {
-	const fileData = await readFile(path);
+	const fileData = await fs.readFile(path);
 	expect(fileData.slice(0, data.length)).to.deep.equal(data);
 }
 
@@ -82,13 +78,14 @@ describe('block-write-stream', function() {
 	this.timeout(DEFAULT_IMAGE_TESTS_TIMEOUT);
 	const SIZE = BLOCK_WRITE_STREAM_CHUNK_SIZE + 7;
 	const CHUNK_SIZE = 512;
+	const ALIGNMENT = 512;
 
 	async function testBlockWriteStream(
 		size: number,
 		chunkSize: number,
 		sparse = false,
 	): Promise<void> {
-		const data = await randomBytes(size);
+		const data = await randomBytes(size, ALIGNMENT);
 		const input = new Readable({ objectMode: sparse });
 		await using(tmpFileDisposer(false), async (file: TmpFileResult) => {
 			const destination = await blockDeviceFromFile(file.path);
@@ -112,24 +109,44 @@ describe('block-write-stream', function() {
 			});
 			// Check that the first bytes are written last on windows.
 			// ts-ignores are for accessing getCall() which is added by the spy() above.
-			if (os.platform() === 'win32') {
-				expect(output.firstBytesToKeep).to.not.equal(0);
-				// @ts-ignore
-				expect(destination.write.getCall(0).args[3]).to.equal(
-					output.firstBytesToKeep,
-				);
-				const $chunkSize = sparse ? CHUNK_SIZE : BLOCK_WRITE_STREAM_CHUNK_SIZE;
-				const callNumber =
-					Math.floor((SIZE - output.firstBytesToKeep) / $chunkSize) + 1;
-				// @ts-ignore
-				expect(destination.write.getCall(callNumber).args[3]).to.equal(0);
-			} else {
-				// @ts-ignore
-				expect(destination.write.getCall(0).args[3]).to.equal(0);
-				// @ts-ignore
-				expect(destination.write.getCall(1).args[3]).to.equal(
-					sparse ? CHUNK_SIZE : BLOCK_WRITE_STREAM_CHUNK_SIZE,
-				);
+			if (output instanceof SparseWriteStream) {
+				if (os.platform() === 'win32') {
+					expect(output.firstBytesToKeep).to.not.equal(0);
+					// @ts-ignore
+					expect(destination.write.getCall(0).args[3]).to.equal(
+						output.firstBytesToKeep,
+					);
+					const $chunkSize = sparse
+						? CHUNK_SIZE
+						: BLOCK_WRITE_STREAM_CHUNK_SIZE;
+					const callNumber =
+						Math.floor((SIZE - output.firstBytesToKeep) / $chunkSize) + 1;
+					// @ts-ignore
+					expect(destination.write.getCall(callNumber).args[3]).to.equal(0);
+				} else {
+					// @ts-ignore
+					expect(destination.write.getCall(0).args[3]).to.equal(0);
+					// @ts-ignore
+					expect(destination.write.getCall(1).args[3]).to.equal(
+						sparse ? CHUNK_SIZE : BLOCK_WRITE_STREAM_CHUNK_SIZE,
+					);
+				}
+			} else if (output instanceof BlockWriteStream) {
+				if (os.platform() === 'win32') {
+					// @ts-ignore (delayFirstBuffer is private)
+					expect(output.delayFirstBuffer).to.equal(true);
+					// @ts-ignore
+					expect(destination.write.getCall(0).args[3]).to.equal(CHUNK_SIZE);
+					// @ts-ignore
+					expect(destination.write.lastCall.args[3]).to.equal(0);
+				} else {
+					// @ts-ignore (delayFirstBuffer is private)
+					expect(output.delayFirstBuffer).to.equal(false);
+					// @ts-ignore
+					expect(destination.write.getCall(0).args[3]).to.equal(0);
+					// @ts-ignore
+					expect(destination.write.getCall(1).args[3]).to.equal(CHUNK_SIZE);
+				}
 			}
 			expect(output.bytesWritten).to.equal(size);
 			await destination.close();

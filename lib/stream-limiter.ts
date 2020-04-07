@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Transform } from 'readable-stream';
+import { Transform } from 'stream';
 import zlib = require('zlib');
 
 import { getRootStream } from './source-destination/compressed-source';
@@ -29,7 +29,7 @@ export class StreamLimiter extends Transform {
 	public _transform(
 		buffer: Buffer,
 		_encoding: string,
-		callback: (error?: Error | null, data?: Buffer) => void,
+		callback: (error?: Error, data?: Buffer) => void,
 	) {
 		const length = Math.min(buffer.length, this.maxBytes);
 		if (length > 0) {
@@ -37,7 +37,6 @@ export class StreamLimiter extends Transform {
 		}
 		this.maxBytes -= length;
 		if (this.maxBytes === 0) {
-			// @ts-ignore
 			this.stream.unpipe(this);
 			this.push(null);
 			this.emit('finish');

@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
+import { promises as fs } from 'fs';
 import { Argv } from 'yargs';
 
-import { fs, sourceDestination } from '../lib';
+import { sourceDestination } from '../lib';
 
 import { pipeSourceToDestinationsWithProgressBar, wrapper } from './utils';
 
 const readJsonFile = async (path: string): Promise<any> => {
 	const data = await fs.readFile(path, { encoding: 'utf8', flag: 'r' });
-	return JSON.parse(data as string);
+	return JSON.parse(data);
 };
 
 const main = async ({
@@ -40,18 +41,21 @@ const main = async ({
 		buildId,
 	);
 	if (trim || config !== undefined) {
-		source = new sourceDestination.ConfiguredSource(
+		source = new sourceDestination.ConfiguredSource({
 			source,
-			trim,
-			false,
-			config !== undefined ? 'legacy' : undefined,
-			config !== undefined ? { config: await readJsonFile(config) } : undefined,
-		);
+			shouldTrimPartitions: trim,
+			createStreamFromDisk: false,
+			configure: config !== undefined ? 'legacy' : undefined,
+			config:
+				config !== undefined
+					? { config: await readJsonFile(config) }
+					: undefined,
+		});
 	}
-	const destination = new sourceDestination.File(
-		fileDestination,
-		sourceDestination.File.OpenFlags.ReadWrite,
-	);
+	const destination = new sourceDestination.File({
+		path: fileDestination,
+		write: true,
+	});
 	await pipeSourceToDestinationsWithProgressBar(source, [destination], verify);
 };
 

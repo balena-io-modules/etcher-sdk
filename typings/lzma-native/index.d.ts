@@ -12,6 +12,9 @@ declare module 'lzma-native' {
 				cb: (err: Error | null, buffer?: Buffer) => any,
 			) => void;
 		},
-		callback: (error?: Error, metadata?: { uncompressedSize: number }) => void,
+		callback: (
+			error: Error | null,
+			metadata: { uncompressedSize: number },
+		) => void,
 	): void;
 }

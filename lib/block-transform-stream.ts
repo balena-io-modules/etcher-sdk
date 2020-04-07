@@ -14,36 +14,64 @@
  * limitations under the License.
  */
 
-import { Transform } from 'readable-stream';
+import { Transform } from 'stream';
+
+import { AlignedReadableState } from './aligned-lockable-buffer';
+import { CHUNK_SIZE } from './constants';
+import { asCallback } from './utils';
 
 export class BlockTransformStream extends Transform {
 	public bytesRead = 0;
 	public bytesWritten = 0;
-	private _buffers: Buffer[] = [];
-	private _bytes = 0;
+	private chunkSize: number;
+	private alignedReadableState: AlignedReadableState;
+	private inputBuffers: Buffer[] = [];
+	private inputBytes = 0;
 
-	constructor(private chunkSize: number) {
-		super();
+	constructor({
+		chunkSize,
+		alignment,
+		numBuffers = 2,
+	}: {
+		chunkSize: number;
+		alignment: number;
+		numBuffers?: number;
+	}) {
+		super({ objectMode: true, highWaterMark: numBuffers - 1 });
+		this.chunkSize = chunkSize;
+		this.alignedReadableState = new AlignedReadableState(
+			chunkSize,
+			alignment,
+			numBuffers,
+		);
 	}
 
-	private writeBuffers(flush = false) {
-		if (flush || this._bytes >= this.chunkSize) {
-			let block = Buffer.concat(this._buffers);
+	private async writeBuffers(flush = false): Promise<void> {
+		if (flush || this.inputBytes >= this.chunkSize) {
+			// TODO optimize
+			let block = Buffer.concat(this.inputBuffers, this.inputBytes);
 			const length = flush
 				? block.length
 				: Math.floor(block.length / this.chunkSize) * this.chunkSize;
 
-			this._buffers.length = 0;
-			this._bytes = 0;
+			this.inputBuffers.length = 0;
+			this.inputBytes = 0;
 
 			if (block.length !== length) {
-				this._buffers.push(block.slice(length));
-				this._bytes += block.length - length;
+				this.inputBuffers.push(block.slice(length));
+				this.inputBytes += block.length - length;
 				block = block.slice(0, length);
 			}
 
-			this.bytesWritten += block.length;
-			this.push(block);
+			const alignedBuffer = this.alignedReadableState.getCurrentBuffer();
+			const unlock = await alignedBuffer.lock();
+			try {
+				block.copy(alignedBuffer);
+			} finally {
+				unlock();
+			}
+			this.bytesWritten += length;
+			this.push(alignedBuffer.slice(0, length));
 		}
 	}
 
@@ -53,23 +81,30 @@ export class BlockTransformStream extends Transform {
 		callback: (error?: Error) => void,
 	) {
 		this.bytesRead += chunk.length;
-		if (
-			this._bytes === 0 &&
-			chunk.length >= this.chunkSize &&
-			chunk.length % this.chunkSize === 0
-		) {
-			this.bytesWritten += chunk.length;
-			this.push(chunk);
-		} else {
-			this._buffers.push(chunk);
-			this._bytes += chunk.length;
-			this.writeBuffers();
-		}
-		callback();
+		this.inputBuffers.push(chunk);
+		this.inputBytes += chunk.length;
+		asCallback(this.writeBuffers(), callback);
 	}
 
 	public _flush(callback: (error?: Error) => void) {
-		this.writeBuffers(true);
-		callback();
+		asCallback(this.writeBuffers(true), callback);
+	}
+
+	public static alignIfNeeded(
+		stream: NodeJS.ReadableStream,
+		alignment?: number,
+		numBuffers?: number,
+	) {
+		if (alignment === undefined) {
+			return stream;
+		}
+		const transform = new BlockTransformStream({
+			chunkSize: CHUNK_SIZE,
+			alignment,
+			numBuffers,
+		});
+		stream.on('error', transform.emit.bind(transform, 'error'));
+		stream.pipe(transform);
+		return transform;
 	}
 }

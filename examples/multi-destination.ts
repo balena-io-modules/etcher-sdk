@@ -26,14 +26,26 @@ import {
 
 const main = async ({
 	sourceImage,
-	devicePathPrefix,
+	devices,
 	verify,
 	trim,
 	config,
-}: any) => {
+	numBuffers,
+}: {
+	sourceImage: string;
+	devices: string[];
+	verify: boolean;
+	trim: boolean;
+	config: string;
+	numBuffers: number;
+}) => {
 	const adapters = [
-		new scanner.adapters.BlockDeviceAdapter(() => false),
-		new scanner.adapters.UsbbootDeviceAdapter(),
+		new scanner.adapters.BlockDeviceAdapter({
+			includeSystemDrives: () => false,
+			unmountOnSuccess: false,
+			write: true,
+			direct: true,
+		}),
 	];
 	const deviceScanner = new scanner.Scanner(adapters);
 	deviceScanner.on('error', console.error);
@@ -42,23 +54,25 @@ const main = async ({
 	await new Promise(resolve => {
 		deviceScanner.on('ready', resolve);
 	});
-	let source: sourceDestination.SourceDestination = new sourceDestination.File(
-		sourceImage,
-		sourceDestination.File.OpenFlags.Read,
-	);
+	let source: sourceDestination.SourceDestination = new sourceDestination.File({
+		path: sourceImage,
+	});
 	source = await source.getInnerSource(); // getInnerSource will open the sources for you, no need to call open().
 	if (trim || config !== undefined) {
-		source = new sourceDestination.ConfiguredSource(
+		source = new sourceDestination.ConfiguredSource({
 			source,
-			trim,
-			true,
-			config !== undefined ? 'legacy' : undefined,
-			config !== undefined ? { config: await readJsonFile(config) } : undefined,
-		);
+			shouldTrimPartitions: trim,
+			createStreamFromDisk: true,
+			configure: config !== undefined ? 'legacy' : undefined,
+			config:
+				config !== undefined
+					? { config: await readJsonFile(config) }
+					: undefined,
+		});
 	}
 	const destinationDrives = Array.from(deviceScanner.drives.values()).filter(
 		drive => {
-			return drive.devicePath && drive.devicePath.startsWith(devicePathPrefix);
+			return devices.includes(drive.device!);
 		},
 	);
 	try {
@@ -66,6 +80,7 @@ const main = async ({
 			source,
 			destinationDrives,
 			verify,
+			numBuffers,
 		);
 	} finally {
 		deviceScanner.stop();
@@ -74,15 +89,19 @@ const main = async ({
 
 // tslint:disable-next-line: no-var-requires
 const argv = require('yargs').command(
-	'$0 <sourceImage> <devicePathPrefix>',
-	'Write the sourceImage on all drives which link name in /dev/disk/by-path/ starts with devicePathPrefix.',
+	'$0 <sourceImage> [devices..]',
+	'Write the sourceImage on all devices.',
 	(yargs: Argv) => {
 		yargs.positional('sourceImage', { describe: 'Source image' });
-		yargs.positional('devicePathPrefix', {
-			describe: 'Devices name prefix in /dev/disk/by-path/',
+		yargs.positional('devices', {
+			describe: 'Devices to write to',
 		});
 		yargs.option('verify', { default: false });
 		yargs.option('trim', { default: false });
+		yargs.option('numBuffers', {
+			default: 16,
+			describe: 'Number of 1MiB buffers used to buffer data',
+		});
 		yargs.describe('config', 'json configuration file');
 	},
 ).argv;

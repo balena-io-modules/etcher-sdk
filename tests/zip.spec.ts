@@ -105,10 +105,9 @@ describe('zip support', function() {
 	for (const preferStreamSource of [false, true]) {
 		it(`should fail to read from a zip file containing no archive (use stream=${preferStreamSource})`, async () => {
 			const source = new sourceDestination.ZipSource(
-				new sourceDestination.File(
-					join(ZIP_PATH, 'zip-directory-empty.zip'),
-					sourceDestination.File.OpenFlags.Read,
-				),
+				new sourceDestination.File({
+					path: join(ZIP_PATH, 'zip-directory-empty.zip'),
+				}),
 				preferStreamSource,
 				() => false, // Don't match any filename
 			);
@@ -118,6 +117,8 @@ describe('zip support', function() {
 			} catch (error) {
 				expect(error).to.be.instanceof(Error);
 				expect(error.message).to.equal(NO_MATCHING_FILE_MSG);
+			} finally {
+				await source.close();
 			}
 		});
 	}

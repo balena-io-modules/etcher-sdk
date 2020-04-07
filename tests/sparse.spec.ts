@@ -41,10 +41,7 @@ describe('sparse streams', function() {
 	this.timeout(DEFAULT_IMAGE_TESTS_TIMEOUT);
 
 	it('dmgs, sparse streams and verifiers', async () => {
-		const source = new sourceDestination.File(
-			DMG_PATH,
-			sourceDestination.File.OpenFlags.Read,
-		);
+		const source = new sourceDestination.File({ path: DMG_PATH });
 		const innerSource = await source.getInnerSource();
 		assert(innerSource instanceof sourceDestination.DmgSource);
 
@@ -55,10 +52,7 @@ describe('sparse streams', function() {
 
 		// Create a temporary destination file:
 		await using(tmpFileDisposer(false), async ({ path }: { path: string }) => {
-			const destination = new sourceDestination.File(
-				path,
-				sourceDestination.File.OpenFlags.ReadWrite,
-			);
+			const destination = new sourceDestination.File({ path, write: true });
 			await destination.open();
 			// Test sparse write stream
 			const destinationStream = await destination.createSparseWriteStream();
@@ -108,15 +102,13 @@ describe('sparse streams', function() {
 				verifierError.message ===
 					'Checksum does not match for range [0, 134217727]: "wrong" != "4c754335"',
 			);
+			await destination.close();
 		});
 
 		// Test regular streams
 		const sourceStream = await innerSource.createReadStream();
 		await using(tmpFileDisposer(false), async ({ path }: { path: string }) => {
-			const destination = new sourceDestination.File(
-				path,
-				sourceDestination.File.OpenFlags.ReadWrite,
-			);
+			const destination = new sourceDestination.File({ path, write: true });
 			await destination.open();
 			const destinationStream = await destination.createWriteStream();
 			await new Promise((resolve, reject) => {
@@ -132,7 +124,9 @@ describe('sparse streams', function() {
 				verifier.on('finish', resolve);
 				verifier.run();
 			});
+			await destination.close();
 		});
+		await innerSource.close();
 	});
 
 	const checksumTypes: ChecksumType[] = [
@@ -146,22 +140,17 @@ describe('sparse streams', function() {
 		for (const createStreamFromDisk of [false, true]) {
 			for (const checksumType of checksumTypes) {
 				it(`${checksumType} hasher, createStreamFromDisk=${createStreamFromDisk}, alignment=${alignment}`, async () => {
-					const source = new sourceDestination.File(
-						DISK_PATH,
-						sourceDestination.File.OpenFlags.Read,
-					);
-					const trimmedSource = new sourceDestination.ConfiguredSource(
+					const source = new sourceDestination.File({ path: DISK_PATH });
+					const trimmedSource = new sourceDestination.ConfiguredSource({
 						source,
-						true,
+						shouldTrimPartitions: true,
 						createStreamFromDisk,
-						undefined,
-						undefined,
 						checksumType,
-						alignment,
-					);
+						chunkSize: alignment,
+					});
 					await trimmedSource.open();
 					const sourceSparseStream = await trimmedSource.createSparseReadStream(
-						true,
+						{ generateChecksums: true },
 					);
 					if (alignment === 1) {
 						assert(sourceSparseStream.blocks.length === 15);
@@ -176,10 +165,10 @@ describe('sparse streams', function() {
 					await using(
 						tmpFileDisposer(false),
 						async ({ path }: { path: string }) => {
-							const destination = new sourceDestination.File(
+							const destination = new sourceDestination.File({
 								path,
-								sourceDestination.File.OpenFlags.ReadWrite,
-							);
+								write: true,
+							});
 							await destination.open();
 							// Test sparse write stream
 							const destinationStream = await destination.createSparseWriteStream();
@@ -240,16 +229,14 @@ describe('sparse streams', function() {
 							assert(verifierError instanceof BlocksVerificationError);
 						},
 					);
+					await trimmedSource.close();
 				});
 			}
 		}
 	}
 
 	it('blockmap in a zip file', async () => {
-		const source = new sourceDestination.File(
-			ZIP_PATH,
-			sourceDestination.File.OpenFlags.Read,
-		);
+		const source = new sourceDestination.File({ path: ZIP_PATH });
 		const innerSource = await source.getInnerSource();
 		assert(innerSource instanceof sourceDestination.ZipSource);
 
@@ -269,10 +256,7 @@ describe('sparse streams', function() {
 
 		// Create a temporary destination file:
 		await using(tmpFileDisposer(false), async ({ path }: { path: string }) => {
-			const destination = new sourceDestination.File(
-				path,
-				sourceDestination.File.OpenFlags.ReadWrite,
-			);
+			const destination = new sourceDestination.File({ path, write: true });
 			await destination.open();
 			// Test sparse write stream
 			const destinationStream = await destination.createSparseWriteStream();
@@ -323,5 +307,6 @@ describe('sparse streams', function() {
 					'Checksum does not match for range [0, 16383]: "wrong" != "ce55029ab3dd4875edbf69fcc5d1942bb2abaf2cf88b87ae7016609b3feb5028"',
 			);
 		});
+		await innerSource.close();
 	});
 });

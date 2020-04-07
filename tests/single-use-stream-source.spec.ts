@@ -48,12 +48,7 @@ describe('zip in a single use stream source', function() {
 		await using(tmpFileDisposer(false), async file => {
 			await multiWrite.pipeSourceToDestinations(
 				source,
-				[
-					new sourceDestination.File(
-						file.path,
-						sourceDestination.File.OpenFlags.ReadWrite,
-					),
-				],
+				[new sourceDestination.File({ path: file.path, write: true })],
 				// onFail
 				(_destination: sourceDestination.SourceDestination, _error: Error) => {
 					assert(false);

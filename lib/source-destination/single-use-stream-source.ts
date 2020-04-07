@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
-import { SourceDestination } from './source-destination';
+import {
+	CreateReadStreamOptions,
+	SourceDestination,
+} from './source-destination';
 
 import { NotCapable } from '../errors';
 import { StreamLimiter } from '../stream-limiter';
@@ -30,11 +33,10 @@ export class SingleUseStreamSource extends SourceDestination {
 		return !this.used;
 	}
 
-	public async createReadStream(
-		_emitProgress = false,
+	public async createReadStream({
 		start = 0,
-		end?: number,
-	): Promise<NodeJS.ReadableStream> {
+		end,
+	}: CreateReadStreamOptions = {}): Promise<NodeJS.ReadableStream> {
 		if (this.used) {
 			throw new NotCapable('Single use source stream already used');
 		}

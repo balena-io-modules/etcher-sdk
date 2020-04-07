@@ -16,8 +16,9 @@
 
 import { delay } from 'bluebird';
 import { ReadResult } from 'file-disk';
-import { Readable } from 'readable-stream';
+import { Readable } from 'stream';
 
+import { AlignedReadableState } from './aligned-lockable-buffer';
 import {
 	CHUNK_SIZE,
 	PROGRESS_EMISSION_INTERVAL,
@@ -28,19 +29,42 @@ import { File } from './source-destination/file';
 import { makeClassEmitProgressEvents } from './source-destination/progress';
 
 export class BlockReadStream extends Readable {
-	private chunkSize: number;
+	private source: File;
+	private alignedReadableState: AlignedReadableState;
+	private bytesRead = 0;
+	private end: number;
+	private maxRetries: number;
 
-	constructor(
-		private source: File,
-		private bytesRead = 0,
-		private end = Infinity,
+	constructor({
+		source,
+		alignment,
+		start = 0,
+		end = Infinity,
 		chunkSize = CHUNK_SIZE,
-		private maxRetries = 5,
-	) {
-		super({ objectMode: true, highWaterMark: 2 });
-		this.chunkSize = Math.max(
-			Math.floor(chunkSize / this.source.blockSize) * this.source.blockSize,
-			this.source.blockSize,
+		maxRetries = 5,
+		numBuffers = 2,
+	}: {
+		source: File;
+		alignment: number;
+		start?: number;
+		end?: number;
+		chunkSize?: number;
+		maxRetries?: number;
+		numBuffers?: number;
+	}) {
+		super({ objectMode: true, highWaterMark: numBuffers - 1 });
+		this.source = source;
+		this.bytesRead = start;
+		this.end = end;
+		this.maxRetries = maxRetries;
+		chunkSize = Math.max(
+			Math.floor(chunkSize / alignment) * alignment,
+			alignment,
+		);
+		this.alignedReadableState = new AlignedReadableState(
+			chunkSize,
+			alignment,
+			numBuffers,
 		);
 	}
 
@@ -65,33 +89,33 @@ export class BlockReadStream extends Readable {
 		}
 	}
 
-	private async __read(): Promise<void> {
-		const toRead = this.end - this.bytesRead + 1; // end is inclusive
-
-		if (toRead <= 0) {
+	public async _read(): Promise<void> {
+		if (this.bytesRead > this.end) {
 			this.push(null);
 			return;
 		}
-
-		// Read chunkSize bytes if available, else all remaining bytes.
-		const length = Math.min(this.chunkSize, toRead);
-		const buffer = Buffer.allocUnsafe(length);
-
+		let buffer = this.alignedReadableState.getCurrentBuffer();
+		const toRead = this.end - this.bytesRead + 1;
+		if (toRead < buffer.length) {
+			buffer = buffer.slice(0, toRead);
+		}
 		try {
-			const { bytesRead } = await this.tryRead(buffer);
-			if (bytesRead === 0) {
-				this.push(null);
-				return;
+			const unlock = await buffer.lock();
+			let bytesRead;
+			try {
+				({ bytesRead } = await this.tryRead(buffer));
+			} finally {
+				unlock();
 			}
 			this.bytesRead += bytesRead;
-			this.push(buffer.slice(0, bytesRead));
+			if (bytesRead !== 0) {
+				this.push(buffer.slice(0, bytesRead));
+			} else {
+				this.push(null);
+			}
 		} catch (error) {
 			this.emit('error', error);
 		}
-	}
-
-	public _read() {
-		this.__read();
 	}
 }
 

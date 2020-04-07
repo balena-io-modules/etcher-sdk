@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
-import { Readable } from 'readable-stream';
-import { ReadableOptions } from 'stream';
+import { Readable } from 'stream';
 
+import {
+	AlignedReadableState,
+	isAlignedLockableBuffer,
+} from '../aligned-lockable-buffer';
 import { SourceDestination } from '../source-destination/source-destination';
 import {
 	BlocksWithChecksum,
@@ -27,19 +30,42 @@ import {
 } from './shared';
 
 export class SparseReadStream extends Readable implements SparseReadable {
+	private source: SourceDestination;
+	public readonly blocks: BlocksWithChecksum[];
+	private chunkSize: number;
 	private stateIterator: Iterator<SparseReaderState>;
 	private state?: SparseReaderState;
 	private positionInBlock = 0;
+	private alignedReadableState?: AlignedReadableState;
 
-	constructor(
-		private source: SourceDestination,
-		public readonly blocks: BlocksWithChecksum[],
-		private chunkSize: number,
-		verify: boolean,
-		generateChecksums: boolean,
-		options: ReadableOptions = {},
-	) {
-		super({ ...options, objectMode: true });
+	constructor({
+		source,
+		blocks,
+		chunkSize,
+		verify,
+		generateChecksums,
+		alignment,
+		numBuffers = 2,
+	}: {
+		source: SourceDestination;
+		blocks: BlocksWithChecksum[];
+		chunkSize: number;
+		verify: boolean;
+		generateChecksums: boolean;
+		alignment?: number;
+		numBuffers?: number;
+	}) {
+		super({ objectMode: true, highWaterMark: numBuffers - 1 });
+		this.source = source;
+		this.blocks = blocks;
+		this.chunkSize = chunkSize;
+		if (alignment !== undefined) {
+			this.alignedReadableState = new AlignedReadableState(
+				chunkSize,
+				alignment,
+				numBuffers,
+			);
+		}
 		this.stateIterator = createSparseReaderStateIterator(
 			blocks,
 			verify,
@@ -71,15 +97,23 @@ export class SparseReadStream extends Readable implements SparseReadable {
 			this.chunkSize,
 			this.state.subBlock.length - this.positionInBlock,
 		);
-		const buffer = Buffer.allocUnsafe(length);
-		await this.source.read(
-			buffer,
-			0,
-			length,
-			this.state.subBlock.offset + this.positionInBlock,
-		);
-		if (this.state.hasher !== undefined) {
-			this.state.hasher.update(buffer);
+		const buffer =
+			this.alignedReadableState !== undefined
+				? this.alignedReadableState.getCurrentBuffer().slice(0, length)
+				: Buffer.allocUnsafe(length);
+		const unlock = isAlignedLockableBuffer(buffer)
+			? await buffer.lock()
+			: undefined;
+		try {
+			await this.source.read(
+				buffer,
+				0,
+				length,
+				this.state.subBlock.offset + this.positionInBlock,
+			);
+			this.state.hasher?.update(buffer);
+		} finally {
+			unlock?.();
 		}
 		const chunk = {
 			buffer,

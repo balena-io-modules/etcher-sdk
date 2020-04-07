@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
+import { getAlignedBuffer } from '@ronomon/direct-io';
 import { delay } from 'bluebird';
 import * as _debug from 'debug';
-import { Writable } from 'readable-stream';
+import { Writable } from 'stream';
 
-import {
-	CHUNK_SIZE,
-	PROGRESS_EMISSION_INTERVAL,
-	RETRY_BASE_TIMEOUT,
-} from './constants';
+import { AlignedLockableBuffer } from './aligned-lockable-buffer';
+import { PROGRESS_EMISSION_INTERVAL, RETRY_BASE_TIMEOUT } from './constants';
 import { isTransientError } from './errors';
 import { BlockDevice } from './source-destination/block-device';
 import { makeClassEmitProgressEvents } from './source-destination/progress';
@@ -31,39 +29,35 @@ import { asCallback } from './utils';
 const debug = _debug('etcher:writer:block-write-stream');
 
 export class BlockWriteStream extends Writable {
+	private destination: BlockDevice;
+	private delayFirstBuffer: boolean;
+	private maxRetries: number;
 	public bytesWritten = 0;
-	private _firstBuffers: Buffer[] = [];
-	private _buffers: Buffer[] = [];
-	private _bytes = 0;
+	private position = 0;
+	private firstBuffer?: Buffer;
 
-	constructor(
-		private destination: BlockDevice,
-		public firstBytesToKeep = 0,
-		private maxRetries = 5,
-	) {
-		super({ objectMode: true, highWaterMark: 1 });
-		this.firstBytesToKeep =
-			Math.ceil(firstBytesToKeep / destination.blockSize) *
-			destination.blockSize;
+	constructor({
+		destination,
+		highWaterMark,
+		delayFirstBuffer = false,
+		maxRetries = 5,
+	}: {
+		destination: BlockDevice;
+		highWaterMark?: number;
+		delayFirstBuffer?: boolean;
+		maxRetries?: number;
+	}) {
+		super({ objectMode: true, highWaterMark });
+		this.destination = destination;
+		this.delayFirstBuffer = delayFirstBuffer;
+		this.maxRetries = maxRetries;
 	}
 
-	private async writeChunk(
-		buffer: Buffer,
-		position: number,
-		flushing = false,
-	): Promise<void> {
+	private async writeBuffer(buffer: Buffer, position: number): Promise<void> {
 		let retries = 0;
 		while (true) {
 			try {
-				const { bytesWritten } = await this.destination.write(
-					buffer,
-					0,
-					buffer.length,
-					position,
-				);
-				if (!flushing) {
-					this.bytesWritten += bytesWritten;
-				}
+				await this.destination.write(buffer, 0, buffer.length, position);
 				return;
 			} catch (error) {
 				if (isTransientError(error)) {
@@ -79,59 +73,27 @@ export class BlockWriteStream extends Writable {
 		}
 	}
 
-	private async writeBuffers(): Promise<void> {
-		if (this._bytes >= CHUNK_SIZE) {
-			let block = Buffer.concat(this._buffers);
-			const length =
-				Math.floor(block.length / this.destination.blockSize) *
-				this.destination.blockSize;
-
-			this._buffers.length = 0;
-			this._bytes = 0;
-
-			if (block.length !== length) {
-				this._buffers.push(block.slice(length));
-				this._bytes += block.length - length;
-				block = block.slice(0, length);
-			}
-
-			await this.writeChunk(block, this.bytesWritten);
-		}
-	}
-
-	private async __write(buffer: Buffer): Promise<void> {
-		debug('_write', buffer.length, this.bytesWritten);
-
-		// Keep the first blocks in memory and write them once the rest has been written.
-		// This is to prevent Windows from mounting the device while we flash it.
-		if (this.bytesWritten < this.firstBytesToKeep) {
-			const end = this.bytesWritten + buffer.length;
-			if (end <= this.firstBytesToKeep) {
-				this._firstBuffers.push(buffer);
-				this.bytesWritten += buffer.length;
+	private async __write(buffer: AlignedLockableBuffer): Promise<void> {
+		const unlock = await buffer.rlock();
+		debug('_write', buffer.length, this.position, this.bytesWritten);
+		try {
+			// Keep the first buffer in memory and write it once the rest has been written.
+			// This is to prevent Windows from mounting the device while we flash it.
+			if (this.delayFirstBuffer && this.firstBuffer === undefined) {
+				this.firstBuffer = getAlignedBuffer(buffer.length, buffer.alignment);
+				buffer.copy(this.firstBuffer);
 			} else {
-				const difference = this.firstBytesToKeep - this.bytesWritten;
-				this._firstBuffers.push(buffer.slice(0, difference));
-				this._buffers.push(buffer.slice(difference));
-				this._bytes += buffer.length - difference;
-				this.bytesWritten += difference;
-				await this.writeBuffers();
+				await this.writeBuffer(buffer, this.position);
+				this.bytesWritten += buffer.length;
 			}
-		} else if (
-			this._bytes === 0 &&
-			buffer.length >= CHUNK_SIZE &&
-			buffer.length % this.destination.blockSize === 0
-		) {
-			await this.writeChunk(buffer, this.bytesWritten);
-		} else {
-			this._buffers.push(buffer);
-			this._bytes += buffer.length;
-			await this.writeBuffers();
+			this.position += buffer.length;
+		} finally {
+			unlock();
 		}
 	}
 
 	public _write(
-		buffer: Buffer,
+		buffer: AlignedLockableBuffer,
 		_encoding: string,
 		callback: (error: Error | undefined) => void,
 	) {
@@ -140,29 +102,21 @@ export class BlockWriteStream extends Writable {
 
 	private async __final(): Promise<void> {
 		debug('_final');
-		try {
-			if (this._bytes) {
-				await this.writeChunk(
-					Buffer.concat(this._buffers, this._bytes),
-					this.bytesWritten,
-				);
+		if (this.firstBuffer) {
+			try {
+				await this.writeBuffer(this.firstBuffer, 0);
+				this.bytesWritten += this.firstBuffer.length;
+			} catch (error) {
+				this.destroy();
+				throw error;
 			}
-
-			let position = 0;
-			for (const buffer of this._firstBuffers) {
-				await this.writeChunk(buffer, position, true);
-				position += buffer.length;
-			}
-		} catch (error) {
-			this.destroy();
-			throw error;
 		}
 	}
 
 	/**
 	 * @summary Write buffered data before a stream ends, called by stream internals
 	 */
-	public _final(callback: (error?: Error | void) => void) {
+	public _final(callback: (error?: Error | null) => void) {
 		asCallback(this.__final(), callback);
 	}
 }

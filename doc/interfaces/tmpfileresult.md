@@ -10,16 +10,16 @@
 
 ### Properties
 
-* [fd](tmpfileresult.md#optional-fd)
+* [fileHandle](tmpfileresult.md#optional-filehandle)
 * [path](tmpfileresult.md#path)
 
 ## Properties
 
-### `Optional` fd
+### `Optional` fileHandle
 
-• **fd**? : *undefined | number*
+• **fileHandle**? : *fs.FileHandle*
 
-*Defined in [lib/tmp.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/tmp.ts#L34)*
+*Defined in [lib/tmp.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/tmp.ts#L33)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **path**: *string*
 
-*Defined in [lib/tmp.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/tmp.ts#L33)*
+*Defined in [lib/tmp.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/tmp.ts#L32)*

@@ -14,12 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import { once } from 'lodash';
+import { promisify } from 'util';
 import * as xxhash from 'xxhash';
 
 export type XXHash = typeof xxhash;
-
-import { promisify } from 'bluebird';
-import { once } from 'lodash';
 
 export const getRaspberrypiUsbboot = once(() => {
 	try {

@@ -26,10 +26,7 @@ const IMAGES_PATH = join(DATA_PATH, 'images');
 
 describe('directory', function() {
 	it('should be rejected with an error', async function() {
-		const source = new sourceDestination.File(
-			IMAGES_PATH,
-			sourceDestination.File.OpenFlags.Read,
-		);
+		const source = new sourceDestination.File({ path: IMAGES_PATH });
 		try {
 			await source.getInnerSource();
 			assert(false);
@@ -39,6 +36,8 @@ describe('directory', function() {
 				'EISDIR: illegal operation on a directory, read',
 			);
 			expect(error.code).to.equal('EISDIR');
+		} finally {
+			await source.close();
 		}
 	});
 });

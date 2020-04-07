@@ -1,32 +1,38 @@
+import { getAlignedBuffer } from '@ronomon/direct-io';
 import { delay } from 'bluebird';
-import { Writable } from 'readable-stream';
+import { Writable } from 'stream';
 
+import { isAlignedLockableBuffer } from '../aligned-lockable-buffer';
 import { PROGRESS_EMISSION_INTERVAL, RETRY_BASE_TIMEOUT } from '../constants';
 import { isTransientError } from '../errors';
 import { makeClassEmitProgressEvents } from '../source-destination/progress';
 import { SourceDestination } from '../source-destination/source-destination';
 import { asCallback } from '../utils';
-import { SparseStreamChunk } from './shared';
-
-export interface SparseWritable extends NodeJS.WritableStream {
-	_write(
-		chunk: SparseStreamChunk,
-		encoding: string,
-		callback: (err?: Error | void) => void,
-	): void;
-}
+import { SparseStreamChunk, SparseWritable } from './shared';
 
 export class SparseWriteStream extends Writable implements SparseWritable {
+	private destination: SourceDestination;
+	public firstBytesToKeep: number;
+	private maxRetries: number;
 	public position: number;
 	public bytesWritten = 0;
 	private _firstChunks: SparseStreamChunk[] = [];
 
-	constructor(
-		private destination: SourceDestination,
-		public firstBytesToKeep = 0,
-		private maxRetries = 5,
-	) {
-		super({ objectMode: true });
+	constructor({
+		destination,
+		highWaterMark,
+		firstBytesToKeep = 0,
+		maxRetries = 5,
+	}: {
+		destination: SourceDestination;
+		firstBytesToKeep?: number;
+		maxRetries?: number;
+		highWaterMark?: number;
+	}) {
+		super({ objectMode: true, highWaterMark });
+		this.destination = destination;
+		this.firstBytesToKeep = firstBytesToKeep;
+		this.maxRetries = maxRetries;
 	}
 
 	private async writeChunk(
@@ -62,38 +68,60 @@ export class SparseWriteStream extends Writable implements SparseWritable {
 		}
 	}
 
-	private async __write(chunk: SparseStreamChunk): Promise<void> {
-		// Keep the first blocks in memory and write them once the rest has been written.
-		// This is to prevent Windows from mounting the device while we flash it.
-		if (chunk.position < this.firstBytesToKeep) {
-			const end = chunk.position + chunk.buffer.length;
-			if (end <= this.firstBytesToKeep) {
-				this._firstChunks.push(chunk);
-				this.position = chunk.position + chunk.buffer.length;
-				this.bytesWritten += chunk.buffer.length;
-			} else {
-				const difference = this.firstBytesToKeep - chunk.position;
-				this._firstChunks.push({
-					position: chunk.position,
-					buffer: chunk.buffer.slice(0, difference),
-				});
-				this.position = this.firstBytesToKeep;
-				this.bytesWritten += difference;
-				const remainingBuffer = chunk.buffer.slice(difference);
-				await this.writeChunk({
-					position: this.firstBytesToKeep,
-					buffer: remainingBuffer,
-				});
-			}
+	private copyChunk(chunk: SparseStreamChunk): SparseStreamChunk {
+		if (isAlignedLockableBuffer(chunk.buffer)) {
+			const buffer = getAlignedBuffer(
+				chunk.buffer.length,
+				chunk.buffer.alignment,
+			);
+			chunk.buffer.copy(buffer);
+			return { position: chunk.position, buffer };
 		} else {
-			await this.writeChunk(chunk);
+			return chunk;
+		}
+	}
+
+	private async __write(chunk: SparseStreamChunk): Promise<void> {
+		const unlock = isAlignedLockableBuffer(chunk.buffer)
+			? await chunk.buffer.rlock()
+			: undefined;
+		try {
+			// Keep the first blocks in memory and write them once the rest has been written.
+			// This is to prevent Windows from mounting the device while we flash it.
+			if (chunk.position < this.firstBytesToKeep) {
+				const end = chunk.position + chunk.buffer.length;
+				if (end <= this.firstBytesToKeep) {
+					this._firstChunks.push(this.copyChunk(chunk));
+					this.position = chunk.position + chunk.buffer.length;
+					this.bytesWritten += chunk.buffer.length;
+				} else {
+					const difference = this.firstBytesToKeep - chunk.position;
+					this._firstChunks.push(
+						this.copyChunk({
+							position: chunk.position,
+							buffer: chunk.buffer.slice(0, difference),
+						}),
+					);
+					this.position = this.firstBytesToKeep;
+					this.bytesWritten += difference;
+					const remainingBuffer = chunk.buffer.slice(difference);
+					await this.writeChunk({
+						position: this.firstBytesToKeep,
+						buffer: remainingBuffer,
+					});
+				}
+			} else {
+				await this.writeChunk(chunk);
+			}
+		} finally {
+			unlock?.();
 		}
 	}
 
 	public _write(
 		chunk: SparseStreamChunk,
 		_enc: string,
-		callback: (error: Error | undefined) => void,
+		callback: (error: Error | null) => void,
 	): void {
 		asCallback(this.__write(chunk), callback);
 	}
@@ -112,7 +140,7 @@ export class SparseWriteStream extends Writable implements SparseWritable {
 	/**
 	 * @summary Write buffered data before a stream ends, called by stream internals
 	 */
-	public _final(callback: (error?: Error | void) => void) {
+	public _final(callback: (error?: Error | null) => void) {
 		asCallback(this.__final(), callback);
 	}
 }

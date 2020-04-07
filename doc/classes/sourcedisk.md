@@ -48,7 +48,7 @@
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configured-source.ts#L43)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/configured-source/configured-source.ts#L47)*
 
 **Parameters:**
 
@@ -124,7 +124,7 @@ ___
 
 • **source**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configured-source.ts#L44)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/configured-source/configured-source.ts#L48)*
 
 ## Methods
 
@@ -134,7 +134,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:80](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configured-source.ts#L80)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:84](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/configured-source/configured-source.ts#L84)*
 
 **Returns:** *Promise‹void›*
 
@@ -146,7 +146,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configured-source.ts#L53)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/configured-source/configured-source.ts#L57)*
 
 **Returns:** *Promise‹number›*
 
@@ -154,17 +154,17 @@ ___
 
 ### `Protected` _read
 
-▸ **_read**(`buffer`: Buffer, `bufferOffset`: number, `length`: number, `fileOffset`: number): *Promise‹ReadResult›*
+▸ **_read**(`buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer), `bufferOffset`: number, `length`: number, `fileOffset`: number): *Promise‹ReadResult›*
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configured-source.ts#L62)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:66](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/configured-source/configured-source.ts#L66)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`buffer` | Buffer |
+`buffer` | [Buffer](../interfaces/alignedlockablebuffer.md#buffer) |
 `bufferOffset` | number |
 `length` | number |
 `fileOffset` | number |
@@ -175,17 +175,17 @@ ___
 
 ### `Protected` _write
 
-▸ **_write**(`_buffer`: Buffer, `_bufferOffset`: number, `_length`: number, `_fileOffset`: number): *Promise‹WriteResult›*
+▸ **_write**(`_buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer), `_bufferOffset`: number, `_length`: number, `_fileOffset`: number): *Promise‹WriteResult›*
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/d5cf67e/lib/source-destination/configured-source/configured-source.ts#L71)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:75](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/configured-source/configured-source.ts#L75)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`_buffer` | Buffer |
+`_buffer` | [Buffer](../interfaces/alignedlockablebuffer.md#buffer) |
 `_bufferOffset` | number |
 `_length` | number |
 `_fileOffset` | number |
@@ -301,7 +301,7 @@ ___
 
 ###  read
 
-▸ **read**(`buffer`: Buffer, `_bufferOffset`: number, `length`: number, `fileOffset`: number): *Promise‹ReadResult›*
+▸ **read**(`buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer), `_bufferOffset`: number, `length`: number, `fileOffset`: number): *Promise‹ReadResult›*
 
 *Inherited from [SourceDisk](sourcedisk.md).[read](sourcedisk.md#read)*
 
@@ -311,7 +311,7 @@ Defined in node_modules/file-disk/build/index.d.ts:33
 
 Name | Type |
 ------ | ------ |
-`buffer` | Buffer |
+`buffer` | [Buffer](../interfaces/alignedlockablebuffer.md#buffer) |
 `_bufferOffset` | number |
 `length` | number |
 `fileOffset` | number |
@@ -322,7 +322,7 @@ ___
 
 ###  write
 
-▸ **write**(`buffer`: Buffer, `bufferOffset`: number, `length`: number, `fileOffset`: number): *Promise‹WriteResult›*
+▸ **write**(`buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer), `bufferOffset`: number, `length`: number, `fileOffset`: number): *Promise‹WriteResult›*
 
 *Inherited from [SourceDisk](sourcedisk.md).[write](sourcedisk.md#write)*
 
@@ -332,7 +332,7 @@ Defined in node_modules/file-disk/build/index.d.ts:34
 
 Name | Type |
 ------ | ------ |
-`buffer` | Buffer |
+`buffer` | [Buffer](../interfaces/alignedlockablebuffer.md#buffer) |
 `bufferOffset` | number |
 `length` | number |
 `fileOffset` | number |

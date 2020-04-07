@@ -19,7 +19,10 @@ import { ReadResult } from 'file-disk';
 
 import { Http } from './http';
 import { Metadata } from './metadata';
-import { SourceDestination } from './source-destination';
+import {
+	CreateReadStreamOptions,
+	SourceDestination,
+} from './source-destination';
 import { ZipSource } from './zip';
 
 type Name = 'balena' | 'resin';
@@ -98,10 +101,10 @@ export class BalenaS3Source extends SourceDestination {
 	}
 
 	public async createReadStream(
-		...args: any[]
+		options: CreateReadStreamOptions = {},
 	): Promise<NodeJS.ReadableStream> {
 		await this.ready;
-		return await this.zipSource.createReadStream(...args);
+		return await this.zipSource.createReadStream(options);
 	}
 
 	protected async _getMetadata(): Promise<Metadata> {
