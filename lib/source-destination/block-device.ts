@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { getAlignedBuffer, O_EXLOCK } from '@ronomon/direct-io';
-import { delay } from 'bluebird';
+import { getAlignedBuffer, O_EXLOCK, setF_NOCACHE } from '@ronomon/direct-io';
+import { delay, fromCallback } from 'bluebird';
 import { Drive as DrivelistDrive } from 'drivelist';
 import { ReadResult, WriteResult } from 'file-disk';
 import * as fs from 'fs';
@@ -163,12 +163,18 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 	}
 
 	protected async _open(): Promise<void> {
-		if (platform() !== 'win32') {
+		const plat = platform();
+		if (plat !== 'win32') {
 			const unmountDisk = getUnmountDisk();
 			await unmountDisk(this.drive.device);
 		}
 		await clean(this.drive.device);
 		await super._open();
+		if (plat === 'darwin') {
+			await fromCallback(cb => {
+				setF_NOCACHE(this.fileHandle.fd, 1, cb);
+			});
+		}
 	}
 
 	protected async _close(): Promise<void> {
