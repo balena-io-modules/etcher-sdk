@@ -46,12 +46,14 @@ interface MultiDestinationState {
 	sparse?: boolean;
 	rootStreamPosition?: number;
 	rootStreamSpeed?: number;
+	rootStreamAverageSpeed?: number;
 }
 
 export interface MultiDestinationProgress extends MultiDestinationState {
 	bytes: number;
 	position: number;
 	speed: number;
+	averageSpeed: number;
 	totalSpeed: number;
 	percentage?: number;
 	eta?: number;
@@ -144,6 +146,7 @@ export async function pipeSourceToDestinations(
 	function _onRootStreamProgress(progress: ProgressEvent) {
 		state.rootStreamPosition = progress.position;
 		state.rootStreamSpeed = progress.speed;
+		state.rootStreamAverageSpeed = progress.averageSpeed;
 	}
 
 	function _onProgress(progress: ProgressEvent) {

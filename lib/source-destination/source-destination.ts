@@ -150,7 +150,12 @@ export class SourceDestinationFs {
 }
 
 export abstract class Verifier extends EventEmitter {
-	public progress: ProgressEvent = { bytes: 0, position: 0, speed: 0 };
+	public progress: ProgressEvent = {
+		bytes: 0,
+		position: 0,
+		speed: 0,
+		averageSpeed: 0,
+	};
 
 	public abstract async run(): Promise<void>;
 
