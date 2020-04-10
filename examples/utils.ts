@@ -70,7 +70,8 @@ function progressBarLabel(
 		`${Math.floor(progress.percentage || 0)}%`,
 		`${bytes} / ${size} ${sourceProgress ? 'compressed ' : ''}bytes`,
 		`position in output: ${progress.position}`,
-		`${bytesToMebibytes(progress.speed)} MiB/s`,
+		`current: ${bytesToMebibytes(progress.speed)} MiB/s`,
+		`average: ${bytesToMebibytes(progress.averageSpeed)} MiB/s`,
 		`${Math.round(progress.eta || 0)} seconds left`,
 	].join(' ; ');
 }

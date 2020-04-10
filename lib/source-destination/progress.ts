@@ -20,14 +20,15 @@ import { Writable } from 'stream';
 
 import speedometer = require('speedometer');
 
-import { PROGRESS_EMISSION_INTERVAL } from '../constants';
+import { PROGRESS_EMISSION_INTERVAL, SPEED_WINDOW } from '../constants';
 
 export type Constructor<T> = new (...args: any[]) => T;
 
 export interface ProgressEvent {
 	position: number; // Position in file
 	bytes: number; // Number of bytes read
-	speed: number; // Speed in bytes per second (based on bytes, not position)
+	speed: number; // Current speed in bytes per second (based on bytes, not position)
+	averageSpeed: number; // Average speed in bytes per second (based on bytes, not position)
 }
 
 export function makeClassEmitProgressEvents<
@@ -43,8 +44,14 @@ export function makeClassEmitProgressEvents<
 		constructor(...args: any[]) {
 			super(...args);
 
-			const meter = speedometer();
-			const state: ProgressEvent = { position: 0, bytes: 0, speed: 0 };
+			const startTime = Date.now();
+			const meter = speedometer(SPEED_WINDOW);
+			const state: ProgressEvent = {
+				position: 0,
+				bytes: 0,
+				speed: 0,
+				averageSpeed: 0,
+			};
 
 			const update = () => {
 				state.bytes += this._attributeDelta;
@@ -56,6 +63,7 @@ export function makeClassEmitProgressEvents<
 				}
 				state.speed = meter(this._attributeDelta);
 				this._attributeDelta = 0;
+				state.averageSpeed = (state.bytes / (Date.now() - startTime)) * 1000;
 				this.emit('progress', state);
 			};
 

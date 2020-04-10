@@ -15,6 +15,7 @@
  */
 
 export const PROGRESS_EMISSION_INTERVAL = 1000 / 2; // emit progress events 2 times per second
+export const SPEED_WINDOW = 5; // Progress events current speed calculation window
 export const RETRY_BASE_TIMEOUT = 100;
 export const CHUNK_SIZE = 1024 ** 2;
 export const NO_MATCHING_FILE_MSG =
