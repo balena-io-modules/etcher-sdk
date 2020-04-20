@@ -35,10 +35,7 @@ export type WriteStep = 'flashing' | 'verifying' | 'finished';
 
 interface MultiDestinationState {
 	active: number;
-	flashing: number;
-	verifying: number;
 	failed: number;
-	successful: number;
 	type: WriteStep;
 	size?: number;
 	compressedSize?: number;
@@ -98,10 +95,7 @@ export async function pipeSourceToDestinations(
 
 	const state: MultiDestinationState = {
 		active: destination.destinations.size,
-		flashing: destination.destinations.size,
-		verifying: 0,
 		failed: 0,
-		successful: 0,
 		type: 'flashing',
 	};
 
@@ -126,15 +120,6 @@ export async function pipeSourceToDestinations(
 		}
 		state.failed = failures.size;
 		state.active = destination.destinations.size - state.failed;
-		if (state.type === 'flashing') {
-			state.flashing = state.active;
-			state.verifying = 0;
-		} else if (state.type === 'verifying') {
-			state.flashing = 0;
-			state.verifying = state.active;
-		} else if (state.type === 'finished') {
-			state.successful = state.active;
-		}
 	}
 
 	function _onFail(error: MultiDestinationError) {
