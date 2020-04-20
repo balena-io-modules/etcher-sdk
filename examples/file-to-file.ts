@@ -58,7 +58,7 @@ const main = async ({
 			});
 		}
 	}
-	await pipeSourceToDestinationsWithProgressBar(source, [destination], verify);
+	await pipeSourceToDestinationsWithProgressBar({ source, destinations: [destination], verify });
 };
 
 // tslint:disable-next-line: no-var-requires

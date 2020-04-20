@@ -78,14 +78,21 @@ function getEta(
 
 // This function is the most common use case of the SDK.
 // Added it here to avoid duplicating it in other projects.
-export async function pipeSourceToDestinations(
-	source: SourceDestination,
-	destinations: SourceDestination[],
-	onFail: OnFailFunction,
-	onProgress: OnProgressFunction,
+export async function pipeSourceToDestinations({
+	source,
+	destinations,
+	onFail,
+	onProgress,
 	verify = false,
 	numBuffers = 16,
-): Promise<PipeSourceToDestinationsResult> {
+}: {
+	source: SourceDestination;
+	destinations: SourceDestination[];
+	onFail: OnFailFunction;
+	onProgress: OnProgressFunction;
+	verify?: boolean;
+	numBuffers?: number;
+}): Promise<PipeSourceToDestinationsResult> {
 	if (numBuffers < 2) {
 		numBuffers = 2;
 	}

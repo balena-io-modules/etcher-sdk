@@ -98,7 +98,7 @@ async function main() {
 				createStreamFromDisk: true,
 			});
 		}
-		pipeSourceToDestinationsWithProgressBar(source, [dest], true);
+		pipeSourceToDestinationsWithProgressBar({ source, destinations: [dest], verify: true });
 	}
 }
 

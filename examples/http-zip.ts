@@ -27,11 +27,11 @@ const main = async ({ zipSource, fileDestination, verify }: any) => {
 		write: true,
 	});
 	const sourceZip = await sourceHttp.getInnerSource();
-	await pipeSourceToDestinationsWithProgressBar(
-		sourceZip,
-		[destinationFile],
+	await pipeSourceToDestinationsWithProgressBar({
+		source: sourceZip,
+		destinations: [destinationFile],
 		verify,
-	);
+	});
 };
 
 // tslint:disable-next-line: no-var-requires

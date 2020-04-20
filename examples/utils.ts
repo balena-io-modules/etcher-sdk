@@ -108,12 +108,17 @@ function createProgressBar(
 	}
 }
 
-export async function pipeSourceToDestinationsWithProgressBar(
-	source: sourceDestination.SourceDestination,
-	destinations: sourceDestination.SourceDestination[],
+export async function pipeSourceToDestinationsWithProgressBar({
+	source,
+	destinations,
 	verify = false,
 	numBuffers = 16,
-): Promise<multiWrite.PipeSourceToDestinationsResult> {
+}: {
+	source: sourceDestination.SourceDestination,
+	destinations: sourceDestination.SourceDestination[],
+	verify?: boolean,
+	numBuffers?: number,
+}): Promise<multiWrite.PipeSourceToDestinationsResult> {
 	function onFail(
 		destination: sourceDestination.SourceDestination,
 		error: Error,
@@ -148,14 +153,14 @@ export async function pipeSourceToDestinationsWithProgressBar(
 		}
 		update(progress);
 	}
-	const result = await multiWrite.pipeSourceToDestinations(
+	const result = await multiWrite.pipeSourceToDestinations({
 		source,
 		destinations,
 		onFail,
 		onProgress,
 		verify,
 		numBuffers,
-	);
+	});
 	// Sleep here to be sure the last spinner title was shown.
 	await delay(SPINNER_DELAY);
 	if (progressBar !== undefined) {

@@ -46,19 +46,22 @@ describe('zip in a single use stream source', function() {
 		});
 		const progressEvents: sourceDestination.ProgressEvent[] = [];
 		await using(tmpFileDisposer(false), async file => {
-			await multiWrite.pipeSourceToDestinations(
+			await multiWrite.pipeSourceToDestinations({
 				source,
-				[new sourceDestination.File({ path: file.path, write: true })],
-				// onFail
-				(_destination: sourceDestination.SourceDestination, _error: Error) => {
+				destinations: [
+					new sourceDestination.File({ path: file.path, write: true }),
+				],
+				onFail: (
+					_destination: sourceDestination.SourceDestination,
+					_error: Error,
+				) => {
 					assert(false);
 				},
-				// onProgress
-				(progress: multiWrite.MultiDestinationProgress) => {
+				onProgress: (progress: multiWrite.MultiDestinationProgress) => {
 					progressEvents.push(progress);
 				},
-				true, // verify
-			);
+				verify: true,
+			});
 		});
 		expect(progressEvents.length).to.be.at.least(2);
 		try {

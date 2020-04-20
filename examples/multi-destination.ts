@@ -76,12 +76,12 @@ const main = async ({
 		},
 	);
 	try {
-		await pipeSourceToDestinationsWithProgressBar(
+		await pipeSourceToDestinationsWithProgressBar({
 			source,
-			destinationDrives,
+			destinations: destinationDrives,
 			verify,
 			numBuffers,
-		);
+		});
 	} finally {
 		deviceScanner.stop();
 	}
