@@ -16,8 +16,11 @@
 
 import { promises as fs } from 'fs';
 import { Argv } from 'yargs';
+import { Disk } from 'file-disk';
 
 import { sourceDestination } from '../lib';
+import { configure as legacyConfigure } from '../lib/source-destination/configured-source/configure';
+import { ConfigureFunction } from '../lib/source-destination/configured-source/configured-source';
 
 import { pipeSourceToDestinationsWithProgressBar, wrapper } from './utils';
 
@@ -41,22 +44,28 @@ const main = async ({
 		buildId,
 	);
 	if (trim || config !== undefined) {
+		let configure: ConfigureFunction | undefined;
+		if (config !== undefined) {
+			configure = async (disk: Disk) => {
+				await legacyConfigure(disk, { config: await readJsonFile(config) });
+			};
+		}
 		source = new sourceDestination.ConfiguredSource({
 			source,
 			shouldTrimPartitions: trim,
 			createStreamFromDisk: false,
-			configure: config !== undefined ? 'legacy' : undefined,
-			config:
-				config !== undefined
-					? { config: await readJsonFile(config) }
-					: undefined,
+			configure,
 		});
 	}
 	const destination = new sourceDestination.File({
 		path: fileDestination,
 		write: true,
 	});
-	await pipeSourceToDestinationsWithProgressBar({ source, destinations: [destination], verify });
+	await pipeSourceToDestinationsWithProgressBar({
+		source,
+		destinations: [destination],
+		verify,
+	});
 };
 
 // tslint:disable-next-line: no-var-requires

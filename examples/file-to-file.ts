@@ -15,8 +15,11 @@
  */
 
 import { Argv } from 'yargs';
+import { Disk } from 'file-disk';
 
 import { sourceDestination } from '../lib';
+import { configure as legacyConfigure } from '../lib/source-destination/configured-source/configure';
+import { ConfigureFunction } from '../lib/source-destination/configured-source/configured-source';
 
 import {
 	pipeSourceToDestinationsWithProgressBar,
@@ -46,19 +49,25 @@ const main = async ({
 				"Can't configure or trim a source that is not randomly readable, skipping",
 			);
 		} else {
+			let configure: ConfigureFunction | undefined;
+			if (config !== undefined) {
+				configure = async (disk: Disk) => {
+					await legacyConfigure(disk, { config: await readJsonFile(config) });
+				};
+			}
 			source = new sourceDestination.ConfiguredSource({
 				source,
 				shouldTrimPartitions: trim,
 				createStreamFromDisk: true,
-				configure: config !== undefined ? 'legacy' : undefined,
-				config:
-					config !== undefined
-						? { config: await readJsonFile(config) }
-						: undefined,
+				configure,
 			});
 		}
 	}
-	await pipeSourceToDestinationsWithProgressBar({ source, destinations: [destination], verify });
+	await pipeSourceToDestinationsWithProgressBar({
+		source,
+		destinations: [destination],
+		verify,
+	});
 };
 
 // tslint:disable-next-line: no-var-requires

@@ -15,8 +15,11 @@
  */
 
 import { Argv } from 'yargs';
+import { Disk } from 'file-disk';
 
 import { scanner, sourceDestination } from '../lib';
+import { configure as legacyConfigure } from '../lib/source-destination/configured-source/configure';
+import { ConfigureFunction } from '../lib/source-destination/configured-source/configured-source';
 
 import {
 	pipeSourceToDestinationsWithProgressBar,
@@ -59,15 +62,17 @@ const main = async ({
 	});
 	source = await source.getInnerSource(); // getInnerSource will open the sources for you, no need to call open().
 	if (trim || config !== undefined) {
+		let configure: ConfigureFunction | undefined;
+		if (config !== undefined) {
+			configure = async (disk: Disk) => {
+				await legacyConfigure(disk, { config: await readJsonFile(config) });
+			};
+		}
 		source = new sourceDestination.ConfiguredSource({
 			source,
 			shouldTrimPartitions: trim,
 			createStreamFromDisk: true,
-			configure: config !== undefined ? 'legacy' : undefined,
-			config:
-				config !== undefined
-					? { config: await readJsonFile(config) }
-					: undefined,
+			configure,
 		});
 	}
 	const destinationDrives = Array.from(deviceScanner.drives.values()).filter(
