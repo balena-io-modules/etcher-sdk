@@ -33,19 +33,31 @@ axios.defaults.adapter = axiosNodeAdapter;
 
 export class Http extends SourceDestination {
 	// Only implements reading for now
+	private url: string;
+	private redirectUrl: string;
+	private avoidRandomAccess: boolean;
 	private size: number;
 	private acceptsRange: boolean;
 	private ready: Promise<void>;
 	private error: Error;
 
-	constructor(private url: string) {
+	constructor({
+		url,
+		avoidRandomAccess = false,
+	}: {
+		url: string,
+		avoidRandomAccess?: boolean,
+	}) {
 		super();
+		this.url = url;
+		this.avoidRandomAccess = avoidRandomAccess;
 		this.ready = this.getInfo();
 	}
 
 	private async getInfo() {
 		try {
 			const response = await axios({ method: 'head', url: this.url });
+			this.redirectUrl = response.request.res.responseUrl;
 			this.size = parseInt(response.headers['content-length'], 10);
 			this.acceptsRange = response.headers['accept-ranges'] === 'bytes';
 		} catch (error) {
@@ -58,7 +70,7 @@ export class Http extends SourceDestination {
 		if (this.error) {
 			throw this.error;
 		}
-		return this.acceptsRange;
+		return !this.avoidRandomAccess && this.acceptsRange;
 	}
 
 	public async canCreateReadStream(): Promise<boolean> {
@@ -71,7 +83,7 @@ export class Http extends SourceDestination {
 			throw this.error;
 		}
 		let name;
-		const pathname = parse(this.url).pathname;
+		const pathname = parse(this.redirectUrl).pathname;
 		if (pathname !== undefined) {
 			name = basename(unescape(pathname));
 		}
@@ -98,7 +110,7 @@ export class Http extends SourceDestination {
 	): Promise<ReadResult> {
 		const response = await axios({
 			method: 'get',
-			url: this.url,
+			url: this.redirectUrl,
 			responseType: 'arraybuffer',
 			headers: {
 				Range: this.getRange(sourceOffset, sourceOffset + length - 1),
@@ -117,7 +129,7 @@ export class Http extends SourceDestination {
 	}: CreateReadStreamOptions = {}): Promise<NodeJS.ReadableStream> {
 		const response = await axios({
 			method: 'get',
-			url: this.url,
+			url: this.redirectUrl,
 			headers: {
 				Range: this.getRange(start, end),
 			},
