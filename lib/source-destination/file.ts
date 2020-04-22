@@ -60,7 +60,10 @@ export class File extends SourceDestination {
 	}
 
 	protected getOpenFlags() {
-		return this.oWrite ? constants.O_RDWR : constants.O_RDONLY;
+		return (
+			// tslint:disable-next-line:no-bitwise
+			constants.O_CREAT | (this.oWrite ? constants.O_RDWR : constants.O_RDONLY)
+		);
 	}
 
 	public async canRead(): Promise<boolean> {

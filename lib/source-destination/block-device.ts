@@ -18,7 +18,7 @@ import { getAlignedBuffer, O_EXLOCK, setF_NOCACHE } from '@ronomon/direct-io';
 import { delay, fromCallback } from 'bluebird';
 import { Drive as DrivelistDrive } from 'drivelist';
 import { ReadResult, WriteResult } from 'file-disk';
-import * as fs from 'fs';
+import { constants } from 'fs';
 import { platform } from 'os';
 
 import {
@@ -75,14 +75,14 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 
 	protected getOpenFlags() {
 		// tslint:disable:no-bitwise
-		let flags = super.getOpenFlags();
+		let flags = this.oWrite ? constants.O_RDWR : constants.O_RDONLY;
 		if (this.oDirect) {
-			flags |= fs.constants.O_DIRECT | fs.constants.O_SYNC;
+			flags |= constants.O_DIRECT | constants.O_SYNC;
 		}
 		if (this.oWrite) {
 			const plat = platform();
 			if (plat === 'linux') {
-				flags |= fs.constants.O_EXCL;
+				flags |= constants.O_EXCL;
 			} else if (plat === 'darwin') {
 				flags |= O_EXLOCK;
 			}
