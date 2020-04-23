@@ -15,6 +15,7 @@
  */
 
 import { Disposer, resolve } from 'bluebird';
+import * as checkDiskSpace from 'check-disk-space';
 import { randomBytes } from 'crypto';
 import { promises as fs } from 'fs';
 import { tmpdir } from 'os';
@@ -24,16 +25,16 @@ const TMP_RANDOM_BYTES = 6;
 const TMP_DIR = tmpdir();
 const TRIES = 5;
 
-const randomFilePath = (): string => {
+function randomFilePath(): string {
 	return join(TMP_DIR, `${randomBytes(TMP_RANDOM_BYTES).toString('hex')}.tmp`);
-};
+}
 
 export interface TmpFileResult {
 	path: string;
 	fileHandle?: fs.FileHandle;
 }
 
-export const tmpFile = async (keepOpen = true): Promise<TmpFileResult> => {
+export async function tmpFile(keepOpen = true): Promise<TmpFileResult> {
 	let fileHandle: fs.FileHandle | undefined;
 	let path: string;
 	let ok = false;
@@ -59,13 +60,17 @@ export const tmpFile = async (keepOpen = true): Promise<TmpFileResult> => {
 		fileHandle = undefined;
 	}
 	return { fileHandle, path: path! };
-};
+}
 
-export const tmpFileDisposer = (keepOpen = true): Disposer<TmpFileResult> => {
+export function tmpFileDisposer(keepOpen = true): Disposer<TmpFileResult> {
 	return resolve(tmpFile(keepOpen)).disposer(async (result: TmpFileResult) => {
 		if (keepOpen && result.fileHandle !== undefined) {
 			await result.fileHandle.close();
 		}
 		await fs.unlink(result.path);
 	});
-};
+}
+
+export async function freeSpace() {
+	return (await checkDiskSpace(TMP_DIR)).free;
+}

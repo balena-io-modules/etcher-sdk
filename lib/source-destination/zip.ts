@@ -427,7 +427,8 @@ export class ZipSource extends SourceSource {
 
 	protected async _getMetadata(): Promise<Metadata> {
 		await this.ready;
-		return await this.implementation.getMetadata();
+		const metadata = await this.implementation.getMetadata();
+		return { ...metadata, isCompressed: true };
 	}
 }
 

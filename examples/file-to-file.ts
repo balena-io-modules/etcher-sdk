@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { Argv } from 'yargs';
 import { Disk } from 'file-disk';
+import { Argv } from 'yargs';
 
 import { sourceDestination } from '../lib';
 import { configure as legacyConfigure } from '../lib/source-destination/configured-source/configure';
@@ -33,40 +33,37 @@ const main = async ({
 	trim,
 	config,
 	verify,
-}: any) => {
-	let source: sourceDestination.SourceDestination = new sourceDestination.File({
-		path: fileSource,
-	});
+	decompressFirst,
+}: {
+	fileSource: string;
+	fileDestination: string;
+	trim: boolean;
+	config: string;
+	verify: boolean;
+	decompressFirst: boolean;
+}) => {
+	const source: sourceDestination.SourceDestination = new sourceDestination.File(
+		{
+			path: fileSource,
+		},
+	);
 	const destination = new sourceDestination.File({
 		path: fileDestination,
 		write: true,
 	});
-	source = await source.getInnerSource();
-	const canRead = await source.canRead();
-	if (trim || config !== undefined) {
-		if (!canRead) {
-			console.warn(
-				"Can't configure or trim a source that is not randomly readable, skipping",
-			);
-		} else {
-			let configure: ConfigureFunction | undefined;
-			if (config !== undefined) {
-				configure = async (disk: Disk) => {
-					await legacyConfigure(disk, { config: await readJsonFile(config) });
-				};
-			}
-			source = new sourceDestination.ConfiguredSource({
-				source,
-				shouldTrimPartitions: trim,
-				createStreamFromDisk: true,
-				configure,
-			});
-		}
+	let configure: ConfigureFunction | undefined;
+	if (config !== undefined) {
+		configure = async (disk: Disk) => {
+			await legacyConfigure(disk, { config: await readJsonFile(config) });
+		};
 	}
 	await pipeSourceToDestinationsWithProgressBar({
 		source,
 		destinations: [destination],
 		verify,
+		trim,
+		decompressFirst,
+		configure,
 	});
 };
 
@@ -80,6 +77,7 @@ const argv = require('yargs').command(
 		yargs.option('trim', { default: false });
 		yargs.option('verify', { default: false });
 		yargs.describe('config', 'json configuration file');
+		yargs.option('decompressFirst', { default: false });
 	},
 ).argv;
 

@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { Argv } from 'yargs';
 import { Disk } from 'file-disk';
+import { Argv } from 'yargs';
 
 import { scanner, sourceDestination } from '../lib';
 import { configure as legacyConfigure } from '../lib/source-destination/configured-source/configure';
@@ -32,6 +32,7 @@ const main = async ({
 	devices,
 	verify,
 	trim,
+	decompressFirst,
 	config,
 	numBuffers,
 }: {
@@ -39,6 +40,7 @@ const main = async ({
 	devices: string[];
 	verify: boolean;
 	trim: boolean;
+	decompressFirst: boolean;
 	config: string;
 	numBuffers: number;
 }) => {
@@ -57,23 +59,16 @@ const main = async ({
 	await new Promise(resolve => {
 		deviceScanner.on('ready', resolve);
 	});
-	let source: sourceDestination.SourceDestination = new sourceDestination.File({
-		path: sourceImage,
-	});
-	source = await source.getInnerSource(); // getInnerSource will open the sources for you, no need to call open().
-	if (trim || config !== undefined) {
-		let configure: ConfigureFunction | undefined;
-		if (config !== undefined) {
-			configure = async (disk: Disk) => {
-				await legacyConfigure(disk, { config: await readJsonFile(config) });
-			};
-		}
-		source = new sourceDestination.ConfiguredSource({
-			source,
-			shouldTrimPartitions: trim,
-			createStreamFromDisk: true,
-			configure,
-		});
+	const source: sourceDestination.SourceDestination = new sourceDestination.File(
+		{
+			path: sourceImage,
+		},
+	);
+	let configure: ConfigureFunction | undefined;
+	if (config !== undefined) {
+		configure = async (disk: Disk) => {
+			await legacyConfigure(disk, { config: await readJsonFile(config) });
+		};
 	}
 	const destinationDrives = Array.from(deviceScanner.drives.values()).filter(
 		drive => {
@@ -86,6 +81,9 @@ const main = async ({
 			destinations: destinationDrives,
 			verify,
 			numBuffers,
+			trim,
+			decompressFirst,
+			configure,
 		});
 	} finally {
 		deviceScanner.stop();
@@ -103,6 +101,7 @@ const argv = require('yargs').command(
 		});
 		yargs.option('verify', { default: false });
 		yargs.option('trim', { default: false });
+		yargs.option('decompressFirst', { default: false });
 		yargs.option('numBuffers', {
 			default: 16,
 			describe: 'Number of 1MiB buffers used to buffer data',

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
+import { Disk } from 'file-disk';
 import { promises as fs } from 'fs';
 import { Argv } from 'yargs';
-import { Disk } from 'file-disk';
 
 import { sourceDestination } from '../lib';
 import { configure as legacyConfigure } from '../lib/source-destination/configured-source/configure';
@@ -37,25 +37,27 @@ const main = async ({
 	trim,
 	config,
 	verify,
-}: any) => {
-	let source: sourceDestination.SourceDestination = new sourceDestination.BalenaS3Source(
+	decompressFirst,
+}: {
+	bucket: string;
+	deviceType: string;
+	buildId: string;
+	fileDestination: string;
+	trim: boolean;
+	config: string;
+	verify: boolean;
+	decompressFirst: boolean;
+}) => {
+	const source: sourceDestination.SourceDestination = new sourceDestination.BalenaS3Source(
 		bucket,
 		deviceType,
 		buildId,
 	);
-	if (trim || config !== undefined) {
-		let configure: ConfigureFunction | undefined;
-		if (config !== undefined) {
-			configure = async (disk: Disk) => {
-				await legacyConfigure(disk, { config: await readJsonFile(config) });
-			};
-		}
-		source = new sourceDestination.ConfiguredSource({
-			source,
-			shouldTrimPartitions: trim,
-			createStreamFromDisk: false,
-			configure,
-		});
+	let configure: ConfigureFunction | undefined;
+	if (config !== undefined) {
+		configure = async (disk: Disk) => {
+			await legacyConfigure(disk, { config: await readJsonFile(config) });
+		};
 	}
 	const destination = new sourceDestination.File({
 		path: fileDestination,
@@ -65,6 +67,9 @@ const main = async ({
 		source,
 		destinations: [destination],
 		verify,
+		trim,
+		configure,
+		decompressFirst,
 	});
 };
 
@@ -86,6 +91,7 @@ const argv = require('yargs').command(
 		yargs.positional('fileDestination', { describe: 'Destination image file' });
 		yargs.option('trim', { default: false });
 		yargs.option('verify', { default: false });
+		yargs.option('decompressFirst', { default: false });
 		yargs.describe('config', 'json configuration file');
 	},
 ).argv;

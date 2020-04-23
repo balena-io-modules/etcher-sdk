@@ -86,22 +86,17 @@ async function main() {
 
 	if (argv.length >= 3) {
 		console.log(`Writing image ${argv[2]}`);
-		let source: sourceDestination.SourceDestination = new sourceDestination.File(
+		const source: sourceDestination.SourceDestination = new sourceDestination.File(
 			{
 				path: argv[2],
 			},
 		);
-		if (await source.canRead()) {
-			source = new sourceDestination.ConfiguredSource({
-				source,
-				shouldTrimPartitions: true,
-				createStreamFromDisk: true,
-			});
-		}
 		pipeSourceToDestinationsWithProgressBar({
 			source,
 			destinations: [dest],
 			verify: true,
+			trim: true,
+			decompressFirst: false,
 		});
 	}
 }

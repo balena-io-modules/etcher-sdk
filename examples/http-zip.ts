@@ -20,17 +20,33 @@ import { sourceDestination } from '../lib';
 
 import { pipeSourceToDestinationsWithProgressBar, wrapper } from './utils';
 
-const main = async ({ zipSource, fileDestination, verify }: any) => {
-	const sourceHttp = new sourceDestination.Http(zipSource);
+const main = async ({
+	zipSource,
+	fileDestination,
+	verify,
+	trim,
+	decompressFirst,
+}: {
+	zipSource: string;
+	fileDestination: string;
+	verify: boolean;
+	trim: boolean;
+	decompressFirst: boolean;
+}) => {
+	const source = new sourceDestination.Http({
+		url: zipSource,
+		avoidRandomAccess: true,
+	});
 	const destinationFile = new sourceDestination.File({
 		path: fileDestination,
 		write: true,
 	});
-	const sourceZip = await sourceHttp.getInnerSource();
 	await pipeSourceToDestinationsWithProgressBar({
-		source: sourceZip,
+		source,
 		destinations: [destinationFile],
 		verify,
+		trim,
+		decompressFirst,
 	});
 };
 
@@ -45,6 +61,8 @@ const argv = require('yargs').command(
 		});
 		yargs.positional('fileDestination', { describe: 'Destination image file' });
 		yargs.option('verify', { default: false });
+		yargs.option('trim', { default: false });
+		yargs.option('decompressFirst', { default: false });
 	},
 ).argv;
 

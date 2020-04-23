@@ -45,8 +45,8 @@ export class Http extends SourceDestination {
 		url,
 		avoidRandomAccess = false,
 	}: {
-		url: string,
-		avoidRandomAccess?: boolean,
+		url: string;
+		avoidRandomAccess?: boolean;
 	}) {
 		super();
 		this.url = url;

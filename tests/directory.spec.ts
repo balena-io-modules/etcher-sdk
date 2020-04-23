@@ -32,9 +32,6 @@ describe('directory', function() {
 			assert(false);
 		} catch (error) {
 			expect(error).to.be.an.instanceof(Error);
-			expect(error.message).to.equal(
-				'EISDIR: illegal operation on a directory, read',
-			);
 			expect(error.code).to.equal('EISDIR');
 		} finally {
 			await source.close();

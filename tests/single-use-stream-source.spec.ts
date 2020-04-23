@@ -43,6 +43,7 @@ describe('zip in a single use stream source', function() {
 			compressedSize: 7791,
 			name: 'etcher-test.img',
 			size: 5242880,
+			isCompressed: true,
 		});
 		const progressEvents: sourceDestination.ProgressEvent[] = [];
 		await using(tmpFileDisposer(false), async file => {

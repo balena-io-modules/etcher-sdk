@@ -91,6 +91,7 @@ export abstract class CompressedSource extends SourceSource {
 			name = basename(sourceMetadata.name, extname(sourceMetadata.name));
 		}
 		return {
+			isCompressed: true,
 			name,
 			size,
 			compressedSize,

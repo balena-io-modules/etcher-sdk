@@ -52,7 +52,10 @@ export class BalenaS3Source extends SourceDestination {
 		this.name = await this.getName();
 		this.rawSource = new Http({ url: this.getUrl(`image/${this.name}.img`) });
 		this.zipSource = new ZipSource(
-			new Http({ url: this.getUrl(`image/${this.name}.img.zip`), avoidRandomAccess: true }),
+			new Http({
+				url: this.getUrl(`image/${this.name}.img.zip`),
+				avoidRandomAccess: true,
+			}),
 		);
 	}
 
