@@ -25,8 +25,8 @@
 * [end](blockreadstream.md#private-end)
 * [maxRetries](blockreadstream.md#private-maxretries)
 * [readable](blockreadstream.md#readable)
-* [readableHighWaterMark](blockreadstream.md#readablehighwatermark)
-* [readableLength](blockreadstream.md#readablelength)
+* [readableHighWaterMark](blockreadstream.md#readonly-readablehighwatermark)
+* [readableLength](blockreadstream.md#readonly-readablelength)
 * [source](blockreadstream.md#private-source)
 * [defaultMaxListeners](blockreadstream.md#static-defaultmaxlisteners)
 
@@ -72,7 +72,7 @@
 
 *Overrides void*
 
-*Defined in [lib/block-read-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-read-stream.ts#L36)*
+*Defined in [lib/block-read-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-read-stream.ts#L32)*
 
 **Parameters:**
 
@@ -96,7 +96,7 @@ Name | Type | Default |
 
 • **alignedReadableState**: *[AlignedReadableState](alignedreadablestate.md)*
 
-*Defined in [lib/block-read-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-read-stream.ts#L33)*
+*Defined in [lib/block-read-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-read-stream.ts#L29)*
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 • **bytesRead**: *number* = 0
 
-*Defined in [lib/block-read-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-read-stream.ts#L34)*
+*Defined in [lib/block-read-stream.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-read-stream.ts#L30)*
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 • **end**: *number*
 
-*Defined in [lib/block-read-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-read-stream.ts#L35)*
+*Defined in [lib/block-read-stream.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-read-stream.ts#L31)*
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 • **maxRetries**: *number*
 
-*Defined in [lib/block-read-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-read-stream.ts#L36)*
+*Defined in [lib/block-read-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-read-stream.ts#L32)*
 
 ___
 
@@ -134,21 +134,21 @@ Defined in node_modules/@types/node/stream.d.ts:20
 
 ___
 
-###  readableHighWaterMark
+### `Readonly` readableHighWaterMark
 
 • **readableHighWaterMark**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableHighWaterMark](sparsefilterstream.md#readablehighwatermark)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableHighWaterMark](sparsefilterstream.md#readonly-readablehighwatermark)*
 
 Defined in node_modules/@types/node/stream.d.ts:21
 
 ___
 
-###  readableLength
+### `Readonly` readableLength
 
 • **readableLength**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableLength](sparsefilterstream.md#readablelength)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableLength](sparsefilterstream.md#readonly-readablelength)*
 
 Defined in node_modules/@types/node/stream.d.ts:22
 
@@ -158,7 +158,7 @@ ___
 
 • **source**: *[File](file.md)*
 
-*Defined in [lib/block-read-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-read-stream.ts#L32)*
+*Defined in [lib/block-read-stream.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-read-stream.ts#L28)*
 
 ___
 
@@ -216,7 +216,7 @@ ___
 
 *Overrides [SparseFilterStream](sparsefilterstream.md).[_read](sparsefilterstream.md#_read)*
 
-*Defined in [lib/block-read-stream.ts:92](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-read-stream.ts#L92)*
+*Defined in [lib/block-read-stream.ts:88](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-read-stream.ts#L88)*
 
 **Returns:** *Promise‹void›*
 
@@ -1389,7 +1389,7 @@ ___
 
 ▸ **tryRead**(`buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer)): *Promise‹ReadResult›*
 
-*Defined in [lib/block-read-stream.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-read-stream.ts#L71)*
+*Defined in [lib/block-read-stream.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-read-stream.ts#L67)*
 
 **Parameters:**
 

@@ -16,8 +16,8 @@
 
 ### Properties
 
-* [blocks](blocksverificationerror.md#blocks)
-* [checksum](blocksverificationerror.md#checksum)
+* [blocks](blocksverificationerror.md#readonly-blocks)
+* [checksum](blocksverificationerror.md#readonly-checksum)
 * [code](blocksverificationerror.md#code)
 * [message](blocksverificationerror.md#message)
 * [name](blocksverificationerror.md#name)
@@ -29,7 +29,7 @@
 
 \+ **new BlocksVerificationError**(`blocks`: [BlocksWithChecksum](../interfaces/blockswithchecksum.md), `checksum`: string): *[BlocksVerificationError](blocksverificationerror.md)*
 
-*Defined in [lib/errors.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/errors.ts#L48)*
+*Defined in [lib/errors.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/errors.ts#L48)*
 
 **Parameters:**
 
@@ -42,19 +42,19 @@ Name | Type |
 
 ## Properties
 
-###  blocks
+### `Readonly` blocks
 
 • **blocks**: *[BlocksWithChecksum](../interfaces/blockswithchecksum.md)*
 
-*Defined in [lib/errors.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/errors.ts#L50)*
+*Defined in [lib/errors.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/errors.ts#L50)*
 
 ___
 
-###  checksum
+### `Readonly` checksum
 
 • **checksum**: *string*
 
-*Defined in [lib/errors.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/errors.ts#L51)*
+*Defined in [lib/errors.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/errors.ts#L51)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 *Inherited from [VerificationError](verificationerror.md).[code](verificationerror.md#code)*
 
-*Defined in [lib/errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/errors.ts#L24)*
+*Defined in [lib/errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/errors.ts#L24)*
 
 ___
 

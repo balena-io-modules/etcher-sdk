@@ -23,12 +23,12 @@
 
 * [maxBytes](streamlimiter.md#private-maxbytes)
 * [readable](streamlimiter.md#readable)
-* [readableHighWaterMark](streamlimiter.md#readablehighwatermark)
-* [readableLength](streamlimiter.md#readablelength)
+* [readableHighWaterMark](streamlimiter.md#readonly-readablehighwatermark)
+* [readableLength](streamlimiter.md#readonly-readablelength)
 * [stream](streamlimiter.md#private-stream)
 * [writable](streamlimiter.md#writable)
-* [writableHighWaterMark](streamlimiter.md#writablehighwatermark)
-* [writableLength](streamlimiter.md#writablelength)
+* [writableHighWaterMark](streamlimiter.md#readonly-writablehighwatermark)
+* [writableLength](streamlimiter.md#readonly-writablelength)
 * [defaultMaxListeners](streamlimiter.md#static-defaultmaxlisteners)
 
 ### Methods
@@ -82,7 +82,7 @@
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [lib/stream-limiter.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/stream-limiter.ts#L22)*
+*Defined in [lib/stream-limiter.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/stream-limiter.ts#L22)*
 
 **Parameters:**
 
@@ -99,7 +99,7 @@ Name | Type |
 
 • **maxBytes**: *number*
 
-*Defined in [lib/stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/stream-limiter.ts#L23)*
+*Defined in [lib/stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/stream-limiter.ts#L23)*
 
 ___
 
@@ -113,21 +113,21 @@ Defined in node_modules/@types/node/stream.d.ts:20
 
 ___
 
-###  readableHighWaterMark
+### `Readonly` readableHighWaterMark
 
 • **readableHighWaterMark**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableHighWaterMark](sparsefilterstream.md#readablehighwatermark)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableHighWaterMark](sparsefilterstream.md#readonly-readablehighwatermark)*
 
 Defined in node_modules/@types/node/stream.d.ts:21
 
 ___
 
-###  readableLength
+### `Readonly` readableLength
 
 • **readableLength**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableLength](sparsefilterstream.md#readablelength)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableLength](sparsefilterstream.md#readonly-readablelength)*
 
 Defined in node_modules/@types/node/stream.d.ts:22
 
@@ -137,7 +137,7 @@ ___
 
 • **stream**: *ReadableStream*
 
-*Defined in [lib/stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/stream-limiter.ts#L23)*
+*Defined in [lib/stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/stream-limiter.ts#L23)*
 
 ___
 
@@ -151,21 +151,21 @@ Defined in node_modules/@types/node/stream.d.ts:209
 
 ___
 
-###  writableHighWaterMark
+### `Readonly` writableHighWaterMark
 
 • **writableHighWaterMark**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableHighWaterMark](sparsefilterstream.md#writablehighwatermark)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableHighWaterMark](sparsefilterstream.md#readonly-writablehighwatermark)*
 
 Defined in node_modules/@types/node/stream.d.ts:210
 
 ___
 
-###  writableLength
+### `Readonly` writableLength
 
 • **writableLength**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableLength](sparsefilterstream.md#writablelength)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableLength](sparsefilterstream.md#readonly-writablelength)*
 
 Defined in node_modules/@types/node/stream.d.ts:211
 
@@ -287,7 +287,7 @@ ___
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[_transform](../interfaces/sourcetransform.md#_transform)*
 
-*Defined in [lib/stream-limiter.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/stream-limiter.ts#L29)*
+*Defined in [lib/stream-limiter.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/stream-limiter.ts#L29)*
 
 **Parameters:**
 

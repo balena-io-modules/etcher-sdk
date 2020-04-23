@@ -23,8 +23,8 @@
 * [bytesWritten](countingwritable.md#byteswritten)
 * [position](countingwritable.md#position)
 * [writable](countingwritable.md#writable)
-* [writableHighWaterMark](countingwritable.md#writablehighwatermark)
-* [writableLength](countingwritable.md#writablelength)
+* [writableHighWaterMark](countingwritable.md#readonly-writablehighwatermark)
+* [writableLength](countingwritable.md#readonly-writablelength)
 * [defaultMaxListeners](countingwritable.md#static-defaultmaxlisteners)
 
 ### Methods
@@ -81,7 +81,7 @@ Name | Type |
 
 • **bytesWritten**: *number* = 0
 
-*Defined in [lib/source-destination/progress.ts:92](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/progress.ts#L92)*
+*Defined in [lib/source-destination/progress.ts:105](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/source-destination/progress.ts#L105)*
 
 ___
 
@@ -89,7 +89,7 @@ ___
 
 • **position**: *number | undefined*
 
-*Defined in [lib/source-destination/progress.ts:93](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/progress.ts#L93)*
+*Defined in [lib/source-destination/progress.ts:106](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/source-destination/progress.ts#L106)*
 
 ___
 
@@ -103,21 +103,21 @@ Defined in node_modules/@types/node/stream.d.ts:109
 
 ___
 
-###  writableHighWaterMark
+### `Readonly` writableHighWaterMark
 
 • **writableHighWaterMark**: *number*
 
-*Inherited from [CountingWritable](countingwritable.md).[writableHighWaterMark](countingwritable.md#writablehighwatermark)*
+*Inherited from [CountingWritable](countingwritable.md).[writableHighWaterMark](countingwritable.md#readonly-writablehighwatermark)*
 
 Defined in node_modules/@types/node/stream.d.ts:110
 
 ___
 
-###  writableLength
+### `Readonly` writableLength
 
 • **writableLength**: *number*
 
-*Inherited from [CountingWritable](countingwritable.md).[writableLength](countingwritable.md#writablelength)*
+*Inherited from [CountingWritable](countingwritable.md).[writableLength](countingwritable.md#readonly-writablelength)*
 
 Defined in node_modules/@types/node/stream.d.ts:111
 
@@ -189,7 +189,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/source-destination/progress.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/progress.ts#L95)*
+*Defined in [lib/source-destination/progress.ts:108](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/source-destination/progress.ts#L108)*
 
 **Parameters:**
 

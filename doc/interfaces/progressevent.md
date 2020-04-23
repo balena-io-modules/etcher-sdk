@@ -10,17 +10,26 @@
 
 ### Properties
 
+* [averageSpeed](progressevent.md#averagespeed)
 * [bytes](progressevent.md#bytes)
 * [position](progressevent.md#position)
 * [speed](progressevent.md#speed)
 
 ## Properties
 
+###  averageSpeed
+
+• **averageSpeed**: *number*
+
+*Defined in [lib/source-destination/progress.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/source-destination/progress.ts#L31)*
+
+___
+
 ###  bytes
 
 • **bytes**: *number*
 
-*Defined in [lib/source-destination/progress.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/progress.ts#L29)*
+*Defined in [lib/source-destination/progress.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/source-destination/progress.ts#L29)*
 
 ___
 
@@ -28,7 +37,7 @@ ___
 
 • **position**: *number*
 
-*Defined in [lib/source-destination/progress.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/progress.ts#L28)*
+*Defined in [lib/source-destination/progress.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/source-destination/progress.ts#L28)*
 
 ___
 
@@ -36,4 +45,4 @@ ___
 
 • **speed**: *number*
 
-*Defined in [lib/source-destination/progress.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/progress.ts#L30)*
+*Defined in [lib/source-destination/progress.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/source-destination/progress.ts#L30)*

@@ -22,12 +22,12 @@
 ### Properties
 
 * [alignedReadableState](sparsereadstream.md#private-optional-alignedreadablestate)
-* [blocks](sparsereadstream.md#blocks)
+* [blocks](sparsereadstream.md#readonly-blocks)
 * [chunkSize](sparsereadstream.md#private-chunksize)
 * [positionInBlock](sparsereadstream.md#private-positioninblock)
 * [readable](sparsereadstream.md#readable)
-* [readableHighWaterMark](sparsereadstream.md#readablehighwatermark)
-* [readableLength](sparsereadstream.md#readablelength)
+* [readableHighWaterMark](sparsereadstream.md#readonly-readablehighwatermark)
+* [readableLength](sparsereadstream.md#readonly-readablelength)
 * [source](sparsereadstream.md#private-source)
 * [state](sparsereadstream.md#private-optional-state)
 * [stateIterator](sparsereadstream.md#private-stateiterator)
@@ -76,7 +76,7 @@
 
 *Overrides void*
 
-*Defined in [lib/sparse-stream/sparse-read-stream.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-read-stream.ts#L39)*
+*Defined in [lib/sparse-stream/sparse-read-stream.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-read-stream.ts#L39)*
 
 **Parameters:**
 
@@ -100,17 +100,17 @@ Name | Type | Default |
 
 • **alignedReadableState**? : *[AlignedReadableState](alignedreadablestate.md)*
 
-*Defined in [lib/sparse-stream/sparse-read-stream.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-read-stream.ts#L39)*
+*Defined in [lib/sparse-stream/sparse-read-stream.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-read-stream.ts#L39)*
 
 ___
 
-###  blocks
+### `Readonly` blocks
 
 • **blocks**: *[BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]*
 
 *Implementation of [SparseReadable](../interfaces/sparsereadable.md).[blocks](../interfaces/sparsereadable.md#blocks)*
 
-*Defined in [lib/sparse-stream/sparse-read-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-read-stream.ts#L34)*
+*Defined in [lib/sparse-stream/sparse-read-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-read-stream.ts#L34)*
 
 ___
 
@@ -118,7 +118,7 @@ ___
 
 • **chunkSize**: *number*
 
-*Defined in [lib/sparse-stream/sparse-read-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-read-stream.ts#L35)*
+*Defined in [lib/sparse-stream/sparse-read-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-read-stream.ts#L35)*
 
 ___
 
@@ -126,7 +126,7 @@ ___
 
 • **positionInBlock**: *number* = 0
 
-*Defined in [lib/sparse-stream/sparse-read-stream.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-read-stream.ts#L38)*
+*Defined in [lib/sparse-stream/sparse-read-stream.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-read-stream.ts#L38)*
 
 ___
 
@@ -142,21 +142,21 @@ Defined in node_modules/@types/node/stream.d.ts:20
 
 ___
 
-###  readableHighWaterMark
+### `Readonly` readableHighWaterMark
 
 • **readableHighWaterMark**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableHighWaterMark](sparsefilterstream.md#readablehighwatermark)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableHighWaterMark](sparsefilterstream.md#readonly-readablehighwatermark)*
 
 Defined in node_modules/@types/node/stream.d.ts:21
 
 ___
 
-###  readableLength
+### `Readonly` readableLength
 
 • **readableLength**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableLength](sparsefilterstream.md#readablelength)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableLength](sparsefilterstream.md#readonly-readablelength)*
 
 Defined in node_modules/@types/node/stream.d.ts:22
 
@@ -166,7 +166,7 @@ ___
 
 • **source**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [lib/sparse-stream/sparse-read-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-read-stream.ts#L33)*
+*Defined in [lib/sparse-stream/sparse-read-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-read-stream.ts#L33)*
 
 ___
 
@@ -174,7 +174,7 @@ ___
 
 • **state**? : *[SparseReaderState](../interfaces/sparsereaderstate.md)*
 
-*Defined in [lib/sparse-stream/sparse-read-stream.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-read-stream.ts#L37)*
+*Defined in [lib/sparse-stream/sparse-read-stream.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-read-stream.ts#L37)*
 
 ___
 
@@ -182,7 +182,7 @@ ___
 
 • **stateIterator**: *Iterator‹[SparseReaderState](../interfaces/sparsereaderstate.md)›*
 
-*Defined in [lib/sparse-stream/sparse-read-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-read-stream.ts#L36)*
+*Defined in [lib/sparse-stream/sparse-read-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-read-stream.ts#L36)*
 
 ___
 
@@ -214,7 +214,7 @@ ___
 
 ▸ **__read**(): *Promise‹[SparseStreamChunk](../interfaces/sparsestreamchunk.md) | null›*
 
-*Defined in [lib/sparse-stream/sparse-read-stream.ts:91](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-read-stream.ts#L91)*
+*Defined in [lib/sparse-stream/sparse-read-stream.ts:91](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-read-stream.ts#L91)*
 
 **Returns:** *Promise‹[SparseStreamChunk](../interfaces/sparsestreamchunk.md) | null›*
 
@@ -252,7 +252,7 @@ ___
 
 *Overrides [SparseFilterStream](sparsefilterstream.md).[_read](sparsefilterstream.md#_read)*
 
-*Defined in [lib/sparse-stream/sparse-read-stream.ts:77](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-read-stream.ts#L77)*
+*Defined in [lib/sparse-stream/sparse-read-stream.ts:77](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-read-stream.ts#L77)*
 
 **Returns:** *Promise‹void›*
 
@@ -605,7 +605,7 @@ ___
 
 ▸ **nextBlock**(): *void*
 
-*Defined in [lib/sparse-stream/sparse-read-stream.ts:86](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-read-stream.ts#L86)*
+*Defined in [lib/sparse-stream/sparse-read-stream.ts:86](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-read-stream.ts#L86)*
 
 **Returns:** *void*
 
