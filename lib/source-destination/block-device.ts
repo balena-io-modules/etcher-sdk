@@ -171,7 +171,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		await clean(this.drive.device);
 		await super._open();
 		if (plat === 'darwin') {
-			await fromCallback(cb => {
+			await fromCallback((cb) => {
 				setF_NOCACHE(this.fileHandle.fd, 1, cb);
 			});
 		}

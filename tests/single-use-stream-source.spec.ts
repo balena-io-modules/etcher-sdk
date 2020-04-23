@@ -28,7 +28,7 @@ import { DEFAULT_IMAGE_TESTS_TIMEOUT } from './tester';
 const DATA_PATH = join(__dirname, 'data');
 const ZIP_PATH = join(DATA_PATH, 'zip');
 
-describe('zip in a single use stream source', function() {
+describe('zip in a single use stream source', function () {
 	this.timeout(DEFAULT_IMAGE_TESTS_TIMEOUT);
 
 	it('should be able to read an image from a zip file from a stream', async () => {
@@ -46,7 +46,7 @@ describe('zip in a single use stream source', function() {
 			isCompressed: true,
 		});
 		const progressEvents: sourceDestination.ProgressEvent[] = [];
-		await using(tmpFileDisposer(false), async file => {
+		await using(tmpFileDisposer(false), async (file) => {
 			await multiWrite.pipeSourceToDestinations({
 				source,
 				destinations: [

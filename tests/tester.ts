@@ -213,7 +213,7 @@ export function expectSourceSourceError(
 	Cls: typeof SourceSource,
 	message: string,
 ) {
-	it(testName, async function() {
+	it(testName, async function () {
 		const source = new sourceDestination.File({ path: filePath });
 		await source.open();
 		const innerSource = new Cls(source);
@@ -235,7 +235,7 @@ export function expectGetInnerSourceError(
 	filePath: string,
 	message: string,
 ) {
-	it(testName, async function() {
+	it(testName, async function () {
 		const source = new sourceDestination.File({ path: filePath });
 		try {
 			await source.getInnerSource();

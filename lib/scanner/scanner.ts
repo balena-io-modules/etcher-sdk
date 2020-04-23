@@ -57,7 +57,7 @@ export class Scanner extends EventEmitter {
 	public start(): Promise<void> {
 		debug('start');
 		let notReady = this.adapters.length;
-		return new Promise(resolve => {
+		return new Promise((resolve) => {
 			this.adapters.forEach((adapter: Adapter) => {
 				adapter.on('ready', () => {
 					notReady -= 1;

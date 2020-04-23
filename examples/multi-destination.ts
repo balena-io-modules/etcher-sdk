@@ -56,7 +56,7 @@ const main = async ({
 	deviceScanner.on('error', console.error);
 	deviceScanner.start();
 	// Wait for the deviceScanner to be ready
-	await new Promise(resolve => {
+	await new Promise((resolve) => {
 		deviceScanner.on('ready', resolve);
 	});
 	const source: sourceDestination.SourceDestination = new sourceDestination.File(
@@ -71,7 +71,7 @@ const main = async ({
 		};
 	}
 	const destinationDrives = Array.from(deviceScanner.drives.values()).filter(
-		drive => {
+		(drive) => {
 			return devices.includes(drive.device!);
 		},
 	);

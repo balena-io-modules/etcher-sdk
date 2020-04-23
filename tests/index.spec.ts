@@ -20,19 +20,19 @@ import 'mocha';
 
 import { sourceDestination } from '../lib';
 
-describe('SourceDestination.imageExtensions', function() {
-	it('should be an array', function() {
+describe('SourceDestination.imageExtensions', function () {
+	it('should be an array', function () {
 		assert(isArray(sourceDestination.SourceDestination.imageExtensions));
 	});
 
-	it('should not be empty', function() {
+	it('should not be empty', function () {
 		assert(!isEmpty(sourceDestination.SourceDestination.imageExtensions));
 	});
 
-	it('should contain only strings', function() {
+	it('should contain only strings', function () {
 		assert(
 			every(
-				map(sourceDestination.SourceDestination.imageExtensions, function(
+				map(sourceDestination.SourceDestination.imageExtensions, function (
 					extension,
 				) {
 					return isString(extension);
@@ -41,10 +41,10 @@ describe('SourceDestination.imageExtensions', function() {
 		);
 	});
 
-	it('should not contain empty strings', function() {
+	it('should not contain empty strings', function () {
 		assert(
 			every(
-				map(sourceDestination.SourceDestination.imageExtensions, function(
+				map(sourceDestination.SourceDestination.imageExtensions, function (
 					extension,
 				) {
 					return !isEmpty(extension);
@@ -53,10 +53,10 @@ describe('SourceDestination.imageExtensions', function() {
 		);
 	});
 
-	it('should not contain a leading period in any file type extension', function() {
+	it('should not contain a leading period in any file type extension', function () {
 		assert(
 			every(
-				map(sourceDestination.SourceDestination.imageExtensions, function(
+				map(sourceDestination.SourceDestination.imageExtensions, function (
 					extension,
 				) {
 					return first(extension) !== '.';

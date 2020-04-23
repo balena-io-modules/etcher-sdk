@@ -37,7 +37,7 @@ const ZIP_PATH = join(
 	'etcher-test-with-bmap.zip',
 );
 
-describe('sparse streams', function() {
+describe('sparse streams', function () {
 	this.timeout(DEFAULT_IMAGE_TESTS_TIMEOUT);
 
 	it('dmgs, sparse streams and verifiers', async () => {

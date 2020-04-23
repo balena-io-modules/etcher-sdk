@@ -125,7 +125,7 @@ export class ConfiguredSource extends SourceSource {
 	public async getBlocks(): Promise<BlocksWithChecksum[]> {
 		// Align ranges to this.chunkSize
 		const blocks = await this.disk.getRanges(this.chunkSize);
-		return blocks.map(block => ({ blocks: [block] }));
+		return blocks.map((block) => ({ blocks: [block] }));
 	}
 
 	private async getBlocksWithChecksumType(
@@ -133,7 +133,7 @@ export class ConfiguredSource extends SourceSource {
 	): Promise<BlocksWithChecksum[]> {
 		let blocks = await this.getBlocks();
 		if (generateChecksums) {
-			blocks = blocks.map(block => ({
+			blocks = blocks.map((block) => ({
 				...block,
 				checksumType: this.checksumType,
 			}));

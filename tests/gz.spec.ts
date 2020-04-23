@@ -23,7 +23,7 @@ const DATA_PATH = join(__dirname, 'data');
 const IMAGES_PATH = join(DATA_PATH, 'images');
 const GZ_PATH = join(DATA_PATH, 'gz');
 
-describe('gzip support', function() {
+describe('gzip support', function () {
 	this.timeout(DEFAULT_IMAGE_TESTS_TIMEOUT);
 
 	testImage(

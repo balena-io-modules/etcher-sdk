@@ -22,7 +22,7 @@ import { DEFAULT_IMAGE_TESTS_TIMEOUT, testImage } from './tester';
 const DATA_PATH = join(__dirname, 'data');
 const IMAGES_PATH = join(DATA_PATH, 'images');
 
-describe('iso support', function() {
+describe('iso support', function () {
 	this.timeout(DEFAULT_IMAGE_TESTS_TIMEOUT);
 
 	testImage(

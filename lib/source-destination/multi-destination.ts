@@ -355,7 +355,7 @@ export class MultiDestination extends SourceDestination {
 	}
 
 	protected async _open(): Promise<void> {
-		await map(this.destinations, async destination => {
+		await map(this.destinations, async (destination) => {
 			try {
 				await destination.open();
 			} catch (error) {
@@ -365,7 +365,7 @@ export class MultiDestination extends SourceDestination {
 	}
 
 	protected async _close(): Promise<void> {
-		await map(this.destinations, async destination => {
+		await map(this.destinations, async (destination) => {
 			try {
 				await destination.close();
 			} catch (error) {

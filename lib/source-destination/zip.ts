@@ -141,7 +141,7 @@ class SourceRandomAccessReader extends RandomAccessReader {
 		const passthrough = new PassThrough();
 		this.source
 			.createReadStream({ start, end: end - 1 })
-			.then(stream => {
+			.then((stream) => {
 				stream.on('error', passthrough.emit.bind(passthrough, 'error'));
 				stream.pipe(passthrough);
 			})
@@ -214,7 +214,9 @@ export class RandomAccessZipSource extends SourceSource {
 	}
 
 	private async getImageEntry(): Promise<Entry> {
-		let entries = (await this.getEntries()).filter(e => this.match(e.fileName));
+		let entries = (await this.getEntries()).filter((e) =>
+			this.match(e.fileName),
+		);
 		if (entries.length === 0) {
 			throw new Error(NO_MATCHING_FILE_MSG);
 		}

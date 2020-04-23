@@ -41,23 +41,23 @@ async function createScanner(
 	return driveScanner;
 }
 
-describe('Scanner', function() {
-	describe('detected devices should be a Set', function() {
-		beforeEach(async function() {
+describe('Scanner', function () {
+	describe('detected devices should be a Set', function () {
+		beforeEach(async function () {
 			this.driveScanner = await createScanner();
 		});
 
-		afterEach(function() {
+		afterEach(function () {
 			this.driveScanner.stop();
 		});
 
-		it('should emit an empty Set', async function() {
+		it('should emit an empty Set', async function () {
 			expect(this.driveScanner.drives).to.be.an.instanceof(Set);
 		});
 	});
 
-	describe('given only system available drives', function() {
-		beforeEach(async function() {
+	describe('given only system available drives', function () {
+		beforeEach(async function () {
 			this.drivelistStub = stub(drivelist, 'list');
 			this.drivelistStub.resolves([
 				{
@@ -75,28 +75,28 @@ describe('Scanner', function() {
 			this.driveScanner = await createScanner();
 		});
 
-		afterEach(function() {
+		afterEach(function () {
 			this.driveScanner.stop();
 			this.drivelistStub.restore();
 		});
 
-		it('should emit an empty Set', async function() {
+		it('should emit an empty Set', async function () {
 			expect(this.driveScanner.drives.size).to.equal(0);
 		});
 	});
 
-	describe('given linux', function() {
-		beforeEach(function() {
+	describe('given linux', function () {
+		beforeEach(function () {
 			this.osPlatformStub = stub(os, 'platform');
 			this.osPlatformStub.returns('linux');
 		});
 
-		afterEach(function() {
+		afterEach(function () {
 			this.osPlatformStub.restore();
 		});
 
-		describe('given available drives', function() {
-			beforeEach(async function() {
+		describe('given available drives', function () {
+			beforeEach(async function () {
 				this.drivelistStub = stub(drivelist, 'list');
 				this.drivelistStub.resolves([
 					{
@@ -142,16 +142,16 @@ describe('Scanner', function() {
 				this.driveScanner = await createScanner();
 			});
 
-			afterEach(function() {
+			afterEach(function () {
 				this.driveScanner.stop();
 				this.drivelistStub.restore();
 			});
 
-			it('should emit the non removable drives', function() {
+			it('should emit the non removable drives', function () {
 				expect(
 					// ignore because BlockDevice.drive is private
 					// @ts-ignore
-					Array.from(this.driveScanner.drives).map(d => d.drive),
+					Array.from(this.driveScanner.drives).map((d) => d.drive),
 				).to.deep.equal([
 					{
 						device: '/dev/sdb',
@@ -184,18 +184,18 @@ describe('Scanner', function() {
 		});
 	});
 
-	describe('given windows', function() {
-		beforeEach(function() {
+	describe('given windows', function () {
+		beforeEach(function () {
 			this.osPlatformStub = stub(os, 'platform');
 			this.osPlatformStub.returns('win32');
 		});
 
-		afterEach(function() {
+		afterEach(function () {
 			this.osPlatformStub.restore();
 		});
 
-		describe('given available drives', function() {
-			beforeEach(async function() {
+		describe('given available drives', function () {
+			beforeEach(async function () {
 				this.drivelistStub = stub(drivelist, 'list');
 				this.drivelistStub.resolves([
 					{
@@ -237,16 +237,16 @@ describe('Scanner', function() {
 				this.driveScanner = await createScanner();
 			});
 
-			afterEach(function() {
+			afterEach(function () {
 				this.driveScanner.stop();
 				this.drivelistStub.restore();
 			});
 
-			it('should emit the non removable drives', function() {
+			it('should emit the non removable drives', function () {
 				expect(
 					// ignore because BlockDevice.drive is private
 					// @ts-ignore
-					Array.from(this.driveScanner.drives).map(d => d.drive),
+					Array.from(this.driveScanner.drives).map((d) => d.drive),
 				).to.deep.equal([
 					{
 						device: '\\\\.\\PHYSICALDRIVE2',
@@ -274,8 +274,8 @@ describe('Scanner', function() {
 			});
 		});
 
-		describe('given a drive with a single drive letters', function() {
-			beforeEach(async function() {
+		describe('given a drive with a single drive letters', function () {
+			beforeEach(async function () {
 				this.drivelistStub = stub(drivelist, 'list');
 				this.drivelistStub.resolves([
 					{
@@ -295,12 +295,12 @@ describe('Scanner', function() {
 				this.driveScanner = await createScanner();
 			});
 
-			afterEach(function() {
+			afterEach(function () {
 				this.driveScanner.stop();
 				this.drivelistStub.restore();
 			});
 
-			it('should use the drive letter as the name', function() {
+			it('should use the drive letter as the name', function () {
 				expect(this.driveScanner.drives.size).to.equal(1);
 				expect(
 					// @ts-ignore
@@ -309,8 +309,8 @@ describe('Scanner', function() {
 			});
 		});
 
-		describe('given a drive with multiple drive letters', function() {
-			beforeEach(async function() {
+		describe('given a drive with multiple drive letters', function () {
+			beforeEach(async function () {
 				this.drivelistStub = stub(drivelist, 'list');
 				this.drivelistStub.resolves([
 					{
@@ -336,12 +336,12 @@ describe('Scanner', function() {
 				this.driveScanner = await createScanner();
 			});
 
-			afterEach(function() {
+			afterEach(function () {
 				this.driveScanner.stop();
 				this.drivelistStub.restore();
 			});
 
-			it('should join all the mountpoints in `name`', function() {
+			it('should join all the mountpoints in `name`', function () {
 				expect(this.driveScanner.drives.size).to.equal(1);
 				expect(
 					// @ts-ignore
@@ -351,17 +351,17 @@ describe('Scanner', function() {
 		});
 	});
 
-	describe('given an error when listing the drives', function() {
-		beforeEach(function() {
+	describe('given an error when listing the drives', function () {
+		beforeEach(function () {
 			this.drivelistStub = stub(drivelist, 'list');
 			this.drivelistStub.rejects(new Error('scan error'));
 		});
 
-		afterEach(function() {
+		afterEach(function () {
 			this.drivelistStub.restore();
 		});
 
-		it('should emit the error', async function() {
+		it('should emit the error', async function () {
 			try {
 				await createScanner();
 			} catch (error) {

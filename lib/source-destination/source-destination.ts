@@ -116,7 +116,7 @@ export class SourceDestinationFs {
 	) {
 		this.source
 			.getMetadata()
-			.then(metadata => {
+			.then((metadata) => {
 				if (metadata.size === undefined) {
 					callback(new Error('No size'));
 					return;

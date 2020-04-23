@@ -74,7 +74,7 @@ async function expectFileToContain(path: string, data: Buffer): Promise<void> {
 	expect(fileData.slice(0, data.length)).to.deep.equal(data);
 }
 
-describe('block-write-stream', function() {
+describe('block-write-stream', function () {
 	this.timeout(DEFAULT_IMAGE_TESTS_TIMEOUT);
 	const SIZE = BLOCK_WRITE_STREAM_CHUNK_SIZE + 7;
 	const CHUNK_SIZE = 512;
@@ -154,14 +154,14 @@ describe('block-write-stream', function() {
 		});
 	}
 
-	describe('win32', function() {
-		before(function() {
+	describe('win32', function () {
+		before(function () {
 			this.osPlatformStub = stub(os, 'platform');
 			this.osPlatformStub.returns('win32');
 			this.diskpartCleanStub = stub(diskpart, 'clean');
 		});
 
-		after(function() {
+		after(function () {
 			this.osPlatformStub.restore();
 			this.diskpartCleanStub.restore();
 		});
@@ -176,13 +176,13 @@ describe('block-write-stream', function() {
 		);
 	});
 
-	describe('linux', function() {
-		before(function() {
+	describe('linux', function () {
+		before(function () {
 			this.osPlatformStub = stub(os, 'platform');
 			this.osPlatformStub.returns('linux');
 		});
 
-		after(function() {
+		after(function () {
 			this.osPlatformStub.restore();
 		});
 
