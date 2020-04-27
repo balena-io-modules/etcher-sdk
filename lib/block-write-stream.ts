@@ -20,7 +20,7 @@ import * as _debug from 'debug';
 import { Writable } from 'stream';
 
 import { AlignedLockableBuffer } from './aligned-lockable-buffer';
-import { PROGRESS_EMISSION_INTERVAL, RETRY_BASE_TIMEOUT } from './constants';
+import { RETRY_BASE_TIMEOUT } from './constants';
 import { isTransientError } from './errors';
 import { BlockDevice } from './source-destination/block-device';
 import { makeClassEmitProgressEvents } from './source-destination/progress';
@@ -125,5 +125,4 @@ export const ProgressBlockWriteStream = makeClassEmitProgressEvents(
 	BlockWriteStream,
 	'bytesWritten',
 	'bytesWritten',
-	PROGRESS_EMISSION_INTERVAL,
 );

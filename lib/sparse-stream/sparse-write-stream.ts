@@ -3,7 +3,7 @@ import { delay } from 'bluebird';
 import { Writable } from 'stream';
 
 import { isAlignedLockableBuffer } from '../aligned-lockable-buffer';
-import { PROGRESS_EMISSION_INTERVAL, RETRY_BASE_TIMEOUT } from '../constants';
+import { RETRY_BASE_TIMEOUT } from '../constants';
 import { isTransientError } from '../errors';
 import { makeClassEmitProgressEvents } from '../source-destination/progress';
 import { SourceDestination } from '../source-destination/source-destination';
@@ -149,5 +149,4 @@ export const ProgressSparseWriteStream = makeClassEmitProgressEvents(
 	SparseWriteStream,
 	'bytesWritten',
 	'position',
-	PROGRESS_EMISSION_INTERVAL,
 );
