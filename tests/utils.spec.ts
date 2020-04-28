@@ -21,12 +21,12 @@ import { Readable } from 'stream';
 
 import { streamToBuffer } from '../lib/utils';
 
-describe('utils', function() {
-	describe('streamToBuffer', function() {
-		describe('given a stream that emits data', function() {
-			beforeEach(function() {
+describe('utils', function () {
+	describe('streamToBuffer', function () {
+		describe('given a stream that emits data', function () {
+			beforeEach(function () {
 				this.stream = new Readable();
-				this.stream._read = function() {
+				this.stream._read = function () {
 					this.push(Buffer.from('Hello', 'utf8'));
 					this.push(Buffer.from(' ', 'utf8'));
 					this.push(Buffer.from('World', 'utf8'));
@@ -34,21 +34,21 @@ describe('utils', function() {
 				};
 			});
 
-			it('should yield the stream data', async function() {
+			it('should yield the stream data', async function () {
 				const data = await streamToBuffer(this.stream);
 				expect(data.toString()).to.equal('Hello World');
 			});
 		});
 
-		describe('given a stream that throws an error', function() {
-			beforeEach(function() {
+		describe('given a stream that throws an error', function () {
+			beforeEach(function () {
 				this.stream = new Readable();
-				this.stream._read = function() {
+				this.stream._read = function () {
 					this.emit('error', new Error('stream error'));
 				};
 			});
 
-			it('should be rejected with the error', async function() {
+			it('should be rejected with the error', async function () {
 				try {
 					await streamToBuffer(this.stream);
 					assert(false);

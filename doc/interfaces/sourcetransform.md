@@ -22,12 +22,12 @@
 ### Properties
 
 * [readable](sourcetransform.md#readable)
-* [readableHighWaterMark](sourcetransform.md#readablehighwatermark)
-* [readableLength](sourcetransform.md#readablelength)
+* [readableHighWaterMark](sourcetransform.md#readonly-readablehighwatermark)
+* [readableLength](sourcetransform.md#readonly-readablelength)
 * [sourceStream](sourcetransform.md#sourcestream)
 * [writable](sourcetransform.md#writable)
-* [writableHighWaterMark](sourcetransform.md#writablehighwatermark)
-* [writableLength](sourcetransform.md#writablelength)
+* [writableHighWaterMark](sourcetransform.md#readonly-writablehighwatermark)
+* [writableLength](sourcetransform.md#readonly-writablelength)
 * [defaultMaxListeners](sourcetransform.md#static-defaultmaxlisteners)
 
 ### Methods
@@ -105,21 +105,21 @@ Defined in node_modules/@types/node/stream.d.ts:20
 
 ___
 
-###  readableHighWaterMark
+### `Readonly` readableHighWaterMark
 
 • **readableHighWaterMark**: *number*
 
-*Inherited from [SparseFilterStream](../classes/sparsefilterstream.md).[readableHighWaterMark](../classes/sparsefilterstream.md#readablehighwatermark)*
+*Inherited from [SparseFilterStream](../classes/sparsefilterstream.md).[readableHighWaterMark](../classes/sparsefilterstream.md#readonly-readablehighwatermark)*
 
 Defined in node_modules/@types/node/stream.d.ts:21
 
 ___
 
-###  readableLength
+### `Readonly` readableLength
 
 • **readableLength**: *number*
 
-*Inherited from [SparseFilterStream](../classes/sparsefilterstream.md).[readableLength](../classes/sparsefilterstream.md#readablelength)*
+*Inherited from [SparseFilterStream](../classes/sparsefilterstream.md).[readableLength](../classes/sparsefilterstream.md#readonly-readablelength)*
 
 Defined in node_modules/@types/node/stream.d.ts:22
 
@@ -129,7 +129,7 @@ ___
 
 • **sourceStream**: *ReadableStream*
 
-*Defined in [lib/source-destination/compressed-source.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/compressed-source.ts#L27)*
+*Defined in [lib/source-destination/compressed-source.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/source-destination/compressed-source.ts#L27)*
 
 ___
 
@@ -143,21 +143,21 @@ Defined in node_modules/@types/node/stream.d.ts:209
 
 ___
 
-###  writableHighWaterMark
+### `Readonly` writableHighWaterMark
 
 • **writableHighWaterMark**: *number*
 
-*Inherited from [SparseFilterStream](../classes/sparsefilterstream.md).[writableHighWaterMark](../classes/sparsefilterstream.md#writablehighwatermark)*
+*Inherited from [SparseFilterStream](../classes/sparsefilterstream.md).[writableHighWaterMark](../classes/sparsefilterstream.md#readonly-writablehighwatermark)*
 
 Defined in node_modules/@types/node/stream.d.ts:210
 
 ___
 
-###  writableLength
+### `Readonly` writableLength
 
 • **writableLength**: *number*
 
-*Inherited from [SparseFilterStream](../classes/sparsefilterstream.md).[writableLength](../classes/sparsefilterstream.md#writablelength)*
+*Inherited from [SparseFilterStream](../classes/sparsefilterstream.md).[writableLength](../classes/sparsefilterstream.md#readonly-writablelength)*
 
 Defined in node_modules/@types/node/stream.d.ts:211
 

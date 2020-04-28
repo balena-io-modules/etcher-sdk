@@ -14,10 +14,13 @@
  * limitations under the License.
  */
 
+import { Disk } from 'file-disk';
 import { promises as fs } from 'fs';
 import { Argv } from 'yargs';
 
 import { sourceDestination } from '../lib';
+import { configure as legacyConfigure } from '../lib/source-destination/configured-source/configure';
+import { ConfigureFunction } from '../lib/source-destination/configured-source/configured-source';
 
 import { pipeSourceToDestinationsWithProgressBar, wrapper } from './utils';
 
@@ -34,29 +37,40 @@ const main = async ({
 	trim,
 	config,
 	verify,
-}: any) => {
-	let source: sourceDestination.SourceDestination = new sourceDestination.BalenaS3Source(
+	decompressFirst,
+}: {
+	bucket: string;
+	deviceType: string;
+	buildId: string;
+	fileDestination: string;
+	trim: boolean;
+	config: string;
+	verify: boolean;
+	decompressFirst: boolean;
+}) => {
+	const source: sourceDestination.SourceDestination = new sourceDestination.BalenaS3Source(
 		bucket,
 		deviceType,
 		buildId,
 	);
-	if (trim || config !== undefined) {
-		source = new sourceDestination.ConfiguredSource({
-			source,
-			shouldTrimPartitions: trim,
-			createStreamFromDisk: false,
-			configure: config !== undefined ? 'legacy' : undefined,
-			config:
-				config !== undefined
-					? { config: await readJsonFile(config) }
-					: undefined,
-		});
+	let configure: ConfigureFunction | undefined;
+	if (config !== undefined) {
+		configure = async (disk: Disk) => {
+			await legacyConfigure(disk, { config: await readJsonFile(config) });
+		};
 	}
 	const destination = new sourceDestination.File({
 		path: fileDestination,
 		write: true,
 	});
-	await pipeSourceToDestinationsWithProgressBar(source, [destination], verify);
+	await pipeSourceToDestinationsWithProgressBar({
+		source,
+		destinations: [destination],
+		verify,
+		trim,
+		configure,
+		decompressFirst,
+	});
 };
 
 // tslint:disable-next-line: no-var-requires
@@ -77,6 +91,7 @@ const argv = require('yargs').command(
 		yargs.positional('fileDestination', { describe: 'Destination image file' });
 		yargs.option('trim', { default: false });
 		yargs.option('verify', { default: false });
+		yargs.option('decompressFirst', { default: false });
 		yargs.describe('config', 'json configuration file');
 	},
 ).argv;

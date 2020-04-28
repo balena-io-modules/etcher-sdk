@@ -26,7 +26,7 @@ const DATA_PATH = join(__dirname, 'data');
 const IMAGES_PATH = join(DATA_PATH, 'images');
 const DMG_PATH = join(DATA_PATH, 'dmg');
 
-describe('dmg support', function() {
+describe('dmg support', function () {
 	this.timeout(DEFAULT_IMAGE_TESTS_TIMEOUT);
 
 	const compressionMethods = [
@@ -38,7 +38,7 @@ describe('dmg support', function() {
 		// 'lzfse',
 	];
 
-	compressionMethods.forEach(compressionMethod => {
+	compressionMethods.forEach((compressionMethod) => {
 		testImage(
 			compressionMethod,
 			join(DMG_PATH, `etcher-test-${compressionMethod}.dmg`),
@@ -53,7 +53,7 @@ describe('dmg support', function() {
 		);
 	});
 
-	it('invalid dmg file', async function() {
+	it('invalid dmg file', async function () {
 		const source = new sourceDestination.File({
 			path: join(DATA_PATH, 'unrecognized', 'invalid.dmg'),
 		});

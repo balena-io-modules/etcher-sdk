@@ -160,7 +160,7 @@ export class BlockDeviceAdapter extends Adapter {
 
 			const displayName =
 				/PhysicalDrive/i.test(drive.device) && drive.mountpoints.length
-					? drive.mountpoints.map(m => m.path).join(', ') // Windows
+					? drive.mountpoints.map((m) => m.path).join(', ') // Windows
 					: drive.device;
 			const resultDrive: DrivelistDrive = { ...drive, displayName };
 			if (looksLikeComputeModule(resultDrive.description)) {

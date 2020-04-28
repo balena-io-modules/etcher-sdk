@@ -27,11 +27,7 @@ import {
 	AlignedLockableBuffer,
 	isAlignedLockableBuffer,
 } from '../aligned-lockable-buffer';
-import {
-	CHUNK_SIZE,
-	PROGRESS_EMISSION_INTERVAL,
-	XXHASH_SEED,
-} from '../constants';
+import { CHUNK_SIZE, XXHASH_SEED } from '../constants';
 import { ChecksumVerificationError, NotCapable } from '../errors';
 import { BlocksWithChecksum, SparseReadable } from '../sparse-stream/shared';
 import { SparseWritable } from '../sparse-stream/shared';
@@ -82,7 +78,6 @@ export const ProgressHashStream = makeClassEmitProgressEvents(
 	CountingHashStream,
 	'bytesWritten',
 	'bytesWritten',
-	PROGRESS_EMISSION_INTERVAL,
 );
 
 export function createHasher() {
@@ -116,7 +111,7 @@ export class SourceDestinationFs {
 	) {
 		this.source
 			.getMetadata()
-			.then(metadata => {
+			.then((metadata) => {
 				if (metadata.size === undefined) {
 					callback(new Error('No size'));
 					return;

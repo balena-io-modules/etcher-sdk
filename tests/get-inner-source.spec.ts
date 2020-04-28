@@ -24,9 +24,9 @@ import { streamToBuffer } from '../lib/utils';
 
 const DATA_PATH = join(__dirname, 'data', 'nested');
 
-describe('getInnerSource()', function() {
+describe('getInnerSource()', function () {
 	for (const filename of ['data.img.zip', 'data.img.zip.gz.bz2.xz']) {
-		it(`should work for ${filename}`, async function() {
+		it(`should work for ${filename}`, async function () {
 			const source = new sourceDestination.File({
 				path: join(DATA_PATH, filename),
 			});
@@ -40,7 +40,7 @@ describe('getInnerSource()', function() {
 	}
 
 	for (const filename of ['data.dmg.zip', 'data.dmg.zip.gz.bz2.xz']) {
-		it(`should fail for ${filename}`, async function() {
+		it(`should fail for ${filename}`, async function () {
 			const source = new sourceDestination.File({
 				path: join(DATA_PATH, filename),
 			});
@@ -58,7 +58,7 @@ describe('getInnerSource()', function() {
 		});
 	}
 
-	it(`should work for a raw image with a .dmg extension`, async function() {
+	it(`should work for a raw image with a .dmg extension`, async function () {
 		const filename = 'raw-image-not-a-dmg.dmg';
 		const source = new sourceDestination.File({
 			path: join(__dirname, 'data', 'images', filename),

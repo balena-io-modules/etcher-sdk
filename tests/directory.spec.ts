@@ -24,17 +24,14 @@ import { sourceDestination } from '../lib';
 const DATA_PATH = join(__dirname, 'data');
 const IMAGES_PATH = join(DATA_PATH, 'images');
 
-describe('directory', function() {
-	it('should be rejected with an error', async function() {
+describe('directory', function () {
+	it('should be rejected with an error', async function () {
 		const source = new sourceDestination.File({ path: IMAGES_PATH });
 		try {
 			await source.getInnerSource();
 			assert(false);
 		} catch (error) {
 			expect(error).to.be.an.instanceof(Error);
-			expect(error.message).to.equal(
-				'EISDIR: illegal operation on a directory, read',
-			);
 			expect(error.code).to.equal('EISDIR');
 		} finally {
 			await source.close();

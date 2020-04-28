@@ -50,10 +50,12 @@ export class BalenaS3Source extends SourceDestination {
 
 	private async prepare(): Promise<void> {
 		this.name = await this.getName();
-		this.rawSource = new Http(this.getUrl(`image/${this.name}.img`));
+		this.rawSource = new Http({ url: this.getUrl(`image/${this.name}.img`) });
 		this.zipSource = new ZipSource(
-			new Http(this.getUrl(`image/${this.name}.img.zip`)),
-			true,
+			new Http({
+				url: this.getUrl(`image/${this.name}.img.zip`),
+				avoidRandomAccess: true,
+			}),
 		);
 	}
 

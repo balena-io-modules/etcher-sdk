@@ -21,6 +21,7 @@ import { BlocksWithChecksum } from '../sparse-stream/shared';
 export interface Metadata {
 	size?: number;
 	isSizeEstimated?: boolean;
+	isCompressed?: boolean; // zip archive or compressed raw image (not dmg)
 	compressedSize?: number;
 	blockmappedSize?: number;
 	name?: string;

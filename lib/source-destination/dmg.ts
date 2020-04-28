@@ -107,7 +107,7 @@ export class DmgSource extends SourceSource {
 	public async getBlocks(): Promise<BlocksWithChecksum[]> {
 		const result: BlocksWithChecksum[] = [];
 		for (const blk of this.image.resourceFork.blkx) {
-			const childBlocks = blk.map.blocks.filter(b =>
+			const childBlocks = blk.map.blocks.filter((b) =>
 				DmgSource.mappedBlockTypes.includes(b.type),
 			);
 			if (childBlocks.length === 0) {

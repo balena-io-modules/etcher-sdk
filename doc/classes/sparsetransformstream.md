@@ -28,11 +28,11 @@
 * [bytesWritten](sparsetransformstream.md#byteswritten)
 * [position](sparsetransformstream.md#position)
 * [readable](sparsetransformstream.md#readable)
-* [readableHighWaterMark](sparsetransformstream.md#readablehighwatermark)
-* [readableLength](sparsetransformstream.md#readablelength)
+* [readableHighWaterMark](sparsetransformstream.md#readonly-readablehighwatermark)
+* [readableLength](sparsetransformstream.md#readonly-readablelength)
 * [writable](sparsetransformstream.md#writable)
-* [writableHighWaterMark](sparsetransformstream.md#writablehighwatermark)
-* [writableLength](sparsetransformstream.md#writablelength)
+* [writableHighWaterMark](sparsetransformstream.md#readonly-writablehighwatermark)
+* [writableLength](sparsetransformstream.md#readonly-writablelength)
 * [defaultMaxListeners](sparsetransformstream.md#static-defaultmaxlisteners)
 
 ### Methods
@@ -87,7 +87,7 @@
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [lib/sparse-stream/sparse-transform-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-transform-stream.ts#L36)*
+*Defined in [lib/sparse-stream/sparse-transform-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-transform-stream.ts#L35)*
 
 **Parameters:**
 
@@ -108,7 +108,7 @@ Name | Type | Default |
 
 • **alignedReadableState**: *[AlignedReadableState](alignedreadablestate.md)*
 
-*Defined in [lib/sparse-stream/sparse-transform-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-transform-stream.ts#L36)*
+*Defined in [lib/sparse-stream/sparse-transform-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-transform-stream.ts#L35)*
 
 ___
 
@@ -118,7 +118,7 @@ ___
 
 *Implementation of [SparseReadable](../interfaces/sparsereadable.md).[blocks](../interfaces/sparsereadable.md#blocks)*
 
-*Defined in [lib/sparse-stream/sparse-transform-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-transform-stream.ts#L33)*
+*Defined in [lib/sparse-stream/sparse-transform-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-transform-stream.ts#L32)*
 
 ___
 
@@ -126,7 +126,7 @@ ___
 
 • **bytesWritten**: *number* = 0
 
-*Defined in [lib/sparse-stream/sparse-transform-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-transform-stream.ts#L35)*
+*Defined in [lib/sparse-stream/sparse-transform-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-transform-stream.ts#L34)*
 
 ___
 
@@ -134,7 +134,7 @@ ___
 
 • **position**: *number* = 0
 
-*Defined in [lib/sparse-stream/sparse-transform-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-transform-stream.ts#L34)*
+*Defined in [lib/sparse-stream/sparse-transform-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-transform-stream.ts#L33)*
 
 ___
 
@@ -150,21 +150,21 @@ Defined in node_modules/@types/node/stream.d.ts:20
 
 ___
 
-###  readableHighWaterMark
+### `Readonly` readableHighWaterMark
 
 • **readableHighWaterMark**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableHighWaterMark](sparsefilterstream.md#readablehighwatermark)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableHighWaterMark](sparsefilterstream.md#readonly-readablehighwatermark)*
 
 Defined in node_modules/@types/node/stream.d.ts:21
 
 ___
 
-###  readableLength
+### `Readonly` readableLength
 
 • **readableLength**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableLength](sparsefilterstream.md#readablelength)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableLength](sparsefilterstream.md#readonly-readablelength)*
 
 Defined in node_modules/@types/node/stream.d.ts:22
 
@@ -182,21 +182,21 @@ Defined in node_modules/@types/node/stream.d.ts:209
 
 ___
 
-###  writableHighWaterMark
+### `Readonly` writableHighWaterMark
 
 • **writableHighWaterMark**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableHighWaterMark](sparsefilterstream.md#writablehighwatermark)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableHighWaterMark](sparsefilterstream.md#readonly-writablehighwatermark)*
 
 Defined in node_modules/@types/node/stream.d.ts:210
 
 ___
 
-###  writableLength
+### `Readonly` writableLength
 
 • **writableLength**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableLength](sparsefilterstream.md#writablelength)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableLength](sparsefilterstream.md#readonly-writablelength)*
 
 Defined in node_modules/@types/node/stream.d.ts:211
 
@@ -230,7 +230,7 @@ ___
 
 ▸ **__transform**(`chunk`: [SparseStreamChunk](../interfaces/sparsestreamchunk.md)): *Promise‹void›*
 
-*Defined in [lib/sparse-stream/sparse-transform-stream.ts:58](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-transform-stream.ts#L58)*
+*Defined in [lib/sparse-stream/sparse-transform-stream.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-transform-stream.ts#L57)*
 
 **Parameters:**
 
@@ -336,7 +336,7 @@ ___
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[_transform](../interfaces/sourcetransform.md#_transform)*
 
-*Defined in [lib/sparse-stream/sparse-transform-stream.ts:76](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/sparse-stream/sparse-transform-stream.ts#L76)*
+*Defined in [lib/sparse-stream/sparse-transform-stream.ts:75](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/sparse-stream/sparse-transform-stream.ts#L75)*
 
 **Parameters:**
 

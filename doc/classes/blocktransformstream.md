@@ -28,11 +28,11 @@
 * [inputBuffers](blocktransformstream.md#private-inputbuffers)
 * [inputBytes](blocktransformstream.md#private-inputbytes)
 * [readable](blocktransformstream.md#readable)
-* [readableHighWaterMark](blocktransformstream.md#readablehighwatermark)
-* [readableLength](blocktransformstream.md#readablelength)
+* [readableHighWaterMark](blocktransformstream.md#readonly-readablehighwatermark)
+* [readableLength](blocktransformstream.md#readonly-readablelength)
 * [writable](blocktransformstream.md#writable)
-* [writableHighWaterMark](blocktransformstream.md#writablehighwatermark)
-* [writableLength](blocktransformstream.md#writablelength)
+* [writableHighWaterMark](blocktransformstream.md#readonly-writablehighwatermark)
+* [writableLength](blocktransformstream.md#readonly-writablelength)
 * [defaultMaxListeners](blocktransformstream.md#static-defaultmaxlisteners)
 
 ### Methods
@@ -88,7 +88,7 @@
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [lib/block-transform-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-transform-stream.ts#L29)*
+*Defined in [lib/block-transform-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-transform-stream.ts#L29)*
 
 **Parameters:**
 
@@ -108,7 +108,7 @@ Name | Type | Default |
 
 • **alignedReadableState**: *[AlignedReadableState](alignedreadablestate.md)*
 
-*Defined in [lib/block-transform-stream.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-transform-stream.ts#L27)*
+*Defined in [lib/block-transform-stream.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-transform-stream.ts#L27)*
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 • **bytesRead**: *number* = 0
 
-*Defined in [lib/block-transform-stream.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-transform-stream.ts#L24)*
+*Defined in [lib/block-transform-stream.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-transform-stream.ts#L24)*
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 • **bytesWritten**: *number* = 0
 
-*Defined in [lib/block-transform-stream.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-transform-stream.ts#L25)*
+*Defined in [lib/block-transform-stream.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-transform-stream.ts#L25)*
 
 ___
 
@@ -132,7 +132,7 @@ ___
 
 • **chunkSize**: *number*
 
-*Defined in [lib/block-transform-stream.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-transform-stream.ts#L26)*
+*Defined in [lib/block-transform-stream.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-transform-stream.ts#L26)*
 
 ___
 
@@ -140,7 +140,7 @@ ___
 
 • **inputBuffers**: *[Buffer](../interfaces/alignedlockablebuffer.md#buffer)[]* = []
 
-*Defined in [lib/block-transform-stream.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-transform-stream.ts#L28)*
+*Defined in [lib/block-transform-stream.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-transform-stream.ts#L28)*
 
 ___
 
@@ -148,7 +148,7 @@ ___
 
 • **inputBytes**: *number* = 0
 
-*Defined in [lib/block-transform-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-transform-stream.ts#L29)*
+*Defined in [lib/block-transform-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-transform-stream.ts#L29)*
 
 ___
 
@@ -162,21 +162,21 @@ Defined in node_modules/@types/node/stream.d.ts:20
 
 ___
 
-###  readableHighWaterMark
+### `Readonly` readableHighWaterMark
 
 • **readableHighWaterMark**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableHighWaterMark](sparsefilterstream.md#readablehighwatermark)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableHighWaterMark](sparsefilterstream.md#readonly-readablehighwatermark)*
 
 Defined in node_modules/@types/node/stream.d.ts:21
 
 ___
 
-###  readableLength
+### `Readonly` readableLength
 
 • **readableLength**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableLength](sparsefilterstream.md#readablelength)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableLength](sparsefilterstream.md#readonly-readablelength)*
 
 Defined in node_modules/@types/node/stream.d.ts:22
 
@@ -192,21 +192,21 @@ Defined in node_modules/@types/node/stream.d.ts:209
 
 ___
 
-###  writableHighWaterMark
+### `Readonly` writableHighWaterMark
 
 • **writableHighWaterMark**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableHighWaterMark](sparsefilterstream.md#writablehighwatermark)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableHighWaterMark](sparsefilterstream.md#readonly-writablehighwatermark)*
 
 Defined in node_modules/@types/node/stream.d.ts:210
 
 ___
 
-###  writableLength
+### `Readonly` writableLength
 
 • **writableLength**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableLength](sparsefilterstream.md#writablelength)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableLength](sparsefilterstream.md#readonly-writablelength)*
 
 Defined in node_modules/@types/node/stream.d.ts:211
 
@@ -292,7 +292,7 @@ ___
 
 *Overrides [SparseFilterStream](sparsefilterstream.md).[_flush](sparsefilterstream.md#_flush)*
 
-*Defined in [lib/block-transform-stream.ts:89](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-transform-stream.ts#L89)*
+*Defined in [lib/block-transform-stream.ts:89](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-transform-stream.ts#L89)*
 
 **Parameters:**
 
@@ -334,7 +334,7 @@ ___
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[_transform](../interfaces/sourcetransform.md#_transform)*
 
-*Defined in [lib/block-transform-stream.ts:78](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-transform-stream.ts#L78)*
+*Defined in [lib/block-transform-stream.ts:78](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-transform-stream.ts#L78)*
 
 **Parameters:**
 
@@ -1757,7 +1757,7 @@ ___
 
 ▸ **writeBuffers**(`flush`: boolean): *Promise‹void›*
 
-*Defined in [lib/block-transform-stream.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-transform-stream.ts#L49)*
+*Defined in [lib/block-transform-stream.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-transform-stream.ts#L49)*
 
 **Parameters:**
 
@@ -1773,7 +1773,7 @@ ___
 
 ▸ **alignIfNeeded**(`stream`: ReadableStream, `alignment?`: undefined | number, `numBuffers?`: undefined | number): *ReadableStream‹› | [BlockTransformStream](blocktransformstream.md)‹›*
 
-*Defined in [lib/block-transform-stream.ts:93](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/block-transform-stream.ts#L93)*
+*Defined in [lib/block-transform-stream.ts:93](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/block-transform-stream.ts#L93)*
 
 **Parameters:**
 

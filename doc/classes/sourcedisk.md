@@ -18,7 +18,7 @@
 
 * [capacity](sourcedisk.md#capacity)
 * [discardIsZero](sourcedisk.md#discardiszero)
-* [knownChunks](sourcedisk.md#knownchunks)
+* [knownChunks](sourcedisk.md#readonly-knownchunks)
 * [readOnly](sourcedisk.md#readonly)
 * [recordReads](sourcedisk.md#recordreads)
 * [recordWrites](sourcedisk.md#recordwrites)
@@ -48,7 +48,7 @@
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/configured-source/configured-source.ts#L47)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/source-destination/configured-source/configured-source.ts#L47)*
 
 **Parameters:**
 
@@ -80,11 +80,11 @@ Defined in node_modules/file-disk/build/index.d.ts:24
 
 ___
 
-###  knownChunks
+### `Readonly` knownChunks
 
 • **knownChunks**: *DiskChunk[]*
 
-*Inherited from [SourceDisk](sourcedisk.md).[knownChunks](sourcedisk.md#knownchunks)*
+*Inherited from [SourceDisk](sourcedisk.md).[knownChunks](sourcedisk.md#readonly-knownchunks)*
 
 Defined in node_modules/file-disk/build/index.d.ts:25
 
@@ -124,7 +124,7 @@ ___
 
 • **source**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/configured-source/configured-source.ts#L48)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/source-destination/configured-source/configured-source.ts#L48)*
 
 ## Methods
 
@@ -134,7 +134,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:84](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/configured-source/configured-source.ts#L84)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:84](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/source-destination/configured-source/configured-source.ts#L84)*
 
 **Returns:** *Promise‹void›*
 
@@ -146,7 +146,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/configured-source/configured-source.ts#L57)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/source-destination/configured-source/configured-source.ts#L57)*
 
 **Returns:** *Promise‹number›*
 
@@ -158,7 +158,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:66](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/configured-source/configured-source.ts#L66)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:66](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/source-destination/configured-source/configured-source.ts#L66)*
 
 **Parameters:**
 
@@ -179,7 +179,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:75](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/configured-source/configured-source.ts#L75)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:75](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/source-destination/configured-source/configured-source.ts#L75)*
 
 **Parameters:**
 

@@ -16,14 +16,14 @@
 
 ### Properties
 
-* [BYTES_PER_ELEMENT](alignedlockablebuffer.md#bytes_per_element)
+* [BYTES_PER_ELEMENT](alignedlockablebuffer.md#readonly-bytes_per_element)
 * [Buffer](alignedlockablebuffer.md#buffer)
 * [alignment](alignedlockablebuffer.md#alignment)
-* [buffer](alignedlockablebuffer.md#buffer)
-* [byteLength](alignedlockablebuffer.md#bytelength)
-* [byteOffset](alignedlockablebuffer.md#byteoffset)
+* [buffer](alignedlockablebuffer.md#readonly-buffer)
+* [byteLength](alignedlockablebuffer.md#readonly-bytelength)
+* [byteOffset](alignedlockablebuffer.md#readonly-byteoffset)
 * [constructor](alignedlockablebuffer.md#constructor)
-* [length](alignedlockablebuffer.md#length)
+* [length](alignedlockablebuffer.md#readonly-length)
 * [lock](alignedlockablebuffer.md#lock)
 * [rlock](alignedlockablebuffer.md#rlock)
 * [slice](alignedlockablebuffer.md#slice)
@@ -101,11 +101,11 @@
 
 ## Properties
 
-###  BYTES_PER_ELEMENT
+### `Readonly` BYTES_PER_ELEMENT
 
 • **BYTES_PER_ELEMENT**: *number*
 
-*Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[BYTES_PER_ELEMENT](alignedlockablebuffer.md#bytes_per_element)*
+*Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[BYTES_PER_ELEMENT](alignedlockablebuffer.md#readonly-bytes_per_element)*
 
 Defined in node_modules/typescript/lib/lib.es5.d.ts:1988
 
@@ -175,15 +175,15 @@ ___
 
 • **alignment**: *number*
 
-*Defined in [lib/aligned-lockable-buffer.ts:5](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/aligned-lockable-buffer.ts#L5)*
+*Defined in [lib/aligned-lockable-buffer.ts:5](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/aligned-lockable-buffer.ts#L5)*
 
 ___
 
-###  buffer
+### `Readonly` buffer
 
 • **buffer**: *ArrayBufferLike*
 
-*Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[buffer](alignedlockablebuffer.md#buffer)*
+*Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[buffer](alignedlockablebuffer.md#readonly-buffer)*
 
 Defined in node_modules/typescript/lib/lib.es5.d.ts:1993
 
@@ -191,11 +191,11 @@ The ArrayBuffer instance referenced by the array.
 
 ___
 
-###  byteLength
+### `Readonly` byteLength
 
 • **byteLength**: *number*
 
-*Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[byteLength](alignedlockablebuffer.md#bytelength)*
+*Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[byteLength](alignedlockablebuffer.md#readonly-bytelength)*
 
 Defined in node_modules/typescript/lib/lib.es5.d.ts:1998
 
@@ -203,11 +203,11 @@ The length in bytes of the array.
 
 ___
 
-###  byteOffset
+### `Readonly` byteOffset
 
 • **byteOffset**: *number*
 
-*Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[byteOffset](alignedlockablebuffer.md#byteoffset)*
+*Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[byteOffset](alignedlockablebuffer.md#readonly-byteoffset)*
 
 Defined in node_modules/typescript/lib/lib.es5.d.ts:2003
 
@@ -225,11 +225,11 @@ Defined in node_modules/@types/node/globals.d.ts:230
 
 ___
 
-###  length
+### `Readonly` length
 
 • **length**: *number*
 
-*Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[length](alignedlockablebuffer.md#length)*
+*Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[length](alignedlockablebuffer.md#readonly-length)*
 
 Defined in node_modules/typescript/lib/lib.es5.d.ts:2102
 
@@ -241,7 +241,7 @@ ___
 
 • **lock**: *function*
 
-*Defined in [lib/aligned-lockable-buffer.ts:6](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/aligned-lockable-buffer.ts#L6)*
+*Defined in [lib/aligned-lockable-buffer.ts:6](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/aligned-lockable-buffer.ts#L6)*
 
 #### Type declaration:
 
@@ -253,7 +253,7 @@ ___
 
 • **rlock**: *function*
 
-*Defined in [lib/aligned-lockable-buffer.ts:7](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/aligned-lockable-buffer.ts#L7)*
+*Defined in [lib/aligned-lockable-buffer.ts:7](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/aligned-lockable-buffer.ts#L7)*
 
 #### Type declaration:
 
@@ -267,7 +267,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/aligned-lockable-buffer.ts:8](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/aligned-lockable-buffer.ts#L8)*
+*Defined in [lib/aligned-lockable-buffer.ts:8](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/aligned-lockable-buffer.ts#L8)*
 
 #### Type declaration:
 

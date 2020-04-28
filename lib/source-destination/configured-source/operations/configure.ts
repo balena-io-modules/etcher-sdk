@@ -94,10 +94,7 @@ const nmWifiConfig = (index: number, options: WifiConfig): string => {
 
 const createNetworkConfigFiles = (networks: any) => {
 	return {
-		ethernet: _(networks)
-			.map('configuration')
-			.filter()
-			.value(),
+		ethernet: _(networks).map('configuration').filter().value(),
 		wifi: _(networks)
 			.filter('wifiSsid')
 			.map((network, index) => {

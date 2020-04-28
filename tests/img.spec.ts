@@ -31,11 +31,11 @@ import { tmpFile } from '../lib/tmp';
 const DATA_PATH = join(__dirname, 'data');
 const IMAGES_PATH = join(DATA_PATH, 'images');
 
-describe('img', function() {
+describe('img', function () {
 	this.timeout(DEFAULT_IMAGE_TESTS_TIMEOUT);
 	let gunzippedFilePath: string | undefined;
 
-	before(async function() {
+	before(async function () {
 		gunzippedFilePath = (await tmpFile(false)).path;
 		await new Promise((resolve, reject) => {
 			const source = createReadStream(
@@ -51,7 +51,7 @@ describe('img', function() {
 		});
 	});
 
-	after(async function() {
+	after(async function () {
 		await fs.unlink(gunzippedFilePath as string);
 	});
 
@@ -66,7 +66,7 @@ describe('img', function() {
 		join(IMAGES_PATH, 'etcher-test-partitions.json'), // partitionsFile
 	);
 
-	it('gpt', async function() {
+	it('gpt', async function () {
 		await testImageNoIt(
 			join(IMAGES_PATH, 'etcher-gpt-test.img.gz'),
 			// @ts-ignore

@@ -17,7 +17,6 @@
 import { Transform } from 'stream';
 
 import { AlignedReadableState } from '../aligned-lockable-buffer';
-import { PROGRESS_EMISSION_INTERVAL } from '../constants';
 import { makeClassEmitProgressEvents } from '../source-destination/progress';
 import { asCallback } from '../utils';
 import {
@@ -86,5 +85,4 @@ export const ProgressSparseTransformStream = makeClassEmitProgressEvents(
 	SparseTransformStream,
 	'bytesWritten',
 	'position',
-	PROGRESS_EMISSION_INTERVAL,
 );

@@ -42,7 +42,7 @@ import { configure as legacyConfigure } from './configure';
 
 const debug = _debug('etcher-sdk:configured-source');
 
-export type ConfigureFunction = (disk: Disk, config: any) => Promise<void>;
+export type ConfigureFunction = (disk: Disk) => Promise<void>;
 
 export class SourceDisk extends Disk {
 	constructor(private source: SourceDestination) {
@@ -89,7 +89,6 @@ export class SourceDisk extends Disk {
 export class ConfiguredSource extends SourceSource {
 	private shouldTrimPartitions: boolean;
 	private createStreamFromDisk: boolean;
-	private config: any;
 	private checksumType: ChecksumType;
 	private chunkSize: number;
 	private disk: SourceDisk;
@@ -100,7 +99,6 @@ export class ConfiguredSource extends SourceSource {
 		shouldTrimPartitions,
 		createStreamFromDisk,
 		configure,
-		config,
 		checksumType = 'xxhash64',
 		chunkSize = CHUNK_SIZE,
 	}: {
@@ -108,14 +106,12 @@ export class ConfiguredSource extends SourceSource {
 		shouldTrimPartitions: boolean;
 		createStreamFromDisk: boolean;
 		configure?: ConfigureFunction | 'legacy';
-		config?: any;
 		checksumType?: ChecksumType;
 		chunkSize?: number;
 	}) {
 		super(source);
 		this.shouldTrimPartitions = shouldTrimPartitions;
 		this.createStreamFromDisk = createStreamFromDisk;
-		this.config = config;
 		this.checksumType = checksumType;
 		this.chunkSize = chunkSize;
 		this.disk = new SourceDisk(source);
@@ -129,7 +125,7 @@ export class ConfiguredSource extends SourceSource {
 	public async getBlocks(): Promise<BlocksWithChecksum[]> {
 		// Align ranges to this.chunkSize
 		const blocks = await this.disk.getRanges(this.chunkSize);
-		return blocks.map(block => ({ blocks: [block] }));
+		return blocks.map((block) => ({ blocks: [block] }));
 	}
 
 	private async getBlocksWithChecksumType(
@@ -137,7 +133,7 @@ export class ConfiguredSource extends SourceSource {
 	): Promise<BlocksWithChecksum[]> {
 		let blocks = await this.getBlocks();
 		if (generateChecksums) {
-			blocks = blocks.map(block => ({
+			blocks = blocks.map((block) => ({
 				...block,
 				checksumType: this.checksumType,
 			}));
@@ -283,7 +279,7 @@ export class ConfiguredSource extends SourceSource {
 	protected async _open(): Promise<void> {
 		await super._open();
 		if (this.configure !== undefined) {
-			await this.configure(this.disk, this.config);
+			await this.configure(this.disk);
 		}
 		if (this.shouldTrimPartitions) {
 			await this.trimPartitions();

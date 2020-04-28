@@ -14,16 +14,15 @@
 
 * [active](multidestinationstate.md#active)
 * [blockmappedSize](multidestinationstate.md#optional-blockmappedsize)
+* [bytesWritten](multidestinationstate.md#optional-byteswritten)
 * [compressedSize](multidestinationstate.md#optional-compressedsize)
 * [failed](multidestinationstate.md#failed)
-* [flashing](multidestinationstate.md#flashing)
+* [rootStreamAverageSpeed](multidestinationstate.md#optional-rootstreamaveragespeed)
 * [rootStreamPosition](multidestinationstate.md#optional-rootstreamposition)
 * [rootStreamSpeed](multidestinationstate.md#optional-rootstreamspeed)
 * [size](multidestinationstate.md#optional-size)
 * [sparse](multidestinationstate.md#optional-sparse)
-* [successful](multidestinationstate.md#successful)
 * [type](multidestinationstate.md#type)
-* [verifying](multidestinationstate.md#verifying)
 
 ## Properties
 
@@ -31,7 +30,7 @@
 
 • **active**: *number*
 
-*Defined in [lib/multi-write.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/multi-write.ts#L37)*
+*Defined in [lib/multi-write.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/multi-write.ts#L46)*
 
 ___
 
@@ -39,7 +38,15 @@ ___
 
 • **blockmappedSize**? : *undefined | number*
 
-*Defined in [lib/multi-write.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/multi-write.ts#L45)*
+*Defined in [lib/multi-write.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/multi-write.ts#L51)*
+
+___
+
+### `Optional` bytesWritten
+
+• **bytesWritten**? : *undefined | number*
+
+*Defined in [lib/multi-write.ts:56](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/multi-write.ts#L56)*
 
 ___
 
@@ -47,7 +54,7 @@ ___
 
 • **compressedSize**? : *undefined | number*
 
-*Defined in [lib/multi-write.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/multi-write.ts#L44)*
+*Defined in [lib/multi-write.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/multi-write.ts#L50)*
 
 ___
 
@@ -55,15 +62,15 @@ ___
 
 • **failed**: *number*
 
-*Defined in [lib/multi-write.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/multi-write.ts#L40)*
+*Defined in [lib/multi-write.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/multi-write.ts#L47)*
 
 ___
 
-###  flashing
+### `Optional` rootStreamAverageSpeed
 
-• **flashing**: *number*
+• **rootStreamAverageSpeed**? : *undefined | number*
 
-*Defined in [lib/multi-write.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/multi-write.ts#L38)*
+*Defined in [lib/multi-write.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/multi-write.ts#L55)*
 
 ___
 
@@ -71,7 +78,7 @@ ___
 
 • **rootStreamPosition**? : *undefined | number*
 
-*Defined in [lib/multi-write.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/multi-write.ts#L47)*
+*Defined in [lib/multi-write.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/multi-write.ts#L53)*
 
 ___
 
@@ -79,7 +86,7 @@ ___
 
 • **rootStreamSpeed**? : *undefined | number*
 
-*Defined in [lib/multi-write.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/multi-write.ts#L48)*
+*Defined in [lib/multi-write.ts:54](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/multi-write.ts#L54)*
 
 ___
 
@@ -87,7 +94,7 @@ ___
 
 • **size**? : *undefined | number*
 
-*Defined in [lib/multi-write.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/multi-write.ts#L43)*
+*Defined in [lib/multi-write.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/multi-write.ts#L49)*
 
 ___
 
@@ -95,15 +102,7 @@ ___
 
 • **sparse**? : *undefined | false | true*
 
-*Defined in [lib/multi-write.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/multi-write.ts#L46)*
-
-___
-
-###  successful
-
-• **successful**: *number*
-
-*Defined in [lib/multi-write.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/multi-write.ts#L41)*
+*Defined in [lib/multi-write.ts:52](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/multi-write.ts#L52)*
 
 ___
 
@@ -111,12 +110,4 @@ ___
 
 • **type**: *[WriteStep](../README.md#writestep)*
 
-*Defined in [lib/multi-write.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/multi-write.ts#L42)*
-
-___
-
-###  verifying
-
-• **verifying**: *number*
-
-*Defined in [lib/multi-write.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/multi-write.ts#L39)*
+*Defined in [lib/multi-write.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/multi-write.ts#L48)*

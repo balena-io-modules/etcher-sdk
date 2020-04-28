@@ -31,7 +31,7 @@ const DATA_PATH = join(__dirname, 'data');
 const IMAGES_PATH = join(DATA_PATH, 'images');
 const ZIP_PATH = join(DATA_PATH, 'zip');
 
-describe('zip support', function() {
+describe('zip support', function () {
 	this.timeout(DEFAULT_IMAGE_TESTS_TIMEOUT);
 
 	expectSourceSourceError(
@@ -77,7 +77,7 @@ describe('zip support', function() {
 		join(IMAGES_PATH, 'etcher-test-partitions.json'), // partitionsFile
 	);
 
-	describe('compression method', function() {
+	describe('compression method', function () {
 		const compressionMethods = [
 			'deflate',
 			// NOTE: These tests are intentionally skipped, as the
@@ -88,7 +88,7 @@ describe('zip support', function() {
 			// 'lzma',
 		];
 
-		compressionMethods.forEach(compressionMethod => {
+		compressionMethods.forEach((compressionMethod) => {
 			testImage(
 				compressionMethod,
 				join(ZIP_PATH, `zip-${compressionMethod}.zip`),

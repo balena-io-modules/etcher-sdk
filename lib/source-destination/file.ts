@@ -26,7 +26,7 @@ import {
 } from './source-destination';
 
 import { BlockReadStream, ProgressBlockReadStream } from '../block-read-stream';
-import { CHUNK_SIZE, PROGRESS_EMISSION_INTERVAL } from '../constants';
+import { CHUNK_SIZE } from '../constants';
 import {
 	ProgressSparseWriteStream,
 	SparseWriteStream,
@@ -36,14 +36,12 @@ export const ProgressReadStream = makeClassEmitProgressEvents(
 	ReadStream,
 	'bytesRead',
 	'bytesRead',
-	PROGRESS_EMISSION_INTERVAL,
 );
 
 export const ProgressWriteStream = makeClassEmitProgressEvents(
 	WriteStream,
 	'bytesWritten',
 	'bytesWritten',
-	PROGRESS_EMISSION_INTERVAL,
 );
 
 const READ_TRIES = 5;
@@ -60,7 +58,10 @@ export class File extends SourceDestination {
 	}
 
 	protected getOpenFlags() {
-		return this.oWrite ? constants.O_RDWR : constants.O_RDONLY;
+		return (
+			// tslint:disable-next-line:no-bitwise
+			constants.O_CREAT | (this.oWrite ? constants.O_RDWR : constants.O_RDONLY)
+		);
 	}
 
 	public async canRead(): Promise<boolean> {

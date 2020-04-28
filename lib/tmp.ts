@@ -15,25 +15,61 @@
  */
 
 import { Disposer, resolve } from 'bluebird';
+import * as checkDiskSpace from 'check-disk-space';
 import { randomBytes } from 'crypto';
-import { promises as fs } from 'fs';
+import { Dirent, promises as fs } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
 
 const TMP_RANDOM_BYTES = 6;
-const TMP_DIR = tmpdir();
+const TMP_DIR = join(tmpdir(), 'etcher');
 const TRIES = 5;
 
-const randomFilePath = (): string => {
+function randomFilePath(): string {
 	return join(TMP_DIR, `${randomBytes(TMP_RANDOM_BYTES).toString('hex')}.tmp`);
-};
+}
 
 export interface TmpFileResult {
 	path: string;
 	fileHandle?: fs.FileHandle;
 }
 
-export const tmpFile = async (keepOpen = true): Promise<TmpFileResult> => {
+export async function cleanupTmpFiles(olderThan = Date.now()): Promise<void> {
+	let dirents: Dirent[] = [];
+	try {
+		dirents = await fs.readdir(TMP_DIR, { withFileTypes: true });
+	} catch {
+		return;
+	}
+	for (const dirent of dirents) {
+		if (dirent.isFile()) {
+			const filename = join(TMP_DIR, dirent.name);
+			try {
+				const stats = await fs.stat(filename);
+				if (stats.ctime.getTime() <= olderThan) {
+					await fs.unlink(filename);
+				}
+			} catch {
+				// noop
+			}
+		}
+	}
+}
+
+async function createTmpRoot(): Promise<void> {
+	try {
+		await fs.mkdir(TMP_DIR, { recursive: true });
+	} catch (error) {
+		// the 'recursive' option is only supported on node >= 10.12.0
+		if (error.code === 'EEXIST' && !(await fs.stat(TMP_DIR)).isDirectory()) {
+			await fs.unlink(TMP_DIR);
+			await fs.mkdir(TMP_DIR, { recursive: true });
+		}
+	}
+}
+
+export async function tmpFile(keepOpen = true): Promise<TmpFileResult> {
+	await createTmpRoot();
 	let fileHandle: fs.FileHandle | undefined;
 	let path: string;
 	let ok = false;
@@ -59,13 +95,17 @@ export const tmpFile = async (keepOpen = true): Promise<TmpFileResult> => {
 		fileHandle = undefined;
 	}
 	return { fileHandle, path: path! };
-};
+}
 
-export const tmpFileDisposer = (keepOpen = true): Disposer<TmpFileResult> => {
+export function tmpFileDisposer(keepOpen = true): Disposer<TmpFileResult> {
 	return resolve(tmpFile(keepOpen)).disposer(async (result: TmpFileResult) => {
 		if (keepOpen && result.fileHandle !== undefined) {
 			await result.fileHandle.close();
 		}
 		await fs.unlink(result.path);
 	});
-};
+}
+
+export async function freeSpace() {
+	return (await checkDiskSpace(TMP_DIR)).free;
+}

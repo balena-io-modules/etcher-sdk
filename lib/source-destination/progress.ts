@@ -33,7 +33,12 @@ export interface ProgressEvent {
 
 export function makeClassEmitProgressEvents<
 	T extends Constructor<EventEmitter>
->(Cls: T, attribute: string, positionAttribute: string, interval: number) {
+>(
+	Cls: T,
+	attribute: string,
+	positionAttribute: string,
+	interval = PROGRESS_EMISSION_INTERVAL,
+) {
 	// This returns a class that extends Cls, tracks for `attribute` updates and emits `progress` events every `interval` based on it.
 	//  * the type of `attribute` must be a number;
 	//  * the position attribute of emitted events will be copied from the `positionAttribute` of the instances.
@@ -119,5 +124,4 @@ export const ProgressWritable = makeClassEmitProgressEvents(
 	CountingWritable,
 	'bytesWritten',
 	'position',
-	PROGRESS_EMISSION_INTERVAL,
 );

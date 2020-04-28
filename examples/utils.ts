@@ -20,6 +20,7 @@ import { promises as fs } from 'fs';
 import ProgressBar = require('progress');
 
 import { multiWrite, sourceDestination } from '../lib';
+import { ConfigureFunction } from '../lib/source-destination/configured-source/configured-source';
 
 const SPINNER_DELAY = 60;
 
@@ -108,12 +109,23 @@ function createProgressBar(
 	}
 }
 
-export async function pipeSourceToDestinationsWithProgressBar(
-	source: sourceDestination.SourceDestination,
-	destinations: sourceDestination.SourceDestination[],
+export async function pipeSourceToDestinationsWithProgressBar({
+	source,
+	destinations,
+	trim,
+	decompressFirst,
+	configure,
 	verify = false,
 	numBuffers = 16,
-): Promise<multiWrite.PipeSourceToDestinationsResult> {
+}: {
+	source: sourceDestination.SourceDestination;
+	destinations: sourceDestination.SourceDestination[];
+	trim: boolean;
+	decompressFirst: boolean;
+	configure?: ConfigureFunction;
+	verify?: boolean;
+	numBuffers?: number;
+}): Promise<multiWrite.PipeSourceToDestinationsResult> {
 	function onFail(
 		destination: sourceDestination.SourceDestination,
 		error: Error,
@@ -148,14 +160,17 @@ export async function pipeSourceToDestinationsWithProgressBar(
 		}
 		update(progress);
 	}
-	const result = await multiWrite.pipeSourceToDestinations(
+	const result = await multiWrite.decompressThenFlash({
 		source,
 		destinations,
 		onFail,
 		onProgress,
 		verify,
 		numBuffers,
-	);
+		trim,
+		decompressFirst,
+		configure,
+	});
 	// Sleep here to be sure the last spinner title was shown.
 	await delay(SPINNER_DELAY);
 	if (progressBar !== undefined) {

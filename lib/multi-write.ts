@@ -14,10 +14,18 @@
  * limitations under the License.
  */
 
+import { promises as fs } from 'fs';
+import { extname } from 'path';
+
 import { BlockReadStream } from './block-read-stream';
 import { BlockTransformStream } from './block-transform-stream';
 import { CHUNK_SIZE } from './constants';
 import { getRootStream } from './source-destination/compressed-source';
+import {
+	ConfiguredSource,
+	ConfigureFunction,
+} from './source-destination/configured-source/configured-source';
+import { File } from './source-destination/file';
 import { Metadata } from './source-destination/metadata';
 import {
 	MultiDestination,
@@ -30,15 +38,13 @@ import {
 	SourceDestination,
 	Verifier,
 } from './source-destination/source-destination';
+import { freeSpace, tmpFile } from './tmp';
 
-export type WriteStep = 'flashing' | 'verifying' | 'finished';
+export type WriteStep = 'decompressing' | 'flashing' | 'verifying' | 'finished';
 
 interface MultiDestinationState {
 	active: number;
-	flashing: number;
-	verifying: number;
 	failed: number;
-	successful: number;
 	type: WriteStep;
 	size?: number;
 	compressedSize?: number;
@@ -47,6 +53,7 @@ interface MultiDestinationState {
 	rootStreamPosition?: number;
 	rootStreamSpeed?: number;
 	rootStreamAverageSpeed?: number;
+	bytesWritten?: number;
 }
 
 export interface MultiDestinationProgress extends MultiDestinationState {
@@ -54,7 +61,6 @@ export interface MultiDestinationProgress extends MultiDestinationState {
 	position: number;
 	speed: number;
 	averageSpeed: number;
-	totalSpeed: number;
 	percentage?: number;
 	eta?: number;
 }
@@ -69,6 +75,7 @@ export type OnProgressFunction = (progress: MultiDestinationProgress) => void;
 export interface PipeSourceToDestinationsResult {
 	failures: Map<SourceDestination, Error>;
 	bytesWritten: number;
+	sourceMetadata: Metadata;
 }
 
 function getEta(
@@ -79,29 +86,211 @@ function getEta(
 	return speed === 0 ? undefined : (total - current) / speed;
 }
 
-// This function is the most common use case of the SDK.
-// Added it here to avoid duplicating it in other projects.
-export async function pipeSourceToDestinations(
-	source: SourceDestination,
-	destinations: SourceDestination[],
-	onFail: OnFailFunction,
-	onProgress: OnProgressFunction,
+function isWorthDecompressing(filename = '') {
+	return [
+		'.img',
+		'.bin',
+		'.hddimg',
+		'.raw',
+		'.sdcard',
+		'.rpi-sdimg',
+		'.wic',
+	].includes(extname(filename));
+}
+
+function defaultEnoughSpaceForDecompression(free: number, imageSize?: number) {
+	return imageSize === undefined
+		? false
+		: imageSize < Math.min(free / 2, 5 * 1024 ** 3);
+}
+
+export async function decompressThenFlash({
+	source,
+	destinations,
+	onFail,
+	onProgress,
 	verify = false,
 	numBuffers = 16,
-): Promise<PipeSourceToDestinationsResult> {
+	decompressFirst = false,
+	trim = false,
+	configure,
+	enoughSpaceForDecompression = defaultEnoughSpaceForDecompression,
+}: {
+	source: SourceDestination;
+	destinations: SourceDestination[];
+	onFail: OnFailFunction;
+	onProgress: OnProgressFunction;
+	verify?: boolean;
+	numBuffers?: number;
+	decompressFirst?: boolean;
+	trim?: boolean;
+	configure?: ConfigureFunction;
+	enoughSpaceForDecompression?: (free: number, imageSize?: number) => boolean;
+}): Promise<PipeSourceToDestinationsResult> {
+	for (const d of destinations) {
+		// Start opening destinations early to win some time, don't await here, it will be awaited later.
+		d.open();
+	}
+	source = await source.getInnerSource();
+	const sourceMetadata = await source.getMetadata();
+	const enoughDiskSpaceAvailable = enoughSpaceForDecompression(
+		await freeSpace(),
+		sourceMetadata.size,
+	);
+	let decompressedFilePath: string | undefined;
+	try {
+		if (
+			decompressFirst &&
+			sourceMetadata.isCompressed &&
+			isWorthDecompressing(sourceMetadata.name) &&
+			enoughDiskSpaceAvailable
+		) {
+			({ path: decompressedFilePath } = await tmpFile(false));
+			const decompressedSource = new File({
+				path: decompressedFilePath,
+				write: true,
+			});
+			await decompressedSource.open();
+			const inputStream = await source.createReadStream();
+			const outputStream = await decompressedSource.createWriteStream();
+			await new Promise((resolve, reject) => {
+				outputStream.on('done', resolve);
+				outputStream.on('error', reject);
+				inputStream.on('error', reject);
+				const state = {
+					active: 0,
+					failed: 0,
+					type: 'decompressing' as const,
+				};
+				const [$onProgress, onRootStreamProgress] = createCompleteOnProgress(
+					onProgress,
+					sourceMetadata,
+					state,
+					false,
+				);
+				getRootStream(inputStream).on('progress', onRootStreamProgress);
+				outputStream.on('progress', $onProgress);
+				inputStream.pipe(outputStream);
+			});
+			source = decompressedSource;
+		}
+		if (
+			(trim || configure !== undefined) &&
+			!(source instanceof ConfiguredSource)
+		) {
+			if (!(await source.canRead())) {
+				console.warn(
+					"Can't configure or trim a source that is not randomly readable, skipping",
+				);
+			} else {
+				source = new ConfiguredSource({
+					source,
+					shouldTrimPartitions: trim,
+					createStreamFromDisk: decompressFirst || !sourceMetadata.isCompressed,
+					configure,
+				});
+				await source.open();
+			}
+		}
+		return await pipeSourceToDestinations({
+			source,
+			destinations,
+			onFail,
+			onProgress,
+			verify,
+			numBuffers,
+		});
+	} finally {
+		if (decompressedFilePath) {
+			await fs.unlink(decompressedFilePath);
+		}
+	}
+}
+
+function createCompleteOnProgress(
+	onProgress: (p: MultiDestinationProgress) => void,
+	sourceMetadata: Metadata,
+	state: MultiDestinationState,
+	sparse: boolean,
+) {
+	function $onProgress(progress: ProgressEvent) {
+		// sourceMetadata will be updated by pipeRegularSourceToDestination
+		if (!sourceMetadata.isSizeEstimated && sourceMetadata.size !== undefined) {
+			state.size = sourceMetadata.size;
+		}
+		let size: number | undefined;
+		let percentage: number | undefined;
+		let eta: number | undefined;
+		if (sparse) {
+			size = state.blockmappedSize;
+			state.bytesWritten = progress.bytes;
+		} else {
+			size = state.size;
+			state.bytesWritten = progress.position;
+		}
+		if (
+			size !== undefined &&
+			state.bytesWritten !== undefined &&
+			state.bytesWritten <= size
+		) {
+			percentage = (state.bytesWritten / size) * 100;
+			eta = getEta(state.bytesWritten, size, progress.speed);
+		} else if (
+			state.rootStreamSpeed !== undefined &&
+			state.rootStreamPosition !== undefined &&
+			state.compressedSize !== undefined
+		) {
+			percentage = (state.rootStreamPosition / state.compressedSize) * 100;
+			eta = getEta(
+				state.rootStreamPosition,
+				state.compressedSize,
+				state.rootStreamSpeed,
+			);
+		}
+		const result: MultiDestinationProgress = {
+			...progress,
+			...state,
+			percentage,
+			eta,
+		};
+		onProgress(result);
+	}
+
+	function onRootStreamProgress(progress: ProgressEvent) {
+		state.rootStreamPosition = progress.position;
+		state.rootStreamSpeed = progress.speed;
+		state.rootStreamAverageSpeed = progress.averageSpeed;
+	}
+
+	return [$onProgress, onRootStreamProgress];
+}
+
+// This function is the most common use case of the SDK.
+// Added it here to avoid duplicating it in other projects.
+export async function pipeSourceToDestinations({
+	source,
+	destinations,
+	onFail,
+	onProgress,
+	verify = false,
+	numBuffers = 16,
+}: {
+	source: SourceDestination;
+	destinations: SourceDestination[];
+	onFail: OnFailFunction;
+	onProgress: OnProgressFunction;
+	verify?: boolean;
+	numBuffers?: number;
+}): Promise<PipeSourceToDestinationsResult> {
 	if (numBuffers < 2) {
 		numBuffers = 2;
 	}
 	const destination = new MultiDestination(destinations);
 	const failures: Map<SourceDestination, Error> = new Map();
-	let bytesWritten = 0;
 
 	const state: MultiDestinationState = {
 		active: destination.destinations.size,
-		flashing: destination.destinations.size,
-		verifying: 0,
 		failed: 0,
-		successful: 0,
 		type: 'flashing',
 	};
 
@@ -126,15 +315,6 @@ export async function pipeSourceToDestinations(
 		}
 		state.failed = failures.size;
 		state.active = destination.destinations.size - state.failed;
-		if (state.type === 'flashing') {
-			state.flashing = state.active;
-			state.verifying = 0;
-		} else if (state.type === 'verifying') {
-			state.flashing = 0;
-			state.verifying = state.active;
-		} else if (state.type === 'finished') {
-			state.successful = state.active;
-		}
 	}
 
 	function _onFail(error: MultiDestinationError) {
@@ -143,57 +323,12 @@ export async function pipeSourceToDestinations(
 		onFail(error.destination, error.error);
 	}
 
-	function _onRootStreamProgress(progress: ProgressEvent) {
-		state.rootStreamPosition = progress.position;
-		state.rootStreamSpeed = progress.speed;
-		state.rootStreamAverageSpeed = progress.averageSpeed;
-	}
-
-	function _onProgress(progress: ProgressEvent) {
-		if (
-			sourceMetadata.isSizeEstimated === false &&
-			sourceMetadata.size !== undefined
-		) {
-			state.size = sourceMetadata.size;
-		}
-		const totalSpeed = progress.speed * state.active;
-		let size: number | undefined;
-		let percentage: number | undefined;
-		let eta: number | undefined;
-		if (sparse) {
-			size = state.blockmappedSize;
-			bytesWritten = progress.bytes;
-		} else {
-			size = state.size;
-			bytesWritten = progress.position;
-		}
-		if (
-			size !== undefined &&
-			bytesWritten !== undefined &&
-			bytesWritten <= size
-		) {
-			percentage = (bytesWritten / size) * 100;
-			eta = getEta(bytesWritten, size, progress.speed);
-		} else if (
-			state.rootStreamSpeed !== undefined &&
-			state.rootStreamPosition !== undefined &&
-			state.compressedSize !== undefined
-		) {
-			percentage = (state.rootStreamPosition / state.compressedSize) * 100;
-			eta = getEta(
-				state.rootStreamPosition,
-				state.compressedSize,
-				state.rootStreamSpeed,
-			);
-		}
-		const result: MultiDestinationProgress = Object.assign(
-			{},
-			progress,
-			state,
-			{ totalSpeed, percentage, eta },
-		);
-		onProgress(result);
-	}
+	const [$onProgress, onRootStreamProgress] = createCompleteOnProgress(
+		onProgress,
+		sourceMetadata,
+		state,
+		sparse,
+	);
 
 	if (sparse) {
 		await pipeSparseSourceToDestination(
@@ -203,8 +338,8 @@ export async function pipeSourceToDestinations(
 			numBuffers,
 			updateState,
 			_onFail,
-			_onProgress,
-			_onRootStreamProgress,
+			$onProgress,
+			onRootStreamProgress,
 		);
 	} else {
 		await pipeRegularSourceToDestination(
@@ -215,13 +350,13 @@ export async function pipeSourceToDestinations(
 			numBuffers,
 			updateState,
 			_onFail,
-			_onProgress,
-			_onRootStreamProgress,
+			$onProgress,
+			onRootStreamProgress,
 		);
 	}
 	updateState('finished');
 	await Promise.all([source.close(), destination.close()]);
-	return { failures, bytesWritten };
+	return { sourceMetadata, failures, bytesWritten: state.bytesWritten || 0 };
 }
 
 async function pipeRegularSourceToDestination(
@@ -233,7 +368,7 @@ async function pipeRegularSourceToDestination(
 	updateState: (state?: WriteStep) => void,
 	onFail: (error: MultiDestinationError) => void,
 	onProgress: (progress: ProgressEvent) => void,
-	_onRootStreamProgress: (progress: ProgressEvent) => void,
+	onRootStreamProgress: (progress: ProgressEvent) => void,
 ): Promise<void> {
 	let lastPosition = 0;
 	const emitSourceProgress =
@@ -249,7 +384,7 @@ async function pipeRegularSourceToDestination(
 		destination.createWriteStream({ highWaterMark }),
 	]);
 	getRootStream(sourceStream).on('progress', (progress: ProgressEvent) => {
-		_onRootStreamProgress(progress);
+		onRootStreamProgress(progress);
 	});
 	const checksum = await new Promise(
 		(
@@ -336,7 +471,7 @@ async function pipeSparseSourceToDestination(
 	updateState: (state?: WriteStep) => void,
 	onFail: (error: MultiDestinationError) => void,
 	onProgress: (progress: ProgressEvent) => void,
-	_onRootStreamProgress: (progress: ProgressEvent) => void,
+	onRootStreamProgress: (progress: ProgressEvent) => void,
 ): Promise<void> {
 	const alignment = destination.getAlignment();
 	const highWaterMark = alignment === undefined ? undefined : numBuffers - 1;
@@ -349,7 +484,7 @@ async function pipeSparseSourceToDestination(
 		destination.createSparseWriteStream({ highWaterMark }),
 	]);
 	getRootStream(sourceStream).on('progress', (progress: ProgressEvent) => {
-		_onRootStreamProgress(progress);
+		onRootStreamProgress(progress);
 	});
 	await new Promise((resolve: () => void, reject: (error: Error) => void) => {
 		sourceStream.once('error', reject);

@@ -23,11 +23,11 @@
 
 * [bytesWritten](countinghashstream.md#byteswritten)
 * [readable](countinghashstream.md#readable)
-* [readableHighWaterMark](countinghashstream.md#readablehighwatermark)
-* [readableLength](countinghashstream.md#readablelength)
+* [readableHighWaterMark](countinghashstream.md#readonly-readablehighwatermark)
+* [readableLength](countinghashstream.md#readonly-readablelength)
 * [writable](countinghashstream.md#writable)
-* [writableHighWaterMark](countinghashstream.md#writablehighwatermark)
-* [writableLength](countinghashstream.md#writablelength)
+* [writableHighWaterMark](countinghashstream.md#readonly-writablehighwatermark)
+* [writableLength](countinghashstream.md#readonly-writablelength)
 * [defaultMaxListeners](countinghashstream.md#static-defaultmaxlisteners)
 
 ### Methods
@@ -84,7 +84,7 @@
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [typings/xxhash/index.d.ts:12](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/typings/xxhash/index.d.ts#L12)*
+*Defined in [typings/xxhash/index.d.ts:12](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/typings/xxhash/index.d.ts#L12)*
 
 **Parameters:**
 
@@ -102,7 +102,7 @@ Name | Type |
 
 • **bytesWritten**: *number* = 0
 
-*Defined in [lib/source-destination/source-destination.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/source-destination.ts#L53)*
+*Defined in [lib/source-destination/source-destination.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/source-destination/source-destination.ts#L49)*
 
 ___
 
@@ -116,21 +116,21 @@ Defined in node_modules/@types/node/stream.d.ts:20
 
 ___
 
-###  readableHighWaterMark
+### `Readonly` readableHighWaterMark
 
 • **readableHighWaterMark**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableHighWaterMark](sparsefilterstream.md#readablehighwatermark)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableHighWaterMark](sparsefilterstream.md#readonly-readablehighwatermark)*
 
 Defined in node_modules/@types/node/stream.d.ts:21
 
 ___
 
-###  readableLength
+### `Readonly` readableLength
 
 • **readableLength**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableLength](sparsefilterstream.md#readablelength)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableLength](sparsefilterstream.md#readonly-readablelength)*
 
 Defined in node_modules/@types/node/stream.d.ts:22
 
@@ -146,21 +146,21 @@ Defined in node_modules/@types/node/stream.d.ts:209
 
 ___
 
-###  writableHighWaterMark
+### `Readonly` writableHighWaterMark
 
 • **writableHighWaterMark**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableHighWaterMark](sparsefilterstream.md#writablehighwatermark)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableHighWaterMark](sparsefilterstream.md#readonly-writablehighwatermark)*
 
 Defined in node_modules/@types/node/stream.d.ts:210
 
 ___
 
-###  writableLength
+### `Readonly` writableLength
 
 • **writableLength**: *number*
 
-*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableLength](sparsefilterstream.md#writablelength)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableLength](sparsefilterstream.md#readonly-writablelength)*
 
 Defined in node_modules/@types/node/stream.d.ts:211
 
@@ -192,7 +192,7 @@ ___
 
 ▸ **__transform**(`chunk`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer) | [AlignedLockableBuffer](../interfaces/alignedlockablebuffer.md), `encoding`: string): *Promise‹void›*
 
-*Defined in [lib/source-destination/source-destination.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/source-destination.ts#L55)*
+*Defined in [lib/source-destination/source-destination.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/source-destination/source-destination.ts#L51)*
 
 **Parameters:**
 
@@ -299,7 +299,7 @@ ___
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[_transform](../interfaces/sourcetransform.md#_transform)*
 
-*Defined in [lib/source-destination/source-destination.ts:72](https://github.com/balena-io-modules/etcher-sdk/blob/e5355bd/lib/source-destination/source-destination.ts#L72)*
+*Defined in [lib/source-destination/source-destination.ts:68](https://github.com/balena-io-modules/etcher-sdk/blob/d935b6d/lib/source-destination/source-destination.ts#L68)*
 
 **Parameters:**
 

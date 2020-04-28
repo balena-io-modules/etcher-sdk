@@ -23,7 +23,7 @@ const DATA_PATH = join(__dirname, 'data');
 const IMAGES_PATH = join(DATA_PATH, 'images');
 const XZ_PATH = join(DATA_PATH, 'xz');
 
-describe('xz support', function() {
+describe('xz support', function () {
 	this.timeout(DEFAULT_IMAGE_TESTS_TIMEOUT);
 
 	testImage(

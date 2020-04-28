@@ -28,7 +28,7 @@ import { DEFAULT_IMAGE_TESTS_TIMEOUT } from './tester';
 const DATA_PATH = join(__dirname, 'data');
 const ZIP_PATH = join(DATA_PATH, 'zip');
 
-describe('zip in a single use stream source', function() {
+describe('zip in a single use stream source', function () {
 	this.timeout(DEFAULT_IMAGE_TESTS_TIMEOUT);
 
 	it('should be able to read an image from a zip file from a stream', async () => {
@@ -43,22 +43,26 @@ describe('zip in a single use stream source', function() {
 			compressedSize: 7791,
 			name: 'etcher-test.img',
 			size: 5242880,
+			isCompressed: true,
 		});
 		const progressEvents: sourceDestination.ProgressEvent[] = [];
-		await using(tmpFileDisposer(false), async file => {
-			await multiWrite.pipeSourceToDestinations(
+		await using(tmpFileDisposer(false), async (file) => {
+			await multiWrite.pipeSourceToDestinations({
 				source,
-				[new sourceDestination.File({ path: file.path, write: true })],
-				// onFail
-				(_destination: sourceDestination.SourceDestination, _error: Error) => {
+				destinations: [
+					new sourceDestination.File({ path: file.path, write: true }),
+				],
+				onFail: (
+					_destination: sourceDestination.SourceDestination,
+					_error: Error,
+				) => {
 					assert(false);
 				},
-				// onProgress
-				(progress: multiWrite.MultiDestinationProgress) => {
+				onProgress: (progress: multiWrite.MultiDestinationProgress) => {
 					progressEvents.push(progress);
 				},
-				true, // verify
-			);
+				verify: true,
+			});
 		});
 		expect(progressEvents.length).to.be.at.least(2);
 		try {

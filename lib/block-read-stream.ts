@@ -19,11 +19,7 @@ import { ReadResult } from 'file-disk';
 import { Readable } from 'stream';
 
 import { AlignedReadableState } from './aligned-lockable-buffer';
-import {
-	CHUNK_SIZE,
-	PROGRESS_EMISSION_INTERVAL,
-	RETRY_BASE_TIMEOUT,
-} from './constants';
+import { CHUNK_SIZE, RETRY_BASE_TIMEOUT } from './constants';
 import { isTransientError } from './errors';
 import { File } from './source-destination/file';
 import { makeClassEmitProgressEvents } from './source-destination/progress';
@@ -123,5 +119,4 @@ export const ProgressBlockReadStream = makeClassEmitProgressEvents(
 	BlockReadStream,
 	'bytesRead',
 	'bytesRead',
-	PROGRESS_EMISSION_INTERVAL,
 );

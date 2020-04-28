@@ -6,9 +6,14 @@ npm:
       packages:
         - libudev-dev
       architecture: x86_64
+      node_versions:
+        - "10"
+        - "12"
     - name: linux
       os: ubuntu
       packages:
         - libudev-dev
       architecture: x86
-
+      node_versions:
+        - "10"
+        - "12"

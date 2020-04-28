@@ -25,7 +25,7 @@ const DATA_PATH = join(__dirname, 'data');
 const IMAGES_PATH = join(DATA_PATH, 'images');
 const ZIP_PATH = join(DATA_PATH, 'metadata', 'zip');
 
-describe('metadata zip', function() {
+describe('metadata zip', function () {
 	this.timeout(10000);
 
 	expectGetInnerSourceError(

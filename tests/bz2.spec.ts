@@ -23,7 +23,7 @@ const DATA_PATH = join(__dirname, 'data');
 const IMAGES_PATH = join(DATA_PATH, 'images');
 const BZ2_PATH = join(DATA_PATH, 'bz2');
 
-describe('bzip2 support', function() {
+describe('bzip2 support', function () {
 	this.timeout(DEFAULT_IMAGE_TESTS_TIMEOUT);
 
 	testImage(
