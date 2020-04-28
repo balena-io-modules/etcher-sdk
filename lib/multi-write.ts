@@ -75,6 +75,7 @@ export type OnProgressFunction = (progress: MultiDestinationProgress) => void;
 export interface PipeSourceToDestinationsResult {
 	failures: Map<SourceDestination, Error>;
 	bytesWritten: number;
+	sourceMetadata: Metadata;
 }
 
 function getEta(
@@ -355,7 +356,7 @@ export async function pipeSourceToDestinations({
 	}
 	updateState('finished');
 	await Promise.all([source.close(), destination.close()]);
-	return { failures, bytesWritten: state.bytesWritten || 0 };
+	return { sourceMetadata, failures, bytesWritten: state.bytesWritten || 0 };
 }
 
 async function pipeRegularSourceToDestination(
