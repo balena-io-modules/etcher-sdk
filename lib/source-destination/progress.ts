@@ -18,9 +18,8 @@ import { Chunk } from 'blockmap';
 import { EventEmitter } from 'events';
 import { Writable } from 'stream';
 
-import speedometer = require('speedometer');
-
 import { PROGRESS_EMISSION_INTERVAL, SPEED_WINDOW } from '../constants';
+import { Speedometer } from '../speedometer';
 
 export type Constructor<T> = new (...args: any[]) => T;
 
@@ -50,7 +49,7 @@ export function makeClassEmitProgressEvents<
 			super(...args);
 
 			const startTime = Date.now();
-			const meter = speedometer(SPEED_WINDOW);
+			const meter = new Speedometer(SPEED_WINDOW);
 			const state: ProgressEvent = {
 				position: 0,
 				bytes: 0,
@@ -66,7 +65,7 @@ export function makeClassEmitProgressEvents<
 				if (position !== undefined) {
 					state.position = position;
 				}
-				state.speed = meter(this._attributeDelta);
+				state.speed = meter.speed(this._attributeDelta);
 				this._attributeDelta = 0;
 				state.averageSpeed = (state.bytes / (Date.now() - startTime)) * 1000;
 				this.emit('progress', state);
