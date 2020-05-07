@@ -68,7 +68,7 @@
     "resin-image-fs": "^5.0.8",
     "rwmutex": "^1.0.0",
     "udif": "^0.17.0",
-    "unbzip2-stream": "balena-io-modules/unbzip2-stream#942fc218013c14adab01cf693b0500cf6ac83193",
+    "unbzip2-stream": "balena-io-modules/unbzip2-stream#4a54f56a25b58950f9e4277c56db2912d62242e7",
     "unzip-stream": "^0.3.0",
     "xxhash": "^0.3.0",
     "yauzl": "^2.9.2"
