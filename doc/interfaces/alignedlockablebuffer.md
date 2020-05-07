@@ -175,7 +175,7 @@ ___
 
 • **alignment**: *number*
 
-*Defined in [lib/aligned-lockable-buffer.ts:5](https://github.com/balena-io-modules/etcher-sdk/blob/1e00137/lib/aligned-lockable-buffer.ts#L5)*
+*Defined in [lib/aligned-lockable-buffer.ts:5](https://github.com/balena-io-modules/etcher-sdk/blob/b5a0409/lib/aligned-lockable-buffer.ts#L5)*
 
 ___
 
@@ -241,7 +241,7 @@ ___
 
 • **lock**: *function*
 
-*Defined in [lib/aligned-lockable-buffer.ts:6](https://github.com/balena-io-modules/etcher-sdk/blob/1e00137/lib/aligned-lockable-buffer.ts#L6)*
+*Defined in [lib/aligned-lockable-buffer.ts:6](https://github.com/balena-io-modules/etcher-sdk/blob/b5a0409/lib/aligned-lockable-buffer.ts#L6)*
 
 #### Type declaration:
 
@@ -253,7 +253,7 @@ ___
 
 • **rlock**: *function*
 
-*Defined in [lib/aligned-lockable-buffer.ts:7](https://github.com/balena-io-modules/etcher-sdk/blob/1e00137/lib/aligned-lockable-buffer.ts#L7)*
+*Defined in [lib/aligned-lockable-buffer.ts:7](https://github.com/balena-io-modules/etcher-sdk/blob/b5a0409/lib/aligned-lockable-buffer.ts#L7)*
 
 #### Type declaration:
 
@@ -267,7 +267,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/aligned-lockable-buffer.ts:8](https://github.com/balena-io-modules/etcher-sdk/blob/1e00137/lib/aligned-lockable-buffer.ts#L8)*
+*Defined in [lib/aligned-lockable-buffer.ts:8](https://github.com/balena-io-modules/etcher-sdk/blob/b5a0409/lib/aligned-lockable-buffer.ts#L8)*
 
 #### Type declaration:
 
