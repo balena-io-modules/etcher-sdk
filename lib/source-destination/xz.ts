@@ -30,8 +30,14 @@ export class XzSource extends CompressedSource {
 		return createDecompressor();
 	}
 
-	protected async getSize(): Promise<number | undefined> {
+	protected async getSize(): Promise<
+		{ size: number; isEstimated: boolean } | undefined
+	> {
 		if (!(await this.source.canRead())) {
+			const sizeFromPartitionTable = await this.getSizeFromPartitionTable();
+			if (sizeFromPartitionTable !== undefined) {
+				return { size: sizeFromPartitionTable, isEstimated: true };
+			}
 			return;
 		}
 		const { size } = await this.source.getMetadata();
@@ -58,7 +64,7 @@ export class XzSource extends CompressedSource {
 				}
 			},
 		});
-		return uncompressedSize;
+		return { size: uncompressedSize, isEstimated: false };
 	}
 }
 
