@@ -35,6 +35,7 @@ describe('bzip2 support', function () {
 		true,
 		'mbr',
 		join(IMAGES_PATH, 'etcher-test-partitions.json'), // partitionsFile
+		{ isSizeEstimated: true, size: 2162688 },
 	);
 
 	testImage(
@@ -46,5 +47,6 @@ describe('bzip2 support', function () {
 		true,
 		'mbr',
 		join(IMAGES_PATH, 'etcher-test-partitions.json'), // partitionsFile
+		{ isSizeEstimated: true, size: 2162688 },
 	);
 });

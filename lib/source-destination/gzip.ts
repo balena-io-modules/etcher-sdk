@@ -24,13 +24,15 @@ const ISIZE_LENGTH = 4;
 
 export class GZipSource extends CompressedSource {
 	public static readonly mimetype = 'application/gzip';
-	public isSizeEstimated = true;
 
 	protected createTransform(): Transform {
 		return createGunzip();
 	}
 
-	protected async getSize(): Promise<number | undefined> {
+	protected async getSize(): Promise<
+		{ size: number; isEstimated: true } | undefined
+	> {
+		const sizeFromPartitionTable = await this.getSizeFromPartitionTable();
 		if (await this.source.canRead()) {
 			const sourceMetadata = await this.source.getMetadata();
 			if (sourceMetadata.size !== undefined) {
@@ -40,8 +42,16 @@ export class GZipSource extends CompressedSource {
 					ISIZE_LENGTH,
 					sourceMetadata.size - ISIZE_LENGTH,
 				);
-				return buffer.readUInt32LE(0);
+				const sizeFromFooter = buffer.readUInt32LE(0);
+				// The size from the gzip footer can't be larger than 4GiB (it is stored in 4 bytes)
+				// Use the size from the partition table is it is larger (and available)
+				return {
+					size: Math.max(sizeFromFooter, sizeFromPartitionTable || 0),
+					isEstimated: true,
+				};
 			}
+		} else if (sizeFromPartitionTable !== undefined) {
+			return { size: sizeFromPartitionTable, isEstimated: true };
 		}
 	}
 }

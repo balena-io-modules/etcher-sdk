@@ -26,6 +26,15 @@ export class BZip2Source extends CompressedSource {
 	protected createTransform(): Transform {
 		return unbzip2Stream();
 	}
+
+	protected async getSize(): Promise<
+		{ size: number; isEstimated: true } | undefined
+	> {
+		const size = await this.getSizeFromPartitionTable();
+		if (size !== undefined) {
+			return { size, isEstimated: true };
+		}
+	}
 }
 
 SourceDestination.register(BZip2Source);

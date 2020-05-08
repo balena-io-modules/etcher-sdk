@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { GPTPartition, MBRPartition } from 'partitioninfo';
 import { basename, extname } from 'path';
 import { Transform } from 'stream';
 
@@ -42,9 +43,10 @@ export function getRootStream(
 
 export abstract class CompressedSource extends SourceSource {
 	protected abstract createTransform(): Transform;
-	protected isSizeEstimated = false;
 
-	protected async getSize(): Promise<number | undefined> {
+	protected async getSize(): Promise<
+		{ size: number; isEstimated: boolean } | undefined
+	> {
 		return;
 	}
 
@@ -82,6 +84,24 @@ export abstract class CompressedSource extends SourceSource {
 		return transform;
 	}
 
+	protected async getSizeFromPartitionTable(): Promise<number | undefined> {
+		try {
+			const partitions = await this.getPartitionTable();
+			if (partitions !== undefined) {
+				const lastByte = Math.max(
+					...(partitions.partitions as Array<GPTPartition | MBRPartition>).map(
+						({ offset, size }) => offset + size,
+					),
+				);
+				if (lastByte !== -Infinity) {
+					return lastByte;
+				}
+			}
+		} catch (error) {
+			// noop
+		}
+	}
+
 	protected async _getMetadata(): Promise<Metadata> {
 		const sourceMetadata = await this.source.getMetadata();
 		const compressedSize = sourceMetadata.compressedSize || sourceMetadata.size;
@@ -93,9 +113,9 @@ export abstract class CompressedSource extends SourceSource {
 		return {
 			isCompressed: true,
 			name,
-			size,
+			size: size?.size,
 			compressedSize,
-			isSizeEstimated: this.isSizeEstimated,
+			isSizeEstimated: size?.isEstimated,
 		};
 	}
 }

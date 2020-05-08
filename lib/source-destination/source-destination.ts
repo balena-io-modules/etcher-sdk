@@ -495,7 +495,7 @@ export class SourceDestination extends EventEmitter {
 
 	public async getPartitionTable(): Promise<GetPartitionsResult | undefined> {
 		const stream = await this.createReadStream({
-			end: 65535, // TODO: constant
+			end: 34 * 512, // GPT partition table size
 		});
 		const buffer = await streamToBuffer(stream);
 		try {
