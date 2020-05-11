@@ -215,7 +215,7 @@ function createCompleteOnProgress(
 ) {
 	function $onProgress(progress: ProgressEvent) {
 		// sourceMetadata will be updated by pipeRegularSourceToDestination
-		if (!sourceMetadata.isSizeEstimated && sourceMetadata.size !== undefined) {
+		if (sourceMetadata.size !== undefined && state.size === undefined) {
 			state.size = sourceMetadata.size;
 		}
 		let size: number | undefined;
