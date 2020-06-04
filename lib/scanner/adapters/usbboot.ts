@@ -37,7 +37,7 @@ export class UsbbootDeviceAdapter extends Adapter {
 			this.scanner.on('ready', this.emit.bind(this, 'ready'));
 			this.scanner.on('error', this.emit.bind(this, 'error'));
 		} else {
-			console.log('node-raspberrypi-usbboot not available');
+			console.warn('node-raspberrypi-usbboot not available');
 			setImmediate(this.emit.bind(this, 'ready'));
 		}
 	}
