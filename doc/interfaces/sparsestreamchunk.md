@@ -19,7 +19,7 @@
 
 • **buffer**: *[Buffer](alignedlockablebuffer.md#buffer) | [AlignedLockableBuffer](alignedlockablebuffer.md)*
 
-*Defined in [lib/sparse-stream/shared.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/5c0d0cc/lib/sparse-stream/shared.ts#L45)*
+*Defined in [lib/sparse-stream/shared.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/656fcec/lib/sparse-stream/shared.ts#L45)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **position**: *number*
 
-*Defined in [lib/sparse-stream/shared.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/5c0d0cc/lib/sparse-stream/shared.ts#L46)*
+*Defined in [lib/sparse-stream/shared.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/656fcec/lib/sparse-stream/shared.ts#L46)*

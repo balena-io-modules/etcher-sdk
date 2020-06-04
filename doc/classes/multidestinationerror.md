@@ -29,7 +29,7 @@
 
 \+ **new MultiDestinationError**(`error`: [Error](notcapable.md#static-error), `destination`: [SourceDestination](sourcedestination.md)): *[MultiDestinationError](multidestinationerror.md)*
 
-*Defined in [lib/source-destination/multi-destination.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/5c0d0cc/lib/source-destination/multi-destination.ts#L41)*
+*Defined in [lib/source-destination/multi-destination.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/656fcec/lib/source-destination/multi-destination.ts#L41)*
 
 **Parameters:**
 
@@ -46,7 +46,7 @@ Name | Type |
 
 • **destination**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [lib/source-destination/multi-destination.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/5c0d0cc/lib/source-destination/multi-destination.ts#L42)*
+*Defined in [lib/source-destination/multi-destination.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/656fcec/lib/source-destination/multi-destination.ts#L42)*
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 • **error**: *[Error](notcapable.md#static-error)*
 
-*Defined in [lib/source-destination/multi-destination.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/5c0d0cc/lib/source-destination/multi-destination.ts#L42)*
+*Defined in [lib/source-destination/multi-destination.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/656fcec/lib/source-destination/multi-destination.ts#L42)*
 
 ___
 
