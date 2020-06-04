@@ -112,7 +112,7 @@ export class File extends SourceDestination {
 		}
 		do {
 			if (tries < READ_TRIES) {
-				console.log('Incomplete read', {
+				console.warn('Incomplete read', {
 					path: this.path,
 					bufferOffset,
 					length,
