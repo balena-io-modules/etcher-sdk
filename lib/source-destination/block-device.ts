@@ -64,7 +64,11 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		this.drive = drive;
 		this.unmountOnSuccess = unmountOnSuccess;
 		this.oDirect = direct;
-		this.alignment = drive.blockSize || DEFAULT_ALIGNMENT;
+		// alignment must be at most 4k
+		this.alignment = Math.min(
+			drive.blockSize || DEFAULT_ALIGNMENT,
+			4 * 1024 ** 2,
+		);
 	}
 
 	public getAlignment() {
