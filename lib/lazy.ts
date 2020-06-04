@@ -24,7 +24,7 @@ export const getRaspberrypiUsbboot = once(() => {
 	try {
 		return require('node-raspberrypi-usbboot') as typeof import('node-raspberrypi-usbboot');
 	} catch (e) {
-		console.warn('Failed to import node-raspberrypi-usbboot:', e);
+		console.log('Failed to import node-raspberrypi-usbboot:', e);
 	}
 });
 

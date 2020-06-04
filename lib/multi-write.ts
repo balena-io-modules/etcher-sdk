@@ -179,7 +179,7 @@ export async function decompressThenFlash({
 			!(source instanceof ConfiguredSource)
 		) {
 			if (!(await source.canRead())) {
-				console.warn(
+				console.log(
 					"Can't configure or trim a source that is not randomly readable, skipping",
 				);
 			} else {
