@@ -75,19 +75,16 @@ const main = async ({
 			return devices.includes(drive.device!);
 		},
 	);
-	try {
-		await pipeSourceToDestinationsWithProgressBar({
-			source,
-			destinations: destinationDrives,
-			verify,
-			numBuffers,
-			trim,
-			decompressFirst,
-			configure,
-		});
-	} finally {
-		deviceScanner.stop();
-	}
+	deviceScanner.stop();
+	await pipeSourceToDestinationsWithProgressBar({
+		source,
+		destinations: destinationDrives,
+		verify,
+		numBuffers,
+		trim,
+		decompressFirst,
+		configure,
+	});
 };
 
 // tslint:disable-next-line: no-var-requires
