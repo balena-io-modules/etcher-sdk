@@ -14,7 +14,7 @@
     "prettier": "balena-lint --typescript --fix lib typings examples tests",
     "lint": "balena-lint --typescript lib typings examples tests",
     "build": "rimraf build doc && tsc && npm run doc",
-    "doc": "typedoc --readme none --theme markdown --mode file --out doc lib && sed -i 's|'$(pwd)'||g' $(find doc -type f)",
+    "doc": "typedoc --readme none --theme markdown --mode file --out doc lib && sed -i '' 's|'$(pwd)'||g' $(find doc -type f)",
     "prepublish": "npm run build"
   },
   "files": [
