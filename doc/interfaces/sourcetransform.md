@@ -129,7 +129,7 @@ ___
 
 • **sourceStream**: *ReadableStream*
 
-*Defined in [lib/source-destination/compressed-source.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/source-destination/compressed-source.ts#L28)*
+*Defined in [lib/source-destination/compressed-source.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/source-destination/compressed-source.ts#L28)*
 
 ___
 
@@ -1039,7 +1039,7 @@ ___
 
 ###  pipe
 
-▸ **pipe**<**T**>(`destination`: T, `options?`: undefined | object): *T*
+▸ **pipe**‹**T**›(`destination`: T, `options?`: undefined | object): *T*
 
 *Inherited from [CountingWritable](../classes/countingwritable.md).[pipe](../classes/countingwritable.md#pipe)*
 

@@ -48,7 +48,7 @@
 
 • **drives**: *Map‹string, [DriverlessDevice](driverlessdevice.md)›* = new Map()
 
-*Defined in [lib/scanner/adapters/driverless.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/driverless.ts#L30)*
+*Defined in [lib/scanner/adapters/driverless.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/scanner/adapters/driverless.ts#L30)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • **listDriverlessDevices**: *any*
 
-*Defined in [lib/scanner/adapters/driverless.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/driverless.ts#L33)*
+*Defined in [lib/scanner/adapters/driverless.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/scanner/adapters/driverless.ts#L33)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 • **ready**: *boolean* = false
 
-*Defined in [lib/scanner/adapters/driverless.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/driverless.ts#L32)*
+*Defined in [lib/scanner/adapters/driverless.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/scanner/adapters/driverless.ts#L32)*
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 • **running**: *boolean* = false
 
-*Defined in [lib/scanner/adapters/driverless.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/driverless.ts#L31)*
+*Defined in [lib/scanner/adapters/driverless.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/scanner/adapters/driverless.ts#L31)*
 
 ___
 
@@ -167,7 +167,7 @@ ___
 
 ▸ **listDrives**(): *Map‹string, WinUsbDriverlessDevice›*
 
-*Defined in [lib/scanner/adapters/driverless.ts:88](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/driverless.ts#L88)*
+*Defined in [lib/scanner/adapters/driverless.ts:88](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/scanner/adapters/driverless.ts#L88)*
 
 **Returns:** *Map‹string, WinUsbDriverlessDevice›*
 
@@ -425,7 +425,7 @@ ___
 
 ▸ **scan**(): *void*
 
-*Defined in [lib/scanner/adapters/driverless.ts:63](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/driverless.ts#L63)*
+*Defined in [lib/scanner/adapters/driverless.ts:63](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/scanner/adapters/driverless.ts#L63)*
 
 **Returns:** *void*
 
@@ -435,7 +435,7 @@ ___
 
 ▸ **scanLoop**(): *Promise‹void›*
 
-*Defined in [lib/scanner/adapters/driverless.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/driverless.ts#L46)*
+*Defined in [lib/scanner/adapters/driverless.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/scanner/adapters/driverless.ts#L46)*
 
 **Returns:** *Promise‹void›*
 
@@ -467,7 +467,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[start](adapter.md#abstract-start)*
 
-*Defined in [lib/scanner/adapters/driverless.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/driverless.ts#L35)*
+*Defined in [lib/scanner/adapters/driverless.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/scanner/adapters/driverless.ts#L35)*
 
 **Returns:** *void*
 
@@ -479,7 +479,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[stop](adapter.md#abstract-stop)*
 
-*Defined in [lib/scanner/adapters/driverless.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/driverless.ts#L40)*
+*Defined in [lib/scanner/adapters/driverless.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/scanner/adapters/driverless.ts#L40)*
 
 **Returns:** *void*
 

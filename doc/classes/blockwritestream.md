@@ -72,7 +72,7 @@
 
 *Overrides [CountingWritable](countingwritable.md).[constructor](countingwritable.md#constructor)*
 
-*Defined in [lib/block-write-stream.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/block-write-stream.ts#L37)*
+*Defined in [lib/block-write-stream.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/block-write-stream.ts#L37)*
 
 **Parameters:**
 
@@ -93,7 +93,7 @@ Name | Type | Default |
 
 • **bytesWritten**: *number* = 0
 
-*Defined in [lib/block-write-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/block-write-stream.ts#L35)*
+*Defined in [lib/block-write-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/block-write-stream.ts#L35)*
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 • **delayFirstBuffer**: *boolean*
 
-*Defined in [lib/block-write-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/block-write-stream.ts#L33)*
+*Defined in [lib/block-write-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/block-write-stream.ts#L33)*
 
 ___
 
@@ -109,7 +109,7 @@ ___
 
 • **destination**: *[BlockDevice](blockdevice.md)*
 
-*Defined in [lib/block-write-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/block-write-stream.ts#L32)*
+*Defined in [lib/block-write-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/block-write-stream.ts#L32)*
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 • **firstBuffer**? : *[Buffer](../interfaces/alignedlockablebuffer.md#buffer)*
 
-*Defined in [lib/block-write-stream.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/block-write-stream.ts#L37)*
+*Defined in [lib/block-write-stream.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/block-write-stream.ts#L37)*
 
 ___
 
@@ -125,7 +125,7 @@ ___
 
 • **maxRetries**: *number*
 
-*Defined in [lib/block-write-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/block-write-stream.ts#L34)*
+*Defined in [lib/block-write-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/block-write-stream.ts#L34)*
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 • **position**: *number* = 0
 
-*Defined in [lib/block-write-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/block-write-stream.ts#L36)*
+*Defined in [lib/block-write-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/block-write-stream.ts#L36)*
 
 ___
 
@@ -181,7 +181,7 @@ Defined in node_modules/@types/node/events.d.ts:18
 
 ▸ **__final**(): *Promise‹void›*
 
-*Defined in [lib/block-write-stream.ts:103](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/block-write-stream.ts#L103)*
+*Defined in [lib/block-write-stream.ts:103](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/block-write-stream.ts#L103)*
 
 **Returns:** *Promise‹void›*
 
@@ -191,7 +191,7 @@ ___
 
 ▸ **__write**(`buffer`: [AlignedLockableBuffer](../interfaces/alignedlockablebuffer.md)): *Promise‹void›*
 
-*Defined in [lib/block-write-stream.ts:76](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/block-write-stream.ts#L76)*
+*Defined in [lib/block-write-stream.ts:76](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/block-write-stream.ts#L76)*
 
 **Parameters:**
 
@@ -235,7 +235,7 @@ ___
 
 *Overrides [CountingWritable](countingwritable.md).[_final](countingwritable.md#_final)*
 
-*Defined in [lib/block-write-stream.ts:119](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/block-write-stream.ts#L119)*
+*Defined in [lib/block-write-stream.ts:119](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/block-write-stream.ts#L119)*
 
 **`summary`** Write buffered data before a stream ends, called by stream internals
 
@@ -261,7 +261,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/block-write-stream.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/block-write-stream.ts#L95)*
+*Defined in [lib/block-write-stream.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/block-write-stream.ts#L95)*
 
 **Parameters:**
 
@@ -1067,7 +1067,7 @@ ___
 
 ###  pipe
 
-▸ **pipe**<**T**>(`destination`: T, `options?`: undefined | object): *T*
+▸ **pipe**‹**T**›(`destination`: T, `options?`: undefined | object): *T*
 
 *Inherited from [CountingWritable](countingwritable.md).[pipe](countingwritable.md#pipe)*
 
@@ -1673,7 +1673,7 @@ ___
 
 ▸ **writeBuffer**(`buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer), `position`: number): *Promise‹void›*
 
-*Defined in [lib/block-write-stream.ts:56](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/block-write-stream.ts#L56)*
+*Defined in [lib/block-write-stream.ts:56](https://github.com/balena-io-modules/etcher-sdk/blob/be777fd/lib/block-write-stream.ts#L56)*
 
 **Parameters:**
 
