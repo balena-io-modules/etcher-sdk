@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { getAlignedBuffer, O_EXLOCK, setF_NOCACHE } from '@ronomon/direct-io';
+import { getAlignedBuffer, O_EXLOCK, setF_NOCACHE, setFSCTL_LOCK_VOLUME } from '@ronomon/direct-io';
 import { delay, fromCallback } from 'bluebird';
 import { Drive as DrivelistDrive } from 'drivelist';
 import { ReadResult, WriteResult } from 'file-disk';
@@ -171,6 +171,12 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		if (plat !== 'win32') {
 			const unmountDisk = getUnmountDisk();
 			await unmountDisk(this.drive.device);
+		} else {
+			// Lock the volume on Windows to prevent creation
+			// of "System Volume Information" folder
+			await fromCallback((cb) => {
+				setFSCTL_LOCK_VOLUME(this.fileHandle.fd, 1, cb)
+			});
 		}
 		await clean(this.drive.device);
 		await super._open();
@@ -191,6 +197,12 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 			await delay(UNMOUNT_ON_SUCCESS_TIMEOUT_MS);
 			const unmountDisk = getUnmountDisk();
 			await unmountDisk(this.drive.device);
+		}
+		// Unlock the volume on Windows
+		if (platform() === 'win32') {
+			await fromCallback((cb) => {
+				setFSCTL_LOCK_VOLUME(this.fileHandle.fd, 0, cb)
+			});
 		}
 	}
 

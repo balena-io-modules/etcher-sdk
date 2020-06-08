@@ -7,4 +7,9 @@ declare module '@ronomon/direct-io' {
 		value: 0 | 1,
 		callback: (error?: Error) => void,
 	): void;
+	function setFSCTL_LOCK_VOLUME(
+		fd: number,
+		value: 0 | 1,
+		callback: (error?: Error) => void,
+	): void;
 }
