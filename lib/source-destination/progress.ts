@@ -42,9 +42,6 @@ export function makeClassEmitProgressEvents<
 	//  * the type of `attribute` must be a number;
 	//  * the position attribute of emitted events will be copied from the `positionAttribute` of the instances.
 	return class extends Cls {
-		public _attributeValue: number;
-		public _attributeDelta = 0;
-
 		constructor(...args: any[]) {
 			super(...args);
 
@@ -57,16 +54,25 @@ export function makeClassEmitProgressEvents<
 				averageSpeed: 0,
 			};
 
+			// @ts-ignore
+			let attributeValue: number = this[attribute];
+
 			const update = () => {
-				state.bytes += this._attributeDelta;
+				// @ts-ignore
+				const newValue: number = this[attribute];
+				const attributeDelta = newValue - attributeValue;
+				if (attributeDelta === 0) {
+					return;
+				}
+				attributeValue = newValue;
+				state.bytes += attributeDelta;
 				// Ignore because I don't know how to express that positionAttribute is a key of T instances
 				// @ts-ignore
 				const position = this[positionAttribute];
 				if (position !== undefined) {
 					state.position = position;
 				}
-				state.speed = meter.speed(this._attributeDelta);
-				this._attributeDelta = 0;
+				state.speed = meter.speed(attributeDelta);
 				state.averageSpeed = (state.bytes / (Date.now() - startTime)) * 1000;
 				this.emit('progress', state);
 			};
@@ -85,17 +91,6 @@ export function makeClassEmitProgressEvents<
 			// Readable streams
 			this.once('end', clear);
 			this.once('end', update);
-		}
-
-		get [attribute]() {
-			return this._attributeValue;
-		}
-
-		set [attribute](value: number) {
-			if (this._attributeValue !== undefined) {
-				this._attributeDelta += value - this._attributeValue;
-			}
-			this._attributeValue = value;
 		}
 	};
 }
