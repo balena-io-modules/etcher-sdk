@@ -220,7 +220,7 @@ export class RandomAccessZipSource extends SourceSource {
 		if (entries.length === 0) {
 			throw new Error(NO_MATCHING_FILE_MSG);
 		}
-		entries = sortBy(entries, 'uncompressedSize');
+		entries = sortBy(entries, (e) => e.uncompressedSize);
 		const entry = entries[entries.length - 1];
 		if (entry.compressionMethod !== 0 && entry.compressionMethod !== 8) {
 			throw new Error(

@@ -34,7 +34,7 @@ import {
 	Verifier,
 } from './source-destination';
 
-function isntNull(x: any) {
+function isntNull<T>(x: T | null): x is Exclude<T, null> {
 	return x !== null;
 }
 
@@ -299,7 +299,7 @@ export class MultiDestination extends SourceDestination {
 			// TODO: avoid Array.from
 			const leastAdvancedProgress = minBy(
 				Array.from(progresses.values()).filter(isntNull),
-				'position',
+				(p) => p.position,
 			);
 			if (leastAdvancedProgress !== undefined) {
 				passthrough.emit('progress', leastAdvancedProgress);
