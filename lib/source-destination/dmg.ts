@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import * as _ from 'lodash';
 import { BLOCK, CHECKSUM_TYPE, Image as UDIFImage, SECTOR_SIZE } from 'udif';
 import { promisify } from 'util';
 
