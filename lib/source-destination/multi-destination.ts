@@ -165,47 +165,44 @@ export class MultiDestination extends SourceDestination {
 			| 'canCreateSparseWriteStream',
 	) {
 		return every(
-			await map(
-				this.activeDestinations,
-				async (destination: SourceDestination) => {
-					return await destination[methodName]();
-				},
-			),
+			await map(this.activeDestinations, (destination: SourceDestination) => {
+				return destination[methodName]();
+			}),
 		);
 	}
 
-	public async canRead(): Promise<boolean> {
-		return await this.can('canRead');
+	public canRead(): Promise<boolean> {
+		return this.can('canRead');
 	}
 
-	public async canWrite(): Promise<boolean> {
-		return await this.can('canWrite');
+	public canWrite(): Promise<boolean> {
+		return this.can('canWrite');
 	}
 
-	public async canCreateReadStream(): Promise<boolean> {
-		return await this.can('canCreateReadStream');
+	public canCreateReadStream(): Promise<boolean> {
+		return this.can('canCreateReadStream');
 	}
 
-	public async canCreateSparseReadStream(): Promise<boolean> {
-		return await this.can('canCreateSparseReadStream');
+	public canCreateSparseReadStream(): Promise<boolean> {
+		return this.can('canCreateSparseReadStream');
 	}
 
-	public async canCreateWriteStream(): Promise<boolean> {
-		return await this.can('canCreateWriteStream');
+	public canCreateWriteStream(): Promise<boolean> {
+		return this.can('canCreateWriteStream');
 	}
 
-	public async canCreateSparseWriteStream(): Promise<boolean> {
-		return await this.can('canCreateSparseWriteStream');
+	public canCreateSparseWriteStream(): Promise<boolean> {
+		return this.can('canCreateSparseWriteStream');
 	}
 
-	public async read(
+	public read(
 		buffer: Buffer,
 		bufferOffset: number,
 		length: number,
 		sourceOffset: number,
 	): Promise<ReadResult> {
 		// Reads from the first destination (supposing all destinations contain the same data)
-		return await Array.from(this.activeDestinations)[0].read(
+		return Array.from(this.activeDestinations)[0].read(
 			buffer,
 			bufferOffset,
 			length,
@@ -221,13 +218,8 @@ export class MultiDestination extends SourceDestination {
 	): Promise<WriteResult> {
 		const results = await map(
 			this.activeDestinations,
-			async (destination: SourceDestination) => {
-				return await destination.write(
-					buffer,
-					bufferOffset,
-					length,
-					fileOffset,
-				);
+			(destination: SourceDestination) => {
+				return destination.write(buffer, bufferOffset, length, fileOffset);
 			},
 		);
 		// Returns the first WriteResult (they should be all the same)
@@ -235,20 +227,18 @@ export class MultiDestination extends SourceDestination {
 		// TODO: handle errors so one destination can fail
 	}
 
-	public async createReadStream(
+	public createReadStream(
 		options: CreateReadStreamOptions,
 	): Promise<NodeJS.ReadableStream> {
 		// TODO: raise an error or a warning here
-		return await Array.from(this.activeDestinations)[0].createReadStream(
-			options,
-		);
+		return Array.from(this.activeDestinations)[0].createReadStream(options);
 	}
 
-	public async createSparseReadStream(
+	public createSparseReadStream(
 		options: CreateSparseReadStreamOptions,
 	): Promise<SparseReadable> {
 		// TODO: raise an error or a warning here
-		return await Array.from(this.activeDestinations)[0].createSparseReadStream(
+		return Array.from(this.activeDestinations)[0].createSparseReadStream(
 			options,
 		);
 	}
@@ -335,16 +325,16 @@ export class MultiDestination extends SourceDestination {
 		return passthrough;
 	}
 
-	public async createWriteStream(
+	public createWriteStream(
 		...args: Parameters<SourceDestination['createWriteStream']>
 	): Promise<NodeJS.WritableStream> {
-		return await this.createStream('createWriteStream', ...args);
+		return this.createStream('createWriteStream', ...args);
 	}
 
-	public async createSparseWriteStream(
+	public createSparseWriteStream(
 		...args: Parameters<SourceDestination['createSparseWriteStream']>
 	): Promise<SparseWritable> {
-		return await this.createStream('createSparseWriteStream', ...args);
+		return this.createStream('createSparseWriteStream', ...args);
 	}
 
 	public createVerifier(

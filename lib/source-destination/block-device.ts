@@ -226,16 +226,16 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return { buffer, bytesRead: Math.min(length, bytesRead - offset) };
 	}
 
-	public async read(
+	public read(
 		buffer: Buffer,
 		bufferOffset: number,
 		length: number,
 		sourceOffset: number,
 	): Promise<ReadResult> {
 		if (!(this.offsetIsAligned(sourceOffset) && this.offsetIsAligned(length))) {
-			return await this.alignedRead(buffer, bufferOffset, length, sourceOffset);
+			return this.alignedRead(buffer, bufferOffset, length, sourceOffset);
 		} else {
-			return await super.read(buffer, bufferOffset, length, sourceOffset);
+			return super.read(buffer, bufferOffset, length, sourceOffset);
 		}
 	}
 
@@ -255,16 +255,16 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return { buffer, bytesWritten: length };
 	}
 
-	public async write(
+	public write(
 		buffer: Buffer,
 		bufferOffset: number,
 		length: number,
 		fileOffset: number,
 	): Promise<WriteResult> {
 		if (!(this.offsetIsAligned(fileOffset) && this.offsetIsAligned(length))) {
-			return await this.alignedWrite(buffer, bufferOffset, length, fileOffset);
+			return this.alignedWrite(buffer, bufferOffset, length, fileOffset);
 		} else {
-			return await super.write(buffer, bufferOffset, length, fileOffset);
+			return super.write(buffer, bufferOffset, length, fileOffset);
 		}
 	}
 }

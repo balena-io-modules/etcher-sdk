@@ -469,7 +469,7 @@ export class SourceDestination extends EventEmitter {
 			);
 		}
 		const innerSource = new Cls(this);
-		return await innerSource.getInnerSource();
+		return innerSource.getInnerSource();
 	}
 
 	public async getInnerSource(): Promise<SourceDestination> {
@@ -490,7 +490,7 @@ export class SourceDestination extends EventEmitter {
 			}
 		}
 		mimetype = await this.getMimeTypeFromContent();
-		return await this.getInnerSourceHelper(mimetype);
+		return this.getInnerSourceHelper(mimetype);
 	}
 
 	public async getPartitionTable(): Promise<GetPartitionsResult | undefined> {
