@@ -45,6 +45,7 @@ export const ProgressWriteStream = makeClassEmitProgressEvents(
 );
 
 const READ_TRIES = 5;
+const readEndMarker = Buffer.from(`not the correct data ${Math.random()}`);
 
 export class File extends SourceDestination {
 	public readonly path: string;
@@ -105,7 +106,6 @@ export class File extends SourceDestination {
 		// it is still there after reading.
 		let result;
 		let tries = READ_TRIES;
-		const readEndMarker = Buffer.from(`not the correct data ${sourceOffset}`);
 		const markerPosition = bufferOffset + length - readEndMarker.length;
 		if (length >= readEndMarker.length) {
 			readEndMarker.copy(buffer, markerPosition);
