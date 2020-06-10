@@ -17,10 +17,8 @@
 import { isAlignedLockableBuffer } from './aligned-lockable-buffer';
 import { SparseStreamChunk } from './sparse-stream/shared';
 
-export async function streamToBuffer(
-	stream: NodeJS.ReadableStream,
-): Promise<Buffer> {
-	return await new Promise(
+export function streamToBuffer(stream: NodeJS.ReadableStream): Promise<Buffer> {
+	return new Promise(
 		(resolve: (buffer: Buffer) => void, reject: (error: Error) => void) => {
 			const chunks: Buffer[] = [];
 			stream.on('error', reject);

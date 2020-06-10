@@ -77,12 +77,12 @@ export class File extends SourceDestination {
 		return true;
 	}
 
-	public async canCreateWriteStream(): Promise<boolean> {
-		return await this.canWrite();
+	public canCreateWriteStream(): Promise<boolean> {
+		return this.canWrite();
 	}
 
-	public async canCreateSparseWriteStream(): Promise<boolean> {
-		return await this.canWrite();
+	public canCreateSparseWriteStream(): Promise<boolean> {
+		return this.canWrite();
 	}
 
 	protected async _getMetadata(): Promise<Metadata> {
@@ -140,18 +140,13 @@ export class File extends SourceDestination {
 		return result;
 	}
 
-	public async write(
+	public write(
 		buffer: Buffer,
 		bufferOffset: number,
 		length: number,
 		fileOffset: number,
 	): Promise<WriteResult> {
-		return await this.fileHandle.write(
-			buffer,
-			bufferOffset,
-			length,
-			fileOffset,
-		);
+		return this.fileHandle.write(buffer, bufferOffset, length, fileOffset);
 	}
 
 	private streamOptions(start?: number, end?: number) {
