@@ -101,7 +101,7 @@ ___
 
 • **displayName**: *string*
 
-*Defined in [lib/scanner/adapters/block-device.ts:52](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/block-device.ts#L52)*
+*Defined in [lib/scanner/adapters/block-device.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/scanner/adapters/block-device.ts#L60)*
 
 ___
 
@@ -129,7 +129,7 @@ ___
 
 • **icon**? : *undefined | string*
 
-*Defined in [lib/scanner/adapters/block-device.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/block-device.ts#L53)*
+*Defined in [lib/scanner/adapters/block-device.ts:61](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/scanner/adapters/block-device.ts#L61)*
 
 ___
 

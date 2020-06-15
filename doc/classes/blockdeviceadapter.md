@@ -55,7 +55,7 @@
 
 \+ **new BlockDeviceAdapter**(`__namedParameters`: object): *[BlockDeviceAdapter](blockdeviceadapter.md)*
 
-*Defined in [lib/scanner/adapters/block-device.ts:64](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/block-device.ts#L64)*
+*Defined in [lib/scanner/adapters/block-device.ts:72](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/scanner/adapters/block-device.ts#L72)*
 
 **Parameters:**
 
@@ -76,7 +76,7 @@ Name | Type | Default |
 
 • **drives**: *Map‹string, [BlockDevice](blockdevice.md)›* = new Map()
 
-*Defined in [lib/scanner/adapters/block-device.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/block-device.ts#L62)*
+*Defined in [lib/scanner/adapters/block-device.ts:70](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/scanner/adapters/block-device.ts#L70)*
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 • **includeSystemDrives**: *function*
 
-*Defined in [lib/scanner/adapters/block-device.ts:58](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/block-device.ts#L58)*
+*Defined in [lib/scanner/adapters/block-device.ts:66](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/scanner/adapters/block-device.ts#L66)*
 
 #### Type declaration:
 
@@ -96,7 +96,7 @@ ___
 
 • **oDirect**: *boolean*
 
-*Defined in [lib/scanner/adapters/block-device.ts:61](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/block-device.ts#L61)*
+*Defined in [lib/scanner/adapters/block-device.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/scanner/adapters/block-device.ts#L69)*
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 • **oWrite**: *boolean*
 
-*Defined in [lib/scanner/adapters/block-device.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/block-device.ts#L60)*
+*Defined in [lib/scanner/adapters/block-device.ts:68](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/scanner/adapters/block-device.ts#L68)*
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 • **ready**: *boolean* = false
 
-*Defined in [lib/scanner/adapters/block-device.ts:64](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/block-device.ts#L64)*
+*Defined in [lib/scanner/adapters/block-device.ts:72](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/scanner/adapters/block-device.ts#L72)*
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 • **running**: *boolean* = false
 
-*Defined in [lib/scanner/adapters/block-device.ts:63](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/block-device.ts#L63)*
+*Defined in [lib/scanner/adapters/block-device.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/scanner/adapters/block-device.ts#L71)*
 
 ___
 
@@ -128,7 +128,7 @@ ___
 
 • **unmountOnSuccess**: *boolean*
 
-*Defined in [lib/scanner/adapters/block-device.ts:59](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/block-device.ts#L59)*
+*Defined in [lib/scanner/adapters/block-device.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/scanner/adapters/block-device.ts#L67)*
 
 ___
 
@@ -223,7 +223,7 @@ ___
 
 ▸ **listDrives**(): *Promise‹Map‹string, [DrivelistDrive](../interfaces/drivelistdrive.md)››*
 
-*Defined in [lib/scanner/adapters/block-device.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/block-device.ts#L130)*
+*Defined in [lib/scanner/adapters/block-device.ts:138](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/scanner/adapters/block-device.ts#L138)*
 
 **Returns:** *Promise‹Map‹string, [DrivelistDrive](../interfaces/drivelistdrive.md)››*
 
@@ -481,7 +481,7 @@ ___
 
 ▸ **scan**(): *Promise‹void›*
 
-*Defined in [lib/scanner/adapters/block-device.ts:106](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/block-device.ts#L106)*
+*Defined in [lib/scanner/adapters/block-device.ts:114](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/scanner/adapters/block-device.ts#L114)*
 
 **Returns:** *Promise‹void›*
 
@@ -491,7 +491,7 @@ ___
 
 ▸ **scanLoop**(): *Promise‹void›*
 
-*Defined in [lib/scanner/adapters/block-device.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/block-device.ts#L95)*
+*Defined in [lib/scanner/adapters/block-device.ts:103](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/scanner/adapters/block-device.ts#L103)*
 
 **Returns:** *Promise‹void›*
 
@@ -523,7 +523,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[start](adapter.md#abstract-start)*
 
-*Defined in [lib/scanner/adapters/block-device.ts:84](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/block-device.ts#L84)*
+*Defined in [lib/scanner/adapters/block-device.ts:92](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/scanner/adapters/block-device.ts#L92)*
 
 **Returns:** *void*
 
@@ -535,7 +535,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[stop](adapter.md#abstract-stop)*
 
-*Defined in [lib/scanner/adapters/block-device.ts:89](https://github.com/balena-io-modules/etcher-sdk/blob/8c389f5/lib/scanner/adapters/block-device.ts#L89)*
+*Defined in [lib/scanner/adapters/block-device.ts:97](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/scanner/adapters/block-device.ts#L97)*
 
 **Returns:** *void*
 
