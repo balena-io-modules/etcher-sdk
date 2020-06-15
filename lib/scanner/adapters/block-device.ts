@@ -44,9 +44,17 @@ function looksLikeComputeModule(description: string): boolean {
 	return false;
 }
 
-const driveKey = (drive: $Drive) => {
-	return drive.device + '|' + drive.size + '|' + drive.description;
-};
+function driveKey(drive: $Drive) {
+	return [
+		drive.device,
+		drive.size,
+		drive.description,
+		drive.mountpoints
+			.map((m) => m.path)
+			.sort()
+			.join(','),
+	].join('|');
+}
 
 export interface DrivelistDrive extends $Drive {
 	displayName: string;
