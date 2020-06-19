@@ -51,7 +51,7 @@
 
 \+ **new SparseStreamVerifier**(`source`: [SourceDestination](sourcedestination.md), `blocks`: [BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]): *[SparseStreamVerifier](sparsestreamverifier.md)*
 
-*Defined in [lib/source-destination/source-destination.ts:208](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/source-destination/source-destination.ts#L208)*
+*Defined in [lib/source-destination/source-destination.ts:208](https://github.com/balena-io-modules/etcher-sdk/blob/d96f6c9/lib/source-destination/source-destination.ts#L208)*
 
 **Parameters:**
 
@@ -68,7 +68,7 @@ Name | Type |
 
 • **blocks**: *[BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]*
 
-*Defined in [lib/source-destination/source-destination.ts:211](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/source-destination/source-destination.ts#L211)*
+*Defined in [lib/source-destination/source-destination.ts:211](https://github.com/balena-io-modules/etcher-sdk/blob/d96f6c9/lib/source-destination/source-destination.ts#L211)*
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 • **source**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [lib/source-destination/source-destination.ts:210](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/source-destination/source-destination.ts#L210)*
+*Defined in [lib/source-destination/source-destination.ts:210](https://github.com/balena-io-modules/etcher-sdk/blob/d96f6c9/lib/source-destination/source-destination.ts#L210)*
 
 ___
 
@@ -173,7 +173,7 @@ ___
 
 *Inherited from [Verifier](verifier.md).[handleEventsAndPipe](verifier.md#protected-handleeventsandpipe)*
 
-*Defined in [lib/source-destination/source-destination.ts:157](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/source-destination/source-destination.ts#L157)*
+*Defined in [lib/source-destination/source-destination.ts:157](https://github.com/balena-io-modules/etcher-sdk/blob/d96f6c9/lib/source-destination/source-destination.ts#L157)*
 
 **Parameters:**
 
@@ -440,7 +440,7 @@ ___
 
 *Overrides [Verifier](verifier.md).[run](verifier.md#abstract-run)*
 
-*Defined in [lib/source-destination/source-destination.ts:216](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/source-destination/source-destination.ts#L216)*
+*Defined in [lib/source-destination/source-destination.ts:216](https://github.com/balena-io-modules/etcher-sdk/blob/d96f6c9/lib/source-destination/source-destination.ts#L216)*
 
 **Returns:** *Promise‹void›*
 
@@ -493,28 +493,28 @@ Name | Type |
 
 *Inherited from [Verifier](verifier.md).[progress](verifier.md#progress)*
 
-*Defined in [lib/source-destination/source-destination.ts:148](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/source-destination/source-destination.ts#L148)*
+*Defined in [lib/source-destination/source-destination.ts:148](https://github.com/balena-io-modules/etcher-sdk/blob/d96f6c9/lib/source-destination/source-destination.ts#L148)*
 
 ###  averageSpeed
 
 • **averageSpeed**: *number* = 0
 
-*Defined in [lib/source-destination/source-destination.ts:152](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/source-destination/source-destination.ts#L152)*
+*Defined in [lib/source-destination/source-destination.ts:152](https://github.com/balena-io-modules/etcher-sdk/blob/d96f6c9/lib/source-destination/source-destination.ts#L152)*
 
 ###  bytes
 
 • **bytes**: *number* = 0
 
-*Defined in [lib/source-destination/source-destination.ts:149](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/source-destination/source-destination.ts#L149)*
+*Defined in [lib/source-destination/source-destination.ts:149](https://github.com/balena-io-modules/etcher-sdk/blob/d96f6c9/lib/source-destination/source-destination.ts#L149)*
 
 ###  position
 
 • **position**: *number* = 0
 
-*Defined in [lib/source-destination/source-destination.ts:150](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/source-destination/source-destination.ts#L150)*
+*Defined in [lib/source-destination/source-destination.ts:150](https://github.com/balena-io-modules/etcher-sdk/blob/d96f6c9/lib/source-destination/source-destination.ts#L150)*
 
 ###  speed
 
 • **speed**: *number* = 0
 
-*Defined in [lib/source-destination/source-destination.ts:151](https://github.com/balena-io-modules/etcher-sdk/blob/4b5b1b3/lib/source-destination/source-destination.ts#L151)*
+*Defined in [lib/source-destination/source-destination.ts:151](https://github.com/balena-io-modules/etcher-sdk/blob/d96f6c9/lib/source-destination/source-destination.ts#L151)*
