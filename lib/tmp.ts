@@ -107,5 +107,10 @@ export function tmpFileDisposer(keepOpen = true): Disposer<TmpFileResult> {
 }
 
 export async function freeSpace() {
-	return (await checkDiskSpace(TMP_DIR)).free;
+	try {
+		return (await checkDiskSpace(TMP_DIR)).free;
+	} catch (error) {
+		console.warn(`Could not check free disk space in "${TMP_DIR}": ${error}`);
+		return 0;
+	}
 }
