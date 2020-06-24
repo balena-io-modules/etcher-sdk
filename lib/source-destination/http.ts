@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 // Always use the node adapter (even in a browser)
 // @ts-ignore
 import * as axiosNodeAdapter from 'axios/lib/adapters/http';
@@ -56,7 +56,18 @@ export class Http extends SourceDestination {
 
 	private async getInfo() {
 		try {
-			const response = await axios({ method: 'head', url: this.url });
+			let response: AxiosResponse;
+			try {
+				response = await axios({ method: 'head', url: this.url });
+			} catch (error) {
+				// We use GET instead of HEAD as some servers will respond with a 403 to HEAD requests
+				response = await axios({
+					method: 'get',
+					url: this.url,
+					responseType: 'stream',
+				});
+				response.data.destroy();
+			}
 			this.redirectUrl = response.request.res.responseUrl;
 			this.size = parseInt(response.headers['content-length'], 10);
 			this.acceptsRange = response.headers['accept-ranges'] === 'bytes';
