@@ -15,6 +15,7 @@
  */
 
 import { Disk } from 'file-disk';
+import { promises as fs } from 'fs';
 import { Argv } from 'yargs';
 
 import { scanner, sourceDestination } from '../lib';
@@ -27,7 +28,45 @@ import {
 	wrapper,
 } from './utils';
 
-const main = async ({
+const FILE_PROTOCOL = 'file://';
+
+async function openUrl(
+	url: string,
+	deviceScanner: scanner.Scanner,
+	write: boolean,
+	direct = true,
+): Promise<
+	| sourceDestination.Http
+	| sourceDestination.File
+	| sourceDestination.BlockDevice
+> {
+	if (url.startsWith('http://') || url.startsWith('https://')) {
+		return new sourceDestination.Http({ url });
+	}
+	if (url.startsWith(FILE_PROTOCOL)) {
+		url = url.slice(FILE_PROTOCOL.length);
+	}
+	const stats = await fs.stat(url);
+	if (stats.isBlockDevice()) {
+		const device = Array.from(deviceScanner.drives.values()).find((d) => {
+			return d.device === url || d.devicePath === url;
+		});
+		if (
+			device !== undefined &&
+			device instanceof sourceDestination.BlockDevice
+		) {
+			device.oWrite = write;
+			device.oDirect = direct;
+			return device;
+		}
+	}
+	if (!write && !stats.isFile()) {
+		throw new Error(`Invalid url for reading: ${url}`);
+	}
+	return new sourceDestination.File({ path: url, write });
+}
+
+async function main({
 	sourceImage,
 	devices,
 	verify,
@@ -43,7 +82,7 @@ const main = async ({
 	decompressFirst: boolean;
 	config: string;
 	numBuffers: number;
-}) => {
+}) {
 	const adapters = [
 		new scanner.adapters.BlockDeviceAdapter({
 			includeSystemDrives: () => false,
@@ -59,21 +98,21 @@ const main = async ({
 	await new Promise((resolve) => {
 		deviceScanner.on('ready', resolve);
 	});
-	const source: sourceDestination.SourceDestination = new sourceDestination.File(
-		{
-			path: sourceImage,
-		},
-	);
 	let configure: ConfigureFunction | undefined;
 	if (config !== undefined) {
 		configure = async (disk: Disk) => {
 			await legacyConfigure(disk, { config: await readJsonFile(config) });
 		};
 	}
-	const destinationDrives = Array.from(deviceScanner.drives.values()).filter(
-		(drive) => {
-			return devices.includes(drive.device!);
-		},
+	const destinationDrives = await Promise.all(
+		devices.map((d) => openUrl(d, deviceScanner, true)),
+	);
+	const source = await openUrl(
+		sourceImage,
+		deviceScanner,
+		false,
+		// ConfiguredSource will not work with O_DIRECT
+		!trim && configure === undefined,
 	);
 	deviceScanner.stop();
 	await pipeSourceToDestinationsWithProgressBar({
@@ -85,7 +124,7 @@ const main = async ({
 		decompressFirst,
 		configure,
 	});
-};
+}
 
 // tslint:disable-next-line: no-var-requires
 const argv = require('yargs').command(

@@ -49,7 +49,7 @@ const readEndMarker = Buffer.from(`not the correct data ${Math.random()}`);
 
 export class File extends SourceDestination {
 	public readonly path: string;
-	public readonly oWrite: boolean;
+	public oWrite: boolean;
 	protected fileHandle: fs.FileHandle;
 
 	constructor({ path, write = false }: { path: string; write?: boolean }) {
