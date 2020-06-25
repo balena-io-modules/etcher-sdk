@@ -31,6 +31,7 @@ import { SparseFilterStream } from '../../sparse-stream/sparse-filter-stream';
 import { SparseReadStream } from '../../sparse-stream/sparse-read-stream';
 
 import { Metadata } from '../metadata';
+import { BlockDevice } from '../block-device';
 import {
 	CreateReadStreamOptions,
 	CreateSparseReadStreamOptions,
@@ -52,6 +53,12 @@ export class SourceDisk extends Disk {
 			true, // recordReads
 			true, // discardIsZero
 		);
+		if (source instanceof BlockDevice && source.oDirect) {
+			// Reads into non aligned buffers won't work in partitioninfo and file-disk
+			throw new Error(
+				"Can't create a SourceDisk from a BlockDevice opened with O_DIRECT",
+			);
+		}
 	}
 
 	protected async _getCapacity(): Promise<number> {

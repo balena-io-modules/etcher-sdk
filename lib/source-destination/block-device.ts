@@ -45,7 +45,7 @@ const WIN32_FIRST_BYTES_TO_KEEP = 64 * 1024;
 export class BlockDevice extends File implements AdapterSourceDestination {
 	private drive: DrivelistDrive;
 	private unmountOnSuccess: boolean;
-	public readonly oDirect: boolean;
+	public oDirect: boolean;
 	public emitsProgress = false;
 	public readonly alignment: number;
 
@@ -127,6 +127,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 	protected async _getMetadata(): Promise<Metadata> {
 		return {
 			size: this.drive.size || undefined,
+			name: this.drive.device,
 		};
 	}
 

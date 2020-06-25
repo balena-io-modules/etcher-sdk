@@ -359,6 +359,17 @@ export async function pipeSourceToDestinations({
 	return { sourceMetadata, failures, bytesWritten: state.bytesWritten || 0 };
 }
 
+function notUndefined<T>(x: T | undefined): x is T {
+	return x !== undefined;
+}
+
+function getAlignment(...devices: SourceDestination[]): number | undefined {
+	const alignments = devices.map((d) => d.getAlignment()).filter(notUndefined);
+	if (alignments.length) {
+		return Math.max(...alignments);
+	}
+}
+
 async function pipeRegularSourceToDestination(
 	source: SourceDestination,
 	sourceMetadata: Metadata,
@@ -373,7 +384,7 @@ async function pipeRegularSourceToDestination(
 	let lastPosition = 0;
 	const emitSourceProgress =
 		sourceMetadata.size === undefined || sourceMetadata.isSizeEstimated;
-	const alignment = destination.getAlignment();
+	const alignment = getAlignment(source, destination);
 	const highWaterMark = alignment === undefined ? undefined : numBuffers - 1;
 	const [sourceStream, destinationStream] = await Promise.all([
 		source.createReadStream({
@@ -473,7 +484,7 @@ async function pipeSparseSourceToDestination(
 	onProgress: (progress: ProgressEvent) => void,
 	onRootStreamProgress: (progress: ProgressEvent) => void,
 ): Promise<void> {
-	const alignment = destination.getAlignment();
+	const alignment = getAlignment(source, destination);
 	const highWaterMark = alignment === undefined ? undefined : numBuffers - 1;
 	const [sourceStream, destinationStream] = await Promise.all([
 		source.createSparseReadStream({

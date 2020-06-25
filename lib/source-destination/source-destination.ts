@@ -442,6 +442,7 @@ export class SourceDestination extends EventEmitter {
 		try {
 			stream = await this.createReadStream({
 				end: 263, // TODO: constant
+				alignment: this.getAlignment(),
 			});
 		} catch (error) {
 			if (error instanceof NotCapable) {
@@ -496,6 +497,7 @@ export class SourceDestination extends EventEmitter {
 	public async getPartitionTable(): Promise<GetPartitionsResult | undefined> {
 		const stream = await this.createReadStream({
 			end: 34 * 512, // GPT partition table size
+			alignment: this.getAlignment(),
 		});
 		const buffer = await streamToBuffer(stream);
 		try {

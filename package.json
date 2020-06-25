@@ -64,7 +64,7 @@
     "mountutils": "^1.3.18",
     "node-raspberrypi-usbboot": "^0.2.4",
     "outdent": "^0.7.0",
-    "partitioninfo": "^5.3.4",
+    "partitioninfo": "^5.3.5",
     "resin-image-fs": "^5.0.8",
     "rwmutex": "^1.0.0",
     "udif": "^0.17.0",
