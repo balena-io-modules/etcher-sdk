@@ -15,7 +15,8 @@
  */
 
 import { Disk } from 'file-disk';
-import { promises as fs } from 'fs';
+import { Stats, promises as fs } from 'fs';
+import { platform } from 'os';
 import { Argv } from 'yargs';
 
 import { scanner, sourceDestination } from '../lib';
@@ -46,22 +47,34 @@ async function openUrl(
 	if (url.startsWith(FILE_PROTOCOL)) {
 		url = url.slice(FILE_PROTOCOL.length);
 	}
-	const stats = await fs.stat(url);
-	if (stats.isBlockDevice()) {
-		const device = Array.from(deviceScanner.drives.values()).find((d) => {
-			return d.device === url || d.devicePath === url;
-		});
-		if (
-			device !== undefined &&
-			device instanceof sourceDestination.BlockDevice
-		) {
-			device.oWrite = write;
-			device.oDirect = direct;
-			return device;
+	let stats: Stats | undefined;
+	try {
+		stats = await fs.stat(url);
+	} catch (error) {
+		if (error.code !== 'ENOENT') {
+			throw error;
 		}
 	}
-	if (!write && !stats.isFile()) {
-		throw new Error(`Invalid url for reading: ${url}`);
+	if (stats !== undefined) {
+		if (
+			stats.isBlockDevice() ||
+			(stats.isCharacterDevice() && platform() === 'darwin')
+		) {
+			const device = Array.from(deviceScanner.drives.values()).find((d) => {
+				return d.device === url || d.devicePath === url || d.raw === url;
+			});
+			if (
+				device !== undefined &&
+				device instanceof sourceDestination.BlockDevice
+			) {
+				device.oWrite = write;
+				device.oDirect = direct;
+				return device;
+			}
+		}
+		if (!write && !stats.isFile()) {
+			throw new Error(`Invalid url for reading: ${url}`);
+		}
 	}
 	return new sourceDestination.File({ path: url, write });
 }
