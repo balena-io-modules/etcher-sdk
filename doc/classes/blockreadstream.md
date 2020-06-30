@@ -21,7 +21,9 @@
 ### Properties
 
 * [alignedReadableState](blockreadstream.md#private-alignedreadablestate)
+* [alignment](blockreadstream.md#private-alignment)
 * [bytesRead](blockreadstream.md#private-bytesread)
+* [chunkSize](blockreadstream.md#private-chunksize)
 * [end](blockreadstream.md#private-end)
 * [maxRetries](blockreadstream.md#private-maxretries)
 * [readable](blockreadstream.md#readable)
@@ -72,7 +74,7 @@
 
 *Overrides void*
 
-*Defined in [lib/block-read-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-read-stream.ts#L32)*
+*Defined in [lib/block-read-stream.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-read-stream.ts#L37)*
 
 **Parameters:**
 
@@ -80,7 +82,7 @@
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`alignment` | number | - |
+`alignment` | undefined &#124; number | - |
 `chunkSize` | number | CHUNK_SIZE |
 `end` | number | Infinity |
 `maxRetries` | number | 5 |
@@ -96,7 +98,15 @@ Name | Type | Default |
 
 • **alignedReadableState**: *[AlignedReadableState](alignedreadablestate.md)*
 
-*Defined in [lib/block-read-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-read-stream.ts#L29)*
+*Defined in [lib/block-read-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-read-stream.ts#L33)*
+
+___
+
+### `Private` alignment
+
+• **alignment**: *number | undefined*
+
+*Defined in [lib/block-read-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-read-stream.ts#L32)*
 
 ___
 
@@ -104,7 +114,15 @@ ___
 
 • **bytesRead**: *number* = 0
 
-*Defined in [lib/block-read-stream.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-read-stream.ts#L30)*
+*Defined in [lib/block-read-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-read-stream.ts#L34)*
+
+___
+
+### `Private` chunkSize
+
+• **chunkSize**: *number*
+
+*Defined in [lib/block-read-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-read-stream.ts#L36)*
 
 ___
 
@@ -112,7 +130,7 @@ ___
 
 • **end**: *number*
 
-*Defined in [lib/block-read-stream.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-read-stream.ts#L31)*
+*Defined in [lib/block-read-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-read-stream.ts#L35)*
 
 ___
 
@@ -120,7 +138,7 @@ ___
 
 • **maxRetries**: *number*
 
-*Defined in [lib/block-read-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-read-stream.ts#L32)*
+*Defined in [lib/block-read-stream.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-read-stream.ts#L37)*
 
 ___
 
@@ -158,7 +176,7 @@ ___
 
 • **source**: *[File](file.md)*
 
-*Defined in [lib/block-read-stream.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-read-stream.ts#L28)*
+*Defined in [lib/block-read-stream.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-read-stream.ts#L31)*
 
 ___
 
@@ -216,7 +234,7 @@ ___
 
 *Overrides [SparseFilterStream](sparsefilterstream.md).[_read](sparsefilterstream.md#_read)*
 
-*Defined in [lib/block-read-stream.ts:88](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-read-stream.ts#L88)*
+*Defined in [lib/block-read-stream.ts:97](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-read-stream.ts#L97)*
 
 **Returns:** *Promise‹void›*
 
@@ -1389,7 +1407,7 @@ ___
 
 ▸ **tryRead**(`buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer)): *Promise‹ReadResult›*
 
-*Defined in [lib/block-read-stream.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-read-stream.ts#L67)*
+*Defined in [lib/block-read-stream.ts:76](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-read-stream.ts#L76)*
 
 **Parameters:**
 
