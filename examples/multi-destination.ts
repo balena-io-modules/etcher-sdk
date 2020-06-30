@@ -47,6 +47,23 @@ async function openUrl(
 	if (url.startsWith(FILE_PROTOCOL)) {
 		url = url.slice(FILE_PROTOCOL.length);
 	}
+	const plat = platform();
+	const lowercaseUrl = url.toLowerCase();
+	if (plat === 'win32' && lowercaseUrl.startsWith('\\\\.\\physicaldrive')) {
+		// fs.stat will fail on \\.\PhysicalDriveN on windows
+		const device = Array.from(deviceScanner.drives.values()).find((d) => {
+			return d.device !== null && d.device.toLowerCase() === lowercaseUrl;
+		});
+		if (
+			device !== undefined &&
+			device instanceof sourceDestination.BlockDevice
+		) {
+			device.oWrite = write;
+			device.oDirect = direct;
+			return device;
+		}
+		throw new Error(`Could not open ${url}`);
+	}
 	let stats: Stats | undefined;
 	try {
 		stats = await fs.stat(url);
@@ -58,7 +75,7 @@ async function openUrl(
 	if (stats !== undefined) {
 		if (
 			stats.isBlockDevice() ||
-			(stats.isCharacterDevice() && platform() === 'darwin')
+			(stats.isCharacterDevice() && plat === 'darwin')
 		) {
 			const device = Array.from(deviceScanner.drives.values()).find((d) => {
 				return d.device === url || d.devicePath === url || d.raw === url;
