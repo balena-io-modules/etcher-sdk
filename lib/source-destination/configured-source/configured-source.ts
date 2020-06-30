@@ -132,6 +132,14 @@ export class ConfiguredSource extends SourceSource {
 	public async getBlocks(): Promise<BlocksWithChecksum[]> {
 		// Align ranges to this.chunkSize
 		const blocks = await this.disk.getRanges(this.chunkSize);
+		if (blocks.length) {
+			const lastBlock = blocks[blocks.length - 1];
+			const metadata = await this.source.getMetadata();
+			const overflow = lastBlock.offset + lastBlock.length - metadata.size!;
+			if (overflow > 0) {
+				lastBlock.length -= overflow;
+			}
+		}
 		return blocks.map((block) => ({ blocks: [block] }));
 	}
 

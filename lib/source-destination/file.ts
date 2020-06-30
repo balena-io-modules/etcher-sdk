@@ -150,6 +150,9 @@ export class File extends SourceDestination {
 		numBuffers,
 	}: CreateReadStreamOptions = {}): Promise<NodeJS.ReadableStream> {
 		await this.open();
+		const metadata = await this.getMetadata();
+		const lastByte = metadata.size! - 1;
+		end = end === undefined ? lastByte : Math.min(end, lastByte);
 		if (emitProgress) {
 			return new ProgressBlockReadStream({
 				source: this,
