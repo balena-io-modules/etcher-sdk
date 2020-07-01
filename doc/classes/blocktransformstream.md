@@ -88,7 +88,7 @@
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [lib/block-transform-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-transform-stream.ts#L29)*
+*Defined in [lib/block-transform-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L29)*
 
 **Parameters:**
 
@@ -108,7 +108,7 @@ Name | Type | Default |
 
 • **alignedReadableState**: *[AlignedReadableState](alignedreadablestate.md)*
 
-*Defined in [lib/block-transform-stream.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-transform-stream.ts#L27)*
+*Defined in [lib/block-transform-stream.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L27)*
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 • **bytesRead**: *number* = 0
 
-*Defined in [lib/block-transform-stream.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-transform-stream.ts#L24)*
+*Defined in [lib/block-transform-stream.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L24)*
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 • **bytesWritten**: *number* = 0
 
-*Defined in [lib/block-transform-stream.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-transform-stream.ts#L25)*
+*Defined in [lib/block-transform-stream.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L25)*
 
 ___
 
@@ -132,7 +132,7 @@ ___
 
 • **chunkSize**: *number*
 
-*Defined in [lib/block-transform-stream.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-transform-stream.ts#L26)*
+*Defined in [lib/block-transform-stream.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L26)*
 
 ___
 
@@ -140,7 +140,7 @@ ___
 
 • **inputBuffers**: *[Buffer](../interfaces/alignedlockablebuffer.md#buffer)[]* = []
 
-*Defined in [lib/block-transform-stream.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-transform-stream.ts#L28)*
+*Defined in [lib/block-transform-stream.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L28)*
 
 ___
 
@@ -148,7 +148,7 @@ ___
 
 • **inputBytes**: *number* = 0
 
-*Defined in [lib/block-transform-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-transform-stream.ts#L29)*
+*Defined in [lib/block-transform-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L29)*
 
 ___
 
@@ -292,7 +292,7 @@ ___
 
 *Overrides [SparseFilterStream](sparsefilterstream.md).[_flush](sparsefilterstream.md#_flush)*
 
-*Defined in [lib/block-transform-stream.ts:89](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-transform-stream.ts#L89)*
+*Defined in [lib/block-transform-stream.ts:89](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L89)*
 
 **Parameters:**
 
@@ -334,7 +334,7 @@ ___
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[_transform](../interfaces/sourcetransform.md#_transform)*
 
-*Defined in [lib/block-transform-stream.ts:78](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-transform-stream.ts#L78)*
+*Defined in [lib/block-transform-stream.ts:78](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L78)*
 
 **Parameters:**
 
@@ -1757,7 +1757,7 @@ ___
 
 ▸ **writeBuffers**(`flush`: boolean): *Promise‹void›*
 
-*Defined in [lib/block-transform-stream.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-transform-stream.ts#L49)*
+*Defined in [lib/block-transform-stream.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L49)*
 
 **Parameters:**
 
@@ -1773,7 +1773,7 @@ ___
 
 ▸ **alignIfNeeded**(`stream`: ReadableStream, `alignment?`: undefined | number, `numBuffers?`: undefined | number): *ReadableStream‹› | [BlockTransformStream](blocktransformstream.md)‹›*
 
-*Defined in [lib/block-transform-stream.ts:93](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/block-transform-stream.ts#L93)*
+*Defined in [lib/block-transform-stream.ts:93](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L93)*
 
 **Parameters:**
 

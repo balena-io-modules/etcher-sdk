@@ -15,7 +15,8 @@
  */
 
 import { Disk } from 'file-disk';
-import { promises as fs } from 'fs';
+import { Stats, promises as fs } from 'fs';
+import { platform } from 'os';
 import { Argv } from 'yargs';
 
 import { scanner, sourceDestination } from '../lib';
@@ -46,10 +47,12 @@ async function openUrl(
 	if (url.startsWith(FILE_PROTOCOL)) {
 		url = url.slice(FILE_PROTOCOL.length);
 	}
-	const stats = await fs.stat(url);
-	if (stats.isBlockDevice()) {
+	const plat = platform();
+	const lowercaseUrl = url.toLowerCase();
+	if (plat === 'win32' && lowercaseUrl.startsWith('\\\\.\\physicaldrive')) {
+		// fs.stat will fail on \\.\PhysicalDriveN on windows
 		const device = Array.from(deviceScanner.drives.values()).find((d) => {
-			return d.device === url || d.devicePath === url;
+			return d.device !== null && d.device.toLowerCase() === lowercaseUrl;
 		});
 		if (
 			device !== undefined &&
@@ -59,9 +62,36 @@ async function openUrl(
 			device.oDirect = direct;
 			return device;
 		}
+		throw new Error(`Could not open ${url}`);
 	}
-	if (!write && !stats.isFile()) {
-		throw new Error(`Invalid url for reading: ${url}`);
+	let stats: Stats | undefined;
+	try {
+		stats = await fs.stat(url);
+	} catch (error) {
+		if (error.code !== 'ENOENT') {
+			throw error;
+		}
+	}
+	if (stats !== undefined) {
+		if (
+			stats.isBlockDevice() ||
+			(stats.isCharacterDevice() && plat === 'darwin')
+		) {
+			const device = Array.from(deviceScanner.drives.values()).find((d) => {
+				return d.device === url || d.devicePath === url || d.raw === url;
+			});
+			if (
+				device !== undefined &&
+				device instanceof sourceDestination.BlockDevice
+			) {
+				device.oWrite = write;
+				device.oDirect = direct;
+				return device;
+			}
+		}
+		if (!write && !stats.isFile()) {
+			throw new Error(`Invalid url for reading: ${url}`);
+		}
 	}
 	return new sourceDestination.File({ path: url, write });
 }

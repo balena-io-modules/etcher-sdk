@@ -402,7 +402,7 @@ ___
 
 ▸ **start**(): *void*
 
-*Defined in [lib/scanner/adapters/adapter.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/scanner/adapters/adapter.ts#L34)*
+*Defined in [lib/scanner/adapters/adapter.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/scanner/adapters/adapter.ts#L34)*
 
 **Returns:** *void*
 
@@ -412,7 +412,7 @@ ___
 
 ▸ **stop**(): *void*
 
-*Defined in [lib/scanner/adapters/adapter.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/5d3d84c/lib/scanner/adapters/adapter.ts#L35)*
+*Defined in [lib/scanner/adapters/adapter.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/scanner/adapters/adapter.ts#L35)*
 
 **Returns:** *void*
 

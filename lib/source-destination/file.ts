@@ -15,7 +15,7 @@
  */
 
 import { ReadResult, WriteResult } from 'file-disk';
-import { constants, promises as fs, ReadStream, WriteStream } from 'fs';
+import { constants, promises as fs, WriteStream } from 'fs';
 import { basename } from 'path';
 
 import { Metadata } from './metadata';
@@ -26,17 +26,10 @@ import {
 } from './source-destination';
 
 import { BlockReadStream, ProgressBlockReadStream } from '../block-read-stream';
-import { CHUNK_SIZE } from '../constants';
 import {
 	ProgressSparseWriteStream,
 	SparseWriteStream,
 } from '../sparse-stream/sparse-write-stream';
-
-export const ProgressReadStream = makeClassEmitProgressEvents(
-	ReadStream,
-	'bytesRead',
-	'bytesRead',
-);
 
 export const ProgressWriteStream = makeClassEmitProgressEvents(
 	WriteStream,
@@ -149,17 +142,6 @@ export class File extends SourceDestination {
 		return this.fileHandle.write(buffer, bufferOffset, length, fileOffset);
 	}
 
-	private streamOptions(start?: number, end?: number) {
-		// TODO: pass fs: SourceDestinationFs(this) instead of fd (only works with node >= v13.6.0)
-		return {
-			fd: this.fileHandle.fd,
-			highWaterMark: CHUNK_SIZE,
-			autoClose: false,
-			start,
-			end,
-		};
-	}
-
 	public async createReadStream({
 		emitProgress = false,
 		start = 0,
@@ -168,33 +150,25 @@ export class File extends SourceDestination {
 		numBuffers,
 	}: CreateReadStreamOptions = {}): Promise<NodeJS.ReadableStream> {
 		await this.open();
-		if (alignment !== undefined) {
-			if (emitProgress) {
-				return new ProgressBlockReadStream({
-					source: this,
-					alignment,
-					start,
-					end,
-					numBuffers,
-				});
-			} else {
-				return new BlockReadStream({
-					source: this,
-					alignment,
-					start,
-					end,
-					numBuffers,
-				});
-			}
+		const metadata = await this.getMetadata();
+		const lastByte = metadata.size! - 1;
+		end = end === undefined ? lastByte : Math.min(end, lastByte);
+		if (emitProgress) {
+			return new ProgressBlockReadStream({
+				source: this,
+				alignment,
+				start,
+				end,
+				numBuffers,
+			});
 		} else {
-			const options = this.streamOptions(start, end);
-			if (emitProgress) {
-				// @ts-ignore: @types/node is wrong about fs.WriteStream constructor: it takes 2 arguments, the first one is the file path
-				return new ProgressReadStream(null, options);
-			} else {
-				// @ts-ignore: @types/node is wrong about fs.WriteStream constructor: it takes 2 arguments, the first one is the file path
-				return new ReadStream(null, options);
-			}
+			return new BlockReadStream({
+				source: this,
+				alignment,
+				start,
+				end,
+				numBuffers,
+			});
 		}
 	}
 
