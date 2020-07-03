@@ -24,6 +24,7 @@ import { BlocksWithChecksum, SparseReadable } from '../sparse-stream/shared';
 import { SparseWritable } from '../sparse-stream/shared';
 import { every, difference, minBy } from '../utils';
 import { BlockDevice } from './block-device';
+import { getRootStream } from './compressed-source';
 import { ProgressEvent } from './progress';
 import {
 	CreateReadStreamOptions,
@@ -31,6 +32,7 @@ import {
 	SourceDestination,
 	Verifier,
 } from './source-destination';
+import { TcpDestination, RawZstdStream } from './tcp';
 
 function isntNull<T>(x: T | null): x is Exclude<T, null> {
 	return x !== null;
@@ -294,30 +296,43 @@ export class MultiDestination extends SourceDestination {
 			}
 		}
 
-		await Promise.all(
-			Array.from(this.activeDestinations).map(async (destination) => {
-				const stream = await destination[methodName](...args);
-				progresses.set(stream, null);
-				stream.on('progress', (progressEvent: ProgressEvent) => {
-					progresses.set(stream, progressEvent);
-					if (interval === undefined) {
-						interval = setInterval(emitProgress, PROGRESS_EMISSION_INTERVAL);
-					}
-				});
-				stream.on('error', (error: Error) => {
-					this.destinationError(destination, error, passthrough);
-					oneStreamFinished(stream);
-				});
-				stream.on('finish', oneStreamFinished.bind(null, stream));
-				passthrough.pipe(stream);
-			}),
-		);
-
-		passthrough.on('pipe', () => {
+		passthrough.on('pipe', async (sourceStream: NodeJS.ReadableStream) => {
+			const rootStream = getRootStream(sourceStream);
+			console.log('source stream', rootStream);
 			// Handle the special case where we have zero destination streams
 			if (this.activeDestinations.size === 0) {
 				passthrough.emit('done');
 			}
+
+			await Promise.all(
+				Array.from(this.activeDestinations).map(async (destination: SourceDestination) => {
+					const dontRecompress =
+						rootStream instanceof RawZstdStream &&
+						destination instanceof TcpDestination;
+					if (dontRecompress) {
+						args[0] = args[0] || {};
+						args[0].compress = false;
+					}
+					const stream = await destination[methodName](...args);
+					progresses.set(stream, null);
+					stream.on('progress', (progressEvent: ProgressEvent) => {
+						progresses.set(stream, progressEvent);
+						if (interval === undefined) {
+							interval = setInterval(emitProgress, PROGRESS_EMISSION_INTERVAL);
+						}
+					});
+					stream.on('error', (error: Error) => {
+						this.destinationError(destination, error, passthrough);
+						oneStreamFinished(stream);
+					});
+					stream.on('finish', oneStreamFinished.bind(null, stream));
+					if (dontRecompress) {
+						rootStream.pipe(stream);
+					} else {
+						passthrough.pipe(stream);
+					}
+				}),
+			);
 		});
 		return passthrough;
 	}

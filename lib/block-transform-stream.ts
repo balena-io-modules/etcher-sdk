@@ -24,6 +24,7 @@ import { CHUNK_SIZE } from './constants';
 import { asCallback } from './utils';
 
 export class BlockTransformStream extends Transform {
+	public sourceStream: NodeJS.ReadableStream;
 	public bytesRead = 0;
 	public bytesWritten = 0;
 	private alignedReadableState: AlignedReadableState;
@@ -46,6 +47,9 @@ export class BlockTransformStream extends Transform {
 			alignment,
 			numBuffers,
 		);
+		this.on('pipe', (sourceStream: NodeJS.ReadableStream) => {
+			this.sourceStream = sourceStream;
+		});
 	}
 
 	private __flush() {

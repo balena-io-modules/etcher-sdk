@@ -369,13 +369,15 @@ export class SourceDestination extends EventEmitter {
 	}
 
 	public async createWriteStream(
-		_options: { highWaterMark?: number } = {},
+		// compress is only used in TcpDestination
+		_options: { highWaterMark?: number; compress?: boolean } = {},
 	): Promise<NodeJS.WritableStream> {
 		throw new NotCapable();
 	}
 
 	public async createSparseWriteStream(
-		_options: { highWaterMark?: number } = {},
+		// compress is only used in TcpDestination
+		_options: { highWaterMark?: number; compress?: boolean } = {},
 	): Promise<SparseWritable> {
 		throw new NotCapable();
 	}

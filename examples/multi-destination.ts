@@ -19,6 +19,7 @@ import { Stats, promises as fs } from 'fs';
 import { platform } from 'os';
 import { Argv } from 'yargs';
 
+import { TcpDestination, TcpSource } from '../lib/source-destination/tcp';
 import { scanner, sourceDestination } from '../lib';
 import { configure as legacyConfigure } from '../lib/source-destination/configured-source/configure';
 import { ConfigureFunction } from '../lib/source-destination/configured-source/configured-source';
@@ -40,7 +41,16 @@ async function openUrl(
 	| sourceDestination.Http
 	| sourceDestination.File
 	| sourceDestination.BlockDevice
+	| TcpDestination
+	| TcpSource
 > {
+	if (url.startsWith('tcp://')) {
+		const { hostname: host, port } = new URL(url);
+		const portNumber = parseInt(port, 10);
+		return write
+			? new TcpDestination(host, portNumber)
+			: new TcpSource(host, portNumber);
+	}
 	if (url.startsWith('http://') || url.startsWith('https://')) {
 		return new sourceDestination.Http({ url });
 	}
