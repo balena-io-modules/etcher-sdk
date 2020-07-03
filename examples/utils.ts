@@ -100,9 +100,9 @@ function createProgressBar(
 		spinner.start();
 		function update(progress: multiWrite.MultiDestinationProgress) {
 			spinner.setSpinnerTitle(
-				`${title}, ${progress.bytes} bytes, ${bytesToMebibytes(
+				`${title}, ${progress.bytes} bytes, current: ${bytesToMebibytes(
 					progress.speed,
-				)} MiB/s`,
+				)} MiB/s, average: ${bytesToMebibytes(progress.averageSpeed)}`,
 			);
 		}
 		return [spinner, update];
