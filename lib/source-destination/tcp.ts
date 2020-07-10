@@ -1,9 +1,52 @@
+// @ts-ignore
+import { BufferList } from 'bl';
 import { fromCallback } from 'bluebird';
 import { ChildProcess, spawn } from 'child_process';
+import * as MessagePack from 'msgpack5';
 import { createServer, Server, Socket } from 'net';
 import { PassThrough, Duplex, pipeline } from 'stream';
 
+import { CHUNK_SIZE } from '../constants';
+import {
+	// @ts-ignore
+	SparseStreamChunk,
+	SparseReadable,
+	SparseWritable,
+} from '../sparse-stream/shared';
+import { SparseTransformStream } from '../sparse-stream/sparse-transform-stream';
+
 import { SourceDestination } from './source-destination';
+
+const msgpack = MessagePack();
+
+// function isSparseStreamChunk(chunk: any) {
+// 	// We don't encode anything else
+// 	console.log('checking', chunk);
+// 	return true;
+// }
+//
+// const TYPE = 0x42;
+//
+// msgpack.registerEncoder(
+// 	isSparseStreamChunk,
+// 	(chunk: SparseStreamChunk): BufferList => {
+// 		const header = Buffer.allocUnsafe(1);
+// 		header.writeInt8(TYPE, 0);
+// 		const bl = new BufferList();
+// 		bl.append(header);
+// 		bl.append(msgpack.encode([chunk.position, chunk.buffer]));
+// 		return bl;
+// 	},
+// );
+//
+// msgpack.registerDecoder(
+// 	TYPE,
+// 	(encoded: Buffer): SparseStreamChunk => {
+// 		console.log('decoding', encoded);
+// 		const [position, buffer] = msgpack.decode(encoded);
+// 		return { position, buffer };
+// 	},
+// );
 
 class ProcessTransform extends Duplex {
 	private cp: ChildProcess;
@@ -77,8 +120,36 @@ export class TcpSource extends SourceDestination {
 		return true;
 	}
 
+	public async canCreateSparseReadStream(): Promise<boolean> {
+		// TODO: this depends on the other side of the connection
+		return true;
+	}
+
 	public async createReadStream(): Promise<NodeJS.ReadableStream> {
 		return this.passthrough;
+	}
+
+	public async createSparseReadStream({
+		alignment = 512,
+		numBuffers,
+	}: {
+		alignment?: number;
+		numBuffers?: number;
+	} = {}): Promise<SparseReadable> {
+		const decoder = msgpack.decoder();
+		const sparseTransform = new SparseTransformStream({
+			// TODO
+			blocks: [],
+			chunkSize: CHUNK_SIZE,
+			alignment: alignment || 512,
+			numBuffers,
+		});
+		pipeline(this.passthrough, decoder, sparseTransform, noop);
+		// TODO
+		// @ts-ignore
+		decoder.blocks = [];
+		// @ts-ignore
+		return sparseTransform;
 	}
 
 	protected async _open(): Promise<void> {
@@ -116,12 +187,13 @@ export class TcpDestination extends SourceDestination {
 		return true;
 	}
 
-	public async createWriteStream({
-		compress = true,
-	}: {
-		compress?: boolean;
-		highWaterMark?: number;
-	} = {}): Promise<NodeJS.WritableStream> {
+	public async canCreateSparseWriteStream(): Promise<boolean> {
+		return true;
+	}
+
+	private async createSocket(
+		compress: boolean,
+	): Promise<NodeJS.WritableStream> {
 		const sock: Socket = await new Promise((resolve, reject) => {
 			const socket = new Socket();
 			socket.setNoDelay(true);
@@ -137,6 +209,34 @@ export class TcpDestination extends SourceDestination {
 			return compressor;
 		} else {
 			return sock;
+		}
+	}
+
+	public async createWriteStream({
+		compress = true,
+	}: {
+		compress?: boolean;
+		highWaterMark?: number;
+	} = {}): Promise<NodeJS.WritableStream> {
+		return await this.createSocket(compress);
+	}
+
+	public async createSparseWriteStream({
+		compress = true,
+	}: {
+		compress?: boolean;
+		highWaterMark?: number;
+	} = {}): Promise<SparseWritable> {
+		const socket = await this.createSocket(compress);
+		// TODO: compress actually means encode and compress
+		if (!compress) {
+			// TODO
+			// @ts-ignore
+			return socket;
+		} else {
+			const encoder = msgpack.encoder();
+			pipeline(encoder, socket, noop);
+			return encoder;
 		}
 	}
 }
