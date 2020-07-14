@@ -48,7 +48,7 @@
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/source-destination/configured-source/configured-source.ts#L48)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/configured-source/configured-source.ts#L48)*
 
 **Parameters:**
 
@@ -124,7 +124,7 @@ ___
 
 • **source**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/source-destination/configured-source/configured-source.ts#L49)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/configured-source/configured-source.ts#L49)*
 
 ## Methods
 
@@ -134,7 +134,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:91](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/source-destination/configured-source/configured-source.ts#L91)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:91](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/configured-source/configured-source.ts#L91)*
 
 **Returns:** *Promise‹void›*
 
@@ -146,7 +146,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:64](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/source-destination/configured-source/configured-source.ts#L64)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:64](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/configured-source/configured-source.ts#L64)*
 
 **Returns:** *Promise‹number›*
 
@@ -158,7 +158,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:73](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/source-destination/configured-source/configured-source.ts#L73)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:73](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/configured-source/configured-source.ts#L73)*
 
 **Parameters:**
 
@@ -179,7 +179,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:82](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/source-destination/configured-source/configured-source.ts#L82)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:82](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/configured-source/configured-source.ts#L82)*
 
 **Parameters:**
 

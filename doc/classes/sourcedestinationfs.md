@@ -29,7 +29,7 @@
 
 \+ **new SourceDestinationFs**(`source`: [SourceDestination](sourcedestination.md)): *[SourceDestinationFs](sourcedestinationfs.md)*
 
-*Defined in [lib/source-destination/source-destination.ts:92](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/source-destination/source-destination.ts#L92)*
+*Defined in [lib/source-destination/source-destination.ts:92](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L92)*
 
 **Parameters:**
 
@@ -45,7 +45,7 @@ Name | Type |
 
 • **source**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [lib/source-destination/source-destination.ts:94](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/source-destination/source-destination.ts#L94)*
+*Defined in [lib/source-destination/source-destination.ts:94](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L94)*
 
 ## Methods
 
@@ -53,7 +53,7 @@ Name | Type |
 
 ▸ **close**(`_fd`: number, `callback`: function): *void*
 
-*Defined in [lib/source-destination/source-destination.ts:104](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/source-destination/source-destination.ts#L104)*
+*Defined in [lib/source-destination/source-destination.ts:104](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L104)*
 
 **Parameters:**
 
@@ -77,7 +77,7 @@ ___
 
 ▸ **fstat**(`_fd`: number, `callback`: function): *void*
 
-*Defined in [lib/source-destination/source-destination.ts:108](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/source-destination/source-destination.ts#L108)*
+*Defined in [lib/source-destination/source-destination.ts:108](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L108)*
 
 **Parameters:**
 
@@ -102,7 +102,7 @@ ___
 
 ▸ **open**(`_path`: string, `_options`: any, `callback`: function): *void*
 
-*Defined in [lib/source-destination/source-destination.ts:96](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/source-destination/source-destination.ts#L96)*
+*Defined in [lib/source-destination/source-destination.ts:96](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L96)*
 
 **Parameters:**
 
@@ -129,7 +129,7 @@ ___
 
 ▸ **read**(`_fd`: number, `buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer), `bufferOffset`: number, `length`: number, `sourceOffset`: number, `callback`: function): *void*
 
-*Defined in [lib/source-destination/source-destination.ts:124](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/source-destination/source-destination.ts#L124)*
+*Defined in [lib/source-destination/source-destination.ts:124](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L124)*
 
 **Parameters:**
 

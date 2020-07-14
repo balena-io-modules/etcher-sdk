@@ -89,9 +89,9 @@ async function openUrl(
 				return device;
 			}
 		}
-		if (!write && !stats.isFile()) {
-			throw new Error(`Invalid url for reading: ${url}`);
-		}
+	} else if (!write) {
+		// Non existing file
+		throw new Error(`Invalid url for reading: ${url}`);
 	}
 	return new sourceDestination.File({ path: url, write });
 }

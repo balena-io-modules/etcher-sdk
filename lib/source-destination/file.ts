@@ -151,8 +151,11 @@ export class File extends SourceDestination {
 	}: CreateReadStreamOptions = {}): Promise<NodeJS.ReadableStream> {
 		await this.open();
 		const metadata = await this.getMetadata();
-		const lastByte = metadata.size! - 1;
-		end = end === undefined ? lastByte : Math.min(end, lastByte);
+		if (metadata.size! !== 0) {
+			// workaround for special files like /dev/zero or /dev/random
+			const lastByte = metadata.size! - 1;
+			end = end === undefined ? lastByte : Math.min(end, lastByte);
+		}
 		if (emitProgress) {
 			return new ProgressBlockReadStream({
 				source: this,
