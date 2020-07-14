@@ -24,12 +24,12 @@
 * [alignedReadableState](blocktransformstream.md#private-alignedreadablestate)
 * [bytesRead](blocktransformstream.md#bytesread)
 * [bytesWritten](blocktransformstream.md#byteswritten)
-* [chunkSize](blocktransformstream.md#private-chunksize)
-* [inputBuffers](blocktransformstream.md#private-inputbuffers)
-* [inputBytes](blocktransformstream.md#private-inputbytes)
+* [currentBuffer](blocktransformstream.md#private-currentbuffer)
+* [currentBufferPosition](blocktransformstream.md#private-currentbufferposition)
 * [readable](blocktransformstream.md#readable)
 * [readableHighWaterMark](blocktransformstream.md#readonly-readablehighwatermark)
 * [readableLength](blocktransformstream.md#readonly-readablelength)
+* [unlockCurrentBuffer](blocktransformstream.md#private-unlockcurrentbuffer)
 * [writable](blocktransformstream.md#writable)
 * [writableHighWaterMark](blocktransformstream.md#readonly-writablehighwatermark)
 * [writableLength](blocktransformstream.md#readonly-writablelength)
@@ -38,6 +38,7 @@
 ### Methods
 
 * [[Symbol.asyncIterator]](blocktransformstream.md#[symbol.asynciterator])
+* [__flush](blocktransformstream.md#private-__flush)
 * [_destroy](blocktransformstream.md#_destroy)
 * [_final](blocktransformstream.md#_final)
 * [_flush](blocktransformstream.md#_flush)
@@ -63,6 +64,7 @@
 * [prependListener](blocktransformstream.md#prependlistener)
 * [prependOnceListener](blocktransformstream.md#prependoncelistener)
 * [push](blocktransformstream.md#push)
+* [pushChunk](blocktransformstream.md#private-pushchunk)
 * [rawListeners](blocktransformstream.md#rawlisteners)
 * [read](blocktransformstream.md#read)
 * [removeAllListeners](blocktransformstream.md#removealllisteners)
@@ -76,7 +78,6 @@
 * [unshift](blocktransformstream.md#unshift)
 * [wrap](blocktransformstream.md#wrap)
 * [write](blocktransformstream.md#write)
-* [writeBuffers](blocktransformstream.md#private-writebuffers)
 * [alignIfNeeded](blocktransformstream.md#static-alignifneeded)
 * [listenerCount](blocktransformstream.md#static-listenercount)
 
@@ -88,7 +89,7 @@
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [lib/block-transform-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L29)*
+*Defined in [lib/block-transform-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/block-transform-stream.ts#L32)*
 
 **Parameters:**
 
@@ -108,7 +109,7 @@ Name | Type | Default |
 
 • **alignedReadableState**: *[AlignedReadableState](alignedreadablestate.md)*
 
-*Defined in [lib/block-transform-stream.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L27)*
+*Defined in [lib/block-transform-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/block-transform-stream.ts#L29)*
 
 ___
 
@@ -116,7 +117,7 @@ ___
 
 • **bytesRead**: *number* = 0
 
-*Defined in [lib/block-transform-stream.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L24)*
+*Defined in [lib/block-transform-stream.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/block-transform-stream.ts#L27)*
 
 ___
 
@@ -124,31 +125,23 @@ ___
 
 • **bytesWritten**: *number* = 0
 
-*Defined in [lib/block-transform-stream.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L25)*
+*Defined in [lib/block-transform-stream.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/block-transform-stream.ts#L28)*
 
 ___
 
-### `Private` chunkSize
+### `Private` currentBuffer
 
-• **chunkSize**: *number*
+• **currentBuffer**: *[AlignedLockableBuffer](../interfaces/alignedlockablebuffer.md)*
 
-*Defined in [lib/block-transform-stream.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L26)*
-
-___
-
-### `Private` inputBuffers
-
-• **inputBuffers**: *[Buffer](../interfaces/alignedlockablebuffer.md#buffer)[]* = []
-
-*Defined in [lib/block-transform-stream.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L28)*
+*Defined in [lib/block-transform-stream.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/block-transform-stream.ts#L30)*
 
 ___
 
-### `Private` inputBytes
+### `Private` currentBufferPosition
 
-• **inputBytes**: *number* = 0
+• **currentBufferPosition**: *number* = 0
 
-*Defined in [lib/block-transform-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L29)*
+*Defined in [lib/block-transform-stream.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/block-transform-stream.ts#L31)*
 
 ___
 
@@ -179,6 +172,18 @@ ___
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[readableLength](sparsefilterstream.md#readonly-readablelength)*
 
 Defined in node_modules/@types/node/stream.d.ts:22
+
+___
+
+### `Private` unlockCurrentBuffer
+
+• **unlockCurrentBuffer**: *function*
+
+*Defined in [lib/block-transform-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/block-transform-stream.ts#L32)*
+
+#### Type declaration:
+
+▸ (): *void*
 
 ___
 
@@ -231,6 +236,16 @@ Defined in node_modules/@types/node/events.d.ts:18
 Defined in node_modules/@types/node/stream.d.ts:95
 
 **Returns:** *AsyncIterableIterator‹any›*
+
+___
+
+### `Private` __flush
+
+▸ **__flush**(): *void*
+
+*Defined in [lib/block-transform-stream.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/block-transform-stream.ts#L51)*
+
+**Returns:** *void*
 
 ___
 
@@ -292,7 +307,7 @@ ___
 
 *Overrides [SparseFilterStream](sparsefilterstream.md).[_flush](sparsefilterstream.md#_flush)*
 
-*Defined in [lib/block-transform-stream.ts:89](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L89)*
+*Defined in [lib/block-transform-stream.ts:101](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/block-transform-stream.ts#L101)*
 
 **Parameters:**
 
@@ -334,7 +349,7 @@ ___
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[_transform](../interfaces/sourcetransform.md#_transform)*
 
-*Defined in [lib/block-transform-stream.ts:78](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L78)*
+*Defined in [lib/block-transform-stream.ts:93](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/block-transform-stream.ts#L93)*
 
 **Parameters:**
 
@@ -1402,6 +1417,22 @@ Name | Type |
 
 ___
 
+### `Private` pushChunk
+
+▸ **pushChunk**(`chunk`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer)): *Promise‹void›*
+
+*Defined in [lib/block-transform-stream.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/block-transform-stream.ts#L62)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`chunk` | [Buffer](../interfaces/alignedlockablebuffer.md#buffer) |
+
+**Returns:** *Promise‹void›*
+
+___
+
 ###  rawListeners
 
 ▸ **rawListeners**(`event`: string | symbol): *Function[]*
@@ -1753,27 +1784,11 @@ Name | Type |
 
 ___
 
-### `Private` writeBuffers
-
-▸ **writeBuffers**(`flush`: boolean): *Promise‹void›*
-
-*Defined in [lib/block-transform-stream.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L49)*
-
-**Parameters:**
-
-Name | Type | Default |
------- | ------ | ------ |
-`flush` | boolean | false |
-
-**Returns:** *Promise‹void›*
-
-___
-
 ### `Static` alignIfNeeded
 
 ▸ **alignIfNeeded**(`stream`: ReadableStream, `alignment?`: undefined | number, `numBuffers?`: undefined | number): *ReadableStream‹› | [BlockTransformStream](blocktransformstream.md)‹›*
 
-*Defined in [lib/block-transform-stream.ts:93](https://github.com/balena-io-modules/etcher-sdk/blob/eef9406/lib/block-transform-stream.ts#L93)*
+*Defined in [lib/block-transform-stream.ts:110](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/block-transform-stream.ts#L110)*
 
 **Parameters:**
 
