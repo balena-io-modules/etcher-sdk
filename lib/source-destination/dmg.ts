@@ -14,15 +14,18 @@
  * limitations under the License.
  */
 
-import { BLOCK, CHECKSUM_TYPE, Image as UDIFImage, SECTOR_SIZE } from 'udif';
-import { promisify } from 'util';
+import {
+	BLOCK,
+	CHECKSUM_TYPE,
+	Image as UDIFImage,
+	SECTOR_SIZE,
+} from '@balena/udif';
 
 import { Metadata } from './metadata';
 import {
 	CreateReadStreamOptions,
 	CreateSparseReadStreamOptions,
 	SourceDestination,
-	SourceDestinationFs,
 } from './source-destination';
 import { SourceSource } from './source-source';
 
@@ -40,6 +43,7 @@ import { StreamLimiter } from '../stream-limiter';
 
 export class DmgSource extends SourceSource {
 	private static mappedBlockTypes = [
+		BLOCK.ZEROFILL,
 		BLOCK.RAW,
 		BLOCK.UDCO,
 		BLOCK.UDZO,
@@ -52,7 +56,6 @@ export class DmgSource extends SourceSource {
 
 	constructor(source: SourceDestination) {
 		super(source);
-		this.image = new UDIFImage('', { fs: new SourceDestinationFs(source) });
 	}
 
 	public async canCreateReadStream() {
@@ -85,7 +88,7 @@ export class DmgSource extends SourceSource {
 		numBuffers,
 	}: CreateSparseReadStreamOptions = {}): Promise<SparseReadable> {
 		const blocks = await this.getBlocks();
-		const stream = Object.assign(this.image.createSparseReadStream(), {
+		const stream = Object.assign(await this.image.createSparseReadStream(), {
 			blocks,
 		});
 		if (alignment !== undefined) {
@@ -147,18 +150,19 @@ export class DmgSource extends SourceSource {
 		const blocks = await this.getBlocks();
 		const blockmappedSize = blocksLength(blocks);
 		const compressedSize = (await this.source.getMetadata()).size;
-		const size = this.image.getUncompressedSize();
+		const size = await this.image.getUncompressedSize();
 		return { blocks, blockmappedSize, compressedSize, size };
 	}
 
 	protected async _open(): Promise<void> {
 		await super._open();
-		await promisify(this.image.open).bind(this.image)();
-	}
-
-	protected async _close(): Promise<void> {
-		await promisify(this.image.close).bind(this.image)();
-		await super._close();
+		this.image = new UDIFImage({
+			size: (await this.source.getMetadata()).size as number,
+			createReadStream: async (start, end) => {
+				return await this.source.createReadStream({ start, end });
+			},
+		});
+		await this.image.ready;
 	}
 }
 
