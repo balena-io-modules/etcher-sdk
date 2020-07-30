@@ -104,3 +104,23 @@ export async function asCallback<T>(
 		callback(error);
 	}
 }
+
+export async function fromCallback<T>(
+	fn: (callback: (error?: Error | null, result?: T) => void) => void,
+): Promise<T> {
+	return await new Promise((resolve, reject) => {
+		fn((error?: Error | null, result?: T) => {
+			if (error != null) {
+				reject(error);
+			} else {
+				resolve(result);
+			}
+		});
+	});
+}
+
+export async function delay(ms: number): Promise<void> {
+	await new Promise((resolve) => {
+		setTimeout(resolve, ms);
+	});
+}

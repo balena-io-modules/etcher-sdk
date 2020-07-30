@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import { using } from 'bluebird';
+import { interact } from 'balena-image-fs';
 import * as _debug from 'debug';
 import { DiscardDiskChunk, Disk, ReadResult, WriteResult } from 'file-disk';
 import { getPartitions, GPTPartition, MBRPartition } from 'partitioninfo';
-import { AsyncFsLike, interact } from 'resin-image-fs';
+import { promisify } from 'util';
 
 import { CHUNK_SIZE } from '../../constants';
 import { NotCapable } from '../../errors';
@@ -265,14 +265,13 @@ export class ConfiguredSource extends SourceSource {
 		}
 		for (const partition of partitions) {
 			try {
-				await using(
-					interact(this.disk, partition.index),
-					async (fs: AsyncFsLike) => {
-						if (fs.trimAsync !== undefined) {
-							await fs.trimAsync();
-						}
-					},
-				);
+				await interact(this.disk, partition.index, async (fs) => {
+					// @ts-ignore: trim method exists for ext partitions
+					if (fs.trim !== undefined) {
+						// @ts-ignore: trim method exists for ext partitions
+						await promisify(fs.trim)();
+					}
+				});
 			} catch {
 				// Unsupported filesystem
 			}

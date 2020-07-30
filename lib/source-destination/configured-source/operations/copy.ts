@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-import { using } from 'bluebird';
 import { Disk } from 'file-disk';
+import * as Fs from 'fs';
 import * as _ from 'lodash';
-import { AsyncFsLike, interact } from 'resin-image-fs';
+import { interact } from 'balena-image-fs';
 
 const copy = async (
-	sourceFs: AsyncFsLike,
+	sourceFs: typeof Fs,
 	sourcePath: string,
-	destinationFs: AsyncFsLike,
+	destinationFs: typeof Fs,
 	destinationPath: string,
 ): Promise<void> => {
 	const readStream = sourceFs.createReadStream(`/${sourcePath}`);
 	const writeStream = destinationFs.createWriteStream(`/${destinationPath}`);
-	await new Promise((resolve: () => void, reject: (e: Error) => void) => {
+	await new Promise((resolve, reject) => {
 		readStream
 			.on('error', reject)
 			.pipe(writeStream)
@@ -42,22 +42,18 @@ export const execute = async (operation: any, disk: Disk) => {
 	if (_.isUndefined(source) || _.isUndefined(destination)) {
 		throw new Error('copy operation needs from and to properties');
 	}
-	if (source === destination) {
-		await using(interact(disk, source), async (fs: AsyncFsLike) => {
-			await copy(fs, operation.from.path, fs, operation.to.path);
-		});
-	} else {
-		await using(
-			interact(disk, source),
-			interact(disk, destination),
-			async (sourceFs: AsyncFsLike, destinationFs: AsyncFsLike) => {
+	await interact(disk, source, async (sourceFs) => {
+		if (source === destination) {
+			await copy(sourceFs, operation.from.path, sourceFs, operation.to.path);
+		} else {
+			await interact(disk, destination, async (destinationFs) => {
 				await copy(
 					sourceFs,
 					operation.from.path,
 					destinationFs,
 					operation.to.path,
 				);
-			},
-		);
-	}
+			});
+		}
+	});
 };

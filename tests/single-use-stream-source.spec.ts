@@ -15,14 +15,13 @@
  */
 
 import * as assert from 'assert';
-import { using } from 'bluebird';
 import { expect } from 'chai';
 import { createReadStream } from 'fs';
 import 'mocha';
 import { join } from 'path';
 
 import { errors, multiWrite, sourceDestination } from '../lib';
-import { tmpFileDisposer } from '../lib/tmp';
+import { withTmpFile } from '../lib/tmp';
 import { DEFAULT_IMAGE_TESTS_TIMEOUT } from './tester';
 
 const DATA_PATH = join(__dirname, 'data');
@@ -46,7 +45,7 @@ describe('zip in a single use stream source', function () {
 			isCompressed: true,
 		});
 		const progressEvents: sourceDestination.ProgressEvent[] = [];
-		await using(tmpFileDisposer(false), async (file) => {
+		await withTmpFile(false, async (file) => {
 			await multiWrite.pipeSourceToDestinations({
 				source,
 				destinations: [

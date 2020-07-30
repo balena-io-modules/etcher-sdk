@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { Disposer, resolve } from 'bluebird';
 import * as checkDiskSpace from 'check-disk-space';
 import { randomBytes } from 'crypto';
 import { Dirent, promises as fs } from 'fs';
@@ -97,13 +96,19 @@ export async function tmpFile(keepOpen = true): Promise<TmpFileResult> {
 	return { fileHandle, path: path! };
 }
 
-export function tmpFileDisposer(keepOpen = true): Disposer<TmpFileResult> {
-	return resolve(tmpFile(keepOpen)).disposer(async (result: TmpFileResult) => {
+export async function withTmpFile<T>(
+	keepOpen = true,
+	fn: (result: TmpFileResult) => Promise<T>,
+): Promise<T> {
+	const result = await tmpFile(keepOpen);
+	try {
+		return await fn(result);
+	} finally {
 		if (keepOpen && result.fileHandle !== undefined) {
 			await result.fileHandle.close();
 		}
 		await fs.unlink(result.path);
-	});
+	}
 }
 
 export async function freeSpace() {

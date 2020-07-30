@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import { using } from 'bluebird';
+import { interact } from 'balena-image-fs';
 import { Disk } from 'file-disk';
 import * as _ from 'lodash';
 import { getPartitions } from 'partitioninfo';
-import { AsyncFsLike, interact } from 'resin-image-fs';
+import { promisify } from 'util';
 
 import { execute as configureAction } from './operations/configure';
 import { execute as copyAction } from './operations/copy';
@@ -69,14 +69,13 @@ const getDiskDeviceType = async (disk: Disk): Promise<any> => {
 	const partitions = await getPartitions(disk);
 	for (const partition of partitions.partitions) {
 		if (partition.type === 14) {
-			const deviceType = await using(
-				interact(disk, partition.index),
-				async (fs: AsyncFsLike) => {
-					return await fs
-						.readFileAsync('/device-type.json')
-						.catchReturn(undefined);
-				},
-			);
+			const deviceType = await interact(disk, partition.index, async (fs) => {
+				try {
+					return await promisify(fs.readFile)('/device-type.json');
+				} catch (error) {
+					return undefined;
+				}
+			});
 			if (deviceType) {
 				return JSON.parse(deviceType.toString());
 			}

@@ -84,7 +84,7 @@
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [typings/xxhash/index.d.ts:12](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/typings/xxhash/index.d.ts#L12)*
+*Defined in [typings/xxhash/index.d.ts:12](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/typings/xxhash/index.d.ts#L12)*
 
 **Parameters:**
 
@@ -102,7 +102,7 @@ Name | Type |
 
 • **bytesWritten**: *number* = 0
 
-*Defined in [lib/source-destination/source-destination.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L49)*
+*Defined in [lib/source-destination/source-destination.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L48)*
 
 ___
 
@@ -192,7 +192,7 @@ ___
 
 ▸ **__transform**(`chunk`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer) | [AlignedLockableBuffer](../interfaces/alignedlockablebuffer.md), `encoding`: string): *Promise‹void›*
 
-*Defined in [lib/source-destination/source-destination.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L51)*
+*Defined in [lib/source-destination/source-destination.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L50)*
 
 **Parameters:**
 
@@ -299,7 +299,7 @@ ___
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[_transform](../interfaces/sourcetransform.md#_transform)*
 
-*Defined in [lib/source-destination/source-destination.ts:68](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L68)*
+*Defined in [lib/source-destination/source-destination.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L67)*
 
 **Parameters:**
 

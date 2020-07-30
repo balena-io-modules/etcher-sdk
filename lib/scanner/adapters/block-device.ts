@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-import { delay } from 'bluebird';
 import * as _debug from 'debug';
 import { Drive as $Drive, list } from 'drivelist';
 
 import { BlockDevice } from '../../source-destination/block-device';
-import { difference } from '../../utils';
+import { delay, difference } from '../../utils';
 import { Adapter } from './adapter';
 
 const debug = _debug('etcher-sdk:block-device-adapter');

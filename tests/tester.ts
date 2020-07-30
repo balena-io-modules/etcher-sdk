@@ -164,8 +164,8 @@ export async function testImageNoIt(
 		}
 	}
 
-	await source.close();
 	await compareSource.close();
+	await innerSource.close();
 }
 
 export function testImage(

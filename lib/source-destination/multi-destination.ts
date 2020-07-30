@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { map } from 'bluebird';
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
 import { every, minBy } from 'lodash';
@@ -165,9 +164,11 @@ export class MultiDestination extends SourceDestination {
 			| 'canCreateSparseWriteStream',
 	) {
 		return every(
-			await map(this.activeDestinations, (destination: SourceDestination) => {
-				return destination[methodName]();
-			}),
+			await Promise.all(
+				Array.from(this.activeDestinations).map((destination) =>
+					destination[methodName](),
+				),
+			),
 		);
 	}
 
@@ -216,11 +217,10 @@ export class MultiDestination extends SourceDestination {
 		length: number,
 		fileOffset: number,
 	): Promise<WriteResult> {
-		const results = await map(
-			this.activeDestinations,
-			(destination: SourceDestination) => {
-				return destination.write(buffer, bufferOffset, length, fileOffset);
-			},
+		const results = await Promise.all(
+			Array.from(this.activeDestinations).map((destination) =>
+				destination.write(buffer, bufferOffset, length, fileOffset),
+			),
 		);
 		// Returns the first WriteResult (they should be all the same)
 		return results[0];
@@ -296,9 +296,8 @@ export class MultiDestination extends SourceDestination {
 			}
 		}
 
-		await map(
-			this.activeDestinations,
-			async (destination: SourceDestination) => {
+		await Promise.all(
+			Array.from(this.activeDestinations).map(async (destination) => {
 				const stream = await destination[methodName](...args);
 				progresses.set(stream, null);
 				stream.on('progress', (progressEvent: ProgressEvent) => {
@@ -313,7 +312,7 @@ export class MultiDestination extends SourceDestination {
 				});
 				stream.on('finish', oneStreamFinished.bind(null, stream));
 				passthrough.pipe(stream);
-			},
+			}),
 		);
 
 		passthrough.on('pipe', () => {
@@ -345,22 +344,26 @@ export class MultiDestination extends SourceDestination {
 	}
 
 	protected async _open(): Promise<void> {
-		await map(this.destinations, async (destination) => {
-			try {
-				await destination.open();
-			} catch (error) {
-				this.destinationError(destination, error);
-			}
-		});
+		await Promise.all(
+			Array.from(this.destinations).map(async (destination) => {
+				try {
+					await destination.open();
+				} catch (error) {
+					this.destinationError(destination, error);
+				}
+			}),
+		);
 	}
 
 	protected async _close(): Promise<void> {
-		await map(this.destinations, async (destination) => {
-			try {
-				await destination.close();
-			} catch (error) {
-				this.destinationError(destination, error);
-			}
-		});
+		await Promise.all(
+			Array.from(this.destinations).map(async (destination) => {
+				try {
+					await destination.close();
+				} catch (error) {
+					this.destinationError(destination, error);
+				}
+			}),
+		);
 	}
 }

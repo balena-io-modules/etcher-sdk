@@ -15,7 +15,6 @@
  */
 
 import { getAlignedBuffer } from '@ronomon/direct-io';
-import { delay } from 'bluebird';
 import * as _debug from 'debug';
 import { Writable } from 'stream';
 
@@ -24,7 +23,7 @@ import { RETRY_BASE_TIMEOUT } from './constants';
 import { isTransientError } from './errors';
 import { BlockDevice } from './source-destination/block-device';
 import { makeClassEmitProgressEvents } from './source-destination/progress';
-import { asCallback } from './utils';
+import { asCallback, delay } from './utils';
 
 const debug = _debug('etcher:writer:block-write-stream');
 
