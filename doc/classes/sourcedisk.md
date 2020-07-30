@@ -48,7 +48,7 @@
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/configured-source/configured-source.ts#L48)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/configured-source/configured-source.ts#L48)*
 
 **Parameters:**
 
@@ -66,7 +66,7 @@ Name | Type |
 
 *Inherited from [SourceDisk](sourcedisk.md).[capacity](sourcedisk.md#capacity)*
 
-Defined in node_modules/file-disk/build/index.d.ts:26
+Defined in node_modules/file-disk/build/index.d.ts:32
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 *Inherited from [SourceDisk](sourcedisk.md).[discardIsZero](sourcedisk.md#discardiszero)*
 
-Defined in node_modules/file-disk/build/index.d.ts:24
+Defined in node_modules/file-disk/build/index.d.ts:30
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 *Inherited from [SourceDisk](sourcedisk.md).[knownChunks](sourcedisk.md#readonly-knownchunks)*
 
-Defined in node_modules/file-disk/build/index.d.ts:25
+Defined in node_modules/file-disk/build/index.d.ts:31
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 *Inherited from [SourceDisk](sourcedisk.md).[readOnly](sourcedisk.md#readonly)*
 
-Defined in node_modules/file-disk/build/index.d.ts:21
+Defined in node_modules/file-disk/build/index.d.ts:27
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 *Inherited from [SourceDisk](sourcedisk.md).[recordReads](sourcedisk.md#recordreads)*
 
-Defined in node_modules/file-disk/build/index.d.ts:23
+Defined in node_modules/file-disk/build/index.d.ts:29
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 *Inherited from [SourceDisk](sourcedisk.md).[recordWrites](sourcedisk.md#recordwrites)*
 
-Defined in node_modules/file-disk/build/index.d.ts:22
+Defined in node_modules/file-disk/build/index.d.ts:28
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 • **source**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/configured-source/configured-source.ts#L49)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/configured-source/configured-source.ts#L49)*
 
 ## Methods
 
@@ -134,7 +134,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:91](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/configured-source/configured-source.ts#L91)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:91](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/configured-source/configured-source.ts#L91)*
 
 **Returns:** *Promise‹void›*
 
@@ -146,7 +146,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:64](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/configured-source/configured-source.ts#L64)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:64](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/configured-source/configured-source.ts#L64)*
 
 **Returns:** *Promise‹number›*
 
@@ -158,7 +158,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:73](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/configured-source/configured-source.ts#L73)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:73](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/configured-source/configured-source.ts#L73)*
 
 **Parameters:**
 
@@ -179,7 +179,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/source-destination/configured-source/configured-source.ts:82](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/configured-source/configured-source.ts#L82)*
+*Defined in [lib/source-destination/configured-source/configured-source.ts:82](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/configured-source/configured-source.ts#L82)*
 
 **Parameters:**
 
@@ -200,7 +200,7 @@ ___
 
 *Inherited from [SourceDisk](sourcedisk.md).[discard](sourcedisk.md#discard)*
 
-Defined in node_modules/file-disk/build/index.d.ts:36
+Defined in node_modules/file-disk/build/index.d.ts:42
 
 **Parameters:**
 
@@ -219,7 +219,7 @@ ___
 
 *Inherited from [SourceDisk](sourcedisk.md).[flush](sourcedisk.md#flush)*
 
-Defined in node_modules/file-disk/build/index.d.ts:35
+Defined in node_modules/file-disk/build/index.d.ts:41
 
 **Returns:** *Promise‹void›*
 
@@ -231,7 +231,7 @@ ___
 
 *Inherited from [SourceDisk](sourcedisk.md).[getCapacity](sourcedisk.md#getcapacity)*
 
-Defined in node_modules/file-disk/build/index.d.ts:37
+Defined in node_modules/file-disk/build/index.d.ts:43
 
 **Returns:** *Promise‹number›*
 
@@ -243,7 +243,7 @@ ___
 
 *Inherited from [SourceDisk](sourcedisk.md).[getDiscardedChunks](sourcedisk.md#getdiscardedchunks)*
 
-Defined in node_modules/file-disk/build/index.d.ts:39
+Defined in node_modules/file-disk/build/index.d.ts:45
 
 **Returns:** *DiskChunk[]*
 
@@ -255,7 +255,7 @@ ___
 
 *Inherited from [SourceDisk](sourcedisk.md).[getRanges](sourcedisk.md#getranges)*
 
-Defined in node_modules/file-disk/build/index.d.ts:40
+Defined in node_modules/file-disk/build/index.d.ts:46
 
 **Parameters:**
 
@@ -273,7 +273,7 @@ ___
 
 *Inherited from [SourceDisk](sourcedisk.md).[getStream](sourcedisk.md#getstream)*
 
-Defined in node_modules/file-disk/build/index.d.ts:38
+Defined in node_modules/file-disk/build/index.d.ts:44
 
 **Parameters:**
 
@@ -293,7 +293,7 @@ ___
 
 *Inherited from [SourceDisk](sourcedisk.md).[getTransformStream](sourcedisk.md#gettransformstream)*
 
-Defined in node_modules/file-disk/build/index.d.ts:32
+Defined in node_modules/file-disk/build/index.d.ts:38
 
 **Returns:** *Transform*
 
@@ -305,7 +305,7 @@ ___
 
 *Inherited from [SourceDisk](sourcedisk.md).[read](sourcedisk.md#read)*
 
-Defined in node_modules/file-disk/build/index.d.ts:33
+Defined in node_modules/file-disk/build/index.d.ts:39
 
 **Parameters:**
 
@@ -326,7 +326,7 @@ ___
 
 *Inherited from [SourceDisk](sourcedisk.md).[write](sourcedisk.md#write)*
 
-Defined in node_modules/file-disk/build/index.d.ts:34
+Defined in node_modules/file-disk/build/index.d.ts:40
 
 **Parameters:**
 

@@ -86,7 +86,7 @@
 
 \+ **new UsbbootDrive**(`usbDevice`: UsbbootDevice): *[UsbbootDrive](usbbootdrive.md)*
 
-*Defined in [lib/source-destination/usbboot.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/usbboot.ts#L35)*
+*Defined in [lib/source-destination/usbboot.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/usbboot.ts#L35)*
 
 **Parameters:**
 
@@ -104,7 +104,7 @@ Name | Type |
 
 *Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[description](../interfaces/adaptersourcedestination.md#description)*
 
-*Defined in [lib/source-destination/usbboot.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/usbboot.ts#L30)*
+*Defined in [lib/source-destination/usbboot.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/usbboot.ts#L30)*
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 *Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[device](../interfaces/adaptersourcedestination.md#device)*
 
-*Defined in [lib/source-destination/usbboot.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/usbboot.ts#L26)*
+*Defined in [lib/source-destination/usbboot.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/usbboot.ts#L26)*
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 *Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[devicePath](../interfaces/adaptersourcedestination.md#devicepath)*
 
-*Defined in [lib/source-destination/usbboot.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/usbboot.ts#L27)*
+*Defined in [lib/source-destination/usbboot.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/usbboot.ts#L27)*
 
 ___
 
@@ -132,7 +132,7 @@ ___
 
 • **disabled**: *boolean* = true
 
-*Defined in [lib/source-destination/usbboot.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/usbboot.ts#L33)*
+*Defined in [lib/source-destination/usbboot.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/usbboot.ts#L33)*
 
 ___
 
@@ -140,7 +140,7 @@ ___
 
 • **displayName**: *string* = "Initializing device"
 
-*Defined in [lib/source-destination/usbboot.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/usbboot.ts#L25)*
+*Defined in [lib/source-destination/usbboot.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/usbboot.ts#L25)*
 
 ___
 
@@ -150,7 +150,7 @@ ___
 
 *Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[emitsProgress](../interfaces/adaptersourcedestination.md#emitsprogress)*
 
-*Defined in [lib/source-destination/usbboot.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/usbboot.ts#L35)*
+*Defined in [lib/source-destination/usbboot.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/usbboot.ts#L35)*
 
 ___
 
@@ -158,7 +158,7 @@ ___
 
 • **icon**: *string* = "loading"
 
-*Defined in [lib/source-destination/usbboot.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/usbboot.ts#L28)*
+*Defined in [lib/source-destination/usbboot.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/usbboot.ts#L28)*
 
 ___
 
@@ -166,7 +166,7 @@ ___
 
 • **isReadOnly**: *boolean* = false
 
-*Defined in [lib/source-destination/usbboot.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/usbboot.ts#L32)*
+*Defined in [lib/source-destination/usbboot.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/usbboot.ts#L32)*
 
 ___
 
@@ -176,7 +176,7 @@ ___
 
 *Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[isSystem](../interfaces/adaptersourcedestination.md#issystem)*
 
-*Defined in [lib/source-destination/usbboot.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/usbboot.ts#L29)*
+*Defined in [lib/source-destination/usbboot.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/usbboot.ts#L29)*
 
 ___
 
@@ -186,7 +186,7 @@ ___
 
 *Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[mountpoints](../interfaces/adaptersourcedestination.md#mountpoints)*
 
-*Defined in [lib/source-destination/usbboot.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/usbboot.ts#L31)*
+*Defined in [lib/source-destination/usbboot.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/usbboot.ts#L31)*
 
 ___
 
@@ -196,7 +196,7 @@ ___
 
 *Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[raw](../interfaces/adaptersourcedestination.md#raw)*
 
-*Defined in [lib/source-destination/usbboot.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/usbboot.ts#L24)*
+*Defined in [lib/source-destination/usbboot.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/usbboot.ts#L24)*
 
 ___
 
@@ -206,7 +206,7 @@ ___
 
 *Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[size](../interfaces/adaptersourcedestination.md#size)*
 
-*Defined in [lib/source-destination/usbboot.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/usbboot.ts#L34)*
+*Defined in [lib/source-destination/usbboot.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/usbboot.ts#L34)*
 
 ___
 
@@ -214,7 +214,7 @@ ___
 
 • **usbDevice**: *UsbbootDevice*
 
-*Defined in [lib/source-destination/usbboot.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/usbboot.ts#L37)*
+*Defined in [lib/source-destination/usbboot.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/usbboot.ts#L37)*
 
 ___
 
@@ -249,7 +249,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[imageExtensions](sourcesource.md#static-readonly-imageextensions)*
 
-*Defined in [lib/source-destination/source-destination.ts:275](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L275)*
+*Defined in [lib/source-destination/source-destination.ts:274](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L274)*
 
 ___
 
@@ -261,7 +261,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[mimetype](sourcesource.md#static-optional-readonly-mimetype)*
 
-*Defined in [lib/source-destination/source-destination.ts:287](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L287)*
+*Defined in [lib/source-destination/source-destination.ts:286](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L286)*
 
 ## Methods
 
@@ -273,7 +273,7 @@ ___
 
 *Inherited from [SourceDestination](sourcedestination.md).[_close](sourcedestination.md#protected-_close)*
 
-*Defined in [lib/source-destination/source-destination.ts:402](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L402)*
+*Defined in [lib/source-destination/source-destination.ts:401](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L401)*
 
 **Returns:** *Promise‹void›*
 
@@ -287,7 +287,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[_getMetadata](sourcesource.md#protected-_getmetadata)*
 
-*Defined in [lib/source-destination/source-destination.ts:334](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L334)*
+*Defined in [lib/source-destination/source-destination.ts:333](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L333)*
 
 **Returns:** *Promise‹[Metadata](../interfaces/metadata.md)›*
 
@@ -301,7 +301,7 @@ ___
 
 *Inherited from [SourceDestination](sourcedestination.md).[_open](sourcedestination.md#protected-_open)*
 
-*Defined in [lib/source-destination/source-destination.ts:398](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L398)*
+*Defined in [lib/source-destination/source-destination.ts:397](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L397)*
 
 **Returns:** *Promise‹void›*
 
@@ -343,7 +343,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[canCreateReadStream](sourcesource.md#cancreatereadstream)*
 
-*Defined in [lib/source-destination/source-destination.ts:311](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L311)*
+*Defined in [lib/source-destination/source-destination.ts:310](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L310)*
 
 **Returns:** *Promise‹boolean›*
 
@@ -357,7 +357,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[canCreateSparseReadStream](sourcesource.md#cancreatesparsereadstream)*
 
-*Defined in [lib/source-destination/source-destination.ts:315](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L315)*
+*Defined in [lib/source-destination/source-destination.ts:314](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L314)*
 
 **Returns:** *Promise‹boolean›*
 
@@ -371,7 +371,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[canCreateSparseWriteStream](sourcesource.md#cancreatesparsewritestream)*
 
-*Defined in [lib/source-destination/source-destination.ts:323](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L323)*
+*Defined in [lib/source-destination/source-destination.ts:322](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L322)*
 
 **Returns:** *Promise‹boolean›*
 
@@ -385,7 +385,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[canCreateWriteStream](sourcesource.md#cancreatewritestream)*
 
-*Defined in [lib/source-destination/source-destination.ts:319](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L319)*
+*Defined in [lib/source-destination/source-destination.ts:318](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L318)*
 
 **Returns:** *Promise‹boolean›*
 
@@ -399,7 +399,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[canRead](sourcesource.md#canread)*
 
-*Defined in [lib/source-destination/source-destination.ts:303](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L303)*
+*Defined in [lib/source-destination/source-destination.ts:302](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L302)*
 
 **Returns:** *Promise‹boolean›*
 
@@ -413,7 +413,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[canWrite](sourcesource.md#canwrite)*
 
-*Defined in [lib/source-destination/source-destination.ts:307](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L307)*
+*Defined in [lib/source-destination/source-destination.ts:306](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L306)*
 
 **Returns:** *Promise‹boolean›*
 
@@ -427,7 +427,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[close](sourcesource.md#close)*
 
-*Defined in [lib/source-destination/source-destination.ts:391](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L391)*
+*Defined in [lib/source-destination/source-destination.ts:390](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L390)*
 
 **Returns:** *Promise‹void›*
 
@@ -441,7 +441,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[createReadStream](sourcesource.md#createreadstream)*
 
-*Defined in [lib/source-destination/source-destination.ts:356](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L356)*
+*Defined in [lib/source-destination/source-destination.ts:355](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L355)*
 
 **Parameters:**
 
@@ -461,7 +461,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[createSparseReadStream](sourcesource.md#createsparsereadstream)*
 
-*Defined in [lib/source-destination/source-destination.ts:362](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L362)*
+*Defined in [lib/source-destination/source-destination.ts:361](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L361)*
 
 **Parameters:**
 
@@ -479,7 +479,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[createSparseWriteStream](sourcesource.md#createsparsewritestream)*
 
-*Defined in [lib/source-destination/source-destination.ts:378](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L378)*
+*Defined in [lib/source-destination/source-destination.ts:377](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L377)*
 
 **Parameters:**
 
@@ -501,7 +501,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[createVerifier](sourcesource.md#createverifier)*
 
-*Defined in [lib/source-destination/source-destination.ts:406](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L406)*
+*Defined in [lib/source-destination/source-destination.ts:405](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L405)*
 
 **Parameters:**
 
@@ -520,7 +520,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[createWriteStream](sourcesource.md#createwritestream)*
 
-*Defined in [lib/source-destination/source-destination.ts:372](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L372)*
+*Defined in [lib/source-destination/source-destination.ts:371](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L371)*
 
 **Parameters:**
 
@@ -581,7 +581,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[getAlignment](sourcesource.md#getalignment)*
 
-*Defined in [lib/source-destination/source-destination.ts:299](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L299)*
+*Defined in [lib/source-destination/source-destination.ts:298](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L298)*
 
 **Returns:** *number | undefined*
 
@@ -595,7 +595,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[getBlocks](sourcesource.md#getblocks)*
 
-*Defined in [lib/source-destination/source-destination.ts:368](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L368)*
+*Defined in [lib/source-destination/source-destination.ts:367](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L367)*
 
 **Returns:** *Promise‹[BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]›*
 
@@ -609,7 +609,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[getInnerSource](sourcesource.md#getinnersource)*
 
-*Defined in [lib/source-destination/source-destination.ts:476](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L476)*
+*Defined in [lib/source-destination/source-destination.ts:475](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L475)*
 
 **Returns:** *Promise‹[SourceDestination](sourcedestination.md)›*
 
@@ -639,7 +639,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[getMetadata](sourcesource.md#getmetadata)*
 
-*Defined in [lib/source-destination/source-destination.ts:327](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L327)*
+*Defined in [lib/source-destination/source-destination.ts:326](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L326)*
 
 **Returns:** *Promise‹[Metadata](../interfaces/metadata.md)›*
 
@@ -653,7 +653,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[getPartitionTable](sourcesource.md#getpartitiontable)*
 
-*Defined in [lib/source-destination/source-destination.ts:497](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L497)*
+*Defined in [lib/source-destination/source-destination.ts:496](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L496)*
 
 **Returns:** *Promise‹GetPartitionsResult | undefined›*
 
@@ -795,7 +795,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[open](sourcesource.md#open)*
 
-*Defined in [lib/source-destination/source-destination.ts:384](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L384)*
+*Defined in [lib/source-destination/source-destination.ts:383](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L383)*
 
 **Returns:** *Promise‹void›*
 
@@ -887,7 +887,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[read](sourcesource.md#read)*
 
-*Defined in [lib/source-destination/source-destination.ts:338](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L338)*
+*Defined in [lib/source-destination/source-destination.ts:337](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L337)*
 
 **Parameters:**
 
@@ -982,7 +982,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[write](sourcesource.md#write)*
 
-*Defined in [lib/source-destination/source-destination.ts:347](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L347)*
+*Defined in [lib/source-destination/source-destination.ts:346](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L346)*
 
 **Parameters:**
 
@@ -1028,7 +1028,7 @@ ___
 
 *Inherited from [SourceSource](sourcesource.md).[register](sourcesource.md#static-register)*
 
-*Defined in [lib/source-destination/source-destination.ts:293](https://github.com/balena-io-modules/etcher-sdk/blob/99f7964/lib/source-destination/source-destination.ts#L293)*
+*Defined in [lib/source-destination/source-destination.ts:292](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/source-destination/source-destination.ts#L292)*
 
 **Parameters:**
 
