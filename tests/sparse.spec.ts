@@ -15,7 +15,6 @@
  */
 
 import * as assert from 'assert';
-import { using } from 'bluebird';
 import { cloneDeep } from 'lodash';
 import 'mocha';
 import { join } from 'path';
@@ -24,7 +23,7 @@ import { stub } from 'sinon';
 import { sourceDestination } from '../lib';
 import { BlocksVerificationError } from '../lib/errors';
 import { ChecksumType } from '../lib/sparse-stream/shared';
-import { tmpFileDisposer } from '../lib/tmp';
+import { withTmpFile } from '../lib/tmp';
 import { DEFAULT_IMAGE_TESTS_TIMEOUT } from './tester';
 
 const DMG_PATH = join(__dirname, 'data', 'dmg', 'gpt-in-dmg.dmg');
@@ -51,7 +50,7 @@ describe('sparse streams', function () {
 		assert(sourceSparseStream.blocks[0].blocks.length === 1);
 
 		// Create a temporary destination file:
-		await using(tmpFileDisposer(false), async ({ path }: { path: string }) => {
+		await withTmpFile(false, async ({ path }: { path: string }) => {
 			const destination = new sourceDestination.File({ path, write: true });
 			await destination.open();
 			// Test sparse write stream
@@ -107,7 +106,7 @@ describe('sparse streams', function () {
 
 		// Test regular streams
 		const sourceStream = await innerSource.createReadStream();
-		await using(tmpFileDisposer(false), async ({ path }: { path: string }) => {
+		await withTmpFile(false, async ({ path }: { path: string }) => {
 			const destination = new sourceDestination.File({ path, write: true });
 			await destination.open();
 			const destinationStream = await destination.createWriteStream();
@@ -162,73 +161,70 @@ describe('sparse streams', function () {
 						assert(block.checksum === undefined);
 						assert(block.blocks.length === 1);
 					}
-					await using(
-						tmpFileDisposer(false),
-						async ({ path }: { path: string }) => {
-							const destination = new sourceDestination.File({
-								path,
-								write: true,
-							});
-							await destination.open();
-							// Test sparse write stream
-							const destinationStream = await destination.createSparseWriteStream();
-							await new Promise((resolve, reject) => {
-								sourceSparseStream.on('error', reject);
-								destinationStream.on('error', reject);
-								destinationStream.on('done', resolve);
-								sourceSparseStream.pipe(destinationStream);
-							});
+					await withTmpFile(false, async ({ path }: { path: string }) => {
+						const destination = new sourceDestination.File({
+							path,
+							write: true,
+						});
+						await destination.open();
+						// Test sparse write stream
+						const destinationStream = await destination.createSparseWriteStream();
+						await new Promise((resolve, reject) => {
+							sourceSparseStream.on('error', reject);
+							destinationStream.on('error', reject);
+							destinationStream.on('done', resolve);
+							sourceSparseStream.pipe(destinationStream);
+						});
 
-							// Checksums should have been generated
-							for (const block of sourceSparseStream.blocks) {
-								assert(block.checksum !== undefined);
-							}
+						// Checksums should have been generated
+						for (const block of sourceSparseStream.blocks) {
+							assert(block.checksum !== undefined);
+						}
 
-							// Test sparse verifier for randomly readable destination
-							// (This tests SparseReadStream)
-							const verifier = destination.createVerifier(
-								sourceSparseStream.blocks,
-							);
-							await new Promise((resolve, reject) => {
-								verifier.on('error', reject);
-								verifier.on('finish', resolve);
-								verifier.run();
-							});
+						// Test sparse verifier for randomly readable destination
+						// (This tests SparseReadStream)
+						const verifier = destination.createVerifier(
+							sourceSparseStream.blocks,
+						);
+						await new Promise((resolve, reject) => {
+							verifier.on('error', reject);
+							verifier.on('finish', resolve);
+							verifier.run();
+						});
 
-							// Test sparse verifier for non randomly readable destination
-							// (This tests SparseFilterStream)
-							const canReadStub = stub(destination, 'canRead');
-							canReadStub.resolves(false);
-							const verifier2 = destination.createVerifier(
-								sourceSparseStream.blocks,
-							);
-							await new Promise((resolve, reject) => {
-								verifier2.on('error', reject);
-								verifier2.on('finish', resolve);
-								verifier2.run();
-							});
-							canReadStub.restore();
+						// Test sparse verifier for non randomly readable destination
+						// (This tests SparseFilterStream)
+						const canReadStub = stub(destination, 'canRead');
+						canReadStub.resolves(false);
+						const verifier2 = destination.createVerifier(
+							sourceSparseStream.blocks,
+						);
+						await new Promise((resolve, reject) => {
+							verifier2.on('error', reject);
+							verifier2.on('finish', resolve);
+							verifier2.run();
+						});
+						canReadStub.restore();
 
-							// Test sparse verifier with wrong checksum
-							const wrongBlocks = cloneDeep(sourceSparseStream.blocks);
-							wrongBlocks[0].checksum = 'wrong';
-							const brokenVerifier = destination.createVerifier(wrongBlocks);
-							const verifierError: Error = await new Promise(
-								(resolve, reject) => {
-									brokenVerifier.on('finish', () => {
-										reject(
-											new Error('There should have been a checksum mismatch'),
-										);
-									});
-									brokenVerifier.on('error', (error: Error) => {
-										resolve(error);
-									});
-									brokenVerifier.run();
-								},
-							);
-							assert(verifierError instanceof BlocksVerificationError);
-						},
-					);
+						// Test sparse verifier with wrong checksum
+						const wrongBlocks = cloneDeep(sourceSparseStream.blocks);
+						wrongBlocks[0].checksum = 'wrong';
+						const brokenVerifier = destination.createVerifier(wrongBlocks);
+						const verifierError: Error = await new Promise(
+							(resolve, reject) => {
+								brokenVerifier.on('finish', () => {
+									reject(
+										new Error('There should have been a checksum mismatch'),
+									);
+								});
+								brokenVerifier.on('error', (error: Error) => {
+									resolve(error);
+								});
+								brokenVerifier.run();
+							},
+						);
+						assert(verifierError instanceof BlocksVerificationError);
+					});
 					await trimmedSource.close();
 				});
 			}
@@ -255,7 +251,7 @@ describe('sparse streams', function () {
 		}
 
 		// Create a temporary destination file:
-		await using(tmpFileDisposer(false), async ({ path }: { path: string }) => {
+		await withTmpFile(false, async ({ path }: { path: string }) => {
 			const destination = new sourceDestination.File({ path, write: true });
 			await destination.open();
 			// Test sparse write stream

@@ -15,7 +15,6 @@
  */
 
 import { getAlignedBuffer, O_EXLOCK, setF_NOCACHE } from '@ronomon/direct-io';
-import { delay, fromCallback } from 'bluebird';
 import { Drive as DrivelistDrive } from 'drivelist';
 import { ReadResult, WriteResult } from 'file-disk';
 import { constants } from 'fs';
@@ -33,6 +32,7 @@ import {
 	ProgressSparseWriteStream,
 	SparseWriteStream,
 } from '../sparse-stream/sparse-write-stream';
+import { delay, fromCallback } from '../utils';
 import { File } from './file';
 import { Metadata } from './metadata';
 

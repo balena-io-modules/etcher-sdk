@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { fromCallback } from 'bluebird';
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
 import * as fileType from 'file-type';
@@ -33,7 +32,7 @@ import { BlocksWithChecksum, SparseReadable } from '../sparse-stream/shared';
 import { SparseWritable } from '../sparse-stream/shared';
 import { SparseFilterStream } from '../sparse-stream/sparse-filter-stream';
 import { SparseReadStream } from '../sparse-stream/sparse-read-stream';
-import { asCallback, streamToBuffer } from '../utils';
+import { asCallback, fromCallback, streamToBuffer } from '../utils';
 
 import { Metadata } from './metadata';
 import {

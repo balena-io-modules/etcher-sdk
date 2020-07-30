@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-import { delay } from 'bluebird';
 import { platform } from 'process';
 import { DriverlessDevice as WinUsbDriverlessDevice } from 'winusb-driver-generator';
 
 import { getRaspberrypiUsbboot } from '../../lazy';
 import { DriverlessDevice } from '../../source-destination/driverless';
-import { difference } from '../../utils';
+import { delay, difference } from '../../utils';
 import { Adapter } from './adapter';
 
 const SCAN_INTERVAL = 1000;

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import { using } from 'bluebird';
+import { interact } from 'balena-image-fs';
 import { Disk } from 'file-disk';
 import * as _ from 'lodash';
 import { outdent } from 'outdent';
-import { AsyncFsLike, interact } from 'resin-image-fs';
+import { promisify } from 'util';
 
 const NETWORK_SETTINGS_KEYS = [
 	'wifiSsid',
@@ -127,17 +127,18 @@ export const execute = async (operation: any, disk: Disk): Promise<void> => {
 	// FIXME: no need to remove wifiSsid, wifiKey, ip, netmask and gateway once api is updated
 	config = _.omit(config, 'network', ...NETWORK_SETTINGS_KEYS);
 
-	await using(interact(disk, operation.partition), async (fs: AsyncFsLike) => {
-		await fs.writeFileAsync('/config.json', JSON.stringify(config));
+	await interact(disk, operation.partition, async (fs) => {
+		const writeFileAsync = promisify(fs.writeFile);
+		await writeFileAsync('/config.json', JSON.stringify(config));
 		let index;
 		for (index = 0; index < networkConfigFiles.ethernet.length; index++) {
-			await fs.writeFileAsync(
+			await writeFileAsync(
 				`/system-connections/connection-${pad(index + 1)}`,
 				networkConfigFiles.ethernet[index],
 			);
 		}
 		for (index = 0; index < networkConfigFiles.wifi.length; index++) {
-			await fs.writeFileAsync(
+			await writeFileAsync(
 				`/system-connections/connection-${pad(index + 1)}`,
 				networkConfigFiles.wifi[index],
 			);

@@ -1,5 +1,4 @@
 import { getAlignedBuffer } from '@ronomon/direct-io';
-import { delay } from 'bluebird';
 import { Writable } from 'stream';
 
 import { isAlignedLockableBuffer } from '../aligned-lockable-buffer';
@@ -7,7 +6,7 @@ import { RETRY_BASE_TIMEOUT } from '../constants';
 import { isTransientError } from '../errors';
 import { makeClassEmitProgressEvents } from '../source-destination/progress';
 import { SourceDestination } from '../source-destination/source-destination';
-import { asCallback } from '../utils';
+import { asCallback, delay } from '../utils';
 import { SparseStreamChunk, SparseWritable } from './shared';
 
 export class SparseWriteStream extends Writable implements SparseWritable {

@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { delay } from 'bluebird';
 import { ReadResult } from 'file-disk';
 import { Readable } from 'stream';
 
@@ -26,6 +25,7 @@ import { CHUNK_SIZE, RETRY_BASE_TIMEOUT } from './constants';
 import { isTransientError } from './errors';
 import { File } from './source-destination/file';
 import { makeClassEmitProgressEvents } from './source-destination/progress';
+import { delay } from './utils';
 
 export class BlockReadStream extends Readable {
 	private source: File;

@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import { delay, using } from 'bluebird';
 import { execFile, ExecFileOptions } from 'child_process';
 import * as _debug from 'debug';
 import { promises as fs } from 'fs';
 import { platform } from 'os';
 
-import { tmpFileDisposer, TmpFileResult } from './tmp';
+import { withTmpFile, TmpFileResult } from './tmp';
+import { delay } from './utils';
 
 const debug = _debug('etcher-sdk:diskpart');
 
@@ -64,7 +64,7 @@ const runDiskpart = async (commands: string[]): Promise<void> => {
 	if (platform() !== 'win32') {
 		return;
 	}
-	await using(tmpFileDisposer(false), async (file: TmpFileResult) => {
+	await withTmpFile(false, async (file: TmpFileResult) => {
 		await fs.writeFile(file.path, commands.join('\r\n'));
 		const { stdout, stderr } = await execFileAsync('diskpart', [
 			'/s',

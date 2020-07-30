@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { using } from 'bluebird';
 import { expect } from 'chai';
 import { randomFill } from 'crypto';
 import { promises as fs } from 'fs';
@@ -29,7 +28,7 @@ import { BlockWriteStream } from '../lib/block-write-stream';
 import { CHUNK_SIZE as BLOCK_WRITE_STREAM_CHUNK_SIZE } from '../lib/constants';
 import * as diskpart from '../lib/diskpart';
 import { SparseWriteStream } from '../lib/sparse-stream/sparse-write-stream';
-import { tmpFileDisposer, TmpFileResult } from '../lib/tmp';
+import { withTmpFile, TmpFileResult } from '../lib/tmp';
 import { blockDeviceFromFile, DEFAULT_IMAGE_TESTS_TIMEOUT } from './tester';
 
 const randomFillAsync = promisify(randomFill);
@@ -87,7 +86,7 @@ describe('block-write-stream', function () {
 	): Promise<void> {
 		const data = await randomBytes(size, ALIGNMENT);
 		const input = new Readable({ objectMode: sparse });
-		await using(tmpFileDisposer(false), async (file: TmpFileResult) => {
+		await withTmpFile(false, async (file: TmpFileResult) => {
 			const destination = await blockDeviceFromFile(file.path);
 			await destination.open();
 			let output: BlockWriteStream | SparseWriteStream;

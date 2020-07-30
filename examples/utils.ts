@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import { delay } from 'bluebird';
 import { Spinner } from 'cli-spinner';
 import { promises as fs } from 'fs';
 import ProgressBar = require('progress');
 
 import { multiWrite, sourceDestination } from '../lib';
 import { ConfigureFunction } from '../lib/source-destination/configured-source/configured-source';
+import { delay } from '../lib/utils';
 
 const SPINNER_DELAY = 60;
 

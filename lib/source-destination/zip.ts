@@ -15,7 +15,6 @@
  */
 
 import { BlockMap, Range } from 'blockmap';
-import { fromCallback } from 'bluebird';
 import { sortBy } from 'lodash';
 import { posix } from 'path';
 import { PassThrough } from 'stream';
@@ -46,7 +45,7 @@ import {
 } from '../sparse-stream/shared';
 import { SparseFilterStream } from '../sparse-stream/sparse-filter-stream';
 import { StreamLimiter } from '../stream-limiter';
-import { streamToBuffer } from '../utils';
+import { fromCallback, streamToBuffer } from '../utils';
 
 function blockmapToBlocks(blockmap: BlockMap): BlocksWithChecksum[] {
 	return blockmap.ranges.map(
@@ -177,19 +176,17 @@ export class RandomAccessZipSource extends SourceSource {
 		await this.source.open();
 		const sourceMetadata = await this.source.getMetadata();
 		const reader = new SourceRandomAccessReader(this.source);
-		this.zip = await fromCallback(
-			(callback: (err: any, result?: ZipFile) => void) => {
-				if (sourceMetadata.size === undefined) {
-					throw new NotCapable();
-				}
-				fromRandomAccessReader(
-					reader,
-					sourceMetadata.size,
-					{ autoClose: false },
-					callback,
-				);
-			},
-		);
+		this.zip = await fromCallback((callback) => {
+			if (sourceMetadata.size === undefined) {
+				throw new NotCapable();
+			}
+			fromRandomAccessReader(
+				reader,
+				sourceMetadata.size,
+				{ autoClose: false },
+				callback,
+			);
+		});
 		this.zip.on('entry', (entry: Entry) => {
 			this.entries.push(entry);
 		});
