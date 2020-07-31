@@ -16,7 +16,6 @@
 import * as assert from 'assert';
 import { expect } from 'chai';
 import { promises as fs } from 'fs';
-import { entries } from 'lodash';
 import 'mocha';
 
 import { sourceDestination } from '../lib';
@@ -158,7 +157,7 @@ export async function testImageNoIt(
 	}
 
 	if (expectedMetadata !== undefined) {
-		for (const [key, value] of entries(expectedMetadata)) {
+		for (const [key, value] of Object.entries(expectedMetadata)) {
 			// @ts-ignore
 			expect(sourceMetadata[key]).to.deep.equal(value);
 		}

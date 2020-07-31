@@ -15,7 +15,6 @@
  */
 
 import { BlockMap, Range } from 'blockmap';
-import { sortBy } from 'lodash';
 import { posix } from 'path';
 import { PassThrough } from 'stream';
 import { ZipStreamEntry } from 'unzip-stream';
@@ -45,7 +44,7 @@ import {
 } from '../sparse-stream/shared';
 import { SparseFilterStream } from '../sparse-stream/sparse-filter-stream';
 import { StreamLimiter } from '../stream-limiter';
-import { fromCallback, streamToBuffer } from '../utils';
+import { maxBy, fromCallback, streamToBuffer } from '../utils';
 
 function blockmapToBlocks(blockmap: BlockMap): BlocksWithChecksum[] {
 	return blockmap.ranges.map(
@@ -211,14 +210,13 @@ export class RandomAccessZipSource extends SourceSource {
 	}
 
 	private async getImageEntry(): Promise<Entry> {
-		let entries = (await this.getEntries()).filter((e) =>
+		const entries = (await this.getEntries()).filter((e) =>
 			this.match(e.fileName),
 		);
-		if (entries.length === 0) {
+		const entry = maxBy(entries, (e) => e.uncompressedSize);
+		if (entry === undefined) {
 			throw new Error(NO_MATCHING_FILE_MSG);
 		}
-		entries = sortBy(entries, (e) => e.uncompressedSize);
-		const entry = entries[entries.length - 1];
 		if (entry.compressionMethod !== 0 && entry.compressionMethod !== 8) {
 			throw new Error(
 				`unsupported compression method: ${entry.compressionMethod}`,

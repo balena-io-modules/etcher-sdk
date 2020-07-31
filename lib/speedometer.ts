@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { sumBy } from 'lodash';
+import { sumBy } from './utils';
 
 export class Speedometer {
 	private values: Array<[number, number]> = [];

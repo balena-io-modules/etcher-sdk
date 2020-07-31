@@ -16,7 +16,6 @@
 
 import { interact } from 'balena-image-fs';
 import { Disk } from 'file-disk';
-import * as _ from 'lodash';
 import { getPartitions } from 'partitioninfo';
 import { promisify } from 'util';
 
@@ -32,7 +31,6 @@ interface Operation {
 	when: any;
 }
 
-const PARTITION_FIELDS = ['partition', 'to.partition', 'from.partition'];
 const MBR_LAST_PRIMARY_PARTITION = 4;
 
 const ACTIONS = {
@@ -93,10 +91,9 @@ export const configure = async (
 		'device type read from disk image:\n',
 		JSON.stringify(deviceType, null, 4),
 	);
-	let operations = _.cloneDeep(
-		_.get(deviceType, 'configuration.operations', []),
-	);
-	const config = _.get(deviceType, 'configuration.config');
+	let operations = deviceType?.configuration?.operations ?? [];
+	operations = JSON.parse(JSON.stringify(operations));
+	const config = deviceType?.configuration?.config;
 
 	if (config) {
 		operations.push({
@@ -107,7 +104,7 @@ export const configure = async (
 	}
 
 	operations = operations.filter((operation: Operation) => {
-		if (_.isObject(operation.when)) {
+		if (operation.when !== undefined) {
 			for (const key in operation.when) {
 				if (options[key] !== operations.when[key]) {
 					return false;
@@ -118,11 +115,14 @@ export const configure = async (
 	});
 
 	for (const operation of operations) {
-		for (const field of PARTITION_FIELDS) {
-			const partition = _.get(operation, field);
-			if (partition) {
-				_.set(operation, field, getPartitionIndex(partition));
-			}
+		if (operation.partition !== undefined) {
+			operation.partition = getPartitionIndex(operation.partition);
+		}
+		if (operation.to?.partition !== undefined) {
+			operation.to.partition = getPartitionIndex(operation.to.partition);
+		}
+		if (operation.from?.partition !== undefined) {
+			operation.from.partition = getPartitionIndex(operation.from.partition);
 		}
 		await executeOperation(operation, disk);
 	}

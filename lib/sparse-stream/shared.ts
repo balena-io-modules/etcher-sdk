@@ -15,7 +15,6 @@
  */
 
 import { createHash, Hash } from 'crypto';
-import { padStart } from 'lodash';
 import * as XXHash from 'xxhash';
 
 import { AlignedLockableBuffer } from '../aligned-lockable-buffer';
@@ -68,7 +67,7 @@ class CRC32Hasher {
 	}
 
 	public digest(_encoding: 'hex'): string {
-		return padStart(this.value.toString(16), 8, '0');
+		return this.value.toString(16).padStart(8, '0');
 	}
 }
 

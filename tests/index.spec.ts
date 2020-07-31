@@ -15,53 +15,39 @@
  */
 
 import * as assert from 'assert';
-import { every, first, isArray, isEmpty, isString, map } from 'lodash';
-import 'mocha';
 
 import { sourceDestination } from '../lib';
 
-describe('SourceDestination.imageExtensions', function () {
-	it('should be an array', function () {
-		assert(isArray(sourceDestination.SourceDestination.imageExtensions));
+describe('SourceDestination.imageExtensions', () => {
+	it('should be an array', () => {
+		assert(Array.isArray(sourceDestination.SourceDestination.imageExtensions));
 	});
 
-	it('should not be empty', function () {
-		assert(!isEmpty(sourceDestination.SourceDestination.imageExtensions));
+	it('should not be empty', () => {
+		assert(sourceDestination.SourceDestination.imageExtensions.length > 0);
 	});
 
-	it('should contain only strings', function () {
+	it('should contain only strings', () => {
 		assert(
-			every(
-				map(sourceDestination.SourceDestination.imageExtensions, function (
-					extension,
-				) {
-					return isString(extension);
-				}),
-			),
+			sourceDestination.SourceDestination.imageExtensions.every((extension) => {
+				return typeof extension === 'string';
+			}),
 		);
 	});
 
-	it('should not contain empty strings', function () {
+	it('should not contain empty strings', () => {
 		assert(
-			every(
-				map(sourceDestination.SourceDestination.imageExtensions, function (
-					extension,
-				) {
-					return !isEmpty(extension);
-				}),
-			),
+			sourceDestination.SourceDestination.imageExtensions.every((extension) => {
+				return extension.length > 0;
+			}),
 		);
 	});
 
-	it('should not contain a leading period in any file type extension', function () {
+	it('should not contain a leading period in any file type extension', () => {
 		assert(
-			every(
-				map(sourceDestination.SourceDestination.imageExtensions, function (
-					extension,
-				) {
-					return first(extension) !== '.';
-				}),
-			),
+			sourceDestination.SourceDestination.imageExtensions.every((extension) => {
+				return extension[0] !== '.';
+			}),
 		);
 	});
 });

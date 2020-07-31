@@ -15,8 +15,6 @@
  */
 
 import * as assert from 'assert';
-import { cloneDeep } from 'lodash';
-import 'mocha';
 import { join } from 'path';
 import { stub } from 'sinon';
 
@@ -84,7 +82,7 @@ describe('sparse streams', function () {
 			canReadStub.restore();
 
 			// Test sparse verifier with wrong checksum
-			const wrongBlocks = cloneDeep(sourceSparseStream.blocks);
+			const wrongBlocks = JSON.parse(JSON.stringify(sourceSparseStream.blocks));
 			wrongBlocks[0].checksum = 'wrong';
 			const brokenVerifier = destination.createVerifier(wrongBlocks);
 			const verifierError: Error = await new Promise((resolve, reject) => {
@@ -207,7 +205,9 @@ describe('sparse streams', function () {
 						canReadStub.restore();
 
 						// Test sparse verifier with wrong checksum
-						const wrongBlocks = cloneDeep(sourceSparseStream.blocks);
+						const wrongBlocks = JSON.parse(
+							JSON.stringify(sourceSparseStream.blocks),
+						);
 						wrongBlocks[0].checksum = 'wrong';
 						const brokenVerifier = destination.createVerifier(wrongBlocks);
 						const verifierError: Error = await new Promise(
@@ -285,7 +285,7 @@ describe('sparse streams', function () {
 			canReadStub.restore();
 
 			// Test sparse verifier with wrong checksum
-			const wrongBlocks = cloneDeep(sourceSparseStream.blocks);
+			const wrongBlocks = JSON.parse(JSON.stringify(sourceSparseStream.blocks));
 			wrongBlocks[0].checksum = 'wrong';
 			const brokenVerifier = destination.createVerifier(wrongBlocks);
 			const verifierError: Error = await new Promise((resolve, reject) => {
