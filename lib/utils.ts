@@ -124,3 +124,58 @@ export async function delay(ms: number): Promise<void> {
 		setTimeout(resolve, ms);
 	});
 }
+
+export function minBy<T>(
+	things: Iterable<T>,
+	iteratee: (thing: T) => number,
+): T | undefined {
+	let result: T | undefined;
+	let minimum: number | undefined;
+	for (const t of things) {
+		const value = iteratee(t);
+		if (minimum === undefined || value < minimum) {
+			minimum = value;
+			result = t;
+		}
+	}
+	return result;
+}
+
+export function maxBy<T>(
+	things: Iterable<T>,
+	iteratee: (thing: T) => number,
+): T | undefined {
+	return minBy(things, (t) => -iteratee(t));
+}
+
+export function sumBy<T>(
+	things: Iterable<T>,
+	iteratee: (thing: T) => number,
+): number {
+	let result = 0;
+	for (const t of things) {
+		result += iteratee(t);
+	}
+	return result;
+}
+
+export function every<T>(things: Iterable<T>): boolean {
+	for (const t of things) {
+		if (!t) {
+			return false;
+		}
+	}
+	return true;
+}
+
+export function once<T>(fn: () => T): () => T {
+	let ran = false;
+	let result: T;
+	return () => {
+		if (!ran) {
+			result = fn();
+			ran = true;
+		}
+		return result;
+	};
+}

@@ -16,18 +16,8 @@
 
 import { interact } from 'balena-image-fs';
 import { Disk } from 'file-disk';
-import * as _ from 'lodash';
 import { outdent } from 'outdent';
 import { promisify } from 'util';
-
-const NETWORK_SETTINGS_KEYS = [
-	'wifiSsid',
-	'wifiKey',
-	'ip',
-	'netmask',
-	'gateway',
-	'routeMetric',
-];
 
 interface WifiConfig {
 	wifiSsid: string;
@@ -92,20 +82,19 @@ const nmWifiConfig = (index: number, options: WifiConfig): string => {
 	return config;
 };
 
-const createNetworkConfigFiles = (networks: any) => {
+const createNetworkConfigFiles = (networks: any[]) => {
 	return {
-		ethernet: _(networks).map('configuration').filter().value(),
-		wifi: _(networks)
-			.filter('wifiSsid')
-			.map((network, index) => {
-				return nmWifiConfig(index + 1, network);
-			})
-			.value(),
+		ethernet: networks.map((n: any) => n.configuration).filter((n: any) => !!n),
+		wifi: networks
+			.filter((n) => !!n.wifiSsid)
+			.map((network: WifiConfig, index: number) =>
+				nmWifiConfig(index + 1, network),
+			),
 	};
 };
 
 const pad = (num: number): string => {
-	return _.padStart(`${num}`, 2, '0');
+	return `${num}`.padStart(2, '0');
 };
 
 export const execute = async (operation: any, disk: Disk): Promise<void> => {
@@ -115,17 +104,22 @@ export const execute = async (operation: any, disk: Disk): Promise<void> => {
 	if (!operation.partition) {
 		throw new Error('partition information missing from operation options');
 	}
-
-	let config = operation.data;
-
+	const {
+		wifiSsid,
+		wifiKey,
+		ip,
+		netmask,
+		gateway,
+		routeMetric,
+		network,
+		...config
+	} = operation.data;
 	// FIXME: init with an empty list once the api no longer uses ('wifiSsid', 'wifiKey', 'ip', 'netmask', 'gateway')
-	const networks = [_.pick(config, ...NETWORK_SETTINGS_KEYS)];
-	if (config.network) {
-		networks.push(...config.network);
-	}
+	const networks = [
+		{ wifiSsid, wifiKey, ip, netmask, gateway, routeMetric },
+		...network,
+	];
 	const networkConfigFiles = createNetworkConfigFiles(networks);
-	// FIXME: no need to remove wifiSsid, wifiKey, ip, netmask and gateway once api is updated
-	config = _.omit(config, 'network', ...NETWORK_SETTINGS_KEYS);
 
 	await interact(disk, operation.partition, async (fs) => {
 		const writeFileAsync = promisify(fs.writeFile);

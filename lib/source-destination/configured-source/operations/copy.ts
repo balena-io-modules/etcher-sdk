@@ -16,7 +16,6 @@
 
 import { Disk } from 'file-disk';
 import * as Fs from 'fs';
-import * as _ from 'lodash';
 import { interact } from 'balena-image-fs';
 
 const copy = async (
@@ -37,9 +36,9 @@ const copy = async (
 };
 
 export const execute = async (operation: any, disk: Disk) => {
-	const source = _.get(operation, 'from.partition');
-	const destination = _.get(operation, 'to.partition');
-	if (_.isUndefined(source) || _.isUndefined(destination)) {
+	const source = operation?.from?.partition;
+	const destination = operation?.to?.partition;
+	if (source === undefined || destination === undefined) {
 		throw new Error('copy operation needs from and to properties');
 	}
 	await interact(disk, source, async (sourceFs) => {

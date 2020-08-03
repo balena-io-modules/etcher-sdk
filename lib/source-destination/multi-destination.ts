@@ -16,14 +16,13 @@
 
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
-import { every, minBy } from 'lodash';
 import { PassThrough } from 'stream';
 
 import { PROGRESS_EMISSION_INTERVAL } from '../constants';
 import { VerificationError } from '../errors';
 import { BlocksWithChecksum, SparseReadable } from '../sparse-stream/shared';
 import { SparseWritable } from '../sparse-stream/shared';
-import { difference } from '../utils';
+import { every, difference, minBy } from '../utils';
 import { BlockDevice } from './block-device';
 import { ProgressEvent } from './progress';
 import {
@@ -79,8 +78,7 @@ export class MultiDestinationVerifier extends Verifier {
 	}
 
 	private emitProgress() {
-		// TODO: avoid Array.from
-		const verifier = minBy(Array.from(this.verifiers), (v: Verifier) => {
+		const verifier = minBy(this.verifiers, (v: Verifier) => {
 			return v.progress.bytes;
 		});
 		if (verifier !== undefined) {

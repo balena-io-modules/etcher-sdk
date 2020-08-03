@@ -72,7 +72,7 @@
 
 *Overrides [CountingWritable](countingwritable.md).[constructor](countingwritable.md#constructor)*
 
-*Defined in [lib/block-write-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/block-write-stream.ts#L36)*
+*Defined in [lib/block-write-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/block-write-stream.ts#L36)*
 
 **Parameters:**
 
@@ -93,7 +93,7 @@ Name | Type | Default |
 
 • **bytesWritten**: *number* = 0
 
-*Defined in [lib/block-write-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/block-write-stream.ts#L34)*
+*Defined in [lib/block-write-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/block-write-stream.ts#L34)*
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 • **delayFirstBuffer**: *boolean*
 
-*Defined in [lib/block-write-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/block-write-stream.ts#L32)*
+*Defined in [lib/block-write-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/block-write-stream.ts#L32)*
 
 ___
 
@@ -109,7 +109,7 @@ ___
 
 • **destination**: *[BlockDevice](blockdevice.md)*
 
-*Defined in [lib/block-write-stream.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/block-write-stream.ts#L31)*
+*Defined in [lib/block-write-stream.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/block-write-stream.ts#L31)*
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 • **firstBuffer**? : *[Buffer](../interfaces/alignedlockablebuffer.md#buffer)*
 
-*Defined in [lib/block-write-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/block-write-stream.ts#L36)*
+*Defined in [lib/block-write-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/block-write-stream.ts#L36)*
 
 ___
 
@@ -125,7 +125,7 @@ ___
 
 • **maxRetries**: *number*
 
-*Defined in [lib/block-write-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/block-write-stream.ts#L33)*
+*Defined in [lib/block-write-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/block-write-stream.ts#L33)*
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 • **position**: *number* = 0
 
-*Defined in [lib/block-write-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/block-write-stream.ts#L35)*
+*Defined in [lib/block-write-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/block-write-stream.ts#L35)*
 
 ___
 
@@ -143,7 +143,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[writable](countingwritable.md#writable)*
 
-Defined in node_modules/@types/node/stream.d.ts:109
+Defined in node_modules/@types/node/stream.d.ts:110
 
 ___
 
@@ -153,7 +153,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[writableHighWaterMark](countingwritable.md#readonly-writablehighwatermark)*
 
-Defined in node_modules/@types/node/stream.d.ts:110
+Defined in node_modules/@types/node/stream.d.ts:111
 
 ___
 
@@ -163,7 +163,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[writableLength](countingwritable.md#readonly-writablelength)*
 
-Defined in node_modules/@types/node/stream.d.ts:111
+Defined in node_modules/@types/node/stream.d.ts:112
 
 ___
 
@@ -181,7 +181,7 @@ Defined in node_modules/@types/node/events.d.ts:18
 
 ▸ **__final**(): *Promise‹void›*
 
-*Defined in [lib/block-write-stream.ts:102](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/block-write-stream.ts#L102)*
+*Defined in [lib/block-write-stream.ts:102](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/block-write-stream.ts#L102)*
 
 **Returns:** *Promise‹void›*
 
@@ -191,7 +191,7 @@ ___
 
 ▸ **__write**(`buffer`: [AlignedLockableBuffer](../interfaces/alignedlockablebuffer.md)): *Promise‹void›*
 
-*Defined in [lib/block-write-stream.ts:75](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/block-write-stream.ts#L75)*
+*Defined in [lib/block-write-stream.ts:75](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/block-write-stream.ts#L75)*
 
 **Parameters:**
 
@@ -209,7 +209,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[_destroy](countingwritable.md#_destroy)*
 
-Defined in node_modules/@types/node/stream.d.ts:115
+Defined in node_modules/@types/node/stream.d.ts:116
 
 **Parameters:**
 
@@ -235,7 +235,7 @@ ___
 
 *Overrides [CountingWritable](countingwritable.md).[_final](countingwritable.md#_final)*
 
-*Defined in [lib/block-write-stream.ts:118](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/block-write-stream.ts#L118)*
+*Defined in [lib/block-write-stream.ts:118](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/block-write-stream.ts#L118)*
 
 **`summary`** Write buffered data before a stream ends, called by stream internals
 
@@ -261,7 +261,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/block-write-stream.ts:94](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/block-write-stream.ts#L94)*
+*Defined in [lib/block-write-stream.ts:94](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/block-write-stream.ts#L94)*
 
 **Parameters:**
 
@@ -289,7 +289,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[_writev](countingwritable.md#optional-_writev)*
 
-Defined in node_modules/@types/node/stream.d.ts:114
+Defined in node_modules/@types/node/stream.d.ts:115
 
 **Parameters:**
 
@@ -317,7 +317,7 @@ ___
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:137
+Defined in node_modules/@types/node/stream.d.ts:138
 
 Event emitter
 The defined events on documents including:
@@ -344,7 +344,7 @@ The defined events on documents including:
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:138
+Defined in node_modules/@types/node/stream.d.ts:139
 
 **Parameters:**
 
@@ -362,7 +362,7 @@ Defined in node_modules/@types/node/stream.d.ts:138
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:139
+Defined in node_modules/@types/node/stream.d.ts:140
 
 **Parameters:**
 
@@ -386,7 +386,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:140
+Defined in node_modules/@types/node/stream.d.ts:141
 
 **Parameters:**
 
@@ -404,7 +404,7 @@ Defined in node_modules/@types/node/stream.d.ts:140
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:141
+Defined in node_modules/@types/node/stream.d.ts:142
 
 **Parameters:**
 
@@ -428,7 +428,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:142
+Defined in node_modules/@types/node/stream.d.ts:143
 
 **Parameters:**
 
@@ -452,7 +452,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:143
+Defined in node_modules/@types/node/stream.d.ts:144
 
 **Parameters:**
 
@@ -478,7 +478,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[cork](countingwritable.md#cork)*
 
-Defined in node_modules/@types/node/stream.d.ts:123
+Defined in node_modules/@types/node/stream.d.ts:124
 
 **Returns:** *void*
 
@@ -490,7 +490,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[destroy](countingwritable.md#destroy)*
 
-Defined in node_modules/@types/node/stream.d.ts:125
+Defined in node_modules/@types/node/stream.d.ts:126
 
 **Parameters:**
 
@@ -510,7 +510,7 @@ ___
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/stream.d.ts:145
+Defined in node_modules/@types/node/stream.d.ts:146
 
 **Parameters:**
 
@@ -526,7 +526,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/stream.d.ts:146
+Defined in node_modules/@types/node/stream.d.ts:147
 
 **Parameters:**
 
@@ -542,7 +542,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/stream.d.ts:147
+Defined in node_modules/@types/node/stream.d.ts:148
 
 **Parameters:**
 
@@ -559,7 +559,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/stream.d.ts:148
+Defined in node_modules/@types/node/stream.d.ts:149
 
 **Parameters:**
 
@@ -575,7 +575,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/stream.d.ts:149
+Defined in node_modules/@types/node/stream.d.ts:150
 
 **Parameters:**
 
@@ -592,7 +592,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/stream.d.ts:150
+Defined in node_modules/@types/node/stream.d.ts:151
 
 **Parameters:**
 
@@ -609,7 +609,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/stream.d.ts:151
+Defined in node_modules/@types/node/stream.d.ts:152
 
 **Parameters:**
 
@@ -628,7 +628,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[end](countingwritable.md#end)*
 
-Defined in node_modules/@types/node/stream.d.ts:120
+Defined in node_modules/@types/node/stream.d.ts:121
 
 **Parameters:**
 
@@ -642,7 +642,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[end](countingwritable.md#end)*
 
-Defined in node_modules/@types/node/stream.d.ts:121
+Defined in node_modules/@types/node/stream.d.ts:122
 
 **Parameters:**
 
@@ -657,7 +657,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[end](countingwritable.md#end)*
 
-Defined in node_modules/@types/node/stream.d.ts:122
+Defined in node_modules/@types/node/stream.d.ts:123
 
 **Parameters:**
 
@@ -765,7 +765,7 @@ ___
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/stream.d.ts:153
+Defined in node_modules/@types/node/stream.d.ts:154
 
 **Parameters:**
 
@@ -783,7 +783,7 @@ Defined in node_modules/@types/node/stream.d.ts:153
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/stream.d.ts:154
+Defined in node_modules/@types/node/stream.d.ts:155
 
 **Parameters:**
 
@@ -801,7 +801,7 @@ Defined in node_modules/@types/node/stream.d.ts:154
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/stream.d.ts:155
+Defined in node_modules/@types/node/stream.d.ts:156
 
 **Parameters:**
 
@@ -825,7 +825,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/stream.d.ts:156
+Defined in node_modules/@types/node/stream.d.ts:157
 
 **Parameters:**
 
@@ -843,7 +843,7 @@ Defined in node_modules/@types/node/stream.d.ts:156
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/stream.d.ts:157
+Defined in node_modules/@types/node/stream.d.ts:158
 
 **Parameters:**
 
@@ -867,7 +867,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/stream.d.ts:158
+Defined in node_modules/@types/node/stream.d.ts:159
 
 **Parameters:**
 
@@ -891,7 +891,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/stream.d.ts:159
+Defined in node_modules/@types/node/stream.d.ts:160
 
 **Parameters:**
 
@@ -919,7 +919,7 @@ ___
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/stream.d.ts:161
+Defined in node_modules/@types/node/stream.d.ts:162
 
 **Parameters:**
 
@@ -937,7 +937,7 @@ Defined in node_modules/@types/node/stream.d.ts:161
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/stream.d.ts:162
+Defined in node_modules/@types/node/stream.d.ts:163
 
 **Parameters:**
 
@@ -955,7 +955,7 @@ Defined in node_modules/@types/node/stream.d.ts:162
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/stream.d.ts:163
+Defined in node_modules/@types/node/stream.d.ts:164
 
 **Parameters:**
 
@@ -979,7 +979,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/stream.d.ts:164
+Defined in node_modules/@types/node/stream.d.ts:165
 
 **Parameters:**
 
@@ -997,7 +997,7 @@ Defined in node_modules/@types/node/stream.d.ts:164
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/stream.d.ts:165
+Defined in node_modules/@types/node/stream.d.ts:166
 
 **Parameters:**
 
@@ -1021,7 +1021,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/stream.d.ts:166
+Defined in node_modules/@types/node/stream.d.ts:167
 
 **Parameters:**
 
@@ -1045,7 +1045,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/stream.d.ts:167
+Defined in node_modules/@types/node/stream.d.ts:168
 
 **Parameters:**
 
@@ -1096,7 +1096,7 @@ ___
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:169
+Defined in node_modules/@types/node/stream.d.ts:170
 
 **Parameters:**
 
@@ -1114,7 +1114,7 @@ Defined in node_modules/@types/node/stream.d.ts:169
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:170
+Defined in node_modules/@types/node/stream.d.ts:171
 
 **Parameters:**
 
@@ -1132,7 +1132,7 @@ Defined in node_modules/@types/node/stream.d.ts:170
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:171
+Defined in node_modules/@types/node/stream.d.ts:172
 
 **Parameters:**
 
@@ -1156,7 +1156,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:172
+Defined in node_modules/@types/node/stream.d.ts:173
 
 **Parameters:**
 
@@ -1174,7 +1174,7 @@ Defined in node_modules/@types/node/stream.d.ts:172
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:173
+Defined in node_modules/@types/node/stream.d.ts:174
 
 **Parameters:**
 
@@ -1198,7 +1198,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:174
+Defined in node_modules/@types/node/stream.d.ts:175
 
 **Parameters:**
 
@@ -1222,7 +1222,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:175
+Defined in node_modules/@types/node/stream.d.ts:176
 
 **Parameters:**
 
@@ -1250,7 +1250,7 @@ ___
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:177
+Defined in node_modules/@types/node/stream.d.ts:178
 
 **Parameters:**
 
@@ -1268,7 +1268,7 @@ Defined in node_modules/@types/node/stream.d.ts:177
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:178
+Defined in node_modules/@types/node/stream.d.ts:179
 
 **Parameters:**
 
@@ -1286,7 +1286,7 @@ Defined in node_modules/@types/node/stream.d.ts:178
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:179
+Defined in node_modules/@types/node/stream.d.ts:180
 
 **Parameters:**
 
@@ -1310,7 +1310,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:180
+Defined in node_modules/@types/node/stream.d.ts:181
 
 **Parameters:**
 
@@ -1328,7 +1328,7 @@ Defined in node_modules/@types/node/stream.d.ts:180
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:181
+Defined in node_modules/@types/node/stream.d.ts:182
 
 **Parameters:**
 
@@ -1352,7 +1352,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:182
+Defined in node_modules/@types/node/stream.d.ts:183
 
 **Parameters:**
 
@@ -1376,7 +1376,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:183
+Defined in node_modules/@types/node/stream.d.ts:184
 
 **Parameters:**
 
@@ -1440,7 +1440,7 @@ ___
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:185
+Defined in node_modules/@types/node/stream.d.ts:186
 
 **Parameters:**
 
@@ -1458,7 +1458,7 @@ Defined in node_modules/@types/node/stream.d.ts:185
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:186
+Defined in node_modules/@types/node/stream.d.ts:187
 
 **Parameters:**
 
@@ -1476,7 +1476,7 @@ Defined in node_modules/@types/node/stream.d.ts:186
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:187
+Defined in node_modules/@types/node/stream.d.ts:188
 
 **Parameters:**
 
@@ -1500,7 +1500,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:188
+Defined in node_modules/@types/node/stream.d.ts:189
 
 **Parameters:**
 
@@ -1518,7 +1518,7 @@ Defined in node_modules/@types/node/stream.d.ts:188
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:189
+Defined in node_modules/@types/node/stream.d.ts:190
 
 **Parameters:**
 
@@ -1542,7 +1542,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:190
+Defined in node_modules/@types/node/stream.d.ts:191
 
 **Parameters:**
 
@@ -1566,7 +1566,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:191
+Defined in node_modules/@types/node/stream.d.ts:192
 
 **Parameters:**
 
@@ -1592,7 +1592,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[setDefaultEncoding](countingwritable.md#setdefaultencoding)*
 
-Defined in node_modules/@types/node/stream.d.ts:119
+Defined in node_modules/@types/node/stream.d.ts:120
 
 **Parameters:**
 
@@ -1628,7 +1628,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[uncork](countingwritable.md#uncork)*
 
-Defined in node_modules/@types/node/stream.d.ts:124
+Defined in node_modules/@types/node/stream.d.ts:125
 
 **Returns:** *void*
 
@@ -1640,7 +1640,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[write](countingwritable.md#write)*
 
-Defined in node_modules/@types/node/stream.d.ts:117
+Defined in node_modules/@types/node/stream.d.ts:118
 
 **Parameters:**
 
@@ -1655,7 +1655,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[write](countingwritable.md#write)*
 
-Defined in node_modules/@types/node/stream.d.ts:118
+Defined in node_modules/@types/node/stream.d.ts:119
 
 **Parameters:**
 
@@ -1673,7 +1673,7 @@ ___
 
 ▸ **writeBuffer**(`buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer), `position`: number): *Promise‹void›*
 
-*Defined in [lib/block-write-stream.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/block-write-stream.ts#L55)*
+*Defined in [lib/block-write-stream.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/block-write-stream.ts#L55)*
 
 **Parameters:**
 

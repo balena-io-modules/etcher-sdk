@@ -14,9 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { once } from 'lodash';
 import { promisify } from 'util';
 import * as xxhash from 'xxhash';
+
+import { once } from './utils';
 
 export type XXHash = typeof xxhash;
 
