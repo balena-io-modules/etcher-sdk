@@ -25,6 +25,7 @@
 * [blocks](sparsefilterstream.md#readonly-blocks)
 * [position](sparsefilterstream.md#private-position)
 * [readable](sparsefilterstream.md#readable)
+* [readableFlowing](sparsefilterstream.md#readonly-readableflowing)
 * [readableHighWaterMark](sparsefilterstream.md#readonly-readablehighwatermark)
 * [readableLength](sparsefilterstream.md#readonly-readablelength)
 * [state](sparsefilterstream.md#private-optional-state)
@@ -87,7 +88,7 @@
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [lib/sparse-stream/sparse-filter-stream.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/sparse-stream/sparse-filter-stream.ts#L30)*
+*Defined in [lib/sparse-stream/sparse-filter-stream.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/sparse-stream/sparse-filter-stream.ts#L30)*
 
 **Parameters:**
 
@@ -109,7 +110,7 @@ Name | Type |
 
 *Implementation of [SparseReadable](../interfaces/sparsereadable.md).[blocks](../interfaces/sparsereadable.md#blocks)*
 
-*Defined in [lib/sparse-stream/sparse-filter-stream.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/sparse-stream/sparse-filter-stream.ts#L27)*
+*Defined in [lib/sparse-stream/sparse-filter-stream.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/sparse-stream/sparse-filter-stream.ts#L27)*
 
 ___
 
@@ -117,7 +118,7 @@ ___
 
 • **position**: *number* = 0
 
-*Defined in [lib/sparse-stream/sparse-filter-stream.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/sparse-stream/sparse-filter-stream.ts#L30)*
+*Defined in [lib/sparse-stream/sparse-filter-stream.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/sparse-stream/sparse-filter-stream.ts#L30)*
 
 ___
 
@@ -133,13 +134,23 @@ Defined in node_modules/@types/node/stream.d.ts:20
 
 ___
 
+### `Readonly` readableFlowing
+
+• **readableFlowing**: *boolean | null*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[readableFlowing](sparsefilterstream.md#readonly-readableflowing)*
+
+Defined in node_modules/@types/node/stream.d.ts:21
+
+___
+
 ### `Readonly` readableHighWaterMark
 
 • **readableHighWaterMark**: *number*
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[readableHighWaterMark](sparsefilterstream.md#readonly-readablehighwatermark)*
 
-Defined in node_modules/@types/node/stream.d.ts:21
+Defined in node_modules/@types/node/stream.d.ts:22
 
 ___
 
@@ -149,7 +160,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[readableLength](sparsefilterstream.md#readonly-readablelength)*
 
-Defined in node_modules/@types/node/stream.d.ts:22
+Defined in node_modules/@types/node/stream.d.ts:23
 
 ___
 
@@ -157,7 +168,7 @@ ___
 
 • **state**? : *[SparseReaderState](../interfaces/sparsereaderstate.md)*
 
-*Defined in [lib/sparse-stream/sparse-filter-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/sparse-stream/sparse-filter-stream.ts#L29)*
+*Defined in [lib/sparse-stream/sparse-filter-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/sparse-stream/sparse-filter-stream.ts#L29)*
 
 ___
 
@@ -165,7 +176,7 @@ ___
 
 • **stateIterator**: *Iterator‹[SparseReaderState](../interfaces/sparsereaderstate.md)›*
 
-*Defined in [lib/sparse-stream/sparse-filter-stream.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/sparse-stream/sparse-filter-stream.ts#L28)*
+*Defined in [lib/sparse-stream/sparse-filter-stream.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/sparse-stream/sparse-filter-stream.ts#L28)*
 
 ___
 
@@ -175,7 +186,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[writable](sparsefilterstream.md#writable)*
 
-Defined in node_modules/@types/node/stream.d.ts:209
+Defined in node_modules/@types/node/stream.d.ts:210
 
 ___
 
@@ -185,7 +196,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[writableHighWaterMark](sparsefilterstream.md#readonly-writablehighwatermark)*
 
-Defined in node_modules/@types/node/stream.d.ts:210
+Defined in node_modules/@types/node/stream.d.ts:211
 
 ___
 
@@ -195,7 +206,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[writableLength](sparsefilterstream.md#readonly-writablelength)*
 
-Defined in node_modules/@types/node/stream.d.ts:211
+Defined in node_modules/@types/node/stream.d.ts:212
 
 ___
 
@@ -217,7 +228,7 @@ Defined in node_modules/@types/node/events.d.ts:18
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[[Symbol.asyncIterator]](sparsefilterstream.md#[symbol.asynciterator])*
 
-Defined in node_modules/@types/node/stream.d.ts:95
+Defined in node_modules/@types/node/stream.d.ts:96
 
 **Returns:** *AsyncIterableIterator‹any›*
 
@@ -227,7 +238,7 @@ ___
 
 ▸ **__transform**(`buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer)): *void*
 
-*Defined in [lib/sparse-stream/sparse-filter-stream.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/sparse-stream/sparse-filter-stream.ts#L69)*
+*Defined in [lib/sparse-stream/sparse-filter-stream.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/sparse-stream/sparse-filter-stream.ts#L69)*
 
 **Parameters:**
 
@@ -247,7 +258,7 @@ ___
 
 *Overrides [SparseReadStream](sparsereadstream.md).[_destroy](sparsereadstream.md#_destroy)*
 
-Defined in node_modules/@types/node/stream.d.ts:215
+Defined in node_modules/@types/node/stream.d.ts:216
 
 **Parameters:**
 
@@ -273,7 +284,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[_final](sparsefilterstream.md#_final)*
 
-Defined in node_modules/@types/node/stream.d.ts:216
+Defined in node_modules/@types/node/stream.d.ts:217
 
 **Parameters:**
 
@@ -297,7 +308,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[_flush](sparsefilterstream.md#_flush)*
 
-Defined in node_modules/@types/node/stream.d.ts:242
+Defined in node_modules/@types/node/stream.d.ts:243
 
 **Parameters:**
 
@@ -315,7 +326,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[_read](sparsefilterstream.md#_read)*
 
-Defined in node_modules/@types/node/stream.d.ts:24
+Defined in node_modules/@types/node/stream.d.ts:25
 
 **Parameters:**
 
@@ -333,7 +344,7 @@ ___
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[_transform](../interfaces/sourcetransform.md#_transform)*
 
-*Defined in [lib/sparse-stream/sparse-filter-stream.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/sparse-stream/sparse-filter-stream.ts#L55)*
+*Defined in [lib/sparse-stream/sparse-filter-stream.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/sparse-stream/sparse-filter-stream.ts#L55)*
 
 **Parameters:**
 
@@ -361,7 +372,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[_write](sparsefilterstream.md#_write)*
 
-Defined in node_modules/@types/node/stream.d.ts:213
+Defined in node_modules/@types/node/stream.d.ts:214
 
 **Parameters:**
 
@@ -389,7 +400,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[_writev](sparsefilterstream.md#optional-_writev)*
 
-Defined in node_modules/@types/node/stream.d.ts:214
+Defined in node_modules/@types/node/stream.d.ts:215
 
 **Parameters:**
 
@@ -417,7 +428,7 @@ ___
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:46
+Defined in node_modules/@types/node/stream.d.ts:47
 
 Event emitter
 The defined events on documents including:
@@ -443,7 +454,7 @@ The defined events on documents including:
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:47
+Defined in node_modules/@types/node/stream.d.ts:48
 
 **Parameters:**
 
@@ -467,7 +478,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:48
+Defined in node_modules/@types/node/stream.d.ts:49
 
 **Parameters:**
 
@@ -485,7 +496,7 @@ Defined in node_modules/@types/node/stream.d.ts:48
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:49
+Defined in node_modules/@types/node/stream.d.ts:50
 
 **Parameters:**
 
@@ -503,7 +514,7 @@ Defined in node_modules/@types/node/stream.d.ts:49
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:50
+Defined in node_modules/@types/node/stream.d.ts:51
 
 **Parameters:**
 
@@ -527,7 +538,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:51
+Defined in node_modules/@types/node/stream.d.ts:52
 
 **Parameters:**
 
@@ -553,7 +564,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[cork](sparsefilterstream.md#cork)*
 
-Defined in node_modules/@types/node/stream.d.ts:223
+Defined in node_modules/@types/node/stream.d.ts:224
 
 **Returns:** *void*
 
@@ -565,7 +576,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[destroy](sparsefilterstream.md#destroy)*
 
-Defined in node_modules/@types/node/stream.d.ts:35
+Defined in node_modules/@types/node/stream.d.ts:36
 
 **Parameters:**
 
@@ -585,7 +596,7 @@ ___
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/stream.d.ts:53
+Defined in node_modules/@types/node/stream.d.ts:54
 
 **Parameters:**
 
@@ -601,7 +612,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/stream.d.ts:54
+Defined in node_modules/@types/node/stream.d.ts:55
 
 **Parameters:**
 
@@ -618,7 +629,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/stream.d.ts:55
+Defined in node_modules/@types/node/stream.d.ts:56
 
 **Parameters:**
 
@@ -634,7 +645,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/stream.d.ts:56
+Defined in node_modules/@types/node/stream.d.ts:57
 
 **Parameters:**
 
@@ -650,7 +661,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/stream.d.ts:57
+Defined in node_modules/@types/node/stream.d.ts:58
 
 **Parameters:**
 
@@ -669,7 +680,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
-Defined in node_modules/@types/node/stream.d.ts:58
+Defined in node_modules/@types/node/stream.d.ts:59
 
 **Parameters:**
 
@@ -688,7 +699,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[end](sparsefilterstream.md#end)*
 
-Defined in node_modules/@types/node/stream.d.ts:220
+Defined in node_modules/@types/node/stream.d.ts:221
 
 **Parameters:**
 
@@ -702,7 +713,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[end](sparsefilterstream.md#end)*
 
-Defined in node_modules/@types/node/stream.d.ts:221
+Defined in node_modules/@types/node/stream.d.ts:222
 
 **Parameters:**
 
@@ -717,7 +728,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[end](sparsefilterstream.md#end)*
 
-Defined in node_modules/@types/node/stream.d.ts:222
+Defined in node_modules/@types/node/stream.d.ts:223
 
 **Parameters:**
 
@@ -767,7 +778,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[isPaused](sparsefilterstream.md#ispaused)*
 
-Defined in node_modules/@types/node/stream.d.ts:29
+Defined in node_modules/@types/node/stream.d.ts:30
 
 **Returns:** *boolean*
 
@@ -817,7 +828,7 @@ ___
 
 ▸ **nextBlock**(): *void*
 
-*Defined in [lib/sparse-stream/sparse-filter-stream.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/e5f13b5/lib/sparse-stream/sparse-filter-stream.ts#L51)*
+*Defined in [lib/sparse-stream/sparse-filter-stream.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/sparse-stream/sparse-filter-stream.ts#L51)*
 
 **Returns:** *void*
 
@@ -857,7 +868,7 @@ ___
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/stream.d.ts:60
+Defined in node_modules/@types/node/stream.d.ts:61
 
 **Parameters:**
 
@@ -875,7 +886,7 @@ Defined in node_modules/@types/node/stream.d.ts:60
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/stream.d.ts:61
+Defined in node_modules/@types/node/stream.d.ts:62
 
 **Parameters:**
 
@@ -899,7 +910,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/stream.d.ts:62
+Defined in node_modules/@types/node/stream.d.ts:63
 
 **Parameters:**
 
@@ -917,7 +928,7 @@ Defined in node_modules/@types/node/stream.d.ts:62
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/stream.d.ts:63
+Defined in node_modules/@types/node/stream.d.ts:64
 
 **Parameters:**
 
@@ -935,7 +946,7 @@ Defined in node_modules/@types/node/stream.d.ts:63
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/stream.d.ts:64
+Defined in node_modules/@types/node/stream.d.ts:65
 
 **Parameters:**
 
@@ -959,7 +970,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
 
-Defined in node_modules/@types/node/stream.d.ts:65
+Defined in node_modules/@types/node/stream.d.ts:66
 
 **Parameters:**
 
@@ -987,7 +998,7 @@ ___
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/stream.d.ts:67
+Defined in node_modules/@types/node/stream.d.ts:68
 
 **Parameters:**
 
@@ -1005,7 +1016,7 @@ Defined in node_modules/@types/node/stream.d.ts:67
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/stream.d.ts:68
+Defined in node_modules/@types/node/stream.d.ts:69
 
 **Parameters:**
 
@@ -1029,7 +1040,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/stream.d.ts:69
+Defined in node_modules/@types/node/stream.d.ts:70
 
 **Parameters:**
 
@@ -1047,7 +1058,7 @@ Defined in node_modules/@types/node/stream.d.ts:69
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/stream.d.ts:70
+Defined in node_modules/@types/node/stream.d.ts:71
 
 **Parameters:**
 
@@ -1065,7 +1076,7 @@ Defined in node_modules/@types/node/stream.d.ts:70
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/stream.d.ts:71
+Defined in node_modules/@types/node/stream.d.ts:72
 
 **Parameters:**
 
@@ -1089,7 +1100,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
 
-Defined in node_modules/@types/node/stream.d.ts:72
+Defined in node_modules/@types/node/stream.d.ts:73
 
 **Parameters:**
 
@@ -1117,7 +1128,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[pause](sparsefilterstream.md#pause)*
 
-Defined in node_modules/@types/node/stream.d.ts:27
+Defined in node_modules/@types/node/stream.d.ts:28
 
 **Returns:** *this*
 
@@ -1154,7 +1165,7 @@ ___
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:74
+Defined in node_modules/@types/node/stream.d.ts:75
 
 **Parameters:**
 
@@ -1172,7 +1183,7 @@ Defined in node_modules/@types/node/stream.d.ts:74
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:75
+Defined in node_modules/@types/node/stream.d.ts:76
 
 **Parameters:**
 
@@ -1196,7 +1207,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:76
+Defined in node_modules/@types/node/stream.d.ts:77
 
 **Parameters:**
 
@@ -1214,7 +1225,7 @@ Defined in node_modules/@types/node/stream.d.ts:76
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:77
+Defined in node_modules/@types/node/stream.d.ts:78
 
 **Parameters:**
 
@@ -1232,7 +1243,7 @@ Defined in node_modules/@types/node/stream.d.ts:77
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:78
+Defined in node_modules/@types/node/stream.d.ts:79
 
 **Parameters:**
 
@@ -1256,7 +1267,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:79
+Defined in node_modules/@types/node/stream.d.ts:80
 
 **Parameters:**
 
@@ -1284,7 +1295,7 @@ ___
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:81
+Defined in node_modules/@types/node/stream.d.ts:82
 
 **Parameters:**
 
@@ -1302,7 +1313,7 @@ Defined in node_modules/@types/node/stream.d.ts:81
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:82
+Defined in node_modules/@types/node/stream.d.ts:83
 
 **Parameters:**
 
@@ -1326,7 +1337,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:83
+Defined in node_modules/@types/node/stream.d.ts:84
 
 **Parameters:**
 
@@ -1344,7 +1355,7 @@ Defined in node_modules/@types/node/stream.d.ts:83
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:84
+Defined in node_modules/@types/node/stream.d.ts:85
 
 **Parameters:**
 
@@ -1362,7 +1373,7 @@ Defined in node_modules/@types/node/stream.d.ts:84
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:85
+Defined in node_modules/@types/node/stream.d.ts:86
 
 **Parameters:**
 
@@ -1386,7 +1397,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:86
+Defined in node_modules/@types/node/stream.d.ts:87
 
 **Parameters:**
 
@@ -1412,7 +1423,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[push](sparsefilterstream.md#push)*
 
-Defined in node_modules/@types/node/stream.d.ts:33
+Defined in node_modules/@types/node/stream.d.ts:34
 
 **Parameters:**
 
@@ -1453,7 +1464,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[read](sparsefilterstream.md#read)*
 
-Defined in node_modules/@types/node/stream.d.ts:25
+Defined in node_modules/@types/node/stream.d.ts:26
 
 **Parameters:**
 
@@ -1493,7 +1504,7 @@ ___
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:88
+Defined in node_modules/@types/node/stream.d.ts:89
 
 **Parameters:**
 
@@ -1511,7 +1522,7 @@ Defined in node_modules/@types/node/stream.d.ts:88
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:89
+Defined in node_modules/@types/node/stream.d.ts:90
 
 **Parameters:**
 
@@ -1535,7 +1546,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:90
+Defined in node_modules/@types/node/stream.d.ts:91
 
 **Parameters:**
 
@@ -1553,7 +1564,7 @@ Defined in node_modules/@types/node/stream.d.ts:90
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:91
+Defined in node_modules/@types/node/stream.d.ts:92
 
 **Parameters:**
 
@@ -1571,7 +1582,7 @@ Defined in node_modules/@types/node/stream.d.ts:91
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:92
+Defined in node_modules/@types/node/stream.d.ts:93
 
 **Parameters:**
 
@@ -1595,7 +1606,7 @@ Name | Type |
 
 *Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
 
-Defined in node_modules/@types/node/stream.d.ts:93
+Defined in node_modules/@types/node/stream.d.ts:94
 
 **Parameters:**
 
@@ -1623,7 +1634,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[resume](sparsefilterstream.md#resume)*
 
-Defined in node_modules/@types/node/stream.d.ts:28
+Defined in node_modules/@types/node/stream.d.ts:29
 
 **Returns:** *this*
 
@@ -1635,7 +1646,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[setDefaultEncoding](sparsefilterstream.md#setdefaultencoding)*
 
-Defined in node_modules/@types/node/stream.d.ts:219
+Defined in node_modules/@types/node/stream.d.ts:220
 
 **Parameters:**
 
@@ -1655,7 +1666,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[setEncoding](sparsefilterstream.md#setencoding)*
 
-Defined in node_modules/@types/node/stream.d.ts:26
+Defined in node_modules/@types/node/stream.d.ts:27
 
 **Parameters:**
 
@@ -1693,7 +1704,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[uncork](sparsefilterstream.md#uncork)*
 
-Defined in node_modules/@types/node/stream.d.ts:224
+Defined in node_modules/@types/node/stream.d.ts:225
 
 **Returns:** *void*
 
@@ -1707,7 +1718,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[unpipe](sparsefilterstream.md#unpipe)*
 
-Defined in node_modules/@types/node/stream.d.ts:30
+Defined in node_modules/@types/node/stream.d.ts:31
 
 **Parameters:**
 
@@ -1725,7 +1736,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[unshift](sparsefilterstream.md#unshift)*
 
-Defined in node_modules/@types/node/stream.d.ts:31
+Defined in node_modules/@types/node/stream.d.ts:32
 
 **Parameters:**
 
@@ -1745,7 +1756,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[wrap](sparsefilterstream.md#wrap)*
 
-Defined in node_modules/@types/node/stream.d.ts:32
+Defined in node_modules/@types/node/stream.d.ts:33
 
 **Parameters:**
 
@@ -1763,7 +1774,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[write](sparsefilterstream.md#write)*
 
-Defined in node_modules/@types/node/stream.d.ts:217
+Defined in node_modules/@types/node/stream.d.ts:218
 
 **Parameters:**
 
@@ -1778,7 +1789,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[write](sparsefilterstream.md#write)*
 
-Defined in node_modules/@types/node/stream.d.ts:218
+Defined in node_modules/@types/node/stream.d.ts:219
 
 **Parameters:**
 
