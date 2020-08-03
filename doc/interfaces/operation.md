@@ -19,7 +19,7 @@
 
 • **command**: *[OperationCommand](../README.md#operationcommand)*
 
-*Defined in [lib/source-destination/configured-source/configure.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/source-destination/configured-source/configure.ts#L30)*
+*Defined in [lib/source-destination/configured-source/configure.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/87ea758/lib/source-destination/configured-source/configure.ts#L30)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **when**: *any*
 
-*Defined in [lib/source-destination/configured-source/configure.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/247d322/lib/source-destination/configured-source/configure.ts#L31)*
+*Defined in [lib/source-destination/configured-source/configure.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/87ea758/lib/source-destination/configured-source/configure.ts#L31)*

@@ -165,12 +165,12 @@ const argv = require('yargs').command(
 		yargs.positional('devices', {
 			describe: 'Devices to write to',
 		});
-		yargs.option('verify', { default: false });
-		yargs.option('trim', { default: false });
-		yargs.option('decompressFirst', { default: false });
+		yargs.option('verify', { type: 'boolean', default: false });
+		yargs.option('trim', { type: 'boolean', default: false });
+		yargs.option('decompressFirst', { type: 'boolean', default: false });
 		yargs.option('numBuffers', {
 			default: 16,
-			describe: 'Number of 1MiB buffers used to buffer data',
+			description: 'Number of 1MiB buffers used to buffer data',
 		});
 		yargs.describe('config', 'json configuration file');
 	},

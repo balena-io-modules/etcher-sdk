@@ -89,9 +89,9 @@ const argv = require('yargs').command(
 			describe: 'device type build id (example: 2.12.7+rev1.prod)',
 		});
 		yargs.positional('fileDestination', { describe: 'Destination image file' });
-		yargs.option('trim', { default: false });
-		yargs.option('verify', { default: false });
-		yargs.option('decompressFirst', { default: false });
+		yargs.option('verify', { type: 'boolean', default: false });
+		yargs.option('trim', { type: 'boolean', default: false });
+		yargs.option('decompressFirst', { type: 'boolean', default: false });
 		yargs.describe('config', 'json configuration file');
 	},
 ).argv;
