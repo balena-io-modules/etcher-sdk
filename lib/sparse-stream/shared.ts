@@ -58,24 +58,11 @@ export interface SparseWritable extends NodeJS.WritableStream {
 	): void;
 }
 
-class CRC32Hasher {
-	private value: number;
-	private crc32 = getCrc().crc32;
-
-	public update(data: Buffer): void {
-		this.value = this.crc32(data, this.value);
-	}
-
-	public digest(_encoding: 'hex'): string {
-		return this.value.toString(16).padStart(8, '0');
-	}
-}
-
-type AnyHasher = CRC32Hasher | Hash | XXHash | XXHash.XXHash64;
+type AnyHasher = Hash | XXHash | XXHash.XXHash64;
 
 function createHasher(checksumType?: ChecksumType): undefined | AnyHasher {
 	if (checksumType === 'crc32') {
-		return new CRC32Hasher();
+		return getCrc().createHash();
 	} else if (checksumType === 'sha1' || checksumType === 'sha256') {
 		return createHash(checksumType);
 	} else if (checksumType === 'xxhash32') {

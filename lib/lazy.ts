@@ -37,4 +37,6 @@ export const getUnmountDisk = once(() =>
 	promisify((require('mountutils') as typeof import('mountutils')).unmountDisk),
 );
 
-export const getCrc = once(() => require('crc') as typeof import('crc'));
+export const getCrc = once(
+	() => require('cyclic-32') as typeof import('cyclic-32'),
+);
