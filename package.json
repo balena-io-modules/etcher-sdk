@@ -48,7 +48,7 @@
     "winusb-driver-generator": "^1.2.3"
   },
   "dependencies": {
-    "@balena/udif": "^1.0.3",
+    "@balena/udif": "^1.1.0",
     "@ronomon/direct-io": "^3.0.1",
     "axios": "^0.19.2",
     "balena-image-fs": "^7.0.0-remove-bluebird-9150c6c0fee21e33beef0ddaeea56ad1ce175c96",

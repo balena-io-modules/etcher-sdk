@@ -39,7 +39,6 @@ import {
 	SparseReadable,
 } from '../sparse-stream/shared';
 import { ProgressSparseTransformStream } from '../sparse-stream/sparse-transform-stream';
-import { StreamLimiter } from '../stream-limiter';
 
 export class DmgSource extends SourceSource {
 	private static mappedBlockTypes = [
@@ -75,11 +74,7 @@ export class DmgSource extends SourceSource {
 		if (start !== 0) {
 			throw new NotCapable();
 		}
-		const stream = await this.image.createReadStream();
-		if (end !== undefined) {
-			const transform = new StreamLimiter(stream, end + 1);
-			return transform;
-		}
+		const stream = await this.image.createReadStream(end);
 		return BlockTransformStream.alignIfNeeded(stream, alignment, numBuffers);
 	}
 
