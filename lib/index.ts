@@ -21,6 +21,7 @@ import * as scanner from './scanner';
 import * as sourceDestination from './source-destination';
 import * as sparseStream from './sparse-stream';
 import * as utils from './utils';
+import * as tmp from './tmp';
 
 export {
 	constants,
@@ -30,4 +31,5 @@ export {
 	sourceDestination,
 	sparseStream,
 	utils,
+	tmp,
 };
