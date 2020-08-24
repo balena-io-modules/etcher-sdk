@@ -23,6 +23,7 @@ import { basename } from 'path';
 import { unescape } from 'querystring';
 import { parse } from 'url';
 
+import { StreamLimiter } from '../stream-limiter';
 import { Metadata } from './metadata';
 import {
 	CreateReadStreamOptions,
@@ -162,6 +163,9 @@ export class Http extends SourceDestination {
 				});
 			});
 			response.data.pause();
+		}
+		if (end !== undefined) {
+			return new StreamLimiter(response.data, end - start);
 		}
 		return response.data;
 	}
