@@ -37,7 +37,7 @@ export class Http extends SourceDestination {
 	private url: string;
 	private redirectUrl: string;
 	private avoidRandomAccess: boolean;
-	private size: number;
+	private size: number | undefined;
 	private acceptsRange: boolean;
 	private ready: Promise<void>;
 	private error: Error;
@@ -71,6 +71,9 @@ export class Http extends SourceDestination {
 			}
 			this.redirectUrl = response.request.res.responseUrl;
 			this.size = parseInt(response.headers['content-length'], 10);
+			if (Number.isNaN(this.size)) {
+				this.size = undefined;
+			}
 			this.acceptsRange = response.headers['accept-ranges'] === 'bytes';
 		} catch (error) {
 			this.error = error;
