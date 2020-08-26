@@ -168,7 +168,8 @@ export class Http extends SourceDestination {
 			response.data.pause();
 		}
 		if (end !== undefined) {
-			return new StreamLimiter(response.data, end - start);
+			// +1 because start and end are inclusive
+			return new StreamLimiter(response.data, end - start + 1);
 		}
 		return response.data;
 	}
