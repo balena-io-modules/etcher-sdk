@@ -29,7 +29,7 @@
 
 \+ **new BlocksVerificationError**(`blocks`: [BlocksWithChecksum](../interfaces/blockswithchecksum.md), `checksum`: string): *[BlocksVerificationError](blocksverificationerror.md)*
 
-*Defined in [lib/errors.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/8322d54/lib/errors.ts#L48)*
+*Defined in [lib/errors.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/7246f9c/lib/errors.ts#L48)*
 
 **Parameters:**
 
@@ -46,7 +46,7 @@ Name | Type |
 
 • **blocks**: *[BlocksWithChecksum](../interfaces/blockswithchecksum.md)*
 
-*Defined in [lib/errors.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/8322d54/lib/errors.ts#L50)*
+*Defined in [lib/errors.ts:50](https://github.com/balena-io-modules/etcher-sdk/blob/7246f9c/lib/errors.ts#L50)*
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 • **checksum**: *string*
 
-*Defined in [lib/errors.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/8322d54/lib/errors.ts#L51)*
+*Defined in [lib/errors.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/7246f9c/lib/errors.ts#L51)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 *Inherited from [VerificationError](verificationerror.md).[code](verificationerror.md#code)*
 
-*Defined in [lib/errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/8322d54/lib/errors.ts#L24)*
+*Defined in [lib/errors.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/7246f9c/lib/errors.ts#L24)*
 
 ___
 

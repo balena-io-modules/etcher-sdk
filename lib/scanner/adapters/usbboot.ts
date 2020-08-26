@@ -25,7 +25,7 @@ import { Adapter } from './adapter';
 
 export class UsbbootDeviceAdapter extends Adapter {
 	private drives: Map<UsbbootDevice, UsbbootDrive> = new Map();
-	private scanner: UsbbootScannerType;
+	private scanner?: UsbbootScannerType;
 
 	constructor() {
 		super();
@@ -43,11 +43,11 @@ export class UsbbootDeviceAdapter extends Adapter {
 	}
 
 	public start(): void {
-		this.scanner.start();
+		this.scanner?.start?.();
 	}
 
 	public stop(): void {
-		this.scanner.stop();
+		this.scanner?.stop?.();
 	}
 
 	private onAttach(device: UsbbootDevice): void {
