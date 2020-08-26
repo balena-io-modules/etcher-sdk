@@ -19,7 +19,7 @@
 
 • **fileHandle**? : *fs.FileHandle*
 
-*Defined in [lib/tmp.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/9e465a8/lib/tmp.ts#L33)*
+*Defined in [lib/tmp.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/8322d54/lib/tmp.ts#L33)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **path**: *string*
 
-*Defined in [lib/tmp.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/9e465a8/lib/tmp.ts#L32)*
+*Defined in [lib/tmp.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/8322d54/lib/tmp.ts#L32)*
