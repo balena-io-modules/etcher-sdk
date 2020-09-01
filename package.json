@@ -51,7 +51,7 @@
     "@balena/udif": "^1.1.0",
     "@ronomon/direct-io": "^3.0.1",
     "axios": "^0.19.2",
-    "balena-image-fs": "^7.0.0-remove-bluebird-9150c6c0fee21e33beef0ddaeea56ad1ce175c96",
+    "balena-image-fs": "^7.0.1",
     "blockmap": "^4.0.1",
     "check-disk-space": "^2.1.0",
     "cyclic-32": "^1.1.0",
