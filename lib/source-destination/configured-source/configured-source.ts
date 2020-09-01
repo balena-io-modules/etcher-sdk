@@ -17,7 +17,6 @@
 import { interact } from 'balena-image-fs';
 import * as _debug from 'debug';
 import { DiscardDiskChunk, Disk, ReadResult, WriteResult } from 'file-disk';
-import { arch, platform } from 'os';
 import { getPartitions, GPTPartition, MBRPartition } from 'partitioninfo';
 import { promisify } from 'util';
 
@@ -255,11 +254,6 @@ export class ConfiguredSource extends SourceSource {
 	}
 
 	private async trimPartitions(): Promise<void> {
-		if (platform() === 'win32' && arch() === 'ia32') {
-			// Disable trimming of ext partitions on 32 bit windows as it segfaults for now.
-			// TODO: re-enable it once ext2fs is fixed.
-			return;
-		}
 		let partitions: GPTPartition[] | MBRPartition[];
 		try {
 			({ partitions } = await getPartitions(this.disk, {
