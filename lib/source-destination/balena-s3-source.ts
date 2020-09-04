@@ -32,20 +32,36 @@ export class BalenaS3Source extends SourceDestination {
 	private zipSource: ZipSource;
 	private ready: Promise<void>;
 	private names: Name[] = ['balena', 'resin'];
+	public readonly host: string;
+	public readonly bucket: string;
+	public readonly prefix: string;
+	public readonly deviceType: string;
+	public readonly buildId: string;
+	public readonly release?: string; // Only used for preloaded images
 	public name: Name; // images can be named balena.img or resin.img
 
-	constructor(
-		readonly bucket: string,
-		readonly deviceType: string,
-		readonly version: string,
-		readonly host = 's3.amazonaws.com',
-		readonly prefix = 'images',
-	) {
-		// example:
-		// bucket: resin-staging-img or resin-production-img-cloudformation
-		// deviceType: raspberry-pi
-		// version: 2.9.6+rev1.prod
+	constructor({
+		host = 's3.amazonaws.com',
+		bucket = 'resin-production-img-cloudformation',
+		prefix = 'images',
+		deviceType,
+		buildId,
+		release,
+	}: {
+		host?: string; // s3.amazonaws.com
+		bucket?: string; // resin-staging-img or resin-production-img-cloudformation
+		prefix?: string; // images or preloaded-images or esr-images
+		deviceType: string; // raspberry-pi
+		buildId: string; // 2.9.6+rev1.prod
+		release?: string; // 1344795
+	}) {
 		super();
+		this.host = host;
+		this.bucket = bucket;
+		this.prefix = prefix;
+		this.deviceType = deviceType;
+		this.buildId = buildId;
+		this.release = release;
 		this.ready = this.prepare();
 	}
 
@@ -83,9 +99,16 @@ export class BalenaS3Source extends SourceDestination {
 	}
 
 	private getUrl(path: string): string {
-		return `https://${this.bucket}.${this.host}/${this.prefix}/${
-			this.deviceType
-		}/${encodeURIComponent(this.version)}/${path}`;
+		const p = [
+			this.prefix,
+			this.deviceType,
+			encodeURIComponent(this.buildId),
+			this.release,
+			path,
+		]
+			.filter((x) => x !== undefined)
+			.join('/');
+		return `https://${this.bucket}.${this.host}/${p}`;
 	}
 
 	public async read(

@@ -30,29 +30,38 @@ const readJsonFile = async (path: string): Promise<any> => {
 };
 
 const main = async ({
+	host,
 	bucket,
+	prefix,
 	deviceType,
 	buildId,
+	release,
 	fileDestination,
 	trim,
 	config,
 	verify,
 	decompressFirst,
 }: {
+	host?: string;
 	bucket: string;
+	prefix?: string;
 	deviceType: string;
 	buildId: string;
+	release?: string;
 	fileDestination: string;
 	trim: boolean;
 	config: string;
 	verify: boolean;
 	decompressFirst: boolean;
 }) => {
-	const source: sourceDestination.SourceDestination = new sourceDestination.BalenaS3Source(
+	const source = new sourceDestination.BalenaS3Source({
+		host,
 		bucket,
+		prefix,
 		deviceType,
 		buildId,
-	);
+		release,
+	});
 	let configure: ConfigureFunction | undefined;
 	if (config !== undefined) {
 		configure = async (disk: Disk) => {
@@ -75,13 +84,9 @@ const main = async ({
 
 // tslint:disable-next-line: no-var-requires
 const argv = require('yargs').command(
-	'$0 <bucket> <deviceType> <buildId> <fileDestination>',
+	'$0 <deviceType> <buildId> <fileDestination>',
 	'Write the image contained in the zipSource url into fileDestination',
 	(yargs: Argv) => {
-		yargs.positional('bucket', {
-			describe:
-				's3 bucket (resin-staging-img or resin-production-img-cloudformation)',
-		});
 		yargs.positional('deviceType', {
 			describe: 'device type (example: raspberrypi3)',
 		});
@@ -89,10 +94,20 @@ const argv = require('yargs').command(
 			describe: 'device type build id (example: 2.12.7+rev1.prod)',
 		});
 		yargs.positional('fileDestination', { describe: 'Destination image file' });
+		yargs.option('host', { type: 'string', default: 's3.amazonaws.com' });
+		yargs.option('bucket', {
+			type: 'string',
+			default: 'resin-production-img-cloudformation',
+		});
+		yargs.option('prefix', { type: 'string', default: 'images' });
+		yargs.option('release', { type: 'string' });
 		yargs.option('verify', { type: 'boolean', default: false });
 		yargs.option('trim', { type: 'boolean', default: false });
 		yargs.option('decompressFirst', { type: 'boolean', default: false });
-		yargs.describe('config', 'json configuration file');
+		yargs.option('config', {
+			type: 'string',
+			description: 'json configuration file',
+		});
 	},
 ).argv;
 
