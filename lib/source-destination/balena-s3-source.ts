@@ -39,6 +39,7 @@ export class BalenaS3Source extends SourceDestination {
 		readonly deviceType: string,
 		readonly version: string,
 		readonly host = 's3.amazonaws.com',
+		readonly prefix = 'images',
 	) {
 		// example:
 		// bucket: resin-staging-img or resin-production-img-cloudformation
@@ -82,7 +83,7 @@ export class BalenaS3Source extends SourceDestination {
 	}
 
 	private getUrl(path: string): string {
-		return `https://${this.bucket}.${this.host}/images/${
+		return `https://${this.bucket}.${this.host}/${this.prefix}/${
 			this.deviceType
 		}/${encodeURIComponent(this.version)}/${path}`;
 	}
