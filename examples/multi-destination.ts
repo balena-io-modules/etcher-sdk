@@ -131,7 +131,7 @@ async function main({
 	let configure: ConfigureFunction | undefined;
 	if (config !== undefined) {
 		configure = async (disk: Disk) => {
-			await legacyConfigure(disk, { config: await readJsonFile(config) });
+			await legacyConfigure(disk, await readJsonFile(config));
 		};
 	}
 	const destinationDrives = await Promise.all(

@@ -27,6 +27,7 @@ export * from './metadata';
 export * from './multi-destination';
 export * from './progress';
 export * from './balena-s3-source';
+export * from './balena-s3-compressed-source';
 export * from './source-destination';
 export * from './source-source';
 export * from './single-use-stream-source';

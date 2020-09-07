@@ -17,6 +17,10 @@
 import { isAlignedLockableBuffer } from './aligned-lockable-buffer';
 import { SparseStreamChunk } from './sparse-stream/shared';
 
+export interface Dictionary<T> {
+	[key: string]: T;
+}
+
 export function streamToBuffer(stream: NodeJS.ReadableStream): Promise<Buffer> {
 	return new Promise(
 		(resolve: (buffer: Buffer) => void, reject: (error: Error) => void) => {

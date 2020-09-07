@@ -19,6 +19,8 @@ import { Disk } from 'file-disk';
 import { outdent } from 'outdent';
 import { promisify } from 'util';
 
+import { Dictionary } from '../../../utils';
+
 interface WifiConfig {
 	wifiSsid: string;
 	wifiKey?: string;
@@ -28,7 +30,7 @@ interface WifiConfig {
 	gateway?: string;
 }
 
-const nmWifiConfig = (index: number, options: WifiConfig): string => {
+function nmWifiConfig(index: number, options: WifiConfig): string {
 	let config = outdent`
 		[connection]
 		id=balena-wifi-${pad(index)}
@@ -78,11 +80,10 @@ const nmWifiConfig = (index: number, options: WifiConfig): string => {
 			psk=${options.wifiKey}
 		`;
 	}
-	console.log('network config file:\n', config);
 	return config;
-};
+}
 
-const createNetworkConfigFiles = (networks: any[]) => {
+function createNetworkConfigFiles(networks: any[]) {
 	return {
 		ethernet: networks.map((n: any) => n.configuration).filter((n: any) => !!n),
 		wifi: networks
@@ -91,19 +92,17 @@ const createNetworkConfigFiles = (networks: any[]) => {
 				nmWifiConfig(index + 1, network),
 			),
 	};
-};
+}
 
-const pad = (num: number): string => {
+function pad(num: number): string {
 	return `${num}`.padStart(2, '0');
-};
+}
 
-export const execute = async (operation: any, disk: Disk): Promise<void> => {
-	if (!operation.data) {
-		throw new Error('config.json data missing from operation options');
-	}
-	if (!operation.partition) {
-		throw new Error('partition information missing from operation options');
-	}
+export async function configure(
+	disk: Disk,
+	partition: number | undefined,
+	config: Dictionary<any>,
+): Promise<void> {
 	const {
 		wifiSsid,
 		wifiKey,
@@ -112,18 +111,24 @@ export const execute = async (operation: any, disk: Disk): Promise<void> => {
 		gateway,
 		routeMetric,
 		network,
-		...config
-	} = operation.data;
+		...configJSON
+	} = config;
 	// FIXME: init with an empty list once the api no longer uses ('wifiSsid', 'wifiKey', 'ip', 'netmask', 'gateway')
 	const networks = [
 		{ wifiSsid, wifiKey, ip, netmask, gateway, routeMetric },
-		...network,
+		...(network ?? []),
 	];
 	const networkConfigFiles = createNetworkConfigFiles(networks);
 
-	await interact(disk, operation.partition, async (fs) => {
+	await interact(disk, partition, async (fs) => {
 		const writeFileAsync = promisify(fs.writeFile);
-		await writeFileAsync('/config.json', JSON.stringify(config));
+		const mkdirAsync = promisify(fs.mkdir);
+		await writeFileAsync('/config.json', JSON.stringify(configJSON));
+		try {
+			await mkdirAsync('/system-connections');
+		} catch {
+			// Directory already exists
+		}
 		let index;
 		for (index = 0; index < networkConfigFiles.ethernet.length; index++) {
 			await writeFileAsync(
@@ -138,4 +143,4 @@ export const execute = async (operation: any, disk: Disk): Promise<void> => {
 			);
 		}
 	});
-};
+}

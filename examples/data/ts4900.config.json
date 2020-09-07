@@ -1,0 +1,22 @@
+{
+	"apiEndpoint": "https://api.resinstaging.io",
+	"apiKey": "nXasvWVTDc5B3YKITzdkcDbHdcef9uzH",
+	"appUpdatePollInterval": 2520000,
+	"applicationId": 20605,
+	"applicationName": "rpi3",
+	"deltaEndpoint": "https://delta.resinstaging.io",
+	"deviceType": "raspberrypi3",
+	"listenPort": 48484,
+	"mixpanelToken": "cb974f32bab01ecc1171937026774b18",
+	"pubnubPublishKey": "pub-c-6cbce8db-bfd1-4fdf-a8c8-53671ae2b226",
+	"pubnubSubscribeKey": "sub-c-bbc12eba-ce4a-11e3-9782-02ee2ddab7fe",
+	"registryEndpoint": "registry2.resinstaging.io",
+	"userId": 392,
+	"username": "alexis",
+	"version": "2.9.6+rev1.prod",
+	"vpnEndpoint": "vpn.resinstaging.io",
+	"vpnPort": 443,
+	"wifiKey": "pass",
+	"wifiSsid": "ssid",
+	"processorCore": "quad"
+}

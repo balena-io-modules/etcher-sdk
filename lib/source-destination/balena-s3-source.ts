@@ -27,18 +27,22 @@ import { ZipSource } from './zip';
 
 type Name = 'balena' | 'resin';
 
-export class BalenaS3Source extends SourceDestination {
-	private rawSource: Http;
-	private zipSource: ZipSource;
-	private ready: Promise<void>;
-	private names: Name[] = ['balena', 'resin'];
+export interface BalenaS3SourceOptions {
+	host?: string; // s3.amazonaws.com
+	bucket?: string; // resin-staging-img or resin-production-img-cloudformation
+	prefix?: string; // images or preloaded-images or esr-images
+	deviceType: string; // raspberry-pi
+	buildId: string; // 2.9.6+rev1.prod
+	release?: string; // 1344795
+}
+
+export abstract class BalenaS3SourceBase extends SourceDestination {
 	public readonly host: string;
 	public readonly bucket: string;
 	public readonly prefix: string;
 	public readonly deviceType: string;
 	public readonly buildId: string;
 	public readonly release?: string; // Only used for preloaded images
-	public name: Name; // images can be named balena.img or resin.img
 
 	constructor({
 		host = 's3.amazonaws.com',
@@ -47,14 +51,7 @@ export class BalenaS3Source extends SourceDestination {
 		deviceType,
 		buildId,
 		release,
-	}: {
-		host?: string; // s3.amazonaws.com
-		bucket?: string; // resin-staging-img or resin-production-img-cloudformation
-		prefix?: string; // images or preloaded-images or esr-images
-		deviceType: string; // raspberry-pi
-		buildId: string; // 2.9.6+rev1.prod
-		release?: string; // 1344795
-	}) {
+	}: BalenaS3SourceOptions) {
 		super();
 		this.host = host;
 		this.bucket = bucket;
@@ -62,19 +59,37 @@ export class BalenaS3Source extends SourceDestination {
 		this.deviceType = deviceType;
 		this.buildId = buildId;
 		this.release = release;
-		this.ready = this.prepare();
 	}
 
-	private async prepare(): Promise<void> {
-		this.name = await this.getName();
-		this.rawSource = new Http({ url: this.getUrl(`image/${this.name}.img`) });
-		this.zipSource = new ZipSource(
-			new Http({
-				url: this.getUrl(`image/${this.name}.img.zip`),
-				avoidRandomAccess: true,
-			}),
-		);
+	public async canCreateReadStream(): Promise<boolean> {
+		return true;
 	}
+
+	protected getUrl(path: string): string {
+		const p = [
+			this.prefix,
+			this.deviceType,
+			encodeURIComponent(this.buildId),
+			this.release,
+			path,
+		]
+			.filter((x) => x !== undefined)
+			.join('/');
+		return `https://${this.bucket}.${this.host}/${p}`;
+	}
+}
+
+export class BalenaS3Source extends BalenaS3SourceBase {
+	/*
+	 * Random reads from the uncompressed image in S3
+	 * Read streams from the zipped image in S3
+	 * This allows this source to be randomly readable for configuration using ConfiguredSource
+	 * The downside is that you need to decompress and recomrpess the whole image if you need a compressed configured image.
+	 */
+	private rawSource: Http;
+	private zipSource: ZipSource;
+	private names: Name[] = ['balena', 'resin'];
+	public name: Name; // images can be named balena.img or resin.img
 
 	private async getName(): Promise<Name> {
 		for (const name of this.names) {
@@ -90,25 +105,8 @@ export class BalenaS3Source extends SourceDestination {
 		throw new Error('Could not find image');
 	}
 
-	public async canCreateReadStream(): Promise<boolean> {
-		return true;
-	}
-
 	public async canRead(): Promise<boolean> {
 		return true;
-	}
-
-	private getUrl(path: string): string {
-		const p = [
-			this.prefix,
-			this.deviceType,
-			encodeURIComponent(this.buildId),
-			this.release,
-			path,
-		]
-			.filter((x) => x !== undefined)
-			.join('/');
-		return `https://${this.bucket}.${this.host}/${p}`;
 	}
 
 	public async read(
@@ -117,7 +115,6 @@ export class BalenaS3Source extends SourceDestination {
 		length: number,
 		sourceOffset: number,
 	): Promise<ReadResult> {
-		await this.ready;
 		return await this.rawSource.read(
 			buffer,
 			bufferOffset,
@@ -129,22 +126,26 @@ export class BalenaS3Source extends SourceDestination {
 	public async createReadStream(
 		options: CreateReadStreamOptions = {},
 	): Promise<NodeJS.ReadableStream> {
-		await this.ready;
 		return await this.zipSource.createReadStream(options);
 	}
 
 	protected async _getMetadata(): Promise<Metadata> {
-		await this.ready;
 		return await this.zipSource.getMetadata();
 	}
 
 	protected async _open() {
-		await this.ready;
+		this.name = await this.getName();
+		this.rawSource = new Http({ url: this.getUrl(`image/${this.name}.img`) });
+		this.zipSource = new ZipSource(
+			new Http({
+				url: this.getUrl(`image/${this.name}.img.zip`),
+				avoidRandomAccess: true,
+			}),
+		);
 		await Promise.all([this.rawSource.open(), await this.zipSource.open()]);
 	}
 
 	protected async _close() {
-		await this.ready;
 		await Promise.all([this.zipSource.close(), await this.rawSource.close()]);
 	}
 }

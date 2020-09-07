@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-import { Disk } from 'file-disk';
 import { promises as fs } from 'fs';
 import { Argv } from 'yargs';
 
 import { sourceDestination } from '../lib';
-import { configure as legacyConfigure } from '../lib/source-destination/configured-source/configure';
-import { ConfigureFunction } from '../lib/source-destination/configured-source/configured-source';
 
 import { pipeSourceToDestinationsWithProgressBar, wrapper } from './utils';
 
@@ -36,6 +33,7 @@ const main = async ({
 	deviceType,
 	buildId,
 	release,
+	format,
 	fileDestination,
 	trim,
 	config,
@@ -48,26 +46,23 @@ const main = async ({
 	deviceType: string;
 	buildId: string;
 	release?: string;
+	format: 'zip' | 'gzip';
 	fileDestination: string;
 	trim: boolean;
 	config: string;
 	verify: boolean;
 	decompressFirst: boolean;
 }) => {
-	const source = new sourceDestination.BalenaS3Source({
+	const source = new sourceDestination.BalenaS3CompressedSource({
 		host,
 		bucket,
 		prefix,
 		deviceType,
 		buildId,
 		release,
+		format,
+		configuration: config ? await readJsonFile(config) : undefined,
 	});
-	let configure: ConfigureFunction | undefined;
-	if (config !== undefined) {
-		configure = async (disk: Disk) => {
-			await legacyConfigure(disk, await readJsonFile(config));
-		};
-	}
 	const destination = new sourceDestination.File({
 		path: fileDestination,
 		write: true,
@@ -77,7 +72,6 @@ const main = async ({
 		destinations: [destination],
 		verify,
 		trim,
-		configure,
 		decompressFirst,
 	});
 };
@@ -101,6 +95,7 @@ const argv = require('yargs').command(
 		});
 		yargs.option('prefix', { type: 'string', default: 'images' });
 		yargs.option('release', { type: 'string' });
+		yargs.option('format', { choices: ['zip', 'gzip'], default: 'zip' });
 		yargs.option('verify', { type: 'boolean', default: false });
 		yargs.option('trim', { type: 'boolean', default: false });
 		yargs.option('decompressFirst', { type: 'boolean', default: false });

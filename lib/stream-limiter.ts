@@ -37,7 +37,9 @@ export class StreamLimiter extends Transform {
 		}
 		this.maxBytes -= length;
 		if (this.maxBytes === 0) {
-			this.stream.unpipe(this);
+			if (this.stream.unpipe !== undefined) {
+				this.stream.unpipe(this);
+			}
 			this.push(null);
 			this.emit('finish');
 			// Emit an 'end' event on the root stream because we want to stop reporting progress events on it.

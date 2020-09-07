@@ -18,12 +18,12 @@ import { Disk } from 'file-disk';
 import * as Fs from 'fs';
 import { interact } from 'balena-image-fs';
 
-const copy = async (
+async function copyFile(
 	sourceFs: typeof Fs,
 	sourcePath: string,
 	destinationFs: typeof Fs,
 	destinationPath: string,
-): Promise<void> => {
+): Promise<void> {
 	const readStream = sourceFs.createReadStream(`/${sourcePath}`);
 	const writeStream = destinationFs.createWriteStream(`/${destinationPath}`);
 	await new Promise((resolve, reject) => {
@@ -33,26 +33,23 @@ const copy = async (
 			.on('error', reject)
 			.on('close', resolve);
 	});
-};
+}
 
-export const execute = async (operation: any, disk: Disk) => {
-	const source = operation?.from?.partition;
-	const destination = operation?.to?.partition;
-	if (source === undefined || destination === undefined) {
-		throw new Error('copy operation needs from and to properties');
-	}
-	await interact(disk, source, async (sourceFs) => {
-		if (source === destination) {
-			await copy(sourceFs, operation.from.path, sourceFs, operation.to.path);
+export async function copy(
+	diskFrom: Disk,
+	partitionFrom: number | undefined,
+	pathFrom: string,
+	diskTo: Disk,
+	partitionTo: number | undefined,
+	pathTo: string,
+): Promise<void> {
+	await interact(diskFrom, partitionFrom, async (fsFrom) => {
+		if (diskFrom === diskTo && partitionFrom === partitionTo) {
+			await copyFile(fsFrom, pathFrom, fsFrom, pathTo);
 		} else {
-			await interact(disk, destination, async (destinationFs) => {
-				await copy(
-					sourceFs,
-					operation.from.path,
-					destinationFs,
-					operation.to.path,
-				);
+			await interact(diskTo, partitionTo, async (fsTo) => {
+				await copyFile(fsFrom, pathFrom, fsTo, pathTo);
 			});
 		}
 	});
-};
+}
