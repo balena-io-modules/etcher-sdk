@@ -34,6 +34,7 @@ const main = async ({
 	buildId,
 	release,
 	format,
+	asItIs,
 	fileDestination,
 	trim,
 	config,
@@ -47,6 +48,7 @@ const main = async ({
 	buildId: string;
 	release?: string;
 	format: 'zip' | 'gzip';
+	asItIs: boolean;
 	fileDestination: string;
 	trim: boolean;
 	config: string;
@@ -73,6 +75,7 @@ const main = async ({
 		verify,
 		trim,
 		decompressFirst,
+		asItIs,
 	});
 };
 
@@ -96,6 +99,11 @@ const argv = require('yargs').command(
 		yargs.option('prefix', { type: 'string', default: 'images' });
 		yargs.option('release', { type: 'string' });
 		yargs.option('format', { choices: ['zip', 'gzip'], default: 'zip' });
+		yargs.option('asItIs', {
+			type: 'boolean',
+			default: false,
+			description: 'do not try to decompress, write as it is',
+		});
 		yargs.option('verify', { type: 'boolean', default: false });
 		yargs.option('trim', { type: 'boolean', default: false });
 		yargs.option('decompressFirst', { type: 'boolean', default: false });

@@ -115,6 +115,7 @@ export async function decompressThenFlash({
 	trim = false,
 	configure,
 	enoughSpaceForDecompression = defaultEnoughSpaceForDecompression,
+	asItIs = false,
 }: {
 	source: SourceDestination;
 	destinations: SourceDestination[];
@@ -126,12 +127,16 @@ export async function decompressThenFlash({
 	trim?: boolean;
 	configure?: ConfigureFunction;
 	enoughSpaceForDecompression?: (free: number, imageSize?: number) => boolean;
+	asItIs?: boolean;
 }): Promise<PipeSourceToDestinationsResult> {
 	for (const d of destinations) {
 		// Start opening destinations early to win some time, don't await here, it will be awaited later.
 		d.open();
 	}
-	source = await source.getInnerSource();
+	await source.open();
+	if (!asItIs) {
+		source = await source.getInnerSource();
+	}
 	const sourceMetadata = await source.getMetadata();
 	const enoughDiskSpaceAvailable = enoughSpaceForDecompression(
 		await freeSpace(),
