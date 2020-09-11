@@ -43,6 +43,11 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 	public readonly deviceType: string;
 	public readonly buildId: string;
 	public readonly release?: string; // Only used for preloaded images
+	private static filesMissingFromPreloadedImages = [
+		'VERSION',
+		'VERSION_HOSTOS',
+		'device-type.json',
+	];
 
 	constructor({
 		host = 's3.amazonaws.com',
@@ -65,12 +70,26 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 		return true;
 	}
 
+	private isESR() {
+		return /^\d{4}\.\d{2}\.\d+\.(dev|prod)$/.test(this.buildId);
+	}
+
 	protected getUrl(path: string): string {
+		let prefix = this.prefix;
+		let release = this.release;
+		// Preloaded images have no VERSION, VERSION_HOSTOS or device-type.json file, we need to get it from the images or esr-images folder
+		if (
+			release !== undefined &&
+			BalenaS3SourceBase.filesMissingFromPreloadedImages.includes(path)
+		) {
+			release = undefined;
+			prefix = this.isESR() ? 'esr-images' : 'images';
+		}
 		const p = [
-			this.prefix,
+			prefix,
 			this.deviceType,
 			encodeURIComponent(this.buildId),
-			this.release,
+			release,
 			path,
 		]
 			.filter((x) => x !== undefined)

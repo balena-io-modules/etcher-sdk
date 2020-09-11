@@ -59,7 +59,6 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	>();
 
 	// TODO: preloaded images are not publicly readable
-	// TODO: preloaded images folders have no device-type.json file
 	constructor({
 		format = 'zip',
 		zipFilename = 'balena.img',
