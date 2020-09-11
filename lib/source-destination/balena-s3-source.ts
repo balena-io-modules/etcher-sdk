@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import axios from 'axios';
+import { aws4Interceptor } from 'aws4-axios';
+import axios, { AxiosInstance } from 'axios';
 import { ReadResult } from 'file-disk';
 
 import { Http } from './http';
@@ -27,13 +28,19 @@ import { ZipSource } from './zip';
 
 type Name = 'balena' | 'resin';
 
+export interface AwsCredentials {
+	accessKeyId: string;
+	secretAccessKey: string;
+}
+
 export interface BalenaS3SourceOptions {
-	host?: string; // s3.amazonaws.com
+	host?: string; // https://s3.amazonaws.com
 	bucket?: string; // resin-staging-img or resin-production-img-cloudformation
 	prefix?: string; // images or preloaded-images or esr-images
 	deviceType: string; // raspberry-pi
 	buildId: string; // 2.9.6+rev1.prod
 	release?: string; // 1344795
+	awsCredentials?: AwsCredentials;
 }
 
 export abstract class BalenaS3SourceBase extends SourceDestination {
@@ -43,6 +50,7 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 	public readonly deviceType: string;
 	public readonly buildId: string;
 	public readonly release?: string; // Only used for preloaded images
+	protected axiosInstance: AxiosInstance;
 	private static filesMissingFromPreloadedImages = [
 		'VERSION',
 		'VERSION_HOSTOS',
@@ -50,12 +58,13 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 	];
 
 	constructor({
-		host = 's3.amazonaws.com',
+		host = 'https://s3.amazonaws.com',
 		bucket = 'resin-production-img-cloudformation',
 		prefix = 'images',
 		deviceType,
 		buildId,
 		release,
+		awsCredentials,
 	}: BalenaS3SourceOptions) {
 		super();
 		this.host = host;
@@ -64,6 +73,12 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 		this.deviceType = deviceType;
 		this.buildId = buildId;
 		this.release = release;
+		this.axiosInstance = axios.create();
+		if (awsCredentials !== undefined) {
+			this.axiosInstance.interceptors.request.use(
+				aws4Interceptor({ service: 's3' }, awsCredentials),
+			);
+		}
 	}
 
 	public async canCreateReadStream(): Promise<boolean> {
@@ -85,7 +100,9 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 			release = undefined;
 			prefix = this.isESR() ? 'esr-images' : 'images';
 		}
-		const p = [
+		return [
+			this.host,
+			this.bucket,
 			prefix,
 			this.deviceType,
 			encodeURIComponent(this.buildId),
@@ -94,7 +111,6 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 		]
 			.filter((x) => x !== undefined)
 			.join('/');
-		return `https://${this.bucket}.${this.host}/${p}`;
 	}
 }
 
@@ -113,7 +129,10 @@ export class BalenaS3Source extends BalenaS3SourceBase {
 	private async getName(): Promise<Name> {
 		for (const name of this.names) {
 			try {
-				await axios({ method: 'head', url: this.getUrl(`image/${name}.img`) });
+				await this.axiosInstance({
+					method: 'head',
+					url: this.getUrl(`image/${name}.img`),
+				});
 				return name;
 			} catch (error) {
 				if (error.response.status !== 404) {
@@ -154,11 +173,15 @@ export class BalenaS3Source extends BalenaS3SourceBase {
 
 	protected async _open() {
 		this.name = await this.getName();
-		this.rawSource = new Http({ url: this.getUrl(`image/${this.name}.img`) });
+		this.rawSource = new Http({
+			url: this.getUrl(`image/${this.name}.img`),
+			axiosInstance: this.axiosInstance,
+		});
 		this.zipSource = new ZipSource(
 			new Http({
 				url: this.getUrl(`image/${this.name}.img.zip`),
 				avoidRandomAccess: true,
+				axiosInstance: this.axiosInstance,
 			}),
 		);
 		await Promise.all([this.rawSource.open(), await this.zipSource.open()]);

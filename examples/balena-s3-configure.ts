@@ -22,7 +22,11 @@ import { sourceDestination } from '../lib';
 import { configure as legacyConfigure } from '../lib/source-destination/configured-source/configure';
 import { ConfigureFunction } from '../lib/source-destination/configured-source/configured-source';
 
-import { pipeSourceToDestinationsWithProgressBar, wrapper } from './utils';
+import {
+	getAwsCredentialsFromEnv,
+	pipeSourceToDestinationsWithProgressBar,
+	wrapper,
+} from './utils';
 
 const readJsonFile = async (path: string): Promise<any> => {
 	const data = await fs.readFile(path, { encoding: 'utf8', flag: 'r' });
@@ -61,6 +65,7 @@ const main = async ({
 		deviceType,
 		buildId,
 		release,
+		awsCredentials: getAwsCredentialsFromEnv(),
 	});
 	let configure: ConfigureFunction | undefined;
 	if (config !== undefined) {
@@ -94,7 +99,11 @@ const argv = require('yargs').command(
 			describe: 'device type build id (example: 2.12.7+rev1.prod)',
 		});
 		yargs.positional('fileDestination', { describe: 'Destination image file' });
-		yargs.option('host', { type: 'string', default: 's3.amazonaws.com' });
+		yargs.option('host', {
+			type: 'string',
+			default: 'https://s3.amazonaws.com',
+			description: 'S3 host including scheme and port',
+		});
 		yargs.option('bucket', {
 			type: 'string',
 			default: 'resin-production-img-cloudformation',

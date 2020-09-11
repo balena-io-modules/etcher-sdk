@@ -1,4 +1,3 @@
-import axios from 'axios';
 import * as CombinedStream from 'combined-stream';
 import { BufferDisk } from 'file-disk';
 import { createDeflatePart, createGzipFromParts } from 'gzip-stream';
@@ -58,7 +57,6 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 		{ crc: number; zLen: number; buffer: Buffer }
 	>();
 
-	// TODO: preloaded images are not publicly readable
 	constructor({
 		format = 'zip',
 		zipFilename = 'balena.img',
@@ -91,7 +89,8 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	}
 
 	private async getImageJSON(): Promise<ImageJSON> {
-		const imageJSON = (await axios.get(this.getUrl('image.json'))).data;
+		const imageJSON = (await this.axiosInstance.get(this.getUrl('image.json')))
+			.data;
 		const keys = Object.keys(imageJSON);
 		// replace resin.img with the requested filename
 		if (keys.length === 1 && keys[0] === 'resin.img') {
@@ -103,13 +102,13 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	}
 
 	private async getDeviceTypeJSON(): Promise<DeviceTypeJSON> {
-		return (await axios.get(this.getUrl('device-type.json'))).data;
+		return (await this.axiosInstance.get(this.getUrl('device-type.json'))).data;
 	}
 
 	private async getPartStream(
 		filename: string,
 	): Promise<NodeJS.ReadableStream> {
-		const response = await axios({
+		const response = await this.axiosInstance({
 			method: 'get',
 			url: this.getUrl(`compressed/${filename}`),
 			responseType: 'stream',
