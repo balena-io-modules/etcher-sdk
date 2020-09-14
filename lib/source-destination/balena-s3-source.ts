@@ -28,15 +28,18 @@ import { ZipSource } from './zip';
 
 type Name = 'balena' | 'resin';
 
+const ESR_IMAGES_PREFIX = 'esr-images';
+const IMAGES_PREFIX = 'images';
+
 export interface AwsCredentials {
 	accessKeyId: string;
 	secretAccessKey: string;
 }
 
 export interface BalenaS3SourceOptions {
-	host?: string; // https://s3.amazonaws.com
-	bucket?: string; // resin-staging-img or resin-production-img-cloudformation
-	prefix?: string; // images or preloaded-images or esr-images
+	host: string; // https://s3.amazonaws.com
+	bucket: string; // resin-staging-img or resin-production-img-cloudformation
+	prefix: string; // images or preloaded-images or esr-images
 	deviceType: string; // raspberry-pi
 	buildId: string; // 2.9.6+rev1.prod
 	release?: string; // 1344795
@@ -58,9 +61,9 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 	];
 
 	constructor({
-		host = 'https://s3.amazonaws.com',
-		bucket = 'resin-production-img-cloudformation',
-		prefix = 'images',
+		host,
+		bucket,
+		prefix,
 		deviceType,
 		buildId,
 		release,
@@ -98,7 +101,7 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 			BalenaS3SourceBase.filesMissingFromPreloadedImages.includes(path)
 		) {
 			release = undefined;
-			prefix = this.isESR() ? 'esr-images' : 'images';
+			prefix = this.isESR() ? ESR_IMAGES_PREFIX : IMAGES_PREFIX;
 		}
 		return [
 			this.host,

@@ -33,7 +33,7 @@ const readJsonFile = async (path: string): Promise<any> => {
 	return JSON.parse(data);
 };
 
-const main = async ({
+async function main({
 	host,
 	bucket,
 	prefix,
@@ -46,9 +46,9 @@ const main = async ({
 	verify,
 	decompressFirst,
 }: {
-	host?: string;
+	host: string;
 	bucket: string;
-	prefix?: string;
+	prefix: string;
 	deviceType: string;
 	buildId: string;
 	release?: string;
@@ -57,7 +57,7 @@ const main = async ({
 	config: string;
 	verify: boolean;
 	decompressFirst: boolean;
-}) => {
+}) {
 	const source = new sourceDestination.BalenaS3Source({
 		host,
 		bucket,
@@ -85,7 +85,7 @@ const main = async ({
 		configure,
 		decompressFirst,
 	});
-};
+}
 
 // tslint:disable-next-line: no-var-requires
 const argv = require('yargs').command(

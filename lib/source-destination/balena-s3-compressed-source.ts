@@ -33,6 +33,12 @@ type ImageJSON = Dictionary<{ parts: ImageJSONPart[] }>;
 
 const DEFLATE_FOOTER = Buffer.from([0x03, 0x00]);
 
+export interface BalenaS3CompressedSourceOptions extends BalenaS3SourceOptions {
+	format?: 'zip' | 'gzip';
+	zipFilename?: string;
+	configuration?: Dictionary<any>;
+}
+
 export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	/*
 	 * Supports regular disk images (zipped or gzipped) and edison zip archives (zip only as it contains many files).
@@ -62,11 +68,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 		zipFilename = 'balena.img',
 		configuration,
 		...options
-	}: BalenaS3SourceOptions & {
-		format?: 'zip' | 'gzip';
-		zipFilename?: string;
-		configuration?: Dictionary<any>;
-	}) {
+	}: BalenaS3CompressedSourceOptions) {
 		super(options);
 		this.format = format;
 		this.zipFilename = zipFilename;
