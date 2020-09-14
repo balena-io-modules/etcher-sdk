@@ -16,11 +16,9 @@
 
 import { Spinner } from 'cli-spinner';
 import { promises as fs } from 'fs';
-import { env } from 'process';
 import ProgressBar = require('progress');
 
 import { multiWrite, sourceDestination } from '../lib';
-import { AwsCredentials } from '../lib/source-destination/balena-s3-source';
 import { ConfigureFunction } from '../lib/source-destination/configured-source/configured-source';
 import { delay } from '../lib/utils';
 
@@ -187,16 +185,4 @@ export async function pipeSourceToDestinationsWithProgressBar({
 	}
 	console.log();
 	return result;
-}
-
-export function getAwsCredentialsFromEnv(): AwsCredentials | undefined {
-	if (
-		env.AWS_ACCESS_KEY_ID !== undefined &&
-		env.AWS_SECRET_ACCESS_KEY !== undefined
-	) {
-		return {
-			accessKeyId: env.AWS_ACCESS_KEY_ID,
-			secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
-		};
-	}
 }

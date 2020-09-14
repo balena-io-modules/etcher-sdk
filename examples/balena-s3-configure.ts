@@ -16,49 +16,65 @@
 
 import { Disk } from 'file-disk';
 import { promises as fs } from 'fs';
+import { env } from 'process';
 import { Argv } from 'yargs';
 
-import { sourceDestination } from '../lib';
+import {
+	AwsCredentials,
+	BalenaS3Source,
+} from '../lib/source-destination/balena-s3-source';
+import { BalenaS3CompressedSource } from '../lib/source-destination/balena-s3-compressed-source';
 import { configure as legacyConfigure } from '../lib/source-destination/configured-source/configure';
 import { ConfigureFunction } from '../lib/source-destination/configured-source/configured-source';
+import { File } from '../lib/source-destination/file';
 
-import {
-	getAwsCredentialsFromEnv,
-	pipeSourceToDestinationsWithProgressBar,
-	wrapper,
-} from './utils';
+import { pipeSourceToDestinationsWithProgressBar, wrapper } from './utils';
 
 const readJsonFile = async (path: string): Promise<any> => {
 	const data = await fs.readFile(path, { encoding: 'utf8', flag: 'r' });
 	return JSON.parse(data);
 };
 
-async function main({
-	host,
-	bucket,
-	prefix,
-	deviceType,
-	buildId,
-	release,
-	fileDestination,
-	trim,
-	config,
-	verify,
-	decompressFirst,
-}: {
+function getAwsCredentialsFromEnv(): AwsCredentials | undefined {
+	if (
+		env.AWS_ACCESS_KEY_ID !== undefined &&
+		env.AWS_SECRET_ACCESS_KEY !== undefined
+	) {
+		return {
+			accessKeyId: env.AWS_ACCESS_KEY_ID,
+			secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
+		};
+	}
+}
+
+interface Arguments {
+	sourceClass:
+		| BalenaS3Source['constructor']['name']
+		| BalenaS3CompressedSource['constructor']['name'];
 	host: string;
 	bucket: string;
 	prefix: string;
 	deviceType: string;
 	buildId: string;
 	release?: string;
+	format: 'zip' | 'gzip';
+	asItIs: boolean;
 	fileDestination: string;
 	trim: boolean;
 	config: string;
 	verify: boolean;
 	decompressFirst: boolean;
-}) {
-	const source = new sourceDestination.BalenaS3Source({
+}
+
+function createS3Source({
+	host,
+	bucket,
+	prefix,
+	deviceType,
+	buildId,
+	release,
+}: Arguments) {
+	return new BalenaS3Source({
 		host,
 		bucket,
 		prefix,
@@ -67,23 +83,62 @@ async function main({
 		release,
 		awsCredentials: getAwsCredentialsFromEnv(),
 	});
+}
+
+async function createCompressedS3Source({
+	host,
+	bucket,
+	prefix,
+	deviceType,
+	buildId,
+	release,
+	format,
+	config,
+}: Arguments) {
+	return new BalenaS3CompressedSource({
+		host,
+		bucket,
+		prefix,
+		deviceType,
+		buildId,
+		release,
+		format,
+		configuration: config ? await readJsonFile(config) : undefined,
+		awsCredentials: getAwsCredentialsFromEnv(),
+	});
+}
+
+async function main(options: Arguments) {
 	let configure: ConfigureFunction | undefined;
-	if (config !== undefined) {
-		configure = async (disk: Disk) => {
-			await legacyConfigure(disk, await readJsonFile(config));
-		};
+	let source: BalenaS3Source | BalenaS3CompressedSource;
+	if (options.sourceClass === BalenaS3CompressedSource.name) {
+		if (options.trim) {
+			throw new Error(`Can not trim a ${options.sourceClass}`);
+		}
+		source = await createCompressedS3Source(options);
+	} else {
+		if (options.format !== 'zip') {
+			throw new Error(`Format can only be zip for ${options.sourceClass}`);
+		}
+		if (options.config !== undefined) {
+			configure = async (disk: Disk) => {
+				await legacyConfigure(disk, await readJsonFile(options.config));
+			};
+		}
+		source = createS3Source(options);
 	}
-	const destination = new sourceDestination.File({
-		path: fileDestination,
+	const destination = new File({
+		path: options.fileDestination,
 		write: true,
 	});
 	await pipeSourceToDestinationsWithProgressBar({
 		source,
 		destinations: [destination],
-		verify,
-		trim,
+		verify: options.verify,
+		trim: options.trim,
 		configure,
-		decompressFirst,
+		decompressFirst: options.decompressFirst,
+		asItIs: options.asItIs,
 	});
 }
 
@@ -110,12 +165,22 @@ const argv = require('yargs').command(
 		});
 		yargs.option('prefix', { type: 'string', default: 'images' });
 		yargs.option('release', { type: 'string' });
+		yargs.option('format', { choices: ['zip', 'gzip'], default: 'zip' });
+		yargs.option('asItIs', {
+			type: 'boolean',
+			default: false,
+			description: 'do not try to decompress, write as it is',
+		});
 		yargs.option('verify', { type: 'boolean', default: false });
 		yargs.option('trim', { type: 'boolean', default: false });
 		yargs.option('decompressFirst', { type: 'boolean', default: false });
 		yargs.option('config', {
 			type: 'string',
 			description: 'json configuration file',
+		});
+		yargs.option('sourceClass', {
+			choices: [BalenaS3Source.name, BalenaS3CompressedSource.name],
+			default: BalenaS3Source.name,
 		});
 	},
 ).argv;
