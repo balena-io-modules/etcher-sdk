@@ -1,6 +1,10 @@
 import * as CombinedStream from 'combined-stream';
 import { BufferDisk } from 'file-disk';
-import { createDeflatePart, createGzipFromParts } from 'gzip-stream';
+import {
+	createDeflatePart,
+	createGzipFromParts,
+	DEFLATE_END,
+} from 'gzip-stream';
 import { Readable } from 'stream';
 import * as ZipPartStream from 'zip-part-stream';
 import { createInflateRaw } from 'zlib';
@@ -30,8 +34,6 @@ interface ImageJSONPart {
 }
 
 type ImageJSON = Dictionary<{ parts: ImageJSONPart[] }>;
-
-const DEFLATE_FOOTER = Buffer.from([0x03, 0x00]);
 
 export interface BalenaS3CompressedSourceOptions extends BalenaS3SourceOptions {
 	format?: 'zip' | 'gzip';
@@ -157,7 +159,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 		const stream = await this.getPartStream(filename);
 		const combined = CombinedStream.create();
 		combined.append(stream);
-		combined.append(DEFLATE_FOOTER);
+		combined.append(DEFLATE_END);
 		const inflate = createInflateRaw();
 		combined.pipe(inflate);
 		return new BufferDisk(await streamToBuffer(inflate));

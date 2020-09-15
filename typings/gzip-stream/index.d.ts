@@ -26,4 +26,6 @@ declare module 'gzip-stream' {
 			digest?: string;
 		}>,
 	): GzipStream;
+
+	export const DEFLATE_END: Buffer;
 }
