@@ -34,6 +34,7 @@ const IMAGES_PREFIX = 'images';
 export interface AwsCredentials {
 	accessKeyId: string;
 	secretAccessKey: string;
+	sessionToken?: string;
 }
 
 export interface BalenaS3SourceOptions {
