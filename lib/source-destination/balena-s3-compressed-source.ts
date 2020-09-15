@@ -36,7 +36,7 @@ interface ImageJSONPart {
 type ImageJSON = Dictionary<{ parts: ImageJSONPart[] }>;
 
 export interface BalenaS3CompressedSourceOptions extends BalenaS3SourceOptions {
-	format?: 'zip' | 'gzip';
+	format: 'zip' | 'gzip';
 	zipFilename?: string;
 	configuration?: Dictionary<any>;
 }
@@ -56,7 +56,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	 */
 	private imageJSON: ImageJSON;
 	private deviceTypeJSON: DeviceTypeJSON;
-	private format: 'zip' | 'gzip';
+	private format: BalenaS3CompressedSourceOptions['format'];
 	private zipFilename: string;
 	// configuration is config.json + network configuration + dashboard "when" options like "processorCore" for ts4900
 	private configuration?: Dictionary<any>;
@@ -66,7 +66,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	>();
 
 	constructor({
-		format = 'zip',
+		format,
 		zipFilename = 'balena.img',
 		configuration,
 		...options
