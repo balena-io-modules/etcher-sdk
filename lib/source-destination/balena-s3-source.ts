@@ -89,8 +89,12 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 		return true;
 	}
 
+	public static isESRVersion(buildId: string) {
+		return /^\d{4}\.\d{2}\.\d+\.(dev|prod)$/.test(buildId);
+	}
+
 	private isESR() {
-		return /^\d{4}\.\d{2}\.\d+\.(dev|prod)$/.test(this.buildId);
+		return BalenaS3SourceBase.isESRVersion(this.buildId);
 	}
 
 	protected getUrl(path: string): string {
