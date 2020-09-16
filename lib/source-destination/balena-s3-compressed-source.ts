@@ -37,7 +37,7 @@ type ImageJSON = Dictionary<{ parts: ImageJSONPart[] }>;
 
 export interface BalenaS3CompressedSourceOptions extends BalenaS3SourceOptions {
 	format: 'zip' | 'gzip';
-	zipFilename?: string;
+	filenamePrefix?: string;
 	configuration?: Dictionary<any>;
 }
 
@@ -57,51 +57,56 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	private imageJSON: ImageJSON;
 	private deviceTypeJSON: DeviceTypeJSON;
 	private format: BalenaS3CompressedSourceOptions['format'];
-	private zipFilename: string;
+	private filenamePrefix?: string;
 	// configuration is config.json + network configuration + dashboard "when" options like "processorCore" for ts4900
 	private configuration?: Dictionary<any>;
 	private configuredParts = new Map<
 		string,
 		{ crc: number; zLen: number; buffer: Buffer }
 	>();
+	private supervisorVersion: string;
+	private lastModified: Date;
+	private osVersion: string;
+	private size: number;
+	private filename: string;
 
 	constructor({
 		format,
-		zipFilename = 'balena.img',
+		filenamePrefix,
 		configuration,
 		...options
 	}: BalenaS3CompressedSourceOptions) {
 		super(options);
 		this.format = format;
-		this.zipFilename = zipFilename;
+		this.filenamePrefix = filenamePrefix;
 		this.configuration = configuration;
 	}
 
-	public async getSize(): Promise<number> {
+	private async getSize(): Promise<number> {
 		return (await this.createStream(true)).zLen;
 	}
 
+	private getFilename(): string {
+		return [
+			this.filenamePrefix,
+			this.deviceType,
+			this.osVersion,
+			this.buildId.endsWith('.dev') ? 'dev' : undefined,
+			this.supervisorVersion,
+		]
+			.filter((p) => p !== undefined)
+			.join('-');
+	}
+
 	protected async _getMetadata(): Promise<Metadata> {
-		const [
-			{ supervisorVersion, lastModified },
-			osVersion,
-			size,
-		] = await Promise.all([
-			this.getSupervisorVersion(),
-			this.getOsVersion(),
-			this.getSize(),
-		]);
-		const metadata: Metadata = {
-			supervisorVersion,
-			osVersion,
-			lastModified,
-			size,
+		return {
+			supervisorVersion: this.supervisorVersion,
+			osVersion: this.osVersion,
+			lastModified: this.lastModified,
+			size: this.size,
 			version: this.buildId,
+			name: this.filename,
 		};
-		if (this.format === 'zip') {
-			metadata.name = this.zipFilename;
-		}
-		return metadata;
 	}
 
 	private async getSupervisorVersion() {
@@ -118,13 +123,6 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 
 	private async getImageJSON(): Promise<ImageJSON> {
 		const imageJSON = (await this.download('image.json')).data;
-		const keys = Object.keys(imageJSON);
-		// replace resin.img with the requested filename
-		if (keys.length === 1 && keys[0] === 'resin.img') {
-			return {
-				[this.zipFilename]: imageJSON['resin.img'],
-			};
-		}
 		return imageJSON;
 	}
 
@@ -231,13 +229,36 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	}
 
 	protected async _open(): Promise<void> {
-		const [imageJSON, deviceTypeJSON] = await Promise.all([
+		const [
+			{ supervisorVersion, lastModified },
+			osVersion,
+			imageJSON,
+			deviceTypeJSON,
+		] = await Promise.all([
+			this.getSupervisorVersion(),
+			this.getOsVersion(),
 			this.getImageJSON(),
 			this.getDeviceTypeJSON(),
 		]);
-		this.imageJSON = imageJSON;
+		this.supervisorVersion = supervisorVersion;
+		this.lastModified = lastModified;
+		this.osVersion = osVersion;
 		this.deviceTypeJSON = deviceTypeJSON;
+		// The order is important, getFilename() expects osVersion and supervisorVersion to be set
+		this.filename = this.getFilename();
+		// replace resin.img with the requested filename if needed
+		const keys = Object.keys(imageJSON);
+		if (keys.length === 1 && keys[0] === 'resin.img') {
+			this.filename += '.img';
+			this.imageJSON = {
+				[this.filename]: imageJSON['resin.img'],
+			};
+		} else {
+			this.imageJSON = imageJSON;
+		}
 		await this.configure();
+		// The order is important, getSize() expects imageJSON and filename to be set and the image to be configured
+		this.size = await this.getSize();
 	}
 
 	private async getParts(fake: boolean) {
