@@ -129,17 +129,19 @@ export async function configure(
 		} catch {
 			// Directory already exists
 		}
-		let index;
-		for (index = 0; index < networkConfigFiles.ethernet.length; index++) {
+		for (const [
+			index,
+			configuration,
+		] of networkConfigFiles.ethernet.entries()) {
 			await writeFileAsync(
 				`/system-connections/connection-${pad(index + 1)}`,
-				networkConfigFiles.ethernet[index],
+				configuration,
 			);
 		}
-		for (index = 0; index < networkConfigFiles.wifi.length; index++) {
+		for (const [index, configuration] of networkConfigFiles.wifi.entries()) {
 			await writeFileAsync(
-				`/system-connections/connection-${pad(index + 1)}`,
-				networkConfigFiles.wifi[index],
+				`/system-connections/balena-wifi-${pad(index + 1)}`,
+				configuration,
 			);
 		}
 	});
