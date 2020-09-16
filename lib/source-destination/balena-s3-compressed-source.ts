@@ -93,6 +93,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 			this.osVersion,
 			this.buildId.endsWith('.dev') ? 'dev' : undefined,
 			this.supervisorVersion,
+			this.release,
 		]
 			.filter((p) => p !== undefined)
 			.join('-');
