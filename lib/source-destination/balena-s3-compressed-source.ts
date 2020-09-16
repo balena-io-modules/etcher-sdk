@@ -77,19 +77,45 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 		this.configuration = configuration;
 	}
 
-	private async getSize(): Promise<number> {
+	public async getSize(): Promise<number> {
 		return (await this.createStream(true)).zLen;
 	}
 
 	protected async _getMetadata(): Promise<Metadata> {
+		const [
+			{ supervisorVersion, lastModified },
+			osVersion,
+			size,
+		] = await Promise.all([
+			this.getSupervisorVersion(),
+			this.getOsVersion(),
+			this.getSize(),
+		]);
 		const metadata: Metadata = {
-			size: await this.getSize(),
+			supervisorVersion,
+			osVersion,
+			lastModified,
+			size,
 			version: this.buildId,
 		};
 		if (this.format === 'zip') {
 			metadata.name = this.zipFilename;
 		}
 		return metadata;
+	}
+
+	private async getSupervisorVersion() {
+		const response = await this.axiosInstance.get(this.getUrl('VERSION'));
+		const lastModified = new Date(response.headers['last-modified']);
+		const supervisorVersion = response.data.trim();
+		return { supervisorVersion, lastModified };
+	}
+
+	private async getOsVersion() {
+		const response = await this.axiosInstance.get(
+			this.getUrl('VERSION_HOSTOS'),
+		);
+		return response.data.trim();
 	}
 
 	private async getImageJSON(): Promise<ImageJSON> {
