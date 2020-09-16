@@ -97,6 +97,10 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 		return BalenaS3SourceBase.isESRVersion(this.buildId);
 	}
 
+	protected async download(path: string, responseType?: 'stream') {
+		return await this.axiosInstance.get(this.getUrl(path), { responseType });
+	}
+
 	protected getUrl(path: string): string {
 		let prefix = this.prefix;
 		let release = this.release;

@@ -105,22 +105,19 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	}
 
 	private async getSupervisorVersion() {
-		const response = await this.axiosInstance.get(this.getUrl('VERSION'));
+		const response = await this.download('VERSION');
 		const lastModified = new Date(response.headers['last-modified']);
 		const supervisorVersion = response.data.trim();
 		return { supervisorVersion, lastModified };
 	}
 
 	private async getOsVersion() {
-		const response = await this.axiosInstance.get(
-			this.getUrl('VERSION_HOSTOS'),
-		);
+		const response = await this.download('VERSION_HOSTOS');
 		return response.data.trim();
 	}
 
 	private async getImageJSON(): Promise<ImageJSON> {
-		const imageJSON = (await this.axiosInstance.get(this.getUrl('image.json')))
-			.data;
+		const imageJSON = (await this.download('image.json')).data;
 		const keys = Object.keys(imageJSON);
 		// replace resin.img with the requested filename
 		if (keys.length === 1 && keys[0] === 'resin.img') {
@@ -132,17 +129,13 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	}
 
 	private async getDeviceTypeJSON(): Promise<DeviceTypeJSON> {
-		return (await this.axiosInstance.get(this.getUrl('device-type.json'))).data;
+		return (await this.download('device-type.json')).data;
 	}
 
 	private async getPartStream(
 		filename: string,
 	): Promise<NodeJS.ReadableStream> {
-		const response = await this.axiosInstance({
-			method: 'get',
-			url: this.getUrl(`compressed/${filename}`),
-			responseType: 'stream',
-		});
+		const response = await this.download(`compressed/${filename}`, 'stream');
 		return response.data;
 	}
 
