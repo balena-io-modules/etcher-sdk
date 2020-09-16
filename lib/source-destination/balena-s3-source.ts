@@ -30,6 +30,7 @@ type Name = 'balena' | 'resin';
 
 const ESR_IMAGES_PREFIX = 'esr-images';
 const IMAGES_PREFIX = 'images';
+const PRELOADED_IMAGES_PREFIX = 'preloaded-images';
 
 export interface AwsCredentials {
 	accessKeyId: string;
@@ -40,7 +41,7 @@ export interface AwsCredentials {
 export interface BalenaS3SourceOptions {
 	host: string; // https://s3.amazonaws.com
 	bucket: string; // resin-staging-img or resin-production-img-cloudformation
-	prefix: string; // images or preloaded-images or esr-images
+	prefix?: string; // images or preloaded-images or esr-images
 	deviceType: string; // raspberry-pi
 	buildId: string; // 2.9.6+rev1.prod
 	release?: string; // 1344795
@@ -73,7 +74,15 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 		super();
 		this.host = host;
 		this.bucket = bucket;
-		this.prefix = prefix;
+		if (prefix !== undefined) {
+			this.prefix = prefix;
+		} else if (release !== undefined) {
+			this.prefix = PRELOADED_IMAGES_PREFIX;
+		} else if (BalenaS3SourceBase.isESRVersion(buildId)) {
+			this.prefix = ESR_IMAGES_PREFIX;
+		} else {
+			this.prefix = IMAGES_PREFIX;
+		}
 		this.deviceType = deviceType;
 		this.buildId = buildId;
 		this.release = release;

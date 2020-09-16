@@ -54,7 +54,7 @@ interface Arguments {
 		| BalenaS3CompressedSource['constructor']['name'];
 	host: string;
 	bucket: string;
-	prefix: string;
+	prefix?: string;
 	deviceType: string;
 	buildId: string;
 	release?: string;
@@ -164,7 +164,7 @@ const argv = require('yargs').command(
 			type: 'string',
 			default: 'resin-production-img-cloudformation',
 		});
-		yargs.option('prefix', { type: 'string', default: 'images' });
+		yargs.option('prefix', { type: 'string' });
 		yargs.option('release', { type: 'string' });
 		yargs.option('format', { choices: ['zip', 'gzip'], default: 'zip' });
 		yargs.option('asItIs', {
