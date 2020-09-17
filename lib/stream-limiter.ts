@@ -37,30 +37,23 @@ export class StreamLimiter extends Transform {
 		}
 		this.maxBytes -= length;
 		if (this.maxBytes === 0) {
-			if (this.stream.unpipe !== undefined) {
-				this.stream.unpipe(this);
-			}
+			this.stream.unpipe?.(this);
 			this.push(null);
 			this.emit('finish');
 			// Emit an 'end' event on the root stream because we want to stop reporting progress events on it.
 			getRootStream(this.stream).emit('end');
 			// TODO: maybe we don't need to try to close / destroy the stream ?
 			// We could let it be destroyed later when there is no more references to it.
-			// @ts-ignore
-			if (this.stream.close !== undefined) {
-				// avoid https://github.com/nodejs/node/issues/15625
+			// avoid https://github.com/nodejs/node/issues/15625
+			// @ts-ignore zlib.Gunzip exists
+			if (!(this.stream instanceof zlib.Gunzip)) {
 				// @ts-ignore
-				if (!(this.stream instanceof zlib.Gunzip)) {
-					// @ts-ignore
-					this.stream.close();
-				}
+				this.stream.close?.();
+			}
+			// avoid `stream.push() after EOF`
+			if (this.stream.constructor.name !== 'JSLzmaStream') {
 				// @ts-ignore
-			} else if (this.stream.destroy !== undefined) {
-				// avoid `stream.push() after EOF`
-				if (this.stream.constructor.name !== 'JSLzmaStream') {
-					// @ts-ignore
-					this.stream.destroy();
-				}
+				this.stream.destroy?.();
 			}
 		}
 		callback();
