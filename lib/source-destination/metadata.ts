@@ -41,4 +41,5 @@ export interface Metadata {
 	supervisorVersion?: string;
 	osVersion?: string;
 	lastModified?: Date;
+	format?: 'zip' | 'gzip';
 }
