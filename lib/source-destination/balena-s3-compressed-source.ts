@@ -305,7 +305,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 
 	public async createReadStream(
 		options: CreateReadStreamOptions = {},
-	): Promise<NodeJS.ReadableStream> {
+	): Promise<Readable> {
 		if (options.start !== undefined) {
 			throw new NotCapable();
 		}
