@@ -241,6 +241,10 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 			this.getImageJSON(),
 			this.getDeviceTypeJSON(),
 		]);
+		if (deviceTypeJSON.yocto.archive) {
+			// Only zip works for yocto archives (intel-edison)
+			this.format = 'zip';
+		}
 		this.supervisorVersion = supervisorVersion;
 		this.lastModified = lastModified;
 		this.osVersion = osVersion;

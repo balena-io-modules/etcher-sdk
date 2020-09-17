@@ -44,6 +44,9 @@ export interface DeviceTypeJSON {
 		config: FileOnPartition;
 		operations?: CopyOperation[];
 	};
+	yocto: {
+		archive?: boolean;
+	};
 }
 
 const MBR_LAST_PRIMARY_PARTITION = 4;
