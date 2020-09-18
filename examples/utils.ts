@@ -117,6 +117,7 @@ export async function pipeSourceToDestinationsWithProgressBar({
 	configure,
 	verify = false,
 	numBuffers = 16,
+	asItIs = false,
 }: {
 	source: sourceDestination.SourceDestination;
 	destinations: sourceDestination.SourceDestination[];
@@ -125,6 +126,7 @@ export async function pipeSourceToDestinationsWithProgressBar({
 	configure?: ConfigureFunction;
 	verify?: boolean;
 	numBuffers?: number;
+	asItIs?: boolean;
 }): Promise<multiWrite.PipeSourceToDestinationsResult> {
 	function onFail(
 		destination: sourceDestination.SourceDestination,
@@ -170,6 +172,7 @@ export async function pipeSourceToDestinationsWithProgressBar({
 		trim,
 		decompressFirst,
 		configure,
+		asItIs,
 	});
 	// Sleep here to be sure the last spinner title was shown.
 	await delay(SPINNER_DELAY);

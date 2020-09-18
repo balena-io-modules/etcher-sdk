@@ -19,35 +19,52 @@ import { Disk } from 'file-disk';
 import { getPartitions } from 'partitioninfo';
 import { promisify } from 'util';
 
-import { execute as configureAction } from './operations/configure';
-import { execute as copyAction } from './operations/copy';
+import { configure as configureAction } from './operations/configure';
+import { copy as copyAction } from './operations/copy';
 
-// This code comes from resin-image maker, converted to typescript and dropped Edison zip archive support.
+import { Dictionary } from '../../utils';
 
-type OperationCommand = 'configure' | 'copy';
+export type Partition = number | { primary: number; logical?: number };
 
-interface Operation {
-	command: OperationCommand;
-	when: any;
+export interface FileOnPartition {
+	partition?: Partition;
+	image?: string;
+	path: string;
+}
+
+export interface CopyOperation {
+	command: 'copy';
+	from: FileOnPartition;
+	to: FileOnPartition;
+	when: Dictionary<string>;
+}
+
+export interface DeviceTypeJSON {
+	configuration: {
+		config: FileOnPartition;
+		operations?: CopyOperation[];
+	};
+	yocto: {
+		archive?: boolean;
+	};
 }
 
 const MBR_LAST_PRIMARY_PARTITION = 4;
 
-const ACTIONS = {
-	configure: configureAction,
-	copy: copyAction,
-};
+export function shouldRunOperation(
+	options: Dictionary<any>,
+	operation: CopyOperation,
+): boolean {
+	const when = operation.when ?? {};
+	for (const [key, value] of Object.entries(when)) {
+		if (options[key] !== value) {
+			return false;
+		}
+	}
+	return true;
+}
 
-const executeOperation = async (
-	operation: Operation,
-	disk: Disk,
-): Promise<void> => {
-	return await ACTIONS[operation.command](operation, disk);
-};
-
-const getPartitionIndex = (
-	partition: number | { primary?: number; logical?: number },
-): number => {
+export function normalizePartition(partition: Partition): number {
 	// New device-type.json partition format: partition index
 	if (typeof partition === 'number') {
 		return partition;
@@ -61,9 +78,11 @@ const getPartitionIndex = (
 		return partition.primary;
 	}
 	throw new Error(`Invalid partition: ${partition}`);
-};
+}
 
-const getDiskDeviceType = async (disk: Disk): Promise<any> => {
+async function getDiskDeviceType(
+	disk: Disk,
+): Promise<DeviceTypeJSON | undefined> {
 	const partitions = await getPartitions(disk);
 	for (const partition of partitions.partitions) {
 		if (partition.type === 14) {
@@ -79,51 +98,34 @@ const getDiskDeviceType = async (disk: Disk): Promise<any> => {
 			}
 		}
 	}
-};
+}
 
-export const configure = async (
+export async function configure(
 	disk: Disk,
-	options: { [k: string]: any; config?: any } = {},
-): Promise<void> => {
-	console.log('options', options);
+	config?: Dictionary<any>,
+): Promise<void> {
 	const deviceType = await getDiskDeviceType(disk);
-	console.log(
-		'device type read from disk image:\n',
-		JSON.stringify(deviceType, null, 4),
-	);
-	let operations = deviceType?.configuration?.operations ?? [];
-	operations = JSON.parse(JSON.stringify(operations));
-	const config = deviceType?.configuration?.config;
+	const operations = deviceType?.configuration?.operations ?? [];
+	const configPartition = deviceType?.configuration?.config.partition;
 
-	if (config) {
-		operations.push({
-			command: 'configure',
-			partition: config.partition,
-			data: options.config,
-		});
+	if (config !== undefined && configPartition !== undefined) {
+		await configureAction(disk, normalizePartition(configPartition), config);
 	}
 
-	operations = operations.filter((operation: Operation) => {
-		if (operation.when !== undefined) {
-			for (const key in operation.when) {
-				if (options[key] !== operations.when[key]) {
-					return false;
-				}
-			}
+	for (const cpy of operations) {
+		if (
+			cpy.from.partition !== undefined &&
+			cpy.to.partition !== undefined &&
+			shouldRunOperation(config ?? {}, cpy)
+		) {
+			await copyAction(
+				disk,
+				normalizePartition(cpy.from.partition),
+				cpy.from.path,
+				disk,
+				normalizePartition(cpy.to.partition),
+				cpy.to.path,
+			);
 		}
-		return true;
-	});
-
-	for (const operation of operations) {
-		if (operation.partition !== undefined) {
-			operation.partition = getPartitionIndex(operation.partition);
-		}
-		if (operation.to?.partition !== undefined) {
-			operation.to.partition = getPartitionIndex(operation.to.partition);
-		}
-		if (operation.from?.partition !== undefined) {
-			operation.from.partition = getPartitionIndex(operation.from.partition);
-		}
-		await executeOperation(operation, disk);
 	}
-};
+}

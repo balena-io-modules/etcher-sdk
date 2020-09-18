@@ -38,4 +38,8 @@ export interface Metadata {
 	url?: string;
 	version?: string;
 	isEtch?: boolean;
+	supervisorVersion?: string;
+	osVersion?: string;
+	lastModified?: Date;
+	format?: 'zip' | 'gzip';
 }

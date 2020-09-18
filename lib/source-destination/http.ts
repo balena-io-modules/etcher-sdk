@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 // Always use the node adapter (even in a browser)
 // @ts-ignore
 import * as axiosNodeAdapter from 'axios/lib/adapters/http';
@@ -41,17 +41,21 @@ export class Http extends SourceDestination {
 	private acceptsRange: boolean;
 	private ready: Promise<void>;
 	private error: Error;
+	private axiosInstance: AxiosInstance;
 
 	constructor({
 		url,
 		avoidRandomAccess = false,
+		axiosInstance = axios.create(),
 	}: {
 		url: string;
 		avoidRandomAccess?: boolean;
+		axiosInstance?: AxiosInstance;
 	}) {
 		super();
 		this.url = url;
 		this.avoidRandomAccess = avoidRandomAccess;
+		this.axiosInstance = axiosInstance;
 		this.ready = this.getInfo();
 	}
 
@@ -59,10 +63,10 @@ export class Http extends SourceDestination {
 		try {
 			let response: AxiosResponse;
 			try {
-				response = await axios({ method: 'head', url: this.url });
+				response = await this.axiosInstance({ method: 'head', url: this.url });
 			} catch (error) {
 				// We use GET instead of HEAD as some servers will respond with a 403 to HEAD requests
-				response = await axios({
+				response = await this.axiosInstance({
 					method: 'get',
 					url: this.url,
 					responseType: 'stream',
@@ -123,7 +127,7 @@ export class Http extends SourceDestination {
 		length: number,
 		sourceOffset: number,
 	): Promise<ReadResult> {
-		const response = await axios({
+		const response = await this.axiosInstance({
 			method: 'get',
 			url: this.redirectUrl,
 			responseType: 'arraybuffer',
@@ -142,7 +146,7 @@ export class Http extends SourceDestination {
 		start = 0,
 		end,
 	}: CreateReadStreamOptions = {}): Promise<NodeJS.ReadableStream> {
-		const response = await axios({
+		const response = await this.axiosInstance({
 			method: 'get',
 			url: this.redirectUrl,
 			headers: {

@@ -41,7 +41,9 @@ export const getFileStreamFromZipStream = async (
 					}
 					entry.on('end', () => {
 						// Stop reading the zip archive once the file we want has been extracted.
-						zipStream.unpipe(unzipper);
+						zipStream.unpipe?.(unzipper);
+						// @ts-ignore
+						zipStream.destroy?.();
 					});
 					resolve(entry);
 				} else {
