@@ -33,7 +33,7 @@ interface ImageJSONPart {
 	partitionIndex?: string;
 }
 
-type ImageJSON = Dictionary<{ parts: ImageJSONPart[] }>;
+export type ImageJSON = Dictionary<{ parts: ImageJSONPart[] }>;
 
 export interface BalenaS3CompressedSourceOptions extends BalenaS3SourceOptions {
 	format: 'zip' | 'gzip';
