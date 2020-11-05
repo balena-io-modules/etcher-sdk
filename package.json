@@ -75,7 +75,7 @@
     "zip-part-stream": "^1.0.1"
   },
   "devDependencies": {
-    "@balena/lint": "^5.0.4",
+    "@balena/lint": "^5.2.1",
     "@types/bluebird": "^3.5.23",
     "@types/chai": "^4.1.4",
     "@types/cli-spinner": "^0.2.0",

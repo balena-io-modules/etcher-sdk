@@ -26,7 +26,8 @@ import {
 	SparseWritable,
 } from './shared';
 
-export class SparseTransformStream extends Transform
+export class SparseTransformStream
+	extends Transform
 	implements SparseWritable, SparseReadable {
 	// This is only used to align buffers emitted by node-udif's createSparseStream as we don't control their allocation
 	public blocks: BlocksWithChecksum[];

@@ -19,7 +19,8 @@ import { UsbbootDevice } from 'node-raspberrypi-usbboot';
 import { AdapterSourceDestination } from '../scanner/adapters/adapter';
 import { SourceDestination } from './source-destination';
 
-export class UsbbootDrive extends SourceDestination
+export class UsbbootDrive
+	extends SourceDestination
 	implements AdapterSourceDestination {
 	public raw = null;
 	public displayName = 'Initializing device';

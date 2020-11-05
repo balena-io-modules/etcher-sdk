@@ -19,7 +19,8 @@ import { DriverlessDevice as WinUsbDriverlessDevice } from 'winusb-driver-genera
 import { AdapterSourceDestination } from '../scanner/adapters/adapter';
 import { SourceDestination } from './source-destination';
 
-export class DriverlessDevice extends SourceDestination
+export class DriverlessDevice
+	extends SourceDestination
 	implements AdapterSourceDestination {
 	public accessible = false;
 	public raw = null;
