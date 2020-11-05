@@ -1,92 +1,114 @@
-[etcher-sdk](../README.md) › [BalenaS3Source](balenas3source.md)
+[etcher-sdk](../README.md) › [BalenaS3CompressedSource](balenas3compressedsource.md)
 
-# Class: BalenaS3Source
+# Class: BalenaS3CompressedSource
 
 ## Hierarchy
 
   ↳ [BalenaS3SourceBase](balenas3sourcebase.md)
 
-  ↳ **BalenaS3Source**
+  ↳ **BalenaS3CompressedSource**
 
 ## Index
 
 ### Constructors
 
-* [constructor](balenas3source.md#constructor)
+* [constructor](balenas3compressedsource.md#constructor)
 
 ### Properties
 
-* [axiosInstance](balenas3source.md#protected-axiosinstance)
-* [bucket](balenas3source.md#readonly-bucket)
-* [buildId](balenas3source.md#readonly-buildid)
-* [deviceType](balenas3source.md#readonly-devicetype)
-* [host](balenas3source.md#readonly-host)
-* [name](balenas3source.md#name)
-* [names](balenas3source.md#private-names)
-* [prefix](balenas3source.md#readonly-prefix)
-* [rawSource](balenas3source.md#private-rawsource)
-* [release](balenas3source.md#optional-readonly-release)
-* [zipSource](balenas3source.md#private-zipsource)
-* [defaultMaxListeners](balenas3source.md#static-defaultmaxlisteners)
-* [imageExtensions](balenas3source.md#static-readonly-imageextensions)
-* [mimetype](balenas3source.md#static-optional-readonly-mimetype)
+* [axiosInstance](balenas3compressedsource.md#protected-axiosinstance)
+* [bucket](balenas3compressedsource.md#readonly-bucket)
+* [buildId](balenas3compressedsource.md#readonly-buildid)
+* [configuration](balenas3compressedsource.md#private-optional-configuration)
+* [configuredParts](balenas3compressedsource.md#private-configuredparts)
+* [deviceType](balenas3compressedsource.md#readonly-devicetype)
+* [deviceTypeJSON](balenas3compressedsource.md#private-devicetypejson)
+* [filename](balenas3compressedsource.md#private-filename)
+* [filenamePrefix](balenas3compressedsource.md#private-optional-filenameprefix)
+* [format](balenas3compressedsource.md#private-format)
+* [host](balenas3compressedsource.md#readonly-host)
+* [imageJSON](balenas3compressedsource.md#private-imagejson)
+* [lastModified](balenas3compressedsource.md#private-lastmodified)
+* [osVersion](balenas3compressedsource.md#private-osversion)
+* [prefix](balenas3compressedsource.md#readonly-prefix)
+* [release](balenas3compressedsource.md#optional-readonly-release)
+* [size](balenas3compressedsource.md#private-size)
+* [supervisorVersion](balenas3compressedsource.md#private-supervisorversion)
+* [defaultMaxListeners](balenas3compressedsource.md#static-defaultmaxlisteners)
+* [imageExtensions](balenas3compressedsource.md#static-readonly-imageextensions)
+* [mimetype](balenas3compressedsource.md#static-optional-readonly-mimetype)
 
 ### Methods
 
-* [_close](balenas3source.md#protected-_close)
-* [_getMetadata](balenas3source.md#protected-_getmetadata)
-* [_open](balenas3source.md#protected-_open)
-* [addListener](balenas3source.md#addlistener)
-* [canCreateReadStream](balenas3source.md#cancreatereadstream)
-* [canCreateSparseReadStream](balenas3source.md#cancreatesparsereadstream)
-* [canCreateSparseWriteStream](balenas3source.md#cancreatesparsewritestream)
-* [canCreateWriteStream](balenas3source.md#cancreatewritestream)
-* [canRead](balenas3source.md#canread)
-* [canWrite](balenas3source.md#canwrite)
-* [close](balenas3source.md#close)
-* [createReadStream](balenas3source.md#createreadstream)
-* [createSparseReadStream](balenas3source.md#createsparsereadstream)
-* [createSparseWriteStream](balenas3source.md#createsparsewritestream)
-* [createVerifier](balenas3source.md#createverifier)
-* [createWriteStream](balenas3source.md#createwritestream)
-* [download](balenas3source.md#protected-download)
-* [emit](balenas3source.md#emit)
-* [eventNames](balenas3source.md#eventnames)
-* [getAlignment](balenas3source.md#getalignment)
-* [getBlocks](balenas3source.md#getblocks)
-* [getInnerSource](balenas3source.md#getinnersource)
-* [getMaxListeners](balenas3source.md#getmaxlisteners)
-* [getMetadata](balenas3source.md#getmetadata)
-* [getName](balenas3source.md#private-getname)
-* [getPartitionTable](balenas3source.md#getpartitiontable)
-* [getUrl](balenas3source.md#protected-geturl)
-* [listenerCount](balenas3source.md#listenercount)
-* [listeners](balenas3source.md#listeners)
-* [off](balenas3source.md#off)
-* [on](balenas3source.md#on)
-* [once](balenas3source.md#once)
-* [open](balenas3source.md#open)
-* [prependListener](balenas3source.md#prependlistener)
-* [prependOnceListener](balenas3source.md#prependoncelistener)
-* [rawListeners](balenas3source.md#rawlisteners)
-* [read](balenas3source.md#read)
-* [removeAllListeners](balenas3source.md#removealllisteners)
-* [removeListener](balenas3source.md#removelistener)
-* [setMaxListeners](balenas3source.md#setmaxlisteners)
-* [write](balenas3source.md#write)
-* [isESRVersion](balenas3source.md#static-isesrversion)
-* [listenerCount](balenas3source.md#static-listenercount)
-* [register](balenas3source.md#static-register)
+* [_close](balenas3compressedsource.md#protected-_close)
+* [_getMetadata](balenas3compressedsource.md#protected-_getmetadata)
+* [_open](balenas3compressedsource.md#protected-_open)
+* [addListener](balenas3compressedsource.md#addlistener)
+* [canCreateReadStream](balenas3compressedsource.md#cancreatereadstream)
+* [canCreateSparseReadStream](balenas3compressedsource.md#cancreatesparsereadstream)
+* [canCreateSparseWriteStream](balenas3compressedsource.md#cancreatesparsewritestream)
+* [canCreateWriteStream](balenas3compressedsource.md#cancreatewritestream)
+* [canRead](balenas3compressedsource.md#canread)
+* [canWrite](balenas3compressedsource.md#canwrite)
+* [close](balenas3compressedsource.md#close)
+* [configure](balenas3compressedsource.md#private-configure)
+* [createGzipStream](balenas3compressedsource.md#private-creategzipstream)
+* [createReadStream](balenas3compressedsource.md#createreadstream)
+* [createSparseReadStream](balenas3compressedsource.md#createsparsereadstream)
+* [createSparseWriteStream](balenas3compressedsource.md#createsparsewritestream)
+* [createStream](balenas3compressedsource.md#private-createstream)
+* [createVerifier](balenas3compressedsource.md#createverifier)
+* [createWriteStream](balenas3compressedsource.md#createwritestream)
+* [createZipStream](balenas3compressedsource.md#private-createzipstream)
+* [download](balenas3compressedsource.md#protected-download)
+* [emit](balenas3compressedsource.md#emit)
+* [eventNames](balenas3compressedsource.md#eventnames)
+* [extractDeflateToDisk](balenas3compressedsource.md#private-extractdeflatetodisk)
+* [findImagePart](balenas3compressedsource.md#private-findimagepart)
+* [findPart](balenas3compressedsource.md#private-findpart)
+* [findPartitionPart](balenas3compressedsource.md#private-findpartitionpart)
+* [getAlignment](balenas3compressedsource.md#getalignment)
+* [getBlocks](balenas3compressedsource.md#getblocks)
+* [getDeviceTypeJSON](balenas3compressedsource.md#private-getdevicetypejson)
+* [getFilename](balenas3compressedsource.md#private-getfilename)
+* [getImageJSON](balenas3compressedsource.md#private-getimagejson)
+* [getInnerSource](balenas3compressedsource.md#getinnersource)
+* [getMaxListeners](balenas3compressedsource.md#getmaxlisteners)
+* [getMetadata](balenas3compressedsource.md#getmetadata)
+* [getOsVersion](balenas3compressedsource.md#private-getosversion)
+* [getPartStream](balenas3compressedsource.md#private-getpartstream)
+* [getPartitionTable](balenas3compressedsource.md#getpartitiontable)
+* [getParts](balenas3compressedsource.md#private-getparts)
+* [getSize](balenas3compressedsource.md#private-getsize)
+* [getSupervisorVersion](balenas3compressedsource.md#private-getsupervisorversion)
+* [getUrl](balenas3compressedsource.md#protected-geturl)
+* [listenerCount](balenas3compressedsource.md#listenercount)
+* [listeners](balenas3compressedsource.md#listeners)
+* [off](balenas3compressedsource.md#off)
+* [on](balenas3compressedsource.md#on)
+* [once](balenas3compressedsource.md#once)
+* [open](balenas3compressedsource.md#open)
+* [prependListener](balenas3compressedsource.md#prependlistener)
+* [prependOnceListener](balenas3compressedsource.md#prependoncelistener)
+* [rawListeners](balenas3compressedsource.md#rawlisteners)
+* [read](balenas3compressedsource.md#read)
+* [removeAllListeners](balenas3compressedsource.md#removealllisteners)
+* [removeListener](balenas3compressedsource.md#removelistener)
+* [setMaxListeners](balenas3compressedsource.md#setmaxlisteners)
+* [write](balenas3compressedsource.md#write)
+* [isESRVersion](balenas3compressedsource.md#static-isesrversion)
+* [listenerCount](balenas3compressedsource.md#static-listenercount)
+* [register](balenas3compressedsource.md#static-register)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new BalenaS3Source**(`__namedParameters`: object): *[BalenaS3Source](balenas3source.md)*
+\+ **new BalenaS3CompressedSource**(`__namedParameters`: object): *[BalenaS3CompressedSource](balenas3compressedsource.md)*
 
-*Inherited from [BalenaS3SourceBase](balenas3sourcebase.md).[constructor](balenas3sourcebase.md#constructor)*
+*Overrides [BalenaS3SourceBase](balenas3sourcebase.md).[constructor](balenas3sourcebase.md#constructor)*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:63](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-source.ts#L63)*
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L71)*
 
 **Parameters:**
 
@@ -94,15 +116,12 @@
 
 Name | Type |
 ------ | ------ |
-`awsCredentials` | undefined &#124; [AwsCredentials](../interfaces/awscredentials.md) |
-`bucket` | string |
-`buildId` | string |
-`deviceType` | string |
-`host` | string |
-`prefix` | undefined &#124; string |
-`release` | undefined &#124; string |
+`configuration` | undefined &#124; [Dictionary](../interfaces/dictionary.md)‹any› |
+`filenamePrefix` | undefined &#124; string |
+`format` | "zip" &#124; "gzip" |
+`options` | options |
 
-**Returns:** *[BalenaS3Source](balenas3source.md)*
+**Returns:** *[BalenaS3CompressedSource](balenas3compressedsource.md)*
 
 ## Properties
 
@@ -136,6 +155,25 @@ ___
 
 ___
 
+### `Private` `Optional` configuration
+
+• **configuration**? : *[Dictionary](../interfaces/dictionary.md)‹any›*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L62)*
+
+___
+
+### `Private` configuredParts
+
+• **configuredParts**: *Map‹string, object›* = new Map<
+		string,
+		{ crc: number; zLen: number; buffer: Buffer }
+	>()
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:63](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L63)*
+
+___
+
 ### `Readonly` deviceType
 
 • **deviceType**: *string*
@@ -143,6 +181,38 @@ ___
 *Inherited from [BalenaS3SourceBase](balenas3sourcebase.md).[deviceType](balenas3sourcebase.md#readonly-devicetype)*
 
 *Defined in [lib/source-destination/balena-s3-source.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-source.ts#L55)*
+
+___
+
+### `Private` deviceTypeJSON
+
+• **deviceTypeJSON**: *[DeviceTypeJSON](../interfaces/devicetypejson.md)*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:58](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L58)*
+
+___
+
+### `Private` filename
+
+• **filename**: *string*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L71)*
+
+___
+
+### `Private` `Optional` filenamePrefix
+
+• **filenamePrefix**? : *undefined | string*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L60)*
+
+___
+
+### `Private` format
+
+• **format**: *BalenaS3CompressedSourceOptions["format"]*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:59](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L59)*
 
 ___
 
@@ -156,19 +226,27 @@ ___
 
 ___
 
-###  name
+### `Private` imageJSON
 
-• **name**: *[Name](../README.md#name)*
+• **imageJSON**: *[ImageJSON](../README.md#imagejson)*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:148](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-source.ts#L148)*
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L57)*
 
 ___
 
-### `Private` names
+### `Private` lastModified
 
-• **names**: *[Name](../README.md#name)[]* = ['balena', 'resin']
+• **lastModified**: *Date*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:147](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-source.ts#L147)*
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:68](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L68)*
+
+___
+
+### `Private` osVersion
+
+• **osVersion**: *string*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L69)*
 
 ___
 
@@ -182,14 +260,6 @@ ___
 
 ___
 
-### `Private` rawSource
-
-• **rawSource**: *[Http](http.md)*
-
-*Defined in [lib/source-destination/balena-s3-source.ts:145](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-source.ts#L145)*
-
-___
-
 ### `Optional` `Readonly` release
 
 • **release**? : *undefined | string*
@@ -200,11 +270,19 @@ ___
 
 ___
 
-### `Private` zipSource
+### `Private` size
 
-• **zipSource**: *[ZipSource](zipsource.md)*
+• **size**: *number*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:146](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-source.ts#L146)*
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:70](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L70)*
+
+___
+
+### `Private` supervisorVersion
+
+• **supervisorVersion**: *string*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L67)*
 
 ___
 
@@ -253,9 +331,9 @@ ___
 
 ▸ **_close**(): *Promise‹void›*
 
-*Overrides [SourceDestination](sourcedestination.md).[_close](sourcedestination.md#protected-_close)*
+*Inherited from [SourceDestination](sourcedestination.md).[_close](sourcedestination.md#protected-_close)*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:211](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-source.ts#L211)*
+*Defined in [lib/source-destination/source-destination.ts:401](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/source-destination.ts#L401)*
 
 **Returns:** *Promise‹void›*
 
@@ -267,7 +345,7 @@ ___
 
 *Overrides [SourceSource](sourcesource.md).[_getMetadata](sourcesource.md#protected-_getmetadata)*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:191](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-source.ts#L191)*
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:102](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L102)*
 
 **Returns:** *Promise‹[Metadata](../interfaces/metadata.md)›*
 
@@ -279,7 +357,7 @@ ___
 
 *Overrides [SourceDestination](sourcedestination.md).[_open](sourcedestination.md#protected-_open)*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:195](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-source.ts#L195)*
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:233](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L233)*
 
 **Returns:** *Promise‹void›*
 
@@ -367,9 +445,9 @@ ___
 
 ▸ **canRead**(): *Promise‹boolean›*
 
-*Overrides [SourceSource](sourcesource.md).[canRead](sourcesource.md#canread)*
+*Inherited from [SourceSource](sourcesource.md).[canRead](sourcesource.md#canread)*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:167](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-source.ts#L167)*
+*Defined in [lib/source-destination/source-destination.ts:302](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/source-destination.ts#L302)*
 
 **Returns:** *Promise‹boolean›*
 
@@ -399,13 +477,39 @@ ___
 
 ___
 
+### `Private` configure
+
+▸ **configure**(): *Promise‹void›*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:187](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L187)*
+
+**Returns:** *Promise‹void›*
+
+___
+
+### `Private` createGzipStream
+
+▸ **createGzipStream**(`fake`: boolean): *Promise‹GzipStream‹››*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:300](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L300)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`fake` | boolean |
+
+**Returns:** *Promise‹GzipStream‹››*
+
+___
+
 ###  createReadStream
 
-▸ **createReadStream**(`options`: [CreateReadStreamOptions](../interfaces/createreadstreamoptions.md)): *Promise‹ReadableStream›*
+▸ **createReadStream**(`options`: [CreateReadStreamOptions](../interfaces/createreadstreamoptions.md)): *Promise‹Readable›*
 
 *Overrides [SourceSource](sourcesource.md).[createReadStream](sourcesource.md#createreadstream)*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:185](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-source.ts#L185)*
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:311](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L311)*
 
 **Parameters:**
 
@@ -413,7 +517,7 @@ Name | Type | Default |
 ------ | ------ | ------ |
 `options` | [CreateReadStreamOptions](../interfaces/createreadstreamoptions.md) | {} |
 
-**Returns:** *Promise‹ReadableStream›*
+**Returns:** *Promise‹Readable›*
 
 ___
 
@@ -455,6 +559,22 @@ Name | Type |
 
 ___
 
+### `Private` createStream
+
+▸ **createStream**(`fake`: boolean): *Promise‹any›*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:305](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L305)*
+
+**Parameters:**
+
+Name | Type | Default |
+------ | ------ | ------ |
+`fake` | boolean | false |
+
+**Returns:** *Promise‹any›*
+
+___
+
 ###  createVerifier
 
 ▸ **createVerifier**(`checksumOrBlocks`: string | [BlocksWithChecksum](../interfaces/blockswithchecksum.md)[], `size?`: undefined | number): *[Verifier](verifier.md)*
@@ -491,6 +611,22 @@ Name | Type |
 `highWaterMark?` | undefined &#124; number |
 
 **Returns:** *Promise‹WritableStream›*
+
+___
+
+### `Private` createZipStream
+
+▸ **createZipStream**(`fake`: boolean): *Promise‹any›*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:293](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L293)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`fake` | boolean |
+
+**Returns:** *Promise‹any›*
 
 ___
 
@@ -548,6 +684,72 @@ Defined in node_modules/@types/node/events.d.ts:33
 
 ___
 
+### `Private` extractDeflateToDisk
+
+▸ **extractDeflateToDisk**(`filename`: string): *Promise‹BufferDisk‹››*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:177](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L177)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`filename` | string |
+
+**Returns:** *Promise‹BufferDisk‹››*
+
+___
+
+### `Private` findImagePart
+
+▸ **findImagePart**(`imageJSON`: [ImageJSON](../README.md#imagejson), `image`: string): *[ImageJSONPart](../interfaces/imagejsonpart.md)*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:158](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L158)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`imageJSON` | [ImageJSON](../README.md#imagejson) |
+`image` | string |
+
+**Returns:** *[ImageJSONPart](../interfaces/imagejsonpart.md)*
+
+___
+
+### `Private` findPart
+
+▸ **findPart**(`definition`: [FileOnPartition](../interfaces/fileonpartition.md)): *[ImageJSONPart](../interfaces/imagejsonpart.md)*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:166](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L166)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`definition` | [FileOnPartition](../interfaces/fileonpartition.md) |
+
+**Returns:** *[ImageJSONPart](../interfaces/imagejsonpart.md)*
+
+___
+
+### `Private` findPartitionPart
+
+▸ **findPartitionPart**(`imageJSON`: [ImageJSON](../README.md#imagejson), `partition`: number): *[ImageJSONPart](../interfaces/imagejsonpart.md)*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:142](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L142)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`imageJSON` | [ImageJSON](../README.md#imagejson) |
+`partition` | number |
+
+**Returns:** *[ImageJSONPart](../interfaces/imagejsonpart.md)*
+
+___
+
 ###  getAlignment
 
 ▸ **getAlignment**(): *number | undefined*
@@ -569,6 +771,36 @@ ___
 *Defined in [lib/source-destination/source-destination.ts:367](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/source-destination.ts#L367)*
 
 **Returns:** *Promise‹[BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]›*
+
+___
+
+### `Private` getDeviceTypeJSON
+
+▸ **getDeviceTypeJSON**(): *Promise‹[DeviceTypeJSON](../interfaces/devicetypejson.md)›*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:131](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L131)*
+
+**Returns:** *Promise‹[DeviceTypeJSON](../interfaces/devicetypejson.md)›*
+
+___
+
+### `Private` getFilename
+
+▸ **getFilename**(): *string*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:89](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L89)*
+
+**Returns:** *string*
+
+___
+
+### `Private` getImageJSON
+
+▸ **getImageJSON**(): *Promise‹[ImageJSON](../README.md#imagejson)›*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:126](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L126)*
+
+**Returns:** *Promise‹[ImageJSON](../README.md#imagejson)›*
 
 ___
 
@@ -610,13 +842,29 @@ ___
 
 ___
 
-### `Private` getName
+### `Private` getOsVersion
 
-▸ **getName**(): *Promise‹[Name](../README.md#name)›*
+▸ **getOsVersion**(): *Promise‹any›*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:150](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-source.ts#L150)*
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:121](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L121)*
 
-**Returns:** *Promise‹[Name](../README.md#name)›*
+**Returns:** *Promise‹any›*
+
+___
+
+### `Private` getPartStream
+
+▸ **getPartStream**(`filename`: string): *Promise‹ReadableStream›*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:135](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L135)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`filename` | string |
+
+**Returns:** *Promise‹ReadableStream›*
 
 ___
 
@@ -629,6 +877,42 @@ ___
 *Defined in [lib/source-destination/source-destination.ts:496](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/source-destination.ts#L496)*
 
 **Returns:** *Promise‹GetPartitionsResult | undefined›*
+
+___
+
+### `Private` getParts
+
+▸ **getParts**(`fake`: boolean): *Promise‹object[]›*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:270](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L270)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`fake` | boolean |
+
+**Returns:** *Promise‹object[]›*
+
+___
+
+### `Private` getSize
+
+▸ **getSize**(): *Promise‹number›*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:85](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L85)*
+
+**Returns:** *Promise‹number›*
+
+___
+
+### `Private` getSupervisorVersion
+
+▸ **getSupervisorVersion**(): *Promise‹object›*
+
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:114](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-compressed-source.ts#L114)*
+
+**Returns:** *Promise‹object›*
 
 ___
 
@@ -864,20 +1148,20 @@ ___
 
 ###  read
 
-▸ **read**(`buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer), `bufferOffset`: number, `length`: number, `sourceOffset`: number): *Promise‹ReadResult›*
+▸ **read**(`_buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer), `_bufferOffset`: number, `_length`: number, `_sourceOffset`: number): *Promise‹ReadResult›*
 
-*Overrides [SourceSource](sourcesource.md).[read](sourcesource.md#read)*
+*Inherited from [SourceSource](sourcesource.md).[read](sourcesource.md#read)*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:171](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/balena-s3-source.ts#L171)*
+*Defined in [lib/source-destination/source-destination.ts:337](https://github.com/balena-io-modules/etcher-sdk/blob/00d0c25/lib/source-destination/source-destination.ts#L337)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`buffer` | [Buffer](../interfaces/alignedlockablebuffer.md#buffer) |
-`bufferOffset` | number |
-`length` | number |
-`sourceOffset` | number |
+`_buffer` | [Buffer](../interfaces/alignedlockablebuffer.md#buffer) |
+`_bufferOffset` | number |
+`_length` | number |
+`_sourceOffset` | number |
 
 **Returns:** *Promise‹ReadResult›*
 

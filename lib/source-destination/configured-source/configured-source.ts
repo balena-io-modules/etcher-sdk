@@ -18,7 +18,6 @@ import { interact } from 'balena-image-fs';
 import * as _debug from 'debug';
 import { DiscardDiskChunk, Disk, ReadResult, WriteResult } from 'file-disk';
 import { getPartitions, GPTPartition, MBRPartition } from 'partitioninfo';
-import { promisify } from 'util';
 
 import { CHUNK_SIZE } from '../../constants';
 import { NotCapable } from '../../errors';
@@ -269,7 +268,7 @@ export class ConfiguredSource extends SourceSource {
 					// @ts-ignore: trim method exists for ext partitions
 					if (fs.trim !== undefined) {
 						// @ts-ignore: trim method exists for ext partitions
-						await promisify(fs.trim)();
+						await fs.trim();
 					}
 				});
 			} catch {

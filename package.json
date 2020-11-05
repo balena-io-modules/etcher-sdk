@@ -52,7 +52,7 @@
     "@ronomon/direct-io": "^3.0.1",
     "aws4-axios": "^1.12.0",
     "axios": "^0.19.2",
-    "balena-image-fs": "^7.0.1",
+    "balena-image-fs": "^7.0.4",
     "blockmap": "^4.0.1",
     "check-disk-space": "^2.1.0",
     "cyclic-32": "^1.1.0",
@@ -75,7 +75,7 @@
     "zip-part-stream": "^1.0.1"
   },
   "devDependencies": {
-    "@balena/lint": "^5.0.4",
+    "@balena/lint": "^5.2.1",
     "@types/bluebird": "^3.5.23",
     "@types/chai": "^4.1.4",
     "@types/cli-spinner": "^0.2.0",
