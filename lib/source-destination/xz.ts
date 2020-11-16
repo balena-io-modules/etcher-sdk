@@ -15,6 +15,7 @@
  */
 
 import { createDecompressor, parseFileIndex } from 'lzma-native';
+import { totalmem } from 'os';
 import { Transform } from 'stream';
 import { promisify } from 'util';
 
@@ -27,7 +28,7 @@ export class XzSource extends CompressedSource {
 	public static readonly mimetype = 'application/x-xz';
 
 	protected createTransform(): Transform {
-		return createDecompressor();
+		return createDecompressor({ memlimit: Math.floor(totalmem() * 0.2) });
 	}
 
 	protected async getSize(): Promise<

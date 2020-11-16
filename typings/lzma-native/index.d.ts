@@ -1,7 +1,7 @@
 declare module 'lzma-native' {
 	import { Transform } from 'stream';
 
-	function createDecompressor(): Transform;
+	function createDecompressor(options?: { memlimit: number }): Transform;
 
 	function parseFileIndex(
 		options: {
