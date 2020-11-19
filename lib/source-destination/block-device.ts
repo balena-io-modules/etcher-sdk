@@ -173,7 +173,9 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 			const unmountDisk = getUnmountDisk();
 			await unmountDisk(this.drive.device);
 		}
-		await clean(this.drive.device);
+		if (this.oWrite) {
+			await clean(this.drive.device);
+		}
 		await super._open();
 		if (plat === 'darwin') {
 			await fromCallback((cb) => {
