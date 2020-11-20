@@ -65,6 +65,7 @@ export async function blockDeviceFromFile(
 		isUSB: true,
 		isVirtual: false,
 		logicalBlockSize: 512,
+		partitionTableType: null,
 	};
 	return new FakeBlockDevice({
 		drive,

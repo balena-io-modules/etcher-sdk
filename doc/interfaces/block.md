@@ -19,7 +19,7 @@
 
 • **length**: *number*
 
-*Defined in [lib/sparse-stream/shared.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/dd7ff37/lib/sparse-stream/shared.ts#L34)*
+*Defined in [lib/sparse-stream/shared.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/8b291ec/lib/sparse-stream/shared.ts#L34)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **offset**: *number*
 
-*Defined in [lib/sparse-stream/shared.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/dd7ff37/lib/sparse-stream/shared.ts#L33)*
+*Defined in [lib/sparse-stream/shared.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/8b291ec/lib/sparse-stream/shared.ts#L33)*

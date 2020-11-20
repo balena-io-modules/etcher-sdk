@@ -151,7 +151,7 @@ export abstract class Verifier extends EventEmitter {
 		averageSpeed: 0,
 	};
 
-	public abstract async run(): Promise<void>;
+	public abstract run(): Promise<void>;
 
 	protected handleEventsAndPipe(
 		stream: NodeJS.ReadableStream,

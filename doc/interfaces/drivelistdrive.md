@@ -32,6 +32,7 @@
 * [isVirtual](drivelistdrive.md#isvirtual)
 * [logicalBlockSize](drivelistdrive.md#logicalblocksize)
 * [mountpoints](drivelistdrive.md#mountpoints)
+* [partitionTableType](drivelistdrive.md#partitiontabletype)
 * [raw](drivelistdrive.md#raw)
 * [size](drivelistdrive.md#size)
 
@@ -101,7 +102,7 @@ ___
 
 • **displayName**: *string*
 
-*Defined in [lib/scanner/adapters/block-device.ts:59](https://github.com/balena-io-modules/etcher-sdk/blob/dd7ff37/lib/scanner/adapters/block-device.ts#L59)*
+*Defined in [lib/scanner/adapters/block-device.ts:59](https://github.com/balena-io-modules/etcher-sdk/blob/8b291ec/lib/scanner/adapters/block-device.ts#L59)*
 
 ___
 
@@ -129,7 +130,7 @@ ___
 
 • **icon**? : *undefined | string*
 
-*Defined in [lib/scanner/adapters/block-device.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/dd7ff37/lib/scanner/adapters/block-device.ts#L60)*
+*Defined in [lib/scanner/adapters/block-device.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/8b291ec/lib/scanner/adapters/block-device.ts#L60)*
 
 ___
 
@@ -230,6 +231,16 @@ ___
 *Inherited from [DrivelistDrive](drivelistdrive.md).[mountpoints](drivelistdrive.md#mountpoints)*
 
 Defined in node_modules/drivelist/js/index.d.ts:23
+
+___
+
+###  partitionTableType
+
+• **partitionTableType**: *"mbr" | "gpt" | null*
+
+*Inherited from [DrivelistDrive](drivelistdrive.md).[partitionTableType](drivelistdrive.md#partitiontabletype)*
+
+Defined in node_modules/drivelist/js/index.d.ts:26
 
 ___
 

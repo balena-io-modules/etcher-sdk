@@ -502,14 +502,16 @@ async function pipeSparseSourceToDestination(
 	getRootStream(sourceStream).on('progress', (progress: ProgressEvent) => {
 		onRootStreamProgress(progress);
 	});
-	await new Promise((resolve: () => void, reject: (error: Error) => void) => {
-		sourceStream.once('error', reject);
-		destinationStream.once('error', reject);
-		destinationStream.once('done', resolve);
-		destinationStream.on('fail', onFail); // This is emitted by MultiDestination when one of its destinations fails
-		destinationStream.on('progress', onProgress);
-		sourceStream.pipe(destinationStream);
-	});
+	await new Promise<void>(
+		(resolve: () => void, reject: (error: Error) => void) => {
+			sourceStream.once('error', reject);
+			destinationStream.once('error', reject);
+			destinationStream.once('done', resolve);
+			destinationStream.on('fail', onFail); // This is emitted by MultiDestination when one of its destinations fails
+			destinationStream.on('progress', onProgress);
+			sourceStream.pipe(destinationStream);
+		},
+	);
 	if (verify) {
 		updateState('verifying');
 		const verifier = destination.createVerifier(sourceStream.blocks);

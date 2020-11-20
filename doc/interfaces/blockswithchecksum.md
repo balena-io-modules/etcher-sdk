@@ -20,7 +20,7 @@
 
 • **blocks**: *[Block](block.md)[]*
 
-*Defined in [lib/sparse-stream/shared.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/dd7ff37/lib/sparse-stream/shared.ts#L40)*
+*Defined in [lib/sparse-stream/shared.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/8b291ec/lib/sparse-stream/shared.ts#L40)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **checksum**? : *undefined | string*
 
-*Defined in [lib/sparse-stream/shared.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/dd7ff37/lib/sparse-stream/shared.ts#L39)*
+*Defined in [lib/sparse-stream/shared.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/8b291ec/lib/sparse-stream/shared.ts#L39)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **checksumType**? : *[ChecksumType](../README.md#checksumtype)*
 
-*Defined in [lib/sparse-stream/shared.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/dd7ff37/lib/sparse-stream/shared.ts#L38)*
+*Defined in [lib/sparse-stream/shared.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/8b291ec/lib/sparse-stream/shared.ts#L38)*

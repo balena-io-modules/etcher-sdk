@@ -54,30 +54,32 @@ export async function sparseStreamToBuffer(
 	stream: NodeJS.ReadableStream,
 ): Promise<Buffer> {
 	const chunks: SparseStreamChunk[] = [];
-	await new Promise((resolve: () => void, reject: (error: Error) => void) => {
-		stream.on('error', reject);
-		stream.on('end', resolve);
-		stream.on('data', async (chunk: SparseStreamChunk) => {
-			if (isAlignedLockableBuffer(chunk.buffer)) {
-				let unlock;
-				try {
-					unlock = await chunk.buffer.rlock();
-				} catch (error) {
-					reject(error);
-					return;
+	await new Promise<void>(
+		(resolve: () => void, reject: (error: Error) => void) => {
+			stream.on('error', reject);
+			stream.on('end', resolve);
+			stream.on('data', async (chunk: SparseStreamChunk) => {
+				if (isAlignedLockableBuffer(chunk.buffer)) {
+					let unlock;
+					try {
+						unlock = await chunk.buffer.rlock();
+					} catch (error) {
+						reject(error);
+						return;
+					}
+					let data;
+					try {
+						data = Buffer.allocUnsafe(chunk.buffer.length);
+						chunk.buffer.copy(data);
+					} finally {
+						unlock();
+					}
+					chunk.buffer = data;
 				}
-				let data;
-				try {
-					data = Buffer.allocUnsafe(chunk.buffer.length);
-					chunk.buffer.copy(data);
-				} finally {
-					unlock();
-				}
-				chunk.buffer = data;
-			}
-			chunks.push(chunk);
-		});
-	});
+				chunks.push(chunk);
+			});
+		},
+	);
 	if (chunks.length === 0) {
 		return Buffer.alloc(0);
 	}
@@ -112,8 +114,8 @@ export async function asCallback<T>(
 export async function fromCallback<T>(
 	fn: (callback: (error?: Error | null, result?: T) => void) => void,
 ): Promise<T> {
-	return await new Promise((resolve, reject) => {
-		fn((error?: Error | null, result?: T) => {
+	return await new Promise<T>((resolve, reject) => {
+		fn((error: Error | null, result: T) => {
 			if (error != null) {
 				reject(error);
 			} else {
