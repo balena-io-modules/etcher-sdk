@@ -3,10 +3,10 @@ import { Writable } from 'stream';
 
 import { isAlignedLockableBuffer } from '../aligned-lockable-buffer';
 import { RETRY_BASE_TIMEOUT } from '../constants';
-import { isTransientError } from '../errors';
+import { retryOnTransientError } from '../errors';
 import { makeClassEmitProgressEvents } from '../source-destination/progress';
 import { SourceDestination } from '../source-destination/source-destination';
-import { asCallback, delay } from '../utils';
+import { asCallback } from '../utils';
 import { SparseStreamChunk, SparseWritable } from './shared';
 
 export class SparseWriteStream extends Writable implements SparseWritable {
@@ -38,9 +38,8 @@ export class SparseWriteStream extends Writable implements SparseWritable {
 		chunk: SparseStreamChunk,
 		flushing = false,
 	): Promise<void> {
-		let retries = 0;
-		while (true) {
-			try {
+		await retryOnTransientError(
+			async () => {
 				this.position = chunk.position;
 				await this.destination.write(
 					chunk.buffer,
@@ -52,19 +51,10 @@ export class SparseWriteStream extends Writable implements SparseWritable {
 					this.position += chunk.buffer.length;
 					this.bytesWritten += chunk.buffer.length;
 				}
-				return;
-			} catch (error) {
-				if (isTransientError(error)) {
-					if (retries < this.maxRetries) {
-						retries += 1;
-						await delay(RETRY_BASE_TIMEOUT * retries);
-						continue;
-					}
-					error.code = 'EUNPLUGGED';
-				}
-				throw error;
-			}
-		}
+			},
+			this.maxRetries,
+			RETRY_BASE_TIMEOUT,
+		);
 	}
 
 	private copyChunk(chunk: SparseStreamChunk): SparseStreamChunk {

@@ -20,10 +20,10 @@ import { Writable } from 'stream';
 
 import { AlignedLockableBuffer } from './aligned-lockable-buffer';
 import { RETRY_BASE_TIMEOUT } from './constants';
-import { isTransientError } from './errors';
+import { retryOnTransientError } from './errors';
 import { BlockDevice } from './source-destination/block-device';
 import { makeClassEmitProgressEvents } from './source-destination/progress';
-import { asCallback, delay } from './utils';
+import { asCallback } from './utils';
 
 const debug = _debug('etcher:writer:block-write-stream');
 
@@ -53,23 +53,13 @@ export class BlockWriteStream extends Writable {
 	}
 
 	private async writeBuffer(buffer: Buffer, position: number): Promise<void> {
-		let retries = 0;
-		while (true) {
-			try {
+		await retryOnTransientError(
+			async () => {
 				await this.destination.write(buffer, 0, buffer.length, position);
-				return;
-			} catch (error) {
-				if (isTransientError(error)) {
-					if (retries < this.maxRetries) {
-						retries += 1;
-						await delay(RETRY_BASE_TIMEOUT * retries);
-						continue;
-					}
-					error.code = 'EUNPLUGGED';
-				}
-				throw error;
-			}
-		}
+			},
+			this.maxRetries,
+			RETRY_BASE_TIMEOUT,
+		);
 	}
 
 	private async __write(buffer: AlignedLockableBuffer): Promise<void> {

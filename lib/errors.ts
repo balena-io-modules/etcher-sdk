@@ -17,6 +17,7 @@
 import { platform } from 'process';
 
 import { BlocksWithChecksum } from './sparse-stream/shared';
+import { delay } from './utils';
 
 export class NotCapable extends Error {}
 
@@ -62,7 +63,7 @@ export class BlocksVerificationError extends VerificationError {
  *   - Windows: ENOENT, UNKNOWN
  *   - Linux: EIO, EBUSY
  */
-export function isTransientError(error: NodeJS.ErrnoException): boolean {
+function isTransientError(error: NodeJS.ErrnoException): boolean {
 	if (platform === 'darwin') {
 		return error.code === 'ENXIO' || error.code === 'EBUSY';
 	} else if (platform === 'linux') {
@@ -71,4 +72,27 @@ export function isTransientError(error: NodeJS.ErrnoException): boolean {
 		return error.code === 'ENOENT' || error.code === 'UNKNOWN';
 	}
 	return false;
+}
+
+export async function retryOnTransientError<T>(
+	fn: () => Promise<T>,
+	maxRetries: number,
+	baseDelay: number,
+): Promise<T> {
+	let retries = 0;
+	while (true) {
+		try {
+			return await fn();
+		} catch (error) {
+			if (isTransientError(error)) {
+				if (retries < maxRetries) {
+					retries += 1;
+					await delay(baseDelay * retries);
+					continue;
+				}
+				error.code = 'EUNPLUGGED';
+			}
+			throw error;
+		}
+	}
 }
