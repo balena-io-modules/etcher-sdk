@@ -22,10 +22,9 @@ import {
 	isAlignedLockableBuffer,
 } from './aligned-lockable-buffer';
 import { CHUNK_SIZE, RETRY_BASE_TIMEOUT } from './constants';
-import { isTransientError } from './errors';
+import { retryOnTransientError } from './errors';
 import { File } from './source-destination/file';
 import { makeClassEmitProgressEvents } from './source-destination/progress';
-import { delay } from './utils';
 
 export class BlockReadStream extends Readable {
 	private source: File;
@@ -75,23 +74,13 @@ export class BlockReadStream extends Readable {
 
 	private async tryRead(buffer: Buffer): Promise<ReadResult> {
 		// Tries to read `this.maxRetries` times if the error is transient.
-		// Throws EUNPLUGGED if all retries failed.
-		let retries = 0;
-		while (true) {
-			try {
+		return await retryOnTransientError(
+			async () => {
 				return await this.source.read(buffer, 0, buffer.length, this.bytesRead);
-			} catch (error) {
-				if (isTransientError(error)) {
-					if (retries < this.maxRetries) {
-						retries += 1;
-						await delay(RETRY_BASE_TIMEOUT * retries);
-						continue;
-					}
-					error.code = 'EUNPLUGGED';
-				}
-				throw error;
-			}
-		}
+			},
+			this.maxRetries,
+			RETRY_BASE_TIMEOUT,
+		);
 	}
 
 	public async _read(): Promise<void> {

@@ -26,6 +26,8 @@ import {
 } from './source-destination';
 
 import { BlockReadStream, ProgressBlockReadStream } from '../block-read-stream';
+import { RETRY_BASE_TIMEOUT } from '../constants';
+import { retryOnTransientError } from '../errors';
 import {
 	ProgressSparseWriteStream,
 	SparseWriteStream,
@@ -201,7 +203,13 @@ export class File extends SourceDestination {
 	}
 
 	protected async _open(): Promise<void> {
-		this.fileHandle = await fs.open(this.path, this.getOpenFlags());
+		await retryOnTransientError(
+			async () => {
+				this.fileHandle = await fs.open(this.path, this.getOpenFlags());
+			},
+			5,
+			RETRY_BASE_TIMEOUT,
+		);
 	}
 
 	protected async _close(): Promise<void> {

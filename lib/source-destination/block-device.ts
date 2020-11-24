@@ -169,11 +169,12 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 
 	protected async _open(): Promise<void> {
 		const plat = platform();
-		if (plat !== 'win32') {
-			const unmountDisk = getUnmountDisk();
-			await unmountDisk(this.drive.device);
-		}
 		if (this.oWrite) {
+			if (plat !== 'win32') {
+				const unmountDisk = getUnmountDisk();
+				await unmountDisk(this.drive.device);
+			}
+			// diskpart clean on windows
 			await clean(this.drive.device);
 		}
 		await super._open();
