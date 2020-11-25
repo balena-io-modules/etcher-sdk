@@ -129,10 +129,6 @@ export async function decompressThenFlash({
 	enoughSpaceForDecompression?: (free: number, imageSize?: number) => boolean;
 	asItIs?: boolean;
 }): Promise<PipeSourceToDestinationsResult> {
-	for (const d of destinations) {
-		// Start opening destinations early to win some time, don't await here, it will be awaited later.
-		d.open();
-	}
 	await source.open();
 	if (!asItIs) {
 		source = await source.getInnerSource();
