@@ -1,294 +1,308 @@
+- commits:
+    - subject: Add versionbot changelog
+      hash: 682e9d6cc15322d51d67080ffe25f6e3c2ed5b17
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+  version: 5.1.8
+  date: 2020-11-26T17:01:34.000Z
 - version: 5.1.7
-  date: 2020-11-25T15:45:22Z
+  date: 2020-11-25T15:45:22.000Z
   commits:
     - hash: 13bcb07fb27d41f66a979fe61b87bda427375d3a
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Don't start opening drives in advance to avoid unhandled rejections
-      body:
+      body: null
     - hash: 573afc1dc3380a1dd8f511c47c15b0bda2fc250e
       author: Alexis Svinartchouk
       footers:
         change-type: none
       subject: Update generated docs
-      body:
+      body: null
 - version: 5.1.6
-  date: 2020-11-24T12:45:45Z
+  date: 2020-11-24T12:45:45.000Z
   commits:
     - hash: da81ed37f960880699482926451467dfd02e2541
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Do not unmount source drives
-      body:
+      body: null
     - hash: d333f94a4b2bb25be892ab8448cddd606af9ee32
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Factorize retrying transient errors
-      body:
+      body: null
     - hash: 9eb4c2ea9c78100a199ac72a00da4fda2f6f6c6d
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Retry opening files & block devices on transient errors
-      body:
+      body: null
     - hash: e478836bc1449851d603cf1e19e11e36b5beeea0
       author: Alexis Svinartchouk
       footers:
         change-type: none
       subject: Update generated docs
-      body:
+      body: null
 - version: 5.1.5
-  date: 2020-11-20T13:43:46Z
+  date: 2020-11-20T13:43:46.000Z
   commits:
     - hash: 95956d8d64fcded72825cb4a26d184c0192c1b24
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update drivelist to 9.2.1
-      body:
+      body: null
     - hash: 8b291ecfdd58314224a596c31d6a8d2a1143ceeb
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update typescript to 4.1.0
-      body:
+      body: null
     - hash: 6593c1c2313691640a4d0b15aaf0b107e23318ed
       author: Alexis Svinartchouk
       footers:
         change-type: none
       subject: Update generated docs
-      body:
+      body: null
 - version: 5.1.4
-  date: 2020-11-19T17:19:39Z
+  date: 2020-11-19T17:19:39.000Z
   commits:
     - hash: dd7ff37cc97fc0a0b0a9c1db68d849fd3aff317a
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Only run diskpart clean if the drive is open for writing
-      body:
+      body: null
     - hash: 43b2b91c5c2ccf080426972e126124d501b6569c
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 5.1.3
-  date: 2020-11-16T18:39:57Z
+  date: 2020-11-16T18:39:57.000Z
   commits:
     - hash: 48506bfe96779d741beeffd769d060aa5d2ed329
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Limit lzma decompressor memory to 20% of total memory
-      body:
+      body: null
     - hash: 80bc19791158f2b6db47a8eba6ac3098a7136b93
       author: Alexis Svinartchouk
       subject: Update generated docs
-      body:
+      body: null
 - version: 5.1.2
-  date: 2020-11-13T16:46:11Z
+  date: 2020-11-13T16:46:11.000Z
   commits:
     - hash: b8afd49e50e7dac0d98d9d4c7247a1b064f30db5
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update resin-crc-utils -> @balena/node-crc-utils
-      body:
+      body: null
 - version: 5.1.1
-  date: 2020-11-05T19:30:41Z
+  date: 2020-11-05T19:30:41.000Z
   commits:
     - hash: df354ba756bbde968028900b3f8f43adf59ea1fa
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update balena-image-fs to ^7.0.4
-      body:
+      body: null
     - hash: 6a8bd70ebfeb38ec362e55ea3ac18882ffc0d336
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update @balena/lint to 5.2.1
-      body:
+      body: null
     - hash: c9d7621058b75c1858138d6d31d632ce1b45e7bf
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 5.1.0
-  date: 2020-09-21T12:06:51Z
+  date: 2020-09-21T12:06:51.000Z
   commits:
     - hash: f6c3976930b6b34e6f9934ebe7b9c1d9438ceeaa
       author: Alexis Svinartchouk
       footers:
         change-type: minor
       subject: Export ImageJSON type
-      body:
+      body: null
 - version: 5.0.0
-  date: 2020-09-18T13:09:09Z
+  date: 2020-09-18T13:09:09.000Z
   commits:
     - hash: 529c74b0f70a9d81b2446db51e9af4c236c5d913
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Make BalenaS3Source prefix folder configurable
-      body:
+      body: null
     - hash: d68b1d93c24cbe73e05c87d1fc37ac011c51f405
       author: Alexis Svinartchouk
       footers:
         change-type: major
-      subject: Make host, prefix and release configurable in BalenaS3Source
-      body:
+      subject: 'Make host, prefix and release configurable in BalenaS3Source'
+      body: null
     - hash: 6332b6f76f6effc620a46a509e283e1f2d4a3d02
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Format example config.json file
-      body:
+      body: null
     - hash: cc2f89062a75b70a7b7c340e7c757e15d3093665
       author: Alexis Svinartchouk
       footers:
         change-type: minor
       subject: BalenaS3CompressedSource class to be used in the image maker
-      body:
+      body: null
     - hash: 31e12bd3ee55324277611d78be7467642ce97c4d
       author: Alexis Svinartchouk
       footers:
         change-type: minor
       subject: Add --asItIs option to avoid guessing the type and decompressing
-      body:
+      body: null
     - hash: 55cfb2a0cdb10e777fb8932fe614e146b668b9f5
       author: Alexis Svinartchouk
       footers:
         change-type: minor
-      subject: Download VERSION, VERSION_HOSTOS and device-type.json files for preloaded images
-      body:
+      subject: >-
+        Download VERSION, VERSION_HOSTOS and device-type.json files for
+        preloaded images
+      body: null
     - hash: fe792f0954bccf971c4cd7a93193a4cf7952e768
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Remove unused gpt module typings
-      body:
+      body: null
     - hash: 79b51b7be380a7cf838401032cf1cfcc856429e1
       author: Alexis Svinartchouk
       footers:
         change-type: minor
       subject: Handle aws4 signatures in Http and BalenaS3 sources
-      body:
+      body: null
     - hash: 93333ed419873fbba738b613a283c8dcec9e24c0
       author: Alexis Svinartchouk
       footers:
         change-type: major
       subject: Remove default constructor parameters from BalenaS3Source
-      body:
+      body: null
     - hash: 868d777f424645fd11a055f0001043c77dfa0588
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update gzip-stream to ^1.0.1
-      body:
+      body: null
     - hash: b00f331bb85ba45ab374e69c1bdf641651ed65d4
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Unify s3 end s3 compressed examples
-      body:
+      body: null
     - hash: 8f0cdd8b9eddbf6c8d1e2201235d879c7bb09c10
       author: Alexis Svinartchouk
       footers:
         change-type: minor
       subject: Add support for specifying an AWS_SESSION_TOKEN for S3 sources
-      body:
+      body: null
     - hash: 5e877ade50bd44c19e7e29e2113aa439b3898a44
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update gzip-stream to ^1.1.0
-      body:
+      body: null
     - hash: 4570c532822225d6557a9d7478c4b667c12daf75
       author: Alexis Svinartchouk
       footers:
         change-type: major
       subject: S3 compressed source 'format' parameter is not optional
-      body:
+      body: null
     - hash: 887dbeb0c6fc3ff398c06648669689ec69fbb569
       author: Alexis Svinartchouk
       footers:
         change-type: minor
       subject: Export BalenaS3SourceBase.isESRVersion static method
-      body:
+      body: null
     - hash: a0996b0f201b197d83b3aa2513dae9e31e71895d
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Wifi config files are named balena-wifi-xx
-      body:
+      body: null
     - hash: 4c92cedfc8d3e5f597ab7a534b089d69f44a1a47
       author: Alexis Svinartchouk
       footers:
         change-type: minor
-      subject: Add supervisorVersion, osVersion and lastModified to s3 compressed source metadata
-      body:
+      subject: >-
+        Add supervisorVersion, osVersion and lastModified to s3 compressed
+        source metadata
+      body: null
     - hash: 881504d095126e01da48d2c193e826b52466533a
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Factorize downloading files in s3 compressed source
-      body:
+      body: null
     - hash: 9b5f93b4680ece3e9637f2b98fc4939b8335ce7e
       author: Alexis Svinartchouk
       footers:
         change-type: minor
       subject: Handle filename generation in s3 compressed source
-      body:
+      body: null
     - hash: 798ae186b5be3a27b68e33f1fb0c3ad5b8887d3b
       author: Alexis Svinartchouk
       footers:
         change-type: minor
       subject: Include release in filename in s3 compressed source
-      body:
+      body: null
     - hash: 63030e152a0f85e3827a2d3b39d9b56509c164a3
       author: Alexis Svinartchouk
       footers:
         change-type: minor
       subject: Determine s3 source prefix automatically if none is given
-      body:
+      body: null
     - hash: d2b6e0d9aca834ad8c4efbbdd73675c15ecbe680
       author: Alexis Svinartchouk
       footers:
         change-type: minor
       subject: BalenaS3CompressedSource.createReadStream returns a Readable
-      body:
+      body: null
     - hash: 99ac7e6a71051d1b48b6e488ee8f9b6ee98a7767
       author: Alexis Svinartchouk
       footers:
         change-type: minor
       subject: Override BalenaS3CompressedSource format to 'zip' for yocto archives
-      body:
+      body: null
     - hash: f7d2503dd0946a09f793b64607ff3f50b23cf429
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Add format to BalenaS3CompressedSource metadata
-      body:
+      body: null
     - hash: 3c2638a409a621414ca91ed32de92f0d2cded999
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Use ?.() instead of testing !== undefined
-      body:
+      body: null
     - hash: 267030cb0363fc92667575b45d8a42a4cc86b0ce
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Remove no longer used fields in config examples
-      body:
+      body: null
 - version: 4.1.30
-  date: 2020-09-01T14:32:34Z
+  date: 2020-09-01T14:32:34.000Z
   commits:
     - hash: e249bf93e9cf1c36e4dcd1f2c141a5bcb7ecb2a0
       author: Alexis Svinartchouk
@@ -301,184 +315,186 @@
       footers:
         change-type: patch
       subject: Update balena-image-fs to ^7.0.1
-      body:
+      body: null
     - hash: 5efcd60a79849c3f1d239cc7d80fa054a10c1b10
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 4.1.29
-  date: 2020-08-27T13:13:22Z
+  date: 2020-08-27T13:13:22.000Z
   commits:
     - hash: cc08b9c580215ba8c59df8a164e85704fe483063
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Disable trimming ext partitions on 32 bit windows
-      body:
+      body: null
     - hash: a07b92fc8cd593b6f47248a3a581c4015a0dc831
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 4.1.28
-  date: 2020-08-26T17:24:15Z
+  date: 2020-08-26T17:24:15.000Z
   commits:
     - hash: 4036c43eaf85a2941f56581220965f1f1270610c
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Fix calling start & stop methods on undefined usbboot scanner
-      body:
+      body: null
     - hash: 7246f9cc0cc39f36e3675cd982055b89caec8bf0
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update typescript to ^4 and ts-node to ^9
-      body:
+      body: null
     - hash: f15507ae3873f8483820f8419a96457558f71460
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 4.1.27
-  date: 2020-08-26T16:48:03Z
+  date: 2020-08-26T16:48:03.000Z
   commits:
     - hash: 8322d547715656a08bbdd4749228583e9fefdbca
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Fix off by one error in Http.createReadStream
-      body:
+      body: null
     - hash: 0f5bd702c27d9f71804044ac0c2e66948c424f77
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 4.1.26
-  date: 2020-08-25T10:56:49Z
+  date: 2020-08-25T10:56:49.000Z
   commits:
     - hash: a1abeee573e6c30d55cf1013b1f619185c6a2877
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Http size is undefined if it is NaN
-      body:
+      body: null
 - version: 4.1.25
-  date: 2020-08-24T15:08:36Z
+  date: 2020-08-24T15:08:36.000Z
   commits:
     - hash: 9e465a8ea5d9a1dc63ed8f71929bed8df4bef429
       author: Alexis Svinartchouk
       footers:
         change-type: patch
-      subject: Use StreamLimiter on http streams in case the server doesn't support Ranges
-      body:
+      subject: >-
+        Use StreamLimiter on http streams in case the server doesn't support
+        Ranges
+      body: null
     - hash: 96ec78a1d4a02c80e629f633316f0512ffe602d0
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 4.1.24
-  date: 2020-08-20T18:46:21Z
+  date: 2020-08-20T18:46:21.000Z
   commits:
     - hash: 2085736b5d9e1f55ce826eaac5aff06877e15512
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update @balena/udif and use createReadStream end parameter
-      body:
+      body: null
     - hash: 5d6319edd72b843ccd6f21141e3a0dd3933fc7c0
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 4.1.23
-  date: 2020-08-06T14:11:49Z
+  date: 2020-08-06T14:11:49.000Z
   commits:
     - hash: 48f0187ff7c48a62fc6e8304266441303b039509
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update drivelist to ^9.1.0
-      body:
+      body: null
 - version: 4.1.22
-  date: 2020-08-03T15:47:10Z
+  date: 2020-08-03T15:47:10.000Z
   commits:
     - hash: d10e9aa6419c75054eecbe17795eefb6a139a2b7
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Fix yargs boolean args in examples
-      body:
+      body: null
     - hash: 87ea7586e187144ac0657ab43118f92104434958
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: 'Use only one module for crc32: cyclic-32'
-      body:
+      body: null
     - hash: fa43cba1282d74c19594c3d92d460d4b48e5a9ff
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 4.1.21
-  date: 2020-08-03T11:37:27Z
+  date: 2020-08-03T11:37:27.000Z
   commits:
     - hash: 0a7a31fb64726d5ff39e4b542fed385cfebf4484
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Remove lodash
-      body:
+      body: null
     - hash: 03094301857810d04c02559618e40dafe5dd5157
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Use typedoc-plugin-markdown === 2.3.1
-      body:
+      body: null
     - hash: fe024829903238db5a93c9402f5049bb991890a1
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 4.1.20
-  date: 2020-07-30T17:12:27Z
+  date: 2020-07-30T17:12:27.000Z
   commits:
     - hash: 286e6e49548d0647d99006435be3d7386f2ce93e
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Remove bluebird
-      body:
+      body: null
     - hash: e5f13b599a3f43f288a1abf062f3b34a03bd97c1
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Remove resin mentions
-      body:
+      body: null
     - hash: c07e474be6c9670f7d25386e85595c55577b22a4
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 4.1.19
-  date: 2020-07-24T15:02:09Z
+  date: 2020-07-24T15:02:09.000Z
   commits:
     - hash: f484c9f71528a0685fccc3eef41b23dd11dc6fad
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update node-udif to ^1.0.3
-      body:
+      body: null
     - hash: ab1cc239f3c1f83d6f3cc087c00ff47feabb3d3b
       author: Alexis Svinartchouk
       footers:
@@ -486,173 +502,173 @@
       subject: Update file-disk to ^6.0.3
       body: Avoid saving discards outside of disk (happened in truncated images)
 - version: 4.1.18
-  date: 2020-07-14T12:52:53Z
+  date: 2020-07-14T12:52:53.000Z
   commits:
     - hash: 28e83d4f6db2937d622fa56ac9b9c137b98c8ad0
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Add average speed in examples output when the size is not known
-      body:
+      body: null
     - hash: 63a1db22d91686a7f12291ee366f089ea4734728
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Fix reading from /dev/zero
-      body:
+      body: null
     - hash: 502d3d5db43562ae028fc89a865fe1bb96c35949
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Avoid unnecessary allocations in BlockTransformStream
-      body:
+      body: null
     - hash: 99f7964548379be649943f8e1c763675f6e88f24
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Use tslib
-      body:
+      body: null
     - hash: 6f059264d368157a1c660a9e41ae0d7c4dcf8cb8
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 4.1.17
-  date: 2020-07-01T13:26:15Z
+  date: 2020-07-01T13:26:15.000Z
   commits:
     - hash: e7a4900c36b55c010e70da0c2d5c57c834badf70
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Always use BlockReadStream for reading from files
-      body:
+      body: null
     - hash: 36acebc65caade6e5438ff7f123a5a8c94a37ced
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: 'In the examples: fix opening /dev/rdiskX on macos, fix creating file'
-      body:
+      body: null
     - hash: b0c097e8c9e0d028221f4bf08baa13e63afaf257
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Fix using drive as source on windows in example
-      body:
+      body: null
     - hash: 1bc86f524a811ae91c4506e5aaf675268966ab63
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Avoid reading after the source end
-      body:
+      body: null
     - hash: 06376f6b599cb351a7725ed2fb26aa7603160535
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 4.1.16
-  date: 2020-06-25T19:21:20Z
+  date: 2020-06-25T19:21:20.000Z
   commits:
     - hash: 8b00b06b5391f9bf23b3bb3b672cb89ef43d410a
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update partitioninfo to ^5.3.5
-      body:
+      body: null
     - hash: 65782366540b542cae040f50b74a52cc7684b5e4
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Use GET instead of HEAD for getting image info
-      body:
+      body: null
     - hash: fce53f8aa261af73363596db9e163bd32a6d5f10
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Make multi-destination example work with http and block devices
-      body:
+      body: null
     - hash: 1a7ae538a20dc8ba59c6dd4e9ed3ae17d9c964d7
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 4.1.15
-  date: 2020-06-19T12:47:32Z
+  date: 2020-06-19T12:47:32.000Z
   commits:
     - hash: d96f6c925bd104f1a75be7c2afbd9f59b599e98d
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Try - catch block around checkDiskSpace as it may fail
-      body:
+      body: null
     - hash: a25bb3b73830c1b6e3bf179b5318a102c3c97af4
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 4.1.14
-  date: 2020-06-15T17:21:11Z
+  date: 2020-06-15T17:21:11.000Z
   commits:
     - hash: 4b5b1b323803c6f188e635826fb7d84a20345a02
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Emit attach events when drive mountpoints change
-      body:
+      body: null
     - hash: cc8819a240ff6652cfa648be29e5e58e87720ad4
       author: Alexis Svinartchouk
       subject: Update generated docs
       body: 'Change-type: patch'
 - version: 4.1.13
-  date: 2020-06-10T10:17:05Z
+  date: 2020-06-10T10:17:05.000Z
   commits:
     - hash: 163e4e95e3b2be087738aa13a2a76d0da528c81b
       author: Pagan Gazzard
       footers:
         change-type: patch
       subject: Avoid unnecessary awaits
-      body:
+      body: null
 - version: 4.1.12
-  date: 2020-06-09T18:20:12Z
+  date: 2020-06-09T18:20:12.000Z
   commits:
     - hash: 7d35840484f66213e837d69fda0a9550d5f64c2c
       author: Pagan Gazzard
       footers:
         change-type: patch
       subject: Avoid creating a new readEndMarker on every read
-      body:
+      body: null
 - version: 4.1.11
-  date: 2020-06-09T18:01:03Z
+  date: 2020-06-09T18:01:03.000Z
   commits:
     - hash: ec8347233bca930bf83dc2d3d9c3a382b92bfb24
       author: Pagan Gazzard
       footers:
         change-type: patch
       subject: Optimize progress calculation
-      body:
+      body: null
 - version: 4.1.10
-  date: 2020-06-09T17:41:16Z
+  date: 2020-06-09T17:41:16.000Z
   commits:
     - hash: 8a0848ab20cba5bad24a149464d092efc4b0b522
       author: Pagan Gazzard
       footers:
         change-type: patch
       subject: Optimize lodash minBy/sortBy usage
-      body:
+      body: null
 - version: 4.1.9
-  date: 2020-06-08T19:42:20Z
+  date: 2020-06-08T19:42:20.000Z
   commits:
     - hash: e5715eb4e20470df8d92434c2804327b9dccadad
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Stop scanning before flashing in examples/multi-destination.ts
-      body:
+      body: null
 - version: 4.1.8
-  date: 2020-06-04T20:14:40Z
+  date: 2020-06-04T20:14:40.000Z
   commits:
     - hash: c1dcd5e15b40885f4d80136ff30bd61b71ebe4c9
       author: Alexis Svinartchouk
@@ -661,103 +677,105 @@
       subject: Revert "Don't use console.warn to avoid writing to stderr"
       body: This reverts commit 8c389f5bd6f7c70182c46018df6d615dd77579a0.
 - version: 4.1.7
-  date: 2020-06-04T16:59:30Z
+  date: 2020-06-04T16:59:30.000Z
   commits:
     - hash: d9101fab56fbe798e2fd7e8e107e0bbe9ea497e5
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Fix typo
-      body:
+      body: null
     - hash: 8c389f5bd6f7c70182c46018df6d615dd77579a0
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Don't use console.warn to avoid writing to stderr
-      body:
+      body: null
     - hash: 6c706991ef7b83233c6b49f960250b6886e59744
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 4.1.6
-  date: 2020-06-04T14:39:10Z
+  date: 2020-06-04T14:39:10.000Z
   commits:
     - hash: 1d9c6753de15d653af77b86426bf3cab72993094
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Nothing
-      body:
+      body: null
     - hash: 2aa8637137a8520b167dde50c1ee5bb7d0c42902
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Alignment must be at most 4k
-      body:
+      body: null
     - hash: 9dd99969aea11e4eb62ad4899fae9ae41a251c4b
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 4.1.5
-  date: 2020-05-29T17:25:51Z
+  date: 2020-05-29T17:25:51.000Z
   commits:
     - hash: 9ac7b182343b98463ace0012e1681cf26f980ff0
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Don't create files when oWrite is not set
-      body:
+      body: null
 - version: 4.1.4
-  date: 2020-05-27T13:08:07Z
+  date: 2020-05-27T13:08:07.000Z
   commits:
     - hash: 4db9a8354d10bd5a0bc24b116939a1589e2214c9
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update drivelist to v9.0.0
-      body:
+      body: null
 - version: 4.1.3
-  date: 2020-05-11T14:08:46Z
+  date: 2020-05-11T14:08:46.000Z
   commits:
     - hash: f36b4bb83a67140dac33679a084478c07405cdb7
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Nothing
-      body:
+      body: null
 - version: 4.1.2
-  date: 2020-05-11T11:19:46Z
+  date: 2020-05-11T11:19:46.000Z
   commits:
     - hash: 116417dbb73a1eb520cf8b825c7c35a3505c06f8
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 4.1.1
-  date: 2020-05-11T10:54:27Z
+  date: 2020-05-11T10:54:27.000Z
   commits:
     - hash: 3c6bb66db32d3f12dba234173dd27c2cb0231f8b
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: 'Use estimated size in mutli-write:'
-      body:
+      body: null
 - version: 4.1.0
-  date: 2020-05-08T16:26:22Z
+  date: 2020-05-08T16:26:22.000Z
   commits:
     - hash: 29f921829c67373c43969ec1f5a9a4c5165d519d
       author: Alexis Svinartchouk
       footers:
         change-type: minor
-      subject: In cases the uncompressed size is unknown, guess it from the partition table
-      body:
+      subject: >-
+        In cases the uncompressed size is unknown, guess it from the partition
+        table
+      body: null
 - version: 4.0.2
-  date: 2020-05-07T16:39:52Z
+  date: 2020-05-07T16:39:52.000Z
   commits:
     - hash: 0c6858b3fbcaf186007af31f73b0f1f611887bee
       author: Alexis Svinartchouk
@@ -768,300 +786,300 @@
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
     - hash: 1e00137fe4ab6f3269d03f0b1e3b2d4bf59c6422
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update unbzip2-stream
-      body:
+      body: null
     - hash: 67a25460ef271f5c076ce100643ea275798f0777
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 4.0.1
-  date: 2020-05-04T09:02:02Z
+  date: 2020-05-04T09:02:02.000Z
   commits:
     - hash: 48fffb164bedc1dd3fc5e5ce5071b40bb83afeff
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Implement correct speedometer
-      body:
+      body: null
 - version: 4.0.0
-  date: 2020-04-28T12:53:39Z
+  date: 2020-04-28T12:53:39.000Z
   commits:
     - hash: f4135552e571d4814afb6ec7befa6786a9fa8ccf
       author: Alexis Svinartchouk
       footers:
         change-type: major
       subject: Remove duplicated information from progress events
-      body:
+      body: null
     - hash: 20474c71012d20d3d9860921986ef5397b0dc64e
       author: Alexis Svinartchouk
       footers:
         change-type: major
       subject: Function pipeSourceToDestinations takes an options argument
-      body:
+      body: null
     - hash: 8226ec10f507ca24f0f0115221ec7ac8bbb709b4
       author: Alexis Svinartchouk
       footers:
         change-type: major
-      subject: ConfiguredSource only takes a configure function, no config
-      body:
+      subject: 'ConfiguredSource only takes a configure function, no config'
+      body: null
     - hash: 29c7641a2305afd5446a4669bc22858d594e8861
       author: Alexis Svinartchouk
       footers:
         change-type: major
       subject: Handle redirects and add option to avoid random acces in Http source
-      body:
+      body: null
     - hash: 7b8a85c451b2858cd47e01cac14822764beb2241
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Create destination file if it does not exist
-      body:
+      body: null
     - hash: 47fa97d66844e77abd1351a9e668cb19026f9e77
       author: Alexis Svinartchouk
       footers:
         change-type: major
       subject: Option for decompressing first
-      body:
+      body: null
     - hash: 4acf5996a649ffbfcbc2087fa2d6da9c6911452f
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Only test on node 10 and 12
-      body:
+      body: null
     - hash: bc3a24a1249e118d9eceed145357ba081df10022
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update resin-lint -> @balena/lint
-      body:
+      body: null
     - hash: 3e0ba8650927e94ee3f5b01636bd21a4a41d4402
       author: Alexis Svinartchouk
       footers:
         change-type: patch
-      subject: Update typescript to 3.8.3, ts-node to 8.9.0
-      body:
+      subject: 'Update typescript to 3.8.3, ts-node to 8.9.0'
+      body: null
     - hash: c8295ab7675601a7721284796eca2c1886383659
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Emit progress events 4 times per second
-      body:
+      body: null
     - hash: 4f6f46abbdc9e05ad56830824f63d5c49f90fc85
       author: Alexis Svinartchouk
       footers:
         change-type: minor
       subject: Add function for cleaning up temporary files
-      body:
+      body: null
     - hash: 80253c85cc730b39dc3d09f9a8e97345340ea9b1
       author: Alexis Svinartchouk
       footers:
         change-type: minor
       subject: Add sourceMetadata to PipeSourceToDestinationsResult
-      body:
+      body: null
     - hash: e29d99e6181d3c5a3cc6dc6c216ef3a5bd7c84af
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 3.0.1
-  date: 2020-04-10T15:43:39Z
+  date: 2020-04-10T15:43:39.000Z
   commits:
     - hash: 063a5d25242ee8525897d8c21fecee0f96936333
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Add averageSpeed to progress events
-      body:
+      body: null
 - version: 3.0.0
-  date: 2020-04-07T15:56:42Z
+  date: 2020-04-07T15:56:42.000Z
   commits:
     - hash: 8c48d52ba7264fd1a31098b02bf70486bd7e2e6b
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Don't use .then in asCallback implementation
-      body:
+      body: null
     - hash: 9dd3536bec367627b25449edef6fe540596b838e
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Use known buffers size when concatenating buffers
-      body:
+      body: null
     - hash: a0be4f2cdd5cb58f3dec4479cc79c907c760554b
       author: Alexis Svinartchouk
       footers:
         change-type: major
       subject: Drop node 6 support
-      body:
+      body: null
     - hash: de87be53766b15ef5bde3cd2c02f6fdc8880bcfb
       author: Alexis Svinartchouk
       subject: LockableBuffer class
-      body:
+      body: null
     - hash: 1a7a17c36133e9919926cd59dc938cf3a5e4ed17
       author: Alexis Svinartchouk
       footers:
         change-type: major
       subject: Use aligned buffers to read and write block devices with O_DIRECT
-      body:
+      body: null
     - hash: 554b213bba8168d8a5cc1acb3eba23c154f457ed
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
     - hash: 8c46ec7d84d294c24c92a7a6ea7c73a4acd610c5
       author: Alexis Svinartchouk
       subject: Address comments
-      body:
+      body: null
     - hash: f7d318fa67a10601a703b6b9758118825de9dc7a
       author: Alexis Svinartchouk
       footers:
         change-type: major
       subject: BlockDeviceAdapter constructor takes an options argument
-      body:
+      body: null
     - hash: fd66806fae0274a46e8ce4e744debc51b63d0995
       author: Alexis Svinartchouk
       footers:
         change-type: major
       subject: Drop node8 support
-      body:
+      body: null
     - hash: 4276cf59cf0d041d1d1f4bb6ac0bd8fbf6b25741
       author: Alexis Svinartchouk
       subject: Address PR comments
-      body:
+      body: null
     - hash: d0053b938a1e2ff01f06ecb4f37b4e9ace751b18
       author: Alexis Svinartchouk
       subject: Address PR comments
-      body:
+      body: null
     - hash: de0826210d6a98cb69a4def83713e273a02aca5b
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update blockmap to ^4.0.1
-      body:
+      body: null
     - hash: cc79d7881fb1f3bc63e54e1b01db9310cda9b6af
       author: Alexis Svinartchouk
       footers:
         change-type: major
       subject: File constructor takes an options object
-      body:
+      body: null
     - hash: 56ccb38b8ae59d759bcb879a2151a633cea9579f
       author: Alexis Svinartchouk
       footers:
         change-type: major
       subject: BlockDevice constructor takes an options argument
-      body:
+      body: null
     - hash: 0478382e0a6547ca0dbec6232e3e88732e6fbe1d
       author: Alexis Svinartchouk
       footers:
         change-type: major
       subject: ConfiguredSource constructor takes an options argument
-      body:
+      body: null
     - hash: 16016bb1a477ac0d7874785ee2ed321808ba9dee
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update udif to ^0.17.0
-      body:
+      body: null
     - hash: 4133b2f94d90d7d35d3d50cd8f2980a112523262
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update lzma-native to ^6.0.0
-      body:
+      body: null
     - hash: 436a5af3f87ad4ffae460a3e88b92423cb1c4d4b
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Stop using readable-stream
-      body:
+      body: null
     - hash: 7c588aace8654e81f225943a14af15fac2c04f96
       author: Alexis Svinartchouk
       subject: Remove unneeded @ts-ignore comment
-      body:
+      body: null
     - hash: f021668c9d5f123e3de592277433f75c61a3d45c
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Retry incomplete reads
-      body:
+      body: null
     - hash: da2fa24c26549963fdbeb9b0bc4de502ee1961cf
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Don't use O_EXLOCK on Windows
-      body:
+      body: null
     - hash: c6e0990a91cb17e335b847ca9545112971b714fd
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Use setF_NOCACHE on macos for block devices
-      body:
+      body: null
     - hash: 3d0724a96886f4f68a8f480bb2dd889df2569bbe
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 2.0.20
-  date: 2020-03-09T15:25:27Z
+  date: 2020-03-09T15:25:27.000Z
   commits:
     - hash: d135f988d60d0cdcadd1e730eee3ce1ffe48bb38
       author: Pagan Gazzard
       footers:
         change-type: patch
       subject: Lazy-load node-raspberrypi-usbboot
-      body:
+      body: null
     - hash: 50254fb61adf68aa13b17b3bfdab9f20c7064a23
       author: Pagan Gazzard
       footers:
         change-type: patch
       subject: Lazy-load xxhash
-      body:
+      body: null
     - hash: badd2d73287a60506d7ed7d45c13e415d270596c
       author: Pagan Gazzard
       footers:
         change-type: patch
       subject: Lazy-load mountutils
-      body:
+      body: null
     - hash: d5cf67e67eb6001a07413dd2f1e3b168df6d93b6
       author: Pagan Gazzard
       footers:
         change-type: patch
       subject: Lazy-load crc
-      body:
+      body: null
     - hash: c6cc511e3ca448ac7ce01f04df3a23d43d27410f
       author: Pagan Gazzard
       subject: Regenerate docs
-      body:
+      body: null
 - version: 2.0.19
-  date: 2020-03-09T12:24:39Z
+  date: 2020-03-09T12:24:39.000Z
   commits:
     - hash: cfb8ccfc4e28e85080c4c11173e5c6e84ca54b8e
       author: Pagan Gazzard
       footers:
         change-type: patch
       subject: Update and typedoc / typedoc-plugin-markdown
-      body:
+      body: null
 - version: 2.0.18
-  date: 2020-03-06T17:24:31Z
+  date: 2020-03-06T17:24:31.000Z
   commits:
     - hash: d127c6f5b673470f59ff786f2b8b2effda3fed14
       author: Pagan Gazzard
       footers:
         change-type: patch
       subject: Use resin-lint for automatic lint fixing instead of prettier
-      body:
+      body: null
 - version: 2.0.17
-  date: 2020-02-05T13:46:20Z
+  date: 2020-02-05T13:46:20.000Z
   commits:
     - hash: 6429a60e7945ce0968fabbf76f58259f99bc4a4f
       author: Alexis Svinartchouk
@@ -1069,37 +1087,37 @@
         changelog-entry: Don't throw in trimPartitions when can't list the partitions
         change-type: patch
       subject: Don't throw in trimPartitions when can't list the partitions
-      body:
+      body: null
     - hash: b749ac9330255653b784ccabf4dbc05ded0b6266
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update resin-lint to ^3.2.0
-      body:
+      body: null
     - hash: 8e665cfa0083f0f8f9fe9ec5d27434a7ffe803db
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
 - version: 2.0.16
-  date: 2020-01-13T21:50:24Z
+  date: 2020-01-13T21:50:24.000Z
   commits:
     - hash: cff8e071467128c017affd9753ba65a353763d17
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update generated docs
-      body:
+      body: null
     - hash: 4f90fd7965998503bce926dec8a8ae12e026561c
       author: Alexis Svinartchouk
       footers:
         changelog-entry: Always use node adapter (not xhr) for axios
         change-type: patch
       subject: Always use node adapter (not xhr) for axios
-      body:
+      body: null
 - version: 2.0.15
-  date: 2019-09-23T12:30:49Z
+  date: 2019-09-23T12:30:49.000Z
   commits:
     - hash: 7889e16571dfeda53cb61f0d036c4e15688f5163
       author: Alexis Svinartchouk
@@ -1107,30 +1125,32 @@
         change-type: patch
         changelog-entry: Update outdent to ^0.7.0
       subject: Update outdent to ^0.7.0
-      body:
+      body: null
     - hash: e86cf6a2cca7db7a2e2499b1adbef2b42b20774c
       author: Alexis Svinartchouk
       footers:
         change-type: patch
         changelog-entry: Update resin-lint
       subject: Update resin-lint
-      body:
+      body: null
     - hash: a1ae70bbc19979f6a9604b20ca8a456bf49b2705
       author: Alexis Svinartchouk
       footers:
         change-type: patch
         changelog-entry: Update generated docs
       subject: Update generated docs
-      body:
+      body: null
 - version: 2.0.14
-  date: 2019-09-06T14:58:21Z
+  date: 2019-09-06T14:58:21.000Z
   commits:
     - hash: 7de71118541cbcce6478a2e230035e820714b0c5
       author: Gergely Imreh
       footers:
         change-type: patch
         signed-off-by: Gergely Imreh <gergely@balena.io>
-      subject: 'dependencies: use upstream xxhash again, now that Node12 support is merged'
+      subject: >-
+        dependencies: use upstream xxhash again, now that Node12 support is
+        merged
       body: Previously we were using our own patched fork.
     - hash: 8d1d7905d5ce2af4172c17ae0e05819da7b500b0
       author: Gergely Imreh
@@ -1140,7 +1160,7 @@
       subject: 'formatting: unblock linter as it complains about formatting'
       body: Just run the code through `npm run prettier`.
 - version: 2.0.13
-  date: 2019-05-29T09:06:21Z
+  date: 2019-05-29T09:06:21.000Z
   commits:
     - hash: e931b2b45cd06bbabbde9ebbe38a507035d002f6
       author: Gergely Imreh
@@ -1148,63 +1168,65 @@
         change-type: patch
         signed-off-by: Gergely Imreh <gergely@balena.io>
       subject: Update dependencies for Node 12 support
-      body:
+      body: null
 - version: 2.0.12
-  date: 2019-05-24T09:45:49Z
+  date: 2019-05-24T09:45:49.000Z
   commits:
     - hash: c640cb70dc39364be6c340eb04b817c7182df029
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Remove local file paths from docs
-      body:
+      body: null
 - version: 2.0.11
-  date: 2019-05-23T10:57:38Z
+  date: 2019-05-23T10:57:38.000Z
   commits:
     - hash: 7ede4f0293ba28ff996072b95ad6ebaa6fb2fe91
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Change remote url resin-io-modules -> balena-io-modules
-      body:
+      body: null
 - version: 2.0.10
-  date: 2019-05-13T12:22:16Z
+  date: 2019-05-13T12:22:16.000Z
   commits:
     - hash: fa7328c66c353de89a966d940e2796e27fe86be3
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Add typedoc generated README
-      body:
+      body: null
 - version: 2.0.9
-  date: 2019-05-10T18:01:05Z
+  date: 2019-05-10T18:01:05.000Z
   commits:
     - hash: dd14f92788af3304dcaa8032b34899b84eb621e7
       author: Alexis Svinartchouk
       footers:
         change-type: patch
-      subject: ConfiguredSource.disk.recordReads set to false after configuration & trimming
-      body:
+      subject: >-
+        ConfiguredSource.disk.recordReads set to false after configuration &
+        trimming
+      body: null
 - version: 2.0.8
-  date: 2019-05-10T16:19:46Z
+  date: 2019-05-10T16:19:46.000Z
   commits:
     - hash: 18f1d0840b5ad24f73d605cc7726125151d66fcf
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Add raspberry pi zero model name
-      body:
+      body: null
 - version: 2.0.7
-  date: 2019-05-09T13:52:44Z
+  date: 2019-05-09T13:52:44.000Z
   commits:
     - hash: 2fd40d1cbf1030216bc86cd5720581ff31745eea
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: 'Win32: fix running diskpart when the tmp file path constains spaces'
-      body:
+      body: null
 - version: 2.0.6
-  date: 2019-05-06T09:58:00Z
+  date: 2019-05-06T09:58:00.000Z
   commits:
     - hash: c61ac80d049ecc0c12de8f26d3838da2b419e12c
       author: Gergely Imreh
@@ -1212,27 +1234,27 @@
         change-type: patch
         signed-off-by: Gergely Imreh <gergely@balena.io>
       subject: Add CODEOWNERS file
-      body:
+      body: null
 - version: 2.0.5
-  date: 2019-04-30T16:30:11Z
+  date: 2019-04-30T16:30:11.000Z
   commits:
     - hash: d4a18dc908ae87a4b725dfd356acab49228497c8
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Fix crc32 digest by padding it to always have 8 hex digits
-      body:
+      body: null
 - version: 2.0.4
-  date: 2019-04-30T16:03:31Z
+  date: 2019-04-30T16:03:31.000Z
   commits:
     - hash: 31930367fcaf591b0f21a5b331c793d511b298cc
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Fix progress in multi-write for gzipped sources
-      body:
+      body: null
 - version: 2.0.3
-  date: 2019-04-29T10:46:31Z
+  date: 2019-04-29T10:46:31.000Z
   commits:
     - hash: fc35a8d1ab850ff3613fabefb7aed0d523e81fc2
       author: Alexis Svinartchouk
@@ -1243,7 +1265,7 @@
         This was happening only if the last block ended the file.
         Test cases were added.
 - version: 2.0.2
-  date: 2019-04-29T10:30:05Z
+  date: 2019-04-29T10:30:05.000Z
   commits:
     - hash: 574978b8444eab0867d5ec4302d2c40ecac42707
       author: David Lechner
@@ -1264,25 +1286,25 @@
       subject: Fix off-by one error when computing size of block in bmap
       body: Fixes balena-io/etcher#2754
 - version: 2.0.1
-  date: 2019-04-18T16:34:39Z
+  date: 2019-04-18T16:34:39.000Z
   commits:
     - hash: 16a5d6f5431c0577d92e3fdb18da858778884763
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Merge adjacent blocks in DmgSource.getBlocks()
-      body:
+      body: null
 - version: 2.0.0
-  date: 2019-04-18T14:13:05Z
+  date: 2019-04-18T14:13:05.000Z
   commits:
     - hash: eb2d36a9f5fbf8016f4d9b4cef6dd18e117d2093
       author: Alexis Svinartchouk
       footers:
         change-type: major
-      subject: Rework sparse streams, verify DMG images
-      body:
+      subject: 'Rework sparse streams, verify DMG images'
+      body: null
 - version: 1.3.14
-  date: 2019-04-11T09:36:17Z
+  date: 2019-04-11T09:36:17.000Z
   commits:
     - hash: 8e2198e0f51689ce7eb02ce5ac89031e44ad9de9
       author: Alexis Svinartchouk
@@ -1291,16 +1313,16 @@
       subject: Add usbboot example
       body: Also fix Compute Modules detection
 - version: 1.3.13
-  date: 2019-04-10T17:52:56Z
+  date: 2019-04-10T17:52:56.000Z
   commits:
     - hash: 07142f175f1f02321b1507713d9340a753f7867d
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update blockmap to ^4.0.0
-      body:
+      body: null
 - version: 1.3.12
-  date: 2019-03-21T15:35:16Z
+  date: 2019-03-21T15:35:16.000Z
   commits:
     - hash: 690103186500dc590953be897af0495ad04d1240
       author: Alexis Svinartchouk
@@ -1309,7 +1331,7 @@
       subject: Fix examples
       body: They were broken by 4499277eef906f54827bae7ba68f0b54e49ffaac
 - version: 1.3.11
-  date: 2019-03-20T21:12:17Z
+  date: 2019-03-20T21:12:17.000Z
   commits:
     - hash: d9fcc75ec40e951937c9736471e059990fff71c6
       author: Juan Cruz Viotti
@@ -1317,18 +1339,18 @@
         change-type: patch
         signed-off-by: Juan Cruz Viotti <juan@balena.io>
       subject: 'usbboot: Add "Linux File-Stor Gadget" to the description list'
-      body:
+      body: null
 - version: 1.3.10
-  date: 2019-03-20T15:09:04Z
+  date: 2019-03-20T15:09:04.000Z
   commits:
     - hash: 6541ef0514f12249989b6e2531193360d732a767
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Fix diskpart error message creation
-      body:
+      body: null
 - version: 1.3.9
-  date: 2019-03-20T14:15:14Z
+  date: 2019-03-20T14:15:14.000Z
   commits:
     - hash: 3e90d002facd1967dc71ea508661dc23666be51e
       author: Juan Cruz Viotti
@@ -1336,18 +1358,18 @@
         change-type: patch
         signed-off-by: Juan Cruz Viotti <juan@balena.io>
       subject: Upgrade node-raspberrypi-usbboot to v0.2.3
-      body:
+      body: null
 - version: 1.3.8
-  date: 2019-03-20T14:06:33Z
+  date: 2019-03-20T14:06:33.000Z
   commits:
     - hash: 788535f02356b2278c428a907b1e83d7ba8ed096
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: DriverlessDeviceAdapter only lists usbboot capable devices
-      body:
+      body: null
 - version: 1.3.7
-  date: 2019-03-20T11:49:06Z
+  date: 2019-03-20T11:49:06.000Z
   commits:
     - hash: e36773de36743c4e3601d32d9324be5b9f27dd6f
       author: Juan Cruz Viotti
@@ -1355,27 +1377,27 @@
         change-type: patch
         signed-off-by: Juan Cruz Viotti <juan@balena.io>
       subject: 'node-raspberrypi-usbboot: Upgrade to v0.2.2'
-      body:
+      body: null
 - version: 1.3.6
-  date: 2019-03-20T11:28:44Z
+  date: 2019-03-20T11:28:44.000Z
   commits:
     - hash: be0423d94ff2f3d22b2bea81104b3a6e1c6dd701
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update node-raspberrypi-usbboot to ^0.2.1
-      body:
+      body: null
 - version: 1.3.5
-  date: 2019-03-19T13:08:00Z
+  date: 2019-03-19T13:08:00.000Z
   commits:
     - hash: 2d80aff6f4070658872c442d83b9ee74a4ebbd8b
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update drivelist to ^8.0.4
-      body:
+      body: null
 - version: 1.3.4
-  date: 2019-03-18T16:26:36Z
+  date: 2019-03-18T16:26:36.000Z
   commits:
     - hash: 09046f7d68dd321eca6f0fe6766faf1ec190315d
       author: Alexis Svinartchouk
@@ -1384,47 +1406,49 @@
       subject: Make UsbbootDrive.usbDevice public again
       body: It was made private in 4499277eef906f54827bae7ba68f0b54e49ffaac
 - version: 1.3.3
-  date: 2019-03-18T11:28:48Z
+  date: 2019-03-18T11:28:48.000Z
   commits:
     - hash: ea26e6229d17bc841f68688ad8ceb07ce047a6a4
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update drivelist to ^8.0.3
-      body:
+      body: null
 - version: 1.3.2
-  date: 2019-03-13T16:43:49Z
+  date: 2019-03-13T16:43:49.000Z
   commits:
     - hash: 9797d801bae1b155fc2ee2fcdba40522d054a97d
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update resin-lint to ^3.0.1
-      body:
+      body: null
     - hash: 4499277eef906f54827bae7ba68f0b54e49ffaac
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Add noUnusedLocals and noUnusedParameters to tsconfig.json
-      body:
+      body: null
 - version: 1.3.1
-  date: 2019-03-08T12:38:14Z
+  date: 2019-03-08T12:38:14.000Z
   commits:
     - hash: 08c77bcdacc8ecb1ed1b10a2712c0b25a62e3742
       author: Theodor Gherzan
       footers:
         change-type: patch
         signed-off-by: Theodor Gherzan <theodor@resin.io>
-      subject: Autodrain does not emit finish as it never calls end(), the more appropriate event is end
-      body:
+      subject: >-
+        Autodrain does not emit finish as it never calls end(), the more
+        appropriate event is end
+      body: null
     - hash: 8b9109a8f5f6ab4a4be3574b1d33b5398c3b4110
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Test cases when no disk image is found in zip archives.
-      body:
+      body: null
 - version: 1.3.0
-  date: 2019-03-05T15:41:19Z
+  date: 2019-03-05T15:41:19.000Z
   commits:
     - hash: b00d98fbfc2d9edc0e0551f5fd352725fa3f2876
       author: Alexis Svinartchouk
@@ -1436,22 +1460,22 @@
       author: Alexis Svinartchouk
       footers:
         change-type: patch
-      subject: SourceDestination._getMetadata() returns {} instead of throwing.
-      body:
+      subject: 'SourceDestination._getMetadata() returns {} instead of throwing.'
+      body: null
     - hash: c81edfe6f624f05c5a60d1bb34665861c37f6745
       author: Alexis Svinartchouk
       footers:
         change-type: minor
       subject: Configurable filename matching function for zip sources
-      body:
+      body: null
     - hash: 2ff6fa11091268f1056bc71c5df83bb5380ead35
       author: Alexis Svinartchouk
       footers:
         change-type: minor
       subject: SingleUseStreamSource class and tests
-      body:
+      body: null
 - version: 1.2.1
-  date: 2019-03-04T14:22:42Z
+  date: 2019-03-04T14:22:42.000Z
   commits:
     - hash: 2953b8f8ae6225d532d2091a8c2a30fe131acd88
       author: Robert Vojta
@@ -1459,24 +1483,24 @@
         change-type: patch
         signed-off-by: Robert Vojta <robert@balena.io>
       subject: Exclude virtual drives
-      body:
+      body: null
 - version: 1.2.0
-  date: 2019-03-04T11:52:45Z
+  date: 2019-03-04T11:52:45.000Z
   commits:
     - hash: 64de7aa3e95c870e9638b717725cd883f57aa21c
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Remove unused test images
-      body:
+      body: null
     - hash: f2b263bed042a3475563361fc058dc6c32517194
       author: Alexis Svinartchouk
       footers:
         change-type: minor
       subject: Fall back to mimetype from content when extension fails.
-      body:
+      body: null
 - version: 1.1.0
-  date: 2019-02-27T17:49:54Z
+  date: 2019-02-27T17:49:54.000Z
   commits:
     - hash: b777be3c6bd3362194f85b5be0fa4b609cfd3a70
       author: Alexis Svinartchouk
@@ -1485,43 +1509,45 @@
       subject: Throw an error when an inner source requires random reads.
       body: Also add tests for SourceDestination.getInnerSource()
 - version: 1.0.10
-  date: 2019-02-26T19:18:53Z
+  date: 2019-02-26T19:18:53.000Z
   commits:
     - hash: 31e6bd6ee564d15c33f048e47f60e1f2ef609cab
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Fix writing on drives with >64KiB block sizes on windows
-      body:
+      body: null
 - version: 1.0.9
-  date: 2019-02-26T14:17:02Z
+  date: 2019-02-26T14:17:02.000Z
   commits:
     - hash: e61eeb8c3586019889e0e89a4bc55c41dc081886
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Use winusb-driver-generator in a try as it may fail.
-      body: It may fail with "Requested resource busy or similar call already in progress"
+      body: >-
+        It may fail with "Requested resource busy or similar call already in
+        progress"
 - version: 1.0.8
-  date: 2019-02-26T11:05:06Z
+  date: 2019-02-26T11:05:06.000Z
   commits:
     - hash: 11b64ec941b4005673ce10a99f6c94d96f6d30f7
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update drivelist to ^8.0.0
-      body:
+      body: null
 - version: 1.0.7
-  date: 2019-02-14T16:42:56Z
+  date: 2019-02-14T16:42:56.000Z
   commits:
     - hash: 98e870dacec779beb4379e7a38d248fffa14ac41
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update drivelist to ^7.0.1
-      body:
+      body: null
 - version: 1.0.6
-  date: 2019-02-11T14:33:03Z
+  date: 2019-02-11T14:33:03.000Z
   commits:
     - hash: 61d8981a52574270cc1ec2a13778e744c86b0edb
       author: Theodor Gherzan
@@ -1529,18 +1555,18 @@
         change-type: patch
         signed-off-by: Theodor Gherzan <theodor@resin.io>
       subject: Make http emit progress events
-      body:
+      body: null
 - version: 1.0.5
-  date: 2019-02-08T14:29:37Z
+  date: 2019-02-08T14:29:37.000Z
   commits:
     - hash: b8213a090bec84fffa65c84bf14b4dce3329e26f
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update node-raspberrypi-usbboot to ^0.1.0
-      body:
+      body: null
 - version: 1.0.4
-  date: 2019-01-29T17:38:48Z
+  date: 2019-01-29T17:38:48.000Z
   commits:
     - hash: a26a2d0df79f972c48c5c1922740bde7b07361b7
       author: Theodor Gherzan
@@ -1548,20 +1574,22 @@
         change-type: patch
         signed-off-by: Theodor Gherzan <theodor@resin.io>
       subject: Fix hash encoding
-      body: |-
-        Xxhash running on 32 bit will return by default an integer while the 64 bit execution
+      body: >-
+        Xxhash running on 32 bit will return by default an integer while the 64
+        bit execution
+
         will return a buffer.
 - version: 1.0.3
-  date: 2019-01-17T14:05:32Z
+  date: 2019-01-17T14:05:32.000Z
   commits:
     - hash: 1fb6bd1452e67abacbd9f9d5f8ca2aa6e9ded14b
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Move lzma.ts to xz.ts to avoid confusion
-      body:
+      body: null
 - version: 1.0.2
-  date: 2019-01-16T18:57:29Z
+  date: 2019-01-16T18:57:29.000Z
   commits:
     - hash: 7b86b683b7764fafc7eaad7379890d5293566480
       author: Alexis Svinartchouk
@@ -1570,20 +1598,20 @@
       subject: Don't try to get mbr logical partitions in getPartitions()
       body: They're not in the first bytes of the disk.
 - version: 1.0.1
-  date: 2019-01-16T18:26:08Z
+  date: 2019-01-16T18:26:08.000Z
   commits:
     - hash: 3e1c89acd4961b852f6b62a4138ba43c10a323d8
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: resin -> balena rename
-      body:
+      body: null
     - hash: 26432912e9e5d786907597929e811f43fb580599
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Rename network config files resin-wifi-xx -> balena-wifi-xx
-      body:
+      body: null
     - hash: 67264b0680a22f731792ae446ef21384136e7ff6
       author: Alexis Svinartchouk
       footers:
@@ -1595,9 +1623,9 @@
       footers:
         change-type: patch
       subject: Only import needed parts from bluebird
-      body:
+      body: null
 - version: 1.0.0
-  date: 2019-01-16T16:04:21Z
+  date: 2019-01-16T16:04:21.000Z
   commits:
     - hash: 99ba99b00540dca6ec5d9d6611f6d6a1be9d4266
       author: Alexis Svinartchouk
@@ -1614,38 +1642,38 @@
         * added "index" attribute
         * gpt id renamed guid
 - version: 0.2.2
-  date: 2019-01-11T16:39:42Z
+  date: 2019-01-11T16:39:42.000Z
   commits:
     - hash: cc4b4f091bb035702062d25a21b3d40eeadd2f11
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Fix typo
-      body:
+      body: null
     - hash: 51c84290a5f59b676343097c24239b6b24c9c8f9
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Use xxhash fork that fixes build with xcode 10.1
-      body:
+      body: null
 - version: 0.2.1
-  date: 2019-01-11T16:20:42Z
+  date: 2019-01-11T16:20:42.000Z
   commits:
     - hash: 0b1d73220b1d6b58f496367b5cd12c56bce409f1
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: winusb-driver-generator is optional (win32 only)
-      body:
+      body: null
 - version: 0.2.0
-  date: 2018-12-20T13:47:05Z
+  date: 2018-12-20T13:47:05.000Z
   commits:
     - hash: 5ef5527722fc4e656de4d5316ed37515a45f49ec
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Remove not needed class members from Scanner
-      body:
+      body: null
     - hash: 90ab7367adfbcfbcf8e26c58624b746e9203472d
       author: Alexis Svinartchouk
       footers:
@@ -1656,7 +1684,7 @@
         been emitted for all connected drives), awaiting for it has the same
         effect as waiting for the 'ready' event.
 - version: 0.1.34
-  date: 2018-12-19T17:06:02Z
+  date: 2018-12-19T17:06:02.000Z
   commits:
     - hash: 6254928964d98da42953cb2f4491cfd49d1934d7
       author: John (Jack) Brown
@@ -1664,45 +1692,45 @@
         change-type: patch
         signed-off-by: Jack Brown <jack@resin.io>
       subject: 'ci: Update platforms to use new syntax'
-      body:
+      body: null
 - version: 0.1.33
-  date: 2018-12-19T11:06:06Z
+  date: 2018-12-19T11:06:06.000Z
   commits:
     - hash: c62ecba0fe5996fb9c0d3d07ddcbd138a3cc8794
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Don't update multi write destination streams max listeners if < default
-      body:
+      body: null
 - version: 0.1.32
-  date: 2018-11-29T17:54:10Z
+  date: 2018-11-29T17:54:10.000Z
   commits:
     - hash: 04964fcd5f0a2d9414358dc7394884d6bebfb4e8
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Update file-disk to ^5.0.0
-      body:
+      body: null
 - version: 0.1.31
-  date: 2018-11-28T15:25:37Z
+  date: 2018-11-28T15:25:37.000Z
   commits:
     - hash: ffb8a6cb2519c4c8f04c5888584b3dea322c8627
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: Add .wic as a supported image format
-      body:
+      body: null
 - version: 0.1.30
-  date: 2018-11-23T17:58:43Z
+  date: 2018-11-23T17:58:43.000Z
   commits:
     - hash: 7dc49b83a30f0c30ba4a706e03f2e12bd587b701
       author: Alexis Svinartchouk
       footers:
         change-type: patch
       subject: 'update(lzma-native): Update lzma-native to ^4.0.3'
-      body:
+      body: null
 - version: 0.1.29
-  date: 2018-11-21T11:54:05Z
+  date: 2018-11-21T11:54:05.000Z
   commits:
     - hash: 001409143adca15b689e3cb5c8699a24b4e3a06d
       author: Alexis Svinartchouk
@@ -1713,7 +1741,7 @@
         Also update the tests as drivelist returns the drive size as a number,
         not a string.
 - version: 0.1.28
-  date: 2018-10-19T13:33:37Z
+  date: 2018-10-19T13:33:37.000Z
   commits:
     - hash: 11fd6726d9a242594b5e538d5dc67b3964132d0c
       author: Alexis Svinartchouk
@@ -1721,9 +1749,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'update(usbboot): Update node-raspberrypi-usbboot to 0.0.12'
-      body:
+      body: null
 - version: 0.1.27
-  date: 2018-10-19T07:30:36Z
+  date: 2018-10-19T07:30:36.000Z
   commits:
     - hash: 3d4389349f2cfc602fe34e5b40dfb5c7b02b63eb
       author: Alexis Svinartchouk
@@ -1731,9 +1759,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'update(usbboot): Update node-raspberrypi-usbboot to 0.0.10'
-      body:
+      body: null
 - version: 0.1.26
-  date: 2018-10-10T13:29:22Z
+  date: 2018-10-10T13:29:22.000Z
   commits:
     - hash: 504ff89f3dd10223d95194b0eb3263deb43d9f07
       author: Alexis Svinartchouk
@@ -1741,9 +1769,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'update(usbboot): Update node-raspberrypi-usbboot to 0.0.9'
-      body:
+      body: null
 - version: 0.1.25
-  date: 2018-10-10T11:59:58Z
+  date: 2018-10-10T11:59:58.000Z
   commits:
     - hash: d16339357a74e65fa983da3573f03d84f4a0f8ad
       author: Alexis Svinartchouk
@@ -1751,9 +1779,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'update(usbboot): Update node-raspberrypi-usbboot to 0.0.8'
-      body:
+      body: null
 - version: 0.1.24
-  date: 2018-10-02T13:50:39Z
+  date: 2018-10-02T13:50:39.000Z
   commits:
     - hash: 4f29c32190729e548036d1bfb7991533618fc1bd
       author: Alexis Svinartchouk
@@ -1761,9 +1789,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(usbboot): Fix usbboot devices display name'
-      body:
+      body: null
 - version: 0.1.23
-  date: 2018-09-21T23:50:06Z
+  date: 2018-09-21T23:50:06.000Z
   commits:
     - hash: 71594df685e905d9f34ccbdb8723815ea55c45ef
       author: Alexis Svinartchouk
@@ -1771,9 +1799,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(resin-s3-source): Allow changing the s3 host'
-      body:
+      body: null
 - version: 0.1.22
-  date: 2018-09-18T22:50:16Z
+  date: 2018-09-18T22:50:16.000Z
   commits:
     - hash: 8ada8545f60105fb79933f7ad46e1b8fa1871099
       author: Alexis Svinartchouk
@@ -1781,9 +1809,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'update(udif): Update udif to ^0.15.7'
-      body:
+      body: null
 - version: 0.1.21
-  date: 2018-09-18T17:49:30Z
+  date: 2018-09-18T17:49:30.000Z
   commits:
     - hash: 8c4722d4c0b0c9190a582f08fcc671aad30ebf4a
       author: Alexis Svinartchouk
@@ -1795,7 +1823,7 @@
         Never return a bytesRead that is larger than the bytes we've actually
         read.
 - version: 0.1.20
-  date: 2018-09-18T13:12:00Z
+  date: 2018-09-18T13:12:00.000Z
   commits:
     - hash: 14a64f44c39241dc6f2d5faf0a0f577b05f0d23b
       author: Alexis Svinartchouk
@@ -1805,7 +1833,7 @@
       subject: 'update(resin-lint): Update resin-lint to ^2.0.1'
       body: Run all files through prettier
 - version: 0.1.19
-  date: 2018-09-18T09:43:26Z
+  date: 2018-09-18T09:43:26.000Z
   commits:
     - hash: dc74f108a7cf0b85db3bbf68f40e814cc73e86c9
       author: Alexis Svinartchouk
@@ -1815,7 +1843,7 @@
       subject: 'update(typescript): Update typescript to ^3.0.3'
       body: Also updates ts-node and fixes a compatibility issue with node8 types.
 - version: 0.1.18
-  date: 2018-09-17T13:26:38Z
+  date: 2018-09-17T13:26:38.000Z
   commits:
     - hash: 94643b4a431de8ba848c08e37017ffcc0294fa2f
       author: Alexis Svinartchouk
@@ -1823,9 +1851,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(npm): Publish the typings folder'
-      body:
+      body: null
 - version: 0.1.17
-  date: 2018-09-17T12:21:27Z
+  date: 2018-09-17T12:21:27.000Z
   commits:
     - hash: 62d17ae9b4d8c9e056f13a059ce300e784286694
       author: Alexis Svinartchouk
@@ -1833,9 +1861,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(http): Catch errors that may happen during a HEAD request'
-      body:
+      body: null
 - version: 0.1.16
-  date: 2018-09-11T11:01:37Z
+  date: 2018-09-11T11:01:37.000Z
   commits:
     - hash: 6c0bb8288bb3e6f0e48bed2c27a668d3c5eb8cb4
       author: Alexis Svinartchouk
@@ -1843,9 +1871,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(errors): Set VerificationError.code to EVALIDATION'
-      body:
+      body: null
 - version: 0.1.15
-  date: 2018-09-07T15:59:37Z
+  date: 2018-09-07T15:59:37.000Z
   commits:
     - hash: 677356837348e005500917329e35f0352e665090
       author: Alexis Svinartchouk
@@ -1853,9 +1881,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(tests): Don''t unmount files in tests'
-      body:
+      body: null
 - version: 0.1.14
-  date: 2018-09-07T15:31:21Z
+  date: 2018-09-07T15:31:21.000Z
   commits:
     - hash: 618405218ab2be0626a436ade25f662c08d1f4d9
       author: Jonas Hermsmeier
@@ -1867,7 +1895,7 @@
         This fixes EINVAL errors on MacOS by using aligned reads / writes for
         buffers not aligned to the device's block size
 - version: 0.1.13
-  date: 2018-09-06T14:01:55Z
+  date: 2018-09-06T14:01:55.000Z
   commits:
     - hash: 1f6b2e4235502daa5f4ace0473c7e1e296d94063
       author: Alexis Svinartchouk
@@ -1875,9 +1903,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(block-transform-stream): Flush last bytes'
-      body:
+      body: null
 - version: 0.1.12
-  date: 2018-09-04T11:55:54Z
+  date: 2018-09-04T11:55:54.000Z
   commits:
     - hash: 0d94d136524b673c01078b0340bc38e8e5ab2938
       author: Alexis Svinartchouk
@@ -1885,9 +1913,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'update(drivelist): Update drivelist to ^6.4.2'
-      body:
+      body: null
 - version: 0.1.11
-  date: 2018-09-04T11:45:50Z
+  date: 2018-09-04T11:45:50.000Z
   commits:
     - hash: 53bb65e0462ecc70ed2cb4eef3a5ca3d75e4e69a
       author: Alexis Svinartchouk
@@ -1895,16 +1923,16 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(source-destination): Remove unused methods'
-      body:
+      body: null
     - hash: eae75d0823f5908963626b9ba4bbcb545782f3c3
       author: Alexis Svinartchouk
       footers:
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(source-destination): Only emit progress events if needed'
-      body:
+      body: null
 - version: 0.1.10
-  date: 2018-09-03T14:02:46Z
+  date: 2018-09-03T14:02:46.000Z
   commits:
     - hash: 79152ce0ebd8c443ab962df38d9311018e480091
       author: Alexis Svinartchouk
@@ -1912,16 +1940,16 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(lint): Fix linter errors'
-      body:
+      body: null
     - hash: 035a877486df10e265ae17c95100104df931a5d0
       author: Alexis Svinartchouk
       footers:
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'feat(block-transform-stream): Faster writes for compressed images'
-      body:
+      body: null
 - version: 0.1.9
-  date: 2018-08-31T12:24:56Z
+  date: 2018-08-31T12:24:56.000Z
   commits:
     - hash: 50b6d247b538d3f5f22b851e40b2d205cce06a49
       author: Alexis Svinartchouk
@@ -1929,9 +1957,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(package): Build before publishing'
-      body:
+      body: null
 - version: 0.1.8
-  date: 2018-08-31T09:57:31Z
+  date: 2018-08-31T09:57:31.000Z
   commits:
     - hash: 649a529ec16a3272b7d8bfeab22b7833bdd8b368
       author: Alexis Svinartchouk
@@ -1941,7 +1969,7 @@
       subject: 'fix(package): Only publish built files'
       body: Also don't install dev packages in production
 - version: 0.1.7
-  date: 2018-08-30T14:06:11Z
+  date: 2018-08-30T14:06:11.000Z
   commits:
     - hash: bc5cf33280396a43b04c3ddbebb761f0ed1c9e4f
       author: Alexis Svinartchouk
@@ -1949,9 +1977,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'feat(gzip): Add isSizeEstimated=true in gzip images metadata'
-      body:
+      body: null
 - version: 0.1.6
-  date: 2018-08-30T13:38:22Z
+  date: 2018-08-30T13:38:22.000Z
   commits:
     - hash: a1894be4db238de7aad3b41f88ba6b019186ff9a
       author: Alexis Svinartchouk
@@ -1961,7 +1989,7 @@
       subject: 'fix(block-write-stream): Fix block-write-stream tests'
       body: Tests were broken by f3b2e8c512521a357406d0163928323bfe31ed74
 - version: 0.1.5
-  date: 2018-08-29T16:44:49Z
+  date: 2018-08-29T16:44:49.000Z
   commits:
     - hash: f3b2e8c512521a357406d0163928323bfe31ed74
       author: Alexis Svinartchouk
@@ -1969,9 +1997,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(block-write-stream): Write 1MiB blocks'
-      body:
+      body: null
 - version: 0.1.4
-  date: 2018-08-29T13:38:31Z
+  date: 2018-08-29T13:38:31.000Z
   commits:
     - hash: 9c02a720561eb96f343ab5466561576f667df3be
       author: Alexis Svinartchouk
@@ -1979,9 +2007,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(block-read-stream): Read 1MiB blocks instead of 64KiB blocks'
-      body:
+      body: null
 - version: 0.1.3
-  date: 2018-08-28T22:29:12Z
+  date: 2018-08-28T22:29:12.000Z
   commits:
     - hash: 1151d6441a38ef5f2ac6822dbd85cee210198405
       author: Alexis Svinartchouk
@@ -1989,9 +2017,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'update(drivelist): Update drivelist to ^6.4.1'
-      body:
+      body: null
 - version: 0.1.2
-  date: 2018-08-28T16:08:50Z
+  date: 2018-08-28T16:08:50.000Z
   commits:
     - hash: 2a3a85a5338d7777e8bbc6342dfeea04170895cf
       author: Alexis Svinartchouk
@@ -2003,7 +2031,7 @@
         Using a regular fs.ReadStream yields different chunk sizes and slows
         down the write stream.
 - version: 0.1.1
-  date: 2018-08-28T10:56:08Z
+  date: 2018-08-28T10:56:08.000Z
   commits:
     - hash: e52c258ea7e1a017fc2f7688f3a715a18a1b9b71
       author: Alexis Svinartchouk
@@ -2011,9 +2039,9 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(block-device): Don''t unmount the drive before flashing on win32'
-      body:
+      body: null
 - version: 0.1.0
-  date: 2018-08-28T10:39:32Z
+  date: 2018-08-28T10:39:32.000Z
   commits:
     - hash: 7c1213b37567aa0de11de1da939f78bb3a7eba4c
       author: Alexis Svinartchouk
@@ -2033,35 +2061,35 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(ci): Install libudev-dev on ci'
-      body:
+      body: null
     - hash: cbfe984928f4c5c83025cfa97ab853838fe514f4
       author: Alexis Svinartchouk
       footers:
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(scanner): Export DriverlessDevice'
-      body:
+      body: null
     - hash: 06cb28cd191e0261fe8e6d5241eb3c74b923bace
       author: Alexis Svinartchouk
       footers:
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(examples): Fix the scanner example'
-      body:
+      body: null
     - hash: 9e2f1b15386692f29980ae9df76a2770c43a7668
       author: Alexis Svinartchouk
       footers:
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(test): Don''t crash if libusb is not available'
-      body:
+      body: null
     - hash: fda8e94d5da8626bfda8b31d3683a6f587e64ee9
       author: Alexis Svinartchouk
       footers:
         connects-to: '#21'
         change-type: minor
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
-      subject: Use the BlockDevice or File in read and write streams, not the fd
+      subject: 'Use the BlockDevice or File in read and write streams, not the fd'
       body: |-
         * The first bytes of a stream are only written to the disk last on
         Windows;
@@ -2076,42 +2104,42 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(progress): Fix makeClassEmitProgressEvents when start != 0'
-      body:
+      body: null
     - hash: 67826de4e15dc025e443f85a6a15aceafab57b9c
       author: Alexis Svinartchouk
       footers:
         change-type: minor
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'feat(progress): Report source file progress'
-      body:
+      body: null
     - hash: 91860a0eb41822761d3af88e97f1dff3558c7568
       author: Alexis Svinartchouk
       footers:
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(lib): Fix type error with @types/bluebird@3.5.23'
-      body:
+      body: null
     - hash: 667f87ceb9b3f555dbfa485ca53d11f5a3a30a96
       author: Alexis Svinartchouk
       footers:
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(examples): Update the spinner with the last progress event'
-      body:
+      body: null
     - hash: ded9edc241822c1151d899aa978f01dfa408bb0d
       author: Alexis Svinartchouk
       footers:
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(lint): Add missing semicolons'
-      body:
+      body: null
     - hash: 92809de5f2a0ac6b2b09887d9d267a58003ebc39
       author: Alexis Svinartchouk
       footers:
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'fix(lib): Fix getInnerSource for .DMG images'
-      body:
+      body: null
     - hash: 4b7079cf1f47816bccd15dc0c3951d4abc1d87ff
       author: Alexis Svinartchouk
       footers:
@@ -2119,38 +2147,38 @@
         change-type: patch
         signed-off-by: Alexis Svinartchouk <alexis@resin.io>
       subject: 'chore(package): Clean build folder before building'
-      body:
+      body: null
     - hash: bbcc5895227ce2ffac4b8d6313f39057476f8166
       author: John (Jack) Brown
       footers:
         change-type: patch
         signed-off-by: Jack Brown <jack@resin.io>
       subject: 'ci: Add .resinci.yml to control node build matrices'
-      body:
+      body: null
     - hash: 41b027e73b4059fa8c97b12e0249e833f3395ad5
       author: Jonas Hermsmeier
       footers:
         change-type: minor
         signed-off-by: Jonas Hermsmeier <jhermsmeier@gmail.com>
       subject: 'fix(lib): Make block-write-stream chunk inputs'
-      body:
+      body: null
     - hash: 757b237249e34918c9f49459e003876b5a5d363b
       author: Jonas Hermsmeier
       footers:
         change-type: patch
         signed-off-by: Jonas Hermsmeier <jhermsmeier@gmail.com>
       subject: 'chore(package): Update readme, package, add license'
-      body:
+      body: null
     - hash: 2841584ac6b686ff08078caf2350ec8f3c18b859
       author: Jonas Hermsmeier
       footers:
         change-type: patch
         signed-off-by: Jonas Hermsmeier <jhermsmeier@gmail.com>
       subject: 'chore(package): Add editorconfig'
-      body:
+      body: null
     - hash: 0c6fc54beb49f43d7a06d65d5494350aff0921a4
       author: Jonas Hermsmeier
       footers:
         change-type: patch
       subject: 'refactor(constants): Reduce progress update frequency to 2 Hz'
-      body:
+      body: null
