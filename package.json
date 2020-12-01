@@ -48,7 +48,7 @@
     "winusb-driver-generator": "^1.2.3"
   },
   "dependencies": {
-    "@balena/udif": "^1.1.0",
+    "@balena/udif": "^1.1.1",
     "@ronomon/direct-io": "^3.0.1",
     "aws4-axios": "^1.12.0",
     "axios": "^0.19.2",
