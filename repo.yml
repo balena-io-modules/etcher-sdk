@@ -1,0 +1,35 @@
+type: node
+upstream:
+  - repo: file-disk
+    url: https://github.com/balena-io-modules/file-disk
+    module: file-disk
+  - repo: '@balena/udif'
+    url: https://github.com/balena-io-modules/node-udif
+    module: '@balena/udif'
+  - repo: file-disk
+    url: https://github.com/balena-io-modules/file-disk
+    module: file-disk
+  - repo: balena-image-fs
+    url: https://github.com/balena-io-modules/balena-image-fs
+    module: balena-image-fs
+  - repo: partitioninfo
+    url: https://github.com/balena-io-modules/partitioninfo
+    module: partitioninfo
+  - repo: blockmap
+    url: https://github.com/balena-io-modules/blockmap
+    module: blockmap
+  - repo: drivelist
+    url: https://github.com/balena-io-modules/drivelist
+    module: drivelist
+  - repo: gzip-stream
+    url: https://github.com/balena-io-modules/gzip-stream
+    module: gzip-stream
+  - repo: mountutils
+    url: https://github.com/balena-io-modules/mountutils
+    module: mountutils
+  - repo: node-raspberrypi-usbboot
+    url: https://github.com/balena-io-modules/node-raspberrypi-usbboot
+    module: node-raspberrypi-usbboot
+  - repo: zip-part-stream
+    url: https://github.com/balena-io-modules/zip-part-stream
+    module: zip-part-stream
