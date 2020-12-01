@@ -72,7 +72,7 @@
     "unzip-stream": "^0.3.0",
     "xxhash": "^0.3.0",
     "yauzl": "^2.9.2",
-    "zip-part-stream": "^1.0.2"
+    "zip-part-stream": "^1.0.3"
   },
   "devDependencies": {
     "@balena/lint": "^5.2.1",
