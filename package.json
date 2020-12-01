@@ -52,7 +52,7 @@
     "@ronomon/direct-io": "^3.0.1",
     "aws4-axios": "^1.12.0",
     "axios": "^0.19.2",
-    "balena-image-fs": "^7.0.4",
+    "balena-image-fs": "^7.0.5",
     "blockmap": "^4.0.1",
     "check-disk-space": "^2.1.0",
     "cyclic-32": "^1.1.0",
