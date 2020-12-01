@@ -1,4 +1,324 @@
 - commits:
+    - subject: Add repo.yml file
+      hash: 545bf53a4800e4672b0f7e18260b046256c01b1e
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested: []
+    - subject: Update @balena/udif from 1.1.0 to 1.1.1
+      hash: 995acd141d7121490e957c190d8a37cac85058cb
+      body: |
+        Update @balena/udif from 1.1.0 to 1.1.1
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested: []
+    - subject: Update zip-part-stream from 1.0.2 to 1.0.3
+      hash: 7a81fa6e7a30cbbe092d2e579784d2fb99479f10
+      body: |
+        Update zip-part-stream from 1.0.2 to 1.0.3
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested:
+        - commits:
+            - subject: Add versionbot changelog
+              hash: f00475a17165009b7fadeb60948897be8e3c2e1b
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+          version: zip-part-stream-1.0.3
+          date: 2020-11-30T19:02:35.063Z
+    - subject: Update node-raspberrypi-usbboot from 0.2.9 to 0.2.10
+      hash: 7bd65a79957b19d48561670acf5638a8b8a4ccfd
+      body: |
+        Update node-raspberrypi-usbboot from 0.2.9 to 0.2.10
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested:
+        - commits:
+            - subject: Update typescript to v4.1.2
+              hash: 58bd9ff059a46e8c5e1e53e9859fbabc9444de0c
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+            - subject: Add versionbot changelog
+              hash: e2f9463549ddc0ed910569a18ce356a6f304220b
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+          version: node-raspberrypi-usbboot-0.2.10
+          date: 2020-11-30T18:33:39.546Z
+    - subject: Update mountutils from 1.3.19 to 1.3.20
+      hash: c49d407a10807ca2601679270b95292da6ab9c3c
+      body: |
+        Update mountutils from 1.3.19 to 1.3.20
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested:
+        - commits:
+            - subject: Add versionbot changelog
+              hash: 416b5556307a66ab7362efbb0e19930ad63a05ed
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+          version: mountutils-1.3.20
+          date: 2020-11-30T18:23:10.530Z
+    - subject: Update gzip-stream from 1.1.1 to 1.1.2
+      hash: 0d8014963c5be75df7d4a0c55ff5c65ed4176693
+      body: |
+        Update gzip-stream from 1.1.1 to 1.1.2
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested:
+        - commits:
+            - subject: Add versionbot changelog
+              hash: 56865feeecae35a12b0375e9c3f2fee9e061e3b0
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+          version: gzip-stream-1.1.2
+          date: 2020-11-30T18:55:08.963Z
+    - subject: Update drivelist from 9.2.1 to 9.2.2
+      hash: 22ad8feb6e318acc74358be1bec4d5b2f7398b67
+      body: |
+        Update drivelist from 9.2.1 to 9.2.2
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested:
+        - commits:
+            - subject: Update typescript to v4.1.2
+              hash: 921936f40542118aad8194a13a81556dc0130523
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+            - subject: Add versionbot changelog
+              hash: 525d2ea0cb4b26c6e36465536f2638e77460e2b6
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+          version: drivelist-9.2.2
+          date: 2020-11-30T18:11:39.632Z
+    - subject: Update blockmap from 4.0.2 to 4.0.3
+      hash: 03ef4aeb0546103598b2bebb97e1dc7461a186a2
+      body: |
+        Update blockmap from 4.0.2 to 4.0.3
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested:
+        - commits:
+            - subject: Update typescript to v4.1.2
+              hash: ea6a3d7569fad0e78a45e9a2c69684845eafec4f
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+            - subject: Add versionbot changelog
+              hash: c5b688387f3bd2dc3d5b22bb510e1e0e5795f986
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+          version: blockmap-4.0.3
+          date: 2020-11-30T17:55:39.228Z
+    - subject: Update partitioninfo from 6.0.1 to 6.0.2
+      hash: e9da78effe73be770e58a485aae2dc96bb66cca2
+      body: |
+        Update partitioninfo from 6.0.1 to 6.0.2
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested:
+        - commits:
+            - subject: Update file-disk from 8.0.0 to 8.0.1
+              hash: f7e5d6556623ba3bd7b972402dcb11e99730027b
+              body: |
+                Update file-disk from 8.0.0 to 8.0.1
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+              nested:
+                - commits:
+                    - subject: Add versionbot changelog
+                      hash: be30ba6813603008ef4444cc1acdbb85cdf31db3
+                      body: ''
+                      footer:
+                        Change-type: patch
+                        change-type: patch
+                      author: Alexis Svinartchouk
+                  version: file-disk-8.0.1
+                  date: 2020-11-26T21:59:04.511Z
+            - subject: Add versionbot changelog
+              hash: 7c0c3abe479e1bc91edb441b14392e68e12300a7
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+              nested: []
+          version: partitioninfo-6.0.2
+          date: 2020-11-27T13:53:29.571Z
+    - subject: Update file-disk from 8.0.0 to 8.0.1
+      hash: fe4cfffbc2243412cff3c2b2139b56c75d5c831a
+      body: |
+        Update file-disk from 8.0.0 to 8.0.1
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested:
+        - commits:
+            - subject: Add versionbot changelog
+              hash: be30ba6813603008ef4444cc1acdbb85cdf31db3
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+          version: file-disk-8.0.1
+          date: 2020-11-26T21:59:04.511Z
+        - commits:
+            - subject: Add versionbot changelog
+              hash: be30ba6813603008ef4444cc1acdbb85cdf31db3
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+          version: file-disk-8.0.1
+          date: 2020-11-26T21:59:04.511Z
+    - subject: Update balena-image-fs from 7.0.4 to 7.0.5
+      hash: 107ce62452011ae5d32e20719889173317076e7f
+      body: |
+        Update balena-image-fs from 7.0.4 to 7.0.5
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested:
+        - commits:
+            - subject: Update file-disk from 8.0.0 to 8.0.1
+              hash: 8f4b321aa0784f914c84922122f754451dcf21d0
+              body: |
+                Update file-disk from 8.0.0 to 8.0.1
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+              nested:
+                - commits:
+                    - subject: Add versionbot changelog
+                      hash: be30ba6813603008ef4444cc1acdbb85cdf31db3
+                      body: ''
+                      footer:
+                        Change-type: patch
+                        change-type: patch
+                      author: Alexis Svinartchouk
+                  version: file-disk-8.0.1
+                  date: 2020-11-26T21:59:04.511Z
+            - subject: Update ext2fs from 3.0.3 to 3.0.4
+              hash: bdcc7c18269098ec3f52f006381d80a6ae4481e3
+              body: |
+                Update ext2fs from 3.0.3 to 3.0.4
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+              nested:
+                - commits:
+                    - subject: Add versionbot changelog
+                      hash: e6a0eafb2097577242ef18e8d60f410f6f1a6cff
+                      body: ''
+                      footer:
+                        Change-type: patch
+                        change-type: patch
+                      author: Alexis Svinartchouk
+                  version: node-ext2fs-3.0.4
+                  date: 2020-11-26T18:56:37.717Z
+            - subject: Update partitioninfo from 6.0.1 to 6.0.2
+              hash: c2b2c6810f9b8e61a2a3d6257ea8933f201aa92f
+              body: |
+                Update partitioninfo from 6.0.1 to 6.0.2
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+              nested:
+                - commits:
+                    - subject: Update file-disk from 8.0.0 to 8.0.1
+                      hash: f7e5d6556623ba3bd7b972402dcb11e99730027b
+                      body: |
+                        Update file-disk from 8.0.0 to 8.0.1
+                      footer:
+                        Change-type: patch
+                        change-type: patch
+                      author: Alexis Svinartchouk
+                      nested:
+                        - commits:
+                            - subject: Add versionbot changelog
+                              hash: be30ba6813603008ef4444cc1acdbb85cdf31db3
+                              body: ''
+                              footer:
+                                Change-type: patch
+                                change-type: patch
+                              author: Alexis Svinartchouk
+                          version: file-disk-8.0.1
+                          date: 2020-11-26T21:59:04.511Z
+                    - subject: Add versionbot changelog
+                      hash: 7c0c3abe479e1bc91edb441b14392e68e12300a7
+                      body: ''
+                      footer:
+                        Change-type: patch
+                        change-type: patch
+                      author: Alexis Svinartchouk
+                      nested: []
+                  version: partitioninfo-6.0.2
+                  date: 2020-11-27T13:53:29.571Z
+            - subject: Add versionbot changelog
+              hash: 8456bef313c0938225da727525af77c5ecfee81a
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+              nested: []
+          version: balena-image-fs-7.0.5
+          date: 2020-11-27T15:09:09.767Z
+  version: 5.1.9
+  date: 2020-12-01T10:52:09.399Z
+- commits:
     - subject: Add versionbot changelog
       hash: 682e9d6cc15322d51d67080ffe25f6e3c2ed5b17
       body: ''
