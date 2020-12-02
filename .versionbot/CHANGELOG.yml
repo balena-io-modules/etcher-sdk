@@ -1,4 +1,38 @@
 - commits:
+    - subject: Update balena-image-fs from 7.0.5 to 7.0.6
+      hash: 8019c0ae03de05ff105f25fa212caed3cc1f77a4
+      body: |
+        Update balena-image-fs from 7.0.5 to 7.0.6
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested:
+        - commits:
+            - subject: Update ext2fs from 3.0.4 to 3.0.5
+              hash: 904ab47378ca2bf55ade3a151bc677aed0b56c5c
+              body: |
+                Update ext2fs from 3.0.4 to 3.0.5
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+              nested:
+                - commits:
+                    - subject: Fix reading and discarding with offsets > 32 bits
+                      hash: b523a8c099bec84c85f3a5393adce88a73c09d7e
+                      body: ''
+                      footer:
+                        Change-type: patch
+                        change-type: patch
+                      author: Alexis Svinartchouk
+                  version: node-ext2fs-3.0.5
+                  date: 2020-12-02T17:40:32.913Z
+          version: balena-image-fs-7.0.6
+          date: 2020-12-02T18:00:40.747Z
+  version: 5.1.10
+  date: 2020-12-02T18:11:49.270Z
+- commits:
     - subject: Add repo.yml file
       hash: 545bf53a4800e4672b0f7e18260b046256c01b1e
       body: ''
