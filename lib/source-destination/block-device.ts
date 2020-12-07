@@ -81,7 +81,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		// tslint:disable:no-bitwise
 		let flags = this.oWrite ? constants.O_RDWR : constants.O_RDONLY;
 		if (this.oDirect) {
-			flags |= constants.O_DIRECT | constants.O_SYNC;
+			flags |= constants.O_DIRECT;
 		}
 		if (this.oWrite) {
 			const plat = platform();
