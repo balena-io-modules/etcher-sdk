@@ -1,4 +1,15 @@
 - commits:
+    - subject: 'Don''t use the O_SYNC flag for block devices, only O_DIRECT'
+      hash: 14f860c28643907ada6d0cdb5b23d73478e4b998
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested: []
+  version: 5.1.11
+  date: 2020-12-07T18:18:14.104Z
+- commits:
     - subject: Update balena-image-fs from 7.0.5 to 7.0.6
       hash: 8019c0ae03de05ff105f25fa212caed3cc1f77a4
       body: |
