@@ -1,4 +1,23 @@
 - commits:
+    - subject: Remove BlockDevice.mountpoints incorrect typing
+      hash: e52f2f89d66f5abd161cc31577f14df22bd935c0
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested: []
+    - subject: Update axios to 0.21.1 and aws4-axios to 2.0.1
+      hash: d48e8706bf0144686f524d269b4bcb23226aa02a
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested: []
+  version: 5.1.12
+  date: 2021-01-06T16:42:20.181Z
+- commits:
     - subject: 'Don''t use the O_SYNC flag for block devices, only O_DIRECT'
       hash: 14f860c28643907ada6d0cdb5b23d73478e4b998
       body: ''
