@@ -116,7 +116,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		return this.drive.description;
 	}
 
-	get mountpoints(): Array<{ path: string }> {
+	get mountpoints() {
 		return this.drive.mountpoints;
 	}
 
