@@ -1,4 +1,15 @@
 - commits:
+    - subject: Store progress on usbboot devices
+      hash: e6bdb271186573bd4b54a63cc4ff824e669c9479
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Alexis Svinartchouk
+      nested: []
+  version: 5.2.0
+  date: 2021-01-06T17:19:20.224Z
+- commits:
     - subject: Remove BlockDevice.mountpoints incorrect typing
       hash: e52f2f89d66f5abd161cc31577f14df22bd935c0
       body: ''
