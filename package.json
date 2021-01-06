@@ -50,8 +50,8 @@
   "dependencies": {
     "@balena/udif": "^1.1.1",
     "@ronomon/direct-io": "^3.0.1",
-    "aws4-axios": "^1.12.0",
-    "axios": "^0.19.2",
+    "aws4-axios": "^2.0.1",
+    "axios": "^0.21.1",
     "balena-image-fs": "^7.0.6",
     "blockmap": "^4.0.3",
     "check-disk-space": "^2.1.0",
