@@ -34,9 +34,13 @@ export class UsbbootDrive
 	public disabled = true;
 	public size = null;
 	public emitsProgress = true;
+	public progress: number = 0;
 
 	constructor(public usbDevice: UsbbootDevice) {
 		super();
-		usbDevice.on('progress', this.emit.bind(this, 'progress'));
+		usbDevice.on('progress', (value) => {
+			this.progress = value;
+			this.emit('progress', value);
+		});
 	}
 }
