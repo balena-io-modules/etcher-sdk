@@ -54,7 +54,7 @@ async function main() {
 	}
 	computeModule.on('progress', onProgress);
 	// Wait until it is converted to a block device
-	await new Promise((resolve, reject) => {
+	await new Promise<void>((resolve, reject) => {
 		function onDetach(drive: scanner.adapters.AdapterSourceDestination) {
 			if (drive === computeModule) {
 				deviceScanner.removeListener('detach', onDetach);
