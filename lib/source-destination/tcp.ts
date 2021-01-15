@@ -1,6 +1,5 @@
 // @ts-ignore
 import { BufferList } from 'bl';
-import { fromCallback } from 'bluebird';
 import { ChildProcess, spawn } from 'child_process';
 import * as MessagePack from 'msgpack5';
 import { createServer, Server, Socket } from 'net';
@@ -14,6 +13,7 @@ import {
 	SparseWritable,
 } from '../sparse-stream/shared';
 import { SparseTransformStream } from '../sparse-stream/sparse-transform-stream';
+import { fromCallback } from '../utils';
 
 import { SourceDestination } from './source-destination';
 
