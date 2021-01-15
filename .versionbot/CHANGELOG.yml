@@ -1,4 +1,24 @@
 - commits:
+    - subject: Only run one diskpart at a time
+      hash: e06f87db30d998940fe02cd23531cdef928324fe
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested: []
+    - subject: Ignore diskpart VDS_E_DISK_IS_OFFLINE errors
+      hash: f868959df6245ce752131d77aa1db66494de8210
+      body: |
+        We don't need to erase the partition table if the disk is offline
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested: []
+  version: 5.2.1
+  date: 2021-01-15T18:09:50.454Z
+- commits:
     - subject: Store progress on usbboot devices
       hash: e6bdb271186573bd4b54a63cc4ff824e669c9479
       body: ''
