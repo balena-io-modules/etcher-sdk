@@ -18,6 +18,7 @@ import { execFile, ExecFileOptions } from 'child_process';
 import * as _debug from 'debug';
 import { promises as fs } from 'fs';
 import { platform } from 'os';
+import RWMutex = require('rwmutex');
 
 import { withTmpFile, TmpFileResult } from './tmp';
 import { delay } from './utils';
@@ -56,6 +57,17 @@ const execFileAsync = async (
 	);
 };
 
+const diskpartMutex = new RWMutex();
+
+async function withDiskpartMutex<T>(fn: () => T): Promise<T> {
+	const unlock = await diskpartMutex.lock();
+	try {
+		return await fn();
+	} finally {
+		unlock();
+	}
+}
+
 /**
  * @summary Run a diskpart script
  * @param {Array<String>} commands - list of commands to run
@@ -66,12 +78,14 @@ const runDiskpart = async (commands: string[]): Promise<void> => {
 	}
 	await withTmpFile(false, async (file: TmpFileResult) => {
 		await fs.writeFile(file.path, commands.join('\r\n'));
-		const { stdout, stderr } = await execFileAsync('diskpart', [
-			'/s',
-			file.path,
-		]);
-		debug('stdout:', stdout);
-		debug('stderr:', stderr);
+		await withDiskpartMutex(async () => {
+			const { stdout, stderr } = await execFileAsync('diskpart', [
+				'/s',
+				file.path,
+			]);
+			debug('stdout:', stdout);
+			debug('stderr:', stderr);
+		});
 	});
 };
 
