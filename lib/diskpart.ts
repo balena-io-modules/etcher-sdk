@@ -18,6 +18,7 @@ import { execFile, ExecFileOptions } from 'child_process';
 import * as _debug from 'debug';
 import { promises as fs } from 'fs';
 import { platform } from 'os';
+import RWMutex = require('rwmutex');
 
 import { withTmpFile, TmpFileResult } from './tmp';
 import { delay } from './utils';
@@ -56,6 +57,17 @@ const execFileAsync = async (
 	);
 };
 
+const diskpartMutex = new RWMutex();
+
+async function withDiskpartMutex<T>(fn: () => T): Promise<T> {
+	const unlock = await diskpartMutex.lock();
+	try {
+		return await fn();
+	} finally {
+		unlock();
+	}
+}
+
 /**
  * @summary Run a diskpart script
  * @param {Array<String>} commands - list of commands to run
@@ -66,12 +78,14 @@ const runDiskpart = async (commands: string[]): Promise<void> => {
 	}
 	await withTmpFile(false, async (file: TmpFileResult) => {
 		await fs.writeFile(file.path, commands.join('\r\n'));
-		const { stdout, stderr } = await execFileAsync('diskpart', [
-			'/s',
-			file.path,
-		]);
-		debug('stdout:', stdout);
-		debug('stderr:', stderr);
+		await withDiskpartMutex(async () => {
+			const { stdout, stderr } = await execFileAsync('diskpart', [
+				'/s',
+				file.path,
+			]);
+			debug('stdout:', stdout);
+			debug('stderr:', stderr);
+		});
 	});
 };
 
@@ -99,6 +113,12 @@ export const clean = async (device: string): Promise<void> => {
 			await runDiskpart([`select disk ${deviceId}`, 'clean', 'rescan']);
 			return;
 		} catch (error) {
+			if (error.code === 0x8004280a) {
+				// See https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-vds/5102cc53-3143-4268-ba4c-6ea39e999ab4
+				// VDS_E_DISK_IS_OFFLINE - The operation cannot be performed on a disk that is offline.
+				// The disk is offline, we should be able to flash it without erasing the partition table first.
+				return;
+			}
 			errorCount += 1;
 			if (errorCount <= DISKPART_RETRIES) {
 				await delay(DISKPART_DELAY);
