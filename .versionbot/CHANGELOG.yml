@@ -1,4 +1,15 @@
 - commits:
+    - subject: upgrade lint
+      hash: 172bf453b5f96d6ebe06dc6564dec6613b97e3c7
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Zane Hitchcox
+      nested: []
+  version: 5.2.3
+  date: 2021-01-26T12:07:58.336Z
+- commits:
     - subject: Update drivelist from 9.2.2 to 9.2.4
       hash: cebb5202f81572aac786c332c9c71c537602774c
       body: |
