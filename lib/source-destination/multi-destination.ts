@@ -55,6 +55,9 @@ export class MultiDestinationVerifier extends Verifier {
 	) {
 		super();
 		for (const dest of source.activeDestinations) {
+			if (dest instanceof TcpDestination) {
+				continue;
+			}
 			const verifier = dest.createVerifier(checksumOrBlocks, size);
 			verifier.on('error', (error: Error) => {
 				this.oneVerifierFinished(verifier);
@@ -298,7 +301,10 @@ export class MultiDestination extends SourceDestination {
 
 		passthrough.on('pipe', async (sourceStream: NodeJS.ReadableStream) => {
 			const rootStream = getRootStream(sourceStream);
-			console.log('source stream', rootStream);
+			// @ts-ignore
+			console.log('source stream', rootStream, rootStream.blocks);
+			// @ts-ignore
+			passthrough.blocks = rootStream.blocks
 			// Handle the special case where we have zero destination streams
 			if (this.activeDestinations.size === 0) {
 				passthrough.emit('done');

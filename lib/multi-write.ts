@@ -38,6 +38,7 @@ import {
 	SourceDestination,
 	Verifier,
 } from './source-destination/source-destination';
+import { TcpDestination } from './source-destination/tcp';
 import { freeSpace, tmpFile } from './tmp';
 
 export type WriteStep = 'decompressing' | 'flashing' | 'verifying' | 'finished';
@@ -221,8 +222,16 @@ function createCompleteOnProgress(
 ) {
 	function $onProgress(progress: ProgressEvent) {
 		// sourceMetadata will be updated by pipeRegularSourceToDestination
-		if (sourceMetadata.size !== undefined && state.size === undefined) {
+		//if (sourceMetadata.size !== undefined && state.size === undefined) {
+		console.log('progress', sourceMetadata);
+		if (sourceMetadata.size !== undefined) {
 			state.size = sourceMetadata.size;
+		}
+		if (sourceMetadata.blockmappedSize !== undefined) {
+			state.blockmappedSize = sourceMetadata.blockmappedSize;
+		}
+		if (sourceMetadata.compressedSize !== undefined) {
+			state.compressedSize = sourceMetadata.compressedSize;
 		}
 		let size: number | undefined;
 		let percentage: number | undefined;
@@ -308,6 +317,11 @@ export async function pipeSourceToDestinations({
 		source.canCreateSparseReadStream(),
 		destination.canCreateSparseWriteStream(),
 	]);
+	for (const dest of destinations) {
+		if (dest instanceof TcpDestination) {
+			dest.sourceMetadata = sourceMetadata;
+		}
+	}
 	const sparse = sparseSource && sparseDestination;
 
 	state.sparse = sparse;
@@ -515,6 +529,7 @@ async function pipeSparseSourceToDestination(
 	);
 	if (verify) {
 		updateState('verifying');
+		console.log('wololo verifying', sourceStream.blocks);  // TODO: remove
 		const verifier = destination.createVerifier(sourceStream.blocks);
 		await runVerifier(verifier, onFail, onProgress);
 	}

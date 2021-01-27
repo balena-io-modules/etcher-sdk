@@ -3,7 +3,7 @@ import { BufferList } from 'bl';
 import { ChildProcess, spawn } from 'child_process';
 import * as MessagePack from 'msgpack5';
 import { createServer, Server, Socket } from 'net';
-import { PassThrough, Duplex, pipeline } from 'stream';
+import { Transform, PassThrough, Duplex, pipeline } from 'stream';
 
 import { CHUNK_SIZE } from '../constants';
 import {
@@ -12,9 +12,11 @@ import {
 	SparseReadable,
 	SparseWritable,
 } from '../sparse-stream/shared';
+import { BlocksWithChecksum } from '../sparse-stream/shared';
 import { SparseTransformStream } from '../sparse-stream/sparse-transform-stream';
 import { fromCallback } from '../utils';
 
+import { Metadata } from './metadata';
 import { SourceDestination } from './source-destination';
 
 const msgpack = MessagePack();
@@ -35,6 +37,7 @@ const msgpack = MessagePack();
 // 		const bl = new BufferList();
 // 		bl.append(header);
 // 		bl.append(msgpack.encode([chunk.position, chunk.buffer]));
+// 		console.log('bubu', bl.slice(0,1));
 // 		return bl;
 // 	},
 // );
@@ -104,10 +107,76 @@ class PassThroughWithSource extends PassThrough {
 	public sourceStream: NodeJS.ReadableStream;
 }
 
+class TcpDecoder extends Transform {
+	constructor() {
+		super({ objectMode: true });
+	}
+
+	public _transform(
+		chunk: any,
+		_encoding: string,
+		callback: (error?: Error) => void,
+	) {
+		// TODO
+		if (chunk.blocks !== undefined) {
+			console.log('TcpDecoder', JSON.stringify(chunk, null, 4));
+			this.emit('blocks', chunk.blocks);
+		} else if (chunk.metadata !== undefined) {
+			console.log('TcpDecoder metadata', JSON.stringify(chunk, null, 4));
+			this.emit('metadata', chunk.metadata);
+		} else if (chunk.buffer !== undefined) {
+			this.push(chunk);
+		} else {
+			console.log('wtf is this', chunk);
+		}
+		callback();
+	}
+}
+
+// TODO: rename to SparseStreamEncoder
+class TcpEncoder extends Transform {
+	private metadataSent = false;
+	private blocks: any; // TODO
+
+	constructor(private sourceMetadata?: Metadata) {
+		super({ objectMode: true });
+		this.on('pipe', (sourceStream) => {
+			// @ts-ignore
+			console.log('sourceStream piped', sourceStream, sourceStream.blocks);
+			this.blocks = sourceStream.blocks;
+		});
+	}
+
+	public _transform(
+		chunk: any,
+		_encoding: string,
+		callback: (error?: Error) => void,
+	) {
+		// TODO
+		if (!this.metadataSent) {
+			console.log('sending blocks');
+			this.push({ blocks: this.blocks }); // TODO: is this needed ? It will be sent in _flush with checksums.
+			if (this.sourceMetadata !== undefined) {
+				this.push({ metadata: this.sourceMetadata });
+			}
+			this.metadataSent = true;
+		}
+		this.push(chunk);
+		callback();
+	}
+
+	public _flush(callback: (error?: Error) => void) {
+		console.log('flush sending blocks');
+		this.push({ blocks: this.blocks });
+		callback();
+	}
+}
+
 export class TcpSource extends SourceDestination {
 	private rawPassthrough = new RawZstdStream();
 	private passthrough = new PassThroughWithSource();
 	private server: Server;
+	private $metadata: Metadata = {};
 
 	constructor(private host: string, private port: number) {
 		super();
@@ -129,6 +198,10 @@ export class TcpSource extends SourceDestination {
 		return this.passthrough;
 	}
 
+	protected async _getMetadata(): Promise<Metadata> {
+		return this.$metadata;
+	}
+
 	public async createSparseReadStream({
 		alignment = 512,
 		numBuffers,
@@ -144,7 +217,15 @@ export class TcpSource extends SourceDestination {
 			alignment: alignment || 512,
 			numBuffers,
 		});
-		pipeline(this.passthrough, decoder, sparseTransform, noop);
+		const tcpDecoder = new TcpDecoder();
+		tcpDecoder.on('blocks', (blocks: BlocksWithChecksum[]) => {
+			sparseTransform.blocks = blocks;
+		});
+		tcpDecoder.on('metadata', (metadata: Metadata) => {
+			Object.assign(this.$metadata, metadata);
+			console.log('got metadata', this.$metadata);
+		});
+		pipeline(this.passthrough, decoder, tcpDecoder, sparseTransform, noop);
 		// TODO
 		// @ts-ignore
 		decoder.blocks = [];
@@ -179,6 +260,8 @@ export class TcpSource extends SourceDestination {
 }
 
 export class TcpDestination extends SourceDestination {
+	public sourceMetadata?: Metadata;
+
 	constructor(private host: string, private port: number) {
 		super();
 	}
@@ -234,9 +317,10 @@ export class TcpDestination extends SourceDestination {
 			// @ts-ignore
 			return socket;
 		} else {
+			const tcpEncoder = new TcpEncoder(this.sourceMetadata);
 			const encoder = msgpack.encoder();
-			pipeline(encoder, socket, noop);
-			return encoder;
+			pipeline(tcpEncoder, encoder, socket, noop);
+			return tcpEncoder;
 		}
 	}
 }
