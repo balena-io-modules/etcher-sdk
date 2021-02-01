@@ -24,8 +24,11 @@ const TMP_RANDOM_BYTES = 6;
 const TMP_DIR = join(tmpdir(), 'etcher');
 const TRIES = 5;
 
-function randomFilePath(): string {
-	return join(TMP_DIR, `${randomBytes(TMP_RANDOM_BYTES).toString('hex')}.tmp`);
+function randomFilePath(prefix: string, postfix: string): string {
+	return join(
+		TMP_DIR,
+		`${prefix}${randomBytes(TMP_RANDOM_BYTES).toString('hex')}${postfix}`,
+	);
 }
 
 export interface TmpFileResult {
@@ -67,13 +70,23 @@ async function createTmpRoot(): Promise<void> {
 	}
 }
 
-export async function tmpFile(keepOpen = true): Promise<TmpFileResult> {
+export interface TmpFileOptions {
+	keepOpen?: boolean;
+	prefix?: string;
+	postfix?: string;
+}
+
+export async function tmpFile({
+	keepOpen = true,
+	prefix = 'tmp-',
+	postfix = '.tmp',
+}: TmpFileOptions): Promise<TmpFileResult> {
 	await createTmpRoot();
 	let fileHandle: fs.FileHandle | undefined;
 	let path: string;
 	let ok = false;
 	for (let i = 0; i < TRIES; i++) {
-		path = randomFilePath();
+		path = randomFilePath(prefix, postfix);
 		try {
 			fileHandle = await fs.open(path, 'wx+');
 			ok = true;
@@ -97,14 +110,14 @@ export async function tmpFile(keepOpen = true): Promise<TmpFileResult> {
 }
 
 export async function withTmpFile<T>(
-	keepOpen = true,
+	options: TmpFileOptions,
 	fn: (result: TmpFileResult) => Promise<T>,
 ): Promise<T> {
-	const result = await tmpFile(keepOpen);
+	const result = await tmpFile(options);
 	try {
 		return await fn(result);
 	} finally {
-		if (keepOpen && result.fileHandle !== undefined) {
+		if (options.keepOpen && result.fileHandle !== undefined) {
 			await result.fileHandle.close();
 		}
 		await fs.unlink(result.path);

@@ -36,7 +36,7 @@ describe('img', function () {
 	let gunzippedFilePath: string | undefined;
 
 	before(async function () {
-		gunzippedFilePath = (await tmpFile(false)).path;
+		gunzippedFilePath = (await tmpFile({ keepOpen: false })).path;
 		await new Promise((resolve, reject) => {
 			const source = createReadStream(
 				join(IMAGES_PATH, 'etcher-gpt-test.img.gz'),

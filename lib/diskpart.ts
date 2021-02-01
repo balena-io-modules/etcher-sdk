@@ -76,7 +76,7 @@ const runDiskpart = async (commands: string[]): Promise<void> => {
 	if (platform() !== 'win32') {
 		return;
 	}
-	await withTmpFile(false, async (file: TmpFileResult) => {
+	await withTmpFile({ keepOpen: false }, async (file: TmpFileResult) => {
 		await fs.writeFile(file.path, commands.join('\r\n'));
 		await withDiskpartMutex(async () => {
 			const { stdout, stderr } = await execFileAsync('diskpart', [

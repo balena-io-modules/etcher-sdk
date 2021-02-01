@@ -45,7 +45,7 @@ describe('zip in a single use stream source', function () {
 			isCompressed: true,
 		});
 		const progressEvents: sourceDestination.ProgressEvent[] = [];
-		await withTmpFile(false, async (file) => {
+		await withTmpFile({ keepOpen: false }, async (file) => {
 			await multiWrite.pipeSourceToDestinations({
 				source,
 				destinations: [
