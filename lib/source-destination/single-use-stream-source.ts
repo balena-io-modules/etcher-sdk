@@ -16,21 +16,32 @@
 
 import {
 	CreateReadStreamOptions,
+	CreateSparseReadStreamOptions,
 	SourceDestination,
 } from './source-destination';
 
+import { Metadata } from './metadata';
 import { NotCapable } from '../errors';
 import { StreamLimiter } from '../stream-limiter';
+import { SparseReadable } from '../sparse-stream/shared';
 
 export class SingleUseStreamSource extends SourceDestination {
 	private used = false;
 
-	constructor(private stream: NodeJS.ReadableStream) {
+	constructor(private stream: NodeJS.ReadableStream, private sparse = false, private $metadata: Metadata = {}) {
 		super();
 	}
 
+	protected async _getMetadata() {
+		return this.$metadata;
+	}
+
 	public async canCreateReadStream(): Promise<boolean> {
-		return !this.used;
+		return !this.used && !this.sparse;
+	}
+
+	public async canCreateSparseReadStream(): Promise<boolean> {
+		return !this.used && this.sparse;
 	}
 
 	public async createReadStream({
@@ -49,5 +60,11 @@ export class SingleUseStreamSource extends SourceDestination {
 		}
 		this.used = true;
 		return stream;
+	}
+
+	public async createSparseReadStream(
+		_options: CreateSparseReadStreamOptions = {},
+	): Promise<SparseReadable> {
+		return this.stream as SparseReadable;
 	}
 }
