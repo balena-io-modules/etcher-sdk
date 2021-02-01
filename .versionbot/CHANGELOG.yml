@@ -1,4 +1,15 @@
 - commits:
+    - subject: Export tmp and add prefix and postfix options
+      hash: bd80af3ec5a87229fb3aebe2c77787371ab20253
+      body: ''
+      footer:
+        Change-type: major
+        change-type: major
+      author: Alexis Svinartchouk
+      nested: []
+  version: 6.0.0
+  date: 2021-02-01T18:03:42.334Z
+- commits:
     - subject: upgrade lint
       hash: 172bf453b5f96d6ebe06dc6564dec6613b97e3c7
       body: ''
