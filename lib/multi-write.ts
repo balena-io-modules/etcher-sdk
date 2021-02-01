@@ -146,7 +146,7 @@ export async function decompressThenFlash({
 			isWorthDecompressing(sourceMetadata.name) &&
 			enoughDiskSpaceAvailable
 		) {
-			({ path: decompressedFilePath } = await tmpFile(false));
+			({ path: decompressedFilePath } = await tmpFile({ keepOpen: false }));
 			const decompressedSource = new File({
 				path: decompressedFilePath,
 				write: true,

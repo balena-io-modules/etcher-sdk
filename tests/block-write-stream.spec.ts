@@ -86,7 +86,7 @@ describe('block-write-stream', function () {
 	): Promise<void> {
 		const data = await randomBytes(size, ALIGNMENT);
 		const input = new Readable({ objectMode: sparse });
-		await withTmpFile(false, async (file: TmpFileResult) => {
+		await withTmpFile({ keepOpen: false }, async (file: TmpFileResult) => {
 			const destination = await blockDeviceFromFile(file.path);
 			await destination.open();
 			let output: BlockWriteStream | SparseWriteStream;
