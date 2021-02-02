@@ -1,4 +1,16 @@
 - commits:
+    - subject: Ignore ENOENT errors on unlink in withTmpFile
+      hash: 7bb2a23c4e94dcda6a7b494fe0435c0b59b56b06
+      body: |
+        The temporary file might have been already deleted by cleanupTmpFiles
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested: []
+  version: 6.0.1
+  date: 2021-02-02T14:57:11.116Z
+- commits:
     - subject: Export tmp and add prefix and postfix options
       hash: bd80af3ec5a87229fb3aebe2c77787371ab20253
       body: ''
