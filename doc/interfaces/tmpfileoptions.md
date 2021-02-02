@@ -20,7 +20,7 @@
 
 • **keepOpen**? : *undefined | false | true*
 
-*Defined in [lib/tmp.ts:74](https://github.com/balena-io-modules/etcher-sdk/blob/bd80af3/lib/tmp.ts#L74)*
+*Defined in [lib/tmp.ts:74](https://github.com/balena-io-modules/etcher-sdk/blob/7bb2a23/lib/tmp.ts#L74)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **postfix**? : *undefined | string*
 
-*Defined in [lib/tmp.ts:76](https://github.com/balena-io-modules/etcher-sdk/blob/bd80af3/lib/tmp.ts#L76)*
+*Defined in [lib/tmp.ts:76](https://github.com/balena-io-modules/etcher-sdk/blob/7bb2a23/lib/tmp.ts#L76)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **prefix**? : *undefined | string*
 
-*Defined in [lib/tmp.ts:75](https://github.com/balena-io-modules/etcher-sdk/blob/bd80af3/lib/tmp.ts#L75)*
+*Defined in [lib/tmp.ts:75](https://github.com/balena-io-modules/etcher-sdk/blob/7bb2a23/lib/tmp.ts#L75)*
