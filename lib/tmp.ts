@@ -120,7 +120,15 @@ export async function withTmpFile<T>(
 		if (options.keepOpen && result.fileHandle !== undefined) {
 			await result.fileHandle.close();
 		}
-		await fs.unlink(result.path);
+		try {
+			await fs.unlink(result.path);
+		} catch (error) {
+			// The file might already have been deleted by cleanupTmpFiles
+			if (error.code !== 'ENOENT') {
+				// tslint:disable-next-line:no-unsafe-finally
+				throw error;
+			}
+		}
 	}
 }
 
