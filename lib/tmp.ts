@@ -36,7 +36,10 @@ export interface TmpFileResult {
 	fileHandle?: fs.FileHandle;
 }
 
-export async function cleanupTmpFiles(olderThan = Date.now()): Promise<void> {
+export async function cleanupTmpFiles(
+	olderThan = Date.now(),
+	prefix = '',
+): Promise<void> {
 	let dirents: Dirent[] = [];
 	try {
 		dirents = await fs.readdir(TMP_DIR, { withFileTypes: true });
@@ -45,14 +48,16 @@ export async function cleanupTmpFiles(olderThan = Date.now()): Promise<void> {
 	}
 	for (const dirent of dirents) {
 		if (dirent.isFile()) {
-			const filename = join(TMP_DIR, dirent.name);
-			try {
-				const stats = await fs.stat(filename);
-				if (stats.ctime.getTime() <= olderThan) {
-					await fs.unlink(filename);
+			if (dirent.name.startsWith(prefix)) {
+				const filename = join(TMP_DIR, dirent.name);
+				try {
+					const stats = await fs.stat(filename);
+					if (stats.ctime.getTime() <= olderThan) {
+						await fs.unlink(filename);
+					}
+				} catch {
+					// noop
 				}
-			} catch {
-				// noop
 			}
 		}
 	}
