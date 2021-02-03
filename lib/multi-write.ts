@@ -42,6 +42,8 @@ import { freeSpace, tmpFile } from './tmp';
 
 export type WriteStep = 'decompressing' | 'flashing' | 'verifying' | 'finished';
 
+export const DECOMPRESSED_IMAGE_PREFIX = 'decompressed-image-';
+
 interface MultiDestinationState {
 	active: number;
 	failed: number;
@@ -146,7 +148,10 @@ export async function decompressThenFlash({
 			isWorthDecompressing(sourceMetadata.name) &&
 			enoughDiskSpaceAvailable
 		) {
-			({ path: decompressedFilePath } = await tmpFile({ keepOpen: false }));
+			({ path: decompressedFilePath } = await tmpFile({
+				keepOpen: false,
+				prefix: DECOMPRESSED_IMAGE_PREFIX,
+			}));
 			const decompressedSource = new File({
 				path: decompressedFilePath,
 				write: true,
