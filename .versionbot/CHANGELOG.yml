@@ -1,4 +1,15 @@
 - commits:
+    - subject: Prefix temporary decompressed images filenames
+      hash: 58b0ba2d9362536a105ff2b1152915540a9efb1e
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Alexis Svinartchouk
+      nested: []
+  version: 6.1.0
+  date: 2021-02-03T13:41:11.058Z
+- commits:
     - subject: Ignore ENOENT errors on unlink in withTmpFile
       hash: 7bb2a23c4e94dcda6a7b494fe0435c0b59b56b06
       body: |
