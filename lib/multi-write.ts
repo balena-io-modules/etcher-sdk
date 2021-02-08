@@ -222,8 +222,6 @@ function createCompleteOnProgress(
 ) {
 	function $onProgress(progress: ProgressEvent) {
 		// sourceMetadata will be updated by pipeRegularSourceToDestination
-		//if (sourceMetadata.size !== undefined && state.size === undefined) {
-		console.log('progress', sourceMetadata);
 		if (sourceMetadata.size !== undefined) {
 			state.size = sourceMetadata.size;
 		}
@@ -529,7 +527,6 @@ async function pipeSparseSourceToDestination(
 	);
 	if (verify) {
 		updateState('verifying');
-		console.log('wololo verifying', sourceStream.blocks);  // TODO: remove
 		const verifier = destination.createVerifier(sourceStream.blocks);
 		await runVerifier(verifier, onFail, onProgress);
 	}

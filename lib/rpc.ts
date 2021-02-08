@@ -138,7 +138,7 @@ class StreamDecoder extends Transform {
 	public blocks: BlocksWithChecksum[];
 
 	constructor() {
-		super( {objectMode: true });
+		super({ objectMode: true });
 	}
 
 	public _transform(
@@ -284,7 +284,7 @@ export class RemoteSource extends SourceDestination {
 			this.stream.on('streamType', resolve);
 		});
 	}
-	
+
 	// TODO: close
 
 	protected async _getMetadata() {

@@ -304,40 +304,45 @@ export class MultiDestination extends SourceDestination {
 			// @ts-ignore
 			console.log('source stream', rootStream, rootStream.blocks);
 			// @ts-ignore
-			passthrough.blocks = rootStream.blocks
+			passthrough.blocks = rootStream.blocks;
 			// Handle the special case where we have zero destination streams
 			if (this.activeDestinations.size === 0) {
 				passthrough.emit('done');
 			}
 
 			await Promise.all(
-				Array.from(this.activeDestinations).map(async (destination: SourceDestination) => {
-					const dontRecompress =
-						rootStream instanceof RawZstdStream &&
-						destination instanceof TcpDestination;
-					if (dontRecompress) {
-						args[0] = args[0] || {};
-						args[0].compress = false;
-					}
-					const stream = await destination[methodName](...args);
-					progresses.set(stream, null);
-					stream.on('progress', (progressEvent: ProgressEvent) => {
-						progresses.set(stream, progressEvent);
-						if (interval === undefined) {
-							interval = setInterval(emitProgress, PROGRESS_EMISSION_INTERVAL);
+				Array.from(this.activeDestinations).map(
+					async (destination: SourceDestination) => {
+						const dontRecompress =
+							rootStream instanceof RawZstdStream &&
+							destination instanceof TcpDestination;
+						if (dontRecompress) {
+							args[0] = args[0] || {};
+							args[0].compress = false;
 						}
-					});
-					stream.on('error', (error: Error) => {
-						this.destinationError(destination, error, passthrough);
-						oneStreamFinished(stream);
-					});
-					stream.on('finish', oneStreamFinished.bind(null, stream));
-					if (dontRecompress) {
-						rootStream.pipe(stream);
-					} else {
-						passthrough.pipe(stream);
-					}
-				}),
+						const stream = await destination[methodName](...args);
+						progresses.set(stream, null);
+						stream.on('progress', (progressEvent: ProgressEvent) => {
+							progresses.set(stream, progressEvent);
+							if (interval === undefined) {
+								interval = setInterval(
+									emitProgress,
+									PROGRESS_EMISSION_INTERVAL,
+								);
+							}
+						});
+						stream.on('error', (error: Error) => {
+							this.destinationError(destination, error, passthrough);
+							oneStreamFinished(stream);
+						});
+						stream.on('finish', oneStreamFinished.bind(null, stream));
+						if (dontRecompress) {
+							rootStream.pipe(stream);
+						} else {
+							passthrough.pipe(stream);
+						}
+					},
+				),
 			);
 		});
 		return passthrough;

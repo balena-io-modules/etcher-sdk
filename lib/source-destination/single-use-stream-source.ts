@@ -28,7 +28,11 @@ import { SparseReadable } from '../sparse-stream/shared';
 export class SingleUseStreamSource extends SourceDestination {
 	private used = false;
 
-	constructor(private stream: NodeJS.ReadableStream, private sparse = false, private $metadata: Metadata = {}) {
+	constructor(
+		private stream: NodeJS.ReadableStream,
+		private sparse = false,
+		private $metadata: Metadata = {},
+	) {
 		super();
 	}
 
