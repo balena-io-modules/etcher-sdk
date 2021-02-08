@@ -103,11 +103,15 @@ export async function asCallback<T>(
 	promise: Promise<T>,
 	callback: (error?: Error | null, value?: T) => void,
 ): Promise<void> {
+	let ok = false;
 	try {
 		const value = await promise;
+		ok = true;
 		callback(null, value);
 	} catch (error) {
-		callback(error);
+		if (!ok) {
+			callback(error);
+		}
 	}
 }
 
