@@ -42,8 +42,21 @@ import { Metadata } from './metadata';
 const UNMOUNT_ON_SUCCESS_TIMEOUT_MS = 2000;
 const WIN32_FIRST_BYTES_TO_KEEP = 64 * 1024;
 
+export type Drive = Pick<
+	DrivelistDrive,
+	| 'raw'
+	| 'blockSize'
+	| 'isSystem'
+	| 'device'
+	| 'devicePath'
+	| 'isReadOnly'
+	| 'size'
+	| 'mountpoints'
+	| 'description'
+>;
+
 export class BlockDevice extends File implements AdapterSourceDestination {
-	private drive: DrivelistDrive;
+	private drive: Drive;
 	private unmountOnSuccess: boolean;
 	public oDirect: boolean;
 	public emitsProgress = false;
@@ -55,7 +68,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		write = false,
 		direct = true,
 	}: {
-		drive: DrivelistDrive;
+		drive: Drive;
 		unmountOnSuccess?: boolean;
 		write?: boolean;
 		direct?: boolean;
