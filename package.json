@@ -63,7 +63,7 @@
     "gzip-stream": "^1.1.2",
     "lzma-native": "^6.0.0",
     "mountutils": "^1.3.20",
-    "node-raspberrypi-usbboot": "^0.2.10",
+    "node-raspberrypi-usbboot": "^0.2.11",
     "outdent": "^0.7.0",
     "partitioninfo": "^6.0.2",
     "rwmutex": "^1.0.0",
