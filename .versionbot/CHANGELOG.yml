@@ -1,4 +1,27 @@
 - commits:
+    - subject: Update node-raspberrypi-usbboot from 0.2.10 to 0.2.11
+      hash: 66a232f0a2cb06192a5d94ddde9831893966cc94
+      body: |
+        Update node-raspberrypi-usbboot from 0.2.10 to 0.2.11
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested:
+        - commits:
+            - subject: Update @balena.io/usb from 1.3.12 to 1.3.14
+              hash: d7cb5c673bfc8bd7c4ca3d49490fc9407d12700d
+              body: |
+                Update @balena.io/usb from 1.3.12 to 1.3.14
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+          version: node-raspberrypi-usbboot-0.2.11
+          date: 2021-02-10T15:43:10.247Z
+  version: 6.1.1
+  date: 2021-02-10T16:33:01.204Z
+- commits:
     - subject: Prefix temporary decompressed images filenames
       hash: 58b0ba2d9362536a105ff2b1152915540a9efb1e
       body: ''
