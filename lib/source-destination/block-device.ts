@@ -56,7 +56,7 @@ export type Drive = Pick<
 >;
 
 export class BlockDevice extends File implements AdapterSourceDestination {
-	private drive: Drive;
+	public readonly drive: Drive;
 	private unmountOnSuccess: boolean;
 	public oDirect: boolean;
 	public emitsProgress = false;
