@@ -1,106 +1,237 @@
-[etcher-sdk](../README.md) › [GZipSource](gzipsource.md)
+[etcher-sdk](../README.md) › [UsbBBbootDrive](usbbbbootdrive.md)
 
-# Class: GZipSource
+# Class: UsbBBbootDrive
 
 ## Hierarchy
 
-  ↳ [CompressedSource](compressedsource.md)
+  ↳ [SourceDestination](sourcedestination.md)
 
-  ↳ **GZipSource**
+  ↳ **UsbBBbootDrive**
+
+## Implements
+
+* [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)
 
 ## Index
 
 ### Constructors
 
-* [constructor](gzipsource.md#constructor)
+* [constructor](usbbbbootdrive.md#constructor)
 
 ### Properties
 
-* [source](gzipsource.md#protected-source)
-* [defaultMaxListeners](gzipsource.md#static-defaultmaxlisteners)
-* [imageExtensions](gzipsource.md#static-readonly-imageextensions)
-* [mimetype](gzipsource.md#static-readonly-mimetype)
-* [requiresRandomReadableSource](gzipsource.md#static-requiresrandomreadablesource)
+* [description](usbbbbootdrive.md#description)
+* [device](usbbbbootdrive.md#device)
+* [devicePath](usbbbbootdrive.md#devicepath)
+* [disabled](usbbbbootdrive.md#disabled)
+* [displayName](usbbbbootdrive.md#displayname)
+* [emitsProgress](usbbbbootdrive.md#emitsprogress)
+* [icon](usbbbbootdrive.md#icon)
+* [isReadOnly](usbbbbootdrive.md#isreadonly)
+* [isSystem](usbbbbootdrive.md#issystem)
+* [mountpoints](usbbbbootdrive.md#mountpoints)
+* [progress](usbbbbootdrive.md#progress)
+* [raw](usbbbbootdrive.md#raw)
+* [size](usbbbbootdrive.md#size)
+* [usbDevice](usbbbbootdrive.md#usbdevice)
+* [defaultMaxListeners](usbbbbootdrive.md#static-defaultmaxlisteners)
+* [imageExtensions](usbbbbootdrive.md#static-readonly-imageextensions)
+* [mimetype](usbbbbootdrive.md#static-optional-readonly-mimetype)
 
 ### Methods
 
-* [_close](gzipsource.md#protected-_close)
-* [_getMetadata](gzipsource.md#protected-_getmetadata)
-* [_open](gzipsource.md#protected-_open)
-* [addListener](gzipsource.md#addlistener)
-* [canCreateReadStream](gzipsource.md#cancreatereadstream)
-* [canCreateSparseReadStream](gzipsource.md#cancreatesparsereadstream)
-* [canCreateSparseWriteStream](gzipsource.md#cancreatesparsewritestream)
-* [canCreateWriteStream](gzipsource.md#cancreatewritestream)
-* [canRead](gzipsource.md#canread)
-* [canWrite](gzipsource.md#canwrite)
-* [close](gzipsource.md#close)
-* [createReadStream](gzipsource.md#createreadstream)
-* [createSparseReadStream](gzipsource.md#createsparsereadstream)
-* [createSparseWriteStream](gzipsource.md#createsparsewritestream)
-* [createTransform](gzipsource.md#protected-createtransform)
-* [createVerifier](gzipsource.md#createverifier)
-* [createWriteStream](gzipsource.md#createwritestream)
-* [emit](gzipsource.md#emit)
-* [eventNames](gzipsource.md#eventnames)
-* [getAlignment](gzipsource.md#getalignment)
-* [getBlocks](gzipsource.md#getblocks)
-* [getInnerSource](gzipsource.md#getinnersource)
-* [getMaxListeners](gzipsource.md#getmaxlisteners)
-* [getMetadata](gzipsource.md#getmetadata)
-* [getPartitionTable](gzipsource.md#getpartitiontable)
-* [getSize](gzipsource.md#protected-getsize)
-* [getSizeFromPartitionTable](gzipsource.md#protected-getsizefrompartitiontable)
-* [listenerCount](gzipsource.md#listenercount)
-* [listeners](gzipsource.md#listeners)
-* [off](gzipsource.md#off)
-* [on](gzipsource.md#on)
-* [once](gzipsource.md#once)
-* [open](gzipsource.md#open)
-* [prependListener](gzipsource.md#prependlistener)
-* [prependOnceListener](gzipsource.md#prependoncelistener)
-* [rawListeners](gzipsource.md#rawlisteners)
-* [read](gzipsource.md#read)
-* [removeAllListeners](gzipsource.md#removealllisteners)
-* [removeListener](gzipsource.md#removelistener)
-* [setMaxListeners](gzipsource.md#setmaxlisteners)
-* [write](gzipsource.md#write)
-* [listenerCount](gzipsource.md#static-listenercount)
-* [register](gzipsource.md#static-register)
+* [_close](usbbbbootdrive.md#protected-_close)
+* [_getMetadata](usbbbbootdrive.md#protected-_getmetadata)
+* [_open](usbbbbootdrive.md#protected-_open)
+* [addListener](usbbbbootdrive.md#addlistener)
+* [canCreateReadStream](usbbbbootdrive.md#cancreatereadstream)
+* [canCreateSparseReadStream](usbbbbootdrive.md#cancreatesparsereadstream)
+* [canCreateSparseWriteStream](usbbbbootdrive.md#cancreatesparsewritestream)
+* [canCreateWriteStream](usbbbbootdrive.md#cancreatewritestream)
+* [canRead](usbbbbootdrive.md#canread)
+* [canWrite](usbbbbootdrive.md#canwrite)
+* [close](usbbbbootdrive.md#close)
+* [createReadStream](usbbbbootdrive.md#createreadstream)
+* [createSparseReadStream](usbbbbootdrive.md#createsparsereadstream)
+* [createSparseWriteStream](usbbbbootdrive.md#createsparsewritestream)
+* [createVerifier](usbbbbootdrive.md#createverifier)
+* [createWriteStream](usbbbbootdrive.md#createwritestream)
+* [emit](usbbbbootdrive.md#emit)
+* [eventNames](usbbbbootdrive.md#eventnames)
+* [getAlignment](usbbbbootdrive.md#getalignment)
+* [getBlocks](usbbbbootdrive.md#getblocks)
+* [getInnerSource](usbbbbootdrive.md#getinnersource)
+* [getMaxListeners](usbbbbootdrive.md#getmaxlisteners)
+* [getMetadata](usbbbbootdrive.md#getmetadata)
+* [getPartitionTable](usbbbbootdrive.md#getpartitiontable)
+* [listenerCount](usbbbbootdrive.md#listenercount)
+* [listeners](usbbbbootdrive.md#listeners)
+* [off](usbbbbootdrive.md#off)
+* [on](usbbbbootdrive.md#on)
+* [once](usbbbbootdrive.md#once)
+* [open](usbbbbootdrive.md#open)
+* [prependListener](usbbbbootdrive.md#prependlistener)
+* [prependOnceListener](usbbbbootdrive.md#prependoncelistener)
+* [rawListeners](usbbbbootdrive.md#rawlisteners)
+* [read](usbbbbootdrive.md#read)
+* [removeAllListeners](usbbbbootdrive.md#removealllisteners)
+* [removeListener](usbbbbootdrive.md#removelistener)
+* [setMaxListeners](usbbbbootdrive.md#setmaxlisteners)
+* [write](usbbbbootdrive.md#write)
+* [listenerCount](usbbbbootdrive.md#static-listenercount)
+* [register](usbbbbootdrive.md#static-register)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new GZipSource**(`source`: [SourceDestination](sourcedestination.md)): *[GZipSource](gzipsource.md)*
+\+ **new UsbBBbootDrive**(`usbDevice`: UsbBBbootDevice): *[UsbBBbootDrive](usbbbbootdrive.md)*
 
-*Inherited from [SourceSource](sourcesource.md).[constructor](sourcesource.md#constructor)*
-
-*Defined in [lib/source-destination/source-source.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-source.ts#L20)*
+*Defined in [lib/source-destination/usb-bb-boot.ts:21](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/usb-bb-boot.ts#L21)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`source` | [SourceDestination](sourcedestination.md) |
+`usbDevice` | UsbBBbootDevice |
 
-**Returns:** *[GZipSource](gzipsource.md)*
+**Returns:** *[UsbBBbootDrive](usbbbbootdrive.md)*
 
 ## Properties
 
-### `Protected` source
+###  description
 
-• **source**: *[SourceDestination](sourcedestination.md)*
+• **description**: *string* = "BeagleBone"
 
-*Inherited from [SourceSource](sourcesource.md).[source](sourcesource.md#protected-source)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[description](../interfaces/adaptersourcedestination.md#description)*
 
-*Defined in [lib/source-destination/source-source.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-source.ts#L22)*
+*Defined in [lib/source-destination/usb-bb-boot.ts:15](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/usb-bb-boot.ts#L15)*
+
+___
+
+###  device
+
+• **device**: *null* = null
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[device](../interfaces/adaptersourcedestination.md#device)*
+
+*Defined in [lib/source-destination/usb-bb-boot.ts:11](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/usb-bb-boot.ts#L11)*
+
+___
+
+###  devicePath
+
+• **devicePath**: *null* = null
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[devicePath](../interfaces/adaptersourcedestination.md#devicepath)*
+
+*Defined in [lib/source-destination/usb-bb-boot.ts:12](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/usb-bb-boot.ts#L12)*
+
+___
+
+###  disabled
+
+• **disabled**: *boolean* = true
+
+*Defined in [lib/source-destination/usb-bb-boot.ts:18](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/usb-bb-boot.ts#L18)*
+
+___
+
+###  displayName
+
+• **displayName**: *string* = "Initializing device"
+
+*Defined in [lib/source-destination/usb-bb-boot.ts:10](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/usb-bb-boot.ts#L10)*
+
+___
+
+###  emitsProgress
+
+• **emitsProgress**: *boolean* = true
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[emitsProgress](../interfaces/adaptersourcedestination.md#emitsprogress)*
+
+*Defined in [lib/source-destination/usb-bb-boot.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/usb-bb-boot.ts#L20)*
+
+___
+
+###  icon
+
+• **icon**: *string* = "loading"
+
+*Defined in [lib/source-destination/usb-bb-boot.ts:13](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/usb-bb-boot.ts#L13)*
+
+___
+
+###  isReadOnly
+
+• **isReadOnly**: *boolean* = false
+
+*Defined in [lib/source-destination/usb-bb-boot.ts:17](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/usb-bb-boot.ts#L17)*
+
+___
+
+###  isSystem
+
+• **isSystem**: *boolean* = false
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[isSystem](../interfaces/adaptersourcedestination.md#issystem)*
+
+*Defined in [lib/source-destination/usb-bb-boot.ts:14](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/usb-bb-boot.ts#L14)*
+
+___
+
+###  mountpoints
+
+• **mountpoints**: *never[]* = []
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[mountpoints](../interfaces/adaptersourcedestination.md#mountpoints)*
+
+*Defined in [lib/source-destination/usb-bb-boot.ts:16](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/usb-bb-boot.ts#L16)*
+
+___
+
+###  progress
+
+• **progress**: *number* = 0
+
+*Defined in [lib/source-destination/usb-bb-boot.ts:21](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/usb-bb-boot.ts#L21)*
+
+___
+
+###  raw
+
+• **raw**: *null* = null
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[raw](../interfaces/adaptersourcedestination.md#raw)*
+
+*Defined in [lib/source-destination/usb-bb-boot.ts:9](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/usb-bb-boot.ts#L9)*
+
+___
+
+###  size
+
+• **size**: *null* = null
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[size](../interfaces/adaptersourcedestination.md#size)*
+
+*Defined in [lib/source-destination/usb-bb-boot.ts:19](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/usb-bb-boot.ts#L19)*
+
+___
+
+###  usbDevice
+
+• **usbDevice**: *UsbBBbootDevice*
+
+*Defined in [lib/source-destination/usb-bb-boot.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/usb-bb-boot.ts#L23)*
 
 ___
 
 ### `Static` defaultMaxListeners
 
 ▪ **defaultMaxListeners**: *number*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[defaultMaxListeners](../interfaces/adaptersourcedestination.md#static-defaultmaxlisteners)*
 
 *Inherited from [CountingWritable](countingwritable.md).[defaultMaxListeners](countingwritable.md#static-defaultmaxlisteners)*
 
@@ -123,29 +254,23 @@ ___
 		'wic',
 	]
 
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[imageExtensions](../interfaces/adaptersourcedestination.md#static-readonly-imageextensions)*
+
 *Inherited from [SourceSource](sourcesource.md).[imageExtensions](sourcesource.md#static-readonly-imageextensions)*
 
 *Defined in [lib/source-destination/source-destination.ts:274](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-destination.ts#L274)*
 
 ___
 
-### `Static` `Readonly` mimetype
+### `Static` `Optional` `Readonly` mimetype
 
-▪ **mimetype**: *"application/gzip"* = "application/gzip"
+▪ **mimetype**? : *undefined | string*
 
-*Overrides [SourceSource](sourcesource.md).[mimetype](sourcesource.md#static-optional-readonly-mimetype)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md).[mimetype](../interfaces/adaptersourcedestination.md#static-optional-readonly-mimetype)*
 
-*Defined in [lib/source-destination/gzip.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/gzip.ts#L26)*
+*Inherited from [SourceSource](sourcesource.md).[mimetype](sourcesource.md#static-optional-readonly-mimetype)*
 
-___
-
-### `Static` requiresRandomReadableSource
-
-▪ **requiresRandomReadableSource**: *boolean* = false
-
-*Inherited from [SourceSource](sourcesource.md).[requiresRandomReadableSource](sourcesource.md#static-requiresrandomreadablesource)*
-
-*Defined in [lib/source-destination/source-source.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-source.ts#L20)*
+*Defined in [lib/source-destination/source-destination.ts:286](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-destination.ts#L286)*
 
 ## Methods
 
@@ -153,11 +278,11 @@ ___
 
 ▸ **_close**(): *Promise‹void›*
 
-*Inherited from [SourceSource](sourcesource.md).[_close](sourcesource.md#protected-_close)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Overrides [SourceDestination](sourcedestination.md).[_close](sourcedestination.md#protected-_close)*
+*Inherited from [SourceDestination](sourcedestination.md).[_close](sourcedestination.md#protected-_close)*
 
-*Defined in [lib/source-destination/source-source.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-source.ts#L30)*
+*Defined in [lib/source-destination/source-destination.ts:401](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-destination.ts#L401)*
 
 **Returns:** *Promise‹void›*
 
@@ -167,11 +292,11 @@ ___
 
 ▸ **_getMetadata**(): *Promise‹[Metadata](../interfaces/metadata.md)›*
 
-*Inherited from [CompressedSource](compressedsource.md).[_getMetadata](compressedsource.md#protected-_getmetadata)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Overrides [SourceSource](sourcesource.md).[_getMetadata](sourcesource.md#protected-_getmetadata)*
+*Inherited from [SourceSource](sourcesource.md).[_getMetadata](sourcesource.md#protected-_getmetadata)*
 
-*Defined in [lib/source-destination/compressed-source.ts:105](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/compressed-source.ts#L105)*
+*Defined in [lib/source-destination/source-destination.ts:333](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-destination.ts#L333)*
 
 **Returns:** *Promise‹[Metadata](../interfaces/metadata.md)›*
 
@@ -181,11 +306,11 @@ ___
 
 ▸ **_open**(): *Promise‹void›*
 
-*Inherited from [SourceSource](sourcesource.md).[_open](sourcesource.md#protected-_open)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Overrides [SourceDestination](sourcedestination.md).[_open](sourcedestination.md#protected-_open)*
+*Inherited from [SourceDestination](sourcedestination.md).[_open](sourcedestination.md#protected-_open)*
 
-*Defined in [lib/source-destination/source-source.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-source.ts#L26)*
+*Defined in [lib/source-destination/source-destination.ts:397](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-destination.ts#L397)*
 
 **Returns:** *Promise‹void›*
 
@@ -223,11 +348,11 @@ ___
 
 ▸ **canCreateReadStream**(): *Promise‹boolean›*
 
-*Inherited from [CompressedSource](compressedsource.md).[canCreateReadStream](compressedsource.md#cancreatereadstream)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Overrides [SourceSource](sourcesource.md).[canCreateReadStream](sourcesource.md#cancreatereadstream)*
+*Inherited from [SourceSource](sourcesource.md).[canCreateReadStream](sourcesource.md#cancreatereadstream)*
 
-*Defined in [lib/source-destination/compressed-source.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/compressed-source.ts#L53)*
+*Defined in [lib/source-destination/source-destination.ts:310](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-destination.ts#L310)*
 
 **Returns:** *Promise‹boolean›*
 
@@ -236,6 +361,8 @@ ___
 ###  canCreateSparseReadStream
 
 ▸ **canCreateSparseReadStream**(): *Promise‹boolean›*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
 *Inherited from [SourceSource](sourcesource.md).[canCreateSparseReadStream](sourcesource.md#cancreatesparsereadstream)*
 
@@ -249,6 +376,8 @@ ___
 
 ▸ **canCreateSparseWriteStream**(): *Promise‹boolean›*
 
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
+
 *Inherited from [SourceSource](sourcesource.md).[canCreateSparseWriteStream](sourcesource.md#cancreatesparsewritestream)*
 
 *Defined in [lib/source-destination/source-destination.ts:322](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-destination.ts#L322)*
@@ -260,6 +389,8 @@ ___
 ###  canCreateWriteStream
 
 ▸ **canCreateWriteStream**(): *Promise‹boolean›*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
 *Inherited from [SourceSource](sourcesource.md).[canCreateWriteStream](sourcesource.md#cancreatewritestream)*
 
@@ -273,6 +404,8 @@ ___
 
 ▸ **canRead**(): *Promise‹boolean›*
 
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
+
 *Inherited from [SourceSource](sourcesource.md).[canRead](sourcesource.md#canread)*
 
 *Defined in [lib/source-destination/source-destination.ts:302](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-destination.ts#L302)*
@@ -284,6 +417,8 @@ ___
 ###  canWrite
 
 ▸ **canWrite**(): *Promise‹boolean›*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
 *Inherited from [SourceSource](sourcesource.md).[canWrite](sourcesource.md#canwrite)*
 
@@ -297,6 +432,8 @@ ___
 
 ▸ **close**(): *Promise‹void›*
 
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
+
 *Inherited from [SourceSource](sourcesource.md).[close](sourcesource.md#close)*
 
 *Defined in [lib/source-destination/source-destination.ts:390](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-destination.ts#L390)*
@@ -307,31 +444,29 @@ ___
 
 ###  createReadStream
 
-▸ **createReadStream**(`__namedParameters`: object): *Promise‹[SourceTransform](../interfaces/sourcetransform.md)›*
+▸ **createReadStream**(`_options`: [CreateReadStreamOptions](../interfaces/createreadstreamoptions.md)): *Promise‹ReadableStream›*
 
-*Inherited from [CompressedSource](compressedsource.md).[createReadStream](compressedsource.md#createreadstream)*
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
-*Overrides [SourceSource](sourcesource.md).[createReadStream](sourcesource.md#createreadstream)*
+*Inherited from [SourceSource](sourcesource.md).[createReadStream](sourcesource.md#createreadstream)*
 
-*Defined in [lib/source-destination/compressed-source.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/compressed-source.ts#L57)*
+*Defined in [lib/source-destination/source-destination.ts:355](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-destination.ts#L355)*
 
 **Parameters:**
 
-▪`Default value`  **__namedParameters**: *object*= {}
-
 Name | Type | Default |
 ------ | ------ | ------ |
-`emitProgress` | boolean | false |
-`end` | undefined &#124; number | - |
-`start` | number | 0 |
+`_options` | [CreateReadStreamOptions](../interfaces/createreadstreamoptions.md) | {} |
 
-**Returns:** *Promise‹[SourceTransform](../interfaces/sourcetransform.md)›*
+**Returns:** *Promise‹ReadableStream›*
 
 ___
 
 ###  createSparseReadStream
 
 ▸ **createSparseReadStream**(`_options`: [CreateSparseReadStreamOptions](../interfaces/createsparsereadstreamoptions.md)): *Promise‹[SparseReadable](../interfaces/sparsereadable.md)›*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
 *Inherited from [SourceSource](sourcesource.md).[createSparseReadStream](sourcesource.md#createsparsereadstream)*
 
@@ -367,21 +502,11 @@ Name | Type |
 
 ___
 
-### `Protected` createTransform
-
-▸ **createTransform**(): *Transform*
-
-*Overrides [CompressedSource](compressedsource.md).[createTransform](compressedsource.md#protected-abstract-createtransform)*
-
-*Defined in [lib/source-destination/gzip.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/gzip.ts#L28)*
-
-**Returns:** *Transform*
-
-___
-
 ###  createVerifier
 
 ▸ **createVerifier**(`checksumOrBlocks`: string | [BlocksWithChecksum](../interfaces/blockswithchecksum.md)[], `size?`: undefined | number): *[Verifier](verifier.md)*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
 *Inherited from [SourceSource](sourcesource.md).[createVerifier](sourcesource.md#createverifier)*
 
@@ -422,6 +547,8 @@ ___
 
 ▸ **emit**(`event`: string | symbol, ...`args`: any[]): *boolean*
 
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
+
 *Inherited from [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
@@ -443,6 +570,8 @@ ___
 
 ▸ **eventNames**(): *Array‹string | symbol›*
 
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
+
 *Inherited from [CountingWritable](countingwritable.md).[eventNames](countingwritable.md#eventnames)*
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[eventNames](../interfaces/sparsereadable.md#eventnames)*
@@ -457,6 +586,8 @@ ___
 
 ▸ **getAlignment**(): *number | undefined*
 
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
+
 *Inherited from [SourceSource](sourcesource.md).[getAlignment](sourcesource.md#getalignment)*
 
 *Defined in [lib/source-destination/source-destination.ts:298](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-destination.ts#L298)*
@@ -468,6 +599,8 @@ ___
 ###  getBlocks
 
 ▸ **getBlocks**(): *Promise‹[BlocksWithChecksum](../interfaces/blockswithchecksum.md)[]›*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
 *Inherited from [SourceSource](sourcesource.md).[getBlocks](sourcesource.md#getblocks)*
 
@@ -481,6 +614,8 @@ ___
 
 ▸ **getInnerSource**(): *Promise‹[SourceDestination](sourcedestination.md)›*
 
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
+
 *Inherited from [SourceSource](sourcesource.md).[getInnerSource](sourcesource.md#getinnersource)*
 
 *Defined in [lib/source-destination/source-destination.ts:475](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-destination.ts#L475)*
@@ -492,6 +627,8 @@ ___
 ###  getMaxListeners
 
 ▸ **getMaxListeners**(): *number*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
 *Inherited from [CountingWritable](countingwritable.md).[getMaxListeners](countingwritable.md#getmaxlisteners)*
 
@@ -507,6 +644,8 @@ ___
 
 ▸ **getMetadata**(): *Promise‹[Metadata](../interfaces/metadata.md)›*
 
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
+
 *Inherited from [SourceSource](sourcesource.md).[getMetadata](sourcesource.md#getmetadata)*
 
 *Defined in [lib/source-destination/source-destination.ts:326](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-destination.ts#L326)*
@@ -519,6 +658,8 @@ ___
 
 ▸ **getPartitionTable**(): *Promise‹GetPartitionsResult | undefined›*
 
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
+
 *Inherited from [SourceSource](sourcesource.md).[getPartitionTable](sourcesource.md#getpartitiontable)*
 
 *Defined in [lib/source-destination/source-destination.ts:496](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-destination.ts#L496)*
@@ -527,33 +668,11 @@ ___
 
 ___
 
-### `Protected` getSize
-
-▸ **getSize**(): *Promise‹object | undefined›*
-
-*Overrides [CompressedSource](compressedsource.md).[getSize](compressedsource.md#protected-getsize)*
-
-*Defined in [lib/source-destination/gzip.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/gzip.ts#L32)*
-
-**Returns:** *Promise‹object | undefined›*
-
-___
-
-### `Protected` getSizeFromPartitionTable
-
-▸ **getSizeFromPartitionTable**(): *Promise‹number | undefined›*
-
-*Inherited from [CompressedSource](compressedsource.md).[getSizeFromPartitionTable](compressedsource.md#protected-getsizefrompartitiontable)*
-
-*Defined in [lib/source-destination/compressed-source.ts:87](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/compressed-source.ts#L87)*
-
-**Returns:** *Promise‹number | undefined›*
-
-___
-
 ###  listenerCount
 
 ▸ **listenerCount**(`type`: string | symbol): *number*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
 *Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
 
@@ -574,6 +693,8 @@ ___
 ###  listeners
 
 ▸ **listeners**(`event`: string | symbol): *Function[]*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
 *Inherited from [CountingWritable](countingwritable.md).[listeners](countingwritable.md#listeners)*
 
@@ -679,6 +800,8 @@ ___
 
 ▸ **open**(): *Promise‹void›*
 
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
+
 *Inherited from [SourceSource](sourcesource.md).[open](sourcesource.md#open)*
 
 *Defined in [lib/source-destination/source-destination.ts:383](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/source-destination/source-destination.ts#L383)*
@@ -747,6 +870,8 @@ ___
 
 ▸ **rawListeners**(`event`: string | symbol): *Function[]*
 
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
+
 *Inherited from [CountingWritable](countingwritable.md).[rawListeners](countingwritable.md#rawlisteners)*
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[rawListeners](../interfaces/sparsereadable.md#rawlisteners)*
@@ -766,6 +891,8 @@ ___
 ###  read
 
 ▸ **read**(`_buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer), `_bufferOffset`: number, `_length`: number, `_sourceOffset`: number): *Promise‹ReadResult›*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
 *Inherited from [SourceSource](sourcesource.md).[read](sourcesource.md#read)*
 
@@ -787,6 +914,8 @@ ___
 ###  removeAllListeners
 
 ▸ **removeAllListeners**(`event?`: string | symbol): *this*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
 *Inherited from [CountingWritable](countingwritable.md).[removeAllListeners](countingwritable.md#removealllisteners)*
 
@@ -836,6 +965,8 @@ ___
 
 ▸ **setMaxListeners**(`n`: number): *this*
 
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
+
 *Inherited from [CountingWritable](countingwritable.md).[setMaxListeners](countingwritable.md#setmaxlisteners)*
 
 *Overrides [SparseReadable](../interfaces/sparsereadable.md).[setMaxListeners](../interfaces/sparsereadable.md#setmaxlisteners)*
@@ -855,6 +986,8 @@ ___
 ###  write
 
 ▸ **write**(`_buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer), `_bufferOffset`: number, `_length`: number, `_fileOffset`: number): *Promise‹WriteResult›*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
 *Inherited from [SourceSource](sourcesource.md).[write](sourcesource.md#write)*
 
@@ -877,6 +1010,8 @@ ___
 
 ▸ **listenerCount**(`emitter`: EventEmitter, `event`: string | symbol): *number*
 
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
+
 *Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
 
 Defined in node_modules/@types/node/events.d.ts:17
@@ -897,6 +1032,8 @@ ___
 ### `Static` register
 
 ▸ **register**(`Cls`: typeof SourceSource): *void*
+
+*Implementation of [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)*
 
 *Inherited from [SourceSource](sourcesource.md).[register](sourcesource.md#static-register)*
 

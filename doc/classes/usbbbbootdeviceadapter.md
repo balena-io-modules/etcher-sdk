@@ -1,78 +1,73 @@
-[etcher-sdk](../README.md) › [DriverlessDeviceAdapter$](driverlessdeviceadapter_.md)
+[etcher-sdk](../README.md) › [UsbBBbootDeviceAdapter](usbbbbootdeviceadapter.md)
 
-# Class: DriverlessDeviceAdapter$
+# Class: UsbBBbootDeviceAdapter
 
 ## Hierarchy
 
   ↳ [Adapter](adapter.md)
 
-  ↳ **DriverlessDeviceAdapter$**
+  ↳ **UsbBBbootDeviceAdapter**
 
 ## Index
 
+### Constructors
+
+* [constructor](usbbbbootdeviceadapter.md#constructor)
+
 ### Properties
 
-* [drives](driverlessdeviceadapter_.md#private-drives)
-* [listDriverlessDevices](driverlessdeviceadapter_.md#private-listdriverlessdevices)
-* [ready](driverlessdeviceadapter_.md#private-ready)
-* [running](driverlessdeviceadapter_.md#private-running)
-* [defaultMaxListeners](driverlessdeviceadapter_.md#static-defaultmaxlisteners)
+* [drives](usbbbbootdeviceadapter.md#private-drives)
+* [scanner](usbbbbootdeviceadapter.md#private-scanner)
+* [defaultMaxListeners](usbbbbootdeviceadapter.md#static-defaultmaxlisteners)
 
 ### Methods
 
-* [addListener](driverlessdeviceadapter_.md#addlistener)
-* [emit](driverlessdeviceadapter_.md#emit)
-* [eventNames](driverlessdeviceadapter_.md#eventnames)
-* [getMaxListeners](driverlessdeviceadapter_.md#getmaxlisteners)
-* [listDrives](driverlessdeviceadapter_.md#private-listdrives)
-* [listenerCount](driverlessdeviceadapter_.md#listenercount)
-* [listeners](driverlessdeviceadapter_.md#listeners)
-* [off](driverlessdeviceadapter_.md#off)
-* [on](driverlessdeviceadapter_.md#on)
-* [once](driverlessdeviceadapter_.md#once)
-* [prependListener](driverlessdeviceadapter_.md#prependlistener)
-* [prependOnceListener](driverlessdeviceadapter_.md#prependoncelistener)
-* [rawListeners](driverlessdeviceadapter_.md#rawlisteners)
-* [removeAllListeners](driverlessdeviceadapter_.md#removealllisteners)
-* [removeListener](driverlessdeviceadapter_.md#removelistener)
-* [scan](driverlessdeviceadapter_.md#private-scan)
-* [scanLoop](driverlessdeviceadapter_.md#private-scanloop)
-* [setMaxListeners](driverlessdeviceadapter_.md#setmaxlisteners)
-* [start](driverlessdeviceadapter_.md#start)
-* [stop](driverlessdeviceadapter_.md#stop)
-* [listenerCount](driverlessdeviceadapter_.md#static-listenercount)
+* [addListener](usbbbbootdeviceadapter.md#addlistener)
+* [emit](usbbbbootdeviceadapter.md#emit)
+* [eventNames](usbbbbootdeviceadapter.md#eventnames)
+* [getMaxListeners](usbbbbootdeviceadapter.md#getmaxlisteners)
+* [listenerCount](usbbbbootdeviceadapter.md#listenercount)
+* [listeners](usbbbbootdeviceadapter.md#listeners)
+* [off](usbbbbootdeviceadapter.md#off)
+* [on](usbbbbootdeviceadapter.md#on)
+* [onAttach](usbbbbootdeviceadapter.md#private-onattach)
+* [onDetach](usbbbbootdeviceadapter.md#private-ondetach)
+* [once](usbbbbootdeviceadapter.md#once)
+* [prependListener](usbbbbootdeviceadapter.md#prependlistener)
+* [prependOnceListener](usbbbbootdeviceadapter.md#prependoncelistener)
+* [rawListeners](usbbbbootdeviceadapter.md#rawlisteners)
+* [removeAllListeners](usbbbbootdeviceadapter.md#removealllisteners)
+* [removeListener](usbbbbootdeviceadapter.md#removelistener)
+* [setMaxListeners](usbbbbootdeviceadapter.md#setmaxlisteners)
+* [start](usbbbbootdeviceadapter.md#start)
+* [stop](usbbbbootdeviceadapter.md#stop)
+* [listenerCount](usbbbbootdeviceadapter.md#static-listenercount)
+
+## Constructors
+
+###  constructor
+
+\+ **new UsbBBbootDeviceAdapter**(): *[UsbBBbootDeviceAdapter](usbbbbootdeviceadapter.md)*
+
+*Defined in [lib/scanner/adapters/usb-bb-boot.ts:11](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/scanner/adapters/usb-bb-boot.ts#L11)*
+
+**Returns:** *[UsbBBbootDeviceAdapter](usbbbbootdeviceadapter.md)*
 
 ## Properties
 
 ### `Private` drives
 
-• **drives**: *Map‹string, [DriverlessDevice](driverlessdevice.md)›* = new Map()
+• **drives**: *Map‹UsbBBbootDevice, [UsbBBbootDrive](usbbbbootdrive.md)›* = new Map()
 
-*Defined in [lib/scanner/adapters/driverless.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/scanner/adapters/driverless.ts#L29)*
-
-___
-
-### `Private` listDriverlessDevices
-
-• **listDriverlessDevices**: *any*
-
-*Defined in [lib/scanner/adapters/driverless.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/scanner/adapters/driverless.ts#L32)*
+*Defined in [lib/scanner/adapters/usb-bb-boot.ts:10](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/scanner/adapters/usb-bb-boot.ts#L10)*
 
 ___
 
-### `Private` ready
+### `Private` scanner
 
-• **ready**: *boolean* = false
+• **scanner**: *UsbBBbootScanner*
 
-*Defined in [lib/scanner/adapters/driverless.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/scanner/adapters/driverless.ts#L31)*
-
-___
-
-### `Private` running
-
-• **running**: *boolean* = false
-
-*Defined in [lib/scanner/adapters/driverless.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/scanner/adapters/driverless.ts#L30)*
+*Defined in [lib/scanner/adapters/usb-bb-boot.ts:11](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/scanner/adapters/usb-bb-boot.ts#L11)*
 
 ___
 
@@ -160,16 +155,6 @@ ___
 Defined in node_modules/@types/node/events.d.ts:29
 
 **Returns:** *number*
-
-___
-
-### `Private` listDrives
-
-▸ **listDrives**(): *Map‹string, WinUsbDriverlessDevice›*
-
-*Defined in [lib/scanner/adapters/driverless.ts:87](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/scanner/adapters/driverless.ts#L87)*
-
-**Returns:** *Map‹string, WinUsbDriverlessDevice›*
 
 ___
 
@@ -266,6 +251,38 @@ Name | Type |
 `...args` | any[] |
 
 **Returns:** *this*
+
+___
+
+### `Private` onAttach
+
+▸ **onAttach**(`device`: UsbBBbootDevice): *void*
+
+*Defined in [lib/scanner/adapters/usb-bb-boot.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/scanner/adapters/usb-bb-boot.ts#L30)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`device` | UsbBBbootDevice |
+
+**Returns:** *void*
+
+___
+
+### `Private` onDetach
+
+▸ **onDetach**(`device`: UsbBBbootDevice): *void*
+
+*Defined in [lib/scanner/adapters/usb-bb-boot.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/scanner/adapters/usb-bb-boot.ts#L39)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`device` | UsbBBbootDevice |
+
+**Returns:** *void*
 
 ___
 
@@ -421,26 +438,6 @@ Name | Type |
 
 ___
 
-### `Private` scan
-
-▸ **scan**(): *void*
-
-*Defined in [lib/scanner/adapters/driverless.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/scanner/adapters/driverless.ts#L62)*
-
-**Returns:** *void*
-
-___
-
-### `Private` scanLoop
-
-▸ **scanLoop**(): *Promise‹void›*
-
-*Defined in [lib/scanner/adapters/driverless.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/scanner/adapters/driverless.ts#L45)*
-
-**Returns:** *Promise‹void›*
-
-___
-
 ###  setMaxListeners
 
 ▸ **setMaxListeners**(`n`: number): *this*
@@ -467,7 +464,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[start](adapter.md#abstract-start)*
 
-*Defined in [lib/scanner/adapters/driverless.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/scanner/adapters/driverless.ts#L34)*
+*Defined in [lib/scanner/adapters/usb-bb-boot.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/scanner/adapters/usb-bb-boot.ts#L22)*
 
 **Returns:** *void*
 
@@ -479,7 +476,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[stop](adapter.md#abstract-stop)*
 
-*Defined in [lib/scanner/adapters/driverless.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/scanner/adapters/driverless.ts#L39)*
+*Defined in [lib/scanner/adapters/usb-bb-boot.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/d8a6f65/lib/scanner/adapters/usb-bb-boot.ts#L26)*
 
 **Returns:** *void*
 
