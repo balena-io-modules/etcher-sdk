@@ -1,4 +1,23 @@
 - commits:
+    - subject: Added BeagleBone USB Boot example
+      hash: f088dbb3543d55341d06cfb6b20f64e02b9f6a78
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Parthiban Gandhi
+      nested: []
+    - subject: Added BeagleBone USB Boot support
+      hash: 2a1d745bf59ca93739f489d7ae85ba19bc2697da
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Parthiban Gandhi
+      nested: []
+  version: 6.2.0
+  date: 2021-02-18T12:08:54.323Z
+- commits:
     - subject: Update node-raspberrypi-usbboot from 0.2.10 to 0.2.11
       hash: 66a232f0a2cb06192a5d94ddde9831893966cc94
       body: |
