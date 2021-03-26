@@ -1,4 +1,33 @@
 - commits:
+    - subject: Update node-raspberrypi-usbboot from 0.2.11 to 0.3.0
+      hash: de39ec278ff397d1f69bcb4db968486ce59b33b2
+      body: |
+        Update node-raspberrypi-usbboot from 0.2.11 to 0.3.0
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Alexis Svinartchouk
+      nested:
+        - commits:
+            - subject: Add support for compute module 4
+              hash: 701744f0bbc02bd7d322ed7e989af576a7156689
+              body: ''
+              footer:
+                Change-type: minor
+                change-type: minor
+              author: Alexis Svinartchouk
+            - subject: Fix size endianness of boot_message_t message
+              hash: 867d8b0d217af0ad554d839fbc42cc08b222bc32
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Alexis Svinartchouk
+          version: node-raspberrypi-usbboot-0.3.0
+          date: 2021-03-26T16:10:38.120Z
+  version: 6.2.1
+  date: 2021-03-26T16:37:33.170Z
+- commits:
     - subject: Added BeagleBone USB Boot example
       hash: f088dbb3543d55341d06cfb6b20f64e02b9f6a78
       body: ''
