@@ -14,13 +14,48 @@
  * limitations under the License.
  */
 
+import { Transform as TransformStream } from 'stream'
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
 import * as fileType from 'file-type';
 import { getPartitions, GetPartitionsResult } from 'partitioninfo';
 import { extname } from 'path';
-import { arch } from 'process';
-import { Stream as HashStream } from 'xxhash';
+import { XXHash3 } from 'xxhash-addon';
+import { inherits } from 'util'
+
+// @ts-ignore
+function HashStream(seed, outEnc) {
+  TransformStream.call(this);
+
+  if (outEnc && typeof outEnc !== 'string' && !Buffer.isBuffer(outEnc)) {
+    outEnc = 'buffer';
+  }
+
+  this._outEnc = outEnc;
+
+	this._hash = new XXHash3(seed);
+
+  // Hack needed to support `readableObjectMode` in node v0.10 and to set
+  // `highWaterMark` only for Readable side
+  var rs = this._readableState;
+  rs.objectMode = true;
+  rs.highWaterMark = 2;
+}
+inherits(HashStream, TransformStream);
+
+// @ts-ignore
+HashStream.prototype._transform = function(chunk, encoding, callback) {
+  this._hash.update(chunk);
+  callback();
+};
+// @ts-ignore
+HashStream.prototype._flush = function(callback) {
+  if (this._outEnc !== undefined)
+    this.push(this._hash.digest(this._outEnc));
+  else
+    this.push(this._hash.digest());
+  callback();
+};
 
 import {
 	AlignedLockableBuffer,
@@ -42,8 +77,8 @@ import {
 } from './progress';
 import { SourceSource } from './source-source';
 
-const BITS = arch === 'x64' || arch === 'aarch64' ? 64 : 32;
 
+// @ts-ignore
 export class CountingHashStream extends HashStream {
 	public bytesWritten = 0;
 
@@ -74,14 +109,16 @@ export class CountingHashStream extends HashStream {
 }
 
 export const ProgressHashStream = makeClassEmitProgressEvents(
+	// @ts-ignore
 	CountingHashStream,
 	'bytesWritten',
 	'bytesWritten',
 );
 
 export function createHasher() {
-	const hasher = new ProgressHashStream(XXHASH_SEED, BITS, 'buffer');
+	const hasher = new ProgressHashStream(XXHASH_SEED, 'buffer');
 	hasher.on('finish', async () => {
+		// @ts-ignore
 		const checksum = (await streamToBuffer(hasher)).toString('hex');
 		hasher.emit('checksum', checksum);
 	});
@@ -200,6 +237,7 @@ export class StreamVerifier extends Verifier {
 				);
 			}
 		});
+		// @ts-ignore
 		this.handleEventsAndPipe(stream, hasher);
 	}
 }

@@ -15,7 +15,7 @@
  */
 
 import { createHash, Hash } from 'crypto';
-import * as XXHash from 'xxhash';
+import * as XXHash from 'xxhash-addon';
 
 import { AlignedLockableBuffer } from '../aligned-lockable-buffer';
 import { XXHASH_SEED } from '../constants';
@@ -27,7 +27,8 @@ export type ChecksumType =
 	| 'sha1'
 	| 'sha256'
 	| 'xxhash32'
-	| 'xxhash64';
+	| 'xxhash64'
+	| 'xxhash3';
 
 export interface Block {
 	offset: number;
@@ -58,7 +59,7 @@ export interface SparseWritable extends NodeJS.WritableStream {
 	): void;
 }
 
-type AnyHasher = Hash | XXHash | XXHash.XXHash64;
+type AnyHasher = Hash | XXHash | XXHash.XXHash64 | XXHash.XXHash3;
 
 function createHasher(checksumType?: ChecksumType): undefined | AnyHasher {
 	if (checksumType === 'crc32') {
@@ -71,6 +72,9 @@ function createHasher(checksumType?: ChecksumType): undefined | AnyHasher {
 	} else if (checksumType === 'xxhash64') {
 		const { XXHash64 } = getXXHash();
 		return new XXHash64(XXHASH_SEED);
+	} else if (checksumType === 'xxhash3') {
+		const { XXHash3 } = getXXHash();
+		return new XXHash3(XXHASH_SEED);
 	}
 }
 
