@@ -22,13 +22,7 @@ import { XXHASH_SEED } from '../constants';
 import { BlocksVerificationError } from '../errors';
 import { getCrc, getXXHash } from '../lazy';
 
-export type ChecksumType =
-	| 'crc32'
-	| 'sha1'
-	| 'sha256'
-	| 'xxhash32'
-	| 'xxhash64'
-	| 'xxhash3';
+export type ChecksumType = 'crc32' | 'sha1' | 'sha256' | 'xxhash3';
 
 export interface Block {
 	offset: number;
@@ -66,12 +60,6 @@ function createHasher(checksumType?: ChecksumType): undefined | AnyHasher {
 		return getCrc().createHash();
 	} else if (checksumType === 'sha1' || checksumType === 'sha256') {
 		return createHash(checksumType);
-	} else if (checksumType === 'xxhash32') {
-		const xxHash = getXXHash();
-		return new xxHash(XXHASH_SEED);
-	} else if (checksumType === 'xxhash64') {
-		const { XXHash64 } = getXXHash();
-		return new XXHash64(XXHASH_SEED);
 	} else if (checksumType === 'xxhash3') {
 		const { XXHash3 } = getXXHash();
 		return new XXHash3(XXHASH_SEED);
@@ -120,7 +108,7 @@ function verifyOrGenerateChecksum(
 		const checksum = hasher.digest('hex') as string;
 		if (generateChecksums) {
 			blocks.checksum = checksum;
-		} else if (verify && blocks.checksum !== checksum) {
+		} else if (verify && blocks.checksum?.toString() !== checksum.toString()) {
 			throw new BlocksVerificationError(blocks, checksum);
 		}
 	}
