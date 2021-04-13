@@ -436,11 +436,11 @@ async function pipeRegularSourceToDestination(
 			destinationStream.on('fail', onFail); // This is emitted by MultiDestination when one of its destinations fails
 			destinationStream.once('error', reject);
 			if (verify) {
-				//@ts-ignore
+				// @ts-ignore
 				hasher = createHasher();
-				//@ts-ignore
+				// @ts-ignore
 				hasher.once('checksum', maybeDone);
-				//@ts-ignore
+				// @ts-ignore
 				sourceStream.pipe(hasher);
 			}
 			destinationStream.once('done', maybeDone);

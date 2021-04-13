@@ -102,6 +102,6 @@
     "typedoc-plugin-markdown": "2.3.1",
     "typescript": "^4.1.2",
     "xxhash-addon": "^1.4.0",
-    "yargs": "^15.4.1"
+    "yargs": "^16.2.0"
   }
 }

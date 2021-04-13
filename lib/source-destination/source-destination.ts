@@ -14,47 +14,48 @@
  * limitations under the License.
  */
 
-import { Transform as TransformStream } from 'stream'
+import { Transform as TransformStream } from 'stream';
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
 import * as fileType from 'file-type';
 import { getPartitions, GetPartitionsResult } from 'partitioninfo';
 import { extname } from 'path';
 import { XXHash3 } from 'xxhash-addon';
-import { inherits } from 'util'
+import { inherits } from 'util';
 
 // @ts-ignore
 function HashStream(seed, outEnc) {
-  TransformStream.call(this);
+	TransformStream.call(this);
 
-  if (outEnc && typeof outEnc !== 'string' && !Buffer.isBuffer(outEnc)) {
-    outEnc = 'buffer';
-  }
+	if (outEnc && typeof outEnc !== 'string' && !Buffer.isBuffer(outEnc)) {
+		outEnc = 'buffer';
+	}
 
-  this._outEnc = outEnc;
+	this._outEnc = outEnc;
 
 	this._hash = new XXHash3(seed);
 
-  // Hack needed to support `readableObjectMode` in node v0.10 and to set
-  // `highWaterMark` only for Readable side
-  var rs = this._readableState;
-  rs.objectMode = true;
-  rs.highWaterMark = 2;
+	// Hack needed to support `readableObjectMode` in node v0.10 and to set
+	// `highWaterMark` only for Readable side
+	const rs = this._readableState;
+	rs.objectMode = true;
+	rs.highWaterMark = 2;
 }
 inherits(HashStream, TransformStream);
 
 // @ts-ignore
-HashStream.prototype._transform = function(chunk, encoding, callback) {
-  this._hash.update(chunk);
-  callback();
+HashStream.prototype._transform = function (chunk, encoding, callback) {
+	this._hash.update(chunk);
+	callback();
 };
 // @ts-ignore
-HashStream.prototype._flush = function(callback) {
-  if (this._outEnc !== undefined)
-    this.push(this._hash.digest(this._outEnc));
-  else
-    this.push(this._hash.digest());
-  callback();
+HashStream.prototype._flush = function (callback) {
+	if (this._outEnc !== undefined) {
+		this.push(this._hash.digest(this._outEnc));
+	} else {
+		this.push(this._hash.digest());
+	}
+	callback();
 };
 
 import {
@@ -76,7 +77,6 @@ import {
 	ProgressWritable,
 } from './progress';
 import { SourceSource } from './source-source';
-
 
 // @ts-ignore
 export class CountingHashStream extends HashStream {
