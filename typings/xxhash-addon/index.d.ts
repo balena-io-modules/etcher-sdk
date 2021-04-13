@@ -22,7 +22,7 @@ declare module 'xxhash-addon' {
 		export class XXHash3 {
 			constructor(seed: number);
 			public update(buffer: Buffer): void;
-			public digest(encoding: string): string;
+			public digest(encoding?: string): string;
 		}
 	}
 
