@@ -45,7 +45,6 @@ import { SourceSource } from './source-source';
 class HashStream extends TransformStream {
 	private _outEnc: string;
 	private _hash: XXHash3;
-	private _readableState: any;
 	constructor(seed: number, outEnc: string | Buffer) {
 		super();
 		if (outEnc && typeof outEnc !== 'string' && !Buffer.isBuffer(outEnc)) {
@@ -55,12 +54,6 @@ class HashStream extends TransformStream {
 		this._outEnc = outEnc as string;
 
 		this._hash = new XXHash3(seed);
-
-		// Hack needed to support `readableObjectMode` in node v0.10 and to set
-		// `highWaterMark` only for Readable side
-		const rs = this._readableState;
-		rs.objectMode = true;
-		rs.highWaterMark = 2;
 	}
 
 	_transform(chunk: Buffer, _encoding: string, callback: () => void) {
@@ -68,11 +61,7 @@ class HashStream extends TransformStream {
 		callback();
 	}
 	_flush(callback: () => void) {
-		if (this._outEnc !== undefined) {
-			this.push(this._hash.digest(this._outEnc));
-		} else {
-			this.push(this._hash.digest());
-		}
+		this.push(this._hash.digest(this._outEnc));
 		callback();
 	}
 }
