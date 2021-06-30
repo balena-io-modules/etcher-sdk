@@ -1,4 +1,15 @@
 - commits:
+    - subject: Delete .github directory
+      hash: 25e22a2ea50b355a66b35e2a99582367f983099e
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: dfunckt
+      nested: []
+  version: 6.2.2
+  date: 2021-06-30T15:44:16.577Z
+- commits:
     - subject: Update node-raspberrypi-usbboot from 0.2.11 to 0.3.0
       hash: de39ec278ff397d1f69bcb4db968486ce59b33b2
       body: |
