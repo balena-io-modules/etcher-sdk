@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { promisify } from 'util';
 import { spawn } from 'child_process';
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
@@ -33,6 +34,8 @@ import {
 	SourceDestination,
 	Verifier,
 } from './source-destination';
+
+const START_SHELLHWDETECTION_DELAY = 2000;
 
 function isntNull<T>(x: T | null): x is Exclude<T, null> {
 	return x !== null;
@@ -381,10 +384,8 @@ export class MultiDestination extends SourceDestination {
 		);
 
 		if (restartSHWD) {
-			await new Promise((res) => {
-				const cp = spawn('sc', ['start', 'ShellHWDetection']);
-				cp.on('exit', res);
-			})
+			promisify(setTimeout)(START_SHELLHWDETECTION_DELAY)
+				.then(() => spawn('sc', ['start', 'ShellHWDetection']));
 		}
 	}
 }
