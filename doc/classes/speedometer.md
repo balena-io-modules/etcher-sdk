@@ -31,7 +31,7 @@
 
 \+ **new Speedometer**(`windowSize`: number): *[Speedometer](speedometer.md)*
 
-*Defined in [lib/speedometer.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/speedometer.ts#L20)*
+*Defined in [lib/speedometer.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/speedometer.ts#L20)*
 
 **Parameters:**
 
@@ -47,7 +47,7 @@ Name | Type | Default |
 
 • **values**: *Array‹[]›* = []
 
-*Defined in [lib/speedometer.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/speedometer.ts#L20)*
+*Defined in [lib/speedometer.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/speedometer.ts#L20)*
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 • **windowSize**: *number*
 
-*Defined in [lib/speedometer.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/speedometer.ts#L22)*
+*Defined in [lib/speedometer.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/speedometer.ts#L22)*
 
 ## Methods
 
@@ -63,7 +63,7 @@ ___
 
 ▸ **moment**(`index`: number): *number*
 
-*Defined in [lib/speedometer.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/speedometer.ts#L36)*
+*Defined in [lib/speedometer.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/speedometer.ts#L36)*
 
 **Parameters:**
 
@@ -79,7 +79,7 @@ ___
 
 ▸ **now**(): *number*
 
-*Defined in [lib/speedometer.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/speedometer.ts#L26)*
+*Defined in [lib/speedometer.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/speedometer.ts#L26)*
 
 **Returns:** *number*
 
@@ -89,7 +89,7 @@ ___
 
 ▸ **removeOldValues**(`start`: number): *void*
 
-*Defined in [lib/speedometer.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/speedometer.ts#L30)*
+*Defined in [lib/speedometer.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/speedometer.ts#L30)*
 
 **Parameters:**
 
@@ -105,7 +105,7 @@ ___
 
 ▸ **speed**(`amount`: number): *number*
 
-*Defined in [lib/speedometer.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/speedometer.ts#L44)*
+*Defined in [lib/speedometer.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/speedometer.ts#L44)*
 
 **Parameters:**
 
@@ -121,7 +121,7 @@ ___
 
 ▸ **value**(`index`: number): *number*
 
-*Defined in [lib/speedometer.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/speedometer.ts#L40)*
+*Defined in [lib/speedometer.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/speedometer.ts#L40)*
 
 **Parameters:**
 

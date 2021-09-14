@@ -85,8 +85,8 @@ class DriverlessDeviceAdapter$ extends Adapter {
 	}
 
 	private listDrives(): Map<string, WinUsbDriverlessDevice> {
-		const isUsbBootCapableUSBDevice = getRaspberrypiUsbboot()
-			?.isUsbBootCapableUSBDevice;
+		const isUsbBootCapableUSBDevice =
+			getRaspberrypiUsbboot()?.isUsbBootCapableUSBDevice;
 		const result = new Map<string, WinUsbDriverlessDevice>();
 		if (isUsbBootCapableUSBDevice == null) {
 			return result;

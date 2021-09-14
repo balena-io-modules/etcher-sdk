@@ -134,13 +134,7 @@ describe('sparse streams', function () {
 		await innerSource.close();
 	});
 
-	const checksumTypes: ChecksumType[] = [
-		'sha1',
-		'sha256',
-		'xxhash32',
-		'xxhash64',
-		'crc32',
-	];
+	const checksumTypes: ChecksumType[] = ['sha1', 'sha256', 'crc32', 'xxhash3'];
 	for (const alignment of [1, 1024 ** 2]) {
 		for (const createStreamFromDisk of [false, true]) {
 			for (const checksumType of checksumTypes) {
@@ -176,7 +170,8 @@ describe('sparse streams', function () {
 							});
 							await destination.open();
 							// Test sparse write stream
-							const destinationStream = await destination.createSparseWriteStream();
+							const destinationStream =
+								await destination.createSparseWriteStream();
 							await new Promise((resolve, reject) => {
 								sourceSparseStream.on('error', reject);
 								destinationStream.on('error', reject);

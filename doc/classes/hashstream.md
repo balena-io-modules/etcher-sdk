@@ -1,146 +1,117 @@
-[etcher-sdk](../README.md) › [BlockReadStream](blockreadstream.md)
+[etcher-sdk](../README.md) › [HashStream](hashstream.md)
 
-# Class: BlockReadStream
+# Class: HashStream
 
 ## Hierarchy
 
-* Readable
+* Transform
 
-  ↳ **BlockReadStream**
+  ↳ **HashStream**
+
+  ↳ [CountingHashStream](countinghashstream.md)
 
 ## Implements
 
 * ReadableStream
+* Writable
 
 ## Index
 
 ### Constructors
 
-* [constructor](blockreadstream.md#constructor)
+* [constructor](hashstream.md#constructor)
 
 ### Properties
 
-* [alignedReadableState](blockreadstream.md#private-alignedreadablestate)
-* [alignment](blockreadstream.md#private-alignment)
-* [bytesRead](blockreadstream.md#private-bytesread)
-* [chunkSize](blockreadstream.md#private-chunksize)
-* [end](blockreadstream.md#private-end)
-* [maxRetries](blockreadstream.md#private-maxretries)
-* [readable](blockreadstream.md#readable)
-* [readableFlowing](blockreadstream.md#readonly-readableflowing)
-* [readableHighWaterMark](blockreadstream.md#readonly-readablehighwatermark)
-* [readableLength](blockreadstream.md#readonly-readablelength)
-* [source](blockreadstream.md#private-source)
-* [defaultMaxListeners](blockreadstream.md#static-defaultmaxlisteners)
+* [_hash](hashstream.md#private-_hash)
+* [_outEnc](hashstream.md#private-_outenc)
+* [readable](hashstream.md#readable)
+* [readableFlowing](hashstream.md#readonly-readableflowing)
+* [readableHighWaterMark](hashstream.md#readonly-readablehighwatermark)
+* [readableLength](hashstream.md#readonly-readablelength)
+* [writable](hashstream.md#writable)
+* [writableHighWaterMark](hashstream.md#readonly-writablehighwatermark)
+* [writableLength](hashstream.md#readonly-writablelength)
+* [defaultMaxListeners](hashstream.md#static-defaultmaxlisteners)
 
 ### Methods
 
-* [[Symbol.asyncIterator]](blockreadstream.md#[symbol.asynciterator])
-* [_destroy](blockreadstream.md#_destroy)
-* [_read](blockreadstream.md#_read)
-* [addListener](blockreadstream.md#addlistener)
-* [destroy](blockreadstream.md#destroy)
-* [emit](blockreadstream.md#emit)
-* [eventNames](blockreadstream.md#eventnames)
-* [getMaxListeners](blockreadstream.md#getmaxlisteners)
-* [isPaused](blockreadstream.md#ispaused)
-* [listenerCount](blockreadstream.md#listenercount)
-* [listeners](blockreadstream.md#listeners)
-* [off](blockreadstream.md#off)
-* [on](blockreadstream.md#on)
-* [once](blockreadstream.md#once)
-* [pause](blockreadstream.md#pause)
-* [pipe](blockreadstream.md#pipe)
-* [prependListener](blockreadstream.md#prependlistener)
-* [prependOnceListener](blockreadstream.md#prependoncelistener)
-* [push](blockreadstream.md#push)
-* [rawListeners](blockreadstream.md#rawlisteners)
-* [read](blockreadstream.md#read)
-* [removeAllListeners](blockreadstream.md#removealllisteners)
-* [removeListener](blockreadstream.md#removelistener)
-* [resume](blockreadstream.md#resume)
-* [setEncoding](blockreadstream.md#setencoding)
-* [setMaxListeners](blockreadstream.md#setmaxlisteners)
-* [tryRead](blockreadstream.md#private-tryread)
-* [unpipe](blockreadstream.md#unpipe)
-* [unshift](blockreadstream.md#unshift)
-* [wrap](blockreadstream.md#wrap)
-* [listenerCount](blockreadstream.md#static-listenercount)
-* [once](blockreadstream.md#static-once)
+* [[Symbol.asyncIterator]](hashstream.md#[symbol.asynciterator])
+* [_destroy](hashstream.md#_destroy)
+* [_final](hashstream.md#_final)
+* [_flush](hashstream.md#_flush)
+* [_read](hashstream.md#_read)
+* [_transform](hashstream.md#_transform)
+* [_write](hashstream.md#_write)
+* [_writev](hashstream.md#optional-_writev)
+* [addListener](hashstream.md#addlistener)
+* [cork](hashstream.md#cork)
+* [destroy](hashstream.md#destroy)
+* [emit](hashstream.md#emit)
+* [end](hashstream.md#end)
+* [eventNames](hashstream.md#eventnames)
+* [getMaxListeners](hashstream.md#getmaxlisteners)
+* [isPaused](hashstream.md#ispaused)
+* [listenerCount](hashstream.md#listenercount)
+* [listeners](hashstream.md#listeners)
+* [off](hashstream.md#off)
+* [on](hashstream.md#on)
+* [once](hashstream.md#once)
+* [pause](hashstream.md#pause)
+* [pipe](hashstream.md#pipe)
+* [prependListener](hashstream.md#prependlistener)
+* [prependOnceListener](hashstream.md#prependoncelistener)
+* [push](hashstream.md#push)
+* [rawListeners](hashstream.md#rawlisteners)
+* [read](hashstream.md#read)
+* [removeAllListeners](hashstream.md#removealllisteners)
+* [removeListener](hashstream.md#removelistener)
+* [resume](hashstream.md#resume)
+* [setDefaultEncoding](hashstream.md#setdefaultencoding)
+* [setEncoding](hashstream.md#setencoding)
+* [setMaxListeners](hashstream.md#setmaxlisteners)
+* [uncork](hashstream.md#uncork)
+* [unpipe](hashstream.md#unpipe)
+* [unshift](hashstream.md#unshift)
+* [wrap](hashstream.md#wrap)
+* [write](hashstream.md#write)
+* [listenerCount](hashstream.md#static-listenercount)
+* [once](hashstream.md#static-once)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new BlockReadStream**(`__namedParameters`: object): *[BlockReadStream](blockreadstream.md)*
+\+ **new HashStream**(`seed`: number, `outEnc`: string | [Buffer](../interfaces/alignedlockablebuffer.md#buffer)): *[HashStream](hashstream.md)*
 
-*Overrides void*
+*Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [lib/block-read-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-read-stream.ts#L36)*
+*Defined in [lib/source-destination/source-destination.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L47)*
 
 **Parameters:**
 
-▪ **__namedParameters**: *object*
+Name | Type |
+------ | ------ |
+`seed` | number |
+`outEnc` | string &#124; [Buffer](../interfaces/alignedlockablebuffer.md#buffer) |
 
-Name | Type | Default |
------- | ------ | ------ |
-`alignment` | undefined &#124; number | - |
-`chunkSize` | number | CHUNK_SIZE |
-`end` | number | Infinity |
-`maxRetries` | number | 5 |
-`numBuffers` | number | 2 |
-`source` | [File](file.md)‹› | - |
-`start` | number | 0 |
-
-**Returns:** *[BlockReadStream](blockreadstream.md)*
+**Returns:** *[HashStream](hashstream.md)*
 
 ## Properties
 
-### `Private` alignedReadableState
+### `Private` _hash
 
-• **alignedReadableState**: *[AlignedReadableState](alignedreadablestate.md)*
+• **_hash**: *XXHash3*
 
-*Defined in [lib/block-read-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-read-stream.ts#L32)*
-
-___
-
-### `Private` alignment
-
-• **alignment**: *number | undefined*
-
-*Defined in [lib/block-read-stream.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-read-stream.ts#L31)*
+*Defined in [lib/source-destination/source-destination.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L47)*
 
 ___
 
-### `Private` bytesRead
+### `Private` _outEnc
 
-• **bytesRead**: *number* = 0
+• **_outEnc**: *string*
 
-*Defined in [lib/block-read-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-read-stream.ts#L33)*
-
-___
-
-### `Private` chunkSize
-
-• **chunkSize**: *number*
-
-*Defined in [lib/block-read-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-read-stream.ts#L35)*
-
-___
-
-### `Private` end
-
-• **end**: *number*
-
-*Defined in [lib/block-read-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-read-stream.ts#L34)*
-
-___
-
-### `Private` maxRetries
-
-• **maxRetries**: *number*
-
-*Defined in [lib/block-read-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-read-stream.ts#L36)*
+*Defined in [lib/source-destination/source-destination.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L46)*
 
 ___
 
@@ -184,11 +155,33 @@ Defined in node_modules/@types/node/stream.d.ts:23
 
 ___
 
-### `Private` source
+###  writable
 
-• **source**: *[File](file.md)*
+• **writable**: *boolean*
 
-*Defined in [lib/block-read-stream.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-read-stream.ts#L30)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[writable](sparsefilterstream.md#writable)*
+
+Defined in node_modules/@types/node/stream.d.ts:210
+
+___
+
+### `Readonly` writableHighWaterMark
+
+• **writableHighWaterMark**: *number*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableHighWaterMark](sparsefilterstream.md#readonly-writablehighwatermark)*
+
+Defined in node_modules/@types/node/stream.d.ts:211
+
+___
+
+### `Readonly` writableLength
+
+• **writableLength**: *number*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[writableLength](sparsefilterstream.md#readonly-writablelength)*
+
+Defined in node_modules/@types/node/stream.d.ts:212
 
 ___
 
@@ -218,9 +211,11 @@ ___
 
 ▸ **_destroy**(`error`: [Error](notcapable.md#static-error) | null, `callback`: function): *void*
 
-*Inherited from [SparseReadStream](sparsereadstream.md).[_destroy](sparsereadstream.md#_destroy)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[_destroy](sparsefilterstream.md#_destroy)*
 
-Defined in node_modules/@types/node/stream.d.ts:35
+*Overrides [SparseReadStream](sparsereadstream.md).[_destroy](sparsereadstream.md#_destroy)*
+
+Defined in node_modules/@types/node/stream.d.ts:216
 
 **Parameters:**
 
@@ -240,15 +235,139 @@ Name | Type |
 
 ___
 
+###  _final
+
+▸ **_final**(`callback`: function): *void*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[_final](sparsefilterstream.md#_final)*
+
+Defined in node_modules/@types/node/stream.d.ts:217
+
+**Parameters:**
+
+▪ **callback**: *function*
+
+▸ (`error?`: [Error](notcapable.md#static-error) | null): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`error?` | [Error](notcapable.md#static-error) &#124; null |
+
+**Returns:** *void*
+
+___
+
+###  _flush
+
+▸ **_flush**(`callback`: function): *void*
+
+*Overrides [SparseFilterStream](sparsefilterstream.md).[_flush](sparsefilterstream.md#_flush)*
+
+*Defined in [lib/source-destination/source-destination.ts:63](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L63)*
+
+**Parameters:**
+
+▪ **callback**: *function*
+
+▸ (): *void*
+
+**Returns:** *void*
+
+___
+
 ###  _read
 
-▸ **_read**(): *Promise‹void›*
+▸ **_read**(`size`: number): *void*
 
-*Overrides [SparseFilterStream](sparsefilterstream.md).[_read](sparsefilterstream.md#_read)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[_read](sparsefilterstream.md#_read)*
 
-*Defined in [lib/block-read-stream.ts:86](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-read-stream.ts#L86)*
+Defined in node_modules/@types/node/stream.d.ts:25
 
-**Returns:** *Promise‹void›*
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`size` | number |
+
+**Returns:** *void*
+
+___
+
+###  _transform
+
+▸ **_transform**(`chunk`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer), `_encoding`: string, `callback`: function): *void*
+
+*Overrides [SourceTransform](../interfaces/sourcetransform.md).[_transform](../interfaces/sourcetransform.md#_transform)*
+
+*Defined in [lib/source-destination/source-destination.ts:59](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L59)*
+
+**Parameters:**
+
+▪ **chunk**: *[Buffer](../interfaces/alignedlockablebuffer.md#buffer)*
+
+▪ **_encoding**: *string*
+
+▪ **callback**: *function*
+
+▸ (): *void*
+
+**Returns:** *void*
+
+___
+
+###  _write
+
+▸ **_write**(`chunk`: any, `encoding`: string, `callback`: function): *void*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[_write](sparsefilterstream.md#_write)*
+
+Defined in node_modules/@types/node/stream.d.ts:214
+
+**Parameters:**
+
+▪ **chunk**: *any*
+
+▪ **encoding**: *string*
+
+▪ **callback**: *function*
+
+▸ (`error?`: [Error](notcapable.md#static-error) | null): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`error?` | [Error](notcapable.md#static-error) &#124; null |
+
+**Returns:** *void*
+
+___
+
+### `Optional` _writev
+
+▸ **_writev**(`chunks`: Array‹object›, `callback`: function): *void*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[_writev](sparsefilterstream.md#optional-_writev)*
+
+Defined in node_modules/@types/node/stream.d.ts:215
+
+**Parameters:**
+
+▪ **chunks**: *Array‹object›*
+
+▪ **callback**: *function*
+
+▸ (`error?`: [Error](notcapable.md#static-error) | null): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`error?` | [Error](notcapable.md#static-error) &#124; null |
+
+**Returns:** *void*
 
 ___
 
@@ -390,6 +509,18 @@ Name | Type |
 
 ___
 
+###  cork
+
+▸ **cork**(): *void*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[cork](sparsefilterstream.md#cork)*
+
+Defined in node_modules/@types/node/stream.d.ts:224
+
+**Returns:** *void*
+
+___
+
 ###  destroy
 
 ▸ **destroy**(`error?`: [Error](notcapable.md#static-error)): *void*
@@ -508,6 +639,55 @@ Name | Type |
 `...args` | any[] |
 
 **Returns:** *boolean*
+
+___
+
+###  end
+
+▸ **end**(`cb?`: undefined | function): *void*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[end](sparsefilterstream.md#end)*
+
+Defined in node_modules/@types/node/stream.d.ts:221
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`cb?` | undefined &#124; function |
+
+**Returns:** *void*
+
+▸ **end**(`chunk`: any, `cb?`: undefined | function): *void*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[end](sparsefilterstream.md#end)*
+
+Defined in node_modules/@types/node/stream.d.ts:222
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`chunk` | any |
+`cb?` | undefined &#124; function |
+
+**Returns:** *void*
+
+▸ **end**(`chunk`: any, `encoding?`: undefined | string, `cb?`: undefined | function): *void*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[end](sparsefilterstream.md#end)*
+
+Defined in node_modules/@types/node/stream.d.ts:223
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`chunk` | any |
+`encoding?` | undefined &#124; string |
+`cb?` | undefined &#124; function |
+
+**Returns:** *void*
 
 ___
 
@@ -1379,6 +1559,24 @@ Defined in node_modules/@types/node/stream.d.ts:29
 
 ___
 
+###  setDefaultEncoding
+
+▸ **setDefaultEncoding**(`encoding`: string): *this*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[setDefaultEncoding](sparsefilterstream.md#setdefaultencoding)*
+
+Defined in node_modules/@types/node/stream.d.ts:220
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`encoding` | string |
+
+**Returns:** *this*
+
+___
+
 ###  setEncoding
 
 ▸ **setEncoding**(`encoding`: string): *this*
@@ -1415,19 +1613,15 @@ Name | Type |
 
 ___
 
-### `Private` tryRead
+###  uncork
 
-▸ **tryRead**(`buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer)): *Promise‹ReadResult›*
+▸ **uncork**(): *void*
 
-*Defined in [lib/block-read-stream.ts:75](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-read-stream.ts#L75)*
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[uncork](sparsefilterstream.md#uncork)*
 
-**Parameters:**
+Defined in node_modules/@types/node/stream.d.ts:225
 
-Name | Type |
------- | ------ |
-`buffer` | [Buffer](../interfaces/alignedlockablebuffer.md#buffer) |
-
-**Returns:** *Promise‹ReadResult›*
+**Returns:** *void*
 
 ___
 
@@ -1482,6 +1676,41 @@ Name | Type |
 `oldStream` | ReadableStream |
 
 **Returns:** *this*
+
+___
+
+###  write
+
+▸ **write**(`chunk`: any, `cb?`: undefined | function): *boolean*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[write](sparsefilterstream.md#write)*
+
+Defined in node_modules/@types/node/stream.d.ts:218
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`chunk` | any |
+`cb?` | undefined &#124; function |
+
+**Returns:** *boolean*
+
+▸ **write**(`chunk`: any, `encoding?`: undefined | string, `cb?`: undefined | function): *boolean*
+
+*Inherited from [SparseFilterStream](sparsefilterstream.md).[write](sparsefilterstream.md#write)*
+
+Defined in node_modules/@types/node/stream.d.ts:219
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`chunk` | any |
+`encoding?` | undefined &#124; string |
+`cb?` | undefined &#124; function |
+
+**Returns:** *boolean*
 
 ___
 

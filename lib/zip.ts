@@ -37,7 +37,9 @@ export const getFileStreamFromZipStream = async (
 					found = true;
 					// The compressed size is only known if the size is known
 					if (entry.size !== undefined) {
-						entry.compressedSize = (unzipper as any).unzipStream.parsedEntity.compressedSize;
+						entry.compressedSize = (
+							unzipper as any
+						).unzipStream.parsedEntity.compressedSize;
 					}
 					entry.on('end', () => {
 						// Stop reading the zip archive once the file we want has been extracted.

@@ -47,18 +47,16 @@ import { StreamLimiter } from '../stream-limiter';
 import { maxBy, fromCallback, streamToBuffer } from '../utils';
 
 function blockmapToBlocks(blockmap: BlockMap): BlocksWithChecksum[] {
-	return blockmap.ranges.map(
-		(range: Range): BlocksWithChecksum => {
-			const offset = range.start * blockmap.blockSize;
-			const length = (range.end - range.start + 1) * blockmap.blockSize;
-			const checksum = range.checksum;
-			const checksumType =
-				blockmap.checksumType === 'sha1' || blockmap.checksumType === 'sha256'
-					? blockmap.checksumType
-					: undefined;
-			return { checksum, checksumType, blocks: [{ offset, length }] };
-		},
-	);
+	return blockmap.ranges.map((range: Range): BlocksWithChecksum => {
+		const offset = range.start * blockmap.blockSize;
+		const length = (range.end - range.start + 1) * blockmap.blockSize;
+		const checksum = range.checksum;
+		const checksumType =
+			blockmap.checksumType === 'sha1' || blockmap.checksumType === 'sha256'
+				? blockmap.checksumType
+				: undefined;
+		return { checksum, checksumType, blocks: [{ offset, length }] };
+	});
 }
 
 export function matchSupportedExtensions(filename: string): boolean {

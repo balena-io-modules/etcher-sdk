@@ -56,7 +56,7 @@ Defined in node_modules/@types/node/globals.d.ts:588
 
 ▸ **_write**(`chunk`: [SparseStreamChunk](sparsestreamchunk.md), `encoding`: string, `callback`: function): *void*
 
-*Defined in [lib/sparse-stream/shared.ts:54](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/sparse-stream/shared.ts#L54)*
+*Defined in [lib/sparse-stream/shared.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/sparse-stream/shared.ts#L49)*
 
 **Parameters:**
 

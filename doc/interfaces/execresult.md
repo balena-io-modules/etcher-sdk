@@ -19,7 +19,7 @@
 
 • **stderr**: *string*
 
-*Defined in [lib/diskpart.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/diskpart.ts#L34)*
+*Defined in [lib/diskpart.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/diskpart.ts#L34)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **stdout**: *string*
 
-*Defined in [lib/diskpart.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/diskpart.ts#L33)*
+*Defined in [lib/diskpart.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/diskpart.ts#L33)*

@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, {
+	AxiosBasicCredentials,
+	AxiosInstance,
+	AxiosResponse,
+} from 'axios';
 // Always use the node adapter (even in a browser)
 // @ts-ignore
 import * as axiosNodeAdapter from 'axios/lib/adapters/http';
@@ -47,15 +51,20 @@ export class Http extends SourceDestination {
 		url,
 		avoidRandomAccess = false,
 		axiosInstance = axios.create(),
+		auth,
 	}: {
 		url: string;
 		avoidRandomAccess?: boolean;
 		axiosInstance?: AxiosInstance;
+		auth?: AxiosBasicCredentials;
 	}) {
 		super();
 		this.url = url;
 		this.avoidRandomAccess = avoidRandomAccess;
 		this.axiosInstance = axiosInstance;
+		if (auth) {
+			this.axiosInstance.defaults.auth = auth;
+		}
 		this.ready = this.getInfo();
 	}
 

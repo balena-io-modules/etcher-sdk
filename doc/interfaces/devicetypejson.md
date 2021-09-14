@@ -19,7 +19,7 @@
 
 • **configuration**: *object*
 
-*Defined in [lib/source-destination/configured-source/configure.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/configured-source/configure.ts#L43)*
+*Defined in [lib/source-destination/configured-source/configure.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/configured-source/configure.ts#L43)*
 
 #### Type declaration:
 
@@ -33,7 +33,7 @@ ___
 
 • **yocto**: *object*
 
-*Defined in [lib/source-destination/configured-source/configure.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/configured-source/configure.ts#L47)*
+*Defined in [lib/source-destination/configured-source/configure.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/configured-source/configure.ts#L47)*
 
 #### Type declaration:
 

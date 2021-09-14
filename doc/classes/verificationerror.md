@@ -28,7 +28,7 @@
 
 • **code**: *string* = "EVALIDATION"
 
-*Defined in [lib/errors.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/errors.ts#L25)*
+*Defined in [lib/errors.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/errors.ts#L25)*
 
 ___
 

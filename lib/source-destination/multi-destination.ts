@@ -265,10 +265,8 @@ export class MultiDestination extends SourceDestination {
 		if (listeners > EventEmitter.defaultMaxListeners) {
 			passthrough.setMaxListeners(listeners);
 		}
-		const progresses: Map<
-			NodeJS.WritableStream,
-			ProgressEvent | null
-		> = new Map();
+		const progresses: Map<NodeJS.WritableStream, ProgressEvent | null> =
+			new Map();
 		let interval: NodeJS.Timer;
 
 		function oneStreamFinished(stream: NodeJS.WritableStream) {

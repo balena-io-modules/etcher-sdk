@@ -31,7 +31,7 @@ export interface ProgressEvent {
 }
 
 export function makeClassEmitProgressEvents<
-	T extends Constructor<EventEmitter>
+	T extends Constructor<EventEmitter>,
 >(
 	Cls: T,
 	attribute: string,

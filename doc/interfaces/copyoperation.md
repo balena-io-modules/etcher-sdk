@@ -21,7 +21,7 @@
 
 • **command**: *"copy"*
 
-*Defined in [lib/source-destination/configured-source/configure.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/configured-source/configure.ts#L36)*
+*Defined in [lib/source-destination/configured-source/configure.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/configured-source/configure.ts#L36)*
 
 ___
 
@@ -29,7 +29,7 @@ ___
 
 • **from**: *[FileOnPartition](fileonpartition.md)*
 
-*Defined in [lib/source-destination/configured-source/configure.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/configured-source/configure.ts#L37)*
+*Defined in [lib/source-destination/configured-source/configure.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/configured-source/configure.ts#L37)*
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 • **to**: *[FileOnPartition](fileonpartition.md)*
 
-*Defined in [lib/source-destination/configured-source/configure.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/configured-source/configure.ts#L38)*
+*Defined in [lib/source-destination/configured-source/configure.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/configured-source/configure.ts#L38)*
 
 ___
 
@@ -45,4 +45,4 @@ ___
 
 • **when**: *[Dictionary](dictionary.md)‹string›*
 
-*Defined in [lib/source-destination/configured-source/configure.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/configured-source/configure.ts#L39)*
+*Defined in [lib/source-destination/configured-source/configure.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/configured-source/configure.ts#L39)*

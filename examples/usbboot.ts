@@ -86,11 +86,10 @@ async function main() {
 
 	if (argv.length >= 3) {
 		console.log(`Writing image ${argv[2]}`);
-		const source: sourceDestination.SourceDestination = new sourceDestination.File(
-			{
+		const source: sourceDestination.SourceDestination =
+			new sourceDestination.File({
 				path: argv[2],
-			},
-		);
+			});
 		pipeSourceToDestinationsWithProgressBar({
 			source,
 			destinations: [dest],

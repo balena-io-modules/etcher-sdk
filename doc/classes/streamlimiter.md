@@ -74,6 +74,7 @@
 * [wrap](streamlimiter.md#wrap)
 * [write](streamlimiter.md#write)
 * [listenerCount](streamlimiter.md#static-listenercount)
+* [once](streamlimiter.md#static-once)
 
 ## Constructors
 
@@ -83,7 +84,7 @@
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [lib/stream-limiter.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/stream-limiter.ts#L22)*
+*Defined in [lib/stream-limiter.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/stream-limiter.ts#L22)*
 
 **Parameters:**
 
@@ -100,7 +101,7 @@ Name | Type |
 
 • **maxBytes**: *number*
 
-*Defined in [lib/stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/stream-limiter.ts#L23)*
+*Defined in [lib/stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/stream-limiter.ts#L23)*
 
 ___
 
@@ -148,7 +149,7 @@ ___
 
 • **stream**: *ReadableStream*
 
-*Defined in [lib/stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/stream-limiter.ts#L23)*
+*Defined in [lib/stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/stream-limiter.ts#L23)*
 
 ___
 
@@ -188,7 +189,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[defaultMaxListeners](countingwritable.md#static-defaultmaxlisteners)*
 
-Defined in node_modules/@types/node/events.d.ts:18
+Defined in node_modules/@types/node/events.d.ts:20
 
 ## Methods
 
@@ -298,7 +299,7 @@ ___
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[_transform](../interfaces/sourcetransform.md#_transform)*
 
-*Defined in [lib/stream-limiter.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/stream-limiter.ts#L29)*
+*Defined in [lib/stream-limiter.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/stream-limiter.ts#L29)*
 
 **Parameters:**
 
@@ -381,7 +382,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[addListener](sparsefilterstream.md#addlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:47
 
@@ -407,7 +408,7 @@ The defined events on documents including:
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[addListener](sparsefilterstream.md#addlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:48
 
@@ -431,7 +432,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[addListener](sparsefilterstream.md#addlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:49
 
@@ -449,7 +450,7 @@ Defined in node_modules/@types/node/stream.d.ts:49
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[addListener](sparsefilterstream.md#addlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:50
 
@@ -467,7 +468,7 @@ Defined in node_modules/@types/node/stream.d.ts:50
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[addListener](sparsefilterstream.md#addlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:51
 
@@ -491,7 +492,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[addListener](sparsefilterstream.md#addlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:52
 
@@ -549,7 +550,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[emit](sparsefilterstream.md#emit)*
 
-*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
 Defined in node_modules/@types/node/stream.d.ts:54
 
@@ -565,7 +566,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[emit](sparsefilterstream.md#emit)*
 
-*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
 Defined in node_modules/@types/node/stream.d.ts:55
 
@@ -582,7 +583,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[emit](sparsefilterstream.md#emit)*
 
-*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
 Defined in node_modules/@types/node/stream.d.ts:56
 
@@ -598,7 +599,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[emit](sparsefilterstream.md#emit)*
 
-*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
 Defined in node_modules/@types/node/stream.d.ts:57
 
@@ -614,7 +615,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[emit](sparsefilterstream.md#emit)*
 
-*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
 Defined in node_modules/@types/node/stream.d.ts:58
 
@@ -631,7 +632,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[emit](sparsefilterstream.md#emit)*
 
-*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
 Defined in node_modules/@types/node/stream.d.ts:59
 
@@ -699,9 +700,9 @@ ___
 
 ▸ **eventNames**(): *Array‹string | symbol›*
 
-*Inherited from [CountingWritable](countingwritable.md).[eventNames](countingwritable.md#eventnames)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[eventNames](../interfaces/sparsereadable.md#eventnames)*
 
-Defined in node_modules/@types/node/events.d.ts:33
+Defined in node_modules/@types/node/globals.d.ts:569
 
 **Returns:** *Array‹string | symbol›*
 
@@ -711,9 +712,9 @@ ___
 
 ▸ **getMaxListeners**(): *number*
 
-*Inherited from [CountingWritable](countingwritable.md).[getMaxListeners](countingwritable.md#getmaxlisteners)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[getMaxListeners](../interfaces/sparsereadable.md#getmaxlisteners)*
 
-Defined in node_modules/@types/node/events.d.ts:29
+Defined in node_modules/@types/node/globals.d.ts:561
 
 **Returns:** *number*
 
@@ -735,9 +736,9 @@ ___
 
 ▸ **listenerCount**(`type`: string | symbol): *number*
 
-*Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[listenerCount](../interfaces/sparsereadable.md#listenercount)*
 
-Defined in node_modules/@types/node/events.d.ts:34
+Defined in node_modules/@types/node/globals.d.ts:565
 
 **Parameters:**
 
@@ -753,9 +754,9 @@ ___
 
 ▸ **listeners**(`event`: string | symbol): *Function[]*
 
-*Inherited from [CountingWritable](countingwritable.md).[listeners](countingwritable.md#listeners)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[listeners](../interfaces/sparsereadable.md#listeners)*
 
-Defined in node_modules/@types/node/events.d.ts:30
+Defined in node_modules/@types/node/globals.d.ts:562
 
 **Parameters:**
 
@@ -771,9 +772,9 @@ ___
 
 ▸ **off**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [CountingWritable](countingwritable.md).[off](countingwritable.md#off)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[off](../interfaces/sparsereadable.md#off)*
 
-Defined in node_modules/@types/node/events.d.ts:26
+Defined in node_modules/@types/node/globals.d.ts:558
 
 **Parameters:**
 
@@ -799,7 +800,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[on](sparsefilterstream.md#on)*
 
-*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
 Defined in node_modules/@types/node/stream.d.ts:61
 
@@ -817,7 +818,7 @@ Defined in node_modules/@types/node/stream.d.ts:61
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[on](sparsefilterstream.md#on)*
 
-*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
 Defined in node_modules/@types/node/stream.d.ts:62
 
@@ -841,7 +842,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[on](sparsefilterstream.md#on)*
 
-*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
 Defined in node_modules/@types/node/stream.d.ts:63
 
@@ -859,7 +860,7 @@ Defined in node_modules/@types/node/stream.d.ts:63
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[on](sparsefilterstream.md#on)*
 
-*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
 Defined in node_modules/@types/node/stream.d.ts:64
 
@@ -877,7 +878,7 @@ Defined in node_modules/@types/node/stream.d.ts:64
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[on](sparsefilterstream.md#on)*
 
-*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
 Defined in node_modules/@types/node/stream.d.ts:65
 
@@ -901,7 +902,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[on](sparsefilterstream.md#on)*
 
-*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
 Defined in node_modules/@types/node/stream.d.ts:66
 
@@ -929,7 +930,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[once](sparsefilterstream.md#once)*
 
-*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
 Defined in node_modules/@types/node/stream.d.ts:68
 
@@ -947,7 +948,7 @@ Defined in node_modules/@types/node/stream.d.ts:68
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[once](sparsefilterstream.md#once)*
 
-*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
 Defined in node_modules/@types/node/stream.d.ts:69
 
@@ -971,7 +972,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[once](sparsefilterstream.md#once)*
 
-*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
 Defined in node_modules/@types/node/stream.d.ts:70
 
@@ -989,7 +990,7 @@ Defined in node_modules/@types/node/stream.d.ts:70
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[once](sparsefilterstream.md#once)*
 
-*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
 Defined in node_modules/@types/node/stream.d.ts:71
 
@@ -1007,7 +1008,7 @@ Defined in node_modules/@types/node/stream.d.ts:71
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[once](sparsefilterstream.md#once)*
 
-*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
 Defined in node_modules/@types/node/stream.d.ts:72
 
@@ -1031,7 +1032,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[once](sparsefilterstream.md#once)*
 
-*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
 Defined in node_modules/@types/node/stream.d.ts:73
 
@@ -1094,7 +1095,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[prependListener](sparsefilterstream.md#prependlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:75
 
@@ -1112,7 +1113,7 @@ Defined in node_modules/@types/node/stream.d.ts:75
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[prependListener](sparsefilterstream.md#prependlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:76
 
@@ -1136,7 +1137,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[prependListener](sparsefilterstream.md#prependlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:77
 
@@ -1154,7 +1155,7 @@ Defined in node_modules/@types/node/stream.d.ts:77
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[prependListener](sparsefilterstream.md#prependlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:78
 
@@ -1172,7 +1173,7 @@ Defined in node_modules/@types/node/stream.d.ts:78
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[prependListener](sparsefilterstream.md#prependlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:79
 
@@ -1196,7 +1197,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[prependListener](sparsefilterstream.md#prependlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:80
 
@@ -1224,7 +1225,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[prependOnceListener](sparsefilterstream.md#prependoncelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:82
 
@@ -1242,7 +1243,7 @@ Defined in node_modules/@types/node/stream.d.ts:82
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[prependOnceListener](sparsefilterstream.md#prependoncelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:83
 
@@ -1266,7 +1267,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[prependOnceListener](sparsefilterstream.md#prependoncelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:84
 
@@ -1284,7 +1285,7 @@ Defined in node_modules/@types/node/stream.d.ts:84
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[prependOnceListener](sparsefilterstream.md#prependoncelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:85
 
@@ -1302,7 +1303,7 @@ Defined in node_modules/@types/node/stream.d.ts:85
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[prependOnceListener](sparsefilterstream.md#prependoncelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:86
 
@@ -1326,7 +1327,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[prependOnceListener](sparsefilterstream.md#prependoncelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:87
 
@@ -1371,9 +1372,9 @@ ___
 
 ▸ **rawListeners**(`event`: string | symbol): *Function[]*
 
-*Inherited from [CountingWritable](countingwritable.md).[rawListeners](countingwritable.md#rawlisteners)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[rawListeners](../interfaces/sparsereadable.md#rawlisteners)*
 
-Defined in node_modules/@types/node/events.d.ts:31
+Defined in node_modules/@types/node/globals.d.ts:563
 
 **Parameters:**
 
@@ -1407,9 +1408,9 @@ ___
 
 ▸ **removeAllListeners**(`event?`: string | symbol): *this*
 
-*Inherited from [CountingWritable](countingwritable.md).[removeAllListeners](countingwritable.md#removealllisteners)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[removeAllListeners](../interfaces/sparsereadable.md#removealllisteners)*
 
-Defined in node_modules/@types/node/events.d.ts:27
+Defined in node_modules/@types/node/globals.d.ts:559
 
 **Parameters:**
 
@@ -1427,7 +1428,7 @@ ___
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[removeListener](sparsefilterstream.md#removelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:89
 
@@ -1445,7 +1446,7 @@ Defined in node_modules/@types/node/stream.d.ts:89
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[removeListener](sparsefilterstream.md#removelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:90
 
@@ -1469,7 +1470,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[removeListener](sparsefilterstream.md#removelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:91
 
@@ -1487,7 +1488,7 @@ Defined in node_modules/@types/node/stream.d.ts:91
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[removeListener](sparsefilterstream.md#removelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:92
 
@@ -1505,7 +1506,7 @@ Defined in node_modules/@types/node/stream.d.ts:92
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[removeListener](sparsefilterstream.md#removelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:93
 
@@ -1529,7 +1530,7 @@ Name | Type |
 
 *Inherited from [SparseFilterStream](sparsefilterstream.md).[removeListener](sparsefilterstream.md#removelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:94
 
@@ -1603,9 +1604,9 @@ ___
 
 ▸ **setMaxListeners**(`n`: number): *this*
 
-*Inherited from [CountingWritable](countingwritable.md).[setMaxListeners](countingwritable.md#setmaxlisteners)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[setMaxListeners](../interfaces/sparsereadable.md#setmaxlisteners)*
 
-Defined in node_modules/@types/node/events.d.ts:28
+Defined in node_modules/@types/node/globals.d.ts:560
 
 **Parameters:**
 
@@ -1736,3 +1737,24 @@ Name | Type |
 `event` | string &#124; symbol |
 
 **Returns:** *number*
+
+___
+
+### `Static` once
+
+▸ **once**(`emitter`: NodeEventTarget, `event`: string | symbol): *Promise‹any[]›*
+
+*Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#static-once)*
+
+*Overrides [CountingWritable](countingwritable.md).[once](countingwritable.md#static-once)*
+
+Defined in node_modules/@types/node/events.d.ts:13
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`emitter` | NodeEventTarget |
+`event` | string &#124; symbol |
+
+**Returns:** *Promise‹any[]›*

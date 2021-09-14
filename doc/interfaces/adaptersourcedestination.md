@@ -17,6 +17,10 @@
 
 ## Index
 
+### Constructors
+
+* [constructor](adaptersourcedestination.md#constructor)
+
 ### Properties
 
 * [description](adaptersourcedestination.md#description)
@@ -72,7 +76,20 @@
 * [setMaxListeners](adaptersourcedestination.md#setmaxlisteners)
 * [write](adaptersourcedestination.md#write)
 * [listenerCount](adaptersourcedestination.md#static-listenercount)
+* [once](adaptersourcedestination.md#static-once)
 * [register](adaptersourcedestination.md#static-register)
+
+## Constructors
+
+###  constructor
+
+\+ **new AdapterSourceDestination**(): *[AdapterSourceDestination](adaptersourcedestination.md)*
+
+*Inherited from [Verifier](../classes/verifier.md).[constructor](../classes/verifier.md#constructor)*
+
+Defined in node_modules/@types/node/events.d.ts:10
+
+**Returns:** *[AdapterSourceDestination](adaptersourcedestination.md)*
 
 ## Properties
 
@@ -80,7 +97,7 @@
 
 • **description**: *string*
 
-*Defined in [lib/scanner/adapters/adapter.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/adapter.ts#L27)*
+*Defined in [lib/scanner/adapters/adapter.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/adapter.ts#L27)*
 
 ___
 
@@ -88,7 +105,7 @@ ___
 
 • **device**: *string | null*
 
-*Defined in [lib/scanner/adapters/adapter.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/adapter.ts#L24)*
+*Defined in [lib/scanner/adapters/adapter.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/adapter.ts#L24)*
 
 ___
 
@@ -96,7 +113,7 @@ ___
 
 • **devicePath**: *string | null*
 
-*Defined in [lib/scanner/adapters/adapter.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/adapter.ts#L25)*
+*Defined in [lib/scanner/adapters/adapter.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/adapter.ts#L25)*
 
 ___
 
@@ -104,7 +121,7 @@ ___
 
 • **emitsProgress**: *boolean*
 
-*Defined in [lib/scanner/adapters/adapter.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/adapter.ts#L30)*
+*Defined in [lib/scanner/adapters/adapter.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/adapter.ts#L30)*
 
 ___
 
@@ -112,7 +129,7 @@ ___
 
 • **isSystem**: *boolean*
 
-*Defined in [lib/scanner/adapters/adapter.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/adapter.ts#L26)*
+*Defined in [lib/scanner/adapters/adapter.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/adapter.ts#L26)*
 
 ___
 
@@ -120,7 +137,7 @@ ___
 
 • **mountpoints**: *Array‹object›*
 
-*Defined in [lib/scanner/adapters/adapter.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/adapter.ts#L28)*
+*Defined in [lib/scanner/adapters/adapter.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/adapter.ts#L28)*
 
 ___
 
@@ -128,7 +145,7 @@ ___
 
 • **raw**: *string | null*
 
-*Defined in [lib/scanner/adapters/adapter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/adapter.ts#L23)*
+*Defined in [lib/scanner/adapters/adapter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/adapter.ts#L23)*
 
 ___
 
@@ -136,7 +153,7 @@ ___
 
 • **size**: *number | null*
 
-*Defined in [lib/scanner/adapters/adapter.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/adapter.ts#L29)*
+*Defined in [lib/scanner/adapters/adapter.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/adapter.ts#L29)*
 
 ___
 
@@ -146,7 +163,7 @@ ___
 
 *Inherited from [CountingWritable](../classes/countingwritable.md).[defaultMaxListeners](../classes/countingwritable.md#static-defaultmaxlisteners)*
 
-Defined in node_modules/@types/node/events.d.ts:18
+Defined in node_modules/@types/node/events.d.ts:20
 
 ___
 
@@ -167,7 +184,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[imageExtensions](../classes/sourcesource.md#static-readonly-imageextensions)*
 
-*Defined in [lib/source-destination/source-destination.ts:274](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L274)*
+*Defined in [lib/source-destination/source-destination.ts:296](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L296)*
 
 ___
 
@@ -177,7 +194,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[mimetype](../classes/sourcesource.md#static-optional-readonly-mimetype)*
 
-*Defined in [lib/source-destination/source-destination.ts:286](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L286)*
+*Defined in [lib/source-destination/source-destination.ts:308](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L308)*
 
 ## Methods
 
@@ -187,7 +204,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[_close](../classes/sourcedestination.md#protected-_close)*
 
-*Defined in [lib/source-destination/source-destination.ts:401](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L401)*
+*Defined in [lib/source-destination/source-destination.ts:423](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L423)*
 
 **Returns:** *Promise‹void›*
 
@@ -199,7 +216,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[_getMetadata](../classes/sourcesource.md#protected-_getmetadata)*
 
-*Defined in [lib/source-destination/source-destination.ts:333](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L333)*
+*Defined in [lib/source-destination/source-destination.ts:355](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L355)*
 
 **Returns:** *Promise‹[Metadata](metadata.md)›*
 
@@ -211,7 +228,7 @@ ___
 
 *Inherited from [SourceDestination](../classes/sourcedestination.md).[_open](../classes/sourcedestination.md#protected-_open)*
 
-*Defined in [lib/source-destination/source-destination.ts:397](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L397)*
+*Defined in [lib/source-destination/source-destination.ts:419](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L419)*
 
 **Returns:** *Promise‹void›*
 
@@ -221,11 +238,9 @@ ___
 
 ▸ **addListener**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [SourceSource](../classes/sourcesource.md).[addListener](../classes/sourcesource.md#addlistener)*
+*Inherited from [SparseReadable](sparsereadable.md).[addListener](sparsereadable.md#addlistener)*
 
-*Overrides [SparseReadable](sparsereadable.md).[addListener](sparsereadable.md#addlistener)*
-
-Defined in node_modules/@types/node/events.d.ts:20
+Defined in node_modules/@types/node/globals.d.ts:554
 
 **Parameters:**
 
@@ -251,7 +266,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[canCreateReadStream](../classes/sourcesource.md#cancreatereadstream)*
 
-*Defined in [lib/source-destination/source-destination.ts:310](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L310)*
+*Defined in [lib/source-destination/source-destination.ts:332](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L332)*
 
 **Returns:** *Promise‹boolean›*
 
@@ -263,7 +278,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[canCreateSparseReadStream](../classes/sourcesource.md#cancreatesparsereadstream)*
 
-*Defined in [lib/source-destination/source-destination.ts:314](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L314)*
+*Defined in [lib/source-destination/source-destination.ts:336](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L336)*
 
 **Returns:** *Promise‹boolean›*
 
@@ -275,7 +290,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[canCreateSparseWriteStream](../classes/sourcesource.md#cancreatesparsewritestream)*
 
-*Defined in [lib/source-destination/source-destination.ts:322](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L322)*
+*Defined in [lib/source-destination/source-destination.ts:344](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L344)*
 
 **Returns:** *Promise‹boolean›*
 
@@ -287,7 +302,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[canCreateWriteStream](../classes/sourcesource.md#cancreatewritestream)*
 
-*Defined in [lib/source-destination/source-destination.ts:318](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L318)*
+*Defined in [lib/source-destination/source-destination.ts:340](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L340)*
 
 **Returns:** *Promise‹boolean›*
 
@@ -299,7 +314,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[canRead](../classes/sourcesource.md#canread)*
 
-*Defined in [lib/source-destination/source-destination.ts:302](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L302)*
+*Defined in [lib/source-destination/source-destination.ts:324](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L324)*
 
 **Returns:** *Promise‹boolean›*
 
@@ -311,7 +326,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[canWrite](../classes/sourcesource.md#canwrite)*
 
-*Defined in [lib/source-destination/source-destination.ts:306](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L306)*
+*Defined in [lib/source-destination/source-destination.ts:328](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L328)*
 
 **Returns:** *Promise‹boolean›*
 
@@ -323,7 +338,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[close](../classes/sourcesource.md#close)*
 
-*Defined in [lib/source-destination/source-destination.ts:390](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L390)*
+*Defined in [lib/source-destination/source-destination.ts:412](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L412)*
 
 **Returns:** *Promise‹void›*
 
@@ -335,7 +350,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[createReadStream](../classes/sourcesource.md#createreadstream)*
 
-*Defined in [lib/source-destination/source-destination.ts:355](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L355)*
+*Defined in [lib/source-destination/source-destination.ts:377](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L377)*
 
 **Parameters:**
 
@@ -353,7 +368,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[createSparseReadStream](../classes/sourcesource.md#createsparsereadstream)*
 
-*Defined in [lib/source-destination/source-destination.ts:361](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L361)*
+*Defined in [lib/source-destination/source-destination.ts:383](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L383)*
 
 **Parameters:**
 
@@ -371,7 +386,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[createSparseWriteStream](../classes/sourcesource.md#createsparsewritestream)*
 
-*Defined in [lib/source-destination/source-destination.ts:377](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L377)*
+*Defined in [lib/source-destination/source-destination.ts:399](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L399)*
 
 **Parameters:**
 
@@ -391,7 +406,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[createVerifier](../classes/sourcesource.md#createverifier)*
 
-*Defined in [lib/source-destination/source-destination.ts:405](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L405)*
+*Defined in [lib/source-destination/source-destination.ts:427](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L427)*
 
 **Parameters:**
 
@@ -410,7 +425,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[createWriteStream](../classes/sourcesource.md#createwritestream)*
 
-*Defined in [lib/source-destination/source-destination.ts:371](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L371)*
+*Defined in [lib/source-destination/source-destination.ts:393](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L393)*
 
 **Parameters:**
 
@@ -428,11 +443,9 @@ ___
 
 ▸ **emit**(`event`: string | symbol, ...`args`: any[]): *boolean*
 
-*Inherited from [SourceSource](../classes/sourcesource.md).[emit](../classes/sourcesource.md#emit)*
+*Inherited from [SparseReadable](sparsereadable.md).[emit](sparsereadable.md#emit)*
 
-*Overrides [SparseReadable](sparsereadable.md).[emit](sparsereadable.md#emit)*
-
-Defined in node_modules/@types/node/events.d.ts:32
+Defined in node_modules/@types/node/globals.d.ts:564
 
 **Parameters:**
 
@@ -449,11 +462,9 @@ ___
 
 ▸ **eventNames**(): *Array‹string | symbol›*
 
-*Inherited from [CountingWritable](../classes/countingwritable.md).[eventNames](../classes/countingwritable.md#eventnames)*
+*Inherited from [SparseReadable](sparsereadable.md).[eventNames](sparsereadable.md#eventnames)*
 
-*Overrides [SparseReadable](sparsereadable.md).[eventNames](sparsereadable.md#eventnames)*
-
-Defined in node_modules/@types/node/events.d.ts:33
+Defined in node_modules/@types/node/globals.d.ts:569
 
 **Returns:** *Array‹string | symbol›*
 
@@ -465,7 +476,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[getAlignment](../classes/sourcesource.md#getalignment)*
 
-*Defined in [lib/source-destination/source-destination.ts:298](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L298)*
+*Defined in [lib/source-destination/source-destination.ts:320](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L320)*
 
 **Returns:** *number | undefined*
 
@@ -477,7 +488,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[getBlocks](../classes/sourcesource.md#getblocks)*
 
-*Defined in [lib/source-destination/source-destination.ts:367](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L367)*
+*Defined in [lib/source-destination/source-destination.ts:389](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L389)*
 
 **Returns:** *Promise‹[BlocksWithChecksum](blockswithchecksum.md)[]›*
 
@@ -489,7 +500,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[getInnerSource](../classes/sourcesource.md#getinnersource)*
 
-*Defined in [lib/source-destination/source-destination.ts:475](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L475)*
+*Defined in [lib/source-destination/source-destination.ts:497](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L497)*
 
 **Returns:** *Promise‹[SourceDestination](../classes/sourcedestination.md)›*
 
@@ -499,11 +510,9 @@ ___
 
 ▸ **getMaxListeners**(): *number*
 
-*Inherited from [CountingWritable](../classes/countingwritable.md).[getMaxListeners](../classes/countingwritable.md#getmaxlisteners)*
+*Inherited from [SparseReadable](sparsereadable.md).[getMaxListeners](sparsereadable.md#getmaxlisteners)*
 
-*Overrides [SparseReadable](sparsereadable.md).[getMaxListeners](sparsereadable.md#getmaxlisteners)*
-
-Defined in node_modules/@types/node/events.d.ts:29
+Defined in node_modules/@types/node/globals.d.ts:561
 
 **Returns:** *number*
 
@@ -515,7 +524,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[getMetadata](../classes/sourcesource.md#getmetadata)*
 
-*Defined in [lib/source-destination/source-destination.ts:326](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L326)*
+*Defined in [lib/source-destination/source-destination.ts:348](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L348)*
 
 **Returns:** *Promise‹[Metadata](metadata.md)›*
 
@@ -527,7 +536,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[getPartitionTable](../classes/sourcesource.md#getpartitiontable)*
 
-*Defined in [lib/source-destination/source-destination.ts:496](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L496)*
+*Defined in [lib/source-destination/source-destination.ts:518](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L518)*
 
 **Returns:** *Promise‹GetPartitionsResult | undefined›*
 
@@ -537,11 +546,9 @@ ___
 
 ▸ **listenerCount**(`type`: string | symbol): *number*
 
-*Inherited from [CountingWritable](../classes/countingwritable.md).[listenerCount](../classes/countingwritable.md#static-listenercount)*
+*Inherited from [SparseReadable](sparsereadable.md).[listenerCount](sparsereadable.md#listenercount)*
 
-*Overrides [SparseReadable](sparsereadable.md).[listenerCount](sparsereadable.md#listenercount)*
-
-Defined in node_modules/@types/node/events.d.ts:34
+Defined in node_modules/@types/node/globals.d.ts:565
 
 **Parameters:**
 
@@ -557,11 +564,9 @@ ___
 
 ▸ **listeners**(`event`: string | symbol): *Function[]*
 
-*Inherited from [CountingWritable](../classes/countingwritable.md).[listeners](../classes/countingwritable.md#listeners)*
+*Inherited from [SparseReadable](sparsereadable.md).[listeners](sparsereadable.md#listeners)*
 
-*Overrides [SparseReadable](sparsereadable.md).[listeners](sparsereadable.md#listeners)*
-
-Defined in node_modules/@types/node/events.d.ts:30
+Defined in node_modules/@types/node/globals.d.ts:562
 
 **Parameters:**
 
@@ -577,11 +582,9 @@ ___
 
 ▸ **off**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [CountingWritable](../classes/countingwritable.md).[off](../classes/countingwritable.md#off)*
+*Inherited from [SparseReadable](sparsereadable.md).[off](sparsereadable.md#off)*
 
-*Overrides [SparseReadable](sparsereadable.md).[off](sparsereadable.md#off)*
-
-Defined in node_modules/@types/node/events.d.ts:26
+Defined in node_modules/@types/node/globals.d.ts:558
 
 **Parameters:**
 
@@ -605,11 +608,9 @@ ___
 
 ▸ **on**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [SourceSource](../classes/sourcesource.md).[on](../classes/sourcesource.md#on)*
+*Inherited from [SparseReadable](sparsereadable.md).[on](sparsereadable.md#on)*
 
-*Overrides [SparseReadable](sparsereadable.md).[on](sparsereadable.md#on)*
-
-Defined in node_modules/@types/node/events.d.ts:21
+Defined in node_modules/@types/node/globals.d.ts:555
 
 **Parameters:**
 
@@ -633,11 +634,9 @@ ___
 
 ▸ **once**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [SourceSource](../classes/sourcesource.md).[once](../classes/sourcesource.md#once)*
+*Inherited from [SparseReadable](sparsereadable.md).[once](sparsereadable.md#once)*
 
-*Overrides [SparseReadable](sparsereadable.md).[once](sparsereadable.md#once)*
-
-Defined in node_modules/@types/node/events.d.ts:22
+Defined in node_modules/@types/node/globals.d.ts:556
 
 **Parameters:**
 
@@ -663,7 +662,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[open](../classes/sourcesource.md#open)*
 
-*Defined in [lib/source-destination/source-destination.ts:383](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L383)*
+*Defined in [lib/source-destination/source-destination.ts:405](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L405)*
 
 **Returns:** *Promise‹void›*
 
@@ -673,11 +672,9 @@ ___
 
 ▸ **prependListener**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [SourceSource](../classes/sourcesource.md).[prependListener](../classes/sourcesource.md#prependlistener)*
+*Inherited from [SparseReadable](sparsereadable.md).[prependListener](sparsereadable.md#prependlistener)*
 
-*Overrides [SparseReadable](sparsereadable.md).[prependListener](sparsereadable.md#prependlistener)*
-
-Defined in node_modules/@types/node/events.d.ts:23
+Defined in node_modules/@types/node/globals.d.ts:567
 
 **Parameters:**
 
@@ -701,11 +698,9 @@ ___
 
 ▸ **prependOnceListener**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [SourceSource](../classes/sourcesource.md).[prependOnceListener](../classes/sourcesource.md#prependoncelistener)*
+*Inherited from [SparseReadable](sparsereadable.md).[prependOnceListener](sparsereadable.md#prependoncelistener)*
 
-*Overrides [SparseReadable](sparsereadable.md).[prependOnceListener](sparsereadable.md#prependoncelistener)*
-
-Defined in node_modules/@types/node/events.d.ts:24
+Defined in node_modules/@types/node/globals.d.ts:568
 
 **Parameters:**
 
@@ -729,11 +724,9 @@ ___
 
 ▸ **rawListeners**(`event`: string | symbol): *Function[]*
 
-*Inherited from [CountingWritable](../classes/countingwritable.md).[rawListeners](../classes/countingwritable.md#rawlisteners)*
+*Inherited from [SparseReadable](sparsereadable.md).[rawListeners](sparsereadable.md#rawlisteners)*
 
-*Overrides [SparseReadable](sparsereadable.md).[rawListeners](sparsereadable.md#rawlisteners)*
-
-Defined in node_modules/@types/node/events.d.ts:31
+Defined in node_modules/@types/node/globals.d.ts:563
 
 **Parameters:**
 
@@ -751,7 +744,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[read](../classes/sourcesource.md#read)*
 
-*Defined in [lib/source-destination/source-destination.ts:337](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L337)*
+*Defined in [lib/source-destination/source-destination.ts:359](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L359)*
 
 **Parameters:**
 
@@ -770,11 +763,9 @@ ___
 
 ▸ **removeAllListeners**(`event?`: string | symbol): *this*
 
-*Inherited from [CountingWritable](../classes/countingwritable.md).[removeAllListeners](../classes/countingwritable.md#removealllisteners)*
+*Inherited from [SparseReadable](sparsereadable.md).[removeAllListeners](sparsereadable.md#removealllisteners)*
 
-*Overrides [SparseReadable](sparsereadable.md).[removeAllListeners](sparsereadable.md#removealllisteners)*
-
-Defined in node_modules/@types/node/events.d.ts:27
+Defined in node_modules/@types/node/globals.d.ts:559
 
 **Parameters:**
 
@@ -790,11 +781,9 @@ ___
 
 ▸ **removeListener**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [SourceSource](../classes/sourcesource.md).[removeListener](../classes/sourcesource.md#removelistener)*
+*Inherited from [SparseReadable](sparsereadable.md).[removeListener](sparsereadable.md#removelistener)*
 
-*Overrides [SparseReadable](sparsereadable.md).[removeListener](sparsereadable.md#removelistener)*
-
-Defined in node_modules/@types/node/events.d.ts:25
+Defined in node_modules/@types/node/globals.d.ts:557
 
 **Parameters:**
 
@@ -818,11 +807,9 @@ ___
 
 ▸ **setMaxListeners**(`n`: number): *this*
 
-*Inherited from [CountingWritable](../classes/countingwritable.md).[setMaxListeners](../classes/countingwritable.md#setmaxlisteners)*
+*Inherited from [SparseReadable](sparsereadable.md).[setMaxListeners](sparsereadable.md#setmaxlisteners)*
 
-*Overrides [SparseReadable](sparsereadable.md).[setMaxListeners](sparsereadable.md#setmaxlisteners)*
-
-Defined in node_modules/@types/node/events.d.ts:28
+Defined in node_modules/@types/node/globals.d.ts:560
 
 **Parameters:**
 
@@ -840,7 +827,7 @@ ___
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[write](../classes/sourcesource.md#write)*
 
-*Defined in [lib/source-destination/source-destination.ts:346](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L346)*
+*Defined in [lib/source-destination/source-destination.ts:368](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L368)*
 
 **Parameters:**
 
@@ -876,13 +863,47 @@ Name | Type |
 
 ___
 
+### `Static` once
+
+▸ **once**(`emitter`: NodeEventTarget, `event`: string | symbol): *Promise‹any[]›*
+
+*Inherited from [CountingWritable](../classes/countingwritable.md).[once](../classes/countingwritable.md#static-once)*
+
+Defined in node_modules/@types/node/events.d.ts:13
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`emitter` | NodeEventTarget |
+`event` | string &#124; symbol |
+
+**Returns:** *Promise‹any[]›*
+
+▸ **once**(`emitter`: DOMEventTarget, `event`: string): *Promise‹any[]›*
+
+*Inherited from [CountingWritable](../classes/countingwritable.md).[once](../classes/countingwritable.md#static-once)*
+
+Defined in node_modules/@types/node/events.d.ts:14
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`emitter` | DOMEventTarget |
+`event` | string |
+
+**Returns:** *Promise‹any[]›*
+
+___
+
 ### `Static` register
 
 ▸ **register**(`Cls`: typeof SourceSource): *void*
 
 *Inherited from [SourceSource](../classes/sourcesource.md).[register](../classes/sourcesource.md#static-register)*
 
-*Defined in [lib/source-destination/source-destination.ts:292](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/source-destination.ts#L292)*
+*Defined in [lib/source-destination/source-destination.ts:314](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L314)*
 
 **Parameters:**
 

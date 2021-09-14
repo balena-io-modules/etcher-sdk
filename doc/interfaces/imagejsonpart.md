@@ -22,7 +22,7 @@
 
 • **crc**: *number*
 
-*Defined in [lib/source-destination/balena-s3-compressed-source.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/balena-s3-compressed-source.ts#L30)*
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/balena-s3-compressed-source.ts#L30)*
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 • **filename**: *string*
 
-*Defined in [lib/source-destination/balena-s3-compressed-source.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/balena-s3-compressed-source.ts#L29)*
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/balena-s3-compressed-source.ts#L29)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **len**: *number*
 
-*Defined in [lib/source-destination/balena-s3-compressed-source.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/balena-s3-compressed-source.ts#L31)*
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/balena-s3-compressed-source.ts#L31)*
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 • **partitionIndex**? : *undefined | string*
 
-*Defined in [lib/source-destination/balena-s3-compressed-source.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/balena-s3-compressed-source.ts#L33)*
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/balena-s3-compressed-source.ts#L33)*
 
 ___
 
@@ -54,4 +54,4 @@ ___
 
 • **zLen**: *number*
 
-*Defined in [lib/source-destination/balena-s3-compressed-source.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/balena-s3-compressed-source.ts#L32)*
+*Defined in [lib/source-destination/balena-s3-compressed-source.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/balena-s3-compressed-source.ts#L32)*

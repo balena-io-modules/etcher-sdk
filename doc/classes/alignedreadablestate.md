@@ -30,7 +30,7 @@
 
 \+ **new AlignedReadableState**(`bufferSize`: number, `alignment`: number, `numBuffers`: number): *[AlignedReadableState](alignedreadablestate.md)*
 
-*Defined in [lib/aligned-lockable-buffer.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/aligned-lockable-buffer.ts#L55)*
+*Defined in [lib/aligned-lockable-buffer.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/aligned-lockable-buffer.ts#L55)*
 
 **Parameters:**
 
@@ -48,7 +48,7 @@ Name | Type |
 
 • **alignment**: *number*
 
-*Defined in [lib/aligned-lockable-buffer.ts:59](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/aligned-lockable-buffer.ts#L59)*
+*Defined in [lib/aligned-lockable-buffer.ts:59](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/aligned-lockable-buffer.ts#L59)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • **bufferSize**: *number*
 
-*Defined in [lib/aligned-lockable-buffer.ts:58](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/aligned-lockable-buffer.ts#L58)*
+*Defined in [lib/aligned-lockable-buffer.ts:58](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/aligned-lockable-buffer.ts#L58)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 • **buffers**: *[AlignedLockableBuffer](../interfaces/alignedlockablebuffer.md)[]*
 
-*Defined in [lib/aligned-lockable-buffer.ts:54](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/aligned-lockable-buffer.ts#L54)*
+*Defined in [lib/aligned-lockable-buffer.ts:54](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/aligned-lockable-buffer.ts#L54)*
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 • **currentBufferIndex**: *number* = 0
 
-*Defined in [lib/aligned-lockable-buffer.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/aligned-lockable-buffer.ts#L55)*
+*Defined in [lib/aligned-lockable-buffer.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/aligned-lockable-buffer.ts#L55)*
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 • **numBuffers**: *number*
 
-*Defined in [lib/aligned-lockable-buffer.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/aligned-lockable-buffer.ts#L60)*
+*Defined in [lib/aligned-lockable-buffer.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/aligned-lockable-buffer.ts#L60)*
 
 ## Methods
 
@@ -88,6 +88,6 @@ ___
 
 ▸ **getCurrentBuffer**(): *[AlignedLockableBuffer](../interfaces/alignedlockablebuffer.md)*
 
-*Defined in [lib/aligned-lockable-buffer.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/aligned-lockable-buffer.ts#L65)*
+*Defined in [lib/aligned-lockable-buffer.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/aligned-lockable-buffer.ts#L65)*
 
 **Returns:** *[AlignedLockableBuffer](../interfaces/alignedlockablebuffer.md)*
