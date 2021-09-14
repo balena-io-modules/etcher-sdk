@@ -21,7 +21,8 @@ import { SourceDestination } from './source-destination';
 
 export class UsbbootDrive
 	extends SourceDestination
-	implements AdapterSourceDestination {
+	implements AdapterSourceDestination
+{
 	public raw = null;
 	public displayName = 'Initializing device';
 	public device = null;

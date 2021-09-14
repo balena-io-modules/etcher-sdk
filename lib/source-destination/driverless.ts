@@ -21,7 +21,8 @@ import { SourceDestination } from './source-destination';
 
 export class DriverlessDevice
 	extends SourceDestination
-	implements AdapterSourceDestination {
+	implements AdapterSourceDestination
+{
 	public accessible = false;
 	public raw = null;
 	public device = null;

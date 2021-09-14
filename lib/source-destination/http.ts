@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
-import axios, { AxiosBasicCredentials, AxiosInstance, AxiosResponse } from 'axios';
+import axios, {
+	AxiosBasicCredentials,
+	AxiosInstance,
+	AxiosResponse,
+} from 'axios';
 // Always use the node adapter (even in a browser)
 // @ts-ignore
 import * as axiosNodeAdapter from 'axios/lib/adapters/http';

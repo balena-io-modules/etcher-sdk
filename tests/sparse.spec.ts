@@ -170,7 +170,8 @@ describe('sparse streams', function () {
 							});
 							await destination.open();
 							// Test sparse write stream
-							const destinationStream = await destination.createSparseWriteStream();
+							const destinationStream =
+								await destination.createSparseWriteStream();
 							await new Promise((resolve, reject) => {
 								sourceSparseStream.on('error', reject);
 								destinationStream.on('error', reject);
