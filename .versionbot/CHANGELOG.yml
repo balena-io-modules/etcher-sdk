@@ -1,4 +1,73 @@
 - commits:
+    - subject: 'patch: Prettify files'
+      hash: c4664b2d23317578434a520ec8f46f8a3cc608c4
+      body: ''
+      footer:
+        Signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+        signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+      author: Lorenzo Alberto Maria Ambrosi
+      nested: []
+    - subject: Update documentation
+      hash: ee5a2f21dbdb652c882bf6c14f382401890711ef
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+        signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+      author: Lorenzo Alberto Maria Ambrosi
+      nested: []
+    - subject: 'readme: explain elevated premissions requirements'
+      hash: ee9096476eb79a9497e80d5232cf9aaca7a46e50
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Forest Johnson
+      nested: []
+    - subject: 'patch: add support for basic auth'
+      hash: d72230986a19888828da330c6b3371b6edbb57f8
+      body: ''
+      footer: {}
+      author: Marco Füllemann
+      nested: []
+    - subject: Remove extraneous code
+      hash: 5d5c154def40f12f2314c92ec0ed5d2a8ed3163b
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Zane Hitchcox
+      nested: []
+    - subject: Convert inherits to class for stronger type-checking
+      hash: 0a05f555be5106ed02d6c43174079a0e194f12f4
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Zane Hitchcox
+      nested: []
+    - subject: Add xxhash3 checksum algorithm for faster verification
+      hash: 46985816280d60eb4160fcf9c52abe486b12b376
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Zane Hitchcox
+      nested: []
+    - subject: Make doc command cross-platform
+      hash: 1207a25a49010c54c48f5339ad4dc80f8172fad0
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+        signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+      author: Lorenzo Alberto Maria Ambrosi
+      nested: []
+  version: 6.2.3
+  date: 2021-09-14T16:58:10.249Z
+- commits:
     - subject: Delete .github directory
       hash: 25e22a2ea50b355a66b35e2a99582367f983099e
       body: ''
