@@ -63,6 +63,7 @@
 * [write](blockwritestream.md#write)
 * [writeBuffer](blockwritestream.md#private-writebuffer)
 * [listenerCount](blockwritestream.md#static-listenercount)
+* [once](blockwritestream.md#static-once)
 
 ## Constructors
 
@@ -72,7 +73,7 @@
 
 *Overrides [CountingWritable](countingwritable.md).[constructor](countingwritable.md#constructor)*
 
-*Defined in [lib/block-write-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/block-write-stream.ts#L36)*
+*Defined in [lib/block-write-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-write-stream.ts#L36)*
 
 **Parameters:**
 
@@ -93,7 +94,7 @@ Name | Type | Default |
 
 • **bytesWritten**: *number* = 0
 
-*Defined in [lib/block-write-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/block-write-stream.ts#L34)*
+*Defined in [lib/block-write-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-write-stream.ts#L34)*
 
 ___
 
@@ -101,7 +102,7 @@ ___
 
 • **delayFirstBuffer**: *boolean*
 
-*Defined in [lib/block-write-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/block-write-stream.ts#L32)*
+*Defined in [lib/block-write-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-write-stream.ts#L32)*
 
 ___
 
@@ -109,7 +110,7 @@ ___
 
 • **destination**: *[BlockDevice](blockdevice.md)*
 
-*Defined in [lib/block-write-stream.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/block-write-stream.ts#L31)*
+*Defined in [lib/block-write-stream.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-write-stream.ts#L31)*
 
 ___
 
@@ -117,7 +118,7 @@ ___
 
 • **firstBuffer**? : *[Buffer](../interfaces/alignedlockablebuffer.md#buffer)*
 
-*Defined in [lib/block-write-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/block-write-stream.ts#L36)*
+*Defined in [lib/block-write-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-write-stream.ts#L36)*
 
 ___
 
@@ -125,7 +126,7 @@ ___
 
 • **maxRetries**: *number*
 
-*Defined in [lib/block-write-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/block-write-stream.ts#L33)*
+*Defined in [lib/block-write-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-write-stream.ts#L33)*
 
 ___
 
@@ -133,7 +134,7 @@ ___
 
 • **position**: *number* = 0
 
-*Defined in [lib/block-write-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/block-write-stream.ts#L35)*
+*Defined in [lib/block-write-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-write-stream.ts#L35)*
 
 ___
 
@@ -173,7 +174,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[defaultMaxListeners](countingwritable.md#static-defaultmaxlisteners)*
 
-Defined in node_modules/@types/node/events.d.ts:18
+Defined in node_modules/@types/node/events.d.ts:20
 
 ## Methods
 
@@ -181,7 +182,7 @@ Defined in node_modules/@types/node/events.d.ts:18
 
 ▸ **__final**(): *Promise‹void›*
 
-*Defined in [lib/block-write-stream.ts:92](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/block-write-stream.ts#L92)*
+*Defined in [lib/block-write-stream.ts:92](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-write-stream.ts#L92)*
 
 **Returns:** *Promise‹void›*
 
@@ -191,7 +192,7 @@ ___
 
 ▸ **__write**(`buffer`: [AlignedLockableBuffer](../interfaces/alignedlockablebuffer.md)): *Promise‹void›*
 
-*Defined in [lib/block-write-stream.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/block-write-stream.ts#L65)*
+*Defined in [lib/block-write-stream.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-write-stream.ts#L65)*
 
 **Parameters:**
 
@@ -235,7 +236,7 @@ ___
 
 *Overrides [CountingWritable](countingwritable.md).[_final](countingwritable.md#_final)*
 
-*Defined in [lib/block-write-stream.ts:108](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/block-write-stream.ts#L108)*
+*Defined in [lib/block-write-stream.ts:108](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-write-stream.ts#L108)*
 
 **`summary`** Write buffered data before a stream ends, called by stream internals
 
@@ -261,7 +262,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/block-write-stream.ts:84](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/block-write-stream.ts#L84)*
+*Defined in [lib/block-write-stream.ts:84](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-write-stream.ts#L84)*
 
 **Parameters:**
 
@@ -315,7 +316,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[addListener](countingwritable.md#addlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:138
 
@@ -342,7 +343,7 @@ The defined events on documents including:
 
 *Inherited from [CountingWritable](countingwritable.md).[addListener](countingwritable.md#addlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:139
 
@@ -360,7 +361,7 @@ Defined in node_modules/@types/node/stream.d.ts:139
 
 *Inherited from [CountingWritable](countingwritable.md).[addListener](countingwritable.md#addlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:140
 
@@ -384,7 +385,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[addListener](countingwritable.md#addlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:141
 
@@ -402,7 +403,7 @@ Defined in node_modules/@types/node/stream.d.ts:141
 
 *Inherited from [CountingWritable](countingwritable.md).[addListener](countingwritable.md#addlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:142
 
@@ -426,7 +427,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[addListener](countingwritable.md#addlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:143
 
@@ -450,7 +451,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[addListener](countingwritable.md#addlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:144
 
@@ -508,7 +509,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[emit](countingwritable.md#emit)*
 
-*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
 Defined in node_modules/@types/node/stream.d.ts:146
 
@@ -524,7 +525,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[emit](countingwritable.md#emit)*
 
-*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
 Defined in node_modules/@types/node/stream.d.ts:147
 
@@ -540,7 +541,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[emit](countingwritable.md#emit)*
 
-*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
 Defined in node_modules/@types/node/stream.d.ts:148
 
@@ -557,7 +558,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[emit](countingwritable.md#emit)*
 
-*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
 Defined in node_modules/@types/node/stream.d.ts:149
 
@@ -573,7 +574,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[emit](countingwritable.md#emit)*
 
-*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
 Defined in node_modules/@types/node/stream.d.ts:150
 
@@ -590,7 +591,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[emit](countingwritable.md#emit)*
 
-*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
 Defined in node_modules/@types/node/stream.d.ts:151
 
@@ -607,7 +608,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[emit](countingwritable.md#emit)*
 
-*Overrides [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
 Defined in node_modules/@types/node/stream.d.ts:152
 
@@ -675,9 +676,9 @@ ___
 
 ▸ **eventNames**(): *Array‹string | symbol›*
 
-*Inherited from [CountingWritable](countingwritable.md).[eventNames](countingwritable.md#eventnames)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[eventNames](../interfaces/sparsereadable.md#eventnames)*
 
-Defined in node_modules/@types/node/events.d.ts:33
+Defined in node_modules/@types/node/globals.d.ts:569
 
 **Returns:** *Array‹string | symbol›*
 
@@ -687,9 +688,9 @@ ___
 
 ▸ **getMaxListeners**(): *number*
 
-*Inherited from [CountingWritable](countingwritable.md).[getMaxListeners](countingwritable.md#getmaxlisteners)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[getMaxListeners](../interfaces/sparsereadable.md#getmaxlisteners)*
 
-Defined in node_modules/@types/node/events.d.ts:29
+Defined in node_modules/@types/node/globals.d.ts:561
 
 **Returns:** *number*
 
@@ -699,9 +700,9 @@ ___
 
 ▸ **listenerCount**(`type`: string | symbol): *number*
 
-*Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[listenerCount](../interfaces/sparsereadable.md#listenercount)*
 
-Defined in node_modules/@types/node/events.d.ts:34
+Defined in node_modules/@types/node/globals.d.ts:565
 
 **Parameters:**
 
@@ -717,9 +718,9 @@ ___
 
 ▸ **listeners**(`event`: string | symbol): *Function[]*
 
-*Inherited from [CountingWritable](countingwritable.md).[listeners](countingwritable.md#listeners)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[listeners](../interfaces/sparsereadable.md#listeners)*
 
-Defined in node_modules/@types/node/events.d.ts:30
+Defined in node_modules/@types/node/globals.d.ts:562
 
 **Parameters:**
 
@@ -735,9 +736,9 @@ ___
 
 ▸ **off**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [CountingWritable](countingwritable.md).[off](countingwritable.md#off)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[off](../interfaces/sparsereadable.md#off)*
 
-Defined in node_modules/@types/node/events.d.ts:26
+Defined in node_modules/@types/node/globals.d.ts:558
 
 **Parameters:**
 
@@ -763,7 +764,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[on](countingwritable.md#on)*
 
-*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
 Defined in node_modules/@types/node/stream.d.ts:154
 
@@ -781,7 +782,7 @@ Defined in node_modules/@types/node/stream.d.ts:154
 
 *Inherited from [CountingWritable](countingwritable.md).[on](countingwritable.md#on)*
 
-*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
 Defined in node_modules/@types/node/stream.d.ts:155
 
@@ -799,7 +800,7 @@ Defined in node_modules/@types/node/stream.d.ts:155
 
 *Inherited from [CountingWritable](countingwritable.md).[on](countingwritable.md#on)*
 
-*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
 Defined in node_modules/@types/node/stream.d.ts:156
 
@@ -823,7 +824,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[on](countingwritable.md#on)*
 
-*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
 Defined in node_modules/@types/node/stream.d.ts:157
 
@@ -841,7 +842,7 @@ Defined in node_modules/@types/node/stream.d.ts:157
 
 *Inherited from [CountingWritable](countingwritable.md).[on](countingwritable.md#on)*
 
-*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
 Defined in node_modules/@types/node/stream.d.ts:158
 
@@ -865,7 +866,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[on](countingwritable.md#on)*
 
-*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
 Defined in node_modules/@types/node/stream.d.ts:159
 
@@ -889,7 +890,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[on](countingwritable.md#on)*
 
-*Overrides [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
 Defined in node_modules/@types/node/stream.d.ts:160
 
@@ -917,7 +918,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#once)*
 
-*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
 Defined in node_modules/@types/node/stream.d.ts:162
 
@@ -935,7 +936,7 @@ Defined in node_modules/@types/node/stream.d.ts:162
 
 *Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#once)*
 
-*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
 Defined in node_modules/@types/node/stream.d.ts:163
 
@@ -953,7 +954,7 @@ Defined in node_modules/@types/node/stream.d.ts:163
 
 *Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#once)*
 
-*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
 Defined in node_modules/@types/node/stream.d.ts:164
 
@@ -977,7 +978,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#once)*
 
-*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
 Defined in node_modules/@types/node/stream.d.ts:165
 
@@ -995,7 +996,7 @@ Defined in node_modules/@types/node/stream.d.ts:165
 
 *Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#once)*
 
-*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
 Defined in node_modules/@types/node/stream.d.ts:166
 
@@ -1019,7 +1020,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#once)*
 
-*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
 Defined in node_modules/@types/node/stream.d.ts:167
 
@@ -1043,7 +1044,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#once)*
 
-*Overrides [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
 Defined in node_modules/@types/node/stream.d.ts:168
 
@@ -1094,7 +1095,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[prependListener](countingwritable.md#prependlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:170
 
@@ -1112,7 +1113,7 @@ Defined in node_modules/@types/node/stream.d.ts:170
 
 *Inherited from [CountingWritable](countingwritable.md).[prependListener](countingwritable.md#prependlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:171
 
@@ -1130,7 +1131,7 @@ Defined in node_modules/@types/node/stream.d.ts:171
 
 *Inherited from [CountingWritable](countingwritable.md).[prependListener](countingwritable.md#prependlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:172
 
@@ -1154,7 +1155,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[prependListener](countingwritable.md#prependlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:173
 
@@ -1172,7 +1173,7 @@ Defined in node_modules/@types/node/stream.d.ts:173
 
 *Inherited from [CountingWritable](countingwritable.md).[prependListener](countingwritable.md#prependlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:174
 
@@ -1196,7 +1197,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[prependListener](countingwritable.md#prependlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:175
 
@@ -1220,7 +1221,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[prependListener](countingwritable.md#prependlistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:176
 
@@ -1248,7 +1249,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[prependOnceListener](countingwritable.md#prependoncelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:178
 
@@ -1266,7 +1267,7 @@ Defined in node_modules/@types/node/stream.d.ts:178
 
 *Inherited from [CountingWritable](countingwritable.md).[prependOnceListener](countingwritable.md#prependoncelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:179
 
@@ -1284,7 +1285,7 @@ Defined in node_modules/@types/node/stream.d.ts:179
 
 *Inherited from [CountingWritable](countingwritable.md).[prependOnceListener](countingwritable.md#prependoncelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:180
 
@@ -1308,7 +1309,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[prependOnceListener](countingwritable.md#prependoncelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:181
 
@@ -1326,7 +1327,7 @@ Defined in node_modules/@types/node/stream.d.ts:181
 
 *Inherited from [CountingWritable](countingwritable.md).[prependOnceListener](countingwritable.md#prependoncelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:182
 
@@ -1350,7 +1351,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[prependOnceListener](countingwritable.md#prependoncelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:183
 
@@ -1374,7 +1375,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[prependOnceListener](countingwritable.md#prependoncelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:184
 
@@ -1400,9 +1401,9 @@ ___
 
 ▸ **rawListeners**(`event`: string | symbol): *Function[]*
 
-*Inherited from [CountingWritable](countingwritable.md).[rawListeners](countingwritable.md#rawlisteners)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[rawListeners](../interfaces/sparsereadable.md#rawlisteners)*
 
-Defined in node_modules/@types/node/events.d.ts:31
+Defined in node_modules/@types/node/globals.d.ts:563
 
 **Parameters:**
 
@@ -1418,9 +1419,9 @@ ___
 
 ▸ **removeAllListeners**(`event?`: string | symbol): *this*
 
-*Inherited from [CountingWritable](countingwritable.md).[removeAllListeners](countingwritable.md#removealllisteners)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[removeAllListeners](../interfaces/sparsereadable.md#removealllisteners)*
 
-Defined in node_modules/@types/node/events.d.ts:27
+Defined in node_modules/@types/node/globals.d.ts:559
 
 **Parameters:**
 
@@ -1438,7 +1439,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[removeListener](countingwritable.md#removelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:186
 
@@ -1456,7 +1457,7 @@ Defined in node_modules/@types/node/stream.d.ts:186
 
 *Inherited from [CountingWritable](countingwritable.md).[removeListener](countingwritable.md#removelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:187
 
@@ -1474,7 +1475,7 @@ Defined in node_modules/@types/node/stream.d.ts:187
 
 *Inherited from [CountingWritable](countingwritable.md).[removeListener](countingwritable.md#removelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:188
 
@@ -1498,7 +1499,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[removeListener](countingwritable.md#removelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:189
 
@@ -1516,7 +1517,7 @@ Defined in node_modules/@types/node/stream.d.ts:189
 
 *Inherited from [CountingWritable](countingwritable.md).[removeListener](countingwritable.md#removelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:190
 
@@ -1540,7 +1541,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[removeListener](countingwritable.md#removelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:191
 
@@ -1564,7 +1565,7 @@ Name | Type |
 
 *Inherited from [CountingWritable](countingwritable.md).[removeListener](countingwritable.md#removelistener)*
 
-*Overrides [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
 Defined in node_modules/@types/node/stream.d.ts:192
 
@@ -1608,9 +1609,9 @@ ___
 
 ▸ **setMaxListeners**(`n`: number): *this*
 
-*Inherited from [CountingWritable](countingwritable.md).[setMaxListeners](countingwritable.md#setmaxlisteners)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[setMaxListeners](../interfaces/sparsereadable.md#setmaxlisteners)*
 
-Defined in node_modules/@types/node/events.d.ts:28
+Defined in node_modules/@types/node/globals.d.ts:560
 
 **Parameters:**
 
@@ -1673,7 +1674,7 @@ ___
 
 ▸ **writeBuffer**(`buffer`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer), `position`: number): *Promise‹void›*
 
-*Defined in [lib/block-write-stream.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/block-write-stream.ts#L55)*
+*Defined in [lib/block-write-stream.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/block-write-stream.ts#L55)*
 
 **Parameters:**
 
@@ -1704,3 +1705,24 @@ Name | Type |
 `event` | string &#124; symbol |
 
 **Returns:** *number*
+
+___
+
+### `Static` once
+
+▸ **once**(`emitter`: NodeEventTarget, `event`: string | symbol): *Promise‹any[]›*
+
+*Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#static-once)*
+
+*Overrides [CountingWritable](countingwritable.md).[once](countingwritable.md#static-once)*
+
+Defined in node_modules/@types/node/events.d.ts:13
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`emitter` | NodeEventTarget |
+`event` | string &#124; symbol |
+
+**Returns:** *Promise‹any[]›*

@@ -108,7 +108,7 @@
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[BYTES_PER_ELEMENT](alignedlockablebuffer.md#readonly-bytes_per_element)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2030
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2042
 
 The size in bytes of each element in the array.
 
@@ -176,7 +176,7 @@ ___
 
 • **alignment**: *number*
 
-*Defined in [lib/aligned-lockable-buffer.ts:5](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/aligned-lockable-buffer.ts#L5)*
+*Defined in [lib/aligned-lockable-buffer.ts:5](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/aligned-lockable-buffer.ts#L5)*
 
 ___
 
@@ -186,7 +186,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[buffer](alignedlockablebuffer.md#readonly-buffer)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2035
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2047
 
 The ArrayBuffer instance referenced by the array.
 
@@ -198,7 +198,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[byteLength](alignedlockablebuffer.md#readonly-bytelength)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2040
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2052
 
 The length in bytes of the array.
 
@@ -210,7 +210,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[byteOffset](alignedlockablebuffer.md#readonly-byteoffset)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2045
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2057
 
 The offset in bytes of the array.
 
@@ -232,7 +232,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[length](alignedlockablebuffer.md#readonly-length)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2144
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2156
 
 The length of the array.
 
@@ -242,7 +242,7 @@ ___
 
 • **lock**: *function*
 
-*Defined in [lib/aligned-lockable-buffer.ts:6](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/aligned-lockable-buffer.ts#L6)*
+*Defined in [lib/aligned-lockable-buffer.ts:6](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/aligned-lockable-buffer.ts#L6)*
 
 #### Type declaration:
 
@@ -254,7 +254,7 @@ ___
 
 • **rlock**: *function*
 
-*Defined in [lib/aligned-lockable-buffer.ts:7](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/aligned-lockable-buffer.ts#L7)*
+*Defined in [lib/aligned-lockable-buffer.ts:7](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/aligned-lockable-buffer.ts#L7)*
 
 #### Type declaration:
 
@@ -268,7 +268,7 @@ ___
 
 *Overrides void*
 
-*Defined in [lib/aligned-lockable-buffer.ts:8](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/aligned-lockable-buffer.ts#L8)*
+*Defined in [lib/aligned-lockable-buffer.ts:8](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/aligned-lockable-buffer.ts#L8)*
 
 #### Type declaration:
 
@@ -332,7 +332,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[copyWithin](alignedlockablebuffer.md#copywithin)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2056
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2068
 
 Returns the this object after copying a section of the array identified by start and end
 to the same array starting at position target
@@ -385,7 +385,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[every](alignedlockablebuffer.md#every)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2066
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2078
 
 Determines whether all the members of an array satisfy the specified test.
 
@@ -444,7 +444,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[filter](alignedlockablebuffer.md#filter)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2085
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2097
 
 Returns the elements of an array that meet the condition specified in a callback function.
 
@@ -480,7 +480,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[find](alignedlockablebuffer.md#find)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2096
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2108
 
 Returns the value of the first element in the array where predicate is true, and undefined
 otherwise.
@@ -518,7 +518,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[findIndex](alignedlockablebuffer.md#findindex)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2107
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2119
 
 Returns the index of the first element in the array where predicate is true, and -1
 otherwise.
@@ -556,7 +556,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[forEach](alignedlockablebuffer.md#foreach)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2116
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2128
 
 Performs the specified action for each element in an array.
 
@@ -634,7 +634,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[join](alignedlockablebuffer.md#join)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2131
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2143
 
 Adds all the elements of an array separated by the specified separator string.
 
@@ -688,7 +688,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[map](alignedlockablebuffer.md#map)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2154
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2166
 
 Calls a defined callback function on each element of an array, and returns an array that
 contains the results.
@@ -1071,7 +1071,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[reduce](alignedlockablebuffer.md#reduce)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2166
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2178
 
 Calls the specified callback function for all the elements in an array. The return value of
 the callback function is the accumulated result, and is provided as an argument in the next
@@ -1101,7 +1101,7 @@ Name | Type |
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[reduce](alignedlockablebuffer.md#reduce)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2167
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2179
 
 **Parameters:**
 
@@ -1126,7 +1126,7 @@ Name | Type |
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[reduce](alignedlockablebuffer.md#reduce)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2179
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2191
 
 Calls the specified callback function for all the elements in an array. The return value of
 the callback function is the accumulated result, and is provided as an argument in the next
@@ -1170,7 +1170,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[reduceRight](alignedlockablebuffer.md#reduceright)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2191
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2203
 
 Calls the specified callback function for all the elements in an array, in descending order.
 The return value of the callback function is the accumulated result, and is provided as an
@@ -1200,7 +1200,7 @@ Name | Type |
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[reduceRight](alignedlockablebuffer.md#reduceright)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2192
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2204
 
 **Parameters:**
 
@@ -1225,7 +1225,7 @@ Name | Type |
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[reduceRight](alignedlockablebuffer.md#reduceright)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2204
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2216
 
 Calls the specified callback function for all the elements in an array, in descending order.
 The return value of the callback function is the accumulated result, and is provided as an
@@ -1269,7 +1269,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[reverse](alignedlockablebuffer.md#reverse)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2209
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2221
 
 Reverses the elements in an Array.
 
@@ -1283,7 +1283,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[set](alignedlockablebuffer.md#set)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2216
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2228
 
 Sets a value or an array of values.
 
@@ -1304,7 +1304,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[some](alignedlockablebuffer.md#some)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2233
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2245
 
 Determines whether the specified callback function returns true for any element of an array.
 
@@ -1341,7 +1341,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[sort](alignedlockablebuffer.md#sort)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2244
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2256
 
 Sorts an array.
 
@@ -1361,7 +1361,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[subarray](alignedlockablebuffer.md#subarray)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2252
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2264
 
 Gets a new Uint8Array view of the ArrayBuffer store for this array, referencing the elements
 at begin, inclusive, up to end, exclusive.
@@ -1435,7 +1435,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[toLocaleString](alignedlockablebuffer.md#tolocalestring)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2257
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2269
 
 Converts a number to a string by using the current locale.
 
@@ -1471,7 +1471,7 @@ ___
 
 *Inherited from [AlignedLockableBuffer](alignedlockablebuffer.md).[valueOf](alignedlockablebuffer.md#valueof)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2265
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2277
 
 Returns the primitive value of the specified object.
 

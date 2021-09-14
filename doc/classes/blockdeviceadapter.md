@@ -48,6 +48,7 @@
 * [start](blockdeviceadapter.md#start)
 * [stop](blockdeviceadapter.md#stop)
 * [listenerCount](blockdeviceadapter.md#static-listenercount)
+* [once](blockdeviceadapter.md#static-once)
 
 ## Constructors
 
@@ -55,7 +56,9 @@
 
 \+ **new BlockDeviceAdapter**(`__namedParameters`: object): *[BlockDeviceAdapter](blockdeviceadapter.md)*
 
-*Defined in [lib/scanner/adapters/block-device.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/block-device.ts#L71)*
+*Overrides [Verifier](verifier.md).[constructor](verifier.md#constructor)*
+
+*Defined in [lib/scanner/adapters/block-device.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/block-device.ts#L71)*
 
 **Parameters:**
 
@@ -76,7 +79,7 @@ Name | Type | Default |
 
 • **drives**: *Map‹string, [BlockDevice](blockdevice.md)›* = new Map()
 
-*Defined in [lib/scanner/adapters/block-device.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/block-device.ts#L69)*
+*Defined in [lib/scanner/adapters/block-device.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/block-device.ts#L69)*
 
 ___
 
@@ -84,7 +87,7 @@ ___
 
 • **includeSystemDrives**: *function*
 
-*Defined in [lib/scanner/adapters/block-device.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/block-device.ts#L65)*
+*Defined in [lib/scanner/adapters/block-device.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/block-device.ts#L65)*
 
 #### Type declaration:
 
@@ -96,7 +99,7 @@ ___
 
 • **oDirect**: *boolean*
 
-*Defined in [lib/scanner/adapters/block-device.ts:68](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/block-device.ts#L68)*
+*Defined in [lib/scanner/adapters/block-device.ts:68](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/block-device.ts#L68)*
 
 ___
 
@@ -104,7 +107,7 @@ ___
 
 • **oWrite**: *boolean*
 
-*Defined in [lib/scanner/adapters/block-device.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/block-device.ts#L67)*
+*Defined in [lib/scanner/adapters/block-device.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/block-device.ts#L67)*
 
 ___
 
@@ -112,7 +115,7 @@ ___
 
 • **ready**: *boolean* = false
 
-*Defined in [lib/scanner/adapters/block-device.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/block-device.ts#L71)*
+*Defined in [lib/scanner/adapters/block-device.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/block-device.ts#L71)*
 
 ___
 
@@ -120,7 +123,7 @@ ___
 
 • **running**: *boolean* = false
 
-*Defined in [lib/scanner/adapters/block-device.ts:70](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/block-device.ts#L70)*
+*Defined in [lib/scanner/adapters/block-device.ts:70](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/block-device.ts#L70)*
 
 ___
 
@@ -128,7 +131,7 @@ ___
 
 • **unmountOnSuccess**: *boolean*
 
-*Defined in [lib/scanner/adapters/block-device.ts:66](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/block-device.ts#L66)*
+*Defined in [lib/scanner/adapters/block-device.ts:66](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/block-device.ts#L66)*
 
 ___
 
@@ -138,7 +141,7 @@ ___
 
 *Inherited from [CountingWritable](countingwritable.md).[defaultMaxListeners](countingwritable.md#static-defaultmaxlisteners)*
 
-Defined in node_modules/@types/node/events.d.ts:18
+Defined in node_modules/@types/node/events.d.ts:20
 
 ## Methods
 
@@ -146,11 +149,9 @@ Defined in node_modules/@types/node/events.d.ts:18
 
 ▸ **addListener**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [SourceSource](sourcesource.md).[addListener](sourcesource.md#addlistener)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
 
-*Overrides [SparseReadable](../interfaces/sparsereadable.md).[addListener](../interfaces/sparsereadable.md#addlistener)*
-
-Defined in node_modules/@types/node/events.d.ts:20
+Defined in node_modules/@types/node/globals.d.ts:554
 
 **Parameters:**
 
@@ -174,11 +175,9 @@ ___
 
 ▸ **emit**(`event`: string | symbol, ...`args`: any[]): *boolean*
 
-*Inherited from [SourceSource](sourcesource.md).[emit](sourcesource.md#emit)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
 
-*Overrides [SparseReadable](../interfaces/sparsereadable.md).[emit](../interfaces/sparsereadable.md#emit)*
-
-Defined in node_modules/@types/node/events.d.ts:32
+Defined in node_modules/@types/node/globals.d.ts:564
 
 **Parameters:**
 
@@ -195,11 +194,9 @@ ___
 
 ▸ **eventNames**(): *Array‹string | symbol›*
 
-*Inherited from [CountingWritable](countingwritable.md).[eventNames](countingwritable.md#eventnames)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[eventNames](../interfaces/sparsereadable.md#eventnames)*
 
-*Overrides [SparseReadable](../interfaces/sparsereadable.md).[eventNames](../interfaces/sparsereadable.md#eventnames)*
-
-Defined in node_modules/@types/node/events.d.ts:33
+Defined in node_modules/@types/node/globals.d.ts:569
 
 **Returns:** *Array‹string | symbol›*
 
@@ -209,11 +206,9 @@ ___
 
 ▸ **getMaxListeners**(): *number*
 
-*Inherited from [CountingWritable](countingwritable.md).[getMaxListeners](countingwritable.md#getmaxlisteners)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[getMaxListeners](../interfaces/sparsereadable.md#getmaxlisteners)*
 
-*Overrides [SparseReadable](../interfaces/sparsereadable.md).[getMaxListeners](../interfaces/sparsereadable.md#getmaxlisteners)*
-
-Defined in node_modules/@types/node/events.d.ts:29
+Defined in node_modules/@types/node/globals.d.ts:561
 
 **Returns:** *number*
 
@@ -223,7 +218,7 @@ ___
 
 ▸ **listDrives**(): *Promise‹Map‹string, [DrivelistDrive](../interfaces/drivelistdrive.md)››*
 
-*Defined in [lib/scanner/adapters/block-device.ts:137](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/block-device.ts#L137)*
+*Defined in [lib/scanner/adapters/block-device.ts:137](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/block-device.ts#L137)*
 
 **Returns:** *Promise‹Map‹string, [DrivelistDrive](../interfaces/drivelistdrive.md)››*
 
@@ -233,11 +228,9 @@ ___
 
 ▸ **listenerCount**(`type`: string | symbol): *number*
 
-*Inherited from [CountingWritable](countingwritable.md).[listenerCount](countingwritable.md#static-listenercount)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[listenerCount](../interfaces/sparsereadable.md#listenercount)*
 
-*Overrides [SparseReadable](../interfaces/sparsereadable.md).[listenerCount](../interfaces/sparsereadable.md#listenercount)*
-
-Defined in node_modules/@types/node/events.d.ts:34
+Defined in node_modules/@types/node/globals.d.ts:565
 
 **Parameters:**
 
@@ -253,11 +246,9 @@ ___
 
 ▸ **listeners**(`event`: string | symbol): *Function[]*
 
-*Inherited from [CountingWritable](countingwritable.md).[listeners](countingwritable.md#listeners)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[listeners](../interfaces/sparsereadable.md#listeners)*
 
-*Overrides [SparseReadable](../interfaces/sparsereadable.md).[listeners](../interfaces/sparsereadable.md#listeners)*
-
-Defined in node_modules/@types/node/events.d.ts:30
+Defined in node_modules/@types/node/globals.d.ts:562
 
 **Parameters:**
 
@@ -273,11 +264,9 @@ ___
 
 ▸ **off**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [CountingWritable](countingwritable.md).[off](countingwritable.md#off)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[off](../interfaces/sparsereadable.md#off)*
 
-*Overrides [SparseReadable](../interfaces/sparsereadable.md).[off](../interfaces/sparsereadable.md#off)*
-
-Defined in node_modules/@types/node/events.d.ts:26
+Defined in node_modules/@types/node/globals.d.ts:558
 
 **Parameters:**
 
@@ -301,11 +290,9 @@ ___
 
 ▸ **on**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [SourceSource](sourcesource.md).[on](sourcesource.md#on)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
 
-*Overrides [SparseReadable](../interfaces/sparsereadable.md).[on](../interfaces/sparsereadable.md#on)*
-
-Defined in node_modules/@types/node/events.d.ts:21
+Defined in node_modules/@types/node/globals.d.ts:555
 
 **Parameters:**
 
@@ -329,11 +316,9 @@ ___
 
 ▸ **once**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [SourceSource](sourcesource.md).[once](sourcesource.md#once)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
 
-*Overrides [SparseReadable](../interfaces/sparsereadable.md).[once](../interfaces/sparsereadable.md#once)*
-
-Defined in node_modules/@types/node/events.d.ts:22
+Defined in node_modules/@types/node/globals.d.ts:556
 
 **Parameters:**
 
@@ -357,11 +342,9 @@ ___
 
 ▸ **prependListener**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [SourceSource](sourcesource.md).[prependListener](sourcesource.md#prependlistener)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
 
-*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependListener](../interfaces/sparsereadable.md#prependlistener)*
-
-Defined in node_modules/@types/node/events.d.ts:23
+Defined in node_modules/@types/node/globals.d.ts:567
 
 **Parameters:**
 
@@ -385,11 +368,9 @@ ___
 
 ▸ **prependOnceListener**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [SourceSource](sourcesource.md).[prependOnceListener](sourcesource.md#prependoncelistener)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
 
-*Overrides [SparseReadable](../interfaces/sparsereadable.md).[prependOnceListener](../interfaces/sparsereadable.md#prependoncelistener)*
-
-Defined in node_modules/@types/node/events.d.ts:24
+Defined in node_modules/@types/node/globals.d.ts:568
 
 **Parameters:**
 
@@ -413,11 +394,9 @@ ___
 
 ▸ **rawListeners**(`event`: string | symbol): *Function[]*
 
-*Inherited from [CountingWritable](countingwritable.md).[rawListeners](countingwritable.md#rawlisteners)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[rawListeners](../interfaces/sparsereadable.md#rawlisteners)*
 
-*Overrides [SparseReadable](../interfaces/sparsereadable.md).[rawListeners](../interfaces/sparsereadable.md#rawlisteners)*
-
-Defined in node_modules/@types/node/events.d.ts:31
+Defined in node_modules/@types/node/globals.d.ts:563
 
 **Parameters:**
 
@@ -433,11 +412,9 @@ ___
 
 ▸ **removeAllListeners**(`event?`: string | symbol): *this*
 
-*Inherited from [CountingWritable](countingwritable.md).[removeAllListeners](countingwritable.md#removealllisteners)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[removeAllListeners](../interfaces/sparsereadable.md#removealllisteners)*
 
-*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeAllListeners](../interfaces/sparsereadable.md#removealllisteners)*
-
-Defined in node_modules/@types/node/events.d.ts:27
+Defined in node_modules/@types/node/globals.d.ts:559
 
 **Parameters:**
 
@@ -453,11 +430,9 @@ ___
 
 ▸ **removeListener**(`event`: string | symbol, `listener`: function): *this*
 
-*Inherited from [SourceSource](sourcesource.md).[removeListener](sourcesource.md#removelistener)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
 
-*Overrides [SparseReadable](../interfaces/sparsereadable.md).[removeListener](../interfaces/sparsereadable.md#removelistener)*
-
-Defined in node_modules/@types/node/events.d.ts:25
+Defined in node_modules/@types/node/globals.d.ts:557
 
 **Parameters:**
 
@@ -481,7 +456,7 @@ ___
 
 ▸ **scan**(): *Promise‹void›*
 
-*Defined in [lib/scanner/adapters/block-device.ts:113](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/block-device.ts#L113)*
+*Defined in [lib/scanner/adapters/block-device.ts:113](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/block-device.ts#L113)*
 
 **Returns:** *Promise‹void›*
 
@@ -491,7 +466,7 @@ ___
 
 ▸ **scanLoop**(): *Promise‹void›*
 
-*Defined in [lib/scanner/adapters/block-device.ts:102](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/block-device.ts#L102)*
+*Defined in [lib/scanner/adapters/block-device.ts:102](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/block-device.ts#L102)*
 
 **Returns:** *Promise‹void›*
 
@@ -501,11 +476,9 @@ ___
 
 ▸ **setMaxListeners**(`n`: number): *this*
 
-*Inherited from [CountingWritable](countingwritable.md).[setMaxListeners](countingwritable.md#setmaxlisteners)*
+*Inherited from [SparseReadable](../interfaces/sparsereadable.md).[setMaxListeners](../interfaces/sparsereadable.md#setmaxlisteners)*
 
-*Overrides [SparseReadable](../interfaces/sparsereadable.md).[setMaxListeners](../interfaces/sparsereadable.md#setmaxlisteners)*
-
-Defined in node_modules/@types/node/events.d.ts:28
+Defined in node_modules/@types/node/globals.d.ts:560
 
 **Parameters:**
 
@@ -523,7 +496,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[start](adapter.md#abstract-start)*
 
-*Defined in [lib/scanner/adapters/block-device.ts:91](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/block-device.ts#L91)*
+*Defined in [lib/scanner/adapters/block-device.ts:91](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/block-device.ts#L91)*
 
 **Returns:** *void*
 
@@ -535,7 +508,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[stop](adapter.md#abstract-stop)*
 
-*Defined in [lib/scanner/adapters/block-device.ts:96](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/scanner/adapters/block-device.ts#L96)*
+*Defined in [lib/scanner/adapters/block-device.ts:96](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/block-device.ts#L96)*
 
 **Returns:** *void*
 
@@ -559,3 +532,37 @@ Name | Type |
 `event` | string &#124; symbol |
 
 **Returns:** *number*
+
+___
+
+### `Static` once
+
+▸ **once**(`emitter`: NodeEventTarget, `event`: string | symbol): *Promise‹any[]›*
+
+*Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#static-once)*
+
+Defined in node_modules/@types/node/events.d.ts:13
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`emitter` | NodeEventTarget |
+`event` | string &#124; symbol |
+
+**Returns:** *Promise‹any[]›*
+
+▸ **once**(`emitter`: DOMEventTarget, `event`: string): *Promise‹any[]›*
+
+*Inherited from [CountingWritable](countingwritable.md).[once](countingwritable.md#static-once)*
+
+Defined in node_modules/@types/node/events.d.ts:14
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`emitter` | DOMEventTarget |
+`event` | string |
+
+**Returns:** *Promise‹any[]›*

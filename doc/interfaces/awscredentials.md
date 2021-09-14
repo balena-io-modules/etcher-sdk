@@ -20,7 +20,7 @@
 
 • **accessKeyId**: *string*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/balena-s3-source.ts#L36)*
+*Defined in [lib/source-destination/balena-s3-source.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/balena-s3-source.ts#L36)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **secretAccessKey**: *string*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/balena-s3-source.ts#L37)*
+*Defined in [lib/source-destination/balena-s3-source.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/balena-s3-source.ts#L37)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **sessionToken**? : *undefined | string*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/balena-s3-source.ts#L38)*
+*Defined in [lib/source-destination/balena-s3-source.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/balena-s3-source.ts#L38)*

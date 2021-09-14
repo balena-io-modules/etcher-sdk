@@ -26,7 +26,7 @@
 
 • **awsCredentials**? : *[AwsCredentials](awscredentials.md)*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/balena-s3-source.ts#L48)*
+*Defined in [lib/source-destination/balena-s3-source.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/balena-s3-source.ts#L48)*
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 • **bucket**: *string*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/balena-s3-source.ts#L43)*
+*Defined in [lib/source-destination/balena-s3-source.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/balena-s3-source.ts#L43)*
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 • **buildId**: *string*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/balena-s3-source.ts#L46)*
+*Defined in [lib/source-destination/balena-s3-source.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/balena-s3-source.ts#L46)*
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 • **deviceType**: *string*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/balena-s3-source.ts#L45)*
+*Defined in [lib/source-destination/balena-s3-source.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/balena-s3-source.ts#L45)*
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 • **host**: *string*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/balena-s3-source.ts#L42)*
+*Defined in [lib/source-destination/balena-s3-source.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/balena-s3-source.ts#L42)*
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 • **prefix**? : *undefined | string*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/balena-s3-source.ts#L44)*
+*Defined in [lib/source-destination/balena-s3-source.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/balena-s3-source.ts#L44)*
 
 ___
 
@@ -74,4 +74,4 @@ ___
 
 • **release**? : *undefined | string*
 
-*Defined in [lib/source-destination/balena-s3-source.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/balena-s3-source.ts#L47)*
+*Defined in [lib/source-destination/balena-s3-source.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/balena-s3-source.ts#L47)*

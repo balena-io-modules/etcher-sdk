@@ -40,7 +40,7 @@
 
 • **blockMap**? : *BlockMap*
 
-*Defined in [lib/source-destination/metadata.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L28)*
+*Defined in [lib/source-destination/metadata.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L28)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • **blockmappedSize**? : *undefined | number*
 
-*Defined in [lib/source-destination/metadata.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L26)*
+*Defined in [lib/source-destination/metadata.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L26)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • **blocks**? : *[BlocksWithChecksum](blockswithchecksum.md)[]*
 
-*Defined in [lib/source-destination/metadata.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L29)*
+*Defined in [lib/source-destination/metadata.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L29)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 • **bytesToZeroOutFromTheBeginning**? : *undefined | number*
 
-*Defined in [lib/source-destination/metadata.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L32)*
+*Defined in [lib/source-destination/metadata.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L32)*
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 • **checksum**? : *undefined | string*
 
-*Defined in [lib/source-destination/metadata.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L33)*
+*Defined in [lib/source-destination/metadata.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L33)*
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 • **checksumType**? : *undefined | string*
 
-*Defined in [lib/source-destination/metadata.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L34)*
+*Defined in [lib/source-destination/metadata.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L34)*
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 • **compressedSize**? : *undefined | number*
 
-*Defined in [lib/source-destination/metadata.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L25)*
+*Defined in [lib/source-destination/metadata.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L25)*
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 • **format**? : *"zip" | "gzip"*
 
-*Defined in [lib/source-destination/metadata.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L44)*
+*Defined in [lib/source-destination/metadata.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L44)*
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 • **instructions**? : *undefined | string*
 
-*Defined in [lib/source-destination/metadata.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L30)*
+*Defined in [lib/source-destination/metadata.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L30)*
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 • **isCompressed**? : *undefined | false | true*
 
-*Defined in [lib/source-destination/metadata.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L24)*
+*Defined in [lib/source-destination/metadata.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L24)*
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 • **isEtch**? : *undefined | false | true*
 
-*Defined in [lib/source-destination/metadata.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L40)*
+*Defined in [lib/source-destination/metadata.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L40)*
 
 ___
 
@@ -128,7 +128,7 @@ ___
 
 • **isSizeEstimated**? : *undefined | false | true*
 
-*Defined in [lib/source-destination/metadata.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L23)*
+*Defined in [lib/source-destination/metadata.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L23)*
 
 ___
 
@@ -136,7 +136,7 @@ ___
 
 • **lastModified**? : *Date*
 
-*Defined in [lib/source-destination/metadata.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L43)*
+*Defined in [lib/source-destination/metadata.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L43)*
 
 ___
 
@@ -144,7 +144,7 @@ ___
 
 • **logo**? : *undefined | string*
 
-*Defined in [lib/source-destination/metadata.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L31)*
+*Defined in [lib/source-destination/metadata.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L31)*
 
 ___
 
@@ -152,7 +152,7 @@ ___
 
 • **name**? : *undefined | string*
 
-*Defined in [lib/source-destination/metadata.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L27)*
+*Defined in [lib/source-destination/metadata.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L27)*
 
 ___
 
@@ -160,7 +160,7 @@ ___
 
 • **osVersion**? : *undefined | string*
 
-*Defined in [lib/source-destination/metadata.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L42)*
+*Defined in [lib/source-destination/metadata.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L42)*
 
 ___
 
@@ -168,7 +168,7 @@ ___
 
 • **recommendedDriveSize**? : *undefined | number*
 
-*Defined in [lib/source-destination/metadata.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L35)*
+*Defined in [lib/source-destination/metadata.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L35)*
 
 ___
 
@@ -176,7 +176,7 @@ ___
 
 • **releaseNotesUrl**? : *undefined | string*
 
-*Defined in [lib/source-destination/metadata.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L36)*
+*Defined in [lib/source-destination/metadata.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L36)*
 
 ___
 
@@ -184,7 +184,7 @@ ___
 
 • **size**? : *undefined | number*
 
-*Defined in [lib/source-destination/metadata.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L22)*
+*Defined in [lib/source-destination/metadata.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L22)*
 
 ___
 
@@ -192,7 +192,7 @@ ___
 
 • **supervisorVersion**? : *undefined | string*
 
-*Defined in [lib/source-destination/metadata.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L41)*
+*Defined in [lib/source-destination/metadata.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L41)*
 
 ___
 
@@ -200,7 +200,7 @@ ___
 
 • **supportUrl**? : *undefined | string*
 
-*Defined in [lib/source-destination/metadata.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L37)*
+*Defined in [lib/source-destination/metadata.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L37)*
 
 ___
 
@@ -208,7 +208,7 @@ ___
 
 • **url**? : *undefined | string*
 
-*Defined in [lib/source-destination/metadata.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L38)*
+*Defined in [lib/source-destination/metadata.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L38)*
 
 ___
 
@@ -216,4 +216,4 @@ ___
 
 • **version**? : *undefined | string*
 
-*Defined in [lib/source-destination/metadata.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/de39ec2/lib/source-destination/metadata.ts#L39)*
+*Defined in [lib/source-destination/metadata.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/metadata.ts#L39)*
