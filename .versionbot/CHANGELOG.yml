@@ -1,4 +1,15 @@
 - commits:
+    - subject: 'patch: Fix missing optional dependency'
+      hash: c490c844d335db43caabb482cf2daeca9da9ea79
+      body: ''
+      footer:
+        Signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+        signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+      author: Lorenzo Alberto Maria Ambrosi
+      nested: []
+  version: 6.2.4
+  date: 2021-09-15T12:33:51.057Z
+- commits:
     - subject: 'patch: Prettify files'
       hash: c4664b2d23317578434a520ec8f46f8a3cc608c4
       body: ''
