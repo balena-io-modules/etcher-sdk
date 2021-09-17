@@ -1,4 +1,15 @@
 - commits:
+    - subject: 'patch: Fix missing build folder in published package'
+      hash: 3ed838a4549d1514eb6ea7b19a3ba72ab3be9cdf
+      body: ''
+      footer:
+        Signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+        signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+      author: Lorenzo Alberto Maria Ambrosi
+      nested: []
+  version: 6.2.5
+  date: 2021-09-17T08:44:00.400Z
+- commits:
     - subject: 'patch: Fix missing optional dependency'
       hash: c490c844d335db43caabb482cf2daeca9da9ea79
       body: ''
