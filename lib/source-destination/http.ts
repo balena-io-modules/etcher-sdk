@@ -38,6 +38,7 @@ axios.defaults.adapter = axiosNodeAdapter;
 
 export class Http extends SourceDestination {
 	// Only implements reading for now
+	private fileName: string | undefined;
 	private url: string;
 	private redirectUrl: string;
 	private avoidRandomAccess: boolean;
@@ -87,6 +88,10 @@ export class Http extends SourceDestination {
 			if (Number.isNaN(this.size)) {
 				this.size = undefined;
 			}
+			const regExpFilename = /filename="(?<filename>.*)"/;
+			this.fileName =
+				regExpFilename.exec(response.headers['content-disposition'])?.groups
+					?.filename ?? undefined;
 			this.acceptsRange = response.headers['accept-ranges'] === 'bytes';
 		} catch (error) {
 			this.error = error;
@@ -110,14 +115,13 @@ export class Http extends SourceDestination {
 		if (this.error) {
 			throw this.error;
 		}
-		let name;
 		const pathname = parse(this.redirectUrl).pathname;
-		if (pathname !== undefined) {
-			name = basename(unescape(pathname));
+		if (!this.fileName && pathname !== undefined) {
+			this.fileName = basename(unescape(pathname));
 		}
 		return {
 			size: this.size,
-			name,
+			name: this.fileName,
 		};
 	}
 
