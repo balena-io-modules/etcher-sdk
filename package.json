@@ -46,7 +46,7 @@
     "url": "https://github.com/balena-io-modules/etcher-sdk/issues"
   },
   "dependencies": {
-    "@balena/node-beaglebone-usbboot": "^2.0.0-switch-to-node-usb-ec2db4c02be9e60e878302fbb0f9fe13f01bed33",
+    "@balena/node-beaglebone-usbboot": "^2.0.0",
     "@balena/udif": "^1.1.1",
     "@ronomon/direct-io": "^3.0.1",
     "aws4-axios": "^2.0.1",
