@@ -35,7 +35,6 @@ import {
 } from './source-destination';
 
 axios.defaults.adapter = axiosNodeAdapter;
-
 export class Http extends SourceDestination {
 	// Only implements reading for now
 	private url: string;
@@ -137,7 +136,7 @@ export class Http extends SourceDestination {
 		sourceOffset: number,
 	): Promise<ReadResult> {
 		const response = await this.axiosInstance({
-			method: 'get',
+			method: this.axiosInstance.defaults.method || 'get',
 			url: this.redirectUrl,
 			responseType: 'arraybuffer',
 			headers: {
@@ -156,7 +155,7 @@ export class Http extends SourceDestination {
 		end,
 	}: CreateReadStreamOptions = {}): Promise<NodeJS.ReadableStream> {
 		const response = await this.axiosInstance({
-			method: 'get',
+			method: this.axiosInstance.defaults.method || 'get',
 			url: this.redirectUrl,
 			headers: {
 				Range: this.getRange(start, end),
