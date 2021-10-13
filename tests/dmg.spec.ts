@@ -33,7 +33,7 @@ describe('dmg support', function () {
 		'raw',
 		'adc',
 		'zlib',
-		'bz2',
+		// 'bz2',
 		// NOTE: Skipped, as LZFSE is not supported by `udif` module yet
 		// 'lzfse',
 	];

@@ -17,3 +17,18 @@ npm:
       node_versions:
         - "10"
         - "12"
+    # - name: darwin
+    #   os: macos
+    #   packages:
+    #     - libudev-dev
+    #   architecture: x86_64
+    # - name: windows
+    #   os: windows
+    #   packages:
+    #     - libudev-dev
+    #   architecture: x86_64
+    # - name: windows
+    #   os: windows
+    #   packages:
+    #     - libudev-dev
+    #   architecture: x86
