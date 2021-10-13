@@ -1,4 +1,44 @@
 - commits:
+    - subject: 'patch: Add cross-platform test'
+      hash: da3852c57cb77e8640d1f37a7c5edd065c45ecfb
+      body: ''
+      footer:
+        Signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+        signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+      author: Lorenzo Alberto Maria Ambrosi
+      nested: []
+    - subject: 'minor: Temporarily disable bz2 tests'
+      hash: 4bf9a9373e797ebda9a5ba7c053f35b142a1dbc3
+      body: ''
+      footer:
+        Signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+        signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+      author: Lorenzo Alberto Maria Ambrosi
+      nested: []
+    - subject: 'Fix Http requests methods, allow to override it'
+      hash: ebb6c01641d85d46bf24cb5697dc20487eaefd37
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Andrea Rosci <andrear@balena.io>
+        signed-off-by: Andrea Rosci <andrear@balena.io>
+      author: JSReds
+      nested: []
+    - subject: Add possible alternative fileName to getInfo request
+      hash: 8f3dfd5d3be6b8f44c8b0b3f9364ad7eaa441cee
+      body: |
+        Add possible alternative fileName to getInfo request
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Andrea Rosci <andrear@balena.io>
+        signed-off-by: Andrea Rosci <andrear@balena.io>
+      author: JSReds
+      nested: []
+  version: 6.3.0
+  date: 2021-10-13T13:40:18.208Z
+- commits:
     - subject: 'patch: Fix missing build folder in published package'
       hash: 3ed838a4549d1514eb6ea7b19a3ba72ab3be9cdf
       body: ''
