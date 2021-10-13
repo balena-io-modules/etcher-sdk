@@ -9,6 +9,7 @@ npm:
       node_versions:
         - "10"
         - "12"
+        - "14"
     - name: linux
       os: ubuntu
       packages:
@@ -17,6 +18,7 @@ npm:
       node_versions:
         - "10"
         - "12"
+        - "14"
     # - name: darwin
     #   os: macos
     #   packages:
