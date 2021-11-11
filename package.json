@@ -11,8 +11,8 @@
   ],
   "scripts": {
     "test": "npm run lint && mocha -r ts-node/register tests/**/*.spec.ts",
-    "prettier": "balena-lint --typescript --fix lib typings examples tests",
-    "lint": "balena-lint --typescript lib typings examples tests",
+    "prettier": "balena-lint --fix lib typings examples tests",
+    "lint": "balena-lint lib typings examples tests",
     "build": "tsc",
     "doc": "typedoc --readme none --theme markdown --mode file --out doc lib && npm run sed",
     "sed": "sed -i'.bak' 's|'$(pwd)'||g' $(find doc -type f) && rimraf doc/*.bak doc/**/*.bak",
@@ -45,12 +45,9 @@
   "bugs": {
     "url": "https://github.com/balena-io-modules/etcher-sdk/issues"
   },
-  "optionalDependencies": {
-    "winusb-driver-generator": "^1.2.3"
-  },
   "dependencies": {
-    "@balena/node-beaglebone-usbboot": "^1.0.3",
-    "@balena/udif": "^1.1.1",
+    "@balena/node-beaglebone-usbboot": "^2.0.0",
+    "@balena/udif": "^1.1.2",
     "@ronomon/direct-io": "^3.0.1",
     "aws4-axios": "^2.0.1",
     "axios": "^0.21.1",
@@ -63,18 +60,21 @@
     "file-disk": "^8.0.1",
     "file-type": "^8.0.0",
     "gzip-stream": "^1.1.2",
-    "lzma-native": "^6.0.0",
+    "lzma-native": "git+https://github.com/thundron/lzma-native.git",
     "mountutils": "^1.3.20",
-    "node-raspberrypi-usbboot": "^0.3.0",
+    "node-raspberrypi-usbboot": "^1.0.1",
     "outdent": "^0.7.0",
     "partitioninfo": "^6.0.2",
     "rwmutex": "^1.0.0",
     "tslib": "^2.0.0",
-    "unbzip2-stream": "github:balena-io-modules/unbzip2-stream#4a54f56a25b58950f9e4277c56db2912d62242e7",
+    "unbzip2-stream": "^1.4.2",
     "unzip-stream": "^0.3.0",
     "xxhash-addon": "^1.4.0",
     "yauzl": "^2.9.2",
     "zip-part-stream": "^1.0.3"
+  },
+  "optionalDependencies": {
+    "winusb-driver-generator": "^1.2.7"
   },
   "devDependencies": {
     "@balena/lint": "^5.4.0",
@@ -86,7 +86,7 @@
     "@types/file-type": "^5.2.1",
     "@types/lodash": "^4.14.108",
     "@types/mocha": "^5.2.4",
-    "@types/node": "^10.17.17",
+    "@types/node": "^10.17.60",
     "@types/progress": "^2.0.1",
     "@types/sinon": "^5.0.1",
     "@types/yargs": "^11.0.0",
