@@ -10,6 +10,7 @@ npm:
         - "10"
         - "12"
         - "14"
+        - "16"
     - name: linux
       os: ubuntu
       packages:
@@ -19,6 +20,7 @@ npm:
         - "10"
         - "12"
         - "14"
+        - "16"
     # - name: darwin
     #   os: macos
     #   packages:
