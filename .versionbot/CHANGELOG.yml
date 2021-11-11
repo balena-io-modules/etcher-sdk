@@ -1,4 +1,63 @@
 - commits:
+    - subject: 'patch: Add node16 tests'
+      hash: 2534ac5394b2be250e8f7ec0d893d264dea3f4ea
+      body: ''
+      footer:
+        Signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+        signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+      author: Lorenzo Alberto Maria Ambrosi
+      nested: []
+    - subject: 'patch: Update lzma-native to v8.0.3'
+      hash: 3422b88b4f15e9aced946f9e3fb4cbad23c5cffd
+      body: ''
+      footer:
+        Signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+        signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+      author: Lorenzo Alberto Maria Ambrosi
+      nested: []
+    - subject: 'patch: Add node14 linux tests'
+      hash: 067eedd4a6c0a7cedecca1ab8c7641cc597e8174
+      body: ''
+      footer:
+        Signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+        signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+      author: Lorenzo Alberto Maria Ambrosi
+      nested: []
+    - subject: 'minor: Update @balena/udif from v1.1.1 to v1.1.2'
+      hash: d4170d28329b208a1ccea2bda3d7148599b21fd5
+      body: ''
+      footer:
+        Signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+        signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+      author: Lorenzo Alberto Maria Ambrosi
+      nested: []
+    - subject: 'patch: Bump node-beaglebone-usbboot version'
+      hash: ed8b70c7ad1464bccf738fa0d879d47f6b1a996c
+      body: ''
+      footer:
+        Signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+        signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+      author: Lorenzo Alberto Maria Ambrosi
+      nested: []
+    - subject: 'patch: Update dependencies for new lockfile'
+      hash: ef447bae083bc2b7e0e13d5040aecbe9f9d01a2b
+      body: ''
+      footer:
+        Signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+        signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+      author: Lorenzo Alberto Maria Ambrosi
+      nested: []
+    - subject: 'major: Update usbboot packages for tessel/node-usb'
+      hash: 03394d2e8ec784e64f560e2f5573b07e76ec5e2e
+      body: ''
+      footer:
+        Signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+        signed-off-by: Lorenzo Alberto Maria Ambrosi <lorenzothunder.ambrosi@gmail.com>
+      author: Lorenzo Alberto Maria Ambrosi
+      nested: []
+  version: 7.0.0
+  date: 2021-11-11T20:30:31.398Z
+- commits:
     - subject: 'patch: Add cross-platform test'
       hash: da3852c57cb77e8640d1f37a7c5edd065c45ecfb
       body: ''
