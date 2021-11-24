@@ -23,7 +23,7 @@ export type XXHash = typeof xxhash;
 
 export const getRaspberrypiUsbboot = once(() => {
 	try {
-		return require('node-raspberrypi-usbboot') as typeof import('node-raspberrypi-usbboot');
+	return require('@acst11/node-raspberrypi-usbboot') as typeof import('@acst11/node-raspberrypi-usbboot');
 	} catch (e) {
 		console.warn('Failed to import node-raspberrypi-usbboot:', e);
 	}

@@ -17,7 +17,7 @@
 import {
 	UsbbootDevice,
 	UsbbootScanner as UsbbootScannerType,
-} from 'node-raspberrypi-usbboot';
+	} from '@acst11/node-raspberrypi-usbboot';
 
 import { getRaspberrypiUsbboot } from '../../lazy';
 import { UsbbootDrive } from '../../source-destination/usbboot';

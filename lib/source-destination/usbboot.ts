@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { UsbbootDevice } from 'node-raspberrypi-usbboot';
+ import { UsbbootDevice } from '@acst11/node-raspberrypi-usbboot';
 
 import { AdapterSourceDestination } from '../scanner/adapters/adapter';
 import { SourceDestination } from './source-destination';
