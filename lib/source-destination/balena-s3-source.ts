@@ -99,7 +99,7 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 	}
 
 	public static isESRVersion(buildId: string) {
-		return /^\d{4}\.\d{2}\.\d+\.(dev|prod)$/.test(buildId);
+		return /^\d{4}\.\d{1,2}\.\d+([.+](dev|prod))?$/.test(buildId);
 	}
 
 	private isESR() {
