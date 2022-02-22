@@ -1,4 +1,20 @@
 - commits:
+    - subject: Support detecting unified and semver normalized ESR version schemes
+      hash: eccd93a6bdb5f3852b25d7971a9bbd39ef5b1185
+      body: ""
+      footer:
+        Change-type: minor
+        change-type: minor
+        See: https://www.flowdock.com/app/rulemotion/resin-devices/threads/391mdzJxZ_GI9c7HO7IriZAM0R-
+        see: https://www.flowdock.com/app/rulemotion/resin-devices/threads/391mdzJxZ_GI9c7HO7IriZAM0R-
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested: []
+  version: 7.1.0
+  title: "'Support detecting unified and semver normalized ESR version schemes'"
+  date: 2022-02-22T13:33:33.533Z
+- commits:
     - subject: "package: Update node-raspberrypi-usbboot module"
       hash: c125d90f2ef2c066b44e311a4e5063b359fe2d34
       body: |
