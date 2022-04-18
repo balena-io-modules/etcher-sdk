@@ -1,4 +1,24 @@
 - commits:
+    - subject: "source: add imageType property"
+      hash: e1671e0308327e56a5e0605b14ae283546249917
+      body: |
+        This ties in with modifications to balena-yocto-scripts and balena-img
+        that allows for multiple explicitly labeled image types, such as raw and
+        flasher, to be uploaded with a suffix.
+
+        This change adds the imageType property to BalenaS3Source, which is used
+        by a getter to generate the suffix to retrieve the relevant files.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Joseph Kogut <joseph@balena.io>
+        signed-off-by: Joseph Kogut <joseph@balena.io>
+      author: Joseph Kogut
+      nested: []
+  version: 7.1.1
+  title: "'compressed-source: add imageType property'"
+  date: 2022-04-13T00:59:08.581Z
+- commits:
     - subject: Support detecting unified and semver normalized ESR version schemes
       hash: eccd93a6bdb5f3852b25d7971a9bbd39ef5b1185
       body: ""
