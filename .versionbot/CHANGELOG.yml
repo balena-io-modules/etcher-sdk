@@ -1,4 +1,16 @@
 - commits:
+    - subject: lockfile 2 working
+      hash: 828f191a9b47cdc48b8de58fc3de3f76095e774a
+      body: ""
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Zane Hitchcox
+      nested: []
+  version: 7.2.0
+  title: "'lockfile 2'"
+  date: 2022-04-19T11:51:55.543Z
+- commits:
     - subject: "source: add imageType property"
       hash: e1671e0308327e56a5e0605b14ae283546249917
       body: |
