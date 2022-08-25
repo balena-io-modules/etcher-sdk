@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-import { interact } from 'balena-image-fs';
-import { Disk } from 'file-disk';
-import { getPartitions } from 'partitioninfo';
-import { promisify } from 'util';
+import { interact } from "balena-image-fs";
+import { Disk } from "file-disk";
+import { getPartitions } from "partitioninfo";
+import { promisify } from "util";
 
-import { configure as configureAction } from './operations/configure';
-import { copy as copyAction } from './operations/copy';
+import { configure as configureAction } from "./operations/configure";
+import { copy as copyAction } from "./operations/copy";
 
-import { Dictionary } from '../../utils';
+import { Dictionary } from "../../utils";
 
 export type Partition = number | { primary: number; logical?: number };
 
@@ -33,13 +33,14 @@ export interface FileOnPartition {
 }
 
 export interface CopyOperation {
-	command: 'copy';
+	command: "copy";
 	from: FileOnPartition;
 	to: FileOnPartition;
 	when: Dictionary<string>;
 }
 
 export interface DeviceTypeJSON {
+	arch?: string;
 	configuration: {
 		config: FileOnPartition;
 		operations?: CopyOperation[];
@@ -53,7 +54,7 @@ const MBR_LAST_PRIMARY_PARTITION = 4;
 
 export function shouldRunOperation(
 	options: Dictionary<any>,
-	operation: CopyOperation,
+	operation: CopyOperation
 ): boolean {
 	const when = operation.when ?? {};
 	for (const [key, value] of Object.entries(when)) {
@@ -66,29 +67,29 @@ export function shouldRunOperation(
 
 export function normalizePartition(partition: Partition): number {
 	// New device-type.json partition format: partition index
-	if (typeof partition === 'number') {
+	if (typeof partition === "number") {
 		return partition;
 	}
 	// Old device-type.json partition format: { primary: 4, logical: 1 }
-	if (typeof partition.logical === 'number') {
+	if (typeof partition.logical === "number") {
 		return partition.logical + MBR_LAST_PRIMARY_PARTITION;
 	}
 	// Old device-type.json partition format: { primary: 4 }
-	if (typeof partition.primary === 'number') {
+	if (typeof partition.primary === "number") {
 		return partition.primary;
 	}
 	throw new Error(`Invalid partition: ${partition}`);
 }
 
 async function getDiskDeviceType(
-	disk: Disk,
+	disk: Disk
 ): Promise<DeviceTypeJSON | undefined> {
 	const partitions = await getPartitions(disk);
 	for (const partition of partitions.partitions) {
 		if (partition.type === 14) {
 			const deviceType = await interact(disk, partition.index, async (fs) => {
 				try {
-					return await promisify(fs.readFile)('/device-type.json');
+					return await promisify(fs.readFile)("/device-type.json");
 				} catch (error) {
 					return undefined;
 				}
@@ -102,7 +103,7 @@ async function getDiskDeviceType(
 
 export async function configure(
 	disk: Disk,
-	config?: Dictionary<any>,
+	config?: Dictionary<any>
 ): Promise<void> {
 	const deviceType = await getDiskDeviceType(disk);
 	const operations = deviceType?.configuration?.operations ?? [];
@@ -124,7 +125,7 @@ export async function configure(
 				cpy.from.path,
 				disk,
 				normalizePartition(cpy.to.partition),
-				cpy.to.path,
+				cpy.to.path
 			);
 		}
 	}

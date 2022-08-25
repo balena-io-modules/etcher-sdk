@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { BlockMap } from 'blockmap';
+import { BlockMap } from "blockmap";
 
-import { BlocksWithChecksum } from '../sparse-stream/shared';
+import { BlocksWithChecksum } from "../sparse-stream/shared";
 
 export interface Metadata {
 	size?: number;
@@ -39,7 +39,8 @@ export interface Metadata {
 	version?: string;
 	isEtch?: boolean;
 	supervisorVersion?: string;
+	arch?: string;
 	osVersion?: string;
 	lastModified?: Date;
-	format?: 'zip' | 'gzip';
+	format?: "zip" | "gzip";
 }
