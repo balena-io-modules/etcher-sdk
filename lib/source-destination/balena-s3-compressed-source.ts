@@ -111,24 +111,24 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 		};
 	}
 
-	private async getSupervisorVersion() {
+	public async getSupervisorVersion() {
 		const response = await this.download('VERSION');
 		const lastModified = new Date(response.headers['last-modified']);
 		const supervisorVersion = response.data.trim();
 		return { supervisorVersion, lastModified };
 	}
 
-	private async getOsVersion() {
+	public async getOsVersion() {
 		const response = await this.download('VERSION_HOSTOS');
 		return response.data.trim();
 	}
 
-	private async getImageJSON(): Promise<ImageJSON> {
+	public async getImageJSON(): Promise<ImageJSON> {
 		const imageJSON = (await this.download(`image${this.imageSuffix}.json`)).data;
 		return imageJSON;
 	}
 
-	private async getDeviceTypeJSON(): Promise<DeviceTypeJSON> {
+	public async getDeviceTypeJSON(): Promise<DeviceTypeJSON> {
 		return (await this.download('device-type.json')).data;
 	}
 
