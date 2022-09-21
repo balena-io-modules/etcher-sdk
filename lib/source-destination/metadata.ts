@@ -39,6 +39,7 @@ export interface Metadata {
 	version?: string;
 	isEtch?: boolean;
 	supervisorVersion?: string;
+	arch?: string;
 	osVersion?: string;
 	lastModified?: Date;
 	format?: 'zip' | 'gzip';
