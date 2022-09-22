@@ -1,4 +1,15 @@
 - commits:
+    - subject: add arch in metadata
+      hash: 38136934d916543a7011eb846298608f0b9b2407
+      body: ""
+      footer:
+        change-type: patch
+      author: Edwin Joassart
+      nested: []
+  version: 7.2.1
+  title: "'add arch in metadata'"
+  date: 2022-09-22T19:05:36.462Z
+- commits:
     - subject: lockfile 2 working
       hash: 828f191a9b47cdc48b8de58fc3de3f76095e774a
       body: ""
