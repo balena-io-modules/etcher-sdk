@@ -1,29 +1,29 @@
-import * as CombinedStream from "combined-stream";
-import { BufferDisk } from "file-disk";
+import * as CombinedStream from 'combined-stream';
+import { BufferDisk } from 'file-disk';
 import {
 	createDeflatePart,
 	createGzipFromParts,
 	DEFLATE_END,
-} from "gzip-stream";
-import { Readable } from "stream";
-import * as ZipPartStream from "zip-part-stream";
-import { createInflateRaw } from "zlib";
+} from 'gzip-stream';
+import { Readable } from 'stream';
+import * as ZipPartStream from 'zip-part-stream';
+import { createInflateRaw } from 'zlib';
 
-import { BalenaS3SourceBase, BalenaS3SourceOptions } from "./balena-s3-source";
+import { BalenaS3SourceBase, BalenaS3SourceOptions } from './balena-s3-source';
 import {
 	normalizePartition,
 	shouldRunOperation,
 	DeviceTypeJSON,
 	FileOnPartition,
-} from "./configured-source/configure";
-import { configure } from "./configured-source/operations/configure";
-import { copy } from "./configured-source/operations/copy";
-import { Metadata } from "./metadata";
-import { CreateReadStreamOptions } from "./source-destination";
+} from './configured-source/configure';
+import { configure } from './configured-source/operations/configure';
+import { copy } from './configured-source/operations/copy';
+import { Metadata } from './metadata';
+import { CreateReadStreamOptions } from './source-destination';
 
-import { NotCapable } from "../errors";
-import { StreamLimiter } from "../stream-limiter";
-import { Dictionary, streamToBuffer } from "../utils";
+import { NotCapable } from '../errors';
+import { StreamLimiter } from '../stream-limiter';
+import { Dictionary, streamToBuffer } from '../utils';
 
 interface ImageJSONPart {
 	filename: string;
@@ -36,7 +36,7 @@ interface ImageJSONPart {
 export type ImageJSON = Dictionary<{ parts: ImageJSONPart[] }>;
 
 export interface BalenaS3CompressedSourceOptions extends BalenaS3SourceOptions {
-	format: "zip" | "gzip";
+	format: 'zip' | 'gzip';
 	filenamePrefix?: string;
 	configuration?: Dictionary<any>;
 }
@@ -56,7 +56,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	 */
 	private imageJSON: ImageJSON;
 	private deviceTypeJSON: DeviceTypeJSON;
-	private format: BalenaS3CompressedSourceOptions["format"];
+	private format: BalenaS3CompressedSourceOptions['format'];
 	private filenamePrefix?: string;
 	// configuration is config.json + network configuration + dashboard "when" options like "processorCore" for ts4900
 	private configuration?: Dictionary<any>;
@@ -91,12 +91,12 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 			this.filenamePrefix,
 			this.deviceType,
 			this.osVersion,
-			this.buildId.endsWith(".dev") ? "dev" : undefined,
+			this.buildId.endsWith('.dev') ? 'dev' : undefined,
 			this.supervisorVersion,
 			this.release,
 		]
 			.filter((p) => p !== undefined)
-			.join("-");
+			.join('-');
 	}
 
 	protected async _getMetadata(): Promise<Metadata> {
@@ -108,45 +108,41 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 			version: this.buildId,
 			name: this.filename,
 			format: this.format,
-			arch: this.deviceTypeJSON?.arch,
+			arch: this.deviceTypeJSON?.arch
 		};
 	}
 
 	private async getSupervisorVersion() {
-		const response = await this.download("VERSION");
-		const lastModified = new Date(response.headers["last-modified"]);
+		const response = await this.download('VERSION');
+		const lastModified = new Date(response.headers['last-modified']);
 		const supervisorVersion = response.data.trim();
 		return { supervisorVersion, lastModified };
 	}
 
 	private async getOsVersion() {
-		const response = await this.download("VERSION_HOSTOS");
+		const response = await this.download('VERSION_HOSTOS');
 		return response.data.trim();
 	}
 
 	private async getImageJSON(): Promise<ImageJSON> {
-		const imageJSON = (await this.download(`image${this.imageSuffix}.json`))
-			.data;
+		const imageJSON = (await this.download(`image${this.imageSuffix}.json`)).data;
 		return imageJSON;
 	}
 
 	private async getDeviceTypeJSON(): Promise<DeviceTypeJSON> {
-		return (await this.download("device-type.json")).data;
+		return (await this.download('device-type.json')).data;
 	}
 
 	private async getPartStream(
-		filename: string
+		filename: string,
 	): Promise<NodeJS.ReadableStream> {
-		const response = await this.download(
-			`compressed${this.imageSuffix}/${filename}`,
-			"stream"
-		);
+		const response = await this.download(`compressed${this.imageSuffix}/${filename}`, 'stream');
 		return response.data;
 	}
 
 	private findPartitionPart(
 		imageJSON: ImageJSON,
-		partition: number
+		partition: number,
 	): ImageJSONPart {
 		for (const { parts } of Object.values(imageJSON)) {
 			for (const part of parts) {
@@ -156,7 +152,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 			}
 		}
 		throw new Error(
-			`Couldn't find compressed image part for partition ${partition}`
+			`Couldn't find compressed image part for partition ${partition}`,
 		);
 	}
 
@@ -175,7 +171,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 		} else if (definition.image !== undefined) {
 			return this.findImagePart(this.imageJSON, definition.image);
 		} else {
-			throw new Error("No partition or image to configure found");
+			throw new Error('No partition or image to configure found');
 		}
 	}
 
@@ -209,7 +205,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 		await configure(
 			await getDisk(this.deviceTypeJSON.configuration.config),
 			undefined,
-			this.configuration
+			this.configuration,
 		);
 		// copy operations
 		for (const cpy of this.deviceTypeJSON.configuration.operations ?? []) {
@@ -220,7 +216,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 					cpy.from.path,
 					await getDisk(cpy.to),
 					undefined,
-					cpy.to.path
+					cpy.to.path,
 				);
 			}
 		}
@@ -231,7 +227,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 				const buffer = await streamToBuffer(stream);
 				const { crc, zLen } = stream.metadata();
 				this.configuredParts.set(filename, { crc, zLen, buffer });
-			})
+			}),
 		);
 	}
 
@@ -249,7 +245,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 		]);
 		if (deviceTypeJSON.yocto.archive) {
 			// Only zip works for yocto archives (intel-edison)
-			this.format = "zip";
+			this.format = 'zip';
 		}
 		this.supervisorVersion = supervisorVersion;
 		this.lastModified = lastModified;
@@ -259,10 +255,10 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 		this.filename = this.getFilename();
 		// replace resin.img with the requested filename if needed
 		const keys = Object.keys(imageJSON);
-		if (keys.length === 1 && keys[0] === "resin.img") {
-			this.filename += ".img";
+		if (keys.length === 1 && keys[0] === 'resin.img') {
+			this.filename += '.img';
 			this.imageJSON = {
-				[this.filename]: imageJSON["resin.img"],
+				[this.filename]: imageJSON['resin.img'],
 			};
 		} else {
 			this.imageJSON = imageJSON;
@@ -289,15 +285,15 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 							stream = await this.getPartStream(p.filename);
 						}
 						return { ...p, crc, zLen, stream };
-					})
+					}),
 				),
-			}))
+			})),
 		);
 	}
 
 	private async createZipStream(fake: boolean) {
 		const entries = (await this.getParts(fake)).map(({ filename, parts }) =>
-			ZipPartStream.createEntry(filename, parts)
+			ZipPartStream.createEntry(filename, parts),
 		);
 		return ZipPartStream.create(entries);
 	}
@@ -308,13 +304,13 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	}
 
 	private async createStream(fake = false) {
-		return await (this.format === "zip"
+		return await (this.format === 'zip'
 			? this.createZipStream(fake)
 			: this.createGzipStream(fake));
 	}
 
 	public async createReadStream(
-		options: CreateReadStreamOptions = {}
+		options: CreateReadStreamOptions = {},
 	): Promise<Readable> {
 		if (options.start !== undefined) {
 			throw new NotCapable();

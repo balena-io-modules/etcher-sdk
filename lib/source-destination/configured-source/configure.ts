@@ -40,7 +40,6 @@ export interface CopyOperation {
 }
 
 export interface DeviceTypeJSON {
-	arch?: string;
 	configuration: {
 		config: FileOnPartition;
 		operations?: CopyOperation[];
