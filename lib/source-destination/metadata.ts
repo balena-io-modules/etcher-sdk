@@ -42,4 +42,5 @@ export interface Metadata {
 	osVersion?: string;
 	lastModified?: Date;
 	format?: 'zip' | 'gzip';
+	arch?: string;
 }

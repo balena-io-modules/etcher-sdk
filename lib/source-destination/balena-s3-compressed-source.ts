@@ -108,6 +108,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 			version: this.buildId,
 			name: this.filename,
 			format: this.format,
+			arch: this.deviceTypeJSON?.arch,
 		};
 	}
 
