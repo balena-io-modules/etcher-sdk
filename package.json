@@ -51,7 +51,7 @@
     "@balena/udif": "^1.1.2",
     "@ronomon/direct-io": "^3.0.1",
     "aws4-axios": "^2.4.9",
-    "axios": "^0.26.1",
+    "axios": "^0.27.0",
     "balena-image-fs": "^7.0.6",
     "blockmap": "^4.0.3",
     "check-disk-space": "^2.1.0",
