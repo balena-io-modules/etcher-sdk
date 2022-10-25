@@ -85,7 +85,7 @@
     "@types/chai": "^4.1.4",
     "@types/cli-spinner": "^0.2.0",
     "@types/crc": "^3.4.0",
-    "@types/debug": "0.0.30",
+    "@types/debug": "0.0.31",
     "@types/file-type": "^5.2.1",
     "@types/gunzip-maybe": "^1.4.0",
     "@types/lodash": "^4.14.108",
