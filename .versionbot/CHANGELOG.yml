@@ -1,4 +1,16 @@
 - commits:
+    - subject: Switch to Flowzone
+      hash: b8edec60d8183122cb17b1a59d7e49051890cc45
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: ab77
+      nested: []
+  version: 7.2.2
+  title: ""
+  date: 2022-10-25T18:53:04.211Z
+- commits:
     - subject: add arch in metadata
       hash: 38136934d916543a7011eb846298608f0b9b2407
       body: ""
