@@ -1,4 +1,16 @@
 - commits:
+    - subject: bump node-beaglebone-usbboot
+      hash: 620a8764a12276007cca813a44d8a3b843d80d04
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Zane Hitchcox
+      nested: []
+  version: 7.2.3
+  title: ""
+  date: 2022-10-25T20:42:57.765Z
+- commits:
     - subject: Switch to Flowzone
       hash: b8edec60d8183122cb17b1a59d7e49051890cc45
       body: ""
