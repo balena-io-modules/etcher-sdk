@@ -84,7 +84,7 @@
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [lib/stream-limiter.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/stream-limiter.ts#L22)*
+*Defined in [lib/stream-limiter.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/stream-limiter.ts#L22)*
 
 **Parameters:**
 
@@ -101,7 +101,7 @@ Name | Type |
 
 • **maxBytes**: *number*
 
-*Defined in [lib/stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/stream-limiter.ts#L23)*
+*Defined in [lib/stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/stream-limiter.ts#L23)*
 
 ___
 
@@ -149,7 +149,7 @@ ___
 
 • **stream**: *ReadableStream*
 
-*Defined in [lib/stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/stream-limiter.ts#L23)*
+*Defined in [lib/stream-limiter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/stream-limiter.ts#L23)*
 
 ___
 
@@ -299,7 +299,7 @@ ___
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[_transform](../interfaces/sourcetransform.md#_transform)*
 
-*Defined in [lib/stream-limiter.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/stream-limiter.ts#L29)*
+*Defined in [lib/stream-limiter.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/stream-limiter.ts#L29)*
 
 **Parameters:**
 

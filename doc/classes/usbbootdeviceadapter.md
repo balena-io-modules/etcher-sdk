@@ -52,7 +52,7 @@
 
 *Overrides [Verifier](verifier.md).[constructor](verifier.md#constructor)*
 
-*Defined in [lib/scanner/adapters/usbboot.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/usbboot.ts#L28)*
+*Defined in [lib/scanner/adapters/usbboot.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/adapters/usbboot.ts#L28)*
 
 **Returns:** *[UsbbootDeviceAdapter](usbbootdeviceadapter.md)*
 
@@ -62,7 +62,7 @@
 
 • **drives**: *Map‹UsbbootDevice, [UsbbootDrive](usbbootdrive.md)›* = new Map()
 
-*Defined in [lib/scanner/adapters/usbboot.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/usbboot.ts#L27)*
+*Defined in [lib/scanner/adapters/usbboot.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/adapters/usbboot.ts#L27)*
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 • **scanner**? : *UsbbootScannerType*
 
-*Defined in [lib/scanner/adapters/usbboot.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/usbboot.ts#L28)*
+*Defined in [lib/scanner/adapters/usbboot.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/adapters/usbboot.ts#L28)*
 
 ___
 
@@ -245,7 +245,7 @@ ___
 
 ▸ **onAttach**(`device`: UsbbootDevice): *void*
 
-*Defined in [lib/scanner/adapters/usbboot.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/usbboot.ts#L53)*
+*Defined in [lib/scanner/adapters/usbboot.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/adapters/usbboot.ts#L53)*
 
 **Parameters:**
 
@@ -261,7 +261,7 @@ ___
 
 ▸ **onDetach**(`device`: UsbbootDevice): *void*
 
-*Defined in [lib/scanner/adapters/usbboot.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/usbboot.ts#L62)*
+*Defined in [lib/scanner/adapters/usbboot.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/adapters/usbboot.ts#L62)*
 
 **Parameters:**
 
@@ -437,7 +437,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[start](adapter.md#abstract-start)*
 
-*Defined in [lib/scanner/adapters/usbboot.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/usbboot.ts#L45)*
+*Defined in [lib/scanner/adapters/usbboot.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/adapters/usbboot.ts#L45)*
 
 **Returns:** *void*
 
@@ -449,7 +449,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[stop](adapter.md#abstract-stop)*
 
-*Defined in [lib/scanner/adapters/usbboot.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/usbboot.ts#L49)*
+*Defined in [lib/scanner/adapters/usbboot.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/adapters/usbboot.ts#L49)*
 
 **Returns:** *void*
 

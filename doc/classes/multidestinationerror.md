@@ -29,7 +29,7 @@
 
 \+ **new MultiDestinationError**(`error`: [Error](notcapable.md#static-error), `destination`: [SourceDestination](sourcedestination.md)): *[MultiDestinationError](multidestinationerror.md)*
 
-*Defined in [lib/source-destination/multi-destination.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/multi-destination.ts#L39)*
+*Defined in [lib/source-destination/multi-destination.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/multi-destination.ts#L39)*
 
 **Parameters:**
 
@@ -46,7 +46,7 @@ Name | Type |
 
 • **destination**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [lib/source-destination/multi-destination.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/multi-destination.ts#L40)*
+*Defined in [lib/source-destination/multi-destination.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/multi-destination.ts#L40)*
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 • **error**: *[Error](notcapable.md#static-error)*
 
-*Defined in [lib/source-destination/multi-destination.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/multi-destination.ts#L40)*
+*Defined in [lib/source-destination/multi-destination.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/multi-destination.ts#L40)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 *Inherited from [NotCapable](notcapable.md).[message](notcapable.md#message)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:974
+Defined in node_modules/typescript/lib/lib.es5.d.ts:1023
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 *Inherited from [NotCapable](notcapable.md).[name](notcapable.md#name)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:973
+Defined in node_modules/typescript/lib/lib.es5.d.ts:1022
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 *Overrides [NotCapable](notcapable.md).[stack](notcapable.md#optional-stack)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:975
+Defined in node_modules/typescript/lib/lib.es5.d.ts:1024
 
 ___
 
@@ -94,4 +94,4 @@ ___
 
 ▪ **Error**: *ErrorConstructor*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:984
+Defined in node_modules/typescript/lib/lib.es5.d.ts:1033

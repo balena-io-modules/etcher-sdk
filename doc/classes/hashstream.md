@@ -86,7 +86,7 @@
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [lib/source-destination/source-destination.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L47)*
+*Defined in [lib/source-destination/source-destination.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/source-destination.ts#L47)*
 
 **Parameters:**
 
@@ -103,7 +103,7 @@ Name | Type |
 
 • **_hash**: *XXHash3*
 
-*Defined in [lib/source-destination/source-destination.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L47)*
+*Defined in [lib/source-destination/source-destination.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/source-destination.ts#L47)*
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 • **_outEnc**: *string*
 
-*Defined in [lib/source-destination/source-destination.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L46)*
+*Defined in [lib/source-destination/source-destination.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/source-destination.ts#L46)*
 
 ___
 
@@ -265,7 +265,7 @@ ___
 
 *Overrides [SparseFilterStream](sparsefilterstream.md).[_flush](sparsefilterstream.md#_flush)*
 
-*Defined in [lib/source-destination/source-destination.ts:63](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L63)*
+*Defined in [lib/source-destination/source-destination.ts:63](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/source-destination.ts#L63)*
 
 **Parameters:**
 
@@ -301,7 +301,7 @@ ___
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[_transform](../interfaces/sourcetransform.md#_transform)*
 
-*Defined in [lib/source-destination/source-destination.ts:59](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L59)*
+*Defined in [lib/source-destination/source-destination.ts:59](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/source-destination.ts#L59)*
 
 **Parameters:**
 

@@ -25,7 +25,7 @@
 
 *Inherited from [NotCapable](notcapable.md).[message](notcapable.md#message)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:974
+Defined in node_modules/typescript/lib/lib.es5.d.ts:1023
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 *Inherited from [NotCapable](notcapable.md).[name](notcapable.md#name)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:973
+Defined in node_modules/typescript/lib/lib.es5.d.ts:1022
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 *Overrides [NotCapable](notcapable.md).[stack](notcapable.md#optional-stack)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:975
+Defined in node_modules/typescript/lib/lib.es5.d.ts:1024
 
 ___
 
@@ -55,4 +55,4 @@ ___
 
 ▪ **Error**: *ErrorConstructor*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:984
+Defined in node_modules/typescript/lib/lib.es5.d.ts:1033
