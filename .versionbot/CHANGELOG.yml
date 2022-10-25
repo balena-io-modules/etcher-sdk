@@ -1,4 +1,19 @@
 - commits:
+    - subject: Update dependency outdent to 0.8.0
+      hash: f554913d877c439b1c91464f9a4b5b794ecd2ffa
+      body: |
+        Update outdent to 0.8.0
+
+        Update outdent from 0.7.1 to 0.8.0
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Renovate Bot
+      nested: []
+  version: 7.3.0
+  title: ""
+  date: 2022-10-25T21:37:31.883Z
+- commits:
     - subject: Update dependency @types/debug to 0.0.31
       hash: d53ff4bc7fb02a8c71796588a387946d4014ad12
       body: |
