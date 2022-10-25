@@ -1,4 +1,19 @@
 - commits:
+    - subject: Update dependency axios to 0.27.2
+      hash: 74a7fa65f7547528b654d63ee4b78e863cf7d787
+      body: |
+        Update axios to 0.27.2
+
+        Update axios from 0.26.1 to 0.27.2
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Renovate Bot
+      nested: []
+  version: 7.4.0
+  title: ""
+  date: 2022-10-25T21:45:02.291Z
+- commits:
     - subject: Update dependency outdent to 0.8.0
       hash: f554913d877c439b1c91464f9a4b5b794ecd2ffa
       body: |
