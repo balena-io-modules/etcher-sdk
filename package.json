@@ -10,6 +10,7 @@
     "Alexis Svinartchouk <alexis@balena.io>"
   ],
   "scripts": {
+    "flowzone-preinstall": "sudo apt-get install -y libudev-dev",
     "test": "npm run lint && mocha -r ts-node/register tests/**/*.spec.ts",
     "prettier": "balena-lint --fix lib typings examples tests",
     "lint": "balena-lint lib typings examples tests",
@@ -106,6 +107,9 @@
     "typedoc-plugin-markdown": "2.3.1",
     "typescript": "^4.6.3",
     "yargs": "^16.2.0"
+  },
+  "engines": {
+    "node": ">=14 < 18"
   },
   "versionist": {
     "publishedAt": "2022-09-22T19:05:36.656Z"

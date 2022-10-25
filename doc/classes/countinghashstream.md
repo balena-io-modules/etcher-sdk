@@ -86,7 +86,7 @@
 
 *Overrides [SourceTransform](../interfaces/sourcetransform.md).[constructor](../interfaces/sourcetransform.md#constructor)*
 
-*Defined in [lib/source-destination/source-destination.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L47)*
+*Defined in [lib/source-destination/source-destination.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/source-destination.ts#L47)*
 
 **Parameters:**
 
@@ -103,7 +103,7 @@ Name | Type |
 
 • **bytesWritten**: *number* = 0
 
-*Defined in [lib/source-destination/source-destination.ts:70](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L70)*
+*Defined in [lib/source-destination/source-destination.ts:70](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/source-destination.ts#L70)*
 
 ___
 
@@ -203,7 +203,7 @@ ___
 
 ▸ **__transform**(`chunk`: [Buffer](../interfaces/alignedlockablebuffer.md#buffer) | [AlignedLockableBuffer](../interfaces/alignedlockablebuffer.md), `encoding`: string): *Promise‹void›*
 
-*Defined in [lib/source-destination/source-destination.ts:72](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L72)*
+*Defined in [lib/source-destination/source-destination.ts:72](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/source-destination.ts#L72)*
 
 **Parameters:**
 
@@ -276,7 +276,7 @@ ___
 
 *Overrides [SparseFilterStream](sparsefilterstream.md).[_flush](sparsefilterstream.md#_flush)*
 
-*Defined in [lib/source-destination/source-destination.ts:63](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L63)*
+*Defined in [lib/source-destination/source-destination.ts:63](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/source-destination.ts#L63)*
 
 **Parameters:**
 
@@ -312,7 +312,7 @@ ___
 
 *Overrides [HashStream](hashstream.md).[_transform](hashstream.md#_transform)*
 
-*Defined in [lib/source-destination/source-destination.ts:89](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L89)*
+*Defined in [lib/source-destination/source-destination.ts:89](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/source-destination.ts#L89)*
 
 **Parameters:**
 

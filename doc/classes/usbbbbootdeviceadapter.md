@@ -52,7 +52,7 @@
 
 *Overrides [Verifier](verifier.md).[constructor](verifier.md#constructor)*
 
-*Defined in [lib/scanner/adapters/usb-bb-boot.ts:11](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/usb-bb-boot.ts#L11)*
+*Defined in [lib/scanner/adapters/usb-bb-boot.ts:11](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/adapters/usb-bb-boot.ts#L11)*
 
 **Returns:** *[UsbBBbootDeviceAdapter](usbbbbootdeviceadapter.md)*
 
@@ -62,7 +62,7 @@
 
 • **drives**: *Map‹UsbBBbootDevice, [UsbBBbootDrive](usbbbbootdrive.md)›* = new Map()
 
-*Defined in [lib/scanner/adapters/usb-bb-boot.ts:10](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/usb-bb-boot.ts#L10)*
+*Defined in [lib/scanner/adapters/usb-bb-boot.ts:10](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/adapters/usb-bb-boot.ts#L10)*
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 • **scanner**: *UsbBBbootScanner*
 
-*Defined in [lib/scanner/adapters/usb-bb-boot.ts:11](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/usb-bb-boot.ts#L11)*
+*Defined in [lib/scanner/adapters/usb-bb-boot.ts:11](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/adapters/usb-bb-boot.ts#L11)*
 
 ___
 
@@ -245,7 +245,7 @@ ___
 
 ▸ **onAttach**(`device`: UsbBBbootDevice): *void*
 
-*Defined in [lib/scanner/adapters/usb-bb-boot.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/usb-bb-boot.ts#L30)*
+*Defined in [lib/scanner/adapters/usb-bb-boot.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/adapters/usb-bb-boot.ts#L30)*
 
 **Parameters:**
 
@@ -261,7 +261,7 @@ ___
 
 ▸ **onDetach**(`device`: UsbBBbootDevice): *void*
 
-*Defined in [lib/scanner/adapters/usb-bb-boot.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/usb-bb-boot.ts#L39)*
+*Defined in [lib/scanner/adapters/usb-bb-boot.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/adapters/usb-bb-boot.ts#L39)*
 
 **Parameters:**
 
@@ -437,7 +437,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[start](adapter.md#abstract-start)*
 
-*Defined in [lib/scanner/adapters/usb-bb-boot.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/usb-bb-boot.ts#L22)*
+*Defined in [lib/scanner/adapters/usb-bb-boot.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/adapters/usb-bb-boot.ts#L22)*
 
 **Returns:** *void*
 
@@ -449,7 +449,7 @@ ___
 
 *Overrides [Adapter](adapter.md).[stop](adapter.md#abstract-stop)*
 
-*Defined in [lib/scanner/adapters/usb-bb-boot.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/adapters/usb-bb-boot.ts#L26)*
+*Defined in [lib/scanner/adapters/usb-bb-boot.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/adapters/usb-bb-boot.ts#L26)*
 
 **Returns:** *void*
 

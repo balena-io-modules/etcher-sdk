@@ -53,7 +53,7 @@
 
 *Overrides [Verifier](verifier.md).[constructor](verifier.md#constructor)*
 
-*Defined in [lib/scanner/scanner.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/scanner.ts#L25)*
+*Defined in [lib/scanner/scanner.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/scanner.ts#L25)*
 
 **Parameters:**
 
@@ -69,7 +69,7 @@ Name | Type |
 
 • **adapters**: *[Adapter](adapter.md)[]*
 
-*Defined in [lib/scanner/scanner.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/scanner.ts#L27)*
+*Defined in [lib/scanner/scanner.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/scanner.ts#L27)*
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 • **drives**: *Set‹[AdapterSourceDestination](../interfaces/adaptersourcedestination.md)›* = new Set()
 
-*Defined in [lib/scanner/scanner.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/scanner.ts#L25)*
+*Defined in [lib/scanner/scanner.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/scanner.ts#L25)*
 
 ___
 
@@ -152,7 +152,7 @@ ___
 
 ▸ **getBy**(`field`: "raw" | "device" | "devicePath", `value`: string): *[AdapterSourceDestination](../interfaces/adaptersourcedestination.md) | undefined*
 
-*Defined in [lib/scanner/scanner.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/scanner.ts#L46)*
+*Defined in [lib/scanner/scanner.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/scanner.ts#L46)*
 
 **Parameters:**
 
@@ -269,7 +269,7 @@ ___
 
 ▸ **onAttach**(`drive`: [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)): *void*
 
-*Defined in [lib/scanner/scanner.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/scanner.ts#L36)*
+*Defined in [lib/scanner/scanner.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/scanner.ts#L36)*
 
 **Parameters:**
 
@@ -285,7 +285,7 @@ ___
 
 ▸ **onDetach**(`drive`: [AdapterSourceDestination](../interfaces/adaptersourcedestination.md)): *void*
 
-*Defined in [lib/scanner/scanner.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/scanner.ts#L41)*
+*Defined in [lib/scanner/scanner.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/scanner.ts#L41)*
 
 **Parameters:**
 
@@ -459,7 +459,7 @@ ___
 
 ▸ **start**(): *Promise‹void›*
 
-*Defined in [lib/scanner/scanner.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/scanner.ts#L57)*
+*Defined in [lib/scanner/scanner.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/scanner.ts#L57)*
 
 **Returns:** *Promise‹void›*
 
@@ -469,7 +469,7 @@ ___
 
 ▸ **stop**(): *void*
 
-*Defined in [lib/scanner/scanner.ts:74](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/scanner/scanner.ts#L74)*
+*Defined in [lib/scanner/scanner.ts:74](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/scanner/scanner.ts#L74)*
 
 **Returns:** *void*
 
