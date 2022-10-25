@@ -56,7 +56,7 @@
 
 • **blocks**: *[BlocksWithChecksum](blockswithchecksum.md)[]*
 
-*Defined in [lib/sparse-stream/shared.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/sparse-stream/shared.ts#L44)*
+*Defined in [lib/sparse-stream/shared.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/sparse-stream/shared.ts#L44)*
 
 ___
 
@@ -368,7 +368,7 @@ ___
 
 ▸ **push**(`chunk`: [SparseStreamChunk](sparsestreamchunk.md)): *boolean*
 
-*Defined in [lib/sparse-stream/shared.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/sparse-stream/shared.ts#L45)*
+*Defined in [lib/sparse-stream/shared.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/sparse-stream/shared.ts#L45)*
 
 **Parameters:**
 

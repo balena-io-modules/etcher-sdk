@@ -22,7 +22,7 @@
 
 • **alignment**? : *undefined | number*
 
-*Defined in [lib/source-destination/source-destination.ts:285](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L285)*
+*Defined in [lib/source-destination/source-destination.ts:285](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/source-destination.ts#L285)*
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 • **emitProgress**? : *undefined | false | true*
 
-*Defined in [lib/source-destination/source-destination.ts:282](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L282)*
+*Defined in [lib/source-destination/source-destination.ts:282](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/source-destination.ts#L282)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **end**? : *undefined | number*
 
-*Defined in [lib/source-destination/source-destination.ts:284](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L284)*
+*Defined in [lib/source-destination/source-destination.ts:284](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/source-destination.ts#L284)*
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 • **numBuffers**? : *undefined | number*
 
-*Defined in [lib/source-destination/source-destination.ts:286](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L286)*
+*Defined in [lib/source-destination/source-destination.ts:286](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/source-destination.ts#L286)*
 
 ___
 
@@ -54,4 +54,4 @@ ___
 
 • **start**? : *undefined | number*
 
-*Defined in [lib/source-destination/source-destination.ts:283](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/source-destination.ts#L283)*
+*Defined in [lib/source-destination/source-destination.ts:283](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/source-destination.ts#L283)*

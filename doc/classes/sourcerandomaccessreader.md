@@ -51,7 +51,7 @@
 
 *Overrides [Verifier](verifier.md).[constructor](verifier.md#constructor)*
 
-*Defined in [lib/source-destination/zip.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/zip.ts#L130)*
+*Defined in [lib/source-destination/zip.ts:128](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/zip.ts#L128)*
 
 **Parameters:**
 
@@ -67,7 +67,7 @@ Name | Type |
 
 • **source**: *[SourceDestination](sourcedestination.md)*
 
-*Defined in [lib/source-destination/zip.ts:131](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/zip.ts#L131)*
+*Defined in [lib/source-destination/zip.ts:129](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/zip.ts#L129)*
 
 ___
 
@@ -87,7 +87,7 @@ Defined in node_modules/@types/node/events.d.ts:20
 
 *Overrides void*
 
-*Defined in [lib/source-destination/zip.ts:135](https://github.com/balena-io-modules/etcher-sdk/blob/96443cd/lib/source-destination/zip.ts#L135)*
+*Defined in [lib/source-destination/zip.ts:133](https://github.com/balena-io-modules/etcher-sdk/blob/0441bfb/lib/source-destination/zip.ts#L133)*
 
 **Parameters:**
 
@@ -138,13 +138,13 @@ Defined in node_modules/@types/yauzl/index.d.ts:15
 
 ▪ **callback**: *function*
 
-▸ (`err?`: [Error](notcapable.md#static-error)): *void*
+▸ (`err`: [Error](notcapable.md#static-error) | null): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`err?` | [Error](notcapable.md#static-error) |
+`err` | [Error](notcapable.md#static-error) &#124; null |
 
 **Returns:** *void*
 
@@ -418,13 +418,13 @@ Defined in node_modules/@types/yauzl/index.d.ts:14
 
 ▪ **callback**: *function*
 
-▸ (`err?`: [Error](notcapable.md#static-error)): *void*
+▸ (`err`: [Error](notcapable.md#static-error) | null): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`err?` | [Error](notcapable.md#static-error) |
+`err` | [Error](notcapable.md#static-error) &#124; null |
 
 **Returns:** *void*
 
