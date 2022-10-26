@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-import { getAlignedBuffer } from '@ronomon/direct-io';
-import * as _debug from 'debug';
-import { Writable } from 'stream';
+import { getAlignedBuffer } from "@ronomon/direct-io";
+import * as _debug from "debug";
+import { Writable } from "stream";
 
-import { AlignedLockableBuffer } from './aligned-lockable-buffer';
-import { RETRY_BASE_TIMEOUT } from './constants';
-import { retryOnTransientError } from './errors';
-import { BlockDevice } from './source-destination/block-device';
-import { makeClassEmitProgressEvents } from './source-destination/progress';
-import { asCallback } from './utils';
+import { AlignedLockableBuffer } from "./aligned-lockable-buffer";
+import { RETRY_BASE_TIMEOUT } from "./constants";
+import { retryOnTransientError } from "./errors";
+import { BlockDevice } from "./source-destination/block-device";
+import { makeClassEmitProgressEvents } from "./source-destination/progress";
+import { asCallback } from "./utils";
 
-const debug = _debug('etcher:writer:block-write-stream');
+const debug = _debug("etcher:writer:block-write-stream");
 
 export class BlockWriteStream extends Writable {
 	private destination: BlockDevice;
@@ -58,13 +58,13 @@ export class BlockWriteStream extends Writable {
 				await this.destination.write(buffer, 0, buffer.length, position);
 			},
 			this.maxRetries,
-			RETRY_BASE_TIMEOUT,
+			RETRY_BASE_TIMEOUT
 		);
 	}
 
 	private async __write(buffer: AlignedLockableBuffer): Promise<void> {
 		const unlock = await buffer.rlock();
-		debug('_write', buffer.length, this.position, this.bytesWritten);
+		debug("_write", buffer.length, this.position, this.bytesWritten);
 		try {
 			// Keep the first buffer in memory and write it once the rest has been written.
 			// This is to prevent Windows from mounting the device while we flash it.
@@ -84,13 +84,13 @@ export class BlockWriteStream extends Writable {
 	public _write(
 		buffer: AlignedLockableBuffer,
 		_encoding: string,
-		callback: (error: Error | undefined) => void,
+		callback: (error: Error | undefined) => void
 	) {
 		asCallback(this.__write(buffer), callback);
 	}
 
 	private async __final(): Promise<void> {
-		debug('_final');
+		debug("_final");
 		if (this.firstBuffer) {
 			try {
 				await this.writeBuffer(this.firstBuffer, 0);
@@ -112,6 +112,6 @@ export class BlockWriteStream extends Writable {
 
 export const ProgressBlockWriteStream = makeClassEmitProgressEvents(
 	BlockWriteStream,
-	'bytesWritten',
-	'bytesWritten',
+	"bytesWritten",
+	"bytesWritten"
 );

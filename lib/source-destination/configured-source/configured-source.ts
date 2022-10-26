@@ -14,33 +14,33 @@
  * limitations under the License.
  */
 
-import { interact } from 'balena-image-fs';
-import * as _debug from 'debug';
-import { DiscardDiskChunk, Disk, ReadResult, WriteResult } from 'file-disk';
-import { getPartitions, GPTPartition, MBRPartition } from 'partitioninfo';
+import { interact } from "balena-image-fs";
+import * as _debug from "debug";
+import { DiscardDiskChunk, Disk, ReadResult, WriteResult } from "file-disk";
+import { getPartitions, GPTPartition, MBRPartition } from "partitioninfo";
 
-import { CHUNK_SIZE } from '../../constants';
-import { NotCapable } from '../../errors';
+import { CHUNK_SIZE } from "../../constants";
+import { NotCapable } from "../../errors";
 import {
 	blocksLength,
 	BlocksWithChecksum,
 	ChecksumType,
-} from '../../sparse-stream/shared';
-import { SparseFilterStream } from '../../sparse-stream/sparse-filter-stream';
-import { SparseReadStream } from '../../sparse-stream/sparse-read-stream';
+} from "../../sparse-stream/shared";
+import { SparseFilterStream } from "../../sparse-stream/sparse-filter-stream";
+import { SparseReadStream } from "../../sparse-stream/sparse-read-stream";
 
-import { Metadata } from '../metadata';
-import { BlockDevice } from '../block-device';
+import { Metadata } from "../metadata";
+import { BlockDevice } from "../block-device";
 import {
 	CreateReadStreamOptions,
 	CreateSparseReadStreamOptions,
 	SourceDestination,
-} from '../source-destination';
-import { SourceSource } from '../source-source';
+} from "../source-destination";
+import { SourceSource } from "../source-source";
 
-import { configure as legacyConfigure } from './configure';
+import { configure as legacyConfigure } from "./configure";
 
-const debug = _debug('etcher-sdk:configured-source');
+const debug = _debug("etcher-sdk:configured-source");
 
 export type ConfigureFunction = (disk: Disk) => Promise<void>;
 
@@ -50,12 +50,12 @@ export class SourceDisk extends Disk {
 			true, // readOnly
 			true, // recordWrites
 			true, // recordReads
-			true, // discardIsZero
+			true // discardIsZero
 		);
 		if (source instanceof BlockDevice && source.oDirect) {
 			// Reads into non aligned buffers won't work in partitioninfo and file-disk
 			throw new Error(
-				"Can't create a SourceDisk from a BlockDevice opened with O_DIRECT",
+				"Can't create a SourceDisk from a BlockDevice opened with O_DIRECT"
 			);
 		}
 	}
@@ -73,7 +73,7 @@ export class SourceDisk extends Disk {
 		buffer: Buffer,
 		bufferOffset: number,
 		length: number,
-		fileOffset: number,
+		fileOffset: number
 	): Promise<ReadResult> {
 		return await this.source.read(buffer, bufferOffset, length, fileOffset);
 	}
@@ -82,7 +82,7 @@ export class SourceDisk extends Disk {
 		_buffer: Buffer,
 		_bufferOffset: number,
 		_length: number,
-		_fileOffset: number,
+		_fileOffset: number
 	): Promise<WriteResult> {
 		throw new Error("Can't write to a SourceDisk");
 	}
@@ -105,13 +105,13 @@ export class ConfiguredSource extends SourceSource {
 		shouldTrimPartitions,
 		createStreamFromDisk,
 		configure,
-		checksumType = 'xxhash3',
+		checksumType = "xxhash3",
 		chunkSize = CHUNK_SIZE,
 	}: {
 		source: SourceDestination;
 		shouldTrimPartitions: boolean;
 		createStreamFromDisk: boolean;
-		configure?: ConfigureFunction | 'legacy';
+		configure?: ConfigureFunction | "legacy";
 		checksumType?: ChecksumType;
 		chunkSize?: number;
 	}) {
@@ -121,7 +121,7 @@ export class ConfiguredSource extends SourceSource {
 		this.checksumType = checksumType;
 		this.chunkSize = chunkSize;
 		this.disk = new SourceDisk(source);
-		if (configure === 'legacy') {
+		if (configure === "legacy") {
 			this.configure = legacyConfigure;
 		} else {
 			this.configure = configure;
@@ -143,7 +143,7 @@ export class ConfiguredSource extends SourceSource {
 	}
 
 	private async getBlocksWithChecksumType(
-		generateChecksums: boolean,
+		generateChecksums: boolean
 	): Promise<BlocksWithChecksum[]> {
 		let blocks = await this.getBlocks();
 		if (generateChecksums) {
@@ -171,18 +171,18 @@ export class ConfiguredSource extends SourceSource {
 		buffer: Buffer,
 		bufferOffset: number,
 		length: number,
-		sourceOffset: number,
+		sourceOffset: number
 	): Promise<ReadResult> {
 		return await this.disk.read(buffer, bufferOffset, length, sourceOffset);
 	}
 
 	public async createReadStream(
-		options: CreateReadStreamOptions,
+		options: CreateReadStreamOptions
 	): Promise<NodeJS.ReadableStream> {
 		const imageStream = await this.source.createReadStream(options);
 		const transform = this.disk.getTransformStream();
-		imageStream.on('error', (err: Error) => {
-			transform.emit('error', err);
+		imageStream.on("error", (err: Error) => {
+			transform.emit("error", err);
 		});
 		imageStream.pipe(transform);
 		return transform;
@@ -191,7 +191,7 @@ export class ConfiguredSource extends SourceSource {
 	private async createSparseReadStreamFromDisk(
 		generateChecksums: boolean,
 		alignment?: number,
-		numBuffers = 2,
+		numBuffers = 2
 	): Promise<SparseReadStream> {
 		return new SparseReadStream({
 			source: this,
@@ -207,7 +207,7 @@ export class ConfiguredSource extends SourceSource {
 	private async createSparseReadStreamFromStream(
 		generateChecksums: boolean,
 		alignment?: number,
-		numBuffers = 2,
+		numBuffers = 2
 	): Promise<SparseFilterStream> {
 		const stream = await this.createReadStream({
 			alignment,
@@ -218,7 +218,7 @@ export class ConfiguredSource extends SourceSource {
 			verify: false,
 			generateChecksums,
 		});
-		stream.on('error', transform.emit.bind(transform, 'error'));
+		stream.on("error", transform.emit.bind(transform, "error"));
 		stream.pipe(transform);
 		return transform;
 	}
@@ -234,13 +234,13 @@ export class ConfiguredSource extends SourceSource {
 			return await this.createSparseReadStreamFromDisk(
 				generateChecksums,
 				alignment,
-				numBuffers,
+				numBuffers
 			);
 		} else {
 			return await this.createSparseReadStreamFromStream(
 				generateChecksums,
 				alignment,
-				numBuffers,
+				numBuffers
 			);
 		}
 	}
@@ -284,7 +284,7 @@ export class ConfiguredSource extends SourceSource {
 		if (metadata.size !== undefined) {
 			const percentage = Math.round((discardedBytes / metadata.size) * 100);
 			debug(
-				`discarded ${discards.length} chunks, ${discardedBytes} bytes, ${percentage}% of the image`,
+				`discarded ${discards.length} chunks, ${discardedBytes} bytes, ${percentage}% of the image`
 			);
 		}
 	}

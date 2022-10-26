@@ -14,24 +14,24 @@
  * limitations under the License.
  */
 
-import * as _debug from 'debug';
-import { Drive as $Drive, list } from 'drivelist';
+import * as _debug from "debug";
+import { Drive as $Drive, list } from "drivelist";
 
-import { BlockDevice } from '../../source-destination/block-device';
-import { delay, difference } from '../../utils';
-import { Adapter } from './adapter';
+import { BlockDevice } from "../../source-destination/block-device";
+import { delay, difference } from "../../utils";
+import { Adapter } from "./adapter";
 
-const debug = _debug('etcher-sdk:block-device-adapter');
+const debug = _debug("etcher-sdk:block-device-adapter");
 
 const SCAN_INTERVAL = 1000;
 const USBBOOT_RPI_COMPUTE_MODULE_NAMES = [
-	'0001',
-	'RPi-MSD- 0001',
-	'File-Stor Gadget',
-	'Linux File-Stor_Gadget',
-	'Linux File-Stor Gadget',
-	'Linux File-Stor Gadget USB Device',
-	'Linux File-Stor Gadget Media',
+	"0001",
+	"RPi-MSD- 0001",
+	"File-Stor Gadget",
+	"Linux File-Stor_Gadget",
+	"Linux File-Stor Gadget",
+	"Linux File-Stor Gadget USB Device",
+	"Linux File-Stor Gadget Media",
 ];
 
 function looksLikeComputeModule(description: string): boolean {
@@ -51,8 +51,8 @@ function driveKey(drive: $Drive) {
 		drive.mountpoints
 			.map((m) => m.path)
 			.sort()
-			.join(','),
-	].join('|');
+			.join(","),
+	].join("|");
 }
 
 export interface DrivelistDrive extends $Drive {
@@ -104,7 +104,7 @@ export class BlockDeviceAdapter extends Adapter {
 			await this.scan();
 			if (!this.ready) {
 				this.ready = true;
-				this.emit('ready');
+				this.emit("ready");
 			}
 			await delay(SCAN_INTERVAL);
 		}
@@ -117,7 +117,7 @@ export class BlockDeviceAdapter extends Adapter {
 			const oldDevices = new Set<string>(this.drives.keys());
 			const newDevices = new Set<string>(drives.keys());
 			for (const removed of difference(oldDevices, newDevices)) {
-				this.emit('detach', this.drives.get(removed));
+				this.emit("detach", this.drives.get(removed));
 				this.drives.delete(removed);
 			}
 			for (const added of difference(newDevices, oldDevices)) {
@@ -128,7 +128,7 @@ export class BlockDeviceAdapter extends Adapter {
 					write: this.oWrite,
 					direct: this.oDirect,
 				});
-				this.emit('attach', blockDevice);
+				this.emit("attach", blockDevice);
 				this.drives.set(added, blockDevice);
 			}
 		}
@@ -141,7 +141,7 @@ export class BlockDeviceAdapter extends Adapter {
 			drives = await list();
 		} catch (error) {
 			debug(error);
-			this.emit('error', error);
+			this.emit("error", error);
 			return result;
 		}
 		for (const drive of drives) {
@@ -150,13 +150,13 @@ export class BlockDeviceAdapter extends Adapter {
 					// Always ignore RAID attached devices, as they are in danger-country;
 					// Even flashing RAIDs intentionally can have unintended effects
 					(
-						drive.busType !== 'RAID' &&
+						drive.busType !== "RAID" &&
 						// Exclude errored drives
 						!drive.error &&
 						// Exclude system drives if needed
 						(this.includeSystemDrives() || !drive.isSystem) &&
 						// Exclude drives with no size
-						typeof drive.size === 'number' &&
+						typeof drive.size === "number" &&
 						// Exclude virtual drives (DMG, TimeMachine, ... on macOS)
 						!drive.isVirtual
 					)
@@ -167,13 +167,13 @@ export class BlockDeviceAdapter extends Adapter {
 
 			const displayName =
 				/PhysicalDrive/i.test(drive.device) && drive.mountpoints.length
-					? drive.mountpoints.map((m) => m.path).join(', ') // Windows
+					? drive.mountpoints.map((m) => m.path).join(", ") // Windows
 					: drive.device;
 			const resultDrive: DrivelistDrive = { ...drive, displayName };
 			if (looksLikeComputeModule(resultDrive.description)) {
-				resultDrive.description = 'Compute Module';
+				resultDrive.description = "Compute Module";
 				// TODO: Should this be in the sdk?
-				resultDrive.icon = 'raspberrypi';
+				resultDrive.icon = "raspberrypi";
 				resultDrive.isSystem = false;
 			}
 			result.set(driveKey(drive), resultDrive);

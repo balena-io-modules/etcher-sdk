@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import * as debug_ from 'debug';
-import { EventEmitter } from 'events';
+import * as debug_ from "debug";
+import { EventEmitter } from "events";
 
-import { Adapter, AdapterSourceDestination } from './adapters/adapter';
+import { Adapter, AdapterSourceDestination } from "./adapters/adapter";
 
-const debug = debug_('etcher-sdk:scanner');
+const debug = debug_("etcher-sdk:scanner");
 
 export class Scanner extends EventEmitter {
 	public drives: Set<AdapterSourceDestination> = new Set();
@@ -27,25 +27,25 @@ export class Scanner extends EventEmitter {
 	constructor(private adapters: Adapter[]) {
 		super();
 		this.adapters.forEach((adapter: Adapter) => {
-			adapter.on('attach', this.onAttach.bind(this));
-			adapter.on('detach', this.onDetach.bind(this));
-			adapter.on('error', this.emit.bind(this, 'error'));
+			adapter.on("attach", this.onAttach.bind(this));
+			adapter.on("detach", this.onDetach.bind(this));
+			adapter.on("error", this.emit.bind(this, "error"));
 		});
 	}
 
 	private onAttach(drive: AdapterSourceDestination) {
 		this.drives.add(drive);
-		this.emit('attach', drive);
+		this.emit("attach", drive);
 	}
 
 	private onDetach(drive: AdapterSourceDestination) {
 		this.drives.delete(drive);
-		this.emit('detach', drive);
+		this.emit("detach", drive);
 	}
 
 	public getBy(
-		field: 'raw' | 'device' | 'devicePath',
-		value: string,
+		field: "raw" | "device" | "devicePath",
+		value: string
 	): AdapterSourceDestination | undefined {
 		for (const drive of this.drives) {
 			if (drive[field] === value) {
@@ -55,14 +55,14 @@ export class Scanner extends EventEmitter {
 	}
 
 	public start(): Promise<void> {
-		debug('start');
+		debug("start");
 		let notReady = this.adapters.length;
 		return new Promise((resolve) => {
 			this.adapters.forEach((adapter: Adapter) => {
-				adapter.on('ready', () => {
+				adapter.on("ready", () => {
 					notReady -= 1;
 					if (notReady === 0) {
-						this.emit('ready');
+						this.emit("ready");
 						resolve();
 					}
 				});
@@ -72,7 +72,7 @@ export class Scanner extends EventEmitter {
 	}
 
 	public stop(): void {
-		debug('stop');
+		debug("stop");
 		this.drives.clear();
 		this.adapters.forEach((adapter: Adapter) => {
 			adapter.stop();
