@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as _debug from 'debug';
+import { debug as _debug } from 'debug';
 import { Drive as $Drive, list } from 'drivelist';
 
 import { BlockDevice } from '../../source-destination/block-device';

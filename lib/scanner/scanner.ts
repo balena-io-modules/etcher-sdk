@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as debug_ from 'debug';
+import { debug as debug_ } from 'debug';
 import { EventEmitter } from 'events';
 
 import { Adapter, AdapterSourceDestination } from './adapters/adapter';

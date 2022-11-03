@@ -116,7 +116,7 @@ export class Http extends SourceDestination {
 		}
 		const pathname = parse(this.redirectUrl).pathname;
 		if (!this.fileName && pathname !== undefined) {
-			this.fileName = basename(unescape(pathname));
+			this.fileName = basename(unescape(pathname!));
 		}
 		return {
 			size: this.size,

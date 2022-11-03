@@ -15,7 +15,7 @@
  */
 
 import { execFile, ExecFileOptions } from 'child_process';
-import * as _debug from 'debug';
+import { debug as _debug } from 'debug';
 import { promises as fs } from 'fs';
 import { platform } from 'os';
 import RWMutex = require('rwmutex');

@@ -15,7 +15,7 @@
  */
 
 import { getAlignedBuffer } from '@ronomon/direct-io';
-import * as _debug from 'debug';
+import { debug as _debug } from 'debug';
 import { Writable } from 'stream';
 
 import { AlignedLockableBuffer } from './aligned-lockable-buffer';

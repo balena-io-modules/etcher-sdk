@@ -15,7 +15,7 @@
  */
 
 import { interact } from 'balena-image-fs';
-import * as _debug from 'debug';
+import { debug as _debug } from 'debug';
 import { DiscardDiskChunk, Disk, ReadResult, WriteResult } from 'file-disk';
 import { getPartitions, GPTPartition, MBRPartition } from 'partitioninfo';
 

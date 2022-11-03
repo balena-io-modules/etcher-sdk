@@ -10,7 +10,8 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"importHelpers": true,
-		"strictNullChecks": true
+		"strictNullChecks": true,
+		"esModuleInterop": true
 	},
 	"include": [
 		"lib"
