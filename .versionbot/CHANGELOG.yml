@@ -1,4 +1,16 @@
 - commits:
+    - subject: update drivelist and node-raspberypi-usbboot dependencies
+      hash: 838399bae7f2d76674c8f76957cafa8875a75d9e
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Zane Hitchcox
+      nested: []
+  version: 7.4.2
+  title: ""
+  date: 2022-11-04T13:35:21.852Z
+- commits:
     - subject: Update dependency typedoc-plugin-markdown to 2.4.2
       hash: c77a5a14462418412069fb48581ce4535d1f4b47
       body: |
