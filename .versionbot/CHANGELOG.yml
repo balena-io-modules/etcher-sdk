@@ -1,4 +1,14 @@
 - commits:
+    - subject: "patch: downgraded drivelist to 9.2.4"
+      hash: c6b18a3f4540fb71b3cc0f89cd8adc56aa344a78
+      body: ""
+      footer: {}
+      author: Peter Makra
+      nested: []
+  version: 7.4.3
+  title: ""
+  date: 2022-12-23T16:15:54.403Z
+- commits:
     - subject: update drivelist and node-raspberypi-usbboot dependencies
       hash: 838399bae7f2d76674c8f76957cafa8875a75d9e
       body: ""
