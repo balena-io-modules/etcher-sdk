@@ -35,3 +35,4 @@ export * from './usb-bb-boot';
 export * from './usbboot';
 export * from './xz';
 export * from './zip';
+export * from './zstd';
