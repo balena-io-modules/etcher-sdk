@@ -1,4 +1,16 @@
 - commits:
+    - subject: "Patch: version bump"
+      hash: 6072618677f050b953c9915b6ae397c2f4a86a09
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: builder555
+      nested: []
+  version: 7.4.4
+  title: ""
+  date: 2022-12-23T16:52:43.506Z
+- commits:
     - subject: "patch: downgraded drivelist to 9.2.4"
       hash: c6b18a3f4540fb71b3cc0f89cd8adc56aa344a78
       body: ""
