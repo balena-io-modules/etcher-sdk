@@ -17,7 +17,7 @@
 import { Transform as TransformStream } from 'stream';
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
-import * as fileType from 'file-type';
+import { fromStream } from 'file-type';
 import { getPartitions, GetPartitionsResult } from 'partitioninfo';
 import { extname } from 'path';
 import { XXHash3 } from 'xxhash-addon';
@@ -472,8 +472,8 @@ export class SourceDestination extends EventEmitter {
 			throw error;
 		}
 		try {
-			const ft = fileType(await streamToBuffer(stream));
-			if (ft !== null) {
+			const ft = await fromStream(stream as any);
+			if (ft !== undefined && ft !== null) {
 				return ft.mime;
 			}
 		} catch (error) {
