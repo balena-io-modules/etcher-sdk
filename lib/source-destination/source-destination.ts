@@ -471,9 +471,14 @@ export class SourceDestination extends EventEmitter {
 			}
 			throw error;
 		}
-		const ft = fileType(await streamToBuffer(stream));
-		if (ft !== null) {
-			return ft.mime;
+		try {
+			const ft = fileType(await streamToBuffer(stream));
+			if (ft !== null) {
+				return ft.mime;
+			}
+		} catch (error) {
+			console.log("Can't read stream to buffer");
+			throw error;
 		}
 	}
 
@@ -511,7 +516,13 @@ export class SourceDestination extends EventEmitter {
 				// File extension may be wrong, try content.
 			}
 		}
-		mimetype = await this.getMimeTypeFromContent();
+
+		try {
+			mimetype = await this.getMimeTypeFromContent();
+		} catch (e) {
+			console.log("Can't get mimetype from content");
+		}
+
 		return this.getInnerSourceHelper(mimetype);
 	}
 
@@ -520,11 +531,16 @@ export class SourceDestination extends EventEmitter {
 			end: 34 * 512, // GPT partition table size
 			alignment: this.getAlignment(),
 		});
-		const buffer = await streamToBuffer(stream);
 		try {
-			return await getPartitions(buffer, { getLogical: false });
-		} catch {
-			// no partitions
+			const buffer = await streamToBuffer(stream);
+			try {
+				return await getPartitions(buffer, { getLogical: false });
+			} catch {
+				// no partitions
+			}
+		} catch (error) {
+			console.log("Can't read to buffer to get partitions")
+			throw error;
 		}
 	}
 }
