@@ -520,7 +520,8 @@ export class SourceDestination extends EventEmitter {
 		try {
 			mimetype = await this.getMimeTypeFromContent();
 		} catch (e) {
-			console.log("Can't get mimetype from content");
+			if (e.code === 'EISDIR') { throw e; } // expected to die on directories
+			console.log("Can't get mimetype from content", e.code);
 		}
 
 		return this.getInnerSourceHelper(mimetype);
