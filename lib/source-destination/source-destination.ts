@@ -17,7 +17,7 @@
 import { Transform as TransformStream } from 'stream';
 import { EventEmitter } from 'events';
 import { ReadResult, WriteResult } from 'file-disk';
-import * as fileType from 'file-type';
+import { fromStream } from 'file-type';
 import { getPartitions, GetPartitionsResult } from 'partitioninfo';
 import { extname } from 'path';
 import { XXHash3 } from 'xxhash-addon';
@@ -471,9 +471,14 @@ export class SourceDestination extends EventEmitter {
 			}
 			throw error;
 		}
-		const ft = fileType(await streamToBuffer(stream));
-		if (ft !== null) {
-			return ft.mime;
+		try {
+			const ft = await fromStream(stream as any);
+			if (ft !== undefined && ft !== null) {
+				return ft.mime;
+			}
+		} catch (error) {
+			console.log("Can't read stream to buffer");
+			throw error;
 		}
 	}
 
@@ -511,7 +516,14 @@ export class SourceDestination extends EventEmitter {
 				// File extension may be wrong, try content.
 			}
 		}
-		mimetype = await this.getMimeTypeFromContent();
+
+		try {
+			mimetype = await this.getMimeTypeFromContent();
+		} catch (e) {
+			if (e.code === 'EISDIR') { throw e; } // expected to die on directories
+			console.log("Can't get mimetype from content", e.code);
+		}
+
 		return this.getInnerSourceHelper(mimetype);
 	}
 
@@ -520,11 +532,16 @@ export class SourceDestination extends EventEmitter {
 			end: 34 * 512, // GPT partition table size
 			alignment: this.getAlignment(),
 		});
-		const buffer = await streamToBuffer(stream);
 		try {
-			return await getPartitions(buffer, { getLogical: false });
-		} catch {
-			// no partitions
+			const buffer = await streamToBuffer(stream);
+			try {
+				return await getPartitions(buffer, { getLogical: false });
+			} catch {
+				// no partitions
+			}
+		} catch (error) {
+			console.log("Can't read to buffer to get partitions")
+			throw error;
 		}
 	}
 }
