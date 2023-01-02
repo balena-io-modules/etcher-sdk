@@ -1,4 +1,32 @@
 - commits:
+    - subject: "patch: reverted unbzip2 to fork"
+      hash: 229a898ebb778693cacb9411f7a3557f0b10cfc8
+      body: ""
+      footer: {}
+      author: Peter Makra
+      nested: []
+    - subject: "patch: eliminated one stream to buffer with bumping file-type version"
+      hash: f0dd3177f6ba4f90f1f6692e4f3cdcc512b1ba14
+      body: ""
+      footer: {}
+      author: Peter Makra
+      nested: []
+    - subject: "patch: aligned error for directories"
+      hash: df90f1d72e4af2ff785cf70dce68524c0e0943c9
+      body: ""
+      footer: {}
+      author: Peter Makra
+      nested: []
+    - subject: "patch: WIP handle error when can't read mime or partition for metadata"
+      hash: 72e7d241e5de68669589826960f53824362121cc
+      body: ""
+      footer: {}
+      author: Peter Makra
+      nested: []
+  version: 7.4.5
+  title: ""
+  date: 2023-01-02T14:45:53.302Z
+- commits:
     - subject: "Patch: version bump"
       hash: 6072618677f050b953c9915b6ae397c2f4a86a09
       body: ""
