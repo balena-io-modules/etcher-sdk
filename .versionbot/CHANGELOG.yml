@@ -1,4 +1,14 @@
 - commits:
+    - subject: "patch: version bump npm release"
+      hash: 3ae1b3e8db454d4eb8f8e9edec7f6de6e0928e77
+      body: ""
+      footer: {}
+      author: mcraa
+      nested: []
+  version: 7.4.6
+  title: ""
+  date: 2023-01-02T16:23:23.908Z
+- commits:
     - subject: "patch: reverted unbzip2 to fork"
       hash: 229a898ebb778693cacb9411f7a3557f0b10cfc8
       body: ""
