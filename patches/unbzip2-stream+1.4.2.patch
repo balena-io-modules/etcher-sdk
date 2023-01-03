@@ -1,0 +1,382 @@
+diff --git a/node_modules/unbzip2-stream/index.js b/node_modules/unbzip2-stream/index.js
+index 92831d3..a9aaf69 100644
+--- a/node_modules/unbzip2-stream/index.js
++++ b/node_modules/unbzip2-stream/index.js
+@@ -1,87 +1,90 @@
+-var through = require('through');
++var stream = require('stream');
+ var bz2 = require('./lib/bzip2');
+ var bitIterator = require('./lib/bit_iterator');
+
+-module.exports = unbzip2Stream;
++class Unbzip2Stream extends stream.Transform {
++    constructor(options) {
+
+-function unbzip2Stream() {
+-    var bufferQueue = [];
+-    var hasBytes = 0;
+-    var blockSize = 0;
+-    var broken = false;
+-    var done = false;
+-    var bitReader = null;
++        super(options);
+
+-    function decompressBlock(push){
+-        if(!blockSize){
+-            blockSize = bz2.header(bitReader);
+-            //console.error("got header of", blockSize);
++        this.queue = [];
++        this.hasBytes = 0;
++        this.blockSize = 0;
++        this.done = false;
++        this.bitReader = null;
++        this.streamCRC = null;
++
++    }
++
++    _decompressAndQueue() {
++        if (this.destroyed)
++            return false;
++        try {
++            return this._decompressBlock();
++        } catch( error ) {
++            this.destroy(error);
++            return false;
++        }
++    }
++
++    _decompressBlock() {
++        if(!this.blockSize) {
++            this.blockSize = bz2.header(this.bitReader);
+             return true;
+-        }else{
+-            var bufsize = 100000 * blockSize;
+-            var buf = new Int32Array(bufsize);
+-
+-            var chunk = [];
+-            var f = function(b) {
+-                chunk.push(b);
++        } else {
++            var length = 100000 * this.blockSize;
++            var buffer = new Int32Array(length);
++            var bytes = [];
++            var push = (value) => {
++                bytes.push(value)
+             };
+
+-            var done = bz2.decompress(bitReader, f, buf, bufsize);
+-            if (done) {
+-                push(null);
+-                //console.error('done');
++            this.streamCRC = bz2.decompress(this.bitReader, push, buffer, length, this.streamCRC);
++            if (this.streamCRC === null) {
++                // reset for next bzip2 header
++                this.blockSize = 0;
+                 return false;
+-            }else{
+-                //console.error('decompressed', chunk.length,'bytes');
+-                push(new Buffer(chunk));
++            } else {
++                this.push(Buffer.from(bytes));
+                 return true;
+             }
+         }
+     }
+
+-    var outlength = 0;
+-    function decompressAndQueue(stream) {
+-        if (broken) return;
+-        try {
+-            return decompressBlock(function(d) {
+-                stream.queue(d);
+-                if (d !== null) {
+-                    //console.error('write at', outlength.toString(16));
+-                    outlength += d.length;
+-                } else {
+-                    //console.error('written EOS');
+-                }
++    _transform(chunk, encoding, next) {
++        this.queue.push(chunk);
++        this.hasBytes += chunk.length;
++
++        if(this.bitReader == null) {
++            this.bitReader = bitIterator(() => {
++                return this.queue.shift();
+             });
+-        } catch(e) {
+-            //console.error(e);
+-            stream.emit('error', e);
+-            broken = true;
+-            return false;
+         }
++
++        while (!this.destroyed && this.hasBytes - this.bitReader.bytesRead + 1 >= ((25000 + 100000 * this.blockSize) || 4)){
++            // console.error('decompressing with', hasBytes - bitReader.bytesRead + 1, 'bytes in buffer');
++            this._decompressAndQueue();
++        }
++
++        process.nextTick(next);
+     }
+
+-    return through(
+-        function write(data) {
+-            //console.error('received', data.length,'bytes in', typeof data);
+-            bufferQueue.push(data);
+-            hasBytes += data.length;
+-            if (bitReader === null) {
+-                bitReader = bitIterator(function() {
+-                    return bufferQueue.shift();
+-                });
+-            }
+-            while (hasBytes - bitReader.bytesRead + 1 >= ((25000 + 100000 * blockSize) || 4)){
+-                //console.error('decompressing with', hasBytes - bitReader.bytesRead + 1, 'bytes in buffer');
+-                if (!done) done = !decompressAndQueue(this);
+-                if (done) break;
+-            }
+-        },
+-        function end(x) {
+-            //console.error(x,'last compressing with', hasBytes, 'bytes in buffer');
+-            if (!done) {
+-                while(decompressAndQueue(this));
+-            }
++    _flush(next) {
++        while (!this.destroyed && this.hasBytes > this.bitReader.bytesRead) {
++            this._decompressAndQueue();
++        }
++        if (this.destroyed) {
++            return;
++        }
++        if (this.streamCRC !== null) {
++            this.destroy(new Error("input stream ended prematurely"));
+         }
+-    );
++        this.push(null);
++    }
+ }
+
++module.exports = function unbzip2Stream(options) {
++    return new Unbzip2Stream(options);
++};
++
++module.exports.Stream = Unbzip2Stream;
+diff --git a/node_modules/unbzip2-stream/lib/bit_iterator.js b/node_modules/unbzip2-stream/lib/bit_iterator.js
+index c038aeb..270e2d6 100644
+--- a/node_modules/unbzip2-stream/lib/bit_iterator.js
++++ b/node_modules/unbzip2-stream/lib/bit_iterator.js
+@@ -6,6 +6,11 @@ module.exports = function bitIterator(nextBuffer) {
+     var bit = 0, byte = 0;
+     var bytes = nextBuffer();
+     var f = function(n) {
++        if (n === null && bit != 0) {  // align to byte boundary
++            bit = 0
++            byte++;
++            return;
++        }
+         var result = 0;
+         while(n > 0) {
+             if (byte >= bytes.length) {
+@@ -13,10 +18,11 @@ module.exports = function bitIterator(nextBuffer) {
+                 bytes = nextBuffer();
+             }
+             var left = 8 - bit;
++            if (bit === 0 && n > 0)
++                f.bytesRead++;
+             if (n >= left) {
+                 result <<= left;
+                 result |= (BITMASK[left] & bytes[byte++]);
+-                f.bytesRead++;
+                 bit = 0;
+                 n -= left;
+             } else {
+@@ -28,6 +34,6 @@ module.exports = function bitIterator(nextBuffer) {
+         }
+         return result;
+     };
+-    f.bytesRead = 1;
++    f.bytesRead = 0;
+     return f;
+ };
+diff --git a/node_modules/unbzip2-stream/lib/bzip2.js b/node_modules/unbzip2-stream/lib/bzip2.js
+index 4195703..677fdc5 100644
+--- a/node_modules/unbzip2-stream/lib/bzip2.js
++++ b/node_modules/unbzip2-stream/lib/bzip2.js
+@@ -1,8 +1,8 @@
+-/*
++/*
+   bzip2.js - a small bzip2 decompression implementation
+-
++
+   Copyright 2011 by antimatter15 (antimatter15@gmail.com)
+-
++
+   Based on micro-bunzip by Rob Landley (rob@landley.net).
+
+   Copyright (c) 2011 by antimatter15 (antimatter15@gmail.com).
+@@ -13,10 +13,10 @@
+   the rights to use, copy, modify, merge, publish, distribute, sublicense,
+   and/or sell copies of the Software, and to permit persons to whom the
+   Software is furnished to do so, subject to the following conditions:
+-
++
+   The above copyright notice and this permission notice shall be included
+   in all copies or substantial portions of the Software.
+-
++
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+@@ -31,9 +31,9 @@ function Bzip2Error(message) {
+     this.stack = (new Error()).stack;
+ }
+ Bzip2Error.prototype = new Error;
+-
++
+ var message = {
+-    Error: function(message) {throw new Bzip2Error(message);}
++    Error: function(message) {throw new Error(message);}
+ };
+
+ var bzip2 = {};
+@@ -130,16 +130,16 @@ bzip2.array = function(bytes) {
+     }
+ }
+
+-
++
+ bzip2.simple = function(srcbuffer, stream) {
+     var bits = bzip2.array(srcbuffer);
+     var size = bzip2.header(bits);
+     var ret = false;
+     var bufsize = 100000 * size;
+     var buf = new Int32Array(bufsize);
+-
++
+     do {
+-        ret = bzip2.decompress(bits, stream, buf, bufsize);
++        ret = bzip2.decompress(bits, stream, buf, bufsize);
+     } while(!ret);
+ }
+
+@@ -160,16 +160,22 @@ bzip2.header = function(bits) {
+ //takes a function for reading the block data (starting with 0x314159265359)
+ //a block size (0-9) (optional, defaults to 9)
+ //a length at which to stop decompressing and return the output
+-bzip2.decompress = function(bits, stream, buf, bufsize) {
++bzip2.decompress = function(bits, stream, buf, bufsize, streamCRC) {
+     var MAX_HUFCODE_BITS = 20;
+     var MAX_SYMBOLS = 258;
+     var SYMBOL_RUNA = 0;
+     var SYMBOL_RUNB = 1;
+     var GROUP_SIZE = 50;
+     var crc = 0 ^ (-1);
+-
++
+     for(var h = '', i = 0; i < 6; i++) h += bits(8).toString(16);
+-    if (h == "177245385090") return true; //last block
++    if (h == "177245385090") {
++      var finalCRC = bits(32)|0;
++      if (finalCRC !== streamCRC) message.Error("Error in bzip2: crc32 do not match");
++      // align stream to byte
++      bits(null);
++      return null; // reset streamCRC for next call
++    }
+     if (h != "314159265359") message.Error("eek not valid bzip data");
+     var crcblock = bits(32)|0; // CRC code
+     if (bits(1)) message.Error("unsupported obsolete version");
+@@ -235,8 +241,8 @@ bzip2.decompress = function(bits, stream, buf, bufsize) {
+
+         hufGroup.minLen = minLen;
+         hufGroup.maxLen = maxLen;
+-        var base = hufGroup.base.subarray(1);
+-        var limit = hufGroup.limit.subarray(1);
++        var base = hufGroup.base;
++        var limit = hufGroup.limit;
+         var pp = 0;
+         for(var i = minLen; i <= maxLen; i++)
+         for(var t = 0; t < symCount; t++)
+@@ -254,19 +260,19 @@ bzip2.decompress = function(bits, stream, buf, bufsize) {
+         base[minLen] = 0;
+     }
+
+-    for(var i = 0; i < 256; i++) {
++    for(var i = 0; i < 256; i++) {
+         this.mtfSymbol[i] = i;
+         this.byteCount[i] = 0;
+     }
+     var runPos, count, symCount, selector;
+-    runPos = count = symCount = selector = 0;
++    runPos = count = symCount = selector = 0;
+     while(true) {
+         if (!(symCount--)) {
+             symCount = GROUP_SIZE - 1;
+             if (selector >= nSelectors) message.Error("meow i'm a kitty, that's an error");
+             hufGroup = groups[this.selectors[selector++]];
+-            base = hufGroup.base.subarray(1);
+-            limit = hufGroup.limit.subarray(1);
++            base = hufGroup.base;
++            limit = hufGroup.limit;
+         }
+         i = hufGroup.minLen;
+         j = bits(i);
+@@ -352,7 +358,10 @@ bzip2.decompress = function(bits, stream, buf, bufsize) {
+
+     crc = (crc ^ (-1)) >>> 0;
+     if ((crc|0) != (crcblock|0)) message.Error("Error in bzip2: crc32 do not match");
+-    return false;
++    if (streamCRC === null)
++      streamCRC = 0;
++    streamCRC = (crc ^ ((streamCRC << 1) | (streamCRC >>> 31))) & 0xFFFFFFFF;
++    return streamCRC;
+ }
+
+ module.exports = bzip2;
+diff --git a/node_modules/unbzip2-stream/package.json b/node_modules/unbzip2-stream/package.json
+index d8da8a9..0ed7c33 100644
+--- a/node_modules/unbzip2-stream/package.json
++++ b/node_modules/unbzip2-stream/package.json
+@@ -1,6 +1,6 @@
+ {
+   "name": "unbzip2-stream",
+-  "version": "1.2.5",
++  "version": "1.4.2",
+   "description": "streaming unbzip2 implementation in pure javascript for node and browsers",
+   "keywords": [
+     "bzip",
+@@ -12,9 +12,9 @@
+     "through"
+   ],
+   "scripts": {
+-    "prepare": "browserify -s unbzip2Stream index.js | uglifyjs >> dist/unbzip2-stream.min.js",
+-    "browser-test": "browserify -t brfs test/simple.js | tape-run2 -b phantomjs",
+-    "prepare-long-test": "dd if=/dev/urandom of=test/fixtures/vmlinux.bin bs=50x1024x1024 count=2 && cat test/fixtures/vmlinux.bin | bzip2 > test/fixtures/vmlinux.bin.bz2",
++    "browserify": "mkdir -p dist && browserify -s unbzip2Stream index.js | uglifyjs > dist/unbzip2-stream.min.js",
++    "browser-test": "browserify -t brfs test/simple.js | tape-run",
++    "prepare-long-test": "head -c 104857600 < /dev/urandom | tee test/fixtures/vmlinux.bin | bzip2 > test/fixtures/vmlinux.bin.bz2",
+     "long-test": "tape test/extra/long.js",
+     "download-test": "beefy test/browser/long.js --open -- -t brfs",
+     "test": "tape test/*.js"
+@@ -34,18 +34,15 @@
+   ],
+   "main": "index.js",
+   "devDependencies": {
+-    "beefy": "^2.1.2",
++    "beefy": "^2.1.8",
+     "brfs": "^1.2.0",
+-    "browserify": "^8.1.0",
++    "browserify": "^16.2.3",
+     "concat-stream": "^1.4.7",
+-    "tape": "^3.4.0",
+-    "tape-run2": "^1.0.3",
+-    "throughout": "0.0.0",
++    "stream-equal": "^1.1.1",
++    "tape": "^4.9.2",
++    "tape-run": "^4.0.0",
+     "uglify-js": "^3.0.10"
+   },
+-  "dependencies": {
+-    "through": "^2.3.6",
+-    "buffer": "^3.0.1"
+-  },
++  "dependencies": {},
+   "license": "MIT"
+ }
