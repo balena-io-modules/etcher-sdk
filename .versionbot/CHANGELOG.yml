@@ -1,4 +1,14 @@
 - commits:
+    - subject: "patch: update usbboot second stage check; fixed winusb version"
+      hash: b28918f8e73224aa6ad3944a004d325b8f9a2e53
+      body: ""
+      footer: {}
+      author: Peter Makra
+      nested: []
+  version: 7.4.7
+  title: ""
+  date: 2023-01-11T12:29:25.355Z
+- commits:
     - subject: "patch: version bump npm release"
       hash: 3ae1b3e8db454d4eb8f8e9edec7f6de6e0928e77
       body: ""
