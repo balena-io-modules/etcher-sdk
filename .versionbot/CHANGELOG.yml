@@ -1,4 +1,14 @@
 - commits:
+    - subject: "patch: cm4 start4.elf update"
+      hash: d3937d28d44887e6a8d8b4be2794dea55bc5fa9a
+      body: ""
+      footer: {}
+      author: Peter Makra
+      nested: []
+  version: 7.4.8
+  title: ""
+  date: 2023-01-16T20:23:27.039Z
+- commits:
     - subject: "patch: update usbboot second stage check; fixed winusb version"
       hash: b28918f8e73224aa6ad3944a004d325b8f9a2e53
       body: ""
