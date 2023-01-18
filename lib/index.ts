@@ -22,6 +22,7 @@ import * as sourceDestination from './source-destination';
 import * as sparseStream from './sparse-stream';
 import * as tmp from './tmp';
 import * as utils from './utils';
+import * as migrator from './migrator';
 
 export {
 	constants,
@@ -32,4 +33,5 @@ export {
 	sparseStream,
 	tmp,
 	utils,
+	migrator,
 };

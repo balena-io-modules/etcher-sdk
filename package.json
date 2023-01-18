@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "@balena/node-beaglebone-usbboot": "^2.0.1",
+    "@balena/sudo-prompt": "^9.2.1-workaround-windows-amperstand-in-username-0849e215b947987a643fe5763902aea201255534",
     "@balena/udif": "^1.1.2",
     "@ronomon/direct-io": "^3.0.1",
     "aws4-axios": "^2.4.9",
@@ -67,6 +68,7 @@
     "outdent": "^0.8.0",
     "partitioninfo": "^6.0.2",
     "rwmutex": "^1.0.0",
+    "semver": "^7.3.8",
     "tslib": "^2.0.0",
     "unbzip2-stream": "github:balena-io-modules/unbzip2-stream#4a54f56a25b58950f9e4277c56db2912d62242e7",
     "unzip-stream": "^0.3.0",
@@ -89,6 +91,7 @@
     "@types/mocha": "^5.2.4",
     "@types/node": "^18.11.18",
     "@types/progress": "^2.0.1",
+    "@types/semver": "^7.3.13",
     "@types/sinon": "^5.0.1",
     "@types/yargs": "^11.0.0",
     "@types/yauzl": "^2.9.0",
