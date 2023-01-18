@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-import { execFile, ExecFileOptions } from 'child_process';
-import * as _debug from 'debug';
-import { promises as fs } from 'fs';
-import { platform } from 'os';
-import RWMutex = require('rwmutex');
+import { execFile, ExecFileOptions } from "child_process";
+import * as _debug from "debug";
+import { promises as fs } from "fs";
+import { platform } from "os";
+import RWMutex = require("rwmutex");
 
-import { withTmpFile, TmpFileResult } from './tmp';
-import { delay } from './utils';
+import { withTmpFile, TmpFileResult } from "./tmp";
+import { delay } from "./utils";
 
-const debug = _debug('etcher-sdk:diskpart');
+const debug = _debug("etcher-sdk:diskpart");
 
 const DISKPART_DELAY = 2000;
 const DISKPART_RETRIES = 5;
@@ -37,7 +37,7 @@ interface ExecResult {
 const execFileAsync = async (
 	command: string,
 	args: string[] = [],
-	options: ExecFileOptions = {},
+	options: ExecFileOptions = {}
 ): Promise<ExecResult> => {
 	return await new Promise(
 		(resolve: (res: ExecResult) => void, reject: (err: Error) => void) => {
@@ -51,9 +51,9 @@ const execFileAsync = async (
 					} else {
 						resolve({ stdout, stderr });
 					}
-				},
+				}
 			);
-		},
+		}
 	);
 };
 
@@ -73,20 +73,36 @@ async function withDiskpartMutex<T>(fn: () => T): Promise<T> {
  * @param {Array<String>} commands - list of commands to run
  */
 const runDiskpart = async (commands: string[]): Promise<void> => {
-	if (platform() !== 'win32') {
+	if (platform() !== "win32") {
 		return;
 	}
 	await withTmpFile({ keepOpen: false }, async (file: TmpFileResult) => {
-		await fs.writeFile(file.path, commands.join('\r\n'));
+		await fs.writeFile(file.path, commands.join("\r\n"));
 		await withDiskpartMutex(async () => {
-			const { stdout, stderr } = await execFileAsync('diskpart', [
-				'/s',
+			const { stdout, stderr } = await execFileAsync("diskpart", [
+				"/s",
 				file.path,
 			]);
-			debug('stdout:', stdout);
-			debug('stderr:', stderr);
+			debug("stdout:", stdout);
+			debug("stderr:", stderr);
 		});
 	});
+};
+
+/**
+ * @summary Checks if running on windows and returns device Id
+ * @param {String} device
+ */
+const prepareDeviceId = (device: string) => {
+	if (platform() !== "win32") {
+		throw new Error(`Diskpart is not available on ${platform()}`);
+	}
+	const match = device.match(PATTERN);
+	if (match === null) {
+		throw new Error(`Invalid device: "${device}"`);
+	}
+
+	return match.pop();
 };
 
 /**
@@ -98,19 +114,19 @@ const runDiskpart = async (commands: string[]): Promise<void> => {
  *   .catch(...)
  */
 export const clean = async (device: string): Promise<void> => {
-	if (platform() !== 'win32') {
-		return;
-	}
-	const match = device.match(PATTERN);
-	if (match === null) {
+	debug("clean", device);
+	let deviceId;
+
+	try {
+		deviceId = prepareDeviceId(device);
+	} catch (error) {
 		throw new Error(`Invalid device: "${device}"`);
 	}
-	debug('clean', device);
-	const deviceId = match.pop();
+
 	let errorCount = 0;
 	while (errorCount <= DISKPART_RETRIES) {
 		try {
-			await runDiskpart([`select disk ${deviceId}`, 'clean', 'rescan']);
+			await runDiskpart([`select disk ${deviceId}`, "clean", "rescan"]);
 			return;
 		} catch (error) {
 			if (error.code === 0x8004280a) {
@@ -124,9 +140,64 @@ export const clean = async (device: string): Promise<void> => {
 				await delay(DISKPART_DELAY);
 			} else {
 				throw new Error(
-					`Couldn't clean the drive, ${error.message} (code ${error.code})`,
+					`Couldn't clean the drive, ${error.message} (code ${error.code})`
 				);
 			}
 		}
+	}
+};
+
+/**
+ * @summary Reduces the size of the given partition
+ * @param {String} partition - the identifier of the partition
+ * @param {number} desiredMB - (optional) megabytes to free up, checked against querymax, defaults to max available
+ * @example
+ * shrinkPartition("C", 2048)
+ *  .then(...)
+ *  .catch(...)
+ */
+export const shrinkPartition = async (
+	partition: string,
+	desiredMB?: number
+) => {
+	debug("shrink", partition, desiredMB);
+
+	try {
+		await runDiskpart([
+			`select volume ${partition}`,
+			`shrink ${desiredMB ? "DESIRED=".concat(desiredMB + "") : ""}`,
+		]);
+	} catch (error) {
+		// TODO
+	}
+};
+
+/**
+ *
+ * @param {string} device - device path
+ * @param {number} sizeMB - size of the new partition (free space has to be present)
+ * @param {string} fs - default "fat32", possible "ntfs" the filesystem to format with
+ * @param {string} desiredLetter - letter to assign to the new volume, gets the next free letter by default
+ * @example
+ * createPartition('\\\\.\\PhysicalDrive2', 2048)
+ *  .then(...)
+ *  .catch(...)
+ */
+export const createPartition = async (
+	device: string,
+	sizeMB: number,
+	fs: "fat32" | "ntfs" = "fat32",
+	desiredLetter?: string
+) => {
+	const deviceId = prepareDeviceId(device);
+	try {
+		await runDiskpart([
+			`select disk ${deviceId}`,
+			`create partition primary size=${sizeMB}`,
+			`${desiredLetter ? "assign letter=".concat(desiredLetter) : ""}`,
+			`format fs=${fs} label="Balena Volume" quick`
+		])
+	} catch (error) {
+		// TODO
 	}
 };
