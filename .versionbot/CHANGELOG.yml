@@ -1,4 +1,16 @@
 - commits:
+    - subject: Drop support for Node 14 and add Node 18
+      hash: 63930b1a9f4a79ad6907edd1a790cc18092ebda8
+      body: ""
+      footer:
+        Change-type: major
+        change-type: major
+      author: Akis Kesoglou
+      nested: []
+  version: 8.0.0
+  title: ""
+  date: 2023-01-20T16:58:08.858Z
+- commits:
     - subject: "patch: cm4 start4.elf update"
       hash: d3937d28d44887e6a8d8b4be2794dea55bc5fa9a
       body: ""
