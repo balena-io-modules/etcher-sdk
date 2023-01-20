@@ -72,7 +72,7 @@
     "zip-part-stream": "^2.0.0"
   },
   "optionalDependencies": {
-    "winusb-driver-generator": "1.2.7"
+    "winusb-driver-generator": "^1.5.0"
   },
   "devDependencies": {
     "@balena/lint": "^5.4.0",
