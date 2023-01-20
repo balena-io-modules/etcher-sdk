@@ -1,4 +1,33 @@
 - commits:
+    - subject: Update drivelist
+      hash: be0abe698e432f59fc49ee5ec3f80944edddff06
+      body: ""
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Akis Kesoglou
+      nested: []
+    - subject: Update winusb-driver-generator
+      hash: 878841170e15f56656dbae5343fb6df478dc7c1c
+      body: ""
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Akis Kesoglou
+      nested: []
+    - subject: Remove dependency on node-crc-utils
+      hash: 568e6e9119dba8636f2e96dace4582e7347ddc4c
+      body: |
+        Was accidentally added with 63930b1a9f4a7
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Akis Kesoglou
+      nested: []
+  version: 8.1.0
+  title: ""
+  date: 2023-01-20T17:48:31.259Z
+- commits:
     - subject: Drop support for Node 14 and add Node 18
       hash: 63930b1a9f4a79ad6907edd1a790cc18092ebda8
       body: ""
