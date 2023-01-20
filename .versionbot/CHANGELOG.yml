@@ -1,4 +1,19 @@
 - commits:
+    - subject: "chore(deps): update node.js to 18.13.0"
+      hash: 310cb447dbcb2879b5a5799717d5696b62d1a098
+      body: |
+        Update node to 18.13.0
+
+        Update node from 16.19.0 to 18.13.0
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Renovate Bot
+      nested: []
+  version: 8.2.0
+  title: ""
+  date: 2023-01-20T18:53:04.370Z
+- commits:
     - subject: Update drivelist
       hash: be0abe698e432f59fc49ee5ec3f80944edddff06
       body: ""
