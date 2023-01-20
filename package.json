@@ -45,7 +45,6 @@
   },
   "dependencies": {
     "@balena/node-beaglebone-usbboot": "^3.0.0",
-    "@balena/node-crc-utils": "^3.0.0",
     "@balena/udif": "^1.1.2",
     "@ronomon/direct-io": "^3.0.1",
     "aws4-axios": "^2.4.9",
