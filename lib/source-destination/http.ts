@@ -19,6 +19,7 @@ import axios, {
 	AxiosInstance,
 	AxiosResponse,
 } from 'axios';
+import { setupCache } from 'axios-cache-interceptor';
 // Always use the node adapter (even in a browser)
 // @ts-ignore
 import * as axiosNodeAdapter from 'axios/lib/adapters/http';
@@ -50,7 +51,7 @@ export class Http extends SourceDestination {
 	constructor({
 		url,
 		avoidRandomAccess = false,
-		axiosInstance = axios.create(),
+		axiosInstance = setupCache(axios),
 		auth,
 	}: {
 		url: string;
