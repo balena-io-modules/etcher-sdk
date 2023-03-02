@@ -145,6 +145,7 @@ export class Http extends SourceDestination {
 			responseType: 'arraybuffer',
 			headers: {
 				Range: this.getRange(sourceOffset, sourceOffset + length - 1),
+				'accept-encoding': 'gzip',
 			},
 		});
 		const bytesRead = response.data.length;
@@ -163,6 +164,7 @@ export class Http extends SourceDestination {
 			url: this.redirectUrl,
 			headers: {
 				Range: this.getRange(start, end),
+				'accept-encoding': 'gzip',
 			},
 			responseType: 'stream',
 		});
