@@ -1,4 +1,14 @@
 - commits:
+    - subject: "patch: fix accept-enconding to prevent CF proxy decompression"
+      hash: 58490506c93d56dad530eddc71fed117d85cb6c8
+      body: ""
+      footer: {}
+      author: JOASSART Edwin
+      nested: []
+  version: 8.3.1
+  title: ""
+  date: 2023-03-02T09:05:00.580Z
+- commits:
     - subject: "minor: updated winusb to NAPI"
       hash: 92db3775bd4e227e083447ade3974b41d661bdc4
       body: ""
