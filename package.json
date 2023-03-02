@@ -91,7 +91,7 @@
     "@types/yauzl": "^2.9.0",
     "chai": "^4.1.2",
     "cli-spinner": "^0.2.8",
-    "mocha": "^8.0.1",
+    "mocha": "^10.2.0",
     "progress": "^2.0.0",
     "rimraf": "^2.6.2",
     "sinon": "^6.1.3",
