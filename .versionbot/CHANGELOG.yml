@@ -1,4 +1,19 @@
 - commits:
+    - subject: "fix(deps): update unbzip2-stream digest to a584ac3"
+      hash: ab3c060b9065129ca3c07f3bfcec1c2b5721b0e0
+      body: |
+        Update unbzip2-stream to
+
+        Update unbzip2-stream from  to
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Renovate Bot
+      nested: []
+  version: 8.4.0
+  title: ""
+  date: 2023-03-09T11:30:48.497Z
+- commits:
     - subject: "patch: fix accept-enconding to prevent CF proxy decompression"
       hash: 58490506c93d56dad530eddc71fed117d85cb6c8
       body: ""
