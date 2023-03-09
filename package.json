@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "types": "build/index.d.ts",
   "scripts": {
-    "flowzone-preinstall": "sudo apt-get install -y libudev-dev",
+    "flowzone-preinstall": "sudo apt-get update && sudo apt-get install -y libudev-dev",
     "test": "npm run lint && mocha -r ts-node/register tests/**/*.spec.ts",
     "prettier": "balena-lint --fix lib typings examples tests",
     "lint": "balena-lint lib typings examples tests",
@@ -65,7 +65,7 @@
     "partitioninfo": "^6.0.2",
     "rwmutex": "^1.0.0",
     "tslib": "^2.0.0",
-    "unbzip2-stream": "github:balena-io-modules/unbzip2-stream#a584ac3e60857e29f2b355eb7b9d8d048db93cb2",
+    "unbzip2-stream": "github:balena-io-modules/unbzip2-stream#4a54f56a25b58950f9e4277c56db2912d62242e7",
     "unzip-stream": "^0.3.0",
     "xxhash-addon": "^1.4.0",
     "yauzl": "^2.9.2",
