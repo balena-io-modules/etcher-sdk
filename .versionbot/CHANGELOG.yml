@@ -1,4 +1,15 @@
 - commits:
+    - subject: "patch: revert unbzip2-stream to
+        #4a54f56a25b58950f9e4277c56db2912d62242e7"
+      hash: 0f9087de5062dfc705071dabbf20657915a78579
+      body: ""
+      footer: {}
+      author: Edwin Joassart
+      nested: []
+  version: 8.4.1
+  title: ""
+  date: 2023-03-09T13:30:35.621Z
+- commits:
     - subject: "fix(deps): update unbzip2-stream digest to a584ac3"
       hash: ab3c060b9065129ca3c07f3bfcec1c2b5721b0e0
       body: |
