@@ -59,7 +59,7 @@ export class Http extends SourceDestination {
 		auth?: AxiosBasicCredentials;
 	}) {
 		super();
-		this.url = url;
+		this.url = this.prefixHttp(url);
 		this.avoidRandomAccess = avoidRandomAccess;
 		this.axiosInstance = axiosInstance;
 		if (auth) {
@@ -95,6 +95,12 @@ export class Http extends SourceDestination {
 		} catch (error) {
 			this.error = error;
 		}
+	}
+
+	// if user doens't provide a protocol when entering an url, prefix `http://` to the url
+	// also works if user just enter an ip address
+	private prefixHttp(url: string): string {
+		return url.indexOf('://') === -1 ? `http://${url}` : url
 	}
 
 	public async canRead(): Promise<boolean> {
