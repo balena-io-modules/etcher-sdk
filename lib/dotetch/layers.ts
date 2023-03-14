@@ -374,21 +374,21 @@ async function layerStreamProcessing(
 				stream: NodeJS.ReadableStream,
 				next: () => void,
 			) => {
-				if (header.pax) {
-					/**
-					 * DELETE header.pax here, if it exists, as it is causing problems with the symlink handling.
-					 * header.pax overrides over the from/to name path for the symlinks so ends up at root level
-					 */
-					// console.log(
-					// 	`=> @layerStreamProcessing header ${inspect(
-					// 		header,
-					// 		true,
-					// 		2,
-					// 		true,
-					// 	)}`,
-					// );
-					delete header.pax;
-				}
+				// if (header.pax) {
+				// 	/**
+				// 	 * DELETE header.pax here, if it exists, as it is causing problems with the symlink handling.
+				// 	 * header.pax overrides over the from/to name path for the symlinks so ends up at root level
+				// 	 */
+				// 	// console.log(
+				// 	// 	`=> @layerStreamProcessing header ${inspect(
+				// 	// 		header,
+				// 	// 		true,
+				// 	// 		2,
+				// 	// 		true,
+				// 	// 	)}`,
+				// 	// );
+				// 	delete header.pax;
+				// }
 
 				// change the name of the file to place it at the right position in tar archive folder tree
 				// change the linkname if it exist so hard and soflinks are pointing to the right file (inside the layer)
