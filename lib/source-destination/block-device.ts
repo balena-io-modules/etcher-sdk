@@ -149,11 +149,13 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 
 	public async createWriteStream({
 		highWaterMark,
-	}: { highWaterMark?: number } = {}): Promise<BlockWriteStream> {
+		startOffset,
+	}: { highWaterMark?: number, startOffset?: number } = {}): Promise<BlockWriteStream> {
 		const stream = new ProgressBlockWriteStream({
 			destination: this,
 			delayFirstBuffer: platform() === 'win32',
 			highWaterMark,
+			startOffset
 		});
 		stream.on('finish', stream.emit.bind(stream, 'done'));
 		return stream;
