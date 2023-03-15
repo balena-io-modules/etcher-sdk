@@ -47,6 +47,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 	private unmountOnSuccess: boolean;
 	public oDirect: boolean;
 	public emitsProgress = false;
+	private keepOriginal = false
 	public readonly alignment: number;
 
 	constructor({
@@ -54,16 +55,19 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		unmountOnSuccess = false,
 		write = false,
 		direct = true,
+		keepOriginal = false
 	}: {
 		drive: DrivelistDrive;
 		unmountOnSuccess?: boolean;
 		write?: boolean;
 		direct?: boolean;
+		keepOriginal?: boolean
 	}) {
 		super({ path: drive.raw, write });
 		this.drive = drive;
 		this.unmountOnSuccess = unmountOnSuccess;
 		this.oDirect = direct;
+		this.keepOriginal = keepOriginal; // skip clean of drive before write
 		// alignment must be at most 4k
 		this.alignment = Math.min(
 			drive.blockSize || DEFAULT_ALIGNMENT,
@@ -175,7 +179,9 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 				await unmountDisk(this.drive.device);
 			}
 			// diskpart clean on windows
-			await clean(this.drive.device);
+			if (!this.keepOriginal) {
+				await clean(this.drive.device);
+			}
 		}
 		await super._open();
 		if (plat === 'darwin') {
