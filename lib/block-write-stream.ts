@@ -33,6 +33,7 @@ export class BlockWriteStream extends Writable {
 	private maxRetries: number;
 	public bytesWritten = 0;
 	private position = 0;
+	private startOffset = 0;
 	private firstBuffer?: Buffer;
 
 	constructor({
@@ -40,22 +41,25 @@ export class BlockWriteStream extends Writable {
 		highWaterMark,
 		delayFirstBuffer = false,
 		maxRetries = 5,
+		startOffset = 0,
 	}: {
 		destination: BlockDevice;
 		highWaterMark?: number;
 		delayFirstBuffer?: boolean;
 		maxRetries?: number;
+		startOffset?: number
 	}) {
 		super({ objectMode: true, highWaterMark });
 		this.destination = destination;
 		this.delayFirstBuffer = delayFirstBuffer;
 		this.maxRetries = maxRetries;
+		this.startOffset = startOffset;
 	}
 
 	private async writeBuffer(buffer: Buffer, position: number): Promise<void> {
 		await retryOnTransientError(
 			async () => {
-				await this.destination.write(buffer, 0, buffer.length, position);
+				await this.destination.write(buffer, 0, buffer.length, position + this.startOffset);
 			},
 			this.maxRetries,
 			RETRY_BASE_TIMEOUT,

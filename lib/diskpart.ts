@@ -34,26 +34,38 @@ interface ExecResult {
 	stderr: string;
 }
 
+/** Subclass to capture stdout from command execution. */
+class ExecError extends Error {
+	stdout?: string;
+
+	constructor(message?: string, stdout?: string) {
+		super(message);
+		this.name = 'ExecError';
+		this.stdout = stdout;
+		Object.setPrototypeOf(this, new.target.prototype);
+	}
+}
+
 const execFileAsync = async (
 	command: string,
 	args: string[] = [],
-	options: ExecFileOptions = {},
+	options: ExecFileOptions = {}
 ): Promise<ExecResult> => {
 	return await new Promise(
-		(resolve: (res: ExecResult) => void, reject: (err: Error) => void) => {
+		(resolve: (res: ExecResult) => void, reject: (err: ExecError) => void) => {
 			execFile(
 				command,
 				args,
 				options,
 				(error: Error, stdout: string, stderr: string) => {
 					if (error) {
-						reject(error);
+						reject(new ExecError(error.message, stdout));
 					} else {
 						resolve({ stdout, stderr });
 					}
-				},
+				}
 			);
-		},
+		}
 	);
 };
 
@@ -90,6 +102,22 @@ const runDiskpart = async (commands: string[]): Promise<void> => {
 };
 
 /**
+ * @summary Checks if running on windows and returns device Id
+ * @param {String} device
+ */
+const prepareDeviceId = (device: string) => {
+	if (platform() !== 'win32') {
+		throw new Error(`Diskpart is not available on ${platform()}`);
+	}
+	const match = device.match(PATTERN);
+	if (match === null) {
+		throw new Error(`Invalid device: "${device}"`);
+	}
+
+	return match.pop();
+};
+
+/**
  * @summary Clean a device's partition tables
  * @param {String} device - device path
  * @example
@@ -98,15 +126,15 @@ const runDiskpart = async (commands: string[]): Promise<void> => {
  *   .catch(...)
  */
 export const clean = async (device: string): Promise<void> => {
-	if (platform() !== 'win32') {
-		return;
-	}
-	const match = device.match(PATTERN);
-	if (match === null) {
+	debug('clean', device);
+	let deviceId;
+
+	try {
+		deviceId = prepareDeviceId(device);
+	} catch (error) {
 		throw new Error(`Invalid device: "${device}"`);
 	}
-	debug('clean', device);
-	const deviceId = match.pop();
+
 	let errorCount = 0;
 	while (errorCount <= DISKPART_RETRIES) {
 		try {
@@ -124,9 +152,66 @@ export const clean = async (device: string): Promise<void> => {
 				await delay(DISKPART_DELAY);
 			} else {
 				throw new Error(
-					`Couldn't clean the drive, ${error.message} (code ${error.code})`,
+					`Couldn't clean the drive, ${error.message} (code ${error.code})`
 				);
 			}
 		}
+	}
+};
+
+/**
+ * @summary Reduces the size of the given partition
+ * @param {String} partition - the identifier of the partition
+ * @param {number} desiredMB - (optional) megabytes to free up, checked against querymax, defaults to max available
+ * @example
+ * shrinkPartition('C', 2048)
+ *  .then(...)
+ *  .catch(...)
+ */
+export const shrinkPartition = async (
+	partition: string,
+	desiredMB?: number
+) => {
+	debug('shrink', partition, desiredMB);
+
+	try {
+		await runDiskpart([
+			`select volume ${partition}`,
+			`shrink ${desiredMB ? 'DESIRED='.concat(desiredMB + '') : ''}`,
+		]);
+	} catch (error) {
+		throw(`shrinkPartition: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+	}
+};
+
+/**
+ *
+ * @param {string} device - device path
+ * @param {number} sizeMB - size of the new partition (free space has to be present)
+ * @param {string} fs - default "fat32", possible "ntfs" the filesystem to format with
+ * @param {string} desiredLetter - letter to assign to the new volume, gets the next free letter by default
+ * @example
+ * createPartition('\\\\.\\PhysicalDrive2', 2048)
+ *  .then(...)
+ *  .catch(...)
+ */
+export const createPartition = async (
+	device: string,
+	sizeMB: number,
+	fs?: 'exFAT' | 'fat32' | 'ntfs',
+	label?: string,
+	desiredLetter?: string
+) => {
+	const deviceId = prepareDeviceId(device);
+	try {
+		await runDiskpart([
+			`select disk ${deviceId}`,
+			`create partition primary size=${sizeMB}`,
+			`${desiredLetter ? 'assign letter='.concat(desiredLetter) : ''}`,
+			`${fs ? 'format fs='.concat(fs).concat(`label=${label ?? 'Balena Volume'}`.concat(' quick')) : ''}`,
+			`detail partition`
+		])		
+	} catch (error) {
+		throw(`createPartition: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
 	}
 };
