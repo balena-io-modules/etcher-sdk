@@ -1,4 +1,61 @@
 - commits:
+    - subject: Add feature to migrate this computer to run balenaOS
+      hash: e5f95590317d4aad800a89521c0e62ce4835e201
+      body: |
+        Adds balena boot and rootA partitions, copies bootloader, and reboots.
+        Presently only supports migration from a UEFI based Windows system.
+      footer:
+        Change-type: minor
+        change-type: minor
+        Co-Authored-By: Peter Makra <6892971+mcraa@users.noreply.github.com>
+        co-authored-by: Peter Makra <6892971+mcraa@users.noreply.github.com>
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+    - subject: Add parameter for starting offset for write
+      hash: 735491aeab9a390415f6c15375acb98e313d290d
+      body: |
+        Historically, always started write at offset 0.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Co-Authored-By: Peter Makra <6892971+mcraa@users.noreply.github.com>
+        co-authored-by: Peter Makra <6892971+mcraa@users.noreply.github.com>
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+    - subject: Add parameter to clear partition table when open device
+      hash: 08337a249d2ee1a9f975f7d399772687092838c4
+      body: |
+        Historically, always cleared partition table.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Co-Authored-By: Peter Makra <6892971+mcraa@users.noreply.github.com>
+        co-authored-by: Peter Makra <6892971+mcraa@users.noreply.github.com>
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+    - subject: Add shrink and create partition functions
+      hash: 7b23adba4d647195264a348947b6c8c6c394a907
+      body: |
+        Also collect command text output on error.
+      footer:
+        Change-type: minor
+        change-type: minor
+        Co-Authored-By: Peter Makra <6892971+mcraa@users.noreply.github.com>
+        co-authored-by: Peter Makra <6892971+mcraa@users.noreply.github.com>
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+  version: 8.5.0
+  title: ""
+  date: 2023-03-16T17:13:21.748Z
+- commits:
     - subject: "patch: revert unbzip2-stream to
         #4a54f56a25b58950f9e4277c56db2912d62242e7"
       hash: 0f9087de5062dfc705071dabbf20657915a78579
