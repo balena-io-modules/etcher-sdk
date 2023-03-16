@@ -1,4 +1,18 @@
 - commits:
+    - subject: Add README for new migrator feature
+      hash: 8c974e45e7d1a923be1a7954ae3d5c77943b390c
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+  version: 8.5.1
+  title: ""
+  date: 2023-03-16T18:30:49.517Z
+- commits:
     - subject: Add feature to migrate this computer to run balenaOS
       hash: e5f95590317d4aad800a89521c0e62ce4835e201
       body: |
