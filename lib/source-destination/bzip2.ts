@@ -15,16 +15,25 @@
  */
 
 import { Transform } from 'stream';
-import unbzip2Stream = require('unbzip2-stream');
+import Bzip2 from "@foxglove/wasm-bz2";
 
 import { CompressedSource } from './compressed-source';
 import { SourceDestination } from './source-destination';
 
+
 export class BZip2Source extends CompressedSource {
 	public static readonly mimetype = 'application/x-bzip2';
 
-	protected createTransform(): Transform {
-		return unbzip2Stream();
+	protected async createTransform(): Promise<Transform> {
+		const bzip2 = await Bzip2.init();
+		return new Transform({
+			transform(chunk: Buffer, _, callback) {
+				const maxSize = 10000 * chunk.length;
+				const decompressed = bzip2.decompress(chunk, maxSize, { small: false });
+				this.push(decompressed);
+				callback();
+			},
+		});
 	}
 
 	protected async getSize(): Promise<

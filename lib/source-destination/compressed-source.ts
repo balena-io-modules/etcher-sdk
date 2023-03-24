@@ -42,7 +42,7 @@ export function getRootStream(
 }
 
 export abstract class CompressedSource extends SourceSource {
-	protected abstract createTransform(): Transform;
+	protected abstract createTransform(): Transform | Promise<Transform>;
 
 	protected async getSize(): Promise<
 		{ size: number; isEstimated: boolean } | undefined
@@ -64,7 +64,7 @@ export abstract class CompressedSource extends SourceSource {
 		}
 		const stream = await this.source.createReadStream({ emitProgress });
 		// as any because we need to add the sourceStream property
-		const transform = this.createTransform() as any;
+		const transform = await this.createTransform() as any;
 		stream.pipe(transform);
 		transform.sourceStream = stream;
 		if (end !== undefined) {
