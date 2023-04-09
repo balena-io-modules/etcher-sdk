@@ -64,14 +64,21 @@ export const migrate = async (
 		if (!(await isElevated())) {
 			throw Error("User is not administrator");
 		}
-		const freeSpace = await checkDiskSpace(`${windowsPartition}:\\`) // works only with capital
-		if ((freeSpace.free / 1024) / 1024 < FREE_SPACE_NEEDED_MB) {
-			throw Error(`Need at least ${FREE_SPACE_NEEDED_MB} MB free on partition ${windowsPartition}`)
-		}
 
-		// make space
-		console.log(`Shrink partition ${windowsPartition} by ${FREE_SPACE_NEEDED_MB} MB`);
-		await diskpart.shrinkPartition(windowsPartition, FREE_SPACE_NEEDED_MB);
+		const unallocSpace = await diskpart.getUnallocatedSize(deviceName)
+		console.log(`Found ${unallocSpace} KB not allocated on disk ${deviceName}`)
+
+		// Shrink partition as needed to provide required unallocated space.
+		// Shrink amount must be for *all* of required space to ensure it is contiguous.
+        // IOW, don't assume the shrink will merge with any existing unallocated space.
+		if (unallocSpace / 1024 < FREE_SPACE_NEEDED_MB) {
+			const freeSpace = await checkDiskSpace(`${windowsPartition}:\\`) // works only with capital
+			if ((freeSpace.free / 1024 / 1024) < FREE_SPACE_NEEDED_MB) {
+				throw Error(`Need at least ${FREE_SPACE_NEEDED_MB} MB free on partition ${windowsPartition}`)
+			}
+			console.log(`Shrink partition ${windowsPartition} by ${FREE_SPACE_NEEDED_MB} MB`);
+			await diskpart.shrinkPartition(windowsPartition, FREE_SPACE_NEEDED_MB);
+		}
 
 		// create partitions
 		// device from file, containing source partitions
