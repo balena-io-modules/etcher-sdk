@@ -72,7 +72,8 @@ export const migrate = async (
 		// Shrink amount must be for *all* of required space to ensure it is contiguous.
         // IOW, don't assume the shrink will merge with any existing unallocated space.
 		if (unallocSpace / 1024 < FREE_SPACE_NEEDED_MB) {
-			const freeSpace = await checkDiskSpace(`${windowsPartition}:\\`) // works only with capital
+			// must force upper case
+			const freeSpace = await checkDiskSpace(`${windowsPartition.toUpperCase()}:\\`)
 			if ((freeSpace.free / 1024 / 1024) < FREE_SPACE_NEEDED_MB) {
 				throw Error(`Need at least ${FREE_SPACE_NEEDED_MB} MB free on partition ${windowsPartition}`)
 			}
@@ -107,9 +108,9 @@ export const migrate = async (
 		console.log(`Created new partition for data at offset ${targetRootAPartition.offset} with size ${targetRootAPartition.size}`);
 
 		// copy partition data
-		console.log("Copy to flasherBootPartition from image");
+		console.log("Copy flasherBootPartition from image to disk");
 		await copyPartitionFromImageToDevice(source, 1, targetDevice, targetBootPartition.offset);
-		console.log("Copy to flasherRootAPartition from image");
+		console.log("Copy flasherRootAPartition from image to disk");
 		await copyPartitionFromImageToDevice(source, 2, targetDevice, targetRootAPartition.offset);
 
 		// mount the boot partition and copy bootloader
