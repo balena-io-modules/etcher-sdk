@@ -83,22 +83,25 @@ async function withDiskpartMutex<T>(fn: () => T): Promise<T> {
 /**
  * @summary Run a diskpart script
  * @param {Array<String>} commands - list of commands to run
+ * @return String with stdout from command
  */
-const runDiskpart = async (commands: string[]): Promise<void> => {
+const runDiskpart = async (commands: string[]): Promise<string> => {
 	if (platform() !== 'win32') {
-		return;
+		return '';
 	}
+	let output = { 'stdout':'', 'stderr':'' }
 	await withTmpFile({ keepOpen: false }, async (file: TmpFileResult) => {
 		await fs.writeFile(file.path, commands.join('\r\n'));
 		await withDiskpartMutex(async () => {
-			const { stdout, stderr } = await execFileAsync('diskpart', [
+			output = await execFileAsync('diskpart', [
 				'/s',
 				file.path,
 			]);
-			debug('stdout:', stdout);
-			debug('stderr:', stderr);
+			debug('stdout:', output.stdout);
+			debug('stderr:', output.stderr);
 		});
 	});
+	return output.stdout
 };
 
 /**
@@ -214,4 +217,62 @@ export const createPartition = async (
 	} catch (error) {
 		throw(`createPartition: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
 	}
+};
+
+/**
+ * Provide unallocated space on disk, in KB
+ * 
+ * @param {string} device - device path
+ * @example
+ * getUnallocatedSize('\\\\.\\PhysicalDrive0')
+ *  .then(...)
+ *  .catch(...)
+ */
+export const getUnallocatedSize = async (
+	device: string
+): Promise<number> => {
+	const deviceId = prepareDeviceId(device);
+
+	/* Retrieves dispart output formatted like the example below.
+	 *
+	 *  Microsoft DiskPart version 10.0.19041.964
+	 *
+	 *  Copyright (C) Microsoft Corporation.
+	 *  On computer: DESKTOP-TIDA6VG
+	 *
+	 *  Disk ###  Status         Size     Free     Dyn  Gpt
+	 *  --------  -------------  -------  -------  ---  ---
+	 *  Disk 0    Online           50 GB  6158 MB        *
+	 */
+	let listText = ''
+	try {
+		listText = await runDiskpart([
+			`list disk`
+		]);
+	} catch (error) {
+		throw(`getUnallocatedSize: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+	}
+
+	let freePos = -1;
+	// Look for 'Free' in column headings; then read size at that position 
+	// on the row for the requested disk.
+	for (let line of listText.split('\n')) {
+		if (freePos < 0) {
+			freePos = line.indexOf('Free');
+		} else if (line.indexOf(`Disk ${deviceId}`) >= 0) {
+			const freeMatch = line.substring(freePos).match(/(\d+)\s+(\w+)B/);
+			if (freeMatch) {
+				let res = Number(freeMatch[1]);
+				for (let units of ['K', 'M', 'G', 'T']) {
+					if (freeMatch[2] == units) {
+						return res;
+					} else {
+						res *= 1024;
+					}
+				}
+			}
+			break;  // should have matched; break to throw below
+		}
+	}
+	throw(`getUnallocatedSize: Can't read Free space on disk ${deviceId} from: ${listText}`);
 };
