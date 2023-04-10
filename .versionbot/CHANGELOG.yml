@@ -1,4 +1,40 @@
 - commits:
+    - subject: Minor formatting updates for migrator script
+      hash: 9f64f01a3d8d5723e4b0c01d58a979a49f09743e
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+    - subject: Integrate check for unallocated space into migrator
+      hash: 093f4deb56d4e28c08b1c003fd5c2f1277558ee5
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+    - subject: Add function to provide unallocated space on disk
+      hash: ce9f2b36c458f213cab23a634d49b46a1477c15c
+      body: |
+        Also modify function that runs diskpart utility to return stdout output,
+        to support this new function.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+  version: 8.5.2
+  title: ""
+  date: 2023-04-10T11:17:12.576Z
+- commits:
     - subject: Add README for new migrator feature
       hash: 8c974e45e7d1a923be1a7954ae3d5c77943b390c
       body: ""
