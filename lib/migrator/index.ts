@@ -15,6 +15,7 @@ import { promisify } from 'util';
 import { exec as childExec } from 'child_process';
 const execAsync = promisify(childExec);
 import { constants as osConstants } from 'os';
+import { existsSync } from 'fs'
 
 /** Determine if running as administrator. */
 async function isElevated(): Promise<boolean> {
@@ -63,6 +64,9 @@ export const migrate = async (
 		}
 		if (!(await isElevated())) {
 			throw Error("User is not administrator");
+		}
+		if (!existsSync(imagePath)) {
+			throw Error(`Image ${imagePath} not found`);
 		}
 
 		const unallocSpace = await diskpart.getUnallocatedSize(deviceName)
