@@ -49,6 +49,27 @@ export const getPartitionBoundaries = async (
 };
 
 /**
+ * Calculate the size required for a partition to contain the contents of
+ * the provided source partition, rounded up to nearest MB.
+ * @param {SourceDestination} source - Device containing requested partition
+ * @param {number} partitionIndex - 1-based index of requested partition
+ * @returns calculated size in MB, rounded up
+ */
+export const calcRequiredPartitionSize = async (
+	source: SourceDestination,
+	partitionIndex = 1
+) => {
+	const sourceBoundaries = await getPartitionBoundaries(source, partitionIndex);
+	const sourcePartitionSize = sourceBoundaries.end! - sourceBoundaries.start!;
+	const alignmentBuffer = 4096;
+
+	if (isNaN(sourcePartitionSize)) {
+		throw Error("Not able to find source partition size.");
+	}
+	return Math.ceil((sourcePartitionSize + alignmentBuffer) / 1024 / 1024);
+}
+
+/**
  * Copy a partition, referenced by index, from an image file to a block device,
  * @param {File} source - source image for partition
  * @param {number} sourcePartitionIndex
