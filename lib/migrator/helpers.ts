@@ -1,3 +1,4 @@
+import * as process from 'process';
 import * as drivelist from 'drivelist'
 import { GetPartitionsResult, GPTPartition, MBRPartition } from 'partitioninfo';
 import { BlockDevice, SourceDestination, File } from '../source-destination';
@@ -50,10 +51,12 @@ export const getPartitionBoundaries = async (
 
 /**
  * Calculate the size required for a partition to contain the contents of
- * the provided source partition, rounded up to nearest MB.
+ * the provided source partition. On Windows, rounds up to nearest MB due to
+ * limitations of partitioning tools.
+ * 
  * @param {SourceDestination} source - Device containing requested partition
  * @param {number} partitionIndex - 1-based index of requested partition
- * @returns calculated size in MB, rounded up
+ * @returns calculated size in bytes
  */
 export const calcRequiredPartitionSize = async (
 	source: SourceDestination,
@@ -66,7 +69,12 @@ export const calcRequiredPartitionSize = async (
 	if (isNaN(sourcePartitionSize)) {
 		throw Error("Not able to find source partition size.");
 	}
-	return Math.ceil((sourcePartitionSize + alignmentBuffer) / 1024 / 1024);
+	if (process.platform == 'win32') {
+		let sizeMB = Math.ceil((sourcePartitionSize + alignmentBuffer) / (1024 * 1024));
+		return sizeMB * 1024 * 1024;
+	} else {
+		return sourcePartitionSize + alignmentBuffer;
+    }
 }
 
 /**

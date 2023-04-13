@@ -34,6 +34,10 @@ async function isElevated(): Promise<boolean> {
     return true;
 }
 
+function formatMB(bytes: number): string {
+	return (bytes / (1024 * 1024)).toFixed(2)
+}
+
 /**
  * @summary Sets up a UEFI based computer running Windows to switch to balenaOS, and then reboots to execute the switch.
  * !!! WARNING !!! Running this function will OVERWRITE AND DESTROY the operating system running on this computer.
@@ -69,16 +73,18 @@ export const migrate = async (
 			throw Error(`Image ${imagePath} not found`);
 		}
 
-		// determine required partition sizes and free space
+		// Determine required partition sizes and free space. Calculations are in
+        // units of bytes. However, on Windows, required sizes are rounded up to
+        // the nearest MB due to tool limitations.
 		const source = new File({ path: imagePath });
 		const requiredBootSize = await calcRequiredPartitionSize(source, BOOT_PARTITION_INDEX);
-		console.log(`Require ${requiredBootSize} MB for boot partition`);
+		console.log(`Require ${requiredBootSize} (${formatMB(requiredBootSize)} MB) for boot partition`);
 		const requiredRootASize = await calcRequiredPartitionSize(source, ROOTA_PARTITION_INDEX);
-		console.log(`Require ${requiredRootASize} MB for rootA partition`);
+		console.log(`Require ${requiredRootASize} (${formatMB(requiredRootASize)} MB) for rootA partition`);
 		const requiredFreeSize = requiredBootSize + requiredRootASize;
 
-		const unallocSpace = (await diskpart.getUnallocatedSize(deviceName)) / 1024;
-		console.log(`Found ${unallocSpace} MB not allocated on disk ${deviceName}`)
+		const unallocSpace = (await diskpart.getUnallocatedSize(deviceName)) * 1024;
+		console.log(`Found ${unallocSpace} (${formatMB(unallocSpace)} MB) not allocated on disk ${deviceName}`)
 
 		// Shrink partition as needed to provide required unallocated space.
 		// Shrink amount must be for *all* of required space to ensure it is contiguous.
@@ -86,11 +92,11 @@ export const migrate = async (
 		if (unallocSpace < requiredFreeSize) {
 			// must force upper case
 			const freeSpace = await checkDiskSpace(`${windowsPartition.toUpperCase()}:\\`)
-			if ((freeSpace.free / 1024 / 1024) < requiredFreeSize) {
-				throw Error(`Need at least ${requiredFreeSize} MB free on partition ${windowsPartition}`)
+			if (freeSpace.free < requiredFreeSize) {
+				throw Error(`Need at least ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB) free on partition ${windowsPartition}`)
 			}
-			console.log(`Shrink partition ${windowsPartition} by ${requiredFreeSize} MB`);
-			await diskpart.shrinkPartition(windowsPartition, requiredFreeSize);
+			console.log(`Shrink partition ${windowsPartition} by ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB)`);
+			await diskpart.shrinkPartition(windowsPartition, requiredFreeSize / (1024 * 1024));
 		}
 
 		// create partitions
@@ -99,7 +105,7 @@ export const migrate = async (
 		const originalPartitions = await targetDevice.getPartitionTable()
 
 		console.log("Create flasherBootPartition");
-		await diskpart.createPartition(deviceName, requiredBootSize);
+		await diskpart.createPartition(deviceName, requiredBootSize / (1024 * 1024));
 		const afterFirstPartitions = await targetDevice.getPartitionTable()
 		const firstNewPartition = findNewPartitions(originalPartitions, afterFirstPartitions);
 		if (firstNewPartition.length !== 1) {
@@ -109,7 +115,7 @@ export const migrate = async (
 		console.log(`Created new partition for boot at offset ${targetBootPartition.offset} with size ${targetBootPartition.size}`);
 
 		console.log("Create flasherRootAPartition");
-		await diskpart.createPartition(deviceName, requiredRootASize);
+		await diskpart.createPartition(deviceName, requiredRootASize / (1024 * 1024));
 		const afterSecondPartitions = await targetDevice.getPartitionTable()
 		const secondNewPartition = findNewPartitions(afterFirstPartitions, afterSecondPartitions)
 		if (secondNewPartition.length !== 1) {
