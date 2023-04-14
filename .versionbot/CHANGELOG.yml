@@ -1,4 +1,50 @@
 - commits:
+    - subject: Convert migrator partition size calculations to use bytes
+      hash: 4ab3e128ae1d1c0386fa5aa9b71c59f1db872efe
+      body: |
+        Was using MB due to tool limitations. diskpart module for
+        Windows still requires sizes in MB.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+    - subject: Determine required free space from image file partitions
+      hash: adf82434bc6f0c970e93cde2667923dda9c45a4c
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+    - subject: Add function to calculate required partition size from an image file
+      hash: 3df7e4a182b521eb8b0c288d381488485416dc2f
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+    - subject: Verify image file exists before begin migration
+      hash: e6262aa2a6cf7eddcc076806040e9a5efef02771
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+  version: 8.5.3
+  title: ""
+  date: 2023-04-14T11:05:38.294Z
+- commits:
     - subject: Minor formatting updates for migrator script
       hash: 9f64f01a3d8d5723e4b0c01d58a979a49f09743e
       body: ""
