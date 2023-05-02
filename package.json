@@ -1,7 +1,7 @@
 {
-  "name": "etcher-sdk",
+  "name": "@kb2ma/etcher-sdk",
   "version": "8.5.3",
-  "description": "Etcher SDK",
+  "description": "Etcher SDK -- kb2ma dev",
   "author": "Balena Ltd <hello@balena.io>",
   "main": "build/index.js",
   "license": "Apache-2.0",
@@ -35,13 +35,13 @@
     "balena",
     "balenaos"
   ],
-  "homepage": "https://github.com/balena-io-modules/etcher-sdk",
+  "homepage": "https://github.com/kb2ma/etcher-sdk",
   "repository": {
     "type": "git",
-    "url": "https://github.com/balena-io-modules/etcher-sdk.git"
+    "url": "https://github.com/kb2ma/etcher-sdk.git"
   },
   "bugs": {
-    "url": "https://github.com/balena-io-modules/etcher-sdk/issues"
+    "url": "https://github.com/kb2ma/etcher-sdk/issues"
   },
   "dependencies": {
     "@balena/node-beaglebone-usbboot": "^3.0.0",
