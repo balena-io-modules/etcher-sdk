@@ -1,4 +1,18 @@
 - commits:
+    - subject: stop diskpart.clean() from breaking CLI  flash cmd
+      hash: 1d0dad1e62f2c723f706482b2b87ec7835d578fe
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ryan Cooke <ryan@balena.io>
+        signed-off-by: Ryan Cooke <ryan@balena.io>
+      author: rcooke-warwick
+      nested: []
+  version: 8.5.4
+  title: ""
+  date: 2023-05-18T15:25:29.172Z
+- commits:
     - subject: Convert migrator partition size calculations to use bytes
       hash: 4ab3e128ae1d1c0386fa5aa9b71c59f1db872efe
       body: |
