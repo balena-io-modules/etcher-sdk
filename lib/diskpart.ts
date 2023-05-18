@@ -109,9 +109,6 @@ const runDiskpart = async (commands: string[]): Promise<string> => {
  * @param {String} device
  */
 const prepareDeviceId = (device: string) => {
-	if (platform() !== 'win32') {
-		throw new Error(`Diskpart is not available on ${platform()}`);
-	}
 	const match = device.match(PATTERN);
 	if (match === null) {
 		throw new Error(`Invalid device: "${device}"`);
@@ -130,6 +127,10 @@ const prepareDeviceId = (device: string) => {
  */
 export const clean = async (device: string): Promise<void> => {
 	debug('clean', device);
+	if (platform() !== 'win32') {
+		return
+	}
+	
 	let deviceId;
 
 	try {
