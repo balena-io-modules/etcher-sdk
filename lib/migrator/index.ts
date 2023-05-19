@@ -38,21 +38,38 @@ function formatMB(bytes: number): string {
 	return (bytes / (1024 * 1024)).toFixed(2)
 }
 
+/** Options for migrate(): */
+export interface MigrateOptions {
+	// don't perform these tasks; comma separated list like 'bootloader,reboot'
+	omitTasks: string
+}
+
 /**
  * @summary Sets up a UEFI based computer running Windows to switch to balenaOS, and then reboots to execute the switch.
  * !!! WARNING !!! Running this function will OVERWRITE AND DESTROY the operating system running on this computer.
+ *
+ * Migration is executed as a sequence of tasks. It begins with an informal "analyze"
+ * task that always is performed. The remaining tasks are shown below. A task may be
+ * omitted by listing it in the options.omitTasks parameter.
  * 
+ * * shrink (shrink partitions if necessary)
+ * * copy (create/copy partitions from image)
+ * * bootloader (setup bootloader for new boot partition)
+ * * reboot (actually execute the reboot)
+ *
  * @param {string} imagePath - balenaOS flasher image to use as source
  * @param {string} windowsPartition - partition label of the device where we want to add the new data; defauls to "C"
  * @param {string} deviceName - storage device name, default: '\\.\PhysicalDrive0'
  * @param {string} efiLabel - label to use when mounting the EFI partition, in case the default "M" is already in use
+ * @param {MigrateOptions} options - various options to qualify how migrate runs
  * @returns
  */
 export const migrate = async (
 	imagePath: string,
 	windowsPartition: string = 'C',
 	deviceName: string = '\\\\.\\PhysicalDrive0',
-	efiLabel: string = 'M'
+	efiLabel: string = 'M',
+	options: MigrateOptions = { omitTasks: '' }
 ) => {
 	console.log(`Migrate ${deviceName} with image ${imagePath}`);
 	try {
@@ -61,6 +78,7 @@ export const migrate = async (
 		const BOOT_FILES_SOURCE_PATH = '/EFI/BOOT';
 		const BOOT_FILES_TARGET_PATH = '/EFI/Boot';
 		const REBOOT_DELAY_SEC = 10
+		const ALL_TASKS = [ 'shrink', 'copy', 'bootloader', 'reboot'];
 
 		// initial validations
 		if (process.platform !== 'win32') {
@@ -72,6 +90,8 @@ export const migrate = async (
 		if (!existsSync(imagePath)) {
 			throw Error(`Image ${imagePath} not found`);
 		}
+
+		const tasks = ALL_TASKS.filter(task => !options.omitTasks.includes(task));
 
 		// Determine required partition sizes and free space. Calculations are in
         // units of bytes. However, on Windows, required sizes are rounded up to
@@ -95,8 +115,12 @@ export const migrate = async (
 			if (freeSpace.free < requiredFreeSize) {
 				throw Error(`Need at least ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB) free on partition ${windowsPartition}`)
 			}
-			console.log(`Shrink partition ${windowsPartition} by ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB)`);
-			await diskpart.shrinkPartition(windowsPartition, requiredFreeSize / (1024 * 1024));
+			if (tasks.includes('shrink')) {
+				console.log(`\nShrink partition ${windowsPartition} by ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB)`);
+				await diskpart.shrinkPartition(windowsPartition, requiredFreeSize / (1024 * 1024));
+			} else {
+				console.log(`\nSkip task: shrink partition ${windowsPartition} by ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB)`);
+			}
 		}
 
 		// create partitions
@@ -130,20 +154,27 @@ export const migrate = async (
 		console.log("Copy flasherRootAPartition from image to disk");
 		await copyPartitionFromImageToDevice(source, 2, targetDevice, targetRootAPartition.offset);
 
-		// mount the boot partition and copy bootloader
-		console.log("Mount Windows boot partition and copy grub bootloader from image");
-		winCommands.mountEfi(efiLabel);
-		await copyBootloaderFromImage(imagePath, 1, BOOT_FILES_SOURCE_PATH, `${efiLabel ?? "M"}:${BOOT_FILES_TARGET_PATH}`);
-		console.log("Copied grub bootloader files");
+		if (tasks.includes('bootloader')) {
+			// mount the boot partition and copy bootloader
+			console.log("\nMount Windows boot partition and copy grub bootloader from image");
+			winCommands.mountEfi(efiLabel);
+			await copyBootloaderFromImage(imagePath, 1, BOOT_FILES_SOURCE_PATH, `${efiLabel ?? "M"}:${BOOT_FILES_TARGET_PATH}`);
+			console.log("Copied grub bootloader files");
 
-		// set boot file
-		console.log("Set boot file");
-		const setBootResult = await winCommands.setBoot();
-		console.log("Boot file set.", setBootResult)
+			// set boot file
+			console.log("Set boot file");
+			const setBootResult = await winCommands.setBoot();
+			console.log("Boot file set.", setBootResult)
+		} else {
+			console.log("\nSkip task: bootloader setup");
+		}
 
-		// reboot
-		console.log("Migration complete, about to reboot");
-		winCommands.shutdown.reboot(REBOOT_DELAY_SEC);
+		if (tasks.includes('reboot')) {
+			console.log("Migration complete, about to reboot");
+			winCommands.shutdown.reboot(REBOOT_DELAY_SEC);
+		} else {
+			console.log("Skip task: reboot");
+		}
 
 	} catch (error) {
 		console.log("Can't proceed with migration:", error);
