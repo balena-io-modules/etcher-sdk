@@ -50,14 +50,18 @@ export interface MigrateOptions {
  * @summary Sets up a UEFI based computer running Windows to switch to balenaOS, and then reboots to execute the switch.
  * !!! WARNING !!! Running this function will OVERWRITE AND DESTROY the operating system running on this computer.
  *
- * Migration is executed as a sequence of tasks. It begins with an informal "analyze"
- * task that always is performed. The remaining tasks are shown below. A task may be
- * omitted by listing it in the options.omitTasks parameter.
- * 
- * * shrink (shrink partitions if necessary)
- * * copy (create/copy partitions from image)
- * * bootloader (setup bootloader for new boot partition)
- * * reboot (actually execute the reboot)
+ * Migration copies a balenaOS boot partition and rootA partition from an image file to
+ * the computer's storage, as well as a bootloader to trigger booting into the boot
+ * partition. The migration is executed as a sequence of tasks as shown below, and begins
+ * with an implicit "analyze" task that always is performed.
+ *
+ * The migration may be re-run on a computer to support development or a failure in the
+ * original run. A task may be omitted by listing it in the options.omitTasks parameter.
+ *
+ * * shrink -- shrink existing Windows partition as needed to accommodate the new partitions
+ * * copy -- create/copy partitions from image
+ * * bootloader -- copy/setup bootloader for new boot partition
+ * * reboot -- actually execute the reboot
  *
  * @param {string} imagePath - balenaOS flasher image to use as source
  * @param {string} windowsPartition - partition label of the device where we want to add the new data; defauls to "C"
@@ -95,44 +99,15 @@ export const migrate = async (
 
 		const tasks = ALL_TASKS.filter(task => !options.omitTasks.includes(task));
 
-		// Determine required partition sizes and free space. Calculations are in
-        // units of bytes. However, on Windows, required sizes are rounded up to
-        // the nearest MB due to tool limitations.
+		// Define objects for image file source for partitions, storage device target,
+		// and the target's partition table.
 		const source = new File({ path: imagePath });
-		const requiredBootSize = await calcRequiredPartitionSize(source, BOOT_PARTITION_INDEX);
-		console.log(`Require ${requiredBootSize} (${formatMB(requiredBootSize)} MB) for boot partition`);
-		const requiredRootASize = await calcRequiredPartitionSize(source, ROOTA_PARTITION_INDEX);
-		console.log(`Require ${requiredRootASize} (${formatMB(requiredRootASize)} MB) for rootA partition`);
-		const requiredFreeSize = requiredBootSize + requiredRootASize;
-
-		const unallocSpace = (await diskpart.getUnallocatedSize(deviceName)) * 1024;
-		console.log(`Found ${unallocSpace} (${formatMB(unallocSpace)} MB) not allocated on disk ${deviceName}`)
-
-		// Shrink partition as needed to provide required unallocated space.
-		// Shrink amount must be for *all* of required space to ensure it is contiguous.
-        // IOW, don't assume the shrink will merge with any existing unallocated space.
-		if (unallocSpace < requiredFreeSize) {
-			// must force upper case
-			const freeSpace = await checkDiskSpace(`${windowsPartition.toUpperCase()}:\\`)
-			if (freeSpace.free < requiredFreeSize) {
-				throw Error(`Need at least ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB) free on partition ${windowsPartition}`)
-			}
-			if (tasks.includes('shrink')) {
-				console.log(`\nShrink partition ${windowsPartition} by ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB)`);
-				await diskpart.shrinkPartition(windowsPartition, requiredFreeSize / (1024 * 1024));
-			} else {
-				console.log(`\nSkip task: shrink partition ${windowsPartition} by ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB)`);
-			}
-		}
-
-		// Scan target device for boot and rootA partitions already present in case
-		// we are re-running the migrator.
 		const targetDevice = await getTargetBlockDevice(windowsPartition)
 		let currentPartitions = await targetDevice.getPartitionTable()
 		if (currentPartitions === undefined) {
 			throw Error("Can't read partition table");
 		}
-		// First log partitions for debugging
+		// Log existing partitions for debugging
 		console.log("\nPartitions on target:")
 		for (const p of currentPartitions.partitions) {
 			// Satisfy TypeScript that p is not an MBRPartition even though we tested above on the table
@@ -141,9 +116,15 @@ export const migrate = async (
 			}
 			console.log(`index ${p.index}, offset ${p.offset}, type ${p.type}`)
 		}
-		// Will instantiate with pre-existing or newly created partitions
+
+		// Prepare to check for the balenaOS boot and rootA partitions already present.
+		// If partitions not present, determine required partition sizes and free space.
+		// Calculations are in units of bytes. However, on Windows, required sizes are
+		// rounded up to the nearest MB due to tool limitations.
 		let targetBootPartition: GPTPartition | MBRPartition | null
 		let targetRootAPartition: GPTPartition | MBRPartition | null
+		let requiredBootSize = 0
+		let requiredRootASize = 0
 
 		// Look for boot partition on a FAT16 filesystem
 		targetBootPartition = await findFilesystemLabel(currentPartitions, targetDevice, 'flash-boot', 'fat16')
@@ -151,6 +132,8 @@ export const migrate = async (
 			console.log(`Boot partition already exists at index ${targetBootPartition.index}`)
 		} else {
 			console.log("Boot partition not found on target")
+			requiredBootSize = await calcRequiredPartitionSize(source, BOOT_PARTITION_INDEX);
+			console.log(`Require ${requiredBootSize} (${formatMB(requiredBootSize)} MB) for boot partition`);
 		}
 		// Look for rootA partition on an ext4 filesystem
 		targetRootAPartition = await findFilesystemLabel(currentPartitions, targetDevice, 'flash-rootA', 'ext4')
@@ -158,6 +141,33 @@ export const migrate = async (
 			console.log(`RootA partition already exists at index ${targetRootAPartition.index}`)
 		} else {
 			console.log("RootA partition not found on target")
+			requiredRootASize = await calcRequiredPartitionSize(source, ROOTA_PARTITION_INDEX);
+			console.log(`Require ${requiredRootASize} (${formatMB(requiredRootASize)} MB) for rootA partition`)
+		}
+		const requiredFreeSize = requiredBootSize + requiredRootASize;
+
+		// Shrink Windows partition as needed to provide required unallocated space.
+		// Shrink amount must be for *all* of required space to ensure it is contiguous.
+		// IOW, don't assume the shrink will merge with any existing unallocated space.
+		if (requiredFreeSize) {
+			const unallocSpace = (await diskpart.getUnallocatedSize(deviceName)) * 1024;
+			console.log(`Found ${unallocSpace} (${formatMB(unallocSpace)} MB) not allocated on disk ${deviceName}`)
+
+			if (unallocSpace < requiredFreeSize) {
+				// must force upper case
+				const freeSpace = await checkDiskSpace(`${windowsPartition.toUpperCase()}:\\`)
+				if (freeSpace.free < requiredFreeSize) {
+					throw Error(`Need at least ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB) free on partition ${windowsPartition}`)
+				}
+				if (tasks.includes('shrink')) {
+					console.log(`\nShrink partition ${windowsPartition} by ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB)`);
+					await diskpart.shrinkPartition(windowsPartition, requiredFreeSize / (1024 * 1024));
+				} else {
+					console.log(`\nSkip task: shrink partition ${windowsPartition} by ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB)`);
+				}
+			} else{
+				console.log("Unallocated space on target is sufficient for copy")
+			}
 		}
 
 		if (tasks.includes('copy')) {
