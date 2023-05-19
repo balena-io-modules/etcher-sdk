@@ -1,5 +1,6 @@
 import * as process from 'process';
 import * as checkDiskSpace from 'check-disk-space';
+import { GPTPartition, MBRPartition } from 'partitioninfo';
 
 import * as diskpart from '../diskpart';
 import { File } from '../source-destination';
@@ -7,7 +8,8 @@ import {
 	copyPartitionFromImageToDevice,
 	calcRequiredPartitionSize,
 	getTargetBlockDevice,
-	findNewPartitions
+	findNewPartitions,
+	findFilesystemLabel
 } from './helpers';
 import { copyBootloaderFromImage } from './copy-bootloader';
 import winCommands from './windows-commands';
@@ -123,36 +125,78 @@ export const migrate = async (
 			}
 		}
 
-		// create partitions
-		// device from file, containing source partitions
+		// Scan target device for boot and rootA partitions already present in case
+		// we are re-running the migrator.
 		const targetDevice = await getTargetBlockDevice(windowsPartition)
-		const originalPartitions = await targetDevice.getPartitionTable()
-
-		console.log("Create flasherBootPartition");
-		await diskpart.createPartition(deviceName, requiredBootSize / (1024 * 1024));
-		const afterFirstPartitions = await targetDevice.getPartitionTable()
-		const firstNewPartition = findNewPartitions(originalPartitions, afterFirstPartitions);
-		if (firstNewPartition.length !== 1) {
-			throw Error(`Found ${firstNewPartition.length} new partitions for flasher boot, but expected 1`)
+		let currentPartitions = await targetDevice.getPartitionTable()
+		if (currentPartitions === undefined) {
+			throw Error("Can't read partition table");
 		}
-		const targetBootPartition = firstNewPartition[0];
-		console.log(`Created new partition for boot at offset ${targetBootPartition.offset} with size ${targetBootPartition.size}`);
-
-		console.log("Create flasherRootAPartition");
-		await diskpart.createPartition(deviceName, requiredRootASize / (1024 * 1024));
-		const afterSecondPartitions = await targetDevice.getPartitionTable()
-		const secondNewPartition = findNewPartitions(afterFirstPartitions, afterSecondPartitions)
-		if (secondNewPartition.length !== 1) {
-			throw Error(`Found ${secondNewPartition.length} new partitions for flasher rootA, but expected 1`)
+		// First log partitions for debugging
+		console.log("\nPartitions on target:")
+		for (const p of currentPartitions.partitions) {
+			// Satisfy TypeScript that p is not an MBRPartition even though we tested above on the table
+			if (!('guid' in p)) {
+				continue
+			}
+			console.log(`index ${p.index}, offset ${p.offset}, type ${p.type}`)
 		}
-		const targetRootAPartition = secondNewPartition[0];
-		console.log(`Created new partition for data at offset ${targetRootAPartition.offset} with size ${targetRootAPartition.size}`);
+		// Will instantiate with pre-existing or newly created partitions
+		let targetBootPartition: GPTPartition | MBRPartition | null
+		let targetRootAPartition: GPTPartition | MBRPartition | null
 
-		// copy partition data
-		console.log("Copy flasherBootPartition from image to disk");
-		await copyPartitionFromImageToDevice(source, 1, targetDevice, targetBootPartition.offset);
-		console.log("Copy flasherRootAPartition from image to disk");
-		await copyPartitionFromImageToDevice(source, 2, targetDevice, targetRootAPartition.offset);
+		// Look for boot partition on a FAT16 filesystem
+		targetBootPartition = await findFilesystemLabel(currentPartitions, targetDevice, 'flash-boot', 'fat16')
+		if (targetBootPartition) {
+			console.log(`Boot partition already exists at index ${targetBootPartition.index}`)
+		} else {
+			console.log("Boot partition not found on target")
+		}
+		// Look for rootA partition on an ext4 filesystem
+		targetRootAPartition = await findFilesystemLabel(currentPartitions, targetDevice, 'flash-rootA', 'ext4')
+		if (targetRootAPartition) {
+			console.log(`RootA partition already exists at index ${targetRootAPartition.index}`)
+		} else {
+			console.log("RootA partition not found on target")
+		}
+
+		if (tasks.includes('copy')) {
+			// create partitions
+			console.log("")		//force newline
+			if (!targetBootPartition) {
+				console.log("Create flasherBootPartition");
+				await diskpart.createPartition(deviceName, requiredBootSize / (1024 * 1024));
+				const afterFirstPartitions = await targetDevice.getPartitionTable()
+				const firstNewPartition = findNewPartitions(currentPartitions, afterFirstPartitions);
+				if (firstNewPartition.length !== 1) {
+					throw Error(`Found ${firstNewPartition.length} new partitions for flasher boot, but expected 1`)
+				}
+				targetBootPartition = firstNewPartition[0];
+				console.log(`Created new partition for boot at offset ${targetBootPartition.offset} with size ${targetBootPartition.size}`);
+				currentPartitions = afterFirstPartitions
+			}
+
+			if (!targetRootAPartition) {
+				console.log("Create flasherRootAPartition");
+				await diskpart.createPartition(deviceName, requiredRootASize / (1024 * 1024));
+				const afterSecondPartitions = await targetDevice.getPartitionTable()
+				const secondNewPartition = findNewPartitions(currentPartitions, afterSecondPartitions)
+				if (secondNewPartition.length !== 1) {
+					throw Error(`Found ${secondNewPartition.length} new partitions for flasher rootA, but expected 1`)
+				}
+				targetRootAPartition = secondNewPartition[0];
+				console.log(`Created new partition for data at offset ${targetRootAPartition.offset} with size ${targetRootAPartition.size}`);
+				currentPartitions = afterSecondPartitions
+			}
+
+			// copy partition data
+			console.log("Copy flasherBootPartition from image to disk");
+			await copyPartitionFromImageToDevice(source, 1, targetDevice, targetBootPartition!.offset);
+			console.log("Copy flasherRootAPartition from image to disk");
+			await copyPartitionFromImageToDevice(source, 2, targetDevice, targetRootAPartition!.offset);
+		} else {
+			console.log(`\nSkip task: create and copy partitions`)
+		}
 
 		if (tasks.includes('bootloader')) {
 			// mount the boot partition and copy bootloader
