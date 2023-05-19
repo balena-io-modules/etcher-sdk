@@ -29,6 +29,14 @@ const DISKPART_DELAY = 2000;
 const DISKPART_RETRIES = 5;
 const PATTERN = /PHYSICALDRIVE(\d+)/i;
 
+// This module provides utility functions for disk partitioning and related disk
+// level tasks. Presently it relies on the Windows 'diskpart' utility to implement 
+// this functionality.
+// Given this reliance, any new exported functions must throw an Error when used on 
+// non-Windows platforms. Only the clean() function silently accepts non-Windows
+// platforms, for historical reasons. Of course it also is fine to implement a function
+// with support for other platforms, and we may do so generally in the future.
+
 interface ExecResult {
 	stdout: string;
 	stderr: string;
@@ -119,6 +127,7 @@ const prepareDeviceId = (device: string) => {
 
 /**
  * @summary Clean a device's partition tables
+ * Functional only on Windows platform; otherwise does nothing.
  * @param {String} device - device path
  * @example
  * diskpart.clean('\\\\.\\PhysicalDrive2')
@@ -177,6 +186,9 @@ export const shrinkPartition = async (
 	desiredMB?: number
 ) => {
 	debug('shrink', partition, desiredMB);
+	if (platform() !== 'win32') {
+		throw new Error("shrinkPartition() not available on this platform")
+	}
 
 	try {
 		await runDiskpart([
@@ -206,6 +218,10 @@ export const createPartition = async (
 	label?: string,
 	desiredLetter?: string
 ) => {
+	if (platform() !== 'win32') {
+		throw new Error("createPartition() not available on this platform")
+	}
+
 	const deviceId = prepareDeviceId(device);
 	try {
 		await runDiskpart([
@@ -233,7 +249,7 @@ export const setPartitionOnlineStatus = async (
 	status: boolean
 ) => {
 	if (platform() !== 'win32') {
-		return
+		throw new Error("setPartitionOnlineStatus() not available on this platform")
 	}
 
 	try {
@@ -274,7 +290,7 @@ export const findVolume = async (
 	 * Volume 4                      NTFS   Partition    530 MB  Healthy    Hidden
 	 */
 	if (platform() !== 'win32') {
-		return ''
+		throw new Error("findVolume() not available on this platform")
 	}
 
 	let listText = ''
@@ -315,6 +331,10 @@ export const findVolume = async (
 export const getUnallocatedSize = async (
 	device: string
 ): Promise<number> => {
+	if (platform() !== 'win32') {
+		throw new Error("getUnallocatedSize() not available on this platform")
+	}
+
 	const deviceId = prepareDeviceId(device);
 
 	/* Retrieves dispart output formatted like the example below.
