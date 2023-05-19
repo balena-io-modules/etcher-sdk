@@ -1,4 +1,20 @@
 - commits:
+    - subject: Establish contract for diskpart functions
+      hash: 159ced7b74fa2dad776d34d573a19ccfcdd69278
+      body: |
+        All new functions must throw an error on non-Windows platforms.
+        Only clean() is a no-op for historical reasons.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+  version: 8.6.1
+  title: ""
+  date: 2023-05-19T15:51:22.661Z
+- commits:
     - subject: "Migrator: setup task sequence"
       hash: f215585ae84f7455aef2f283be155186d0e62436
       body: ""
