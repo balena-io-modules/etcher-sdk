@@ -1,4 +1,18 @@
 - commits:
+    - subject: "Migrator: setup task sequence"
+      hash: f215585ae84f7455aef2f283be155186d0e62436
+      body: ""
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+  version: 8.6.0
+  title: ""
+  date: 2023-05-19T14:06:16.055Z
+- commits:
     - subject: stop diskpart.clean() from breaking CLI  flash cmd
       hash: 1d0dad1e62f2c723f706482b2b87ec7835d578fe
       body: ""
