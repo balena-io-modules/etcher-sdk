@@ -81,6 +81,8 @@ export const migrate = async (
 	try {
 		const BOOT_PARTITION_INDEX = 1;
 		const ROOTA_PARTITION_INDEX = 2;
+		const BOOT_PARTITION_LABEL = 'flash-boot';
+		const ROOTA_PARTITION_LABEL = 'flash-rootA';
 		const BOOT_FILES_SOURCE_PATH = '/EFI/BOOT';
 		const BOOT_FILES_TARGET_PATH = '/EFI/Boot';
 		const REBOOT_DELAY_SEC = 10
@@ -127,7 +129,8 @@ export const migrate = async (
 		let requiredRootASize = 0
 
 		// Look for boot partition on a FAT16 filesystem
-		targetBootPartition = await findFilesystemLabel(currentPartitions, targetDevice, 'flash-boot', 'fat16')
+		targetBootPartition = await findFilesystemLabel(currentPartitions, targetDevice,
+				BOOT_PARTITION_LABEL, 'fat16')
 		if (targetBootPartition) {
 			console.log(`Boot partition already exists at index ${targetBootPartition.index}`)
 		} else {
@@ -136,7 +139,8 @@ export const migrate = async (
 			console.log(`Require ${requiredBootSize} (${formatMB(requiredBootSize)} MB) for boot partition`);
 		}
 		// Look for rootA partition on an ext4 filesystem
-		targetRootAPartition = await findFilesystemLabel(currentPartitions, targetDevice, 'flash-rootA', 'ext4')
+		targetRootAPartition = await findFilesystemLabel(currentPartitions, targetDevice,
+				ROOTA_PARTITION_LABEL, 'ext4')
 		if (targetRootAPartition) {
 			console.log(`RootA partition already exists at index ${targetRootAPartition.index}`)
 		} else {
@@ -173,6 +177,7 @@ export const migrate = async (
 		if (tasks.includes('copy')) {
 			// create partitions
 			console.log("")		//force newline
+			let volumeIds = ['', '']
 			if (!targetBootPartition) {
 				console.log("Create flasherBootPartition");
 				await diskpart.createPartition(deviceName, requiredBootSize / (1024 * 1024));
@@ -185,6 +190,8 @@ export const migrate = async (
 				console.log(`Created new partition for boot at offset ${targetBootPartition.offset} with size ${targetBootPartition.size}`);
 				currentPartitions = afterFirstPartitions
 			}
+			volumeIds[0] = await diskpart.findVolume(deviceName, BOOT_PARTITION_LABEL)
+			console.log(`flasherBootPartition volume: ${volumeIds[0]}`)
 
 			if (!targetRootAPartition) {
 				console.log("Create flasherRootAPartition");
@@ -198,12 +205,25 @@ export const migrate = async (
 				console.log(`Created new partition for data at offset ${targetRootAPartition.offset} with size ${targetRootAPartition.size}`);
 				currentPartitions = afterSecondPartitions
 			}
+			volumeIds[1] = await diskpart.findVolume(deviceName, ROOTA_PARTITION_LABEL)
+			console.log(`flasherRootAPartition volume: ${volumeIds[1]}`)
 
 			// copy partition data
+			// Use volume ID to take volume offine. At present really only necessary
+			// when overwriting boot partition because Windows recognizes the filesystem
+			// and will not allow overwriting it. No need to bring a volume back online.
 			console.log("Copy flasherBootPartition from image to disk");
+			if (volumeIds[0]) {
+				await diskpart.setPartitionOnlineStatus(volumeIds[0], false)
+			}
 			await copyPartitionFromImageToDevice(source, 1, targetDevice, targetBootPartition!.offset);
+			console.log("Copy complete")
 			console.log("Copy flasherRootAPartition from image to disk");
+			if (volumeIds[1]) {
+				await diskpart.setPartitionOnlineStatus(volumeIds[1], false)
+			}
 			await copyPartitionFromImageToDevice(source, 2, targetDevice, targetRootAPartition!.offset);
+			console.log("Copy complete")
 		} else {
 			console.log(`\nSkip task: create and copy partitions`)
 		}

@@ -221,6 +221,89 @@ export const createPartition = async (
 };
 
 /**
+ * @summary Sets the online status of a partition (volume)
+ * @param {String} volume - the identifier of the volume
+ * @example
+ * setPartitionOnlineStatus('3', false)
+ *  .then(...)
+ *  .catch(...)
+ */
+export const setPartitionOnlineStatus = async (
+	volume: string,
+	status: boolean
+) => {
+	if (platform() !== 'win32') {
+		return
+	}
+
+	try {
+		await runDiskpart([
+			`select volume=${volume}`,
+			`${status ? 'online' : 'offline'} volume`,
+		]);
+	} catch (error) {
+		throw(`setPartitionOnlineStatus: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+	}
+};
+
+/**
+ * Find the volume with the provided label.
+ *
+ * @param {string} device - device path
+ * @param {string} label - volume/partition label
+ * @return {number} identifier the volume, or '' if not found
+ * @example
+ * findVolume('\\\\.\\PhysicalDrive0', 'flash-boot')
+ *  .then(...)
+ *  .catch(...)
+ */
+export const findVolume = async (
+	device: string,
+	label: string
+): Promise<string> => {
+	const deviceId = prepareDeviceId(device);
+
+	/* Retrieves diskpart output formatted like the example below.
+	 *
+	 * Volume ###  Ltr  Label        Fs     Type        Size     Status     Info
+	 * ----------  ---  -----------  -----  ----------  -------  ---------  --------
+	 * Volume 0     C                NTFS   Partition     45 GB  Healthy    Boot
+	 * Volume 1         flash-boot   FAT    Partition     41 MB  Healthy
+	 * Volume 2                      RAW    Partition   3793 MB  Healthy
+	 * Volume 3                      FAT32  Partition    100 MB  Healthy    System
+	 * Volume 4                      NTFS   Partition    530 MB  Healthy    Hidden
+	 */
+	if (platform() !== 'win32') {
+		return ''
+	}
+
+	let listText = ''
+	try {
+		listText = await runDiskpart([
+			`select disk ${deviceId}`,
+			`list volume`
+		]);
+	} catch (error) {
+		throw(`findVolume: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+	}
+
+	let labelPos = -1;
+	// Look for 'Label' in column headings; then compare text on subsequent rows
+	// at that position for the expected label.
+	for (let line of listText.split('\n')) {
+		if (labelPos < 0) {
+			labelPos = line.indexOf('Label');
+		} else {
+			const volMatch = line.match(/Volume\s+(\d+)/);
+			if (volMatch && (line.substring(labelPos, labelPos + label.length) == label)) {
+				return volMatch[1]
+			}
+		}
+	}
+	return ''
+};
+
+/**
  * Provide unallocated space on disk, in KB
  * 
  * @param {string} device - device path
