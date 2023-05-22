@@ -1,18 +1,17 @@
 {
-	"compilerOptions": {
-		"typeRoots": ["typings", "node_modules/@types"],
-		"module": "commonjs",
-		"outDir": "build",
-		"sourceMap": true,
-		"declaration": true,
-		"target": "es2018",
-		"noImplicitAny": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"importHelpers": true,
-		"strictNullChecks": true
-	},
-	"include": [
-		"lib"
-	]
+  "compilerOptions": {
+    "typeRoots": ["typings", "node_modules/@types"],
+    "module": "commonjs",
+    "outDir": "build",
+    "sourceMap": true,
+    "declaration": true,
+    "target": "es2019",
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "importHelpers": true,
+    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["lib"]
 }
