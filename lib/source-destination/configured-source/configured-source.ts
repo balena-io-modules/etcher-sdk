@@ -266,7 +266,7 @@ export class ConfiguredSource extends SourceSource {
 			try {
 				await interact(this.disk, partition.index, async (fs) => {
 					// @ts-ignore: trim method exists for ext partitions
-					if (fs.trim !== undefined) {
+					if (fs?.trim !== undefined) {
 						// @ts-ignore: trim method exists for ext partitions
 						await fs.trim();
 					}

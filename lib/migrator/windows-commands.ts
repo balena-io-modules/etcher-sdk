@@ -3,7 +3,7 @@ import * as process from 'process';
 
 const checkPlatform = () => {
 	if (process.platform !== 'win32') {
-		throw Error("This command can be run only on windows.");
+		throw Error('This command can be run only on windows.');
 	}
 };
 
@@ -17,7 +17,7 @@ const mountEfi = (desiredLetter: string = 'M') => {
 	// unmount the letter
 	// fails silently if not present, umounts if occupied
 	try {
-		child_process.execSync(`mountvol ${desiredLetter}: /D`)
+		child_process.execSync(`mountvol ${desiredLetter}: /D`);
 	} catch (error) {
 		// noop
 	} finally {
@@ -27,7 +27,7 @@ const mountEfi = (desiredLetter: string = 'M') => {
 	try {
 		child_process.execSync(`mountvol ${desiredLetter}: /S`);
 	} catch (error) {
-		throw(`mountEfi: ${error}`);
+		throw new Error(`mountEfi: ${error}`);
 	}
 };
 
@@ -41,24 +41,28 @@ const setBoot = async (path: string = '\\EFI\\Boot\\bootx64.efi') => {
 	return new Promise((resolve, reject) => {
 		child_process.exec(`bcdedit /set {bootmgr} path ${path}`, (err, stdout) => {
 			if (err) {
-				reject(`setBoot: ${err}${stdout ? `\n${stdout}` : ""}`);
+				reject(`setBoot: ${err}${stdout ? `\n${stdout}` : ''}`);
 			}
 			resolve(stdout);
 		});
-	})
+	});
 };
 
 const shutdown = {
 	reboot: (delay: number = 0) => {
 		child_process.exec(`shutdown /r /t ${delay}`, function (err, _, __) {
-			if (err) throw Error(err.message);
+			if (err) {
+				throw Error(err.message);
+			}
 			console.log(`Rebooting in ${delay} seconds...`);
 		});
 	},
 	now: () => {
 		child_process.exec('shutdown /s /t 0', function (err, _, __) {
-			if (err) throw Error(err.message);
-			console.log("Shutting down");
+			if (err) {
+				throw Error(err.message);
+			}
+			console.log('Shutting down');
 		});
 	},
 };

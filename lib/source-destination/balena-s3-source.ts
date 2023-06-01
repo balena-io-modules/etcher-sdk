@@ -99,7 +99,7 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 	}
 
 	protected get imageSuffix(): string {
-		return this.imageType ? `-${this.imageType}`: ''
+		return this.imageType ? `-${this.imageType}` : '';
 	}
 
 	public async canCreateReadStream(): Promise<boolean> {

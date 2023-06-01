@@ -9,7 +9,7 @@ import {
 	calcRequiredPartitionSize,
 	getTargetBlockDevice,
 	findNewPartitions,
-	findFilesystemLabel
+	findFilesystemLabel,
 } from './helpers';
 import { copyBootloaderFromImage } from './copy-bootloader';
 import winCommands from './windows-commands';
@@ -18,32 +18,32 @@ import { promisify } from 'util';
 import { exec as childExec } from 'child_process';
 const execAsync = promisify(childExec);
 import { constants as osConstants } from 'os';
-import { existsSync } from 'fs'
+import { existsSync } from 'fs';
 
 /** Determine if running as administrator. */
 async function isElevated(): Promise<boolean> {
-    // `fltmc` is available on WinPE, XP, Vista, 7, 8, and 10
-    // Works even when the "Server" service is disabled
-    // See http://stackoverflow.com/a/28268802
-    try {
-        await execAsync('fltmc');
-    } catch (error: any) {
-        if (error.code === osConstants.errno.EPERM) {
-            return false;
-        }
-        throw error;
-    }
-    return true;
+	// `fltmc` is available on WinPE, XP, Vista, 7, 8, and 10
+	// Works even when the "Server" service is disabled
+	// See http://stackoverflow.com/a/28268802
+	try {
+		await execAsync('fltmc');
+	} catch (error: any) {
+		if (error.code === osConstants.errno.EPERM) {
+			return false;
+		}
+		throw error;
+	}
+	return true;
 }
 
 function formatMB(bytes: number): string {
-	return (bytes / (1024 * 1024)).toFixed(2)
+	return (bytes / (1024 * 1024)).toFixed(2);
 }
 
 /** Options for migrate(): */
 export interface MigrateOptions {
 	// don't perform these tasks; comma separated list like 'bootloader,reboot'
-	omitTasks: string
+	omitTasks: string;
 }
 
 /**
@@ -75,7 +75,7 @@ export const migrate = async (
 	windowsPartition: string = 'C',
 	deviceName: string = '\\\\.\\PhysicalDrive0',
 	efiLabel: string = 'M',
-	options: MigrateOptions = { omitTasks: '' }
+	options: MigrateOptions = { omitTasks: '' },
 ) => {
 	console.log(`Migrate ${deviceName} with image ${imagePath}`);
 	try {
@@ -85,68 +85,94 @@ export const migrate = async (
 		const ROOTA_PARTITION_LABEL = 'flash-rootA';
 		const BOOT_FILES_SOURCE_PATH = '/EFI/BOOT';
 		const BOOT_FILES_TARGET_PATH = '/EFI/Boot';
-		const REBOOT_DELAY_SEC = 10
-		const ALL_TASKS = [ 'shrink', 'copy', 'bootloader', 'reboot'];
+		const REBOOT_DELAY_SEC = 10;
+		const ALL_TASKS = ['shrink', 'copy', 'bootloader', 'reboot'];
 
 		// initial validations
 		if (process.platform !== 'win32') {
-			throw Error("Platform is not Windows");
+			throw Error('Platform is not Windows');
 		}
 		if (!(await isElevated())) {
-			throw Error("User is not administrator");
+			throw Error('User is not administrator');
 		}
 		if (!existsSync(imagePath)) {
 			throw Error(`Image ${imagePath} not found`);
 		}
 
-		const tasks = ALL_TASKS.filter(task => !options.omitTasks.includes(task));
+		const tasks = ALL_TASKS.filter((task) => !options.omitTasks.includes(task));
 
 		// Define objects for image file source for partitions, storage device target,
 		// and the target's partition table.
 		const source = new File({ path: imagePath });
-		const targetDevice = await getTargetBlockDevice(windowsPartition)
-		let currentPartitions = await targetDevice.getPartitionTable()
+		const targetDevice = await getTargetBlockDevice(windowsPartition);
+		let currentPartitions = await targetDevice.getPartitionTable();
 		if (currentPartitions === undefined) {
 			throw Error("Can't read partition table");
 		}
 		// Log existing partitions for debugging
-		console.log("\nPartitions on target:")
+		console.log('\nPartitions on target:');
 		for (const p of currentPartitions.partitions) {
 			// Satisfy TypeScript that p is not an MBRPartition even though we tested above on the table
 			if (!('guid' in p)) {
-				continue
+				continue;
 			}
-			console.log(`index ${p.index}, offset ${p.offset}, type ${p.type}`)
+			console.log(`index ${p.index}, offset ${p.offset}, type ${p.type}`);
 		}
 
 		// Prepare to check for the balenaOS boot and rootA partitions already present.
 		// If partitions not present, determine required partition sizes and free space.
 		// Calculations are in units of bytes. However, on Windows, required sizes are
 		// rounded up to the nearest MB due to tool limitations.
-		let targetBootPartition: GPTPartition | MBRPartition | null
-		let targetRootAPartition: GPTPartition | MBRPartition | null
-		let requiredBootSize = 0
-		let requiredRootASize = 0
+		let targetBootPartition: GPTPartition | MBRPartition | null;
+		let targetRootAPartition: GPTPartition | MBRPartition | null;
+		let requiredBootSize = 0;
+		let requiredRootASize = 0;
 
 		// Look for boot partition on a FAT16 filesystem
-		targetBootPartition = await findFilesystemLabel(currentPartitions, targetDevice,
-				BOOT_PARTITION_LABEL, 'fat16')
+		targetBootPartition = await findFilesystemLabel(
+			currentPartitions,
+			targetDevice,
+			BOOT_PARTITION_LABEL,
+			'fat16',
+		);
 		if (targetBootPartition) {
-			console.log(`Boot partition already exists at index ${targetBootPartition.index}`)
+			console.log(
+				`Boot partition already exists at index ${targetBootPartition.index}`,
+			);
 		} else {
-			console.log("Boot partition not found on target")
-			requiredBootSize = await calcRequiredPartitionSize(source, BOOT_PARTITION_INDEX);
-			console.log(`Require ${requiredBootSize} (${formatMB(requiredBootSize)} MB) for boot partition`);
+			console.log('Boot partition not found on target');
+			requiredBootSize = await calcRequiredPartitionSize(
+				source,
+				BOOT_PARTITION_INDEX,
+			);
+			console.log(
+				`Require ${requiredBootSize} (${formatMB(
+					requiredBootSize,
+				)} MB) for boot partition`,
+			);
 		}
 		// Look for rootA partition on an ext4 filesystem
-		targetRootAPartition = await findFilesystemLabel(currentPartitions, targetDevice,
-				ROOTA_PARTITION_LABEL, 'ext4')
+		targetRootAPartition = await findFilesystemLabel(
+			currentPartitions,
+			targetDevice,
+			ROOTA_PARTITION_LABEL,
+			'ext4',
+		);
 		if (targetRootAPartition) {
-			console.log(`RootA partition already exists at index ${targetRootAPartition.index}`)
+			console.log(
+				`RootA partition already exists at index ${targetRootAPartition.index}`,
+			);
 		} else {
-			console.log("RootA partition not found on target")
-			requiredRootASize = await calcRequiredPartitionSize(source, ROOTA_PARTITION_INDEX);
-			console.log(`Require ${requiredRootASize} (${formatMB(requiredRootASize)} MB) for rootA partition`)
+			console.log('RootA partition not found on target');
+			requiredRootASize = await calcRequiredPartitionSize(
+				source,
+				ROOTA_PARTITION_INDEX,
+			);
+			console.log(
+				`Require ${requiredRootASize} (${formatMB(
+					requiredRootASize,
+				)} MB) for rootA partition`,
+			);
 		}
 		const requiredFreeSize = requiredBootSize + requiredRootASize;
 
@@ -154,102 +180,166 @@ export const migrate = async (
 		// Shrink amount must be for *all* of required space to ensure it is contiguous.
 		// IOW, don't assume the shrink will merge with any existing unallocated space.
 		if (requiredFreeSize) {
-			const unallocSpace = (await diskpart.getUnallocatedSize(deviceName)) * 1024;
-			console.log(`Found ${unallocSpace} (${formatMB(unallocSpace)} MB) not allocated on disk ${deviceName}`)
+			const unallocSpace =
+				(await diskpart.getUnallocatedSize(deviceName)) * 1024;
+			console.log(
+				`Found ${unallocSpace} (${formatMB(
+					unallocSpace,
+				)} MB) not allocated on disk ${deviceName}`,
+			);
 
 			if (unallocSpace < requiredFreeSize) {
 				// must force upper case
-				const freeSpace = await checkDiskSpace(`${windowsPartition.toUpperCase()}:\\`)
+				const freeSpace = await checkDiskSpace(
+					`${windowsPartition.toUpperCase()}:\\`,
+				);
 				if (freeSpace.free < requiredFreeSize) {
-					throw Error(`Need at least ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB) free on partition ${windowsPartition}`)
+					throw Error(
+						`Need at least ${requiredFreeSize} (${formatMB(
+							requiredFreeSize,
+						)} MB) free on partition ${windowsPartition}`,
+					);
 				}
 				if (tasks.includes('shrink')) {
-					console.log(`\nShrink partition ${windowsPartition} by ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB)`);
-					await diskpart.shrinkPartition(windowsPartition, requiredFreeSize / (1024 * 1024));
+					console.log(
+						`\nShrink partition ${windowsPartition} by ${requiredFreeSize} (${formatMB(
+							requiredFreeSize,
+						)} MB)`,
+					);
+					await diskpart.shrinkPartition(
+						windowsPartition,
+						requiredFreeSize / (1024 * 1024),
+					);
 				} else {
-					console.log(`\nSkip task: shrink partition ${windowsPartition} by ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB)`);
+					console.log(
+						`\nSkip task: shrink partition ${windowsPartition} by ${requiredFreeSize} (${formatMB(
+							requiredFreeSize,
+						)} MB)`,
+					);
 				}
-			} else{
-				console.log("Unallocated space on target is sufficient for copy")
+			} else {
+				console.log('Unallocated space on target is sufficient for copy');
 			}
 		}
 
 		if (tasks.includes('copy')) {
 			// create partitions
-			console.log("")		//force newline
-			let volumeIds = ['', '']
+			console.log(''); // force newline
+			const volumeIds = ['', ''];
 			if (!targetBootPartition) {
-				console.log("Create flasherBootPartition");
-				await diskpart.createPartition(deviceName, requiredBootSize / (1024 * 1024));
-				const afterFirstPartitions = await targetDevice.getPartitionTable()
-				const firstNewPartition = findNewPartitions(currentPartitions, afterFirstPartitions);
+				console.log('Create flasherBootPartition');
+				await diskpart.createPartition(
+					deviceName,
+					requiredBootSize / (1024 * 1024),
+				);
+				const afterFirstPartitions = await targetDevice.getPartitionTable();
+				const firstNewPartition = findNewPartitions(
+					currentPartitions,
+					afterFirstPartitions,
+				);
 				if (firstNewPartition.length !== 1) {
-					throw Error(`Found ${firstNewPartition.length} new partitions for flasher boot, but expected 1`)
+					throw Error(
+						`Found ${firstNewPartition.length} new partitions for flasher boot, but expected 1`,
+					);
 				}
 				targetBootPartition = firstNewPartition[0];
-				console.log(`Created new partition for boot at offset ${targetBootPartition.offset} with size ${targetBootPartition.size}`);
-				currentPartitions = afterFirstPartitions
+				console.log(
+					`Created new partition for boot at offset ${targetBootPartition.offset} with size ${targetBootPartition.size}`,
+				);
+				currentPartitions = afterFirstPartitions;
 			}
-			volumeIds[0] = await diskpart.findVolume(deviceName, BOOT_PARTITION_LABEL)
-			console.log(`flasherBootPartition volume: ${volumeIds[0]}`)
+			volumeIds[0] = await diskpart.findVolume(
+				deviceName,
+				BOOT_PARTITION_LABEL,
+			);
+			console.log(`flasherBootPartition volume: ${volumeIds[0]}`);
 
 			if (!targetRootAPartition) {
-				console.log("Create flasherRootAPartition");
-				await diskpart.createPartition(deviceName, requiredRootASize / (1024 * 1024));
-				const afterSecondPartitions = await targetDevice.getPartitionTable()
-				const secondNewPartition = findNewPartitions(currentPartitions, afterSecondPartitions)
+				console.log('Create flasherRootAPartition');
+				await diskpart.createPartition(
+					deviceName,
+					requiredRootASize / (1024 * 1024),
+				);
+				const afterSecondPartitions = await targetDevice.getPartitionTable();
+				const secondNewPartition = findNewPartitions(
+					currentPartitions,
+					afterSecondPartitions,
+				);
 				if (secondNewPartition.length !== 1) {
-					throw Error(`Found ${secondNewPartition.length} new partitions for flasher rootA, but expected 1`)
+					throw Error(
+						`Found ${secondNewPartition.length} new partitions for flasher rootA, but expected 1`,
+					);
 				}
 				targetRootAPartition = secondNewPartition[0];
-				console.log(`Created new partition for data at offset ${targetRootAPartition.offset} with size ${targetRootAPartition.size}`);
-				currentPartitions = afterSecondPartitions
+				console.log(
+					`Created new partition for data at offset ${targetRootAPartition.offset} with size ${targetRootAPartition.size}`,
+				);
+				currentPartitions = afterSecondPartitions;
 			}
-			volumeIds[1] = await diskpart.findVolume(deviceName, ROOTA_PARTITION_LABEL)
-			console.log(`flasherRootAPartition volume: ${volumeIds[1]}`)
+			volumeIds[1] = await diskpart.findVolume(
+				deviceName,
+				ROOTA_PARTITION_LABEL,
+			);
+			console.log(`flasherRootAPartition volume: ${volumeIds[1]}`);
 
 			// copy partition data
 			// Use volume ID to take volume offine. At present really only necessary
 			// when overwriting boot partition because Windows recognizes the filesystem
 			// and will not allow overwriting it. No need to bring a volume back online.
-			console.log("Copy flasherBootPartition from image to disk");
+			console.log('Copy flasherBootPartition from image to disk');
 			if (volumeIds[0]) {
-				await diskpart.setPartitionOnlineStatus(volumeIds[0], false)
+				await diskpart.setPartitionOnlineStatus(volumeIds[0], false);
 			}
-			await copyPartitionFromImageToDevice(source, 1, targetDevice, targetBootPartition!.offset);
-			console.log("Copy complete")
-			console.log("Copy flasherRootAPartition from image to disk");
+			await copyPartitionFromImageToDevice(
+				source,
+				1,
+				targetDevice,
+				targetBootPartition!.offset,
+			);
+			console.log('Copy complete');
+			console.log('Copy flasherRootAPartition from image to disk');
 			if (volumeIds[1]) {
-				await diskpart.setPartitionOnlineStatus(volumeIds[1], false)
+				await diskpart.setPartitionOnlineStatus(volumeIds[1], false);
 			}
-			await copyPartitionFromImageToDevice(source, 2, targetDevice, targetRootAPartition!.offset);
-			console.log("Copy complete")
+			await copyPartitionFromImageToDevice(
+				source,
+				2,
+				targetDevice,
+				targetRootAPartition!.offset,
+			);
+			console.log('Copy complete');
 		} else {
-			console.log(`\nSkip task: create and copy partitions`)
+			console.log(`\nSkip task: create and copy partitions`);
 		}
 
 		if (tasks.includes('bootloader')) {
 			// mount the boot partition and copy bootloader
-			console.log("\nMount Windows boot partition and copy grub bootloader from image");
+			console.log(
+				'\nMount Windows boot partition and copy grub bootloader from image',
+			);
 			winCommands.mountEfi(efiLabel);
-			await copyBootloaderFromImage(imagePath, 1, BOOT_FILES_SOURCE_PATH, `${efiLabel ?? "M"}:${BOOT_FILES_TARGET_PATH}`);
-			console.log("Copied grub bootloader files");
+			await copyBootloaderFromImage(
+				imagePath,
+				1,
+				BOOT_FILES_SOURCE_PATH,
+				`${efiLabel ?? 'M'}:${BOOT_FILES_TARGET_PATH}`,
+			);
+			console.log('Copied grub bootloader files');
 
 			// set boot file
-			console.log("Set boot file");
+			console.log('Set boot file');
 			const setBootResult = await winCommands.setBoot();
-			console.log("Boot file set.", setBootResult)
+			console.log('Boot file set.', setBootResult);
 		} else {
-			console.log("\nSkip task: bootloader setup");
+			console.log('\nSkip task: bootloader setup');
 		}
 
 		if (tasks.includes('reboot')) {
-			console.log("Migration complete, about to reboot");
+			console.log('Migration complete, about to reboot');
 			winCommands.shutdown.reboot(REBOOT_DELAY_SEC);
 		} else {
-			console.log("Skip task: reboot");
+			console.log('Skip task: reboot');
 		}
-
 	} catch (error) {
 		console.log("Can't proceed with migration:", error);
 		return;
