@@ -520,7 +520,9 @@ export class SourceDestination extends EventEmitter {
 		try {
 			mimetype = await this.getMimeTypeFromContent();
 		} catch (e) {
-			if (e.code === 'EISDIR') { throw e; } // expected to die on directories
+			if (e.code === 'EISDIR') {
+				throw e;
+			} // expected to die on directories
 			console.log("Can't get mimetype from content", e.code);
 		}
 
@@ -540,7 +542,7 @@ export class SourceDestination extends EventEmitter {
 				// no partitions
 			}
 		} catch (error) {
-			console.log("Can't read to buffer to get partitions")
+			console.log("Can't read to buffer to get partitions");
 			throw error;
 		}
 	}

@@ -47,7 +47,7 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 	private unmountOnSuccess: boolean;
 	public oDirect: boolean;
 	public emitsProgress = false;
-	private keepOriginal = false
+	private keepOriginal = false;
 	public readonly alignment: number;
 
 	constructor({
@@ -55,13 +55,13 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 		unmountOnSuccess = false,
 		write = false,
 		direct = true,
-		keepOriginal = false
+		keepOriginal = false,
 	}: {
 		drive: DrivelistDrive;
 		unmountOnSuccess?: boolean;
 		write?: boolean;
 		direct?: boolean;
-		keepOriginal?: boolean
+		keepOriginal?: boolean;
 	}) {
 		super({ path: drive.raw, write });
 		this.drive = drive;
@@ -150,12 +150,15 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 	public async createWriteStream({
 		highWaterMark,
 		startOffset,
-	}: { highWaterMark?: number, startOffset?: number } = {}): Promise<BlockWriteStream> {
+	}: {
+		highWaterMark?: number;
+		startOffset?: number;
+	} = {}): Promise<BlockWriteStream> {
 		const stream = new ProgressBlockWriteStream({
 			destination: this,
 			delayFirstBuffer: platform() === 'win32',
 			highWaterMark,
-			startOffset
+			startOffset,
 		});
 		stream.on('finish', stream.emit.bind(stream, 'done'));
 		return stream;

@@ -66,14 +66,11 @@ describe('utils', function () {
 	describe('BalenaS3SourceBase', function () {
 		describe('isESRVersion', function () {
 			it('should return false for non-ESR versions following the original scheme', function () {
-				[
-					'2.7.8.dev',
-					'2.7.8.prod',
-					'2.80.3.0.dev',
-					'2.80.3.0.prod',
-				].forEach((v) => {
-					expect(BalenaS3SourceBase.isESRVersion(v)).to.be.false;
-				});
+				['2.7.8.dev', '2.7.8.prod', '2.80.3.0.dev', '2.80.3.0.prod'].forEach(
+					(v) => {
+						expect(BalenaS3SourceBase.isESRVersion(v)).to.be.false;
+					},
+				);
 			});
 
 			it('should return false for unified non-ESR versions', function () {
@@ -83,11 +80,9 @@ describe('utils', function () {
 			});
 
 			it('should return true for ESR versions following the original scheme', function () {
-				['2020.04.0.prod', '2021.10.1.dev', '2021.10.1.prod'].forEach(
-					(v) => {
-						expect(BalenaS3SourceBase.isESRVersion(v)).to.be.true;
-					},
-				);
+				['2020.04.0.prod', '2021.10.1.dev', '2021.10.1.prod'].forEach((v) => {
+					expect(BalenaS3SourceBase.isESRVersion(v)).to.be.true;
+				});
 			});
 
 			it('should return true for unified ESR versions', function () {

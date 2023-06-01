@@ -11,6 +11,7 @@
     "test": "npm run lint && mocha -r ts-node/register tests/**/*.spec.ts",
     "prettier": "balena-lint --fix lib typings examples tests",
     "lint": "balena-lint lib typings examples tests",
+    "lint:fix": "balena-lint --fix lib typings examples tests",
     "build": "tsc",
     "doc": "typedoc --readme none --theme markdown --mode file --out doc lib && npm run sed",
     "sed": "sed -i'.bak' 's|'$(pwd)'||g' $(find doc -type f) && rimraf doc/*.bak doc/**/*.bak",
@@ -75,7 +76,7 @@
     "winusb-driver-generator": "^2.0.0"
   },
   "devDependencies": {
-    "@balena/lint": "^5.4.0",
+    "@balena/lint": "^6.2.2",
     "@types/bluebird": "^3.5.23",
     "@types/chai": "^4.1.4",
     "@types/cli-spinner": "^0.2.0",
