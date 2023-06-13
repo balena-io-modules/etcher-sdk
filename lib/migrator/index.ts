@@ -3,13 +3,15 @@ import * as checkDiskSpace from 'check-disk-space';
 import { GPTPartition, MBRPartition } from 'partitioninfo';
 
 import * as diskpart from '../diskpart';
+import * as netsh from './netsh'
 import { File } from '../source-destination';
 import {
 	copyPartitionFromImageToDevice,
 	calcRequiredPartitionSize,
 	getTargetBlockDevice,
 	findNewPartitions,
-	findFilesystemLabel
+	findFilesystemLabel,
+	writeNetworkConfig
 } from './helpers';
 import { copyBootloaderFromImage } from './copy-bootloader';
 import winCommands from './windows-commands';
@@ -86,7 +88,7 @@ export const migrate = async (
 		const BOOT_FILES_SOURCE_PATH = '/EFI/BOOT';
 		const BOOT_FILES_TARGET_PATH = '/EFI/Boot';
 		const REBOOT_DELAY_SEC = 10
-		const ALL_TASKS = [ 'shrink', 'copy', 'bootloader', 'reboot'];
+		const ALL_TASKS = [ 'shrink', 'copy', 'config', 'bootloader', 'reboot'];
 
 		// initial validations
 		if (process.platform !== 'win32') {
@@ -150,7 +152,7 @@ export const migrate = async (
 		}
 		const requiredFreeSize = requiredBootSize + requiredRootASize;
 
-		// Shrink Windows partition as needed to provide required unallocated space.
+		// Determine how much to shrink Windows partition to provide required unallocated space.
 		// Shrink amount must be for *all* of required space to ensure it is contiguous.
 		// IOW, don't assume the shrink will merge with any existing unallocated space.
 		if (requiredFreeSize) {
@@ -163,15 +165,28 @@ export const migrate = async (
 				if (freeSpace.free < requiredFreeSize) {
 					throw Error(`Need at least ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB) free on partition ${windowsPartition}`)
 				}
-				if (tasks.includes('shrink')) {
-					console.log(`\nShrink partition ${windowsPartition} by ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB)`);
-					await diskpart.shrinkPartition(windowsPartition, requiredFreeSize / (1024 * 1024));
-				} else {
-					console.log(`\nSkip task: shrink partition ${windowsPartition} by ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB)`);
-				}
 			} else{
 				console.log("Unallocated space on target is sufficient for copy")
 			}
+		}
+
+		// Check for WiFi networks to be configured.
+		const wifiNames = await netsh.collectWifiProfiles()
+		console.log(`\nFound WiFi profiles: ${wifiNames.length ? wifiNames : "<none>"}`)
+		// must initialize empty profile here to satisfy TS compiler
+		let wifiProfile = {name: '', key: ''};
+		for (let name of wifiNames) {
+			wifiProfile = await netsh.readWifiProfile(name)
+			//console.log(`Profile key: ${wifiProfile.key}`)
+			break
+		}
+
+		if (tasks.includes('shrink')) {
+			// Shrink Windows partition as discovered above to provide required unallocated space.
+			console.log(`\nShrink partition ${windowsPartition} by ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB)`);
+			await diskpart.shrinkPartition(windowsPartition, requiredFreeSize / (1024 * 1024));
+		} else {
+			console.log(`\nSkip task: shrink partition ${windowsPartition} by ${requiredFreeSize} (${formatMB(requiredFreeSize)} MB)`);
 		}
 
 		if (tasks.includes('copy')) {
@@ -226,6 +241,18 @@ export const migrate = async (
 			console.log("Copy complete")
 		} else {
 			console.log(`\nSkip task: create and copy partitions`)
+		}
+
+		if (tasks.includes('config')) {
+			console.log("\nWrite network configuration");
+			if (wifiProfile.name) {
+				await writeNetworkConfig(wifiProfile)
+				console.log(`Wrote wifi-config for ${wifiProfile.name}`)
+			} else {
+				console.log("WiFi profile not found");
+			}
+		} else {
+			console.log(`\nSkip task: write configuration`)
 		}
 
 		if (tasks.includes('bootloader')) {

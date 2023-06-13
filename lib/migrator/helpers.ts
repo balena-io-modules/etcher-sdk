@@ -1,7 +1,9 @@
+import { writeFile } from 'fs/promises';
 import * as process from 'process';
 import * as drivelist from 'drivelist'
 import { GetPartitionsResult, GPTPartition, MBRPartition } from 'partitioninfo';
 import { BlockDevice, SourceDestination, File } from '../source-destination';
+import { WifiProfile } from './netsh'
 
 export const MS_DATA_PARTITION_ID = 'EBD0A0A2-B9E5-4433-87C0-68B6B72699C7'
 
@@ -197,4 +199,36 @@ export const getTargetBlockDevice = async (mountLabel: string = 'C') => {
 		write: true,
 		keepOriginal: true
 	})
+}
+
+/** Generates the contents for a balenaOS network configuration file. */
+const generateWifiConfig = (profile: WifiProfile): string => {
+	return `[connection]
+id=resin-wifi
+type=wifi
+
+[wifi]
+mode=infrastructure
+ssid=${profile.name}
+
+[wifi-security]
+auth-alg=open
+key-mgmt=wpa-psk
+psk=${profile.key}
+
+[ipv4]
+method=auto
+
+[ipv6]
+addr-gen-mode=stable-privacy
+method=auto
+`
+}
+
+/**
+ * Writes a balenaOS network configuration file for the provided WiFi profile.
+ */
+export const writeNetworkConfig = async (profile: WifiProfile) => {
+	const config = generateWifiConfig(profile)
+	await writeFile('wifi-config', config)
 }
