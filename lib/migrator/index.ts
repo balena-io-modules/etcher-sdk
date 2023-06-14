@@ -86,7 +86,7 @@ export const migrate = async (
 		const BOOT_FILES_SOURCE_PATH = '/EFI/BOOT';
 		const BOOT_FILES_TARGET_PATH = '/EFI/Boot';
 		const REBOOT_DELAY_SEC = 10
-		const ALL_TASKS = [ 'shrink', 'copy', 'bootloader', 'reboot'];
+		const ALL_TASKS = [ 'shrink', 'copy', 'config', 'bootloader', 'reboot'];
 
 		// initial validations
 		if (process.platform !== 'win32') {
@@ -174,10 +174,10 @@ export const migrate = async (
 			}
 		}
 
+		let volumeIds = ['', '']
 		if (tasks.includes('copy')) {
 			// create partitions
 			console.log("")		//force newline
-			let volumeIds = ['', '']
 			if (!targetBootPartition) {
 				console.log("Create flasherBootPartition");
 				await diskpart.createPartition(deviceName, requiredBootSize / (1024 * 1024));
@@ -226,6 +226,15 @@ export const migrate = async (
 			console.log("Copy complete")
 		} else {
 			console.log(`\nSkip task: create and copy partitions`)
+		}
+
+		if (tasks.includes('config')) {
+			if (volumeIds[0]) {
+				await diskpart.setPartitionOnlineStatus(volumeIds[0], true, 'N')
+				console.log("\nSet drive N online")
+				await diskpart.setPartitionOnlineStatus(volumeIds[0], false, 'N')
+				console.log("\nSet drive N offline")
+			}
 		}
 
 		if (tasks.includes('bootloader')) {

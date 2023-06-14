@@ -246,17 +246,25 @@ export const createPartition = async (
  */
 export const setPartitionOnlineStatus = async (
 	volume: string,
-	status: boolean
+	status: boolean,
+	letter?: string
 ) => {
 	if (platform() !== 'win32') {
 		throw new Error("setPartitionOnlineStatus() not available on this platform")
 	}
+	
+	let cmds = [`select volume=${volume}`]
+	if (letter) {
+		if (status) {
+			cmds.push(`assign letter=${letter}`)
+		} else {
+			cmds.push(`remove letter=${letter}`)
+		}
+	}
+	cmds.push(`${status ? 'online' : 'offline'} volume`)
 
 	try {
-		await runDiskpart([
-			`select volume=${volume}`,
-			`${status ? 'online' : 'offline'} volume`,
-		]);
+		await runDiskpart(cmds);
 	} catch (error) {
 		throw(`setPartitionOnlineStatus: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
 	}
