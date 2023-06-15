@@ -176,7 +176,7 @@ export const migrate = async (
 		}
 
 		let volumeIds = ['', '']
-		let isNewPartition = true
+		let isNewBootPartition = false
 		if (tasks.includes('copy')) {
 			// create partitions
 			console.log("")		//force newline
@@ -191,11 +191,11 @@ export const migrate = async (
 				targetBootPartition = firstNewPartition[0];
 				console.log(`Created new partition for boot at offset ${targetBootPartition.offset} with size ${targetBootPartition.size}`);
 				currentPartitions = afterFirstPartitions
+				isNewBootPartition = true
 				// need to determine this programmatically; do a diff like for targetDevice
 				volumeIds[0] = '1'
 			} else {
 				volumeIds[0] = await diskpart.findVolume(deviceName, BOOT_PARTITION_LABEL)
-				isNewPartition = false
 			}
 			console.log(`flasherBootPartition volume: ${volumeIds[0]}`)
 
@@ -219,8 +219,9 @@ export const migrate = async (
 			// when overwriting boot partition because Windows recognizes the filesystem
 			// and will not allow overwriting it. No need to bring a volume back online.
 			console.log("Copy flasherBootPartition from image to disk");
-			// Don't execute for new partition; cannot write config file below
-			if (volumeIds[0] && !isNewPartition) {
+			// Don't execute for new partition; cannot write config file below.
+			// When create the new partition, it's not really "online" yet.
+			if (!isNewBootPartition) {
 				await diskpart.setPartitionOnlineStatus(volumeIds[0], false)
 			}
 			await copyPartitionFromImageToDevice(source, 1, targetDevice, targetBootPartition!.offset);
@@ -236,19 +237,17 @@ export const migrate = async (
 		}
 
 		if (tasks.includes('config')) {
-			if (volumeIds[0]) {
-				await diskpart.setDriveLetter(volumeIds[0], 'N', true)
-				await diskpart.setPartitionOnlineStatus(volumeIds[0], true)
-				console.log("\nSet drive N online")
-				await writeFile('N:\\system-connections\\wifi-config', 'abcd')
-				const contents = await readFile('N:\\system-connections\\wifi-config')
-				console.log(`wifi-config: ${contents}`)
-				// must ensure we always remove drive letter -- in a catch block
-				await diskpart.setDriveLetter(volumeIds[0], 'N', false)
-				// Don't take offline; won't find volume on next run
-				//await diskpart.setPartitionOnlineStatus(volumeIds[0], false)
-				console.log("\nSet drive N offline")
-			}
+			await diskpart.setDriveLetter(volumeIds[0], 'N')
+			await diskpart.setPartitionOnlineStatus(volumeIds[0], true)
+			console.log("\nSet drive N online")
+			await writeFile('N:\\system-connections\\wifi-config', 'abcd')
+			const contents = await readFile('N:\\system-connections\\wifi-config')
+			console.log(`wifi-config: ${contents}`)
+			// must ensure we always remove drive letter -- in a catch block
+			await diskpart.clearDriveLetter(volumeIds[0], 'N')
+			// Don't take offline; won't find volume on next run
+			//await diskpart.setPartitionOnlineStatus(volumeIds[0], false)
+			console.log("\nSet drive N offline")
 		}
 
 		if (tasks.includes('bootloader')) {

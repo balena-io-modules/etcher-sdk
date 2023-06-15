@@ -201,7 +201,7 @@ export const shrinkPartition = async (
 };
 
 /**
- * Create partition.
+ *
  * @param {string} device - device path
  * @param {number} sizeMB - size of the new partition (free space has to be present)
  * @param {string} fs - default "fat32", possible "ntfs" the filesystem to format with
@@ -214,7 +214,7 @@ export const shrinkPartition = async (
 export const createPartition = async (
 	device: string,
 	sizeMB: number,
-	fs?: 'fat' | 'exFAT' | 'fat32' | 'ntfs',
+	fs?: 'exFAT' | 'fat32' | 'ntfs',
 	label?: string,
 	desiredLetter?: string
 ) => {
@@ -228,42 +228,11 @@ export const createPartition = async (
 			`select disk ${deviceId}`,
 			`create partition primary size=${sizeMB}`,
 			`${desiredLetter ? 'assign letter='.concat(desiredLetter) : ''}`,
-			`${fs ? 'format fs='.concat(fs).concat(` label=${label ?? 'Balena Volume'}`.concat(' quick')) : ''}`,
+			`${fs ? 'format fs='.concat(fs).concat(`label=${label ?? 'Balena Volume'}`.concat(' quick')) : ''}`,
 			`detail partition`
-		])
+		])		
 	} catch (error) {
 		throw(`createPartition: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
-	}
-};
-
-/**
- * Create volume.
- * @param {string} device - device path
- * @param {number} sizeMB - size of the new partition (free space has to be present)
- * @param {string} fs - default "fat32", possible "ntfs" the filesystem to format with
- * @param {string} desiredLetter - letter to assign to the new volume, gets the next free letter by default
- * @example
- * createVolume('\\\\.\\PhysicalDrive2', 2048)
- *  .then(...)
- *  .catch(...)
- */
-export const createVolume = async (
-	device: string,
-	sizeMB: number,
-) => {
-	if (platform() !== 'win32') {
-		throw new Error("createVolume() not available on this platform")
-	}
-
-	const deviceId = prepareDeviceId(device);
-	try {
-		await runDiskpart([
-			`select disk ${deviceId}`,
-			`create volume simple size=${sizeMB}`,
-			`detail volume`
-		])
-	} catch (error) {
-		throw(`createVolume: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
 	}
 };
 
@@ -282,37 +251,60 @@ export const setPartitionOnlineStatus = async (
 	if (platform() !== 'win32') {
 		throw new Error("setPartitionOnlineStatus() not available on this platform")
 	}
-	
-	let cmds = [`select volume=${volume}`]
-	cmds.push(`${status ? 'online' : 'offline'} volume`)
 
 	try {
-		await runDiskpart(cmds);
+		await runDiskpart([
+			`select volume=${volume}`,
+			`${status ? 'online' : 'offline'} volume`,
+		]);
 	} catch (error) {
-		throw(`setPartitionStatus: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+		throw(`setPartitionOnlineStatus: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
 	}
 };
 
+/**
+ * @summary Sets the Windows drive letter for a volume.
+ * @param {String} volume - the identifier of the volume
+ * @param {String} letter - the drive letter, like 'N'
+ */
 export const setDriveLetter = async (
 	volume: string,
-	letter: string,
-	status: boolean
+	letter: string
 ) => {
 	if (platform() !== 'win32') {
 		throw new Error("setDriveLetter() not available on this platform")
 	}
-	
-	let cmds = [`select volume=${volume}`]
-	if (status) {
-		cmds.push(`assign letter=${letter}`)
-	} else {
-		cmds.push(`remove letter=${letter}`)
+
+	try {
+		await runDiskpart([
+			`select volume=${volume}`,
+			`assign letter=${letter}`,
+		]);
+	} catch (error) {
+		throw(`setDriveLetter: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+	}
+};
+
+/**
+ * @summary Clears the Windows drive letter from a volume.
+ * @param {String} volume - the identifier of the volume
+ * @param {String} letter - the drive letter, like 'N'
+ */
+export const clearDriveLetter = async (
+	volume: string,
+	letter: string
+) => {
+	if (platform() !== 'win32') {
+		throw new Error("clearDriveLetter() not available on this platform")
 	}
 
 	try {
-		await runDiskpart(cmds);
+		await runDiskpart([
+			`select volume=${volume}`,
+			`remove letter=${letter}`,
+		]);
 	} catch (error) {
-		throw(`setDriveLetter: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+		throw(`clearDriveLetter: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
 	}
 };
 
