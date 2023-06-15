@@ -201,7 +201,7 @@ export const shrinkPartition = async (
 };
 
 /**
- *
+ * Create partition.
  * @param {string} device - device path
  * @param {number} sizeMB - size of the new partition (free space has to be present)
  * @param {string} fs - default "fat32", possible "ntfs" the filesystem to format with
@@ -214,7 +214,7 @@ export const shrinkPartition = async (
 export const createPartition = async (
 	device: string,
 	sizeMB: number,
-	fs?: 'exFAT' | 'fat32' | 'ntfs',
+	fs?: 'fat' | 'exFAT' | 'fat32' | 'ntfs',
 	label?: string,
 	desiredLetter?: string
 ) => {
@@ -228,11 +228,42 @@ export const createPartition = async (
 			`select disk ${deviceId}`,
 			`create partition primary size=${sizeMB}`,
 			`${desiredLetter ? 'assign letter='.concat(desiredLetter) : ''}`,
-			`${fs ? 'format fs='.concat(fs).concat(`label=${label ?? 'Balena Volume'}`.concat(' quick')) : ''}`,
+			`${fs ? 'format fs='.concat(fs).concat(` label=${label ?? 'Balena Volume'}`.concat(' quick')) : ''}`,
 			`detail partition`
-		])		
+		])
 	} catch (error) {
 		throw(`createPartition: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+	}
+};
+
+/**
+ * Create volume.
+ * @param {string} device - device path
+ * @param {number} sizeMB - size of the new partition (free space has to be present)
+ * @param {string} fs - default "fat32", possible "ntfs" the filesystem to format with
+ * @param {string} desiredLetter - letter to assign to the new volume, gets the next free letter by default
+ * @example
+ * createVolume('\\\\.\\PhysicalDrive2', 2048)
+ *  .then(...)
+ *  .catch(...)
+ */
+export const createVolume = async (
+	device: string,
+	sizeMB: number,
+) => {
+	if (platform() !== 'win32') {
+		throw new Error("createVolume() not available on this platform")
+	}
+
+	const deviceId = prepareDeviceId(device);
+	try {
+		await runDiskpart([
+			`select disk ${deviceId}`,
+			`create volume simple size=${sizeMB}`,
+			`detail volume`
+		])
+	} catch (error) {
+		throw(`createVolume: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
 	}
 };
 
@@ -246,27 +277,42 @@ export const createPartition = async (
  */
 export const setPartitionOnlineStatus = async (
 	volume: string,
-	status: boolean,
-	letter?: string
+	status: boolean
 ) => {
 	if (platform() !== 'win32') {
 		throw new Error("setPartitionOnlineStatus() not available on this platform")
 	}
 	
 	let cmds = [`select volume=${volume}`]
-	if (letter) {
-		if (status) {
-			cmds.push(`assign letter=${letter}`)
-		} else {
-			cmds.push(`remove letter=${letter}`)
-		}
-	}
 	cmds.push(`${status ? 'online' : 'offline'} volume`)
 
 	try {
 		await runDiskpart(cmds);
 	} catch (error) {
-		throw(`setPartitionOnlineStatus: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+		throw(`setPartitionStatus: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+	}
+};
+
+export const setDriveLetter = async (
+	volume: string,
+	letter: string,
+	status: boolean
+) => {
+	if (platform() !== 'win32') {
+		throw new Error("setDriveLetter() not available on this platform")
+	}
+	
+	let cmds = [`select volume=${volume}`]
+	if (status) {
+		cmds.push(`assign letter=${letter}`)
+	} else {
+		cmds.push(`remove letter=${letter}`)
+	}
+
+	try {
+		await runDiskpart(cmds);
+	} catch (error) {
+		throw(`setDriveLetter: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
 	}
 };
 
