@@ -313,6 +313,7 @@ export const clearDriveLetter = async (
  *
  * @param {string} device - device path
  * @param {string} label - volume/partition label
+ * @param {string} size - size of volume, like '41 MB'
  * @return {number} identifier the volume, or '' if not found
  * @example
  * findVolume('\\\\.\\PhysicalDrive0', 'flash-boot')
@@ -321,7 +322,8 @@ export const clearDriveLetter = async (
  */
 export const findVolume = async (
 	device: string,
-	label: string
+	label?: string,
+	size?: string
 ): Promise<string> => {
 	const deviceId = prepareDeviceId(device);
 
@@ -349,16 +351,40 @@ export const findVolume = async (
 		throw(`findVolume: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
 	}
 
-	let labelPos = -1;
-	// Look for 'Label' in column headings; then compare text on subsequent rows
-	// at that position for the expected label.
+	enum Fields { Volume = 0, Letter, Label, Fs, Type, Size, Status, Info, End }
+	let fieldOffsets:number[] = []
+	const findVolMatch = (line:string): string => {
+		const volField = line.substring(fieldOffsets[Fields.Volume],fieldOffsets[Fields.Letter])
+		const volMatch = volField.match(/\w+\s+(\d+)/)
+		if (volMatch && volMatch[1]) {
+			return volMatch[1]
+		}
+		return ''
+	}
+	
 	for (let line of listText.split('\n')) {
-		if (labelPos < 0) {
-			labelPos = line.indexOf('Label');
+		if (!fieldOffsets.length && line.indexOf('-----') >= 0) {
+			// Collect the offset for each field in a line into fieldOffsets
+			let nextPos = 0
+			let dashPos = 0
+			while (true) {
+				nextPos = line.indexOf(' -', dashPos)
+				if (nextPos == -1) {
+					break
+				}
+				dashPos = nextPos + 1
+				fieldOffsets.push(dashPos)
+			}
+			// Add line length so can search last field
+			fieldOffsets.push(line.length)
 		} else {
-			const volMatch = line.match(/Volume\s+(\d+)/);
-			if (volMatch && (line.substring(labelPos, labelPos + label.length) == label)) {
-				return volMatch[1]
+			// Look for the label in the expected field and collect the volume ID if found.
+			if (label && line.substring(fieldOffsets[Fields.Label], fieldOffsets[Fields.Fs]).trim() == label) {
+				return findVolMatch(line)
+			}
+			// Look for the size in the expected field and collect the volume ID if found.
+			if (size && line.substring(fieldOffsets[Fields.Size], fieldOffsets[Fields.Status]).trim() == size) {
+				return findVolMatch(line)
 			}
 		}
 	}

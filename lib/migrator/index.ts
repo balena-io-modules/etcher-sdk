@@ -222,8 +222,9 @@ export const migrate = async (
 				console.log(`Created new partition for boot at offset ${bootPartition.etcher.offset} with size ${bootPartition.etcher.size}`);
 				etcherPartitions = afterFirstPartitions
 				bootPartition.isNew = true
-				// need to determine this programmatically; do a diff like for targetDevice
-				bootPartition.volumeId = '1'
+				// Expected label (flash-boot) not set yet, so look for expected size of partition
+				const bootSize = `${(requiredBootSize / (1024 * 1024)).toFixed(0)} MB`
+				bootPartition.volumeId = await diskpart.findVolume(targetDevice.name, '', bootSize)
 			} else {
 				bootPartition.volumeId = await diskpart.findVolume(targetDevice.name, BOOT_PARTITION_LABEL)
 			}
