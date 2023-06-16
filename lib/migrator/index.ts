@@ -65,9 +65,7 @@ interface TargetPartition {
 	/** Etcher representation */
 	etcher?: GPTPartition | MBRPartition | null;
 	/** Identifier for Windows volume */
-	volumeId: string;
-	/** Was partition created on this run of the migrator? */
-	isNew: boolean
+	volumeId: string
 }
 
 /**
@@ -148,16 +146,14 @@ export const migrate = async (
 
 		// Prepare to check for the balenaOS boot and rootA partitions already present.
 		// If partitions not present, determine required partition sizes and free space.
-		// Calculations are in units of bytes. However, on Windows, required sizes are
+		// Calculations are in units of bytes. However, on Windows, required sizes are in MB.
 		let bootPartition:TargetPartition = {
 			volumeId: '',
-			isNew: false
 		}
 		let rootAPartition:TargetPartition = {
 			volumeId: '',
-			isNew: false
 		}
-		// Values is ounded up to the nearest MB due to tool limitations.
+		// Values is rounded up to the nearest MB due to tool limitations.
 		let requiredBootSize = 0
 		let requiredRootASize = 0
 
@@ -166,6 +162,8 @@ export const migrate = async (
 				BOOT_PARTITION_LABEL, 'fat16')
 		if (bootPartition.etcher) {
 			console.log(`Boot partition already exists at index ${bootPartition.etcher.index}`)
+			bootPartition.volumeId = await diskpart.findVolume(targetDevice.name, BOOT_PARTITION_LABEL)
+			console.log(`flasherBootPartition volume: ${bootPartition.volumeId}`)
 		} else {
 			console.log("Boot partition not found on target")
 			requiredBootSize = await calcRequiredPartitionSize(sourceFile, BOOT_PARTITION_INDEX);
@@ -176,6 +174,8 @@ export const migrate = async (
 				ROOTA_PARTITION_LABEL, 'ext4')
 		if (rootAPartition.etcher) {
 			console.log(`RootA partition already exists at index ${rootAPartition.etcher.index}`)
+			rootAPartition.volumeId = await diskpart.findVolume(targetDevice.name, ROOTA_PARTITION_LABEL)
+			console.log(`flasherRootAPartition volume: ${rootAPartition.volumeId}`)
 		} else {
 			console.log("RootA partition not found on target")
 			requiredRootASize = await calcRequiredPartitionSize(sourceFile, ROOTA_PARTITION_INDEX);
@@ -221,14 +221,7 @@ export const migrate = async (
 				bootPartition.etcher = firstNewPartition[0];
 				console.log(`Created new partition for boot at offset ${bootPartition.etcher.offset} with size ${bootPartition.etcher.size}`);
 				etcherPartitions = afterFirstPartitions
-				bootPartition.isNew = true
-				// Expected label (flash-boot) not set yet, so look for expected size of partition
-				const bootSize = `${(requiredBootSize / (1024 * 1024)).toFixed(0)} MB`
-				bootPartition.volumeId = await diskpart.findVolume(targetDevice.name, '', bootSize)
-			} else {
-				bootPartition.volumeId = await diskpart.findVolume(targetDevice.name, BOOT_PARTITION_LABEL)
 			}
-			console.log(`flasherBootPartition volume: ${bootPartition.volumeId}`)
 
 			if (!rootAPartition.etcher) {
 				console.log("Create flasherRootAPartition");
@@ -241,27 +234,17 @@ export const migrate = async (
 				rootAPartition.etcher = secondNewPartition[0];
 				console.log(`Created new partition for data at offset ${rootAPartition.etcher.offset} with size ${rootAPartition.etcher.size}`);
 				etcherPartitions = afterSecondPartitions
-				rootAPartition.isNew = true
 			}
-			rootAPartition.volumeId = await diskpart.findVolume(targetDevice.name, ROOTA_PARTITION_LABEL)
-			console.log(`flasherRootAPartition volume: ${rootAPartition.volumeId}`)
 
 			// copy partition data
-			// Use volume ID to take volume offine. At present really only necessary
-			// when overwriting boot partition because Windows recognizes the filesystem
-			// and will not allow overwriting it. No need to bring a volume back online.
 			console.log("Copy flasherBootPartition from image to disk");
-			// When create the new partition, it's not really "online" yet, so taking
-			// it offline isn't defined. Don't confuse it.
-			if (!bootPartition.isNew) {
+			if (bootPartition.volumeId) {
+				// Must take volume offline before overwrite.
 				await diskpart.setPartitionOnlineStatus(bootPartition.volumeId, false)
 			}
 			await copyPartitionFromImageToDevice(sourceFile, 1, targetDevice.etcher, bootPartition.etcher!.offset);
 			console.log("Copy complete")
 			console.log("Copy flasherRootAPartition from image to disk");
-			if (rootAPartition.volumeId) {
-				await diskpart.setPartitionOnlineStatus(rootAPartition.volumeId, false)
-			}
 			await copyPartitionFromImageToDevice(sourceFile, 2, targetDevice.etcher, rootAPartition.etcher!.offset);
 			console.log("Copy complete")
 		} else {
@@ -269,16 +252,21 @@ export const migrate = async (
 		}
 
 		if (tasks.includes('config')) {
+			if (bootPartition.volumeId) {
+				// was set offline above, so must online to find volume
+				await diskpart.setPartitionOnlineStatus(bootPartition.volumeId, true)
+			}
+			bootPartition.volumeId = await diskpart.findVolume(targetDevice.name, BOOT_PARTITION_LABEL)
+			if (!bootPartition.volumeId) {
+				throw Error(`Can't find Windows volume for boot partition`)
+			}
 			await diskpart.setDriveLetter(bootPartition.volumeId, 'N')
-			await diskpart.setPartitionOnlineStatus(bootPartition.volumeId, true)
 			console.log("\nSet drive N online")
 			await writeFile('N:\\system-connections\\wifi-config', 'abcd')
 			const contents = await readFile('N:\\system-connections\\wifi-config')
 			console.log(`wifi-config: ${contents}`)
 			// must ensure we always remove drive letter -- in a catch block
 			await diskpart.clearDriveLetter(bootPartition.volumeId, 'N')
-			// Don't take offline; won't find volume on next run
-			//await diskpart.setPartitionOnlineStatus(bootPartition.volumeId, false)
 			console.log("Set drive N offline")
 		}
 
