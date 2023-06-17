@@ -313,8 +313,7 @@ export const clearDriveLetter = async (
  *
  * @param {string} device - device path
  * @param {string} label - volume/partition label
- * @param {string} size - size of volume, like '41 MB'
- * @return {number} identifier the volume, or '' if not found
+ * @return {number} identifier for the first matching volume, or '' if not found
  * @example
  * findVolume('\\\\.\\PhysicalDrive0', 'flash-boot')
  *  .then(...)
@@ -322,20 +321,21 @@ export const clearDriveLetter = async (
  */
 export const findVolume = async (
 	device: string,
-	label?: string,
-	size?: string
+	label: string
 ): Promise<string> => {
 	const deviceId = prepareDeviceId(device);
 
 	/* Retrieves diskpart output formatted like the example below.
 	 *
-	 * Volume ###  Ltr  Label        Fs     Type        Size     Status     Info
-	 * ----------  ---  -----------  -----  ----------  -------  ---------  --------
-	 * Volume 0     C                NTFS   Partition     45 GB  Healthy    Boot
-	 * Volume 1         flash-boot   FAT    Partition     41 MB  Healthy
-	 * Volume 2                      RAW    Partition   3793 MB  Healthy
-	 * Volume 3                      FAT32  Partition    100 MB  Healthy    System
-	 * Volume 4                      NTFS   Partition    530 MB  Healthy    Hidden
+	 * DISKPART> list volume
+	 *
+	 *   Volume ###  Ltr  Label        Fs     Type        Size     Status     Info
+	 *   ----------  ---  -----------  -----  ----------  -------  ---------  --------
+	 *   Volume 0     C                NTFS   Partition     45 GB  Healthy    Boot
+	 *   Volume 1         flash-boot   FAT    Partition     41 MB  Healthy
+	 *   Volume 2                      RAW    Partition   3793 MB  Healthy
+	 *   Volume 3                      FAT32  Partition    100 MB  Healthy    System
+	 *   Volume 4                      NTFS   Partition    530 MB  Healthy    Hidden
 	 */
 	if (platform() !== 'win32') {
 		throw new Error("findVolume() not available on this platform")
@@ -351,40 +351,33 @@ export const findVolume = async (
 		throw(`findVolume: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
 	}
 
-	enum Fields { Volume = 0, Letter, Label, Fs, Type, Size, Status, Info, End }
-	let fieldOffsets:number[] = []
-	const findVolMatch = (line:string): string => {
-		const volField = line.substring(fieldOffsets[Fields.Volume],fieldOffsets[Fields.Letter])
-		const volMatch = volField.match(/\w+\s+(\d+)/)
-		if (volMatch && volMatch[1]) {
-			return volMatch[1]
-		}
-		return ''
-	}
-	
+	// Search for label in a language independent way, based on columns.
+	enum Columns { Volume = 0, Letter, Label, Fs }
+	let colOffsets:number[] = []
+
 	for (let line of listText.split('\n')) {
-		if (!fieldOffsets.length && line.indexOf('-----') >= 0) {
-			// Collect the offset for each field in a line into fieldOffsets
-			let nextPos = 0
-			let dashPos = 0
-			while (true) {
-				nextPos = line.indexOf(' -', dashPos)
-				if (nextPos == -1) {
-					break
+		if (!colOffsets.length && line.indexOf('-----') >= 0) {
+			// Collect the line position for each column into colOffsets.
+			let linePos = 0
+			for (let i = 0; i <= Columns.Fs; i++) {
+				// Expecting even first column preceded by space(s).
+				linePos = line.indexOf(' -', linePos)
+				if (linePos == -1) {
+					throw Error(`findVolume: Only found ${i} columns.`)
 				}
-				dashPos = nextPos + 1
-				fieldOffsets.push(dashPos)
+				linePos += 1 // advance past space
+				colOffsets.push(linePos)
 			}
-			// Add line length so can search last field
-			fieldOffsets.push(line.length)
+			debug(`colOffsets: ${colOffsets}`)
 		} else {
-			// Look for the label in the expected field and collect the volume ID if found.
-			if (label && line.substring(fieldOffsets[Fields.Label], fieldOffsets[Fields.Fs]).trim() == label) {
-				return findVolMatch(line)
-			}
-			// Look for the size in the expected field and collect the volume ID if found.
-			if (size && line.substring(fieldOffsets[Fields.Size], fieldOffsets[Fields.Status]).trim() == size) {
-				return findVolMatch(line)
+			// Look for the label in the expected column and collect the volume ID if found.
+			if (line.substring(colOffsets[Columns.Label], colOffsets[Columns.Fs]).trim() == label) {
+				const volText = line.substring(colOffsets[Columns.Volume],colOffsets[Columns.Letter])
+				// Assumes only a space before the number at the end of the field.
+				const volMatch = volText.match(/\s+(\d+)\s*$/)
+				if (volMatch && volMatch[1]) {
+					return volMatch[1]
+				}
 			}
 		}
 	}
