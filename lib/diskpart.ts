@@ -267,7 +267,7 @@ export const setPartitionOnlineStatus = async (
  *
  * @param {string} device - device path
  * @param {string} label - volume/partition label
- * @return {number} identifier the volume, or '' if not found
+ * @return {number} identifier for the first matching volume, or '' if not found
  * @example
  * findVolume('\\\\.\\PhysicalDrive0', 'flash-boot')
  *  .then(...)
@@ -281,13 +281,15 @@ export const findVolume = async (
 
 	/* Retrieves diskpart output formatted like the example below.
 	 *
-	 * Volume ###  Ltr  Label        Fs     Type        Size     Status     Info
-	 * ----------  ---  -----------  -----  ----------  -------  ---------  --------
-	 * Volume 0     C                NTFS   Partition     45 GB  Healthy    Boot
-	 * Volume 1         flash-boot   FAT    Partition     41 MB  Healthy
-	 * Volume 2                      RAW    Partition   3793 MB  Healthy
-	 * Volume 3                      FAT32  Partition    100 MB  Healthy    System
-	 * Volume 4                      NTFS   Partition    530 MB  Healthy    Hidden
+	 * DISKPART> list volume
+	 *
+	 *   Volume ###  Ltr  Label        Fs     Type        Size     Status     Info
+	 *   ----------  ---  -----------  -----  ----------  -------  ---------  --------
+	 *   Volume 0     C                NTFS   Partition     45 GB  Healthy    Boot
+	 *   Volume 1         flash-boot   FAT    Partition     41 MB  Healthy
+	 *   Volume 2                      RAW    Partition   3793 MB  Healthy
+	 *   Volume 3                      FAT32  Partition    100 MB  Healthy    System
+	 *   Volume 4                      NTFS   Partition    530 MB  Healthy    Hidden
 	 */
 	if (platform() !== 'win32') {
 		throw new Error("findVolume() not available on this platform")
@@ -303,16 +305,33 @@ export const findVolume = async (
 		throw(`findVolume: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
 	}
 
-	let labelPos = -1;
-	// Look for 'Label' in column headings; then compare text on subsequent rows
-	// at that position for the expected label.
+	// Search for label in a language independent way, based on columns.
+	enum Columns { Volume = 0, Letter, Label, Fs }
+	let colOffsets:number[] = []
+
 	for (let line of listText.split('\n')) {
-		if (labelPos < 0) {
-			labelPos = line.indexOf('Label');
+		if (!colOffsets.length && line.indexOf('-----') >= 0) {
+			// Collect the line position for each column into colOffsets.
+			let linePos = 0
+			for (let i = 0; i <= Columns.Fs; i++) {
+				// Expecting even first column preceded by space(s).
+				linePos = line.indexOf(' -', linePos)
+				if (linePos == -1) {
+					throw Error(`findVolume: Only found ${i} columns.`)
+				}
+				linePos += 1 // advance past space
+				colOffsets.push(linePos)
+			}
+			debug(`colOffsets: ${colOffsets}`)
 		} else {
-			const volMatch = line.match(/Volume\s+(\d+)/);
-			if (volMatch && (line.substring(labelPos, labelPos + label.length) == label)) {
-				return volMatch[1]
+			// Look for the label in the expected column and collect the volume ID if found.
+			if (line.substring(colOffsets[Columns.Label], colOffsets[Columns.Fs]).trim() == label) {
+				const volText = line.substring(colOffsets[Columns.Volume],colOffsets[Columns.Letter])
+				// Assumes only a space before the number at the end of the field.
+				const volMatch = volText.match(/\s+(\d+)\s*$/)
+				if (volMatch && volMatch[1]) {
+					return volMatch[1]
+				}
 			}
 		}
 	}
