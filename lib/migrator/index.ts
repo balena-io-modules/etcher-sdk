@@ -3,7 +3,7 @@ import * as checkDiskSpace from 'check-disk-space';
 import { GPTPartition, MBRPartition } from 'partitioninfo';
 
 import * as diskpart from '../diskpart';
-import * as netsh from './netsh'
+import * as wifiProfileReader from './wifi-profile-reader'
 import { File } from '../source-destination';
 import {
 	copyPartitionFromImageToDevice,
@@ -48,6 +48,11 @@ export interface MigrateOptions {
 	omitTasks: string
 }
 
+export interface OsOptions {
+	// Path to Windows Powershell modules that must be installed before run; blank to ignore
+	psInstallPath: string
+}
+
 /**
  * @summary Sets up a UEFI based computer running Windows to switch to balenaOS, and then reboots to execute the switch.
  * !!! WARNING !!! Running this function will OVERWRITE AND DESTROY the operating system running on this computer.
@@ -70,6 +75,7 @@ export interface MigrateOptions {
  * @param {string} deviceName - storage device name, default: '\\.\PhysicalDrive0'
  * @param {string} efiLabel - label to use when mounting the EFI partition, in case the default "M" is already in use
  * @param {MigrateOptions} options - various options to qualify how migrate runs
+ * @param {OsOptions} osOptions - various OS-specific options required to run migrate
  * @returns
  */
 export const migrate = async (
@@ -77,7 +83,8 @@ export const migrate = async (
 	windowsPartition: string = 'C',
 	deviceName: string = '\\\\.\\PhysicalDrive0',
 	efiLabel: string = 'M',
-	options: MigrateOptions = { omitTasks: '' }
+	options: MigrateOptions = { omitTasks: '' },
+	osOptions: OsOptions = { psInstallPath: '' }
 ) => {
 	console.log(`Migrate ${deviceName} with image ${imagePath}`);
 	try {
@@ -171,15 +178,11 @@ export const migrate = async (
 		}
 
 		// Check for WiFi networks to be configured.
-		const wifiNames = await netsh.collectWifiProfiles()
-		console.log(`\nFound WiFi profiles: ${wifiNames.length ? wifiNames : "<none>"}`)
-		// must initialize empty profile here to satisfy TS compiler
-		let wifiProfile = {name: '', key: ''};
-		for (let name of wifiNames) {
-			wifiProfile = await netsh.readWifiProfile(name)
-			//console.log(`Profile key: ${wifiProfile.key}`)
-			break
-		}
+		const wifiReader = new wifiProfileReader.ProfileReader(osOptions.psInstallPath)
+		const wifiProfiles = await wifiReader.collectWifiProfiles()
+		console.log(`\nFound WiFi profiles: ${wifiProfiles.length ? wifiProfiles.map(p => p.name) : "<none>"}`)
+		// just using the first one for now
+		const wifiProfile:wifiProfileReader.WifiProfile = wifiProfiles ? wifiProfiles[0] : {name: '', key: ''}
 
 		if (tasks.includes('shrink')) {
 			// Shrink Windows partition as discovered above to provide required unallocated space.
