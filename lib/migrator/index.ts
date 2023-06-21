@@ -3,7 +3,7 @@ import * as checkDiskSpace from 'check-disk-space';
 import { GPTPartition, MBRPartition } from 'partitioninfo';
 
 import * as diskpart from '../diskpart';
-import { File } from '../source-destination';
+import { File, BlockDevice } from '../source-destination';
 import {
 	copyPartitionFromImageToDevice,
 	calcRequiredPartitionSize,
@@ -38,6 +38,25 @@ async function isElevated(): Promise<boolean> {
 
 function formatMB(bytes: number): string {
 	return (bytes / (1024 * 1024)).toFixed(2)
+}
+
+/** 
+ * A storage device that is the target for the migration. 
+ * Collects useful attributes for the device from multiple sources.
+ */
+interface TargetDevice {
+	/** (Windows) name for the device, like '\\.\PhysicalDrive0' */
+	name: string;
+	/** Etcher BlockDevice representation */
+	etcher: BlockDevice
+}
+
+/** A partition on the target device. */
+interface TargetPartition {
+	/** Etcher representation */
+	etcher?: GPTPartition | MBRPartition | null;
+	/** Identifier for Windows volume */
+	volumeId: string
 }
 
 /** Options for migrate(): */
@@ -103,15 +122,18 @@ export const migrate = async (
 
 		// Define objects for image file source for partitions, storage device target,
 		// and the target's partition table.
-		const source = new File({ path: imagePath });
-		const targetDevice = await getTargetBlockDevice(windowsPartition)
-		let currentPartitions = await targetDevice.getPartitionTable()
-		if (currentPartitions === undefined) {
+		const sourceFile = new File({ path: imagePath });
+		const targetDevice:TargetDevice = {
+			name: deviceName,
+			etcher: await getTargetBlockDevice(windowsPartition)
+		}
+		let etcherPartitions = await targetDevice.etcher.getPartitionTable()
+		if (etcherPartitions === undefined) {
 			throw Error("Can't read partition table");
 		}
 		// Log existing partitions for debugging
 		console.log("\nPartitions on target:")
-		for (const p of currentPartitions.partitions) {
+		for (const p of etcherPartitions.partitions) {
 			// Satisfy TypeScript that p is not an MBRPartition even though we tested above on the table
 			if (!('guid' in p)) {
 				continue
@@ -121,31 +143,39 @@ export const migrate = async (
 
 		// Prepare to check for the balenaOS boot and rootA partitions already present.
 		// If partitions not present, determine required partition sizes and free space.
-		// Calculations are in units of bytes. However, on Windows, required sizes are
-		// rounded up to the nearest MB due to tool limitations.
-		let targetBootPartition: GPTPartition | MBRPartition | null
-		let targetRootAPartition: GPTPartition | MBRPartition | null
+		// Calculations are in units of bytes. However, on Windows, required sizes are in MB.
+		let bootPartition:TargetPartition = {
+			volumeId: '',
+		}
+		let rootAPartition:TargetPartition = {
+			volumeId: '',
+		}
+		// Values are rounded up to the nearest MB due to tool limitations.
 		let requiredBootSize = 0
 		let requiredRootASize = 0
 
 		// Look for boot partition on a FAT16 filesystem
-		targetBootPartition = await findFilesystemLabel(currentPartitions, targetDevice,
+		bootPartition.etcher = await findFilesystemLabel(etcherPartitions, targetDevice.etcher,
 				BOOT_PARTITION_LABEL, 'fat16')
-		if (targetBootPartition) {
-			console.log(`Boot partition already exists at index ${targetBootPartition.index}`)
+		if (bootPartition.etcher) {
+			console.log(`Boot partition already exists at index ${bootPartition.etcher.index}`)
+			bootPartition.volumeId = await diskpart.findVolume(targetDevice.name, BOOT_PARTITION_LABEL)
+			console.log(`flasherBootPartition volume: ${bootPartition.volumeId}`)
 		} else {
 			console.log("Boot partition not found on target")
-			requiredBootSize = await calcRequiredPartitionSize(source, BOOT_PARTITION_INDEX);
+			requiredBootSize = await calcRequiredPartitionSize(sourceFile, BOOT_PARTITION_INDEX);
 			console.log(`Require ${requiredBootSize} (${formatMB(requiredBootSize)} MB) for boot partition`);
 		}
 		// Look for rootA partition on an ext4 filesystem
-		targetRootAPartition = await findFilesystemLabel(currentPartitions, targetDevice,
+		rootAPartition.etcher = await findFilesystemLabel(etcherPartitions, targetDevice.etcher,
 				ROOTA_PARTITION_LABEL, 'ext4')
-		if (targetRootAPartition) {
-			console.log(`RootA partition already exists at index ${targetRootAPartition.index}`)
+		if (rootAPartition.etcher) {
+			console.log(`RootA partition already exists at index ${rootAPartition.etcher.index}`)
+			rootAPartition.volumeId = await diskpart.findVolume(targetDevice.name, ROOTA_PARTITION_LABEL)
+			console.log(`flasherRootAPartition volume: ${rootAPartition.volumeId}`)
 		} else {
 			console.log("RootA partition not found on target")
-			requiredRootASize = await calcRequiredPartitionSize(source, ROOTA_PARTITION_INDEX);
+			requiredRootASize = await calcRequiredPartitionSize(sourceFile, ROOTA_PARTITION_INDEX);
 			console.log(`Require ${requiredRootASize} (${formatMB(requiredRootASize)} MB) for rootA partition`)
 		}
 		const requiredFreeSize = requiredBootSize + requiredRootASize;
@@ -154,8 +184,8 @@ export const migrate = async (
 		// Shrink amount must be for *all* of required space to ensure it is contiguous.
 		// IOW, don't assume the shrink will merge with any existing unallocated space.
 		if (requiredFreeSize) {
-			const unallocSpace = (await diskpart.getUnallocatedSize(deviceName)) * 1024;
-			console.log(`Found ${unallocSpace} (${formatMB(unallocSpace)} MB) not allocated on disk ${deviceName}`)
+			const unallocSpace = (await diskpart.getUnallocatedSize(targetDevice.name)) * 1024;
+			console.log(`Found ${unallocSpace} (${formatMB(unallocSpace)} MB) not allocated on disk ${targetDevice.name}`)
 
 			if (unallocSpace < requiredFreeSize) {
 				// must force upper case
@@ -177,52 +207,44 @@ export const migrate = async (
 		if (tasks.includes('copy')) {
 			// create partitions
 			console.log("")		//force newline
-			let volumeIds = ['', '']
-			if (!targetBootPartition) {
+			if (!bootPartition.etcher) {
 				console.log("Create flasherBootPartition");
-				await diskpart.createPartition(deviceName, requiredBootSize / (1024 * 1024));
-				const afterFirstPartitions = await targetDevice.getPartitionTable()
-				const firstNewPartition = findNewPartitions(currentPartitions, afterFirstPartitions);
+				await diskpart.createPartition(targetDevice.name, requiredBootSize / (1024 * 1024));
+				const afterFirstPartitions = await targetDevice.etcher.getPartitionTable()
+				const firstNewPartition = findNewPartitions(etcherPartitions, afterFirstPartitions);
 				if (firstNewPartition.length !== 1) {
 					throw Error(`Found ${firstNewPartition.length} new partitions for flasher boot, but expected 1`)
 				}
-				targetBootPartition = firstNewPartition[0];
-				console.log(`Created new partition for boot at offset ${targetBootPartition.offset} with size ${targetBootPartition.size}`);
-				currentPartitions = afterFirstPartitions
+				bootPartition.etcher = firstNewPartition[0];
+				console.log(`Created new partition for boot at offset ${bootPartition.etcher.offset} with size ${bootPartition.etcher.size}`);
+				etcherPartitions = afterFirstPartitions
 			}
-			volumeIds[0] = await diskpart.findVolume(deviceName, BOOT_PARTITION_LABEL)
-			console.log(`flasherBootPartition volume: ${volumeIds[0]}`)
 
-			if (!targetRootAPartition) {
+			if (!rootAPartition.etcher) {
 				console.log("Create flasherRootAPartition");
-				await diskpart.createPartition(deviceName, requiredRootASize / (1024 * 1024));
-				const afterSecondPartitions = await targetDevice.getPartitionTable()
-				const secondNewPartition = findNewPartitions(currentPartitions, afterSecondPartitions)
+				await diskpart.createPartition(targetDevice.name, requiredRootASize / (1024 * 1024));
+				const afterSecondPartitions = await targetDevice.etcher.getPartitionTable()
+				const secondNewPartition = findNewPartitions(etcherPartitions, afterSecondPartitions)
 				if (secondNewPartition.length !== 1) {
 					throw Error(`Found ${secondNewPartition.length} new partitions for flasher rootA, but expected 1`)
 				}
-				targetRootAPartition = secondNewPartition[0];
-				console.log(`Created new partition for data at offset ${targetRootAPartition.offset} with size ${targetRootAPartition.size}`);
-				currentPartitions = afterSecondPartitions
+				rootAPartition.etcher = secondNewPartition[0];
+				console.log(`Created new partition for data at offset ${rootAPartition.etcher.offset} with size ${rootAPartition.etcher.size}`);
+				etcherPartitions = afterSecondPartitions
 			}
-			volumeIds[1] = await diskpart.findVolume(deviceName, ROOTA_PARTITION_LABEL)
-			console.log(`flasherRootAPartition volume: ${volumeIds[1]}`)
 
 			// copy partition data
-			// Use volume ID to take volume offine. At present really only necessary
-			// when overwriting boot partition because Windows recognizes the filesystem
-			// and will not allow overwriting it. No need to bring a volume back online.
 			console.log("Copy flasherBootPartition from image to disk");
-			if (volumeIds[0]) {
-				await diskpart.setPartitionOnlineStatus(volumeIds[0], false)
+			if (bootPartition.volumeId) {
+				// Must ensure volume offline before overwrite.
+				await diskpart.setPartitionOnlineStatus(bootPartition.volumeId, false)
 			}
-			await copyPartitionFromImageToDevice(source, 1, targetDevice, targetBootPartition!.offset);
+			// Sets volume online only if a new partition.
+			await copyPartitionFromImageToDevice(sourceFile, 1, targetDevice.etcher, bootPartition.etcher!.offset);
 			console.log("Copy complete")
 			console.log("Copy flasherRootAPartition from image to disk");
-			if (volumeIds[1]) {
-				await diskpart.setPartitionOnlineStatus(volumeIds[1], false)
-			}
-			await copyPartitionFromImageToDevice(source, 2, targetDevice, targetRootAPartition!.offset);
+			// We never set rootA partition online, so no need to offline.
+			await copyPartitionFromImageToDevice(sourceFile, 2, targetDevice.etcher, rootAPartition.etcher!.offset);
 			console.log("Copy complete")
 		} else {
 			console.log(`\nSkip task: create and copy partitions`)
