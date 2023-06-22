@@ -1,4 +1,30 @@
 - commits:
+    - subject: Refine migrate() function
+      hash: 77f3a3c791c69ceae0146bb04c26ef7860743bf3
+      body: |
+        * Add abstractions for target device and partition
+        * Only look for volume info if partition pre-existing
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+    - subject: Rework findVolume() so localization independent
+      hash: df9708844abdfc793535ed5e72b393c8222a978d
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+  version: 8.6.2
+  title: ""
+  date: 2023-06-22T11:51:27.075Z
+- commits:
     - subject: Establish contract for diskpart functions
       hash: 159ced7b74fa2dad776d34d573a19ccfcdd69278
       body: |
