@@ -263,6 +263,52 @@ export const setPartitionOnlineStatus = async (
 };
 
 /**
+ * @summary Sets the Windows drive letter for a volume.
+ * @param {String} volume - the identifier of the volume
+ * @param {String} letter - the drive letter, like 'N'
+ */
+export const setDriveLetter = async (
+	volume: string,
+	letter: string
+) => {
+	if (platform() !== 'win32') {
+		throw new Error("setDriveLetter() not available on this platform")
+	}
+
+	try {
+		await runDiskpart([
+			`select volume=${volume}`,
+			`assign letter=${letter}`,
+		]);
+	} catch (error) {
+		throw(`setDriveLetter: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+	}
+};
+
+/**
+ * @summary Clears the Windows drive letter from a volume.
+ * @param {String} volume - the identifier of the volume
+ * @param {String} letter - the drive letter, like 'N'
+ */
+export const clearDriveLetter = async (
+	volume: string,
+	letter: string
+) => {
+	if (platform() !== 'win32') {
+		throw new Error("clearDriveLetter() not available on this platform")
+	}
+
+	try {
+		await runDiskpart([
+			`select volume=${volume}`,
+			`remove letter=${letter}`,
+		]);
+	} catch (error) {
+		throw(`clearDriveLetter: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+	}
+};
+
+/**
  * Find the volume with the provided label.
  *
  * @param {string} device - device path
