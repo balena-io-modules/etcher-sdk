@@ -73,6 +73,9 @@ export interface MigrateOptions {
 	connectionProfiles: ConnectionProfile[]
 }
 
+/** Describes the result of running migrate() function. */
+export const enum MigrateResult { OK, ERROR }
+
 /**
  * @summary Sets up a UEFI based computer running Windows to switch to balenaOS, and then reboots to execute the switch.
  * !!! WARNING !!! Running this function will OVERWRITE AND DESTROY the operating system running on this computer.
@@ -81,6 +84,9 @@ export interface MigrateOptions {
  * the computer's storage, as well as a bootloader to trigger booting into the boot
  * partition. The migration is executed as a sequence of tasks as shown below, and begins
  * with an implicit "analyze" task that always is performed.
+ * 
+ * The migration outputs useful status messages to the console. Migration catches
+ * errors thrown within, outputs them to the console, and returns MigrateResult.ERROR.
  *
  * The migration may be re-run on a computer to support development or a failure in the
  * original run. A task may be omitted by listing it in the options.omitTasks parameter.
@@ -97,7 +103,7 @@ export interface MigrateOptions {
  * @param {string} efiLabel - label to use when mounting the EFI partition, in case the default "M" is already in use;
  *                            letter following efiLabel is used when mounting boot partition to write host config
  * @param {MigrateOptions} options - various options to qualify how migrate runs
- * @returns
+ * @returns {MigrateResult} OK if no errors, FAIL on error
  */
 export const migrate = async (
 	imagePath: string,
@@ -105,7 +111,7 @@ export const migrate = async (
 	deviceName: string = '\\\\.\\PhysicalDrive0',
 	efiLabel: string = 'M',
 	options: MigrateOptions = { omitTasks: '', connectionProfiles: [] }
-) => {
+): Promise<MigrateResult> => {
 	console.log(`Migrate ${deviceName} with image ${imagePath}`);
 	try {
 		const BOOT_PARTITION_INDEX = 1;
@@ -320,6 +326,7 @@ export const migrate = async (
 
 	} catch (error) {
 		console.log("Can't proceed with migration:", error);
-		return;
+		return MigrateResult.ERROR;
 	}
+	return MigrateResult.OK
 };
