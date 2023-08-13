@@ -1,4 +1,32 @@
 - commits:
+    - subject: Add ability to migrate network configuration
+      hash: f4988ad0c7fcf8b074e08a69ff48fe6b75ae4b30
+      body: |
+        * Accept connection profiles
+        * Write network configuration file to boot partition
+        * Supports WiFi configuration only
+        * Add 'config' step to migration
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+    - subject: Add ability to set/clear drive letter on Windows
+      hash: c477ec5038bc4c6c6ebab1869d7c5a170f3ae46f
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+  version: 8.6.3
+  title: ""
+  date: 2023-08-13T15:48:09.215Z
+- commits:
     - subject: Refine migrate() function
       hash: 77f3a3c791c69ceae0146bb04c26ef7860743bf3
       body: |
