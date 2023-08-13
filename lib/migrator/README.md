@@ -4,8 +4,9 @@
 
 Sets up a UEFI based computer running Windows to switch to balenaOS, and then reboots to execute the switch.
 
-This feature is experimental, and should not be used in production. It has these limitations:
+This feature is ready for wider testing. It has these requirements:
 
-* Works only with a UEFI based Windows computer
-* Does not support re-running the migration in the event of failure
-* A failure may occur while executing the migration, after reboot out of Windows. In this case, the computer should reboot back into Windows.
+* Currently running Windows 10
+* UEFI based firmware
+* Ethernet with DHCP (dynamic addressing), OR
+* WiFi with DHCP, and WPA Personal or open (no) authentication
