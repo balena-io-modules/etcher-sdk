@@ -1,4 +1,18 @@
 - commits:
+    - subject: Update migrator README and bump minor version
+      hash: 9d7608dca69e0dcb3b2f188765dc8590c768229f
+      body: ""
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+  version: 8.7.0
+  title: ""
+  date: 2023-08-13T16:06:05.940Z
+- commits:
     - subject: Add ability to migrate network configuration
       hash: f4988ad0c7fcf8b074e08a69ff48fe6b75ae4b30
       body: |
