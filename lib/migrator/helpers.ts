@@ -1,3 +1,4 @@
+import { writeFile } from 'fs/promises';
 import * as process from 'process';
 import * as drivelist from 'drivelist'
 import { GetPartitionsResult, GPTPartition, MBRPartition } from 'partitioninfo';
@@ -197,4 +198,81 @@ export const getTargetBlockDevice = async (mountLabel: string = 'C') => {
 		write: true,
 		keepOriginal: true
 	})
+}
+
+/** 
+ * Identifies the type of WiFi authentication for a connection profile.
+ * NONE means no authentication.
+ */
+export const enum WifiAuthType { NONE, WPA2_PSK, WPA3_SAE }
+
+/** Configuration values for a single WiFi network profile. */
+export interface ConnectionProfile {
+	name: string;
+	wifiSsid: string;
+	wifiAuthType: WifiAuthType;
+	wifiKey: string;
+}
+
+/** Generates the contents for a NetworkManager configuration file. */
+const generateWifiConfig = (profile: ConnectionProfile): string => {
+	const connectionSection = `[connection]
+id=${profile.name}
+type=wifi
+`
+	const wifiSection = `
+[wifi]
+mode=infrastructure
+ssid=${profile.wifiSsid}
+`
+	let keyMgmt
+	switch (profile.wifiAuthType) {
+		case WifiAuthType.NONE:
+			keyMgmt = ''
+			break
+		case WifiAuthType.WPA2_PSK:
+			keyMgmt = 'wpa-psk'
+			break
+		case WifiAuthType.WPA3_SAE:
+			keyMgmt = 'sae'
+			break
+		default:
+			throw Error(`WifiAuthType ${profile.wifiAuthType} not defined`)
+	}
+	let wifiSecuritySection = ''
+	if (keyMgmt) {
+		wifiSecuritySection = `
+[wifi-security]
+auth-alg=open
+key-mgmt=${keyMgmt}
+psk=${profile.wifiKey}
+`
+	}
+
+	const ipSection = `
+[ipv4]
+method=auto
+
+[ipv6]
+addr-gen-mode=stable-privacy
+method=auto
+`
+
+	return connectionSection.concat(wifiSection, wifiSecuritySection, ipSection)
+}
+
+/**
+ * Writes a NetworkManager configuration file for the provided network connection 
+ * profile. Assumes profile is for WiFi configuration.
+ * 
+ * @param {string} pathname - name for file
+ * @param {ConnectionProfile} profile - Profile data to write; must define WiFi SSID
+ * @returns Promise<void> on file write
+ */
+export const writeNetworkConfig = async (pathname: string, profile: ConnectionProfile): Promise<void> => {
+	if (!profile.wifiSsid) {
+		throw Error("WiFi SSID not defined for profile")
+	}
+	const config = generateWifiConfig(profile)
+	return writeFile(pathname, config)
 }

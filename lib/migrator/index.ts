@@ -9,7 +9,10 @@ import {
 	calcRequiredPartitionSize,
 	getTargetBlockDevice,
 	findNewPartitions,
-	findFilesystemLabel
+	findFilesystemLabel,
+	ConnectionProfile,
+	WifiAuthType,
+	writeNetworkConfig
 } from './helpers';
 import { copyBootloaderFromImage } from './copy-bootloader';
 import winCommands from './windows-commands';
@@ -19,6 +22,9 @@ import { exec as childExec } from 'child_process';
 const execAsync = promisify(childExec);
 import { constants as osConstants } from 'os';
 import { existsSync } from 'fs'
+
+// Callers need to provide profiles via options
+export { ConnectionProfile, WifiAuthType }
 
 /** Determine if running as administrator. */
 async function isElevated(): Promise<boolean> {
@@ -62,8 +68,13 @@ interface TargetPartition {
 /** Options for migrate(): */
 export interface MigrateOptions {
 	// don't perform these tasks; comma separated list like 'bootloader,reboot'
-	omitTasks: string
+	omitTasks: string;
+	// Network connection profiles to write to boot partition
+	connectionProfiles: ConnectionProfile[]
 }
+
+/** Describes the result of running migrate() function. */
+export const enum MigrateResult { OK, ERROR }
 
 /**
  * @summary Sets up a UEFI based computer running Windows to switch to balenaOS, and then reboots to execute the switch.
@@ -73,29 +84,34 @@ export interface MigrateOptions {
  * the computer's storage, as well as a bootloader to trigger booting into the boot
  * partition. The migration is executed as a sequence of tasks as shown below, and begins
  * with an implicit "analyze" task that always is performed.
+ * 
+ * The migration outputs useful status messages to the console. Migration catches
+ * errors thrown within, outputs them to the console, and returns MigrateResult.ERROR.
  *
  * The migration may be re-run on a computer to support development or a failure in the
  * original run. A task may be omitted by listing it in the options.omitTasks parameter.
  *
  * * shrink -- shrink existing Windows partition as needed to accommodate the new partitions
  * * copy -- create/copy partitions from image
+ * * config -- write host configuration like networking to boot partition
  * * bootloader -- copy/setup bootloader for new boot partition
  * * reboot -- actually execute the reboot
  *
  * @param {string} imagePath - balenaOS flasher image to use as source
  * @param {string} windowsPartition - partition label of the device where we want to add the new data; defauls to "C"
  * @param {string} deviceName - storage device name, default: '\\.\PhysicalDrive0'
- * @param {string} efiLabel - label to use when mounting the EFI partition, in case the default "M" is already in use
+ * @param {string} efiLabel - label to use when mounting the EFI partition, in case the default "M" is already in use;
+ *                            letter following efiLabel is used when mounting boot partition to write host config
  * @param {MigrateOptions} options - various options to qualify how migrate runs
- * @returns
+ * @returns {MigrateResult} OK if no errors, FAIL on error
  */
 export const migrate = async (
 	imagePath: string,
 	windowsPartition: string = 'C',
 	deviceName: string = '\\\\.\\PhysicalDrive0',
 	efiLabel: string = 'M',
-	options: MigrateOptions = { omitTasks: '' }
-) => {
+	options: MigrateOptions = { omitTasks: '', connectionProfiles: [] }
+): Promise<MigrateResult> => {
 	console.log(`Migrate ${deviceName} with image ${imagePath}`);
 	try {
 		const BOOT_PARTITION_INDEX = 1;
@@ -105,7 +121,7 @@ export const migrate = async (
 		const BOOT_FILES_SOURCE_PATH = '/EFI/BOOT';
 		const BOOT_FILES_TARGET_PATH = '/EFI/Boot';
 		const REBOOT_DELAY_SEC = 10
-		const ALL_TASKS = [ 'shrink', 'copy', 'bootloader', 'reboot'];
+		const ALL_TASKS = [ 'shrink', 'copy', 'config', 'bootloader', 'reboot'];
 
 		// initial validations
 		if (process.platform !== 'win32') {
@@ -116,6 +132,9 @@ export const migrate = async (
 		}
 		if (!existsSync(imagePath)) {
 			throw Error(`Image ${imagePath} not found`);
+		}
+		if (efiLabel == 'Z') {
+			throw Error("Can't use last letter of alphabet for EFI label");
 		}
 
 		const tasks = ALL_TASKS.filter(task => !options.omitTasks.includes(task));
@@ -239,15 +258,48 @@ export const migrate = async (
 				// Must ensure volume offline before overwrite.
 				await diskpart.setPartitionOnlineStatus(bootPartition.volumeId, false)
 			}
-			// Sets volume online only if a new partition.
-			await copyPartitionFromImageToDevice(sourceFile, 1, targetDevice.etcher, bootPartition.etcher!.offset);
-			console.log("Copy complete")
-			console.log("Copy flasherRootAPartition from image to disk");
-			// We never set rootA partition online, so no need to offline.
-			await copyPartitionFromImageToDevice(sourceFile, 2, targetDevice.etcher, rootAPartition.etcher!.offset);
-			console.log("Copy complete")
+			try {
+				// Sets volume online only if a new partition.
+				await copyPartitionFromImageToDevice(sourceFile, 1, targetDevice.etcher, bootPartition.etcher!.offset);
+				console.log("Copy complete")
+				console.log("Copy flasherRootAPartition from image to disk");
+				// We never set rootA partition online, so no need to offline.
+				await copyPartitionFromImageToDevice(sourceFile, 2, targetDevice.etcher, rootAPartition.etcher!.offset);
+				console.log("Copy complete")
+			} finally {
+				if (tasks.includes('config') && bootPartition.volumeId) {
+					// Ensure online if set offline above, to find volume ID from partition label.
+					await diskpart.setPartitionOnlineStatus(bootPartition.volumeId, true)
+				}
+			}
 		} else {
 			console.log(`\nSkip task: create and copy partitions`)
+		}
+
+		if (tasks.includes('config')) {
+			console.log("\nWrite network configuration");
+			// Verify device is online in all cases; must be so to write file.
+			bootPartition.volumeId = await diskpart.findVolume(targetDevice.name, BOOT_PARTITION_LABEL)
+			if (!bootPartition.volumeId) {
+				throw Error(`Can't find Windows volume for boot partition`)
+			}
+			// use character following EFI label
+			const driveLetter = String.fromCharCode(efiLabel.charCodeAt(0) + 1)
+			await diskpart.setDriveLetter(bootPartition.volumeId, driveLetter)
+			try {
+				for (let profile of options.connectionProfiles) {
+					const pathname = `${driveLetter}:\\system-connections\\${profile.name}`
+					await writeNetworkConfig(pathname, profile)
+					console.log(`Wrote network configuration for ${profile.name}`)
+				}
+				if (!options.connectionProfiles.length) {
+					console.log("No network configuration provided")
+				}
+			} finally {
+				await diskpart.clearDriveLetter(bootPartition.volumeId, driveLetter)
+			}
+		} else {
+			console.log(`\nSkip task: write configuration`)
 		}
 
 		if (tasks.includes('bootloader')) {
@@ -274,6 +326,7 @@ export const migrate = async (
 
 	} catch (error) {
 		console.log("Can't proceed with migration:", error);
-		return;
+		return MigrateResult.ERROR;
 	}
+	return MigrateResult.OK
 };
