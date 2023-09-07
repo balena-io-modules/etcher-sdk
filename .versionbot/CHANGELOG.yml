@@ -1,4 +1,28 @@
 - commits:
+    - subject: Update dependency node-raspberrypi-usbboot to v1.0.7
+      hash: 3a0f31ac90e40892b8e08876ecf876e3013886cc
+      body: |
+        Update node-raspberrypi-usbboot from 1.0.6 to 1.0.7
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Self-hosted Renovate Bot
+      nested:
+        - commits:
+            - subject: Update flowzone.yml
+              hash: a4ed24993a6bed92fac83e1f9f1f544c83995edd
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Kyle Harding
+          version: node-raspberrypi-usbboot-1.0.7
+          title: ""
+          date: 2023-05-31T15:40:34.922Z
+  version: 8.7.1
+  title: ""
+  date: 2023-09-07T13:52:41.571Z
+- commits:
     - subject: Update migrator README and bump minor version
       hash: 9d7608dca69e0dcb3b2f188765dc8590c768229f
       body: ""
