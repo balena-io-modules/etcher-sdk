@@ -26,6 +26,10 @@ import { existsSync } from 'fs'
 // Callers need to provide profiles via options
 export { ConnectionProfile, WifiAuthType }
 
+// Expected paritition labels from flasher image
+const BOOT_PARTITION_LABEL = 'flash-boot';
+const ROOTA_PARTITION_LABEL = 'flash-rootA';
+
 /** Determine if running as administrator. */
 async function isElevated(): Promise<boolean> {
     // `fltmc` is available on WinPE, XP, Vista, 7, 8, and 10
@@ -47,6 +51,26 @@ function formatMB(bytes: number): string {
 }
 
 /** 
+ * Opens filesystem on boot partition so can read/write files. Assigns drive letter
+ * to provided partition on success.
+ * 
+ * @param {string} driveLetter - to be assigned; caller must ensure unused
+ * @param {TargetPartition} partition - for the boot partition
+ * @param {TargetDevice} device - device on which the partition is located
+ * 
+ * @throws If can't find volume for boot partition
+ */
+async function openBootDrive(driveLetter: string, partition: TargetPartition, device: TargetDevice) {
+	// Device must be online to write file.
+	partition.volumeId = await diskpart.findVolume(device.name, BOOT_PARTITION_LABEL)
+	if (!partition.volumeId) {
+		throw Error(`Can't find Windows volume for boot partition`)
+	}
+	await diskpart.setDriveLetter(partition.volumeId, driveLetter)
+	partition.driveLetter = driveLetter
+}
+
+/** 
  * A storage device that is the target for the migration. 
  * Collects useful attributes for the device from multiple sources.
  */
@@ -62,7 +86,9 @@ interface TargetPartition {
 	/** Etcher representation */
 	etcher?: GPTPartition | MBRPartition | null;
 	/** Identifier for Windows volume */
-	volumeId: string
+	volumeId: string;
+	/** Drive letter assigned to partition (volume) so we may write to it; empty if not available */
+	driveLetter: string;
 }
 
 /** Options for migrate(): */
@@ -85,6 +111,9 @@ export const enum MigrateResult { OK, ERROR }
  * partition. The migration is executed as a sequence of tasks as shown below, and begins
  * with an implicit "analyze" task that always is performed.
  * 
+ * After a reboot, the computer may boot to the Windows system paritition, or it may
+ * boot to the newly copied flasher boot parition. So we must allow for failover in either case.
+ * 
  * The migration outputs useful status messages to the console. Migration catches
  * errors thrown within, outputs them to the console, and returns MigrateResult.ERROR.
  *
@@ -92,9 +121,9 @@ export const enum MigrateResult { OK, ERROR }
  * original run. A task may be omitted by listing it in the options.omitTasks parameter.
  *
  * * shrink -- shrink existing Windows partition as needed to accommodate the new partitions
- * * copy -- create/copy partitions from image
+ * * copy -- create/copy partitions from image, and add failover to Windows for boot partition
  * * config -- write host configuration like networking to boot partition
- * * bootloader -- copy/setup bootloader for new boot partition
+ * * bootloader -- copy/setup grub bootloader to EFI system partition
  * * reboot -- actually execute the reboot
  *
  * @param {string} imagePath - balenaOS flasher image to use as source
@@ -116,8 +145,6 @@ export const migrate = async (
 	try {
 		const BOOT_PARTITION_INDEX = 1;
 		const ROOTA_PARTITION_INDEX = 2;
-		const BOOT_PARTITION_LABEL = 'flash-boot';
-		const ROOTA_PARTITION_LABEL = 'flash-rootA';
 		const BOOT_FILES_SOURCE_PATH = '/EFI/BOOT';
 		const BOOT_FILES_TARGET_PATH = '/EFI/Boot';
 		const REBOOT_DELAY_SEC = 10
@@ -165,9 +192,11 @@ export const migrate = async (
 		// Calculations are in units of bytes. However, on Windows, required sizes are in MB.
 		let bootPartition:TargetPartition = {
 			volumeId: '',
+			driveLetter: ''
 		}
 		let rootAPartition:TargetPartition = {
 			volumeId: '',
+			driveLetter: ''
 		}
 		// Values are rounded up to the nearest MB due to tool limitations.
 		let requiredBootSize = 0
@@ -267,9 +296,23 @@ export const migrate = async (
 				await copyPartitionFromImageToDevice(sourceFile, 2, targetDevice.etcher, rootAPartition.etcher!.offset);
 				console.log("Copy complete")
 			} finally {
-				if (tasks.includes('config') && bootPartition.volumeId) {
+				if (bootPartition.volumeId) {
 					// Ensure online if set offline above, to find volume ID from partition label.
 					await diskpart.setPartitionOnlineStatus(bootPartition.volumeId, true)
+				}
+			}
+
+			// Open volume so can revise grub files on boot partition to failover to Windows.
+			if (!bootPartition.driveLetter) {
+				const driveLetter = String.fromCharCode(efiLabel.charCodeAt(0) + 1)
+				await openBootDrive(driveLetter, bootPartition, targetDevice)
+			}
+			try {
+				await copyBootloaderFromImage(imagePath, 1, BOOT_FILES_SOURCE_PATH, `${bootPartition.driveLetter}:${BOOT_FILES_TARGET_PATH}`);
+			} finally {
+				// Just leave boot volume open if config task will write to it as well below.
+				if (! (tasks.includes('config'))) {
+					await diskpart.clearDriveLetter(bootPartition.volumeId, bootPartition.driveLetter)
 				}
 			}
 		} else {
@@ -278,17 +321,13 @@ export const migrate = async (
 
 		if (tasks.includes('config')) {
 			console.log("\nWrite network configuration");
-			// Verify device is online in all cases; must be so to write file.
-			bootPartition.volumeId = await diskpart.findVolume(targetDevice.name, BOOT_PARTITION_LABEL)
-			if (!bootPartition.volumeId) {
-				throw Error(`Can't find Windows volume for boot partition`)
+			if (!bootPartition.driveLetter) {
+				const driveLetter = String.fromCharCode(efiLabel.charCodeAt(0) + 1)
+				await openBootDrive(driveLetter, bootPartition, targetDevice)
 			}
-			// use character following EFI label
-			const driveLetter = String.fromCharCode(efiLabel.charCodeAt(0) + 1)
-			await diskpart.setDriveLetter(bootPartition.volumeId, driveLetter)
 			try {
 				for (let profile of options.connectionProfiles) {
-					const pathname = `${driveLetter}:\\system-connections\\${profile.name}`
+					const pathname = `${bootPartition.driveLetter}:\\system-connections\\${profile.name}`
 					await writeNetworkConfig(pathname, profile)
 					console.log(`Wrote network configuration for ${profile.name}`)
 				}
@@ -296,7 +335,7 @@ export const migrate = async (
 					console.log("No network configuration provided")
 				}
 			} finally {
-				await diskpart.clearDriveLetter(bootPartition.volumeId, driveLetter)
+				await diskpart.clearDriveLetter(bootPartition.volumeId, bootPartition.driveLetter)
 			}
 		} else {
 			console.log(`\nSkip task: write configuration`)
