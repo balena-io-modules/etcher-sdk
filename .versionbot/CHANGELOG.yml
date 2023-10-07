@@ -1,4 +1,18 @@
 - commits:
+    - subject: Add failover to Windows from flash-boot partition
+      hash: 63e7085a9a34372eb4fc3cb538c49d6ee9895cc4
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ken Bannister <kb2ma@runbox.com>
+        signed-off-by: Ken Bannister <kb2ma@runbox.com>
+      author: Ken Bannister
+      nested: []
+  version: 8.7.2
+  title: ""
+  date: 2023-10-07T14:29:19.695Z
+- commits:
     - subject: Update dependency node-raspberrypi-usbboot to v1.0.7
       hash: 3a0f31ac90e40892b8e08876ecf876e3013886cc
       body: |
