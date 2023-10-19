@@ -93,13 +93,16 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 		this.axiosInstance = axios.create();
 		if (awsCredentials !== undefined) {
 			this.axiosInstance.interceptors.request.use(
-				aws4Interceptor({ service: 's3' }, awsCredentials),
+				aws4Interceptor({
+					options: { service: 's3' },
+					credentials: awsCredentials,
+				}),
 			);
 		}
 	}
 
 	protected get imageSuffix(): string {
-		return this.imageType ? `-${this.imageType}`: ''
+		return this.imageType ? `-${this.imageType}` : '';
 	}
 
 	public async canCreateReadStream(): Promise<boolean> {

@@ -30,9 +30,9 @@ const DISKPART_RETRIES = 5;
 const PATTERN = /PHYSICALDRIVE(\d+)/i;
 
 // This module provides utility functions for disk partitioning and related disk
-// level tasks. Presently it relies on the Windows 'diskpart' utility to implement 
+// level tasks. Presently it relies on the Windows 'diskpart' utility to implement
 // this functionality.
-// Given this reliance, any new exported functions must throw an Error when used on 
+// Given this reliance, any new exported functions must throw an Error when used on
 // non-Windows platforms. Only the clean() function silently accepts non-Windows
 // platforms, for historical reasons. Of course it also is fine to implement a function
 // with support for other platforms, and we may do so generally in the future.
@@ -57,7 +57,7 @@ class ExecError extends Error {
 const execFileAsync = async (
 	command: string,
 	args: string[] = [],
-	options: ExecFileOptions = {}
+	options: ExecFileOptions = {},
 ): Promise<ExecResult> => {
 	return await new Promise(
 		(resolve: (res: ExecResult) => void, reject: (err: ExecError) => void) => {
@@ -71,9 +71,9 @@ const execFileAsync = async (
 					} else {
 						resolve({ stdout, stderr });
 					}
-				}
+				},
 			);
-		}
+		},
 	);
 };
 
@@ -97,19 +97,16 @@ const runDiskpart = async (commands: string[]): Promise<string> => {
 	if (platform() !== 'win32') {
 		return '';
 	}
-	let output = { 'stdout':'', 'stderr':'' }
+	let output = { stdout: '', stderr: '' };
 	await withTmpFile({ keepOpen: false }, async (file: TmpFileResult) => {
 		await fs.writeFile(file.path, commands.join('\r\n'));
 		await withDiskpartMutex(async () => {
-			output = await execFileAsync('diskpart', [
-				'/s',
-				file.path,
-			]);
+			output = await execFileAsync('diskpart', ['/s', file.path]);
 			debug('stdout:', output.stdout);
 			debug('stderr:', output.stderr);
 		});
 	});
-	return output.stdout
+	return output.stdout;
 };
 
 /**
@@ -137,9 +134,9 @@ const prepareDeviceId = (device: string) => {
 export const clean = async (device: string): Promise<void> => {
 	debug('clean', device);
 	if (platform() !== 'win32') {
-		return
+		return;
 	}
-	
+
 	let deviceId;
 
 	try {
@@ -165,7 +162,7 @@ export const clean = async (device: string): Promise<void> => {
 				await delay(DISKPART_DELAY);
 			} else {
 				throw new Error(
-					`Couldn't clean the drive, ${error.message} (code ${error.code})`
+					`Couldn't clean the drive, ${error.message} (code ${error.code})`,
 				);
 			}
 		}
@@ -183,11 +180,11 @@ export const clean = async (device: string): Promise<void> => {
  */
 export const shrinkPartition = async (
 	partition: string,
-	desiredMB?: number
+	desiredMB?: number,
 ) => {
 	debug('shrink', partition, desiredMB);
 	if (platform() !== 'win32') {
-		throw new Error("shrinkPartition() not available on this platform")
+		throw new Error('shrinkPartition() not available on this platform');
 	}
 
 	try {
@@ -196,7 +193,9 @@ export const shrinkPartition = async (
 			`shrink ${desiredMB ? 'DESIRED='.concat(desiredMB + '') : ''}`,
 		]);
 	} catch (error) {
-		throw(`shrinkPartition: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+		throw Error(
+			`shrinkPartition: ${error}${error.stdout ? `\n${error.stdout}` : ''}`,
+		);
 	}
 };
 
@@ -214,12 +213,12 @@ export const shrinkPartition = async (
 export const createPartition = async (
 	device: string,
 	sizeMB: number,
-	fs?: 'exFAT' | 'fat32' | 'ntfs',
+	fsType?: 'exFAT' | 'fat32' | 'ntfs',
 	label?: string,
-	desiredLetter?: string
+	desiredLetter?: string,
 ) => {
 	if (platform() !== 'win32') {
-		throw new Error("createPartition() not available on this platform")
+		throw new Error('createPartition() not available on this platform');
 	}
 
 	const deviceId = prepareDeviceId(device);
@@ -228,11 +227,19 @@ export const createPartition = async (
 			`select disk ${deviceId}`,
 			`create partition primary size=${sizeMB}`,
 			`${desiredLetter ? 'assign letter='.concat(desiredLetter) : ''}`,
-			`${fs ? 'format fs='.concat(fs).concat(`label=${label ?? 'Balena Volume'}`.concat(' quick')) : ''}`,
-			`detail partition`
-		])		
+			`${
+				fs
+					? 'format fs='
+							.concat(fsType || '')
+							.concat(`label=${label ?? 'Balena Volume'}`.concat(' quick'))
+					: ''
+			}`,
+			`detail partition`,
+		]);
 	} catch (error) {
-		throw(`createPartition: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+		throw Error(
+			`createPartition: ${error}${error.stdout ? `\n${error.stdout}` : ''}`,
+		);
 	}
 };
 
@@ -246,10 +253,12 @@ export const createPartition = async (
  */
 export const setPartitionOnlineStatus = async (
 	volume: string,
-	status: boolean
+	status: boolean,
 ) => {
 	if (platform() !== 'win32') {
-		throw new Error("setPartitionOnlineStatus() not available on this platform")
+		throw new Error(
+			'setPartitionOnlineStatus() not available on this platform',
+		);
 	}
 
 	try {
@@ -258,7 +267,11 @@ export const setPartitionOnlineStatus = async (
 			`${status ? 'online' : 'offline'} volume`,
 		]);
 	} catch (error) {
-		throw(`setPartitionOnlineStatus: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+		throw Error(
+			`setPartitionOnlineStatus: ${error}${
+				error.stdout ? `\n${error.stdout}` : ''
+			}`,
+		);
 	}
 };
 
@@ -267,21 +280,17 @@ export const setPartitionOnlineStatus = async (
  * @param {String} volume - the identifier of the volume
  * @param {String} letter - the drive letter, like 'N'
  */
-export const setDriveLetter = async (
-	volume: string,
-	letter: string
-) => {
+export const setDriveLetter = async (volume: string, letter: string) => {
 	if (platform() !== 'win32') {
-		throw new Error("setDriveLetter() not available on this platform")
+		throw new Error('setDriveLetter() not available on this platform');
 	}
 
 	try {
-		await runDiskpart([
-			`select volume=${volume}`,
-			`assign letter=${letter}`,
-		]);
+		await runDiskpart([`select volume=${volume}`, `assign letter=${letter}`]);
 	} catch (error) {
-		throw(`setDriveLetter: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+		throw Error(
+			`setDriveLetter: ${error}${error.stdout ? `\n${error.stdout}` : ''}`,
+		);
 	}
 };
 
@@ -290,21 +299,17 @@ export const setDriveLetter = async (
  * @param {String} volume - the identifier of the volume
  * @param {String} letter - the drive letter, like 'N'
  */
-export const clearDriveLetter = async (
-	volume: string,
-	letter: string
-) => {
+export const clearDriveLetter = async (volume: string, letter: string) => {
 	if (platform() !== 'win32') {
-		throw new Error("clearDriveLetter() not available on this platform")
+		throw new Error('clearDriveLetter() not available on this platform');
 	}
 
 	try {
-		await runDiskpart([
-			`select volume=${volume}`,
-			`remove letter=${letter}`,
-		]);
+		await runDiskpart([`select volume=${volume}`, `remove letter=${letter}`]);
 	} catch (error) {
-		throw(`clearDriveLetter: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+		throw Error(
+			`clearDriveLetter: ${error}${error.stdout ? `\n${error.stdout}` : ''}`,
+		);
 	}
 };
 
@@ -321,7 +326,7 @@ export const clearDriveLetter = async (
  */
 export const findVolume = async (
 	device: string,
-	label: string
+	label: string,
 ): Promise<string> => {
 	const deviceId = prepareDeviceId(device);
 
@@ -338,66 +343,75 @@ export const findVolume = async (
 	 *   Volume 4                      NTFS   Partition    530 MB  Healthy    Hidden
 	 */
 	if (platform() !== 'win32') {
-		throw new Error("findVolume() not available on this platform")
+		throw new Error('findVolume() not available on this platform');
 	}
 
-	let listText = ''
+	let listText = '';
 	try {
-		listText = await runDiskpart([
-			`select disk ${deviceId}`,
-			`list volume`
-		]);
+		listText = await runDiskpart([`select disk ${deviceId}`, `list volume`]);
 	} catch (error) {
-		throw(`findVolume: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+		throw Error(
+			`findVolume: ${error}${error.stdout ? `\n${error.stdout}` : ''}`,
+		);
 	}
 
 	// Search for label in a language independent way, based on columns.
-	enum Columns { Volume = 0, Letter, Label, Fs }
-	let colOffsets:number[] = []
+	enum Columns {
+		Volume = 0,
+		Letter,
+		Label,
+		Fs,
+	}
+	const colOffsets: number[] = [];
 
-	for (let line of listText.split('\n')) {
+	for (const line of listText.split('\n')) {
 		if (!colOffsets.length && line.indexOf('-----') >= 0) {
 			// Collect the line position for each column into colOffsets.
-			let linePos = 0
+			let linePos = 0;
 			for (let i = 0; i <= Columns.Fs; i++) {
 				// Expecting even first column preceded by space(s).
-				linePos = line.indexOf(' -', linePos)
-				if (linePos == -1) {
-					throw Error(`findVolume: Only found ${i} columns.`)
+				linePos = line.indexOf(' -', linePos);
+				if (linePos === -1) {
+					throw Error(`findVolume: Only found ${i} columns.`);
 				}
-				linePos += 1 // advance past space
-				colOffsets.push(linePos)
+				linePos += 1; // advance past space
+				colOffsets.push(linePos);
 			}
-			debug(`colOffsets: ${colOffsets}`)
+			debug(`colOffsets: ${colOffsets}`);
 		} else {
 			// Look for the label in the expected column and collect the volume ID if found.
-			if (line.substring(colOffsets[Columns.Label], colOffsets[Columns.Fs]).trim() == label) {
-				const volText = line.substring(colOffsets[Columns.Volume],colOffsets[Columns.Letter])
+			if (
+				line
+					.substring(colOffsets[Columns.Label], colOffsets[Columns.Fs])
+					.trim() === label
+			) {
+				const volText = line.substring(
+					colOffsets[Columns.Volume],
+					colOffsets[Columns.Letter],
+				);
 				// Assumes only a space before the number at the end of the field.
-				const volMatch = volText.match(/\s+(\d+)\s*$/)
+				const volMatch = volText.match(/\s+(\d+)\s*$/);
 				if (volMatch && volMatch[1]) {
-					return volMatch[1]
+					return volMatch[1];
 				}
 			}
 		}
 	}
-	return ''
+	return '';
 };
 
 /**
  * Provide unallocated space on disk, in KB
- * 
+ *
  * @param {string} device - device path
  * @example
  * getUnallocatedSize('\\\\.\\PhysicalDrive0')
  *  .then(...)
  *  .catch(...)
  */
-export const getUnallocatedSize = async (
-	device: string
-): Promise<number> => {
+export const getUnallocatedSize = async (device: string): Promise<number> => {
 	if (platform() !== 'win32') {
-		throw new Error("getUnallocatedSize() not available on this platform")
+		throw new Error('getUnallocatedSize() not available on this platform');
 	}
 
 	const deviceId = prepareDeviceId(device);
@@ -413,35 +427,37 @@ export const getUnallocatedSize = async (
 	 *  --------  -------------  -------  -------  ---  ---
 	 *  Disk 0    Online           50 GB  6158 MB        *
 	 */
-	let listText = ''
+	let listText = '';
 	try {
-		listText = await runDiskpart([
-			`list disk`
-		]);
+		listText = await runDiskpart([`list disk`]);
 	} catch (error) {
-		throw(`getUnallocatedSize: ${error}${error.stdout ? `\n${error.stdout}` : ''}`);
+		throw Error(
+			`getUnallocatedSize: ${error}${error.stdout ? `\n${error.stdout}` : ''}`,
+		);
 	}
 
 	let freePos = -1;
-	// Look for 'Free' in column headings; then read size at that position 
+	// Look for 'Free' in column headings; then read size at that position
 	// on the row for the requested disk.
-	for (let line of listText.split('\n')) {
+	for (const line of listText.split('\n')) {
 		if (freePos < 0) {
 			freePos = line.indexOf('Free');
 		} else if (line.indexOf(`Disk ${deviceId}`) >= 0) {
 			const freeMatch = line.substring(freePos).match(/(\d+)\s+(\w+)B/);
 			if (freeMatch) {
 				let res = Number(freeMatch[1]);
-				for (let units of ['K', 'M', 'G', 'T']) {
-					if (freeMatch[2] == units) {
+				for (const units of ['K', 'M', 'G', 'T']) {
+					if (freeMatch[2] === units) {
 						return res;
 					} else {
 						res *= 1024;
 					}
 				}
 			}
-			break;  // should have matched; break to throw below
+			break; // should have matched; break to throw below
 		}
 	}
-	throw(`getUnallocatedSize: Can't read Free space on disk ${deviceId} from: ${listText}`);
+	throw Error(
+		`getUnallocatedSize: Can't read Free space on disk ${deviceId} from: ${listText}`,
+	);
 };

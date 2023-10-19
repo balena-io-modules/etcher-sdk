@@ -37,14 +37,17 @@ function isntNull<T>(x: T | null): x is Exclude<T, null> {
 }
 
 export class MultiDestinationError extends Error {
-	constructor(public error: Error, public destination: SourceDestination) {
+	constructor(
+		public error: Error,
+		public destination: SourceDestination,
+	) {
 		super();
 	}
 }
 
 export class MultiDestinationVerifier extends Verifier {
 	private verifiers: Set<Verifier> = new Set();
-	private timer: NodeJS.Timer;
+	private timer: NodeJS.Timeout;
 
 	constructor(
 		source: MultiDestination,
@@ -267,7 +270,7 @@ export class MultiDestination extends SourceDestination {
 		}
 		const progresses: Map<NodeJS.WritableStream, ProgressEvent | null> =
 			new Map();
-		let interval: NodeJS.Timer;
+		let interval: NodeJS.Timeout;
 
 		function oneStreamFinished(stream: NodeJS.WritableStream) {
 			if (!progresses.has(stream)) {

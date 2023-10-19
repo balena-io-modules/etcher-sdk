@@ -181,6 +181,7 @@ export class File extends SourceDestination {
 		highWaterMark,
 	}: { highWaterMark?: number } = {}): Promise<NodeJS.WritableStream> {
 		// TODO: use SourceDestinationFs (implement write) when node 14 becomes LTS
+		// eslint-disable-next-line
 		// @ts-ignore: @types/node is wrong about fs.WriteStream constructor: it takes 2 arguments, the first one is the file path
 		const stream = new ProgressWriteStream(null, {
 			fd: this.fileHandle.fd,

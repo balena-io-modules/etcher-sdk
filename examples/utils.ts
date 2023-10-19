@@ -84,27 +84,27 @@ function createProgressBar(
 	if (hasTotal) {
 		const fmt = `${step} [:bar] :label`;
 		const progressBar = new ProgressBar(fmt, { total: 100, width: 40 });
-		function update(progress: multiWrite.MultiDestinationProgress) {
+		const update = (progress: multiWrite.MultiDestinationProgress) => {
 			const percentage =
 				progress.percentage === undefined
 					? progressBar.curr
 					: progress.percentage;
 			const delta = Math.floor(percentage) - progressBar.curr;
 			progressBar.tick(delta, { label: progressBarLabel(progress) });
-		}
+		};
 		return [progressBar, update];
 	} else {
 		const title = `${step}: size not available`;
 		const spinner = new Spinner(title);
 		spinner.setSpinnerDelay(SPINNER_DELAY);
 		spinner.start();
-		function update(progress: multiWrite.MultiDestinationProgress) {
+		const update = (progress: multiWrite.MultiDestinationProgress) => {
 			spinner.setSpinnerTitle(
 				`${title}, ${progress.bytes} bytes, current: ${bytesToMebibytes(
 					progress.speed,
 				)} MiB/s, average: ${bytesToMebibytes(progress.averageSpeed)}`,
 			);
-		}
+		};
 		return [spinner, update];
 	}
 }

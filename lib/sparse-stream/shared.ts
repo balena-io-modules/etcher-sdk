@@ -53,7 +53,7 @@ export interface SparseWritable extends NodeJS.WritableStream {
 	): void;
 }
 
-type AnyHasher = Hash | XXHash | XXHash.XXHash64 | XXHash.XXHash3;
+type AnyHasher = Hash | XXHash.XXHash64 | XXHash.XXHash3;
 
 function createHasher(checksumType?: ChecksumType): undefined | AnyHasher {
 	if (checksumType === 'crc32') {

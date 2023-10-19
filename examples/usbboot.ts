@@ -40,7 +40,7 @@ async function main() {
 			}
 			deviceScanner.on('attach', onAttach);
 			deviceScanner.on('error', reject);
-			deviceScanner.start();
+			void deviceScanner.start();
 		},
 	);
 	console.log('Compute module attached');
@@ -90,7 +90,7 @@ async function main() {
 			new sourceDestination.File({
 				path: argv[2],
 			});
-		pipeSourceToDestinationsWithProgressBar({
+		void pipeSourceToDestinationsWithProgressBar({
 			source,
 			destinations: [dest],
 			verify: true,
@@ -100,4 +100,4 @@ async function main() {
 	}
 }
 
-main();
+void main();

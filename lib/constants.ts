@@ -20,5 +20,5 @@ export const RETRY_BASE_TIMEOUT = 100;
 export const CHUNK_SIZE = 1024 ** 2;
 export const NO_MATCHING_FILE_MSG =
 	"Can't find a matching file in this zip archive";
-export const XXHASH_SEED = 0x45544348; // Seed value 0x45544348 = ASCII "ETCH"
+export const XXHASH_SEED = Buffer.from('ETCH'); // Seed value 0x45544348 = ASCII "ETCH"
 export const DEFAULT_ALIGNMENT = 512;

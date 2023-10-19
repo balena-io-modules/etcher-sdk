@@ -143,7 +143,7 @@ async function main(options: Arguments) {
 	});
 }
 
-// tslint:disable-next-line: no-var-requires
+// eslint-disable-next-line
 const argv = require('yargs').command(
 	'$0 <deviceType> <buildId> <fileDestination>',
 	'Write the image contained in the zipSource url into fileDestination',
@@ -186,4 +186,4 @@ const argv = require('yargs').command(
 	},
 ).argv;
 
-wrapper(main, argv);
+void wrapper(main, argv);

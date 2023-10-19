@@ -125,7 +125,8 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	}
 
 	private async getImageJSON(): Promise<ImageJSON> {
-		const imageJSON = (await this.download(`image${this.imageSuffix}.json`)).data;
+		const imageJSON = (await this.download(`image${this.imageSuffix}.json`))
+			.data;
 		return imageJSON;
 	}
 
@@ -136,7 +137,10 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	private async getPartStream(
 		filename: string,
 	): Promise<NodeJS.ReadableStream> {
-		const response = await this.download(`compressed${this.imageSuffix}/${filename}`, 'stream');
+		const response = await this.download(
+			`compressed${this.imageSuffix}/${filename}`,
+			'stream',
+		);
 		return response.data;
 	}
 

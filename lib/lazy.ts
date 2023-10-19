@@ -23,20 +23,22 @@ export type XXHash = typeof xxhash;
 
 export const getRaspberrypiUsbboot = once(() => {
 	try {
-		return require('node-raspberrypi-usbboot') as typeof import('node-raspberrypi-usbboot');
+		return require('node-raspberrypi-usbboot') as typeof import('node-raspberrypi-usbboot'); // eslint-disable-line
 	} catch (e) {
 		console.warn('Failed to import node-raspberrypi-usbboot:', e);
 	}
 });
 
 export const getXXHash = once(
-	() => require('xxhash-addon') as typeof import('xxhash-addon'),
+	() => require('xxhash-addon') as typeof import('xxhash-addon'), // eslint-disable-line
 );
 
 export const getUnmountDisk = once(() =>
-	promisify((require('mountutils') as typeof import('mountutils')).unmountDisk),
+	promisify(
+		(require('mountutils') as typeof import('mountutils')).unmountDisk, // eslint-disable-line
+	),
 );
 
 export const getCrc = once(
-	() => require('cyclic-32') as typeof import('cyclic-32'),
+	() => require('cyclic-32') as typeof import('cyclic-32'), // eslint-disable-line
 );

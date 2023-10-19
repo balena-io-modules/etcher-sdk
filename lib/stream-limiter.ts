@@ -19,8 +19,16 @@ import zlib = require('zlib');
 
 import { getRootStream } from './source-destination/compressed-source';
 
+type ClosableDestroyableStream = NodeJS.ReadableStream & {
+	close?: () => void;
+	destroy?: () => void;
+};
+
 export class StreamLimiter extends Transform {
-	constructor(private stream: NodeJS.ReadableStream, private maxBytes: number) {
+	constructor(
+		private stream: ClosableDestroyableStream,
+		private maxBytes: number,
+	) {
 		super();
 		this.stream.on('error', this.emit.bind(this, 'error'));
 		this.stream.pipe(this);
@@ -45,14 +53,16 @@ export class StreamLimiter extends Transform {
 			// TODO: maybe we don't need to try to close / destroy the stream ?
 			// We could let it be destroyed later when there is no more references to it.
 			// avoid https://github.com/nodejs/node/issues/15625
-			// @ts-ignore zlib.Gunzip exists
+
+			// zlib.Gunzip exists
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
 			if (!(this.stream instanceof zlib.Gunzip)) {
-				// @ts-ignore
+				//eslint-disable-line
 				this.stream.close?.();
 			}
 			// avoid `stream.push() after EOF`
 			if (this.stream.constructor.name !== 'JSLzmaStream') {
-				// @ts-ignore
 				this.stream.destroy?.();
 			}
 		}

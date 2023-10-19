@@ -58,4 +58,4 @@ async function main() {
 	console.log('ready', d);
 }
 
-main();
+void main();

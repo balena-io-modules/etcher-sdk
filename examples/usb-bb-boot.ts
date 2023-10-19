@@ -33,7 +33,7 @@ async function main() {
 			}
 			deviceScanner.on('attach', onAttach);
 			deviceScanner.on('error', reject);
-			deviceScanner.start();
+			void deviceScanner.start();
 		},
 	);
 	console.log('BeagleBone attached');
@@ -63,4 +63,4 @@ async function main() {
 	deviceScanner.stop();
 }
 
-main();
+void main();

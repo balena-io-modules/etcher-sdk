@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as checkDiskSpace from 'check-disk-space';
+import checkDiskSpace from 'check-disk-space';
 import { randomBytes } from 'crypto';
 import { Dirent, promises as fs } from 'fs';
 import { tmpdir } from 'os';
@@ -130,8 +130,7 @@ export async function withTmpFile<T>(
 		} catch (error) {
 			// The file might already have been deleted by cleanupTmpFiles
 			if (error.code !== 'ENOENT') {
-				// tslint:disable-next-line:no-unsafe-finally
-				throw error;
+				throw error; // eslint-disable-line no-unsafe-finally
 			}
 		}
 	}

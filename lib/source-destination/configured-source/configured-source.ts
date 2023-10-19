@@ -15,7 +15,7 @@
  */
 
 import { interact } from 'balena-image-fs';
-import * as _debug from 'debug';
+import _debug from 'debug';
 import { DiscardDiskChunk, Disk, ReadResult, WriteResult } from 'file-disk';
 import { getPartitions, GPTPartition, MBRPartition } from 'partitioninfo';
 
@@ -79,10 +79,10 @@ export class SourceDisk extends Disk {
 	}
 
 	protected async _write(
-		_buffer: Buffer,
-		_bufferOffset: number,
-		_length: number,
-		_fileOffset: number,
+		_buffer: Buffer, // eslint-disable-line @typescript-eslint/no-unused-vars
+		_bufferOffset: number, // eslint-disable-line @typescript-eslint/no-unused-vars
+		_length: number, // eslint-disable-line @typescript-eslint/no-unused-vars
+		_fileOffset: number, // eslint-disable-line @typescript-eslint/no-unused-vars
 	): Promise<WriteResult> {
 		throw new Error("Can't write to a SourceDisk");
 	}
@@ -264,10 +264,8 @@ export class ConfiguredSource extends SourceSource {
 		}
 		for (const partition of partitions) {
 			try {
-				await interact(this.disk, partition.index, async (fs) => {
-					// @ts-ignore: trim method exists for ext partitions
+				await interact(this.disk, partition.index, async (fs: any) => {
 					if (fs.trim !== undefined) {
-						// @ts-ignore: trim method exists for ext partitions
 						await fs.trim();
 					}
 				});
