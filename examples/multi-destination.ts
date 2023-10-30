@@ -123,7 +123,7 @@ async function main({
 	];
 	const deviceScanner = new scanner.Scanner(adapters);
 	deviceScanner.on('error', console.error);
-	deviceScanner.start();
+	void deviceScanner.start();
 	// Wait for the deviceScanner to be ready
 	await new Promise((resolve) => {
 		deviceScanner.on('ready', resolve);
@@ -156,7 +156,7 @@ async function main({
 	});
 }
 
-// tslint:disable-next-line: no-var-requires
+// eslint-disable-next-line
 const argv = require('yargs').command(
 	'$0 <sourceImage> [devices..]',
 	'Write the sourceImage on all devices.',
@@ -176,4 +176,5 @@ const argv = require('yargs').command(
 	},
 ).argv;
 
+// eslint-disable-next-line
 wrapper(main, argv);

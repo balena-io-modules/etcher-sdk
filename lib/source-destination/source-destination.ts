@@ -43,15 +43,12 @@ import {
 import { SourceSource } from './source-source';
 
 class HashStream extends TransformStream {
-	private _outEnc: string;
 	private _hash: XXHash3;
-	constructor(seed: number, outEnc: string | Buffer) {
+	constructor(seed: Buffer, outEnc: string | Buffer) {
 		super();
 		if (outEnc && typeof outEnc !== 'string' && !Buffer.isBuffer(outEnc)) {
 			outEnc = 'buffer';
 		}
-
-		this._outEnc = outEnc as string;
 
 		this._hash = new XXHash3(seed);
 	}
@@ -61,7 +58,7 @@ class HashStream extends TransformStream {
 		callback();
 	}
 	_flush(callback: () => void) {
-		this.push(this._hash.digest(this._outEnc));
+		this.push(this._hash.digest());
 		callback();
 	}
 }
@@ -91,7 +88,7 @@ export class CountingHashStream extends HashStream {
 		encoding: string,
 		callback: (error?: Error) => void,
 	) {
-		asCallback(this.__transform(chunk, encoding), callback);
+		void asCallback(this.__transform(chunk, encoding), callback);
 	}
 }
 
@@ -261,8 +258,10 @@ export class SparseStreamVerifier extends Verifier {
 			});
 			transform.once('error', (error: Error) => {
 				originalStream.unpipe(transform);
+				// eslint-disable-next-line
 				// @ts-ignore
 				if (typeof originalStream.destroy === 'function') {
+					// eslint-disable-next-line
 					// @ts-ignore
 					originalStream.destroy();
 				}
@@ -357,31 +356,31 @@ export class SourceDestination extends EventEmitter {
 	}
 
 	public async read(
-		_buffer: Buffer,
-		_bufferOffset: number,
-		_length: number,
-		_sourceOffset: number,
+		_buffer: Buffer, // eslint-disable-line @typescript-eslint/no-unused-vars
+		_bufferOffset: number, // eslint-disable-line @typescript-eslint/no-unused-vars
+		_length: number, // eslint-disable-line @typescript-eslint/no-unused-vars
+		_sourceOffset: number, // eslint-disable-line @typescript-eslint/no-unused-vars
 	): Promise<ReadResult> {
 		throw new NotCapable();
 	}
 
 	public async write(
-		_buffer: Buffer,
-		_bufferOffset: number,
-		_length: number,
-		_fileOffset: number,
+		_buffer: Buffer, // eslint-disable-line @typescript-eslint/no-unused-vars
+		_bufferOffset: number, // eslint-disable-line @typescript-eslint/no-unused-vars
+		_length: number, // eslint-disable-line @typescript-eslint/no-unused-vars
+		_fileOffset: number, // eslint-disable-line @typescript-eslint/no-unused-vars
 	): Promise<WriteResult> {
 		throw new NotCapable();
 	}
 
 	public async createReadStream(
-		_options: CreateReadStreamOptions = {},
+		_options?: CreateReadStreamOptions, // eslint-disable-line @typescript-eslint/no-unused-vars
 	): Promise<NodeJS.ReadableStream> {
 		throw new NotCapable();
 	}
 
 	public async createSparseReadStream(
-		_options: CreateSparseReadStreamOptions = {},
+		_options?: CreateSparseReadStreamOptions, // eslint-disable-line @typescript-eslint/no-unused-vars
 	): Promise<SparseReadable> {
 		throw new NotCapable();
 	}
@@ -391,13 +390,13 @@ export class SourceDestination extends EventEmitter {
 	}
 
 	public async createWriteStream(
-		_options: { highWaterMark?: number } = {},
+		_options?: { highWaterMark?: number }, // eslint-disable-line @typescript-eslint/no-unused-vars
 	): Promise<NodeJS.WritableStream> {
 		throw new NotCapable();
 	}
 
 	public async createSparseWriteStream(
-		_options: { highWaterMark?: number } = {},
+		_options?: { highWaterMark?: number }, // eslint-disable-line @typescript-eslint/no-unused-vars
 	): Promise<SparseWritable> {
 		throw new NotCapable();
 	}
@@ -520,7 +519,9 @@ export class SourceDestination extends EventEmitter {
 		try {
 			mimetype = await this.getMimeTypeFromContent();
 		} catch (e) {
-			if (e.code === 'EISDIR') { throw e; } // expected to die on directories
+			if (e.code === 'EISDIR') {
+				throw e;
+			} // expected to die on directories
 			console.log("Can't get mimetype from content", e.code);
 		}
 
@@ -540,7 +541,7 @@ export class SourceDestination extends EventEmitter {
 				// no partitions
 			}
 		} catch (error) {
-			console.log("Can't read to buffer to get partitions")
+			console.log("Can't read to buffer to get partitions");
 			throw error;
 		}
 	}

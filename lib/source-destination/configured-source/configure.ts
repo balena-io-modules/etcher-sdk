@@ -47,7 +47,7 @@ export interface DeviceTypeJSON {
 	yocto: {
 		archive?: boolean;
 	};
-	arch: string
+	arch: string;
 }
 
 const MBR_LAST_PRIMARY_PARTITION = 4;

@@ -54,10 +54,12 @@ export function makeClassEmitProgressEvents<
 				averageSpeed: 0,
 			};
 
+			// eslint-disable-next-line
 			// @ts-ignore
 			let attributeValue: number = this[attribute];
 
 			const update = () => {
+				// eslint-disable-next-line
 				// @ts-ignore
 				const newValue: number = this[attribute];
 				const attributeDelta = newValue - attributeValue;
@@ -67,6 +69,7 @@ export function makeClassEmitProgressEvents<
 				attributeValue = newValue;
 				state.bytes += attributeDelta;
 				// Ignore because I don't know how to express that positionAttribute is a key of T instances
+				// eslint-disable-next-line
 				// @ts-ignore
 				const position = this[positionAttribute];
 				if (position !== undefined) {

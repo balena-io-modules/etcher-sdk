@@ -99,7 +99,7 @@ export abstract class CompressedSource extends SourceSource {
 			}
 		} catch (error) {
 			// noop
-			console.log("Can't get size from partition table")
+			console.log("Can't get size from partition table");
 		}
 	}
 

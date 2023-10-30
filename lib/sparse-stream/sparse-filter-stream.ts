@@ -67,6 +67,7 @@ export class SparseFilterStream extends Transform implements SparseReadable {
 	}
 
 	private __transform(buffer: Buffer): void {
+		// eslint-disable-next-line no-constant-condition
 		while (true) {
 			if (this.state === undefined) {
 				// No current block means we're done reading

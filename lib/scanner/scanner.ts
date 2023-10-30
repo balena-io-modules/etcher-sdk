@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import * as debug_ from 'debug';
+import _debug from 'debug';
 import { EventEmitter } from 'events';
 
 import { Adapter, AdapterSourceDestination } from './adapters/adapter';
 
-const debug = debug_('etcher-sdk:scanner');
+const debug = _debug('etcher-sdk:scanner');
 
 export class Scanner extends EventEmitter {
 	public drives: Set<AdapterSourceDestination> = new Set();
