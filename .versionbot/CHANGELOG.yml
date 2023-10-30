@@ -1,4 +1,16 @@
 - commits:
+    - subject: "major: - bump balena-lint to 7.2.1 - require node 18+ - bump
+        XXHash-addon to 2.0.1 - bump sinon to 17.0.0 - bump axios to 1.6.0 -
+        bump unzip-stream to 0.3.1 - bump all other deps to closest minor"
+      hash: 6e0e0c61cb8e72897a6fb315e8e11faaee85c463
+      body: ""
+      footer: {}
+      author: Edwin Joassart
+      nested: []
+  version: 9.0.0
+  title: ""
+  date: 2023-10-30T15:32:22.430Z
+- commits:
     - subject: Add failover to Windows from flash-boot partition
       hash: 63e7085a9a34372eb4fc3cb538c49d6ee9895cc4
       body: ""
