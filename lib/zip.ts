@@ -19,7 +19,7 @@ import * as unzip from 'unzip-stream';
 import { NO_MATCHING_FILE_MSG } from './constants';
 
 export const getFileStreamFromZipStream = async (
-	zipStream: NodeJS.ReadableStream,
+	zipStream: NodeJS.ReadableStream & { destroy?: () => void },
 	match: (filename: string) => boolean,
 ): Promise<unzip.ZipStreamEntry> => {
 	return await new Promise(
@@ -44,8 +44,6 @@ export const getFileStreamFromZipStream = async (
 					entry.on('end', () => {
 						// Stop reading the zip archive once the file we want has been extracted.
 						zipStream.unpipe?.(unzipper);
-						// eslint-disable-next-line
-						// @ts-ignore
 						zipStream.destroy?.();
 					});
 					resolve(entry);

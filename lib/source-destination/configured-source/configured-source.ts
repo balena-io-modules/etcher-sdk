@@ -40,7 +40,11 @@ import { SourceSource } from '../source-source';
 
 import { configure as legacyConfigure } from './configure';
 
+import * as fs from 'fs';
+
 const debug = _debug('etcher-sdk:configured-source');
+
+type TrimableFsType = typeof fs & { trim?: () => Promise<void> };
 
 export type ConfigureFunction = (disk: Disk) => Promise<void>;
 
@@ -264,11 +268,15 @@ export class ConfiguredSource extends SourceSource {
 		}
 		for (const partition of partitions) {
 			try {
-				await interact(this.disk, partition.index, async (fs: any) => {
-					if (fs.trim !== undefined) {
-						await fs.trim();
-					}
-				});
+				await interact(
+					this.disk,
+					partition.index,
+					async (trimableFs: TrimableFsType) => {
+						if (trimableFs.trim !== undefined) {
+							await trimableFs.trim();
+						}
+					},
+				);
 			} catch {
 				// Unsupported filesystem
 			}
