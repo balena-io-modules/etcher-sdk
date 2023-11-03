@@ -1,4 +1,14 @@
 - commits:
+    - subject: "patch: fixing lint"
+      hash: 250a8d782b4de974bd8d830f3363504c395eea8d
+      body: ""
+      footer: {}
+      author: Edwin Joassart
+      nested: []
+  version: 9.0.1
+  title: ""
+  date: 2023-11-03T15:35:45.051Z
+- commits:
     - subject: "major: - bump balena-lint to 7.2.1 - require node 18+ - bump
         XXHash-addon to 2.0.1 - bump sinon to 17.0.0 - bump axios to 1.6.0 -
         bump unzip-stream to 0.3.1 - bump all other deps to closest minor"
