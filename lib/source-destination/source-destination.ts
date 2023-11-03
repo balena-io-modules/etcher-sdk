@@ -258,11 +258,9 @@ export class SparseStreamVerifier extends Verifier {
 			});
 			transform.once('error', (error: Error) => {
 				originalStream.unpipe(transform);
-				// eslint-disable-next-line
-				// @ts-ignore
+				// @ts-expect-error destroy is not in the Node.js typings
 				if (typeof originalStream.destroy === 'function') {
-					// eslint-disable-next-line
-					// @ts-ignore
+					// @ts-expect-error destroy is not in the Node.js typings
 					originalStream.destroy();
 				}
 				this.emit('error', error);

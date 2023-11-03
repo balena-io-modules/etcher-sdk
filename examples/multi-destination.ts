@@ -156,7 +156,7 @@ async function main({
 	});
 }
 
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const argv = require('yargs').command(
 	'$0 <sourceImage> [devices..]',
 	'Write the sourceImage on all devices.',
@@ -176,5 +176,4 @@ const argv = require('yargs').command(
 	},
 ).argv;
 
-// eslint-disable-next-line
 wrapper(main, argv);

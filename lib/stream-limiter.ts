@@ -54,9 +54,7 @@ export class StreamLimiter extends Transform {
 			// We could let it be destroyed later when there is no more references to it.
 			// avoid https://github.com/nodejs/node/issues/15625
 
-			// zlib.Gunzip exists
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			// @ts-ignore
+			// @ts-expect-error zlib.Gunzip exists
 			if (!(this.stream instanceof zlib.Gunzip)) {
 				//eslint-disable-line
 				this.stream.close?.();

@@ -54,8 +54,7 @@ export function makeClassEmitProgressEvents<
 				averageSpeed: 0,
 			};
 
-			// eslint-disable-next-line
-			// @ts-ignore
+			// @ts-expect-error No index signature with a parameter of type 'string' was found on type '(Anonymous class)'.ts(7053)
 			let attributeValue: number = this[attribute];
 
 			const update = () => {
