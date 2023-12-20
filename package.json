@@ -57,7 +57,7 @@
     "debug": "^4.3.4",
     "drivelist": "^11.1.0",
     "file-disk": "^8.0.1",
-    "file-type": "^16.0.0",
+    "file-type": "^18.0.0",
     "glob": "^10.3.10",
     "gzip-stream": "^2.0.0",
     "lzma-native": "^8.0.6",
