@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency @types/debug to v4.1.12
+      hash: 884b70d3ce314768bedf91cf84968990c887e5f1
+      body: |
+        Update @types/debug from 4.1.10 to 4.1.12
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Self-hosted Renovate Bot
+      nested: []
+  version: 9.0.3
+  title: ""
+  date: 2024-01-02T18:51:28.078Z
+- commits:
     - subject: Remove repo config from flowzone.yml
       hash: d9c3b3ea4ae90409ea14b5909888e81b49f3b1a1
       body: |
