@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency @types/sinon to v17
+      hash: c237d489895f0805a8280217b14eb1127a55ed82
+      body: |
+        Update @types/sinon from 10.0.20 to 17.0.2
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Self-hosted Renovate Bot
+      nested: []
+  version: 9.0.5
+  title: ""
+  date: 2024-01-02T20:50:25.409Z
+- commits:
     - subject: Update dependency @types/node to v20
       hash: 592f33d508e186faa8634bff78f7b0ca8adfccc4
       body: |
