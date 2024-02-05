@@ -1,4 +1,16 @@
 - commits:
+    - subject: Bump drivelist to 11.2.0
+      hash: faaef0e95d2647941d699988ca210eee67cad284
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Otávio Jacobi
+      nested: []
+  version: 9.0.6
+  title: ""
+  date: 2024-02-05T16:35:19.990Z
+- commits:
     - subject: Update dependency @types/sinon to v17
       hash: c237d489895f0805a8280217b14eb1127a55ed82
       body: |

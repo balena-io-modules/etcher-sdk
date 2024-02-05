@@ -1,6 +1,6 @@
 {
   "name": "etcher-sdk",
-  "version": "9.0.5",
+  "version": "9.0.6",
   "description": "Etcher SDK",
   "author": "Balena Ltd <hello@balena.io>",
   "main": "build/index.js",
@@ -108,6 +108,6 @@
     "node": ">=18"
   },
   "versionist": {
-    "publishedAt": "2024-01-02T20:50:25.654Z"
+    "publishedAt": "2024-02-05T16:35:20.239Z"
   }
 }
