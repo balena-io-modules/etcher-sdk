@@ -207,8 +207,18 @@ export async function decompressThenFlash({
 			numBuffers,
 		});
 	} finally {
+		// don't be fooled by the await, `decompressThenFlash` promise is already resolved;
+		// if you cleandup tmp yourself you might get a race condition
 		if (decompressedFilePath) {
-			await fs.unlink(decompressedFilePath);
+			try {
+				await fs.unlink(decompressedFilePath);
+			} catch (error) {
+				if (error.code === 'ENOENT') {
+					console.warn(`File ${decompressedFilePath} was already deleted`);
+				} else {
+					throw error; // eslint-disable-line no-unsafe-finally
+				}
+			}
 		}
 	}
 }
