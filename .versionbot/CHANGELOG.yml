@@ -1,4 +1,14 @@
 - commits:
+    - subject: "patch: handle possible race condition when unlinking tmp file"
+      hash: 2315b734a8701dfb0c81785af604cf84e64316d3
+      body: ""
+      footer: {}
+      author: Edwin Joassart
+      nested: []
+  version: 9.0.7
+  title: ""
+  date: 2024-03-11T11:51:34.385Z
+- commits:
     - subject: Bump drivelist to 11.2.0
       hash: faaef0e95d2647941d699988ca210eee67cad284
       body: ""
