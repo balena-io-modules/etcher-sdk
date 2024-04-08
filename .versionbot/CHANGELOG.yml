@@ -1,4 +1,16 @@
 - commits:
+    - subject: Bump drivelist to v12.0.0
+      hash: 2d75db5e2daa2d8bd7457cd9020e71441c747d61
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+  version: 9.0.8
+  title: ""
+  date: 2024-04-08T14:12:46.633Z
+- commits:
     - subject: "patch: handle possible race condition when unlinking tmp file"
       hash: 2315b734a8701dfb0c81785af604cf84e64316d3
       body: ""
