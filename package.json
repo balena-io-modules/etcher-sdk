@@ -55,7 +55,7 @@
     "check-disk-space": "^3.4.0",
     "cyclic-32": "^1.1.0",
     "debug": "^4.3.4",
-    "drivelist": "^11.2.0",
+    "drivelist": "^12.0.0",
     "file-disk": "^8.0.1",
     "file-type": "^16.0.0",
     "glob": "^10.3.10",
