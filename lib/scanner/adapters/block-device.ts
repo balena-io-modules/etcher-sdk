@@ -63,6 +63,7 @@ export interface DrivelistDrive extends $Drive {
 export class BlockDeviceAdapter extends Adapter {
 	// Emits 'attach', 'detach', 'ready' and 'error' events
 	public includeSystemDrives: () => boolean;
+	public includeVitualDrives: () => boolean;
 	private unmountOnSuccess: boolean;
 	private oWrite: boolean;
 	private oDirect: boolean;
@@ -72,17 +73,20 @@ export class BlockDeviceAdapter extends Adapter {
 
 	constructor({
 		includeSystemDrives = () => false,
+		includeVirtualDrives = () => false,
 		unmountOnSuccess = false,
 		write = false,
 		direct = true,
 	}: {
 		includeSystemDrives?: () => boolean;
+		includeVirtualDrives?: () => boolean;
 		unmountOnSuccess?: boolean;
 		write?: boolean;
 		direct?: boolean;
 	}) {
 		super();
 		this.includeSystemDrives = includeSystemDrives;
+		this.includeVitualDrives = includeVirtualDrives;
 		this.unmountOnSuccess = unmountOnSuccess;
 		this.oWrite = write;
 		this.oDirect = direct;
@@ -158,7 +162,7 @@ export class BlockDeviceAdapter extends Adapter {
 						// Exclude drives with no size
 						typeof drive.size === 'number' &&
 						// Exclude virtual drives (DMG, TimeMachine, ... on macOS)
-						!drive.isVirtual
+						(this.includeVitualDrives() || !drive.isVirtual)
 					)
 				)
 			) {
