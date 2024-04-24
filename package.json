@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "types": "build/index.d.ts",
   "scripts": {
-    "flowzone-preinstall": "sudo apt-get update && sudo apt-get install -y libudev-dev",
+    "flowzone-preinstall": "wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add - && sudo apt-get update && sudo apt-get install -y libudev-dev",
     "test": "npm run lint && mocha -r ts-node/register tests/**/*.spec.ts",
     "prettier": "balena-lint --fix lib typings examples tests",
     "lint": "balena-lint lib typings examples",
