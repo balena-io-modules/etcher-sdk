@@ -23,7 +23,7 @@ import { ReadResult } from 'file-disk';
 import { basename } from 'path';
 import { unescape } from 'querystring';
 import { parse } from 'url';
-
+import { createHTTP2Adapter } from 'axios-http2-adapter';
 import { StreamLimiter } from '../stream-limiter';
 import { Metadata } from './metadata';
 import {
@@ -60,6 +60,7 @@ export class Http extends SourceDestination {
 		if (auth) {
 			this.axiosInstance.defaults.auth = auth;
 		}
+		this.axiosInstance.defaults.adapter = createHTTP2Adapter();
 		this.ready = this.getInfo();
 	}
 
