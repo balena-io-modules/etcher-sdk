@@ -1,4 +1,14 @@
 - commits:
+    - subject: "patch: remove CI workaround"
+      hash: 6ee242a878514931072553f0c7ecbbe4db9423cc
+      body: ""
+      footer: {}
+      author: Edwin Joassart
+      nested: []
+  version: 9.0.10
+  title: ""
+  date: 2024-04-26T11:38:50.672Z
+- commits:
     - subject: "patch: add option to allow listing virtual drive on Mac"
       hash: 987f25f71c9e5ed743ebc256041f375fdea9cf18
       body: ""
