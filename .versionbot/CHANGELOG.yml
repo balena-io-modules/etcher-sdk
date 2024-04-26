@@ -1,4 +1,14 @@
 - commits:
+    - subject: "patch: use http2 to fix issues with url source"
+      hash: b9acd58e82a67342b0bb1e30a6ab9d9d472552c3
+      body: ""
+      footer: {}
+      author: Edwin Joassart
+      nested: []
+  version: 9.0.11
+  title: ""
+  date: 2024-04-26T12:35:55.307Z
+- commits:
     - subject: "patch: remove CI workaround"
       hash: 6ee242a878514931072553f0c7ecbbe4db9423cc
       body: ""
