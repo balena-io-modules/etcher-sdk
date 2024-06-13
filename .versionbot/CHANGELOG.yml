@@ -1,4 +1,20 @@
 - commits:
+    - subject: "patch: etcher-sdk is not yet compatible with node22"
+      hash: 0bafb3e7ae9dcc5e035790143ed0c3655d6550c3
+      body: ""
+      footer: {}
+      author: JOASSART Edwin
+      nested: []
+    - subject: "minor: allow passing custom assets to start SB protected CM4"
+      hash: 8b9d4f344bdc42a9aa2280058274ce8df944d9f5
+      body: ""
+      footer: {}
+      author: Edwin Joassart
+      nested: []
+  version: 9.1.0
+  title: ""
+  date: 2024-06-13T12:12:47.742Z
+- commits:
     - subject: "patch: use http2 to fix issues with url source"
       hash: b9acd58e82a67342b0bb1e30a6ab9d9d472552c3
       body: ""
