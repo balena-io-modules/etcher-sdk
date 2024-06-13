@@ -137,9 +137,8 @@ export async function testImageNoIt(
 		assert(canCreateSparseReadStream);
 		const sourceSparseStream = await innerSource.createSparseReadStream();
 
-		const sourceSparseStreamBuffer = await sparseStreamToBuffer(
-			sourceSparseStream,
-		);
+		const sourceSparseStreamBuffer =
+			await sparseStreamToBuffer(sourceSparseStream);
 		expect(sourceSparseStreamBuffer.length).to.be.at.most(compareToData.length);
 		expect(sourceSparseStreamBuffer).to.deep.equal(
 			compareToData.slice(0, sourceSparseStreamBuffer.length),
