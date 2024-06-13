@@ -27,11 +27,11 @@ export class UsbbootDeviceAdapter extends Adapter {
 	private drives: Map<UsbbootDevice, UsbbootDrive> = new Map();
 	private scanner?: UsbbootScannerType;
 
-	constructor() {
+	constructor(usbBootExtraDir?: string | undefined) {
 		super();
 		const rpiUsbboot = getRaspberrypiUsbboot();
 		if (rpiUsbboot !== undefined) {
-			this.scanner = new rpiUsbboot.UsbbootScanner();
+			this.scanner = new rpiUsbboot.UsbbootScanner(usbBootExtraDir);
 			this.scanner.on('attach', this.onAttach.bind(this));
 			this.scanner.on('detach', this.onDetach.bind(this));
 			this.scanner.on('ready', this.emit.bind(this, 'ready'));

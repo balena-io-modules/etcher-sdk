@@ -13,19 +13,61 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { argv } from 'process';
+
+/**
+ * Unlocking with secureboot
+ *
+ * If you need to expose the internal storage of a cm4 with secureboot, you need to provide a signed boot-image to set the device in MSD mode.
+ * Pass the bootImageDir flag with the path to the folder containing the signed boot-image.
+ */
+
 import ProgressBar = require('progress');
 
 import { scanner, sourceDestination } from '../lib/';
 
 import { pipeSourceToDestinationsWithProgressBar } from './utils';
 
+// Parse command line arguments
+const args = process.argv.slice(2); // removes 'node' and the script name from the args
+const flags: any = {};
+
+args.forEach((arg: string, index: number) => {
+	// Check if the argument is a flag in the format --flag=value
+	if (arg.startsWith('--')) {
+		const key: string = arg.substring(2);
+		const value: string = args[index + 1];
+		flags[key] = value;
+	}
+});
+
+if (!flags.source) {
+	console.log("No source has been provided, won't try to flash anything");
+}
+
+if (flags.bootImageDir !== '') {
+	console.log(`Using external directory ${flags['bootImageDir']}`);
+}
+
+if (flags.help) {
+	console.log(
+		'Usage: ts-node usbboot.js --bootImageDir <bootImageDir> --source <image>',
+	);
+	console.log(
+		'Beware, `source` image will be flashed to all USBboot devices, so make sure you know what you are doing',
+	);
+	console.log(
+		'To expose the internal mass storage device on a locked device, set the bootImageDir to the path of a directory containing a signed boot.img and config.txt.',
+	);
+	process.exit(0);
+}
+
 async function main() {
+	const bootImageDir = flags.bootImageDir;
 	const adapters: scanner.adapters.Adapter[] = [
 		new scanner.adapters.BlockDeviceAdapter({
 			includeSystemDrives: () => false,
 		}),
-		new scanner.adapters.UsbbootDeviceAdapter(),
+		new scanner.adapters.UsbbootDeviceAdapter(bootImageDir),
 	];
 	const deviceScanner = new scanner.Scanner(adapters);
 	console.log('Waiting for one compute module');
@@ -74,6 +116,8 @@ async function main() {
 					drive instanceof sourceDestination.BlockDevice &&
 					drive.description === 'Compute Module'
 				) {
+					drive.oWrite = true;
+					drive.oDirect = true;
 					resolve(drive);
 					deviceScanner.removeListener('attach', onAttach);
 				}
@@ -84,11 +128,12 @@ async function main() {
 	);
 	deviceScanner.stop();
 
-	if (argv.length >= 3) {
-		console.log(`Writing image ${argv[2]}`);
+	if (flags.source) {
+		console.log(JSON.stringify(dest));
+		console.log(`Writing image ${flags.source} to ${dest.path}`);
 		const source: sourceDestination.SourceDestination =
 			new sourceDestination.File({
-				path: argv[2],
+				path: flags.source,
 			});
 		void pipeSourceToDestinationsWithProgressBar({
 			source,

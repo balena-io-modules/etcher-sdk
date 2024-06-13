@@ -17,12 +17,14 @@ import { platform } from 'os';
 
 import { scanner } from '../lib/';
 
-async function main() {
+const bootImageDir = String(process.argv.slice(2));
+
+async function main(usbBootExtraFolder?: string) {
 	const adapters: scanner.adapters.Adapter[] = [
 		new scanner.adapters.BlockDeviceAdapter({
 			includeSystemDrives: () => true,
 		}),
-		new scanner.adapters.UsbbootDeviceAdapter(),
+		new scanner.adapters.UsbbootDeviceAdapter(bootImageDir),
 	];
 	if (platform() === 'win32') {
 		if (scanner.adapters.DriverlessDeviceAdapter !== undefined) {
