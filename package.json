@@ -93,7 +93,7 @@
     "@types/sinon": "^17.0.0",
     "@types/yargs": "^17.0.29",
     "@types/yauzl": "^2.9.0",
-    "chai": "^4.1.2",
+    "chai": "^5.0.0",
     "cli-spinner": "^0.2.8",
     "mocha": "^10.2.0",
     "progress": "^2.0.0",
