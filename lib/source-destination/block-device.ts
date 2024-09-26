@@ -93,8 +93,9 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 				flags |= constants.O_EXCL;
 			} else if (plat === 'darwin') {
 				flags |= O_EXLOCK;
+			} else if (plat === 'win32') {
+				flags |= O_EXLOCK;
 			}
-			// TODO: use O_EXCLOCK on windows too (getting EBUSY errors with it)
 		}
 		// tslint:enable:no-bitwise
 		return flags;

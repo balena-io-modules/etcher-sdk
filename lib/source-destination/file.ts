@@ -207,7 +207,7 @@ export class File extends SourceDestination {
 			async () => {
 				this.fileHandle = await fs.open(this.path, this.getOpenFlags());
 			},
-			5,
+			150,
 			RETRY_BASE_TIMEOUT,
 		);
 	}

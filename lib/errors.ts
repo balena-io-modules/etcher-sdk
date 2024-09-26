@@ -69,7 +69,11 @@ function isTransientError(error: NodeJS.ErrnoException): boolean {
 	} else if (platform === 'linux') {
 		return error.code === 'EIO' || error.code === 'EBUSY';
 	} else if (platform === 'win32') {
-		return error.code === 'ENOENT' || error.code === 'UNKNOWN';
+		return (
+			error.code === 'ENOENT' ||
+			error.code === 'UNKNOWN' ||
+			error.code === 'EBUSY'
+		);
 	}
 	return false;
 }
