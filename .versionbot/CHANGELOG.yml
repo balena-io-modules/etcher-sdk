@@ -1,4 +1,19 @@
 - commits:
+    - subject: "patch: add EXLOCK flag for windows"
+      hash: 915feeeceff83249f87a6a0a1656986791206136
+      body: |
+        Signed-off-by: Talha Can Havadar <havadartalha@gmail.com>
+
+        run prettier for changed files
+      footer:
+        Signed-off-by: Talha Can Havadar <havadartalha@gmail.com>
+        signed-off-by: Talha Can Havadar <havadartalha@gmail.com>
+      author: Talha Can Havadar
+      nested: []
+  version: 9.1.1
+  title: ""
+  date: 2024-10-09T08:24:06.706Z
+- commits:
     - subject: "patch: etcher-sdk is not yet compatible with node22"
       hash: 0bafb3e7ae9dcc5e035790143ed0c3655d6550c3
       body: ""
