@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency unzip-stream to v0.3.2 [SECURITY]
+      hash: c243e56e4189bee7391943a3325a3c1465c62fd1
+      body: |
+        Update unzip-stream from 0.3.1 to 0.3.2
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Self-hosted Renovate Bot
+      nested: []
+  version: 9.1.2
+  title: ""
+  date: 2024-10-09T08:52:13.524Z
+- commits:
     - subject: "patch: add EXLOCK flag for windows"
       hash: 915feeeceff83249f87a6a0a1656986791206136
       body: |
