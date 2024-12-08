@@ -106,7 +106,7 @@
     "yargs": "^17.7.2"
   },
   "engines": {
-    "node": ">=18 <22"
+    "node": "<23"
   },
   "versionist": {
     "publishedAt": "2024-10-09T08:52:13.783Z"
