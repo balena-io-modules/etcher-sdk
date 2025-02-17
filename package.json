@@ -78,7 +78,7 @@
     "winusb-driver-generator": "^2.0.0"
   },
   "devDependencies": {
-    "@balena/lint": "^7.2.1",
+    "@balena/lint": "^8.0.0",
     "@types/bluebird": "^3.5.23",
     "@types/chai": "^4.1.4",
     "@types/cli-spinner": "^0.2.0",
