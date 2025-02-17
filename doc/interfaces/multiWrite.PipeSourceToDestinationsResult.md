@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[lib/multi-write.ts:79](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/multi-write.ts#L79)
+[lib/multi-write.ts:79](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/multi-write.ts#L79)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[lib/multi-write.ts:78](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/multi-write.ts#L78)
+[lib/multi-write.ts:78](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/multi-write.ts#L78)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 #### Defined in
 
-[lib/multi-write.ts:80](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/multi-write.ts#L80)
+[lib/multi-write.ts:80](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/multi-write.ts#L80)

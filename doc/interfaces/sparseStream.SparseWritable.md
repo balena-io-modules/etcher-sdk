@@ -54,13 +54,13 @@ NodeJS.WritableStream.writable
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:244
+node_modules/@types/node/globals.d.ts:287
 
 ## Methods
 
 ### [captureRejectionSymbol]
 
-▸ `Optional` **[captureRejectionSymbol]**(`error`, `event`, `...args`): `void`
+▸ **[captureRejectionSymbol]**(`error`, `event`, `...args`): `void`
 
 #### Parameters
 
@@ -80,7 +80,7 @@ NodeJS.WritableStream.[captureRejectionSymbol]
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:470
+node_modules/@types/node/events.d.ts:540
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/shared.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/sparse-stream/shared.ts#L49)
+[lib/sparse-stream/shared.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/shared.ts#L49)
 
 ___
 
@@ -133,7 +133,7 @@ NodeJS.WritableStream.addListener
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:475
+node_modules/@types/node/events.d.ts:545
 
 ___
 
@@ -147,7 +147,7 @@ to each.
 Returns `true` if the event had listeners, `false` otherwise.
 
 ```js
-const EventEmitter = require('events');
+import { EventEmitter } from 'node:events';
 const myEmitter = new EventEmitter();
 
 // First listener
@@ -200,7 +200,7 @@ NodeJS.WritableStream.emit
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:731
+node_modules/@types/node/events.d.ts:807
 
 ___
 
@@ -224,7 +224,7 @@ NodeJS.WritableStream.end
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:247
+node_modules/@types/node/globals.d.ts:290
 
 ▸ **end**(`data`, `cb?`): [`SparseWritable`](sparseStream.SparseWritable.md)
 
@@ -245,7 +245,7 @@ NodeJS.WritableStream.end
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:248
+node_modules/@types/node/globals.d.ts:291
 
 ▸ **end**(`str`, `encoding?`, `cb?`): [`SparseWritable`](sparseStream.SparseWritable.md)
 
@@ -267,7 +267,7 @@ NodeJS.WritableStream.end
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:249
+node_modules/@types/node/globals.d.ts:292
 
 ___
 
@@ -279,7 +279,8 @@ Returns an array listing the events for which the emitter has registered
 listeners. The values in the array are strings or `Symbol`s.
 
 ```js
-const EventEmitter = require('events');
+import { EventEmitter } from 'node:events';
+
 const myEE = new EventEmitter();
 myEE.on('foo', () => {});
 myEE.on('bar', () => {});
@@ -305,7 +306,7 @@ NodeJS.WritableStream.eventNames
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:794
+node_modules/@types/node/events.d.ts:870
 
 ___
 
@@ -330,7 +331,7 @@ NodeJS.WritableStream.getMaxListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:647
+node_modules/@types/node/events.d.ts:722
 
 ___
 
@@ -338,10 +339,9 @@ ___
 
 ▸ **listenerCount**(`eventName`, `listener?`): `number`
 
-Returns the number of listeners listening to the event named `eventName`.
-
-If `listener` is provided, it will return how many times the listener
-is found in the list of the listeners of the event.
+Returns the number of listeners listening for the event named `eventName`.
+If `listener` is provided, it will return how many times the listener is found
+in the list of the listeners of the event.
 
 #### Parameters
 
@@ -364,7 +364,7 @@ NodeJS.WritableStream.listenerCount
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:741
+node_modules/@types/node/events.d.ts:816
 
 ___
 
@@ -402,7 +402,7 @@ NodeJS.WritableStream.listeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:660
+node_modules/@types/node/events.d.ts:735
 
 ___
 
@@ -433,7 +433,7 @@ NodeJS.WritableStream.off
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:620
+node_modules/@types/node/events.d.ts:695
 
 ___
 
@@ -458,6 +458,7 @@ By default, event listeners are invoked in the order they are added. The`emitter
 event listener to the beginning of the listeners array.
 
 ```js
+import { EventEmitter } from 'node:events';
 const myEE = new EventEmitter();
 myEE.on('foo', () => console.log('a'));
 myEE.prependListener('foo', () => console.log('b'));
@@ -488,7 +489,7 @@ NodeJS.WritableStream.on
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:506
+node_modules/@types/node/events.d.ts:577
 
 ___
 
@@ -511,6 +512,7 @@ By default, event listeners are invoked in the order they are added. The`emitter
 event listener to the beginning of the listeners array.
 
 ```js
+import { EventEmitter } from 'node:events';
 const myEE = new EventEmitter();
 myEE.once('foo', () => console.log('a'));
 myEE.prependOnceListener('foo', () => console.log('b'));
@@ -541,7 +543,7 @@ NodeJS.WritableStream.once
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:535
+node_modules/@types/node/events.d.ts:607
 
 ___
 
@@ -583,7 +585,7 @@ NodeJS.WritableStream.prependListener
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:759
+node_modules/@types/node/events.d.ts:834
 
 ___
 
@@ -623,7 +625,7 @@ NodeJS.WritableStream.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:775
+node_modules/@types/node/events.d.ts:850
 
 ___
 
@@ -635,6 +637,7 @@ Returns a copy of the array of listeners for the event named `eventName`,
 including any wrappers (such as those created by `.once()`).
 
 ```js
+import { EventEmitter } from 'node:events';
 const emitter = new EventEmitter();
 emitter.once('log', () => console.log('log once'));
 
@@ -678,7 +681,7 @@ NodeJS.WritableStream.rawListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:690
+node_modules/@types/node/events.d.ts:766
 
 ___
 
@@ -714,7 +717,7 @@ NodeJS.WritableStream.removeAllListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:631
+node_modules/@types/node/events.d.ts:706
 
 ___
 
@@ -743,6 +746,8 @@ time of emitting are called in order. This implies that any`removeListener()` or
 will not remove them from`emit()` in progress. Subsequent events behave as expected.
 
 ```js
+import { EventEmitter } from 'node:events';
+class MyEmitter extends EventEmitter {}
 const myEmitter = new MyEmitter();
 
 const callbackA = () => {
@@ -783,6 +788,7 @@ event (as in the example below), `removeListener()` will remove the most
 recently added instance. In the example the `once('ping')`listener is removed:
 
 ```js
+import { EventEmitter } from 'node:events';
 const ee = new EventEmitter();
 
 function pong() {
@@ -820,7 +826,7 @@ NodeJS.WritableStream.removeListener
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:615
+node_modules/@types/node/events.d.ts:690
 
 ___
 
@@ -855,7 +861,7 @@ NodeJS.WritableStream.setMaxListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:641
+node_modules/@types/node/events.d.ts:716
 
 ___
 
@@ -880,7 +886,7 @@ NodeJS.WritableStream.write
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:245
+node_modules/@types/node/globals.d.ts:288
 
 ▸ **write**(`str`, `encoding?`, `cb?`): `boolean`
 
@@ -902,4 +908,4 @@ NodeJS.WritableStream.write
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:246
+node_modules/@types/node/globals.d.ts:289

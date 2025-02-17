@@ -9,9 +9,8 @@
   "scripts": {
     "flowzone-preinstall": "sudo apt-get update && sudo apt-get install -y libudev-dev",
     "test": "npm run lint && mocha -r ts-node/register tests/**/*.spec.ts",
-    "prettier": "balena-lint --fix lib typings examples tests",
     "lint": "balena-lint lib typings examples",
-    "lint:fix": "balena-lint --fix lib typings examples",
+    "lint-fix": "balena-lint --fix lib typings examples tests",
     "build": "tsc",
     "doc": "typedoc --readme none --plugin typedoc-plugin-markdown --out doc lib && npm run sed",
     "sed": "sed -i'.bak' 's|'$(pwd)'||g' $(find doc -type f) && rimraf doc/*.bak doc/**/*.bak",
@@ -85,7 +84,6 @@
     "@types/cli-spinner": "^0.2.0",
     "@types/crc": "^3.4.0",
     "@types/debug": "4.1.12",
-    "@types/file-type": "^10.9.1",
     "@types/lodash": "^4.14.108",
     "@types/mocha": "^10.0.3",
     "@types/node": "^20.0.0",

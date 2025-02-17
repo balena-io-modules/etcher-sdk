@@ -81,7 +81,7 @@
 
 ### constructor
 
-• **new CountingWritable**(`opts?`)
+• **new CountingWritable**(`opts?`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
 #### Parameters
 
@@ -89,13 +89,17 @@
 | :------ | :------ |
 | `opts?` | `WritableOptions` |
 
+#### Returns
+
+[`CountingWritable`](sourceDestination.CountingWritable.md)
+
 #### Inherited from
 
 Writable.constructor
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:782
+node_modules/@types/node/stream.d.ts:715
 
 ## Properties
 
@@ -105,7 +109,7 @@ node_modules/@types/node/stream.d.ts:782
 
 #### Defined in
 
-[lib/source-destination/progress.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/progress.ts#L95)
+[lib/source-destination/progress.ts:101](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/progress.ts#L101)
 
 ___
 
@@ -113,7 +117,7 @@ ___
 
 • `Readonly` **closed**: `boolean`
 
-Is true after 'close' has been emitted.
+Is `true` after `'close'` has been emitted.
 
 **`Since`**
 
@@ -125,7 +129,7 @@ Writable.closed
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:771
+node_modules/@types/node/stream.d.ts:704
 
 ___
 
@@ -145,7 +149,7 @@ Writable.destroyed
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:766
+node_modules/@types/node/stream.d.ts:699
 
 ___
 
@@ -165,7 +169,7 @@ Writable.errored
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:776
+node_modules/@types/node/stream.d.ts:709
 
 ___
 
@@ -175,7 +179,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/progress.ts:96](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/progress.ts#L96)
+[lib/source-destination/progress.ts:102](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/progress.ts#L102)
 
 ___
 
@@ -184,7 +188,7 @@ ___
 • `Readonly` **writable**: `boolean`
 
 Is `true` if it is safe to call `writable.write()`, which means
-the stream has not been destroyed, errored or ended.
+the stream has not been destroyed, errored, or ended.
 
 **`Since`**
 
@@ -196,7 +200,7 @@ Writable.writable
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:727
+node_modules/@types/node/stream.d.ts:660
 
 ___
 
@@ -217,7 +221,7 @@ Writable.writableCorked
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:761
+node_modules/@types/node/stream.d.ts:694
 
 ___
 
@@ -238,7 +242,7 @@ Writable.writableEnded
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:733
+node_modules/@types/node/stream.d.ts:666
 
 ___
 
@@ -258,7 +262,7 @@ Writable.writableFinished
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:738
+node_modules/@types/node/stream.d.ts:671
 
 ___
 
@@ -278,7 +282,7 @@ Writable.writableHighWaterMark
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:743
+node_modules/@types/node/stream.d.ts:676
 
 ___
 
@@ -300,7 +304,7 @@ Writable.writableLength
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:750
+node_modules/@types/node/stream.d.ts:683
 
 ___
 
@@ -308,7 +312,7 @@ ___
 
 • `Readonly` **writableNeedDrain**: `boolean`
 
-Is `true` if the stream's buffer has been full and stream will emit 'drain'.
+Is `true` if the stream's buffer has been full and stream will emit `'drain'`.
 
 **`Since`**
 
@@ -320,7 +324,7 @@ Writable.writableNeedDrain
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:781
+node_modules/@types/node/stream.d.ts:714
 
 ___
 
@@ -340,7 +344,7 @@ Writable.writableObjectMode
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:755
+node_modules/@types/node/stream.d.ts:688
 
 ___
 
@@ -348,13 +352,21 @@ ___
 
 ▪ `Static` `Readonly` **captureRejectionSymbol**: typeof [`captureRejectionSymbol`](scanner.adapters.Adapter.md#capturerejectionsymbol)
 
+Value: `Symbol.for('nodejs.rejection')`
+
+See how to write a custom `rejection handler`.
+
+**`Since`**
+
+v13.4.0, v12.16.0
+
 #### Inherited from
 
 Writable.captureRejectionSymbol
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:405
+node_modules/@types/node/events.d.ts:402
 
 ___
 
@@ -362,7 +374,13 @@ ___
 
 ▪ `Static` **captureRejections**: `boolean`
 
-Sets or gets the default captureRejection value for all emitters.
+Value: [boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type)
+
+Change the default `captureRejections` option on all new `EventEmitter` objects.
+
+**`Since`**
+
+v13.4.0, v12.16.0
 
 #### Inherited from
 
@@ -370,7 +388,7 @@ Writable.captureRejections
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:410
+node_modules/@types/node/events.d.ts:409
 
 ___
 
@@ -378,13 +396,51 @@ ___
 
 ▪ `Static` **defaultMaxListeners**: `number`
 
+By default, a maximum of `10` listeners can be registered for any single
+event. This limit can be changed for individual `EventEmitter` instances
+using the `emitter.setMaxListeners(n)` method. To change the default
+for _all_`EventEmitter` instances, the `events.defaultMaxListeners`property can be used. If this value is not a positive number, a `RangeError`is thrown.
+
+Take caution when setting the `events.defaultMaxListeners` because the
+change affects _all_`EventEmitter` instances, including those created before
+the change is made. However, calling `emitter.setMaxListeners(n)` still has
+precedence over `events.defaultMaxListeners`.
+
+This is not a hard limit. The `EventEmitter` instance will allow
+more listeners to be added but will output a trace warning to stderr indicating
+that a "possible EventEmitter memory leak" has been detected. For any single`EventEmitter`, the `emitter.getMaxListeners()` and `emitter.setMaxListeners()`methods can be used to
+temporarily avoid this warning:
+
+```js
+import { EventEmitter } from 'node:events';
+const emitter = new EventEmitter();
+emitter.setMaxListeners(emitter.getMaxListeners() + 1);
+emitter.once('event', () => {
+  // do stuff
+  emitter.setMaxListeners(Math.max(emitter.getMaxListeners() - 1, 0));
+});
+```
+
+The `--trace-warnings` command-line flag can be used to display the
+stack trace for such warnings.
+
+The emitted warning can be inspected with `process.on('warning')` and will
+have the additional `emitter`, `type`, and `count` properties, referring to
+the event emitter instance, the event's name and the number of attached
+listeners, respectively.
+Its `name` property is set to `'MaxListenersExceededWarning'`.
+
+**`Since`**
+
+v0.11.2
+
 #### Inherited from
 
 Writable.defaultMaxListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:411
+node_modules/@types/node/events.d.ts:446
 
 ___
 
@@ -392,13 +448,14 @@ ___
 
 ▪ `Static` `Readonly` **errorMonitor**: typeof [`errorMonitor`](scanner.adapters.Adapter.md#errormonitor)
 
-This symbol shall be used to install a listener for only monitoring `'error'`
-events. Listeners installed using this symbol are called before the regular
-`'error'` listeners are called.
+This symbol shall be used to install a listener for only monitoring `'error'`events. Listeners installed using this symbol are called before the regular`'error'` listeners are called.
 
-Installing a listener using this symbol does not change the behavior once an
-`'error'` event is emitted, therefore the process will still crash if no
+Installing a listener using this symbol does not change the behavior once an`'error'` event is emitted. Therefore, the process will still crash if no
 regular `'error'` listener is installed.
+
+**`Since`**
+
+v13.6.0, v12.17.0
 
 #### Inherited from
 
@@ -406,13 +463,13 @@ Writable.errorMonitor
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:404
+node_modules/@types/node/events.d.ts:395
 
 ## Methods
 
 ### [captureRejectionSymbol]
 
-▸ `Optional` **[captureRejectionSymbol]**(`error`, `event`, `...args`): `void`
+▸ **[captureRejectionSymbol]**(`error`, `event`, `...args`): `void`
 
 #### Parameters
 
@@ -432,13 +489,13 @@ Writable.[captureRejectionSymbol]
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:115
+node_modules/@types/node/events.d.ts:112
 
 ___
 
 ### \_construct
 
-▸ `Optional` **_construct**(`callback`): `void`
+▸ **_construct**(`callback`): `void`
 
 #### Parameters
 
@@ -456,7 +513,7 @@ Writable.\_construct
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:791
+node_modules/@types/node/stream.d.ts:724
 
 ___
 
@@ -481,7 +538,7 @@ Writable.\_destroy
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:792
+node_modules/@types/node/stream.d.ts:725
 
 ___
 
@@ -505,7 +562,7 @@ Writable.\_final
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:793
+node_modules/@types/node/stream.d.ts:726
 
 ___
 
@@ -531,13 +588,13 @@ Writable.\_write
 
 #### Defined in
 
-[lib/source-destination/progress.ts:98](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/progress.ts#L98)
+[lib/source-destination/progress.ts:104](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/progress.ts#L104)
 
 ___
 
 ### \_writev
 
-▸ `Optional` **_writev**(`chunks`, `callback`): `void`
+▸ **_writev**(`chunks`, `callback`): `void`
 
 #### Parameters
 
@@ -556,7 +613,7 @@ Writable.\_writev
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:784
+node_modules/@types/node/stream.d.ts:717
 
 ___
 
@@ -590,7 +647,7 @@ Writable.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:959
+node_modules/@types/node/stream.d.ts:892
 
 ▸ **addListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -611,7 +668,7 @@ Writable.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:960
+node_modules/@types/node/stream.d.ts:893
 
 ▸ **addListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -632,7 +689,7 @@ Writable.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:961
+node_modules/@types/node/stream.d.ts:894
 
 ▸ **addListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -653,7 +710,7 @@ Writable.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:962
+node_modules/@types/node/stream.d.ts:895
 
 ▸ **addListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -674,7 +731,7 @@ Writable.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:963
+node_modules/@types/node/stream.d.ts:896
 
 ▸ **addListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -695,7 +752,7 @@ Writable.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:964
+node_modules/@types/node/stream.d.ts:897
 
 ▸ **addListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -716,7 +773,7 @@ Writable.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:965
+node_modules/@types/node/stream.d.ts:898
 
 ___
 
@@ -782,7 +839,7 @@ Writable.cork
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:897
+node_modules/@types/node/stream.d.ts:830
 
 ___
 
@@ -823,7 +880,7 @@ Writable.destroy
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:948
+node_modules/@types/node/stream.d.ts:881
 
 ___
 
@@ -847,7 +904,7 @@ Writable.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:966
+node_modules/@types/node/stream.d.ts:899
 
 ▸ **emit**(`event`): `boolean`
 
@@ -867,7 +924,7 @@ Writable.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:967
+node_modules/@types/node/stream.d.ts:900
 
 ▸ **emit**(`event`, `err`): `boolean`
 
@@ -888,7 +945,7 @@ Writable.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:968
+node_modules/@types/node/stream.d.ts:901
 
 ▸ **emit**(`event`): `boolean`
 
@@ -908,7 +965,7 @@ Writable.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:969
+node_modules/@types/node/stream.d.ts:902
 
 ▸ **emit**(`event`, `src`): `boolean`
 
@@ -929,7 +986,7 @@ Writable.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:970
+node_modules/@types/node/stream.d.ts:903
 
 ▸ **emit**(`event`, `src`): `boolean`
 
@@ -950,7 +1007,7 @@ Writable.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:971
+node_modules/@types/node/stream.d.ts:904
 
 ▸ **emit**(`event`, `...args`): `boolean`
 
@@ -971,7 +1028,7 @@ Writable.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:972
+node_modules/@types/node/stream.d.ts:905
 
 ___
 
@@ -988,7 +1045,7 @@ Calling the [write](sourceDestination.CountingWritable.md#write) method after ca
 
 ```js
 // Write 'hello, ' and then end with 'world!'.
-const fs = require('fs');
+const fs = require('node:fs');
 const file = fs.createWriteStream('example.txt');
 file.write('hello, ');
 file.end('world!');
@@ -1015,7 +1072,7 @@ Writable.end
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:880
+node_modules/@types/node/stream.d.ts:813
 
 ▸ **end**(`chunk`, `cb?`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1036,7 +1093,7 @@ Writable.end
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:881
+node_modules/@types/node/stream.d.ts:814
 
 ▸ **end**(`chunk`, `encoding`, `cb?`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1058,7 +1115,7 @@ Writable.end
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:882
+node_modules/@types/node/stream.d.ts:815
 
 ___
 
@@ -1070,7 +1127,8 @@ Returns an array listing the events for which the emitter has registered
 listeners. The values in the array are strings or `Symbol`s.
 
 ```js
-const EventEmitter = require('events');
+import { EventEmitter } from 'node:events';
+
 const myEE = new EventEmitter();
 myEE.on('foo', () => {});
 myEE.on('bar', () => {});
@@ -1096,7 +1154,7 @@ Writable.eventNames
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:794
+node_modules/@types/node/events.d.ts:870
 
 ___
 
@@ -1121,7 +1179,7 @@ Writable.getMaxListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:647
+node_modules/@types/node/events.d.ts:722
 
 ___
 
@@ -1129,10 +1187,9 @@ ___
 
 ▸ **listenerCount**(`eventName`, `listener?`): `number`
 
-Returns the number of listeners listening to the event named `eventName`.
-
-If `listener` is provided, it will return how many times the listener
-is found in the list of the listeners of the event.
+Returns the number of listeners listening for the event named `eventName`.
+If `listener` is provided, it will return how many times the listener is found
+in the list of the listeners of the event.
 
 #### Parameters
 
@@ -1155,7 +1212,7 @@ Writable.listenerCount
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:741
+node_modules/@types/node/events.d.ts:816
 
 ___
 
@@ -1193,7 +1250,7 @@ Writable.listeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:660
+node_modules/@types/node/events.d.ts:735
 
 ___
 
@@ -1224,7 +1281,7 @@ Writable.off
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:620
+node_modules/@types/node/events.d.ts:695
 
 ___
 
@@ -1249,7 +1306,7 @@ Writable.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:973
+node_modules/@types/node/stream.d.ts:906
 
 ▸ **on**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1270,7 +1327,7 @@ Writable.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:974
+node_modules/@types/node/stream.d.ts:907
 
 ▸ **on**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1291,7 +1348,7 @@ Writable.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:975
+node_modules/@types/node/stream.d.ts:908
 
 ▸ **on**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1312,7 +1369,7 @@ Writable.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:976
+node_modules/@types/node/stream.d.ts:909
 
 ▸ **on**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1333,7 +1390,7 @@ Writable.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:977
+node_modules/@types/node/stream.d.ts:910
 
 ▸ **on**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1354,7 +1411,7 @@ Writable.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:978
+node_modules/@types/node/stream.d.ts:911
 
 ▸ **on**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1375,7 +1432,7 @@ Writable.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:979
+node_modules/@types/node/stream.d.ts:912
 
 ___
 
@@ -1400,7 +1457,7 @@ Writable.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:980
+node_modules/@types/node/stream.d.ts:913
 
 ▸ **once**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1421,7 +1478,7 @@ Writable.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:981
+node_modules/@types/node/stream.d.ts:914
 
 ▸ **once**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1442,7 +1499,7 @@ Writable.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:982
+node_modules/@types/node/stream.d.ts:915
 
 ▸ **once**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1463,7 +1520,7 @@ Writable.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:983
+node_modules/@types/node/stream.d.ts:916
 
 ▸ **once**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1484,7 +1541,7 @@ Writable.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:984
+node_modules/@types/node/stream.d.ts:917
 
 ▸ **once**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1505,7 +1562,7 @@ Writable.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:985
+node_modules/@types/node/stream.d.ts:918
 
 ▸ **once**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1526,7 +1583,7 @@ Writable.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:986
+node_modules/@types/node/stream.d.ts:919
 
 ___
 
@@ -1583,7 +1640,7 @@ Writable.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:987
+node_modules/@types/node/stream.d.ts:920
 
 ▸ **prependListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1604,7 +1661,7 @@ Writable.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:988
+node_modules/@types/node/stream.d.ts:921
 
 ▸ **prependListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1625,7 +1682,7 @@ Writable.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:989
+node_modules/@types/node/stream.d.ts:922
 
 ▸ **prependListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1646,7 +1703,7 @@ Writable.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:990
+node_modules/@types/node/stream.d.ts:923
 
 ▸ **prependListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1667,7 +1724,7 @@ Writable.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:991
+node_modules/@types/node/stream.d.ts:924
 
 ▸ **prependListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1688,7 +1745,7 @@ Writable.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:992
+node_modules/@types/node/stream.d.ts:925
 
 ▸ **prependListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1709,7 +1766,7 @@ Writable.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:993
+node_modules/@types/node/stream.d.ts:926
 
 ___
 
@@ -1734,7 +1791,7 @@ Writable.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:994
+node_modules/@types/node/stream.d.ts:927
 
 ▸ **prependOnceListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1755,7 +1812,7 @@ Writable.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:995
+node_modules/@types/node/stream.d.ts:928
 
 ▸ **prependOnceListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1776,7 +1833,7 @@ Writable.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:996
+node_modules/@types/node/stream.d.ts:929
 
 ▸ **prependOnceListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1797,7 +1854,7 @@ Writable.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:997
+node_modules/@types/node/stream.d.ts:930
 
 ▸ **prependOnceListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1818,7 +1875,7 @@ Writable.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:998
+node_modules/@types/node/stream.d.ts:931
 
 ▸ **prependOnceListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1839,7 +1896,7 @@ Writable.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:999
+node_modules/@types/node/stream.d.ts:932
 
 ▸ **prependOnceListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1860,7 +1917,7 @@ Writable.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1000
+node_modules/@types/node/stream.d.ts:933
 
 ___
 
@@ -1872,6 +1929,7 @@ Returns a copy of the array of listeners for the event named `eventName`,
 including any wrappers (such as those created by `.once()`).
 
 ```js
+import { EventEmitter } from 'node:events';
 const emitter = new EventEmitter();
 emitter.once('log', () => console.log('log once'));
 
@@ -1915,7 +1973,7 @@ Writable.rawListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:690
+node_modules/@types/node/events.d.ts:766
 
 ___
 
@@ -1951,7 +2009,7 @@ Writable.removeAllListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:631
+node_modules/@types/node/events.d.ts:706
 
 ___
 
@@ -1976,7 +2034,7 @@ Writable.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1001
+node_modules/@types/node/stream.d.ts:934
 
 ▸ **removeListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -1997,7 +2055,7 @@ Writable.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1002
+node_modules/@types/node/stream.d.ts:935
 
 ▸ **removeListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -2018,7 +2076,7 @@ Writable.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1003
+node_modules/@types/node/stream.d.ts:936
 
 ▸ **removeListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -2039,7 +2097,7 @@ Writable.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1004
+node_modules/@types/node/stream.d.ts:937
 
 ▸ **removeListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -2060,7 +2118,7 @@ Writable.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1005
+node_modules/@types/node/stream.d.ts:938
 
 ▸ **removeListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -2081,7 +2139,7 @@ Writable.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1006
+node_modules/@types/node/stream.d.ts:939
 
 ▸ **removeListener**(`event`, `listener`): [`CountingWritable`](sourceDestination.CountingWritable.md)
 
@@ -2102,7 +2160,7 @@ Writable.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1007
+node_modules/@types/node/stream.d.ts:940
 
 ___
 
@@ -2132,7 +2190,7 @@ Writable.setDefaultEncoding
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:857
+node_modules/@types/node/stream.d.ts:790
 
 ___
 
@@ -2167,7 +2225,7 @@ Writable.setMaxListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:641
+node_modules/@types/node/events.d.ts:716
 
 ___
 
@@ -2220,7 +2278,7 @@ Writable.uncork
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:931
+node_modules/@types/node/stream.d.ts:864
 
 ___
 
@@ -2300,7 +2358,7 @@ Writable.write
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:850
+node_modules/@types/node/stream.d.ts:783
 
 ▸ **write**(`chunk`, `encoding`, `callback?`): `boolean`
 
@@ -2322,13 +2380,13 @@ Writable.write
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:851
+node_modules/@types/node/stream.d.ts:784
 
 ___
 
 ### addAbortListener
 
-▸ `Static` **addAbortListener**(`signal`, `resource`): `Disposable`
+▸ **addAbortListener**(`signal`, `resource`): `Disposable`
 
 Listens once to the `abort` event on the provided `signal`.
 
@@ -2375,7 +2433,7 @@ Disposable that removes the `abort` listener.
 
 **`Since`**
 
-v18.18.0
+v20.5.0
 
 #### Inherited from
 
@@ -2383,13 +2441,13 @@ Writable.addAbortListener
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:394
+node_modules/@types/node/events.d.ts:387
 
 ___
 
 ### fromWeb
 
-▸ `Static` **fromWeb**(`writableStream`, `options?`): `Writable`
+▸ **fromWeb**(`writableStream`, `options?`): `Writable`
 
 A utility method for creating a `Writable` from a web `WritableStream`.
 
@@ -2414,13 +2472,13 @@ Writable.fromWeb
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:712
+node_modules/@types/node/stream.d.ts:1006
 
 ___
 
 ### getEventListeners
 
-▸ `Static` **getEventListeners**(`emitter`, `name`): `Function`[]
+▸ **getEventListeners**(`emitter`, `name`): `Function`[]
 
 Returns a copy of the array of listeners for the event named `eventName`.
 
@@ -2431,19 +2489,19 @@ For `EventTarget`s this is the only way to get the event listeners for the
 event target. This is useful for debugging and diagnostic purposes.
 
 ```js
-const { getEventListeners, EventEmitter } = require('events');
+import { getEventListeners, EventEmitter } from 'node:events';
 
 {
   const ee = new EventEmitter();
   const listener = () => console.log('Events are fun');
   ee.on('foo', listener);
-  getEventListeners(ee, 'foo'); // [listener]
+  console.log(getEventListeners(ee, 'foo')); // [ [Function: listener] ]
 }
 {
   const et = new EventTarget();
   const listener = () => console.log('Events are fun');
   et.addEventListener('foo', listener);
-  getEventListeners(et, 'foo'); // [listener]
+  console.log(getEventListeners(et, 'foo')); // [ [Function: listener] ]
 }
 ```
 
@@ -2468,13 +2526,13 @@ Writable.getEventListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:312
+node_modules/@types/node/events.d.ts:308
 
 ___
 
 ### getMaxListeners
 
-▸ `Static` **getMaxListeners**(`emitter`): `number`
+▸ **getMaxListeners**(`emitter`): `number`
 
 Returns the currently set max amount of listeners.
 
@@ -2514,7 +2572,7 @@ import { getMaxListeners, setMaxListeners, EventEmitter } from 'node:events';
 
 **`Since`**
 
-v18.17.0
+v19.9.0
 
 #### Inherited from
 
@@ -2522,18 +2580,19 @@ Writable.getMaxListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:341
+node_modules/@types/node/events.d.ts:337
 
 ___
 
 ### listenerCount
 
-▸ `Static` **listenerCount**(`emitter`, `eventName`): `number`
+▸ **listenerCount**(`emitter`, `eventName`): `number`
 
 A class method that returns the number of listeners for the given `eventName`registered on the given `emitter`.
 
 ```js
-const { EventEmitter, listenerCount } = require('events');
+import { EventEmitter, listenerCount } from 'node:events';
+
 const myEmitter = new EventEmitter();
 myEmitter.on('event', () => {});
 myEmitter.on('event', () => {});
@@ -2566,34 +2625,33 @@ Writable.listenerCount
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:284
+node_modules/@types/node/events.d.ts:280
 
 ___
 
 ### on
 
-▸ `Static` **on**(`emitter`, `eventName`, `options?`): `AsyncIterableIterator`<`any`\>
+▸ **on**(`emitter`, `eventName`, `options?`): `AsyncIterableIterator`<`any`\>
 
 ```js
-const { on, EventEmitter } = require('events');
+import { on, EventEmitter } from 'node:events';
+import process from 'node:process';
 
-(async () => {
-  const ee = new EventEmitter();
+const ee = new EventEmitter();
 
-  // Emit later on
-  process.nextTick(() => {
-    ee.emit('foo', 'bar');
-    ee.emit('foo', 42);
-  });
+// Emit later on
+process.nextTick(() => {
+  ee.emit('foo', 'bar');
+  ee.emit('foo', 42);
+});
 
-  for await (const event of on(ee, 'foo')) {
-    // The execution of this inner block is synchronous and it
-    // processes one event at a time (even with await). Do not use
-    // if concurrent execution is required.
-    console.log(event); // prints ['bar'] [42]
-  }
-  // Unreachable here
-})();
+for await (const event of on(ee, 'foo')) {
+  // The execution of this inner block is synchronous and it
+  // processes one event at a time (even with await). Do not use
+  // if concurrent execution is required.
+  console.log(event); // prints ['bar'] [42]
+}
+// Unreachable here
 ```
 
 Returns an `AsyncIterator` that iterates `eventName` events. It will throw
@@ -2604,7 +2662,9 @@ composed of the emitted event arguments.
 An `AbortSignal` can be used to cancel waiting on events:
 
 ```js
-const { on, EventEmitter } = require('events');
+import { on, EventEmitter } from 'node:events';
+import process from 'node:process';
+
 const ac = new AbortController();
 
 (async () => {
@@ -2652,13 +2712,13 @@ Writable.on
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:263
+node_modules/@types/node/events.d.ts:258
 
 ___
 
 ### once
 
-▸ `Static` **once**(`emitter`, `eventName`, `options?`): `Promise`<`any`[]\>
+▸ **once**(`emitter`, `eventName`, `options?`): `Promise`<`any`[]\>
 
 Creates a `Promise` that is fulfilled when the `EventEmitter` emits the given
 event or that is rejected if the `EventEmitter` emits `'error'` while waiting.
@@ -2669,31 +2729,28 @@ This method is intentionally generic and works with the web platform [EventTarge
 semantics and does not listen to the `'error'` event.
 
 ```js
-const { once, EventEmitter } = require('events');
+import { once, EventEmitter } from 'node:events';
+import process from 'node:process';
 
-async function run() {
-  const ee = new EventEmitter();
+const ee = new EventEmitter();
 
-  process.nextTick(() => {
-    ee.emit('myevent', 42);
-  });
+process.nextTick(() => {
+  ee.emit('myevent', 42);
+});
 
-  const [value] = await once(ee, 'myevent');
-  console.log(value);
+const [value] = await once(ee, 'myevent');
+console.log(value);
 
-  const err = new Error('kaboom');
-  process.nextTick(() => {
-    ee.emit('error', err);
-  });
+const err = new Error('kaboom');
+process.nextTick(() => {
+  ee.emit('error', err);
+});
 
-  try {
-    await once(ee, 'myevent');
-  } catch (err) {
-    console.log('error happened', err);
-  }
+try {
+  await once(ee, 'myevent');
+} catch (err) {
+  console.error('error happened', err);
 }
-
-run();
 ```
 
 The special handling of the `'error'` event is only used when `events.once()`is used to wait for another event. If `events.once()` is used to wait for the
@@ -2701,13 +2758,13 @@ The special handling of the `'error'` event is only used when `events.once()`is 
 special handling:
 
 ```js
-const { EventEmitter, once } = require('events');
+import { EventEmitter, once } from 'node:events';
 
 const ee = new EventEmitter();
 
 once(ee, 'error')
   .then(([err]) => console.log('ok', err.message))
-  .catch((err) => console.log('error', err.message));
+  .catch((err) => console.error('error', err.message));
 
 ee.emit('error', new Error('boom'));
 
@@ -2717,7 +2774,7 @@ ee.emit('error', new Error('boom'));
 An `AbortSignal` can be used to cancel waiting for the event:
 
 ```js
-const { EventEmitter, once } = require('events');
+import { EventEmitter, once } from 'node:events';
 
 const ee = new EventEmitter();
 const ac = new AbortController();
@@ -2762,9 +2819,9 @@ Writable.once
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:199
+node_modules/@types/node/events.d.ts:193
 
-▸ `Static` **once**(`emitter`, `eventName`, `options?`): `Promise`<`any`[]\>
+▸ **once**(`emitter`, `eventName`, `options?`): `Promise`<`any`[]\>
 
 #### Parameters
 
@@ -2784,19 +2841,16 @@ Writable.once
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:204
+node_modules/@types/node/events.d.ts:198
 
 ___
 
 ### setMaxListeners
 
-▸ `Static` **setMaxListeners**(`n?`, `...eventTargets`): `void`
+▸ **setMaxListeners**(`n?`, `...eventTargets`): `void`
 
 ```js
-const {
-  setMaxListeners,
-  EventEmitter
-} = require('events');
+import { setMaxListeners, EventEmitter } from 'node:events';
 
 const target = new EventTarget();
 const emitter = new EventEmitter();
@@ -2825,13 +2879,13 @@ Writable.setMaxListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:359
+node_modules/@types/node/events.d.ts:352
 
 ___
 
 ### toWeb
 
-▸ `Static` **toWeb**(`streamWritable`): `WritableStream`<`any`\>
+▸ **toWeb**(`streamWritable`): `WritableStream`<`any`\>
 
 A utility method for creating a web `WritableStream` from a `Writable`.
 
@@ -2855,4 +2909,4 @@ Writable.toWeb
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:721
+node_modules/@types/node/stream.d.ts:1015

@@ -37,13 +37,17 @@
 
 ### constructor
 
-• **new VerificationError**(`message?`)
+• **new VerificationError**(`message?`): [`VerificationError`](errors.VerificationError.md)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `message?` | `string` |
+
+#### Returns
+
+[`VerificationError`](errors.VerificationError.md)
 
 #### Inherited from
 
@@ -61,7 +65,7 @@ node_modules/typescript/lib/lib.es5.d.ts:1073
 
 #### Defined in
 
-[lib/errors.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/errors.ts#L25)
+[lib/errors.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/errors.ts#L25)
 
 ___
 
@@ -138,7 +142,7 @@ Error.prepareStackTrace
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:11
+node_modules/@types/node/globals.d.ts:28
 
 ___
 
@@ -152,13 +156,13 @@ Error.stackTraceLimit
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:13
+node_modules/@types/node/globals.d.ts:30
 
 ## Methods
 
 ### captureStackTrace
 
-▸ `Static` **captureStackTrace**(`targetObject`, `constructorOpt?`): `void`
+▸ **captureStackTrace**(`targetObject`, `constructorOpt?`): `void`
 
 Create .stack property on a target object
 
@@ -179,4 +183,4 @@ Error.captureStackTrace
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:4
+node_modules/@types/node/globals.d.ts:21

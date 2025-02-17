@@ -47,7 +47,7 @@
 
 #### Defined in
 
-[lib/utils.ts:102](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/utils.ts#L102)
+[lib/utils.ts:102](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/utils.ts#L102)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[lib/utils.ts:128](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/utils.ts#L128)
+[lib/utils.ts:128](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/utils.ts#L128)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[lib/utils.ts:94](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/utils.ts#L94)
+[lib/utils.ts:94](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/utils.ts#L94)
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 #### Defined in
 
-[lib/utils.ts:168](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/utils.ts#L168)
+[lib/utils.ts:168](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/utils.ts#L168)
 
 ___
 
@@ -146,7 +146,7 @@ ___
 
 #### Defined in
 
-[lib/utils.ts:114](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/utils.ts#L114)
+[lib/utils.ts:114](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/utils.ts#L114)
 
 ___
 
@@ -173,7 +173,7 @@ ___
 
 #### Defined in
 
-[lib/utils.ts:150](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/utils.ts#L150)
+[lib/utils.ts:150](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/utils.ts#L150)
 
 ___
 
@@ -200,7 +200,7 @@ ___
 
 #### Defined in
 
-[lib/utils.ts:134](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/utils.ts#L134)
+[lib/utils.ts:134](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/utils.ts#L134)
 
 ___
 
@@ -232,7 +232,7 @@ ___
 
 #### Defined in
 
-[lib/utils.ts:177](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/utils.ts#L177)
+[lib/utils.ts:177](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/utils.ts#L177)
 
 ___
 
@@ -252,7 +252,7 @@ ___
 
 #### Defined in
 
-[lib/utils.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/utils.ts#L53)
+[lib/utils.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/utils.ts#L53)
 
 ___
 
@@ -272,7 +272,7 @@ ___
 
 #### Defined in
 
-[lib/utils.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/utils.ts#L24)
+[lib/utils.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/utils.ts#L24)
 
 ___
 
@@ -299,4 +299,4 @@ ___
 
 #### Defined in
 
-[lib/utils.ts:157](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/utils.ts#L157)
+[lib/utils.ts:157](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/utils.ts#L157)

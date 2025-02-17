@@ -60,7 +60,7 @@
 
 #### Defined in
 
-[lib/sparse-stream/shared.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/sparse-stream/shared.ts#L44)
+[lib/sparse-stream/shared.ts:44](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/shared.ts#L44)
 
 ___
 
@@ -74,7 +74,7 @@ NodeJS.ReadableStream.readable
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:230
+node_modules/@types/node/globals.d.ts:273
 
 ## Methods
 
@@ -92,13 +92,13 @@ NodeJS.ReadableStream.[asyncIterator]
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:240
+node_modules/@types/node/globals.d.ts:283
 
 ___
 
 ### [captureRejectionSymbol]
 
-▸ `Optional` **[captureRejectionSymbol]**(`error`, `event`, `...args`): `void`
+▸ **[captureRejectionSymbol]**(`error`, `event`, `...args`): `void`
 
 #### Parameters
 
@@ -118,7 +118,7 @@ NodeJS.ReadableStream.[captureRejectionSymbol]
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:470
+node_modules/@types/node/events.d.ts:540
 
 ___
 
@@ -149,7 +149,7 @@ NodeJS.ReadableStream.addListener
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:475
+node_modules/@types/node/events.d.ts:545
 
 ___
 
@@ -163,7 +163,7 @@ to each.
 Returns `true` if the event had listeners, `false` otherwise.
 
 ```js
-const EventEmitter = require('events');
+import { EventEmitter } from 'node:events';
 const myEmitter = new EventEmitter();
 
 // First listener
@@ -216,7 +216,7 @@ NodeJS.ReadableStream.emit
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:731
+node_modules/@types/node/events.d.ts:807
 
 ___
 
@@ -228,7 +228,8 @@ Returns an array listing the events for which the emitter has registered
 listeners. The values in the array are strings or `Symbol`s.
 
 ```js
-const EventEmitter = require('events');
+import { EventEmitter } from 'node:events';
+
 const myEE = new EventEmitter();
 myEE.on('foo', () => {});
 myEE.on('bar', () => {});
@@ -254,7 +255,7 @@ NodeJS.ReadableStream.eventNames
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:794
+node_modules/@types/node/events.d.ts:870
 
 ___
 
@@ -279,7 +280,7 @@ NodeJS.ReadableStream.getMaxListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:647
+node_modules/@types/node/events.d.ts:722
 
 ___
 
@@ -297,7 +298,7 @@ NodeJS.ReadableStream.isPaused
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:235
+node_modules/@types/node/globals.d.ts:278
 
 ___
 
@@ -305,10 +306,9 @@ ___
 
 ▸ **listenerCount**(`eventName`, `listener?`): `number`
 
-Returns the number of listeners listening to the event named `eventName`.
-
-If `listener` is provided, it will return how many times the listener
-is found in the list of the listeners of the event.
+Returns the number of listeners listening for the event named `eventName`.
+If `listener` is provided, it will return how many times the listener is found
+in the list of the listeners of the event.
 
 #### Parameters
 
@@ -331,7 +331,7 @@ NodeJS.ReadableStream.listenerCount
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:741
+node_modules/@types/node/events.d.ts:816
 
 ___
 
@@ -369,7 +369,7 @@ NodeJS.ReadableStream.listeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:660
+node_modules/@types/node/events.d.ts:735
 
 ___
 
@@ -400,7 +400,7 @@ NodeJS.ReadableStream.off
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:620
+node_modules/@types/node/events.d.ts:695
 
 ___
 
@@ -425,6 +425,7 @@ By default, event listeners are invoked in the order they are added. The`emitter
 event listener to the beginning of the listeners array.
 
 ```js
+import { EventEmitter } from 'node:events';
 const myEE = new EventEmitter();
 myEE.on('foo', () => console.log('a'));
 myEE.prependListener('foo', () => console.log('b'));
@@ -455,7 +456,7 @@ NodeJS.ReadableStream.on
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:506
+node_modules/@types/node/events.d.ts:577
 
 ___
 
@@ -478,6 +479,7 @@ By default, event listeners are invoked in the order they are added. The`emitter
 event listener to the beginning of the listeners array.
 
 ```js
+import { EventEmitter } from 'node:events';
 const myEE = new EventEmitter();
 myEE.once('foo', () => console.log('a'));
 myEE.prependOnceListener('foo', () => console.log('b'));
@@ -508,7 +510,7 @@ NodeJS.ReadableStream.once
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:535
+node_modules/@types/node/events.d.ts:607
 
 ___
 
@@ -526,7 +528,7 @@ NodeJS.ReadableStream.pause
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:233
+node_modules/@types/node/globals.d.ts:276
 
 ___
 
@@ -558,7 +560,7 @@ NodeJS.ReadableStream.pipe
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:236
+node_modules/@types/node/globals.d.ts:279
 
 ___
 
@@ -600,7 +602,7 @@ NodeJS.ReadableStream.prependListener
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:759
+node_modules/@types/node/events.d.ts:834
 
 ___
 
@@ -640,7 +642,7 @@ NodeJS.ReadableStream.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:775
+node_modules/@types/node/events.d.ts:850
 
 ___
 
@@ -660,7 +662,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/shared.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/sparse-stream/shared.ts#L45)
+[lib/sparse-stream/shared.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/shared.ts#L45)
 
 ___
 
@@ -672,6 +674,7 @@ Returns a copy of the array of listeners for the event named `eventName`,
 including any wrappers (such as those created by `.once()`).
 
 ```js
+import { EventEmitter } from 'node:events';
 const emitter = new EventEmitter();
 emitter.once('log', () => console.log('log once'));
 
@@ -715,7 +718,7 @@ NodeJS.ReadableStream.rawListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:690
+node_modules/@types/node/events.d.ts:766
 
 ___
 
@@ -739,7 +742,7 @@ NodeJS.ReadableStream.read
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:231
+node_modules/@types/node/globals.d.ts:274
 
 ___
 
@@ -775,7 +778,7 @@ NodeJS.ReadableStream.removeAllListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:631
+node_modules/@types/node/events.d.ts:706
 
 ___
 
@@ -804,6 +807,8 @@ time of emitting are called in order. This implies that any`removeListener()` or
 will not remove them from`emit()` in progress. Subsequent events behave as expected.
 
 ```js
+import { EventEmitter } from 'node:events';
+class MyEmitter extends EventEmitter {}
 const myEmitter = new MyEmitter();
 
 const callbackA = () => {
@@ -844,6 +849,7 @@ event (as in the example below), `removeListener()` will remove the most
 recently added instance. In the example the `once('ping')`listener is removed:
 
 ```js
+import { EventEmitter } from 'node:events';
 const ee = new EventEmitter();
 
 function pong() {
@@ -881,7 +887,7 @@ NodeJS.ReadableStream.removeListener
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:615
+node_modules/@types/node/events.d.ts:690
 
 ___
 
@@ -899,7 +905,7 @@ NodeJS.ReadableStream.resume
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:234
+node_modules/@types/node/globals.d.ts:277
 
 ___
 
@@ -923,7 +929,7 @@ NodeJS.ReadableStream.setEncoding
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:232
+node_modules/@types/node/globals.d.ts:275
 
 ___
 
@@ -958,7 +964,7 @@ NodeJS.ReadableStream.setMaxListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:641
+node_modules/@types/node/events.d.ts:716
 
 ___
 
@@ -982,7 +988,7 @@ NodeJS.ReadableStream.unpipe
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:237
+node_modules/@types/node/globals.d.ts:280
 
 ___
 
@@ -1007,7 +1013,7 @@ NodeJS.ReadableStream.unshift
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:238
+node_modules/@types/node/globals.d.ts:281
 
 ___
 
@@ -1031,4 +1037,4 @@ NodeJS.ReadableStream.wrap
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:239
+node_modules/@types/node/globals.d.ts:282

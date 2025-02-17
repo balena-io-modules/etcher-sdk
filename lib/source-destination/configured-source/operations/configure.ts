@@ -122,8 +122,12 @@ export async function configure(
 
 	await interact(disk, partition, async (fs) => {
 		const writeFileAsync = promisify(fs.writeFile);
+		const utimesAsync = promisify(fs.utimes);
 		const mkdirAsync = promisify(fs.mkdir);
-		await writeFileAsync('/config.json', JSON.stringify(configJSON));
+		const path = '/config.json';
+		await writeFileAsync(path, JSON.stringify(configJSON));
+		// Set the mtime and atime to 0 so that the checksum for two images with the same config.json will match, rather than varying based on generation time
+		await utimesAsync(path, 0, 0);
 		try {
 			await mkdirAsync('/system-connections');
 		} catch {

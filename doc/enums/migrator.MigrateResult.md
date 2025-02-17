@@ -21,7 +21,7 @@ Describes the result of running migrate() function.
 
 #### Defined in
 
-[lib/migrator/index.ts:112](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/migrator/index.ts#L112)
+[lib/migrator/index.ts:112](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/migrator/index.ts#L112)
 
 ___
 
@@ -31,4 +31,4 @@ ___
 
 #### Defined in
 
-[lib/migrator/index.ts:111](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/migrator/index.ts#L111)
+[lib/migrator/index.ts:111](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/migrator/index.ts#L111)

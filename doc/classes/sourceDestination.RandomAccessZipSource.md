@@ -93,7 +93,7 @@
 
 ### constructor
 
-• **new RandomAccessZipSource**(`source`, `match?`)
+• **new RandomAccessZipSource**(`source`, `match?`): [`RandomAccessZipSource`](sourceDestination.RandomAccessZipSource.md)
 
 #### Parameters
 
@@ -102,13 +102,17 @@
 | `source` | [`SourceDestination`](sourceDestination.SourceDestination.md) | `undefined` |
 | `match` | (`filename`: `string`) => `boolean` | `matchSupportedExtensions` |
 
+#### Returns
+
+[`RandomAccessZipSource`](sourceDestination.RandomAccessZipSource.md)
+
 #### Overrides
 
 [SourceSource](sourceDestination.SourceSource.md).[constructor](sourceDestination.SourceSource.md#constructor)
 
 #### Defined in
 
-[lib/source-destination/zip.ts:164](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L164)
+[lib/source-destination/zip.ts:164](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L164)
 
 ## Properties
 
@@ -118,7 +122,7 @@
 
 #### Defined in
 
-[lib/source-destination/zip.ts:162](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L162)
+[lib/source-destination/zip.ts:162](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L162)
 
 ___
 
@@ -142,7 +146,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:166](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L166)
+[lib/source-destination/zip.ts:166](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L166)
 
 ___
 
@@ -152,7 +156,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:161](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L161)
+[lib/source-destination/zip.ts:161](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L161)
 
 ___
 
@@ -166,7 +170,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-source.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-source.ts#L22)
+[lib/source-destination/source-source.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-source.ts#L22)
 
 ___
 
@@ -176,7 +180,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:160](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L160)
+[lib/source-destination/zip.ts:160](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L160)
 
 ___
 
@@ -184,13 +188,21 @@ ___
 
 ▪ `Static` `Readonly` **captureRejectionSymbol**: typeof [`captureRejectionSymbol`](scanner.adapters.Adapter.md#capturerejectionsymbol)
 
+Value: `Symbol.for('nodejs.rejection')`
+
+See how to write a custom `rejection handler`.
+
+**`Since`**
+
+v13.4.0, v12.16.0
+
 #### Inherited from
 
 [SourceSource](sourceDestination.SourceSource.md).[captureRejectionSymbol](sourceDestination.SourceSource.md#capturerejectionsymbol)
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:405
+node_modules/@types/node/events.d.ts:402
 
 ___
 
@@ -198,7 +210,13 @@ ___
 
 ▪ `Static` **captureRejections**: `boolean`
 
-Sets or gets the default captureRejection value for all emitters.
+Value: [boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type)
+
+Change the default `captureRejections` option on all new `EventEmitter` objects.
+
+**`Since`**
+
+v13.4.0, v12.16.0
 
 #### Inherited from
 
@@ -206,7 +224,7 @@ Sets or gets the default captureRejection value for all emitters.
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:410
+node_modules/@types/node/events.d.ts:409
 
 ___
 
@@ -214,13 +232,51 @@ ___
 
 ▪ `Static` **defaultMaxListeners**: `number`
 
+By default, a maximum of `10` listeners can be registered for any single
+event. This limit can be changed for individual `EventEmitter` instances
+using the `emitter.setMaxListeners(n)` method. To change the default
+for _all_`EventEmitter` instances, the `events.defaultMaxListeners`property can be used. If this value is not a positive number, a `RangeError`is thrown.
+
+Take caution when setting the `events.defaultMaxListeners` because the
+change affects _all_`EventEmitter` instances, including those created before
+the change is made. However, calling `emitter.setMaxListeners(n)` still has
+precedence over `events.defaultMaxListeners`.
+
+This is not a hard limit. The `EventEmitter` instance will allow
+more listeners to be added but will output a trace warning to stderr indicating
+that a "possible EventEmitter memory leak" has been detected. For any single`EventEmitter`, the `emitter.getMaxListeners()` and `emitter.setMaxListeners()`methods can be used to
+temporarily avoid this warning:
+
+```js
+import { EventEmitter } from 'node:events';
+const emitter = new EventEmitter();
+emitter.setMaxListeners(emitter.getMaxListeners() + 1);
+emitter.once('event', () => {
+  // do stuff
+  emitter.setMaxListeners(Math.max(emitter.getMaxListeners() - 1, 0));
+});
+```
+
+The `--trace-warnings` command-line flag can be used to display the
+stack trace for such warnings.
+
+The emitted warning can be inspected with `process.on('warning')` and will
+have the additional `emitter`, `type`, and `count` properties, referring to
+the event emitter instance, the event's name and the number of attached
+listeners, respectively.
+Its `name` property is set to `'MaxListenersExceededWarning'`.
+
+**`Since`**
+
+v0.11.2
+
 #### Inherited from
 
 [SourceSource](sourceDestination.SourceSource.md).[defaultMaxListeners](sourceDestination.SourceSource.md#defaultmaxlisteners)
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:411
+node_modules/@types/node/events.d.ts:446
 
 ___
 
@@ -228,13 +284,14 @@ ___
 
 ▪ `Static` `Readonly` **errorMonitor**: typeof [`errorMonitor`](scanner.adapters.Adapter.md#errormonitor)
 
-This symbol shall be used to install a listener for only monitoring `'error'`
-events. Listeners installed using this symbol are called before the regular
-`'error'` listeners are called.
+This symbol shall be used to install a listener for only monitoring `'error'`events. Listeners installed using this symbol are called before the regular`'error'` listeners are called.
 
-Installing a listener using this symbol does not change the behavior once an
-`'error'` event is emitted, therefore the process will still crash if no
+Installing a listener using this symbol does not change the behavior once an`'error'` event is emitted. Therefore, the process will still crash if no
 regular `'error'` listener is installed.
+
+**`Since`**
+
+v13.6.0, v12.17.0
 
 #### Inherited from
 
@@ -242,7 +299,7 @@ regular `'error'` listener is installed.
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:404
+node_modules/@types/node/events.d.ts:395
 
 ___
 
@@ -256,7 +313,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:295](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L295)
+[lib/source-destination/source-destination.ts:293](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L293)
 
 ___
 
@@ -266,7 +323,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:150](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L150)
+[lib/source-destination/zip.ts:150](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L150)
 
 ___
 
@@ -280,7 +337,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:307](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L307)
+[lib/source-destination/source-destination.ts:305](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L305)
 
 ___
 
@@ -294,13 +351,13 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-source.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-source.ts#L20)
+[lib/source-destination/source-source.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-source.ts#L20)
 
 ## Methods
 
 ### [captureRejectionSymbol]
 
-▸ `Optional` **[captureRejectionSymbol]**(`error`, `event`, `...args`): `void`
+▸ **[captureRejectionSymbol]**(`error`, `event`, `...args`): `void`
 
 #### Parameters
 
@@ -320,13 +377,13 @@ ___
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:115
+node_modules/@types/node/events.d.ts:112
 
 ___
 
 ### \_close
 
-▸ `Protected` **_close**(): `Promise`<`void`\>
+▸ **_close**(): `Promise`<`void`\>
 
 #### Returns
 
@@ -338,7 +395,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-source.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-source.ts#L30)
+[lib/source-destination/source-source.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-source.ts#L30)
 
 ___
 
@@ -356,13 +413,13 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:319](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L319)
+[lib/source-destination/zip.ts:319](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L319)
 
 ___
 
 ### \_open
 
-▸ `Protected` **_open**(): `Promise`<`void`\>
+▸ **_open**(): `Promise`<`void`\>
 
 #### Returns
 
@@ -374,7 +431,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:226](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L226)
+[lib/source-destination/zip.ts:226](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L226)
 
 ___
 
@@ -405,7 +462,7 @@ v0.1.26
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:475
+node_modules/@types/node/events.d.ts:545
 
 ___
 
@@ -423,7 +480,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:196](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L196)
+[lib/source-destination/zip.ts:196](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L196)
 
 ___
 
@@ -441,7 +498,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:200](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L200)
+[lib/source-destination/zip.ts:200](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L200)
 
 ___
 
@@ -459,7 +516,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:343](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L343)
+[lib/source-destination/source-destination.ts:341](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L341)
 
 ___
 
@@ -477,7 +534,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:339](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L339)
+[lib/source-destination/source-destination.ts:337](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L337)
 
 ___
 
@@ -495,7 +552,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:323](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L323)
+[lib/source-destination/source-destination.ts:321](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L321)
 
 ___
 
@@ -513,7 +570,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:327](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L327)
+[lib/source-destination/source-destination.ts:325](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L325)
 
 ___
 
@@ -531,7 +588,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:411](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L411)
+[lib/source-destination/source-destination.ts:409](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L409)
 
 ___
 
@@ -555,7 +612,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:270](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L270)
+[lib/source-destination/zip.ts:270](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L270)
 
 ___
 
@@ -579,7 +636,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:296](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L296)
+[lib/source-destination/zip.ts:296](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L296)
 
 ___
 
@@ -604,7 +661,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:398](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L398)
+[lib/source-destination/source-destination.ts:396](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L396)
 
 ___
 
@@ -629,7 +686,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:426](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L426)
+[lib/source-destination/source-destination.ts:424](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L424)
 
 ___
 
@@ -654,7 +711,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:392](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L392)
+[lib/source-destination/source-destination.ts:390](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L390)
 
 ___
 
@@ -668,7 +725,7 @@ to each.
 Returns `true` if the event had listeners, `false` otherwise.
 
 ```js
-const EventEmitter = require('events');
+import { EventEmitter } from 'node:events';
 const myEmitter = new EventEmitter();
 
 // First listener
@@ -721,7 +778,7 @@ v0.1.26
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:731
+node_modules/@types/node/events.d.ts:807
 
 ___
 
@@ -733,7 +790,8 @@ Returns an array listing the events for which the emitter has registered
 listeners. The values in the array are strings or `Symbol`s.
 
 ```js
-const EventEmitter = require('events');
+import { EventEmitter } from 'node:events';
+
 const myEE = new EventEmitter();
 myEE.on('foo', () => {});
 myEE.on('bar', () => {});
@@ -759,7 +817,7 @@ v6.0.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:794
+node_modules/@types/node/events.d.ts:870
 
 ___
 
@@ -777,7 +835,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:319](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L319)
+[lib/source-destination/source-destination.ts:317](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L317)
 
 ___
 
@@ -795,13 +853,13 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:388](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L388)
+[lib/source-destination/source-destination.ts:386](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L386)
 
 ___
 
 ### getEntries
 
-▸ `Private` **getEntries**(): `Promise`<`Entry`[]\>
+▸ **getEntries**(): `Promise`<`Entry`[]\>
 
 #### Returns
 
@@ -809,13 +867,13 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:205](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L205)
+[lib/source-destination/zip.ts:205](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L205)
 
 ___
 
 ### getEntryByName
 
-▸ `Private` **getEntryByName**(`name`): `Promise`<`undefined` \| `Entry`\>
+▸ **getEntryByName**(`name`): `Promise`<`undefined` \| `Entry`\>
 
 #### Parameters
 
@@ -829,13 +887,13 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:232](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L232)
+[lib/source-destination/zip.ts:232](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L232)
 
 ___
 
 ### getImageEntry
 
-▸ `Private` **getImageEntry**(): `Promise`<`Entry`\>
+▸ **getImageEntry**(): `Promise`<`Entry`\>
 
 #### Returns
 
@@ -843,7 +901,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:210](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L210)
+[lib/source-destination/zip.ts:210](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L210)
 
 ___
 
@@ -861,13 +919,13 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:501](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L501)
+[lib/source-destination/source-destination.ts:499](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L499)
 
 ___
 
 ### getJson
 
-▸ `Private` **getJson**(`name`): `Promise`<`any`\>
+▸ **getJson**(`name`): `Promise`<`any`\>
 
 #### Parameters
 
@@ -881,7 +939,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:263](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L263)
+[lib/source-destination/zip.ts:263](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L263)
 
 ___
 
@@ -906,7 +964,7 @@ v1.0.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:647
+node_modules/@types/node/events.d.ts:722
 
 ___
 
@@ -924,7 +982,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:347](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L347)
+[lib/source-destination/source-destination.ts:345](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L345)
 
 ___
 
@@ -942,13 +1000,13 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:531](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L531)
+[lib/source-destination/source-destination.ts:529](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L529)
 
 ___
 
 ### getStream
 
-▸ `Private` **getStream**(`name`): `Promise`<`undefined` \| `ReadableStream`\>
+▸ **getStream**(`name`): `Promise`<`undefined` \| `ReadableStream`\>
 
 #### Parameters
 
@@ -962,13 +1020,13 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:241](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L241)
+[lib/source-destination/zip.ts:241](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L241)
 
 ___
 
 ### getString
 
-▸ `Private` **getString**(`name`): `Promise`<`undefined` \| `string`\>
+▸ **getString**(`name`): `Promise`<`undefined` \| `string`\>
 
 #### Parameters
 
@@ -982,13 +1040,13 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:255](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L255)
+[lib/source-destination/zip.ts:255](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L255)
 
 ___
 
 ### init
 
-▸ `Private` **init**(): `Promise`<`void`\>
+▸ **init**(): `Promise`<`void`\>
 
 #### Returns
 
@@ -996,7 +1054,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:172](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L172)
+[lib/source-destination/zip.ts:172](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L172)
 
 ___
 
@@ -1004,10 +1062,9 @@ ___
 
 ▸ **listenerCount**(`eventName`, `listener?`): `number`
 
-Returns the number of listeners listening to the event named `eventName`.
-
-If `listener` is provided, it will return how many times the listener
-is found in the list of the listeners of the event.
+Returns the number of listeners listening for the event named `eventName`.
+If `listener` is provided, it will return how many times the listener is found
+in the list of the listeners of the event.
 
 #### Parameters
 
@@ -1030,7 +1087,7 @@ v3.2.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:741
+node_modules/@types/node/events.d.ts:816
 
 ___
 
@@ -1068,7 +1125,7 @@ v0.1.26
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:660
+node_modules/@types/node/events.d.ts:735
 
 ___
 
@@ -1099,7 +1156,7 @@ v10.0.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:620
+node_modules/@types/node/events.d.ts:695
 
 ___
 
@@ -1124,6 +1181,7 @@ By default, event listeners are invoked in the order they are added. The`emitter
 event listener to the beginning of the listeners array.
 
 ```js
+import { EventEmitter } from 'node:events';
 const myEE = new EventEmitter();
 myEE.on('foo', () => console.log('a'));
 myEE.prependListener('foo', () => console.log('b'));
@@ -1154,7 +1212,7 @@ v0.1.101
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:506
+node_modules/@types/node/events.d.ts:577
 
 ___
 
@@ -1177,6 +1235,7 @@ By default, event listeners are invoked in the order they are added. The`emitter
 event listener to the beginning of the listeners array.
 
 ```js
+import { EventEmitter } from 'node:events';
 const myEE = new EventEmitter();
 myEE.once('foo', () => console.log('a'));
 myEE.prependOnceListener('foo', () => console.log('b'));
@@ -1207,7 +1266,7 @@ v0.3.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:535
+node_modules/@types/node/events.d.ts:607
 
 ___
 
@@ -1225,7 +1284,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:404](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L404)
+[lib/source-destination/source-destination.ts:402](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L402)
 
 ___
 
@@ -1267,7 +1326,7 @@ v6.0.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:759
+node_modules/@types/node/events.d.ts:834
 
 ___
 
@@ -1307,7 +1366,7 @@ v6.0.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:775
+node_modules/@types/node/events.d.ts:850
 
 ___
 
@@ -1319,6 +1378,7 @@ Returns a copy of the array of listeners for the event named `eventName`,
 including any wrappers (such as those created by `.once()`).
 
 ```js
+import { EventEmitter } from 'node:events';
 const emitter = new EventEmitter();
 emitter.once('log', () => console.log('log once'));
 
@@ -1362,7 +1422,7 @@ v9.4.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:690
+node_modules/@types/node/events.d.ts:766
 
 ___
 
@@ -1389,7 +1449,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:358](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L358)
+[lib/source-destination/source-destination.ts:356](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L356)
 
 ___
 
@@ -1425,7 +1485,7 @@ v0.1.26
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:631
+node_modules/@types/node/events.d.ts:706
 
 ___
 
@@ -1454,6 +1514,8 @@ time of emitting are called in order. This implies that any`removeListener()` or
 will not remove them from`emit()` in progress. Subsequent events behave as expected.
 
 ```js
+import { EventEmitter } from 'node:events';
+class MyEmitter extends EventEmitter {}
 const myEmitter = new MyEmitter();
 
 const callbackA = () => {
@@ -1494,6 +1556,7 @@ event (as in the example below), `removeListener()` will remove the most
 recently added instance. In the example the `once('ping')`listener is removed:
 
 ```js
+import { EventEmitter } from 'node:events';
 const ee = new EventEmitter();
 
 function pong() {
@@ -1531,7 +1594,7 @@ v0.1.26
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:615
+node_modules/@types/node/events.d.ts:690
 
 ___
 
@@ -1566,7 +1629,7 @@ v0.3.5
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:641
+node_modules/@types/node/events.d.ts:716
 
 ___
 
@@ -1593,13 +1656,13 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:367](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L367)
+[lib/source-destination/source-destination.ts:365](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L365)
 
 ___
 
 ### addAbortListener
 
-▸ `Static` **addAbortListener**(`signal`, `resource`): `Disposable`
+▸ **addAbortListener**(`signal`, `resource`): `Disposable`
 
 Listens once to the `abort` event on the provided `signal`.
 
@@ -1646,7 +1709,7 @@ Disposable that removes the `abort` listener.
 
 **`Since`**
 
-v18.18.0
+v20.5.0
 
 #### Inherited from
 
@@ -1654,13 +1717,13 @@ v18.18.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:394
+node_modules/@types/node/events.d.ts:387
 
 ___
 
 ### getEventListeners
 
-▸ `Static` **getEventListeners**(`emitter`, `name`): `Function`[]
+▸ **getEventListeners**(`emitter`, `name`): `Function`[]
 
 Returns a copy of the array of listeners for the event named `eventName`.
 
@@ -1671,19 +1734,19 @@ For `EventTarget`s this is the only way to get the event listeners for the
 event target. This is useful for debugging and diagnostic purposes.
 
 ```js
-const { getEventListeners, EventEmitter } = require('events');
+import { getEventListeners, EventEmitter } from 'node:events';
 
 {
   const ee = new EventEmitter();
   const listener = () => console.log('Events are fun');
   ee.on('foo', listener);
-  getEventListeners(ee, 'foo'); // [listener]
+  console.log(getEventListeners(ee, 'foo')); // [ [Function: listener] ]
 }
 {
   const et = new EventTarget();
   const listener = () => console.log('Events are fun');
   et.addEventListener('foo', listener);
-  getEventListeners(et, 'foo'); // [listener]
+  console.log(getEventListeners(et, 'foo')); // [ [Function: listener] ]
 }
 ```
 
@@ -1708,13 +1771,13 @@ v15.2.0, v14.17.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:312
+node_modules/@types/node/events.d.ts:308
 
 ___
 
 ### getMaxListeners
 
-▸ `Static` **getMaxListeners**(`emitter`): `number`
+▸ **getMaxListeners**(`emitter`): `number`
 
 Returns the currently set max amount of listeners.
 
@@ -1754,7 +1817,7 @@ import { getMaxListeners, setMaxListeners, EventEmitter } from 'node:events';
 
 **`Since`**
 
-v18.17.0
+v19.9.0
 
 #### Inherited from
 
@@ -1762,18 +1825,19 @@ v18.17.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:341
+node_modules/@types/node/events.d.ts:337
 
 ___
 
 ### listenerCount
 
-▸ `Static` **listenerCount**(`emitter`, `eventName`): `number`
+▸ **listenerCount**(`emitter`, `eventName`): `number`
 
 A class method that returns the number of listeners for the given `eventName`registered on the given `emitter`.
 
 ```js
-const { EventEmitter, listenerCount } = require('events');
+import { EventEmitter, listenerCount } from 'node:events';
+
 const myEmitter = new EventEmitter();
 myEmitter.on('event', () => {});
 myEmitter.on('event', () => {});
@@ -1806,34 +1870,33 @@ Since v3.2.0 - Use `listenerCount` instead.
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:284
+node_modules/@types/node/events.d.ts:280
 
 ___
 
 ### on
 
-▸ `Static` **on**(`emitter`, `eventName`, `options?`): `AsyncIterableIterator`<`any`\>
+▸ **on**(`emitter`, `eventName`, `options?`): `AsyncIterableIterator`<`any`\>
 
 ```js
-const { on, EventEmitter } = require('events');
+import { on, EventEmitter } from 'node:events';
+import process from 'node:process';
 
-(async () => {
-  const ee = new EventEmitter();
+const ee = new EventEmitter();
 
-  // Emit later on
-  process.nextTick(() => {
-    ee.emit('foo', 'bar');
-    ee.emit('foo', 42);
-  });
+// Emit later on
+process.nextTick(() => {
+  ee.emit('foo', 'bar');
+  ee.emit('foo', 42);
+});
 
-  for await (const event of on(ee, 'foo')) {
-    // The execution of this inner block is synchronous and it
-    // processes one event at a time (even with await). Do not use
-    // if concurrent execution is required.
-    console.log(event); // prints ['bar'] [42]
-  }
-  // Unreachable here
-})();
+for await (const event of on(ee, 'foo')) {
+  // The execution of this inner block is synchronous and it
+  // processes one event at a time (even with await). Do not use
+  // if concurrent execution is required.
+  console.log(event); // prints ['bar'] [42]
+}
+// Unreachable here
 ```
 
 Returns an `AsyncIterator` that iterates `eventName` events. It will throw
@@ -1844,7 +1907,9 @@ composed of the emitted event arguments.
 An `AbortSignal` can be used to cancel waiting on events:
 
 ```js
-const { on, EventEmitter } = require('events');
+import { on, EventEmitter } from 'node:events';
+import process from 'node:process';
+
 const ac = new AbortController();
 
 (async () => {
@@ -1892,13 +1957,13 @@ v13.6.0, v12.16.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:263
+node_modules/@types/node/events.d.ts:258
 
 ___
 
 ### once
 
-▸ `Static` **once**(`emitter`, `eventName`, `options?`): `Promise`<`any`[]\>
+▸ **once**(`emitter`, `eventName`, `options?`): `Promise`<`any`[]\>
 
 Creates a `Promise` that is fulfilled when the `EventEmitter` emits the given
 event or that is rejected if the `EventEmitter` emits `'error'` while waiting.
@@ -1909,31 +1974,28 @@ This method is intentionally generic and works with the web platform [EventTarge
 semantics and does not listen to the `'error'` event.
 
 ```js
-const { once, EventEmitter } = require('events');
+import { once, EventEmitter } from 'node:events';
+import process from 'node:process';
 
-async function run() {
-  const ee = new EventEmitter();
+const ee = new EventEmitter();
 
-  process.nextTick(() => {
-    ee.emit('myevent', 42);
-  });
+process.nextTick(() => {
+  ee.emit('myevent', 42);
+});
 
-  const [value] = await once(ee, 'myevent');
-  console.log(value);
+const [value] = await once(ee, 'myevent');
+console.log(value);
 
-  const err = new Error('kaboom');
-  process.nextTick(() => {
-    ee.emit('error', err);
-  });
+const err = new Error('kaboom');
+process.nextTick(() => {
+  ee.emit('error', err);
+});
 
-  try {
-    await once(ee, 'myevent');
-  } catch (err) {
-    console.log('error happened', err);
-  }
+try {
+  await once(ee, 'myevent');
+} catch (err) {
+  console.error('error happened', err);
 }
-
-run();
 ```
 
 The special handling of the `'error'` event is only used when `events.once()`is used to wait for another event. If `events.once()` is used to wait for the
@@ -1941,13 +2003,13 @@ The special handling of the `'error'` event is only used when `events.once()`is 
 special handling:
 
 ```js
-const { EventEmitter, once } = require('events');
+import { EventEmitter, once } from 'node:events';
 
 const ee = new EventEmitter();
 
 once(ee, 'error')
   .then(([err]) => console.log('ok', err.message))
-  .catch((err) => console.log('error', err.message));
+  .catch((err) => console.error('error', err.message));
 
 ee.emit('error', new Error('boom'));
 
@@ -1957,7 +2019,7 @@ ee.emit('error', new Error('boom'));
 An `AbortSignal` can be used to cancel waiting for the event:
 
 ```js
-const { EventEmitter, once } = require('events');
+import { EventEmitter, once } from 'node:events';
 
 const ee = new EventEmitter();
 const ac = new AbortController();
@@ -2002,9 +2064,9 @@ v11.13.0, v10.16.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:199
+node_modules/@types/node/events.d.ts:193
 
-▸ `Static` **once**(`emitter`, `eventName`, `options?`): `Promise`<`any`[]\>
+▸ **once**(`emitter`, `eventName`, `options?`): `Promise`<`any`[]\>
 
 #### Parameters
 
@@ -2024,13 +2086,13 @@ node_modules/@types/node/events.d.ts:199
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:204
+node_modules/@types/node/events.d.ts:198
 
 ___
 
 ### register
 
-▸ `Static` **register**(`Cls`): `void`
+▸ **register**(`Cls`): `void`
 
 #### Parameters
 
@@ -2048,19 +2110,16 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:313](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L313)
+[lib/source-destination/source-destination.ts:311](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L311)
 
 ___
 
 ### setMaxListeners
 
-▸ `Static` **setMaxListeners**(`n?`, `...eventTargets`): `void`
+▸ **setMaxListeners**(`n?`, `...eventTargets`): `void`
 
 ```js
-const {
-  setMaxListeners,
-  EventEmitter
-} = require('events');
+import { setMaxListeners, EventEmitter } from 'node:events';
 
 const target = new EventTarget();
 const emitter = new EventEmitter();
@@ -2089,4 +2148,4 @@ v15.4.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:359
+node_modules/@types/node/events.d.ts:352

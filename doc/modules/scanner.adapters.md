@@ -30,4 +30,4 @@
 
 #### Defined in
 
-[lib/scanner/adapters/driverless.ts:104](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/scanner/adapters/driverless.ts#L104)
+[lib/scanner/adapters/driverless.ts:104](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/driverless.ts#L104)

@@ -23,7 +23,7 @@ NONE means no authentication.
 
 #### Defined in
 
-[lib/migrator/helpers.ts:226](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/migrator/helpers.ts#L226)
+[lib/migrator/helpers.ts:226](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/migrator/helpers.ts#L226)
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 #### Defined in
 
-[lib/migrator/helpers.ts:227](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/migrator/helpers.ts#L227)
+[lib/migrator/helpers.ts:227](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/migrator/helpers.ts#L227)
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 #### Defined in
 
-[lib/migrator/helpers.ts:228](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/migrator/helpers.ts#L228)
+[lib/migrator/helpers.ts:228](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/migrator/helpers.ts#L228)

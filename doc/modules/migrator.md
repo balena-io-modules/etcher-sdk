@@ -67,4 +67,4 @@ original run. A task may be omitted by listing it in the options.omitTasks param
 
 #### Defined in
 
-[lib/migrator/index.ts:147](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/migrator/index.ts#L147)
+[lib/migrator/index.ts:147](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/migrator/index.ts#L147)
