@@ -41,4 +41,4 @@
 
 #### Defined in
 
-[lib/errors.ts:77](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/errors.ts#L77)
+[lib/errors.ts:81](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/errors.ts#L81)

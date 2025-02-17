@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[lib/tmp.ts:79](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/tmp.ts#L79)
+[lib/tmp.ts:79](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/tmp.ts#L79)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[lib/tmp.ts:81](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/tmp.ts#L81)
+[lib/tmp.ts:81](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/tmp.ts#L81)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 #### Defined in
 
-[lib/tmp.ts:80](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/tmp.ts#L80)
+[lib/tmp.ts:80](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/tmp.ts#L80)

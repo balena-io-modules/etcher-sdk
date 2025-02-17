@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[lib/source-destination/balena-s3-source.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/balena-s3-source.ts#L36)
+[lib/source-destination/balena-s3-source.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-source.ts#L36)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-source.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/balena-s3-source.ts#L37)
+[lib/source-destination/balena-s3-source.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-source.ts#L37)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-source.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/balena-s3-source.ts#L38)
+[lib/source-destination/balena-s3-source.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-source.ts#L38)

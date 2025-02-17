@@ -80,7 +80,7 @@
 
 #### Defined in
 
-[lib/scanner/adapters/adapter.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/scanner/adapters/adapter.ts#L27)
+[lib/scanner/adapters/adapter.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/adapter.ts#L27)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/adapter.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/scanner/adapters/adapter.ts#L24)
+[lib/scanner/adapters/adapter.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/adapter.ts#L24)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/adapter.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/scanner/adapters/adapter.ts#L25)
+[lib/scanner/adapters/adapter.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/adapter.ts#L25)
 
 ___
 
@@ -110,7 +110,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/adapter.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/scanner/adapters/adapter.ts#L30)
+[lib/scanner/adapters/adapter.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/adapter.ts#L30)
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/adapter.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/scanner/adapters/adapter.ts#L26)
+[lib/scanner/adapters/adapter.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/adapter.ts#L26)
 
 ___
 
@@ -130,7 +130,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/adapter.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/scanner/adapters/adapter.ts#L28)
+[lib/scanner/adapters/adapter.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/adapter.ts#L28)
 
 ___
 
@@ -140,7 +140,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/adapter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/scanner/adapters/adapter.ts#L23)
+[lib/scanner/adapters/adapter.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/adapter.ts#L23)
 
 ___
 
@@ -150,13 +150,13 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/adapter.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/scanner/adapters/adapter.ts#L29)
+[lib/scanner/adapters/adapter.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/adapter.ts#L29)
 
 ## Methods
 
 ### [captureRejectionSymbol]
 
-▸ `Optional` **[captureRejectionSymbol]**(`error`, `event`, `...args`): `void`
+▸ **[captureRejectionSymbol]**(`error`, `event`, `...args`): `void`
 
 #### Parameters
 
@@ -176,13 +176,13 @@ ___
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:115
+node_modules/@types/node/events.d.ts:112
 
 ___
 
 ### \_close
 
-▸ `Protected` **_close**(): `Promise`<`void`\>
+▸ **_close**(): `Promise`<`void`\>
 
 #### Returns
 
@@ -194,13 +194,13 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:422](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L422)
+[lib/source-destination/source-destination.ts:420](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L420)
 
 ___
 
 ### \_getMetadata
 
-▸ `Protected` **_getMetadata**(): `Promise`<[`Metadata`](sourceDestination.Metadata.md)\>
+▸ **_getMetadata**(): `Promise`<[`Metadata`](sourceDestination.Metadata.md)\>
 
 #### Returns
 
@@ -212,13 +212,13 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:354](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L354)
+[lib/source-destination/source-destination.ts:352](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L352)
 
 ___
 
 ### \_open
 
-▸ `Protected` **_open**(): `Promise`<`void`\>
+▸ **_open**(): `Promise`<`void`\>
 
 #### Returns
 
@@ -230,7 +230,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:418](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L418)
+[lib/source-destination/source-destination.ts:416](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L416)
 
 ___
 
@@ -261,7 +261,7 @@ v0.1.26
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:475
+node_modules/@types/node/events.d.ts:545
 
 ___
 
@@ -279,7 +279,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:331](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L331)
+[lib/source-destination/source-destination.ts:329](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L329)
 
 ___
 
@@ -297,7 +297,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:335](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L335)
+[lib/source-destination/source-destination.ts:333](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L333)
 
 ___
 
@@ -315,7 +315,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:343](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L343)
+[lib/source-destination/source-destination.ts:341](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L341)
 
 ___
 
@@ -333,7 +333,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:339](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L339)
+[lib/source-destination/source-destination.ts:337](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L337)
 
 ___
 
@@ -351,7 +351,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:323](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L323)
+[lib/source-destination/source-destination.ts:321](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L321)
 
 ___
 
@@ -369,7 +369,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:327](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L327)
+[lib/source-destination/source-destination.ts:325](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L325)
 
 ___
 
@@ -387,7 +387,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:411](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L411)
+[lib/source-destination/source-destination.ts:409](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L409)
 
 ___
 
@@ -411,7 +411,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:376](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L376)
+[lib/source-destination/source-destination.ts:374](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L374)
 
 ___
 
@@ -435,7 +435,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:382](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L382)
+[lib/source-destination/source-destination.ts:380](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L380)
 
 ___
 
@@ -460,7 +460,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:398](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L398)
+[lib/source-destination/source-destination.ts:396](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L396)
 
 ___
 
@@ -485,7 +485,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:426](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L426)
+[lib/source-destination/source-destination.ts:424](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L424)
 
 ___
 
@@ -510,7 +510,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:392](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L392)
+[lib/source-destination/source-destination.ts:390](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L390)
 
 ___
 
@@ -524,7 +524,7 @@ to each.
 Returns `true` if the event had listeners, `false` otherwise.
 
 ```js
-const EventEmitter = require('events');
+import { EventEmitter } from 'node:events';
 const myEmitter = new EventEmitter();
 
 // First listener
@@ -577,7 +577,7 @@ v0.1.26
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:731
+node_modules/@types/node/events.d.ts:807
 
 ___
 
@@ -589,7 +589,8 @@ Returns an array listing the events for which the emitter has registered
 listeners. The values in the array are strings or `Symbol`s.
 
 ```js
-const EventEmitter = require('events');
+import { EventEmitter } from 'node:events';
+
 const myEE = new EventEmitter();
 myEE.on('foo', () => {});
 myEE.on('bar', () => {});
@@ -615,7 +616,7 @@ v6.0.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:794
+node_modules/@types/node/events.d.ts:870
 
 ___
 
@@ -633,7 +634,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:319](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L319)
+[lib/source-destination/source-destination.ts:317](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L317)
 
 ___
 
@@ -651,7 +652,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:388](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L388)
+[lib/source-destination/source-destination.ts:386](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L386)
 
 ___
 
@@ -669,7 +670,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:501](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L501)
+[lib/source-destination/source-destination.ts:499](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L499)
 
 ___
 
@@ -694,7 +695,7 @@ v1.0.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:647
+node_modules/@types/node/events.d.ts:722
 
 ___
 
@@ -712,7 +713,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:347](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L347)
+[lib/source-destination/source-destination.ts:345](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L345)
 
 ___
 
@@ -730,7 +731,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:531](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L531)
+[lib/source-destination/source-destination.ts:529](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L529)
 
 ___
 
@@ -738,10 +739,9 @@ ___
 
 ▸ **listenerCount**(`eventName`, `listener?`): `number`
 
-Returns the number of listeners listening to the event named `eventName`.
-
-If `listener` is provided, it will return how many times the listener
-is found in the list of the listeners of the event.
+Returns the number of listeners listening for the event named `eventName`.
+If `listener` is provided, it will return how many times the listener is found
+in the list of the listeners of the event.
 
 #### Parameters
 
@@ -764,7 +764,7 @@ v3.2.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:741
+node_modules/@types/node/events.d.ts:816
 
 ___
 
@@ -802,7 +802,7 @@ v0.1.26
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:660
+node_modules/@types/node/events.d.ts:735
 
 ___
 
@@ -833,7 +833,7 @@ v10.0.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:620
+node_modules/@types/node/events.d.ts:695
 
 ___
 
@@ -858,6 +858,7 @@ By default, event listeners are invoked in the order they are added. The`emitter
 event listener to the beginning of the listeners array.
 
 ```js
+import { EventEmitter } from 'node:events';
 const myEE = new EventEmitter();
 myEE.on('foo', () => console.log('a'));
 myEE.prependListener('foo', () => console.log('b'));
@@ -888,7 +889,7 @@ v0.1.101
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:506
+node_modules/@types/node/events.d.ts:577
 
 ___
 
@@ -911,6 +912,7 @@ By default, event listeners are invoked in the order they are added. The`emitter
 event listener to the beginning of the listeners array.
 
 ```js
+import { EventEmitter } from 'node:events';
 const myEE = new EventEmitter();
 myEE.once('foo', () => console.log('a'));
 myEE.prependOnceListener('foo', () => console.log('b'));
@@ -941,7 +943,7 @@ v0.3.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:535
+node_modules/@types/node/events.d.ts:607
 
 ___
 
@@ -959,7 +961,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:404](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L404)
+[lib/source-destination/source-destination.ts:402](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L402)
 
 ___
 
@@ -1001,7 +1003,7 @@ v6.0.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:759
+node_modules/@types/node/events.d.ts:834
 
 ___
 
@@ -1041,7 +1043,7 @@ v6.0.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:775
+node_modules/@types/node/events.d.ts:850
 
 ___
 
@@ -1053,6 +1055,7 @@ Returns a copy of the array of listeners for the event named `eventName`,
 including any wrappers (such as those created by `.once()`).
 
 ```js
+import { EventEmitter } from 'node:events';
 const emitter = new EventEmitter();
 emitter.once('log', () => console.log('log once'));
 
@@ -1096,7 +1099,7 @@ v9.4.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:690
+node_modules/@types/node/events.d.ts:766
 
 ___
 
@@ -1123,7 +1126,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:358](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L358)
+[lib/source-destination/source-destination.ts:356](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L356)
 
 ___
 
@@ -1159,7 +1162,7 @@ v0.1.26
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:631
+node_modules/@types/node/events.d.ts:706
 
 ___
 
@@ -1188,6 +1191,8 @@ time of emitting are called in order. This implies that any`removeListener()` or
 will not remove them from`emit()` in progress. Subsequent events behave as expected.
 
 ```js
+import { EventEmitter } from 'node:events';
+class MyEmitter extends EventEmitter {}
 const myEmitter = new MyEmitter();
 
 const callbackA = () => {
@@ -1228,6 +1233,7 @@ event (as in the example below), `removeListener()` will remove the most
 recently added instance. In the example the `once('ping')`listener is removed:
 
 ```js
+import { EventEmitter } from 'node:events';
 const ee = new EventEmitter();
 
 function pong() {
@@ -1265,7 +1271,7 @@ v0.1.26
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:615
+node_modules/@types/node/events.d.ts:690
 
 ___
 
@@ -1300,7 +1306,7 @@ v0.3.5
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:641
+node_modules/@types/node/events.d.ts:716
 
 ___
 
@@ -1327,4 +1333,4 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:367](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L367)
+[lib/source-destination/source-destination.ts:365](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L365)

@@ -128,7 +128,7 @@
 
 ### constructor
 
-• **new SparseFilterStream**(`«destructured»`)
+• **new SparseFilterStream**(`«destructured»`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
 #### Parameters
 
@@ -139,13 +139,17 @@
 | › `generateChecksums` | `boolean` |
 | › `verify` | `boolean` |
 
+#### Returns
+
+[`SparseFilterStream`](sparseStream.SparseFilterStream.md)
+
 #### Overrides
 
 Transform.constructor
 
 #### Defined in
 
-[lib/sparse-stream/sparse-filter-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/sparse-stream/sparse-filter-stream.ts#L32)
+[lib/sparse-stream/sparse-filter-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-filter-stream.ts#L32)
 
 ## Properties
 
@@ -155,7 +159,7 @@ Transform.constructor
 
 If `false` then the stream will automatically end the writable side when the
 readable side ends. Set initially by the `allowHalfOpen` constructor option,
-which defaults to `false`.
+which defaults to `true`.
 
 This can be changed manually to change the half-open behavior of an existing`Duplex` stream instance, but must be changed before the `'end'` event is
 emitted.
@@ -170,7 +174,7 @@ Transform.allowHalfOpen
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1060
+node_modules/@types/node/stream.d.ts:1068
 
 ___
 
@@ -184,7 +188,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-filter-stream.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/sparse-stream/sparse-filter-stream.ts#L27)
+[lib/sparse-stream/sparse-filter-stream.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-filter-stream.ts#L27)
 
 ___
 
@@ -198,7 +202,7 @@ Transform.closed
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1049
+node_modules/@types/node/stream.d.ts:1057
 
 ___
 
@@ -218,7 +222,7 @@ Transform.destroyed
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:145
+node_modules/@types/node/stream.d.ts:114
 
 ___
 
@@ -232,7 +236,7 @@ Transform.errored
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1050
+node_modules/@types/node/stream.d.ts:1058
 
 ___
 
@@ -242,7 +246,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-filter-stream.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/sparse-stream/sparse-filter-stream.ts#L30)
+[lib/sparse-stream/sparse-filter-stream.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-filter-stream.ts#L30)
 
 ___
 
@@ -267,7 +271,7 @@ Transform.readable
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:101
+node_modules/@types/node/stream.d.ts:70
 
 ___
 
@@ -287,7 +291,7 @@ Transform.readableAborted
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:95
+node_modules/@types/node/stream.d.ts:64
 
 ___
 
@@ -307,7 +311,7 @@ Transform.readableDidRead
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:107
+node_modules/@types/node/stream.d.ts:76
 
 ___
 
@@ -327,7 +331,7 @@ Transform.readableEncoding
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:112
+node_modules/@types/node/stream.d.ts:81
 
 ___
 
@@ -347,7 +351,7 @@ Transform.readableEnded
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:117
+node_modules/@types/node/stream.d.ts:86
 
 ___
 
@@ -368,7 +372,7 @@ Transform.readableFlowing
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:123
+node_modules/@types/node/stream.d.ts:92
 
 ___
 
@@ -388,7 +392,7 @@ Transform.readableHighWaterMark
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:128
+node_modules/@types/node/stream.d.ts:97
 
 ___
 
@@ -410,7 +414,7 @@ Transform.readableLength
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:135
+node_modules/@types/node/stream.d.ts:104
 
 ___
 
@@ -430,7 +434,7 @@ Transform.readableObjectMode
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:140
+node_modules/@types/node/stream.d.ts:109
 
 ___
 
@@ -440,7 +444,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-filter-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/sparse-stream/sparse-filter-stream.ts#L29)
+[lib/sparse-stream/sparse-filter-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-filter-stream.ts#L29)
 
 ___
 
@@ -450,7 +454,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-filter-stream.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/sparse-stream/sparse-filter-stream.ts#L28)
+[lib/sparse-stream/sparse-filter-stream.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-filter-stream.ts#L28)
 
 ___
 
@@ -464,7 +468,7 @@ Transform.writable
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1041
+node_modules/@types/node/stream.d.ts:1049
 
 ___
 
@@ -478,7 +482,7 @@ Transform.writableCorked
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1047
+node_modules/@types/node/stream.d.ts:1055
 
 ___
 
@@ -492,7 +496,7 @@ Transform.writableEnded
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1042
+node_modules/@types/node/stream.d.ts:1050
 
 ___
 
@@ -506,7 +510,7 @@ Transform.writableFinished
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1043
+node_modules/@types/node/stream.d.ts:1051
 
 ___
 
@@ -520,7 +524,7 @@ Transform.writableHighWaterMark
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1044
+node_modules/@types/node/stream.d.ts:1052
 
 ___
 
@@ -534,7 +538,7 @@ Transform.writableLength
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1045
+node_modules/@types/node/stream.d.ts:1053
 
 ___
 
@@ -548,7 +552,7 @@ Transform.writableNeedDrain
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1048
+node_modules/@types/node/stream.d.ts:1056
 
 ___
 
@@ -562,7 +566,7 @@ Transform.writableObjectMode
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1046
+node_modules/@types/node/stream.d.ts:1054
 
 ___
 
@@ -570,13 +574,21 @@ ___
 
 ▪ `Static` `Readonly` **captureRejectionSymbol**: typeof [`captureRejectionSymbol`](scanner.adapters.Adapter.md#capturerejectionsymbol)
 
+Value: `Symbol.for('nodejs.rejection')`
+
+See how to write a custom `rejection handler`.
+
+**`Since`**
+
+v13.4.0, v12.16.0
+
 #### Inherited from
 
 Transform.captureRejectionSymbol
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:405
+node_modules/@types/node/events.d.ts:402
 
 ___
 
@@ -584,7 +596,13 @@ ___
 
 ▪ `Static` **captureRejections**: `boolean`
 
-Sets or gets the default captureRejection value for all emitters.
+Value: [boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type)
+
+Change the default `captureRejections` option on all new `EventEmitter` objects.
+
+**`Since`**
+
+v13.4.0, v12.16.0
 
 #### Inherited from
 
@@ -592,7 +610,7 @@ Transform.captureRejections
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:410
+node_modules/@types/node/events.d.ts:409
 
 ___
 
@@ -600,13 +618,51 @@ ___
 
 ▪ `Static` **defaultMaxListeners**: `number`
 
+By default, a maximum of `10` listeners can be registered for any single
+event. This limit can be changed for individual `EventEmitter` instances
+using the `emitter.setMaxListeners(n)` method. To change the default
+for _all_`EventEmitter` instances, the `events.defaultMaxListeners`property can be used. If this value is not a positive number, a `RangeError`is thrown.
+
+Take caution when setting the `events.defaultMaxListeners` because the
+change affects _all_`EventEmitter` instances, including those created before
+the change is made. However, calling `emitter.setMaxListeners(n)` still has
+precedence over `events.defaultMaxListeners`.
+
+This is not a hard limit. The `EventEmitter` instance will allow
+more listeners to be added but will output a trace warning to stderr indicating
+that a "possible EventEmitter memory leak" has been detected. For any single`EventEmitter`, the `emitter.getMaxListeners()` and `emitter.setMaxListeners()`methods can be used to
+temporarily avoid this warning:
+
+```js
+import { EventEmitter } from 'node:events';
+const emitter = new EventEmitter();
+emitter.setMaxListeners(emitter.getMaxListeners() + 1);
+emitter.once('event', () => {
+  // do stuff
+  emitter.setMaxListeners(Math.max(emitter.getMaxListeners() - 1, 0));
+});
+```
+
+The `--trace-warnings` command-line flag can be used to display the
+stack trace for such warnings.
+
+The emitted warning can be inspected with `process.on('warning')` and will
+have the additional `emitter`, `type`, and `count` properties, referring to
+the event emitter instance, the event's name and the number of attached
+listeners, respectively.
+Its `name` property is set to `'MaxListenersExceededWarning'`.
+
+**`Since`**
+
+v0.11.2
+
 #### Inherited from
 
 Transform.defaultMaxListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:411
+node_modules/@types/node/events.d.ts:446
 
 ___
 
@@ -614,13 +670,14 @@ ___
 
 ▪ `Static` `Readonly` **errorMonitor**: typeof [`errorMonitor`](scanner.adapters.Adapter.md#errormonitor)
 
-This symbol shall be used to install a listener for only monitoring `'error'`
-events. Listeners installed using this symbol are called before the regular
-`'error'` listeners are called.
+This symbol shall be used to install a listener for only monitoring `'error'`events. Listeners installed using this symbol are called before the regular`'error'` listeners are called.
 
-Installing a listener using this symbol does not change the behavior once an
-`'error'` event is emitted, therefore the process will still crash if no
+Installing a listener using this symbol does not change the behavior once an`'error'` event is emitted. Therefore, the process will still crash if no
 regular `'error'` listener is installed.
+
+**`Since`**
+
+v13.6.0, v12.17.0
 
 #### Inherited from
 
@@ -628,7 +685,7 @@ Transform.errorMonitor
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:404
+node_modules/@types/node/events.d.ts:395
 
 ## Methods
 
@@ -644,7 +701,7 @@ Calls `readable.destroy()` with an `AbortError` and returns a promise that fulfi
 
 **`Since`**
 
-v18.18.0
+v20.4.0
 
 #### Inherited from
 
@@ -652,7 +709,7 @@ Transform.[asyncDispose]
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:682
+node_modules/@types/node/stream.d.ts:651
 
 ___
 
@@ -674,13 +731,13 @@ Transform.[asyncIterator]
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:677
+node_modules/@types/node/stream.d.ts:646
 
 ___
 
 ### [captureRejectionSymbol]
 
-▸ `Optional` **[captureRejectionSymbol]**(`error`, `event`, `...args`): `void`
+▸ **[captureRejectionSymbol]**(`error`, `event`, `...args`): `void`
 
 #### Parameters
 
@@ -704,13 +761,13 @@ Transform.[captureRejectionSymbol]
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:115
+node_modules/@types/node/events.d.ts:112
 
 ___
 
 ### \_\_transform
 
-▸ `Private` **__transform**(`buffer`): `void`
+▸ **__transform**(`buffer`): `void`
 
 #### Parameters
 
@@ -724,13 +781,13 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-filter-stream.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/sparse-stream/sparse-filter-stream.ts#L69)
+[lib/sparse-stream/sparse-filter-stream.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-filter-stream.ts#L69)
 
 ___
 
 ### \_construct
 
-▸ `Optional` **_construct**(`callback`): `void`
+▸ **_construct**(`callback`): `void`
 
 #### Parameters
 
@@ -748,7 +805,7 @@ Transform.\_construct
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:157
+node_modules/@types/node/stream.d.ts:126
 
 ___
 
@@ -761,7 +818,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `error` | ``null`` \| `Error` |
-| `callback` | (`error`: ``null`` \| `Error`) => `void` |
+| `callback` | (`error?`: ``null`` \| `Error`) => `void` |
 
 #### Returns
 
@@ -773,7 +830,7 @@ Transform.\_destroy
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1103
+node_modules/@types/node/stream.d.ts:1111
 
 ___
 
@@ -797,7 +854,7 @@ Transform.\_final
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1104
+node_modules/@types/node/stream.d.ts:1112
 
 ___
 
@@ -821,7 +878,7 @@ Transform.\_flush
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1250
+node_modules/@types/node/stream.d.ts:1282
 
 ___
 
@@ -845,7 +902,7 @@ Transform.\_read
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:158
+node_modules/@types/node/stream.d.ts:127
 
 ___
 
@@ -871,7 +928,7 @@ Transform.\_transform
 
 #### Defined in
 
-[lib/sparse-stream/sparse-filter-stream.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/sparse-stream/sparse-filter-stream.ts#L55)
+[lib/sparse-stream/sparse-filter-stream.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-filter-stream.ts#L55)
 
 ___
 
@@ -897,13 +954,13 @@ Transform.\_write
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1095
+node_modules/@types/node/stream.d.ts:1103
 
 ___
 
 ### \_writev
 
-▸ `Optional` **_writev**(`chunks`, `callback`): `void`
+▸ **_writev**(`chunks`, `callback`): `void`
 
 #### Parameters
 
@@ -922,7 +979,7 @@ Transform.\_writev
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1096
+node_modules/@types/node/stream.d.ts:1104
 
 ___
 
@@ -965,7 +1022,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1128
+node_modules/@types/node/stream.d.ts:1160
 
 ▸ **addListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -990,7 +1047,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1129
+node_modules/@types/node/stream.d.ts:1161
 
 ▸ **addListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -1015,7 +1072,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1130
+node_modules/@types/node/stream.d.ts:1162
 
 ▸ **addListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -1040,7 +1097,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1131
+node_modules/@types/node/stream.d.ts:1163
 
 ▸ **addListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -1065,7 +1122,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1132
+node_modules/@types/node/stream.d.ts:1164
 
 ▸ **addListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -1090,7 +1147,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1133
+node_modules/@types/node/stream.d.ts:1165
 
 ▸ **addListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -1115,7 +1172,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1134
+node_modules/@types/node/stream.d.ts:1166
 
 ▸ **addListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -1140,7 +1197,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1135
+node_modules/@types/node/stream.d.ts:1167
 
 ▸ **addListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -1165,7 +1222,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1136
+node_modules/@types/node/stream.d.ts:1168
 
 ▸ **addListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -1190,7 +1247,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1137
+node_modules/@types/node/stream.d.ts:1169
 
 ▸ **addListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -1215,7 +1272,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1138
+node_modules/@types/node/stream.d.ts:1170
 
 ▸ **addListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -1240,7 +1297,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1139
+node_modules/@types/node/stream.d.ts:1171
 
 ___
 
@@ -1273,7 +1330,7 @@ Transform.asIndexedPairs
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:572
+node_modules/@types/node/stream.d.ts:541
 
 ___
 
@@ -1323,7 +1380,7 @@ Transform.cork
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1111
+node_modules/@types/node/stream.d.ts:1119
 
 ___
 
@@ -1359,7 +1416,7 @@ Transform.destroy
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:609
+node_modules/@types/node/stream.d.ts:578
 
 ___
 
@@ -1392,7 +1449,7 @@ Transform.drop
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:558
+node_modules/@types/node/stream.d.ts:527
 
 ___
 
@@ -1406,7 +1463,7 @@ to each.
 Returns `true` if the event had listeners, `false` otherwise.
 
 ```js
-const EventEmitter = require('events');
+import { EventEmitter } from 'node:events';
 const myEmitter = new EventEmitter();
 
 // First listener
@@ -1462,7 +1519,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1140
+node_modules/@types/node/stream.d.ts:1172
 
 ▸ **emit**(`event`, `chunk`): `boolean`
 
@@ -1487,7 +1544,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1141
+node_modules/@types/node/stream.d.ts:1173
 
 ▸ **emit**(`event`): `boolean`
 
@@ -1511,7 +1568,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1142
+node_modules/@types/node/stream.d.ts:1174
 
 ▸ **emit**(`event`): `boolean`
 
@@ -1535,7 +1592,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1143
+node_modules/@types/node/stream.d.ts:1175
 
 ▸ **emit**(`event`, `err`): `boolean`
 
@@ -1560,7 +1617,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1144
+node_modules/@types/node/stream.d.ts:1176
 
 ▸ **emit**(`event`): `boolean`
 
@@ -1584,7 +1641,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1145
+node_modules/@types/node/stream.d.ts:1177
 
 ▸ **emit**(`event`): `boolean`
 
@@ -1608,7 +1665,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1146
+node_modules/@types/node/stream.d.ts:1178
 
 ▸ **emit**(`event`, `src`): `boolean`
 
@@ -1633,7 +1690,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1147
+node_modules/@types/node/stream.d.ts:1179
 
 ▸ **emit**(`event`): `boolean`
 
@@ -1657,7 +1714,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1148
+node_modules/@types/node/stream.d.ts:1180
 
 ▸ **emit**(`event`): `boolean`
 
@@ -1681,7 +1738,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1149
+node_modules/@types/node/stream.d.ts:1181
 
 ▸ **emit**(`event`, `src`): `boolean`
 
@@ -1706,7 +1763,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1150
+node_modules/@types/node/stream.d.ts:1182
 
 ▸ **emit**(`event`, `...args`): `boolean`
 
@@ -1731,7 +1788,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1151
+node_modules/@types/node/stream.d.ts:1183
 
 ___
 
@@ -1755,7 +1812,7 @@ Transform.end
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1108
+node_modules/@types/node/stream.d.ts:1116
 
 ▸ **end**(`chunk`, `cb?`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -1776,7 +1833,7 @@ Transform.end
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1109
+node_modules/@types/node/stream.d.ts:1117
 
 ▸ **end**(`chunk`, `encoding?`, `cb?`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -1798,7 +1855,7 @@ Transform.end
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1110
+node_modules/@types/node/stream.d.ts:1118
 
 ___
 
@@ -1810,7 +1867,8 @@ Returns an array listing the events for which the emitter has registered
 listeners. The values in the array are strings or `Symbol`s.
 
 ```js
-const EventEmitter = require('events');
+import { EventEmitter } from 'node:events';
+
 const myEE = new EventEmitter();
 myEE.on('foo', () => {});
 myEE.on('bar', () => {});
@@ -1840,7 +1898,7 @@ Transform.eventNames
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:794
+node_modules/@types/node/events.d.ts:870
 
 ___
 
@@ -1876,7 +1934,7 @@ Transform.every
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:537
+node_modules/@types/node/stream.d.ts:506
 
 ___
 
@@ -1911,7 +1969,7 @@ Transform.filter
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:465
+node_modules/@types/node/stream.d.ts:434
 
 ___
 
@@ -1954,7 +2012,7 @@ Transform.find
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:520
+node_modules/@types/node/stream.d.ts:489
 
 ▸ **find**(`fn`, `options?`): `Promise`<`any`\>
 
@@ -1975,7 +2033,7 @@ Transform.find
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:524
+node_modules/@types/node/stream.d.ts:493
 
 ___
 
@@ -2012,7 +2070,7 @@ Transform.flatMap
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:551
+node_modules/@types/node/stream.d.ts:520
 
 ___
 
@@ -2054,7 +2112,7 @@ Transform.forEach
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:484
+node_modules/@types/node/stream.d.ts:453
 
 ___
 
@@ -2083,7 +2141,7 @@ Transform.getMaxListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:647
+node_modules/@types/node/events.d.ts:722
 
 ___
 
@@ -2123,7 +2181,7 @@ Transform.isPaused
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:318
+node_modules/@types/node/stream.d.ts:287
 
 ___
 
@@ -2156,7 +2214,7 @@ Transform.iterator
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:448
+node_modules/@types/node/stream.d.ts:417
 
 ___
 
@@ -2164,10 +2222,9 @@ ___
 
 ▸ **listenerCount**(`eventName`, `listener?`): `number`
 
-Returns the number of listeners listening to the event named `eventName`.
-
-If `listener` is provided, it will return how many times the listener
-is found in the list of the listeners of the event.
+Returns the number of listeners listening for the event named `eventName`.
+If `listener` is provided, it will return how many times the listener is found
+in the list of the listeners of the event.
 
 #### Parameters
 
@@ -2194,7 +2251,7 @@ Transform.listenerCount
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:741
+node_modules/@types/node/events.d.ts:816
 
 ___
 
@@ -2236,7 +2293,7 @@ Transform.listeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:660
+node_modules/@types/node/events.d.ts:735
 
 ___
 
@@ -2270,13 +2327,13 @@ Transform.map
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:456
+node_modules/@types/node/stream.d.ts:425
 
 ___
 
 ### nextBlock
 
-▸ `Private` **nextBlock**(): `void`
+▸ **nextBlock**(): `void`
 
 #### Returns
 
@@ -2284,7 +2341,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-filter-stream.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/sparse-stream/sparse-filter-stream.ts#L51)
+[lib/sparse-stream/sparse-filter-stream.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-filter-stream.ts#L51)
 
 ___
 
@@ -2319,7 +2376,7 @@ Transform.off
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:620
+node_modules/@types/node/events.d.ts:695
 
 ___
 
@@ -2344,6 +2401,7 @@ By default, event listeners are invoked in the order they are added. The`emitter
 event listener to the beginning of the listeners array.
 
 ```js
+import { EventEmitter } from 'node:events';
 const myEE = new EventEmitter();
 myEE.on('foo', () => console.log('a'));
 myEE.prependListener('foo', () => console.log('b'));
@@ -2378,7 +2436,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1152
+node_modules/@types/node/stream.d.ts:1184
 
 ▸ **on**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2403,7 +2461,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1153
+node_modules/@types/node/stream.d.ts:1185
 
 ▸ **on**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2428,7 +2486,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1154
+node_modules/@types/node/stream.d.ts:1186
 
 ▸ **on**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2453,7 +2511,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1155
+node_modules/@types/node/stream.d.ts:1187
 
 ▸ **on**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2478,7 +2536,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1156
+node_modules/@types/node/stream.d.ts:1188
 
 ▸ **on**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2503,7 +2561,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1157
+node_modules/@types/node/stream.d.ts:1189
 
 ▸ **on**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2528,7 +2586,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1158
+node_modules/@types/node/stream.d.ts:1190
 
 ▸ **on**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2553,7 +2611,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1159
+node_modules/@types/node/stream.d.ts:1191
 
 ▸ **on**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2578,7 +2636,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1160
+node_modules/@types/node/stream.d.ts:1192
 
 ▸ **on**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2603,7 +2661,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1161
+node_modules/@types/node/stream.d.ts:1193
 
 ▸ **on**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2628,7 +2686,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1162
+node_modules/@types/node/stream.d.ts:1194
 
 ▸ **on**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2653,7 +2711,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1163
+node_modules/@types/node/stream.d.ts:1195
 
 ___
 
@@ -2676,6 +2734,7 @@ By default, event listeners are invoked in the order they are added. The`emitter
 event listener to the beginning of the listeners array.
 
 ```js
+import { EventEmitter } from 'node:events';
 const myEE = new EventEmitter();
 myEE.once('foo', () => console.log('a'));
 myEE.prependOnceListener('foo', () => console.log('b'));
@@ -2710,7 +2769,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1164
+node_modules/@types/node/stream.d.ts:1196
 
 ▸ **once**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2735,7 +2794,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1165
+node_modules/@types/node/stream.d.ts:1197
 
 ▸ **once**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2760,7 +2819,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1166
+node_modules/@types/node/stream.d.ts:1198
 
 ▸ **once**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2785,7 +2844,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1167
+node_modules/@types/node/stream.d.ts:1199
 
 ▸ **once**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2810,7 +2869,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1168
+node_modules/@types/node/stream.d.ts:1200
 
 ▸ **once**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2835,7 +2894,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1169
+node_modules/@types/node/stream.d.ts:1201
 
 ▸ **once**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2860,7 +2919,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1170
+node_modules/@types/node/stream.d.ts:1202
 
 ▸ **once**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2885,7 +2944,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1171
+node_modules/@types/node/stream.d.ts:1203
 
 ▸ **once**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2910,7 +2969,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1172
+node_modules/@types/node/stream.d.ts:1204
 
 ▸ **once**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2935,7 +2994,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1173
+node_modules/@types/node/stream.d.ts:1205
 
 ▸ **once**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2960,7 +3019,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1174
+node_modules/@types/node/stream.d.ts:1206
 
 ▸ **once**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -2985,7 +3044,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1175
+node_modules/@types/node/stream.d.ts:1207
 
 ___
 
@@ -3030,7 +3089,7 @@ Transform.pause
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:282
+node_modules/@types/node/stream.d.ts:251
 
 ___
 
@@ -3112,7 +3171,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1176
+node_modules/@types/node/stream.d.ts:1208
 
 ▸ **prependListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3137,7 +3196,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1177
+node_modules/@types/node/stream.d.ts:1209
 
 ▸ **prependListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3162,7 +3221,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1178
+node_modules/@types/node/stream.d.ts:1210
 
 ▸ **prependListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3187,7 +3246,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1179
+node_modules/@types/node/stream.d.ts:1211
 
 ▸ **prependListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3212,7 +3271,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1180
+node_modules/@types/node/stream.d.ts:1212
 
 ▸ **prependListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3237,7 +3296,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1181
+node_modules/@types/node/stream.d.ts:1213
 
 ▸ **prependListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3262,7 +3321,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1182
+node_modules/@types/node/stream.d.ts:1214
 
 ▸ **prependListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3287,7 +3346,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1183
+node_modules/@types/node/stream.d.ts:1215
 
 ▸ **prependListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3312,7 +3371,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1184
+node_modules/@types/node/stream.d.ts:1216
 
 ▸ **prependListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3337,7 +3396,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1185
+node_modules/@types/node/stream.d.ts:1217
 
 ▸ **prependListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3362,7 +3421,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1186
+node_modules/@types/node/stream.d.ts:1218
 
 ▸ **prependListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3387,7 +3446,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1187
+node_modules/@types/node/stream.d.ts:1219
 
 ___
 
@@ -3431,7 +3490,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1188
+node_modules/@types/node/stream.d.ts:1220
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3456,7 +3515,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1189
+node_modules/@types/node/stream.d.ts:1221
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3481,7 +3540,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1190
+node_modules/@types/node/stream.d.ts:1222
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3506,7 +3565,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1191
+node_modules/@types/node/stream.d.ts:1223
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3531,7 +3590,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1192
+node_modules/@types/node/stream.d.ts:1224
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3556,7 +3615,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1193
+node_modules/@types/node/stream.d.ts:1225
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3581,7 +3640,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1194
+node_modules/@types/node/stream.d.ts:1226
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3606,7 +3665,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1195
+node_modules/@types/node/stream.d.ts:1227
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3631,7 +3690,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1196
+node_modules/@types/node/stream.d.ts:1228
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3656,7 +3715,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1197
+node_modules/@types/node/stream.d.ts:1229
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3681,7 +3740,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1198
+node_modules/@types/node/stream.d.ts:1230
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -3706,7 +3765,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1199
+node_modules/@types/node/stream.d.ts:1231
 
 ___
 
@@ -3735,7 +3794,7 @@ Transform.push
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:438
+node_modules/@types/node/stream.d.ts:407
 
 ___
 
@@ -3747,6 +3806,7 @@ Returns a copy of the array of listeners for the event named `eventName`,
 including any wrappers (such as those created by `.once()`).
 
 ```js
+import { EventEmitter } from 'node:events';
 const emitter = new EventEmitter();
 emitter.once('log', () => console.log('log once'));
 
@@ -3794,7 +3854,7 @@ Transform.rawListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:690
+node_modules/@types/node/events.d.ts:766
 
 ___
 
@@ -3899,7 +3959,7 @@ Transform.read
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:235
+node_modules/@types/node/stream.d.ts:204
 
 ___
 
@@ -3946,7 +4006,7 @@ Transform.reduce
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:587
+node_modules/@types/node/stream.d.ts:556
 
 ▸ **reduce**<`T`\>(`fn`, `initial`, `options?`): `Promise`<`T`\>
 
@@ -3974,7 +4034,7 @@ Transform.reduce
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:592
+node_modules/@types/node/stream.d.ts:561
 
 ___
 
@@ -4014,7 +4074,7 @@ Transform.removeAllListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:631
+node_modules/@types/node/events.d.ts:706
 
 ___
 
@@ -4043,6 +4103,8 @@ time of emitting are called in order. This implies that any`removeListener()` or
 will not remove them from`emit()` in progress. Subsequent events behave as expected.
 
 ```js
+import { EventEmitter } from 'node:events';
+class MyEmitter extends EventEmitter {}
 const myEmitter = new MyEmitter();
 
 const callbackA = () => {
@@ -4083,6 +4145,7 @@ event (as in the example below), `removeListener()` will remove the most
 recently added instance. In the example the `once('ping')`listener is removed:
 
 ```js
+import { EventEmitter } from 'node:events';
 const ee = new EventEmitter();
 
 function pong() {
@@ -4124,7 +4187,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1200
+node_modules/@types/node/stream.d.ts:1232
 
 ▸ **removeListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -4149,7 +4212,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1201
+node_modules/@types/node/stream.d.ts:1233
 
 ▸ **removeListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -4174,7 +4237,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1202
+node_modules/@types/node/stream.d.ts:1234
 
 ▸ **removeListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -4199,7 +4262,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1203
+node_modules/@types/node/stream.d.ts:1235
 
 ▸ **removeListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -4224,7 +4287,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1204
+node_modules/@types/node/stream.d.ts:1236
 
 ▸ **removeListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -4249,7 +4312,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1205
+node_modules/@types/node/stream.d.ts:1237
 
 ▸ **removeListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -4274,7 +4337,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1206
+node_modules/@types/node/stream.d.ts:1238
 
 ▸ **removeListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -4299,7 +4362,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1207
+node_modules/@types/node/stream.d.ts:1239
 
 ▸ **removeListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -4324,7 +4387,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1208
+node_modules/@types/node/stream.d.ts:1240
 
 ▸ **removeListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -4349,7 +4412,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1209
+node_modules/@types/node/stream.d.ts:1241
 
 ▸ **removeListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -4374,7 +4437,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1210
+node_modules/@types/node/stream.d.ts:1242
 
 ▸ **removeListener**(`event`, `listener`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
@@ -4399,7 +4462,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1211
+node_modules/@types/node/stream.d.ts:1243
 
 ___
 
@@ -4441,7 +4504,7 @@ Transform.resume
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:301
+node_modules/@types/node/stream.d.ts:270
 
 ___
 
@@ -4465,7 +4528,7 @@ Transform.setDefaultEncoding
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1107
+node_modules/@types/node/stream.d.ts:1115
 
 ___
 
@@ -4518,7 +4581,7 @@ Transform.setEncoding
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:260
+node_modules/@types/node/stream.d.ts:229
 
 ___
 
@@ -4557,7 +4620,7 @@ Transform.setMaxListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:641
+node_modules/@types/node/events.d.ts:716
 
 ___
 
@@ -4593,7 +4656,7 @@ Transform.some
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:506
+node_modules/@types/node/stream.d.ts:475
 
 ___
 
@@ -4626,7 +4689,7 @@ Transform.take
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:565
+node_modules/@types/node/stream.d.ts:534
 
 ___
 
@@ -4661,7 +4724,7 @@ Transform.toArray
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:496
+node_modules/@types/node/stream.d.ts:465
 
 ___
 
@@ -4679,7 +4742,7 @@ Transform.uncork
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1112
+node_modules/@types/node/stream.d.ts:1120
 
 ___
 
@@ -4696,7 +4759,7 @@ If the `destination` is specified, but no pipe is set up for it, then
 the method does nothing.
 
 ```js
-const fs = require('fs');
+const fs = require('node:fs');
 const readable = getReadableStreamSomehow();
 const writable = fs.createWriteStream('file.txt');
 // All the data from readable goes into 'file.txt',
@@ -4734,7 +4797,7 @@ Transform.unpipe
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:345
+node_modules/@types/node/stream.d.ts:314
 
 ___
 
@@ -4762,7 +4825,7 @@ use of a `Transform` stream instead. See the `API for stream implementers` secti
 // Pull off a header delimited by \n\n.
 // Use unshift() if we get too much.
 // Call the callback with (error, header, stream).
-const { StringDecoder } = require('string_decoder');
+const { StringDecoder } = require('node:string_decoder');
 function parseHeader(stream, callback) {
   stream.on('error', callback);
   stream.on('readable', onReadable);
@@ -4806,7 +4869,7 @@ process of performing a read.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `chunk` | `any` | Chunk of data to unshift onto the read queue. For streams not operating in object mode, `chunk` must be a string, `Buffer`, `Uint8Array` or `null`. For object mode streams, `chunk` may be any JavaScript value. |
+| `chunk` | `any` | Chunk of data to unshift onto the read queue. For streams not operating in object mode, `chunk` must be a string, `Buffer`, `Uint8Array`, or `null`. For object mode streams, `chunk` may be any JavaScript value. |
 | `encoding?` | `BufferEncoding` | Encoding of string chunks. Must be a valid `Buffer` encoding, such as `'utf8'` or `'ascii'`. |
 
 #### Returns
@@ -4827,7 +4890,7 @@ Transform.unshift
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:411
+node_modules/@types/node/stream.d.ts:380
 
 ___
 
@@ -4835,8 +4898,8 @@ ___
 
 ▸ **wrap**(`stream`): [`SparseFilterStream`](sparseStream.SparseFilterStream.md)
 
-Prior to Node.js 0.10, streams did not implement the entire `stream` module API
-as it is currently defined. (See `Compatibility` for more information.)
+Prior to Node.js 0.10, streams did not implement the entire `node:stream`module API as it is currently defined. (See `Compatibility` for more
+information.)
 
 When using an older Node.js library that emits `'data'` events and has a [pause](../interfaces/sourceDestination.SourceTransform.md#pause) method that is advisory only, the`readable.wrap()` method can be used to create a `Readable`
 stream that uses
@@ -4848,7 +4911,7 @@ libraries.
 
 ```js
 const { OldReader } = require('./old-api-module.js');
-const { Readable } = require('stream');
+const { Readable } = require('node:stream');
 const oreader = new OldReader();
 const myReader = new Readable().wrap(oreader);
 
@@ -4881,7 +4944,7 @@ Transform.wrap
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:437
+node_modules/@types/node/stream.d.ts:406
 
 ___
 
@@ -4907,7 +4970,7 @@ Transform.write
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1105
+node_modules/@types/node/stream.d.ts:1113
 
 ▸ **write**(`chunk`, `cb?`): `boolean`
 
@@ -4928,13 +4991,13 @@ Transform.write
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1106
+node_modules/@types/node/stream.d.ts:1114
 
 ___
 
 ### addAbortListener
 
-▸ `Static` **addAbortListener**(`signal`, `resource`): `Disposable`
+▸ **addAbortListener**(`signal`, `resource`): `Disposable`
 
 Listens once to the `abort` event on the provided `signal`.
 
@@ -4981,7 +5044,7 @@ Disposable that removes the `abort` listener.
 
 **`Since`**
 
-v18.18.0
+v20.5.0
 
 #### Inherited from
 
@@ -4989,13 +5052,13 @@ Transform.addAbortListener
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:394
+node_modules/@types/node/events.d.ts:387
 
 ___
 
 ### from
 
-▸ `Static` **from**(`src`): `Duplex`
+▸ **from**(`src`): `Duplex`
 
 A utility method for creating duplex streams.
 
@@ -5019,7 +5082,7 @@ A utility method for creating duplex streams.
 
 | Name | Type |
 | :------ | :------ |
-| `src` | `string` \| `Object` \| `ArrayBuffer` \| `Promise`<`any`\> \| `AsyncGeneratorFunction` \| `Blob` \| `Stream` \| `Iterable`<`any`\> \| `AsyncIterable`<`any`\> |
+| `src` | `string` \| `Object` \| `ArrayBuffer` \| `Promise`<`any`\> \| `AsyncGeneratorFunction` \| `Stream` \| `Blob` \| `Iterable`<`any`\> \| `AsyncIterable`<`any`\> |
 
 #### Returns
 
@@ -5035,26 +5098,28 @@ Transform.from
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1083
+node_modules/@types/node/stream.d.ts:1091
 
 ___
 
 ### fromWeb
 
-▸ `Static` **fromWeb**(`readableStream`, `options?`): `Readable`
+▸ **fromWeb**(`duplexStream`, `options?`): `Duplex`
 
-A utility method for creating a `Readable` from a web `ReadableStream`.
+A utility method for creating a `Duplex` from a web `ReadableStream` and `WritableStream`.
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `readableStream` | `ReadableStream`<`any`\> |
-| `options?` | `Pick`<`ReadableOptions`, ``"signal"`` \| ``"encoding"`` \| ``"highWaterMark"`` \| ``"objectMode"``\> |
+| `duplexStream` | `Object` |
+| `duplexStream.readable` | `ReadableStream`<`any`\> |
+| `duplexStream.writable` | `WritableStream`<`any`\> |
+| `options?` | `Pick`<`DuplexOptions`, ``"signal"`` \| ``"encoding"`` \| ``"highWaterMark"`` \| ``"objectMode"`` \| ``"decodeStrings"`` \| ``"allowHalfOpen"``\> |
 
 #### Returns
 
-`Readable`
+`Duplex`
 
 **`Since`**
 
@@ -5066,13 +5131,13 @@ Transform.fromWeb
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:75
+node_modules/@types/node/stream.d.ts:1135
 
 ___
 
 ### getEventListeners
 
-▸ `Static` **getEventListeners**(`emitter`, `name`): `Function`[]
+▸ **getEventListeners**(`emitter`, `name`): `Function`[]
 
 Returns a copy of the array of listeners for the event named `eventName`.
 
@@ -5083,19 +5148,19 @@ For `EventTarget`s this is the only way to get the event listeners for the
 event target. This is useful for debugging and diagnostic purposes.
 
 ```js
-const { getEventListeners, EventEmitter } = require('events');
+import { getEventListeners, EventEmitter } from 'node:events';
 
 {
   const ee = new EventEmitter();
   const listener = () => console.log('Events are fun');
   ee.on('foo', listener);
-  getEventListeners(ee, 'foo'); // [listener]
+  console.log(getEventListeners(ee, 'foo')); // [ [Function: listener] ]
 }
 {
   const et = new EventTarget();
   const listener = () => console.log('Events are fun');
   et.addEventListener('foo', listener);
-  getEventListeners(et, 'foo'); // [listener]
+  console.log(getEventListeners(et, 'foo')); // [ [Function: listener] ]
 }
 ```
 
@@ -5120,13 +5185,13 @@ Transform.getEventListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:312
+node_modules/@types/node/events.d.ts:308
 
 ___
 
 ### getMaxListeners
 
-▸ `Static` **getMaxListeners**(`emitter`): `number`
+▸ **getMaxListeners**(`emitter`): `number`
 
 Returns the currently set max amount of listeners.
 
@@ -5166,7 +5231,7 @@ import { getMaxListeners, setMaxListeners, EventEmitter } from 'node:events';
 
 **`Since`**
 
-v18.17.0
+v19.9.0
 
 #### Inherited from
 
@@ -5174,13 +5239,13 @@ Transform.getMaxListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:341
+node_modules/@types/node/events.d.ts:337
 
 ___
 
 ### isDisturbed
 
-▸ `Static` **isDisturbed**(`stream`): `boolean`
+▸ **isDisturbed**(`stream`): `boolean`
 
 Returns whether the stream has been read from or cancelled.
 
@@ -5188,7 +5253,7 @@ Returns whether the stream has been read from or cancelled.
 
 | Name | Type |
 | :------ | :------ |
-| `stream` | `ReadableStream` \| `Readable` |
+| `stream` | `Readable` \| `ReadableStream` |
 
 #### Returns
 
@@ -5204,18 +5269,19 @@ Transform.isDisturbed
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:83
+node_modules/@types/node/stream.d.ts:58
 
 ___
 
 ### listenerCount
 
-▸ `Static` **listenerCount**(`emitter`, `eventName`): `number`
+▸ **listenerCount**(`emitter`, `eventName`): `number`
 
 A class method that returns the number of listeners for the given `eventName`registered on the given `emitter`.
 
 ```js
-const { EventEmitter, listenerCount } = require('events');
+import { EventEmitter, listenerCount } from 'node:events';
+
 const myEmitter = new EventEmitter();
 myEmitter.on('event', () => {});
 myEmitter.on('event', () => {});
@@ -5248,34 +5314,33 @@ Transform.listenerCount
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:284
+node_modules/@types/node/events.d.ts:280
 
 ___
 
 ### on
 
-▸ `Static` **on**(`emitter`, `eventName`, `options?`): `AsyncIterableIterator`<`any`\>
+▸ **on**(`emitter`, `eventName`, `options?`): `AsyncIterableIterator`<`any`\>
 
 ```js
-const { on, EventEmitter } = require('events');
+import { on, EventEmitter } from 'node:events';
+import process from 'node:process';
 
-(async () => {
-  const ee = new EventEmitter();
+const ee = new EventEmitter();
 
-  // Emit later on
-  process.nextTick(() => {
-    ee.emit('foo', 'bar');
-    ee.emit('foo', 42);
-  });
+// Emit later on
+process.nextTick(() => {
+  ee.emit('foo', 'bar');
+  ee.emit('foo', 42);
+});
 
-  for await (const event of on(ee, 'foo')) {
-    // The execution of this inner block is synchronous and it
-    // processes one event at a time (even with await). Do not use
-    // if concurrent execution is required.
-    console.log(event); // prints ['bar'] [42]
-  }
-  // Unreachable here
-})();
+for await (const event of on(ee, 'foo')) {
+  // The execution of this inner block is synchronous and it
+  // processes one event at a time (even with await). Do not use
+  // if concurrent execution is required.
+  console.log(event); // prints ['bar'] [42]
+}
+// Unreachable here
 ```
 
 Returns an `AsyncIterator` that iterates `eventName` events. It will throw
@@ -5286,7 +5351,9 @@ composed of the emitted event arguments.
 An `AbortSignal` can be used to cancel waiting on events:
 
 ```js
-const { on, EventEmitter } = require('events');
+import { on, EventEmitter } from 'node:events';
+import process from 'node:process';
+
 const ac = new AbortController();
 
 (async () => {
@@ -5334,13 +5401,13 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:263
+node_modules/@types/node/events.d.ts:258
 
 ___
 
 ### once
 
-▸ `Static` **once**(`emitter`, `eventName`, `options?`): `Promise`<`any`[]\>
+▸ **once**(`emitter`, `eventName`, `options?`): `Promise`<`any`[]\>
 
 Creates a `Promise` that is fulfilled when the `EventEmitter` emits the given
 event or that is rejected if the `EventEmitter` emits `'error'` while waiting.
@@ -5351,31 +5418,28 @@ This method is intentionally generic and works with the web platform [EventTarge
 semantics and does not listen to the `'error'` event.
 
 ```js
-const { once, EventEmitter } = require('events');
+import { once, EventEmitter } from 'node:events';
+import process from 'node:process';
 
-async function run() {
-  const ee = new EventEmitter();
+const ee = new EventEmitter();
 
-  process.nextTick(() => {
-    ee.emit('myevent', 42);
-  });
+process.nextTick(() => {
+  ee.emit('myevent', 42);
+});
 
-  const [value] = await once(ee, 'myevent');
-  console.log(value);
+const [value] = await once(ee, 'myevent');
+console.log(value);
 
-  const err = new Error('kaboom');
-  process.nextTick(() => {
-    ee.emit('error', err);
-  });
+const err = new Error('kaboom');
+process.nextTick(() => {
+  ee.emit('error', err);
+});
 
-  try {
-    await once(ee, 'myevent');
-  } catch (err) {
-    console.log('error happened', err);
-  }
+try {
+  await once(ee, 'myevent');
+} catch (err) {
+  console.error('error happened', err);
 }
-
-run();
 ```
 
 The special handling of the `'error'` event is only used when `events.once()`is used to wait for another event. If `events.once()` is used to wait for the
@@ -5383,13 +5447,13 @@ The special handling of the `'error'` event is only used when `events.once()`is 
 special handling:
 
 ```js
-const { EventEmitter, once } = require('events');
+import { EventEmitter, once } from 'node:events';
 
 const ee = new EventEmitter();
 
 once(ee, 'error')
   .then(([err]) => console.log('ok', err.message))
-  .catch((err) => console.log('error', err.message));
+  .catch((err) => console.error('error', err.message));
 
 ee.emit('error', new Error('boom'));
 
@@ -5399,7 +5463,7 @@ ee.emit('error', new Error('boom'));
 An `AbortSignal` can be used to cancel waiting for the event:
 
 ```js
-const { EventEmitter, once } = require('events');
+import { EventEmitter, once } from 'node:events';
 
 const ee = new EventEmitter();
 const ac = new AbortController();
@@ -5444,9 +5508,9 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:199
+node_modules/@types/node/events.d.ts:193
 
-▸ `Static` **once**(`emitter`, `eventName`, `options?`): `Promise`<`any`[]\>
+▸ **once**(`emitter`, `eventName`, `options?`): `Promise`<`any`[]\>
 
 #### Parameters
 
@@ -5466,19 +5530,16 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:204
+node_modules/@types/node/events.d.ts:198
 
 ___
 
 ### setMaxListeners
 
-▸ `Static` **setMaxListeners**(`n?`, `...eventTargets`): `void`
+▸ **setMaxListeners**(`n?`, `...eventTargets`): `void`
 
 ```js
-const {
-  setMaxListeners,
-  EventEmitter
-} = require('events');
+import { setMaxListeners, EventEmitter } from 'node:events';
 
 const target = new EventTarget();
 const emitter = new EventEmitter();
@@ -5507,25 +5568,30 @@ Transform.setMaxListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:359
+node_modules/@types/node/events.d.ts:352
 
 ___
 
 ### toWeb
 
-▸ `Static` **toWeb**(`streamReadable`): `ReadableStream`<`any`\>
+▸ **toWeb**(`streamDuplex`): `Object`
 
-A utility method for creating a web `ReadableStream` from a `Readable`.
+A utility method for creating a web `ReadableStream` and `WritableStream` from a `Duplex`.
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `streamReadable` | `Readable` |
+| `streamDuplex` | `Duplex` |
 
 #### Returns
 
-`ReadableStream`<`any`\>
+`Object`
+
+| Name | Type |
+| :------ | :------ |
+| `readable` | `ReadableStream`<`any`\> |
+| `writable` | `WritableStream`<`any`\> |
 
 **`Since`**
 
@@ -5537,4 +5603,4 @@ Transform.toWeb
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:89
+node_modules/@types/node/stream.d.ts:1126

@@ -23,7 +23,7 @@ Configuration values for a single WiFi network profile.
 
 #### Defined in
 
-[lib/migrator/helpers.ts:233](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/migrator/helpers.ts#L233)
+[lib/migrator/helpers.ts:233](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/migrator/helpers.ts#L233)
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 #### Defined in
 
-[lib/migrator/helpers.ts:235](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/migrator/helpers.ts#L235)
+[lib/migrator/helpers.ts:235](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/migrator/helpers.ts#L235)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 #### Defined in
 
-[lib/migrator/helpers.ts:236](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/migrator/helpers.ts#L236)
+[lib/migrator/helpers.ts:236](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/migrator/helpers.ts#L236)
 
 ___
 
@@ -53,4 +53,4 @@ ___
 
 #### Defined in
 
-[lib/migrator/helpers.ts:234](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/migrator/helpers.ts#L234)
+[lib/migrator/helpers.ts:234](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/migrator/helpers.ts#L234)

@@ -22,7 +22,7 @@
 
 #### Defined in
 
-[lib/constants.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/constants.ts#L20)
+[lib/constants.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/constants.ts#L20)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 #### Defined in
 
-[lib/constants.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/constants.ts#L24)
+[lib/constants.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/constants.ts#L24)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 #### Defined in
 
-[lib/constants.ts:21](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/constants.ts#L21)
+[lib/constants.ts:21](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/constants.ts#L21)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[lib/constants.ts:17](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/constants.ts#L17)
+[lib/constants.ts:17](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/constants.ts#L17)
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 #### Defined in
 
-[lib/constants.ts:19](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/constants.ts#L19)
+[lib/constants.ts:19](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/constants.ts#L19)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[lib/constants.ts:18](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/constants.ts#L18)
+[lib/constants.ts:18](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/constants.ts#L18)
 
 ___
 
@@ -82,4 +82,4 @@ ___
 
 #### Defined in
 
-[lib/constants.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/constants.ts#L23)
+[lib/constants.ts:23](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/constants.ts#L23)

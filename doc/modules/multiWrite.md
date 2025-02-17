@@ -47,7 +47,7 @@
 
 #### Defined in
 
-[lib/multi-write.ts:70](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/multi-write.ts#L70)
+[lib/multi-write.ts:70](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/multi-write.ts#L70)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 #### Defined in
 
-[lib/multi-write.ts:75](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/multi-write.ts#L75)
+[lib/multi-write.ts:75](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/multi-write.ts#L75)
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 #### Defined in
 
-[lib/multi-write.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/multi-write.ts#L43)
+[lib/multi-write.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/multi-write.ts#L43)
 
 ## Variables
 
@@ -91,7 +91,7 @@ ___
 
 #### Defined in
 
-[lib/multi-write.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/multi-write.ts#L45)
+[lib/multi-write.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/multi-write.ts#L45)
 
 ## Functions
 
@@ -122,7 +122,7 @@ ___
 
 #### Defined in
 
-[lib/multi-write.ts:109](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/multi-write.ts#L109)
+[lib/multi-write.ts:109](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/multi-write.ts#L109)
 
 ___
 
@@ -148,4 +148,4 @@ ___
 
 #### Defined in
 
-[lib/multi-write.ts:276](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/multi-write.ts#L276)
+[lib/multi-write.ts:286](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/multi-write.ts#L286)

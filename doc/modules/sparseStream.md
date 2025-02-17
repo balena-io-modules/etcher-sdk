@@ -40,7 +40,7 @@
 
 #### Defined in
 
-[lib/sparse-stream/shared.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/sparse-stream/shared.ts#L25)
+[lib/sparse-stream/shared.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/shared.ts#L25)
 
 ## Variables
 
@@ -50,7 +50,7 @@
 
 #### Defined in
 
-[lib/sparse-stream/sparse-write-stream.ts:137](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/sparse-stream/sparse-write-stream.ts#L137)
+[lib/sparse-stream/sparse-write-stream.ts:137](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-write-stream.ts#L137)
 
 ## Functions
 
@@ -70,7 +70,7 @@
 
 #### Defined in
 
-[lib/sparse-stream/shared.ts:117](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/sparse-stream/shared.ts#L117)
+[lib/sparse-stream/shared.ts:117](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/shared.ts#L117)
 
 ___
 
@@ -92,4 +92,4 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/shared.ts:75](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/sparse-stream/shared.ts#L75)
+[lib/sparse-stream/shared.ts:75](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/shared.ts#L75)

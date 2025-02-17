@@ -34,7 +34,7 @@
 
 ### constructor
 
-• **new MultiDestinationError**(`error`, `destination`)
+• **new MultiDestinationError**(`error`, `destination`): [`MultiDestinationError`](sourceDestination.MultiDestinationError.md)
 
 #### Parameters
 
@@ -43,13 +43,17 @@
 | `error` | `Error` |
 | `destination` | [`SourceDestination`](sourceDestination.SourceDestination.md) |
 
+#### Returns
+
+[`MultiDestinationError`](sourceDestination.MultiDestinationError.md)
+
 #### Overrides
 
 Error.constructor
 
 #### Defined in
 
-[lib/source-destination/multi-destination.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/multi-destination.ts#L40)
+[lib/source-destination/multi-destination.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/multi-destination.ts#L40)
 
 ## Properties
 
@@ -59,7 +63,7 @@ Error.constructor
 
 #### Defined in
 
-[lib/source-destination/multi-destination.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/multi-destination.ts#L42)
+[lib/source-destination/multi-destination.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/multi-destination.ts#L42)
 
 ___
 
@@ -69,7 +73,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/multi-destination.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/multi-destination.ts#L41)
+[lib/source-destination/multi-destination.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/multi-destination.ts#L41)
 
 ___
 
@@ -146,7 +150,7 @@ Error.prepareStackTrace
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:11
+node_modules/@types/node/globals.d.ts:28
 
 ___
 
@@ -160,13 +164,13 @@ Error.stackTraceLimit
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:13
+node_modules/@types/node/globals.d.ts:30
 
 ## Methods
 
 ### captureStackTrace
 
-▸ `Static` **captureStackTrace**(`targetObject`, `constructorOpt?`): `void`
+▸ **captureStackTrace**(`targetObject`, `constructorOpt?`): `void`
 
 Create .stack property on a target object
 
@@ -187,4 +191,4 @@ Error.captureStackTrace
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:4
+node_modules/@types/node/globals.d.ts:21

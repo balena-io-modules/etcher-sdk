@@ -104,7 +104,7 @@
 
 If `false` then the stream will automatically end the writable side when the
 readable side ends. Set initially by the `allowHalfOpen` constructor option,
-which defaults to `false`.
+which defaults to `true`.
 
 This can be changed manually to change the half-open behavior of an existing`Duplex` stream instance, but must be changed before the `'end'` event is
 emitted.
@@ -119,7 +119,7 @@ Transform.allowHalfOpen
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1060
+node_modules/@types/node/stream.d.ts:1068
 
 ___
 
@@ -133,7 +133,7 @@ Transform.closed
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1049
+node_modules/@types/node/stream.d.ts:1057
 
 ___
 
@@ -153,7 +153,7 @@ Transform.destroyed
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:145
+node_modules/@types/node/stream.d.ts:114
 
 ___
 
@@ -167,7 +167,7 @@ Transform.errored
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1050
+node_modules/@types/node/stream.d.ts:1058
 
 ___
 
@@ -188,7 +188,7 @@ Transform.readable
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:101
+node_modules/@types/node/stream.d.ts:70
 
 ___
 
@@ -208,7 +208,7 @@ Transform.readableAborted
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:95
+node_modules/@types/node/stream.d.ts:64
 
 ___
 
@@ -228,7 +228,7 @@ Transform.readableDidRead
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:107
+node_modules/@types/node/stream.d.ts:76
 
 ___
 
@@ -248,7 +248,7 @@ Transform.readableEncoding
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:112
+node_modules/@types/node/stream.d.ts:81
 
 ___
 
@@ -268,7 +268,7 @@ Transform.readableEnded
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:117
+node_modules/@types/node/stream.d.ts:86
 
 ___
 
@@ -289,7 +289,7 @@ Transform.readableFlowing
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:123
+node_modules/@types/node/stream.d.ts:92
 
 ___
 
@@ -309,7 +309,7 @@ Transform.readableHighWaterMark
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:128
+node_modules/@types/node/stream.d.ts:97
 
 ___
 
@@ -331,7 +331,7 @@ Transform.readableLength
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:135
+node_modules/@types/node/stream.d.ts:104
 
 ___
 
@@ -351,7 +351,7 @@ Transform.readableObjectMode
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:140
+node_modules/@types/node/stream.d.ts:109
 
 ___
 
@@ -361,7 +361,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/compressed-source.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/compressed-source.ts#L28)
+[lib/source-destination/compressed-source.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/compressed-source.ts#L28)
 
 ___
 
@@ -375,7 +375,7 @@ Transform.writable
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1041
+node_modules/@types/node/stream.d.ts:1049
 
 ___
 
@@ -389,7 +389,7 @@ Transform.writableCorked
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1047
+node_modules/@types/node/stream.d.ts:1055
 
 ___
 
@@ -403,7 +403,7 @@ Transform.writableEnded
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1042
+node_modules/@types/node/stream.d.ts:1050
 
 ___
 
@@ -417,7 +417,7 @@ Transform.writableFinished
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1043
+node_modules/@types/node/stream.d.ts:1051
 
 ___
 
@@ -431,7 +431,7 @@ Transform.writableHighWaterMark
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1044
+node_modules/@types/node/stream.d.ts:1052
 
 ___
 
@@ -445,7 +445,7 @@ Transform.writableLength
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1045
+node_modules/@types/node/stream.d.ts:1053
 
 ___
 
@@ -459,7 +459,7 @@ Transform.writableNeedDrain
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1048
+node_modules/@types/node/stream.d.ts:1056
 
 ___
 
@@ -473,7 +473,7 @@ Transform.writableObjectMode
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1046
+node_modules/@types/node/stream.d.ts:1054
 
 ## Methods
 
@@ -489,7 +489,7 @@ Calls `readable.destroy()` with an `AbortError` and returns a promise that fulfi
 
 **`Since`**
 
-v18.18.0
+v20.4.0
 
 #### Inherited from
 
@@ -497,7 +497,7 @@ Transform.[asyncDispose]
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:682
+node_modules/@types/node/stream.d.ts:651
 
 ___
 
@@ -515,13 +515,13 @@ Transform.[asyncIterator]
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:677
+node_modules/@types/node/stream.d.ts:646
 
 ___
 
 ### [captureRejectionSymbol]
 
-▸ `Optional` **[captureRejectionSymbol]**(`error`, `event`, `...args`): `void`
+▸ **[captureRejectionSymbol]**(`error`, `event`, `...args`): `void`
 
 #### Parameters
 
@@ -541,13 +541,13 @@ Transform.[captureRejectionSymbol]
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:115
+node_modules/@types/node/events.d.ts:112
 
 ___
 
 ### \_construct
 
-▸ `Optional` **_construct**(`callback`): `void`
+▸ **_construct**(`callback`): `void`
 
 #### Parameters
 
@@ -565,7 +565,7 @@ Transform.\_construct
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:157
+node_modules/@types/node/stream.d.ts:126
 
 ___
 
@@ -578,7 +578,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `error` | ``null`` \| `Error` |
-| `callback` | (`error`: ``null`` \| `Error`) => `void` |
+| `callback` | (`error?`: ``null`` \| `Error`) => `void` |
 
 #### Returns
 
@@ -590,7 +590,7 @@ Transform.\_destroy
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1103
+node_modules/@types/node/stream.d.ts:1111
 
 ___
 
@@ -614,7 +614,7 @@ Transform.\_final
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1104
+node_modules/@types/node/stream.d.ts:1112
 
 ___
 
@@ -638,7 +638,7 @@ Transform.\_flush
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1250
+node_modules/@types/node/stream.d.ts:1282
 
 ___
 
@@ -662,7 +662,7 @@ Transform.\_read
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:158
+node_modules/@types/node/stream.d.ts:127
 
 ___
 
@@ -688,7 +688,7 @@ Transform.\_transform
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1249
+node_modules/@types/node/stream.d.ts:1281
 
 ___
 
@@ -714,13 +714,13 @@ Transform.\_write
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1095
+node_modules/@types/node/stream.d.ts:1103
 
 ___
 
 ### \_writev
 
-▸ `Optional` **_writev**(`chunks`, `callback`): `void`
+▸ **_writev**(`chunks`, `callback`): `void`
 
 #### Parameters
 
@@ -739,7 +739,7 @@ Transform.\_writev
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1096
+node_modules/@types/node/stream.d.ts:1104
 
 ___
 
@@ -778,7 +778,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1128
+node_modules/@types/node/stream.d.ts:1160
 
 ▸ **addListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -799,7 +799,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1129
+node_modules/@types/node/stream.d.ts:1161
 
 ▸ **addListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -820,7 +820,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1130
+node_modules/@types/node/stream.d.ts:1162
 
 ▸ **addListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -841,7 +841,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1131
+node_modules/@types/node/stream.d.ts:1163
 
 ▸ **addListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -862,7 +862,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1132
+node_modules/@types/node/stream.d.ts:1164
 
 ▸ **addListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -883,7 +883,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1133
+node_modules/@types/node/stream.d.ts:1165
 
 ▸ **addListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -904,7 +904,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1134
+node_modules/@types/node/stream.d.ts:1166
 
 ▸ **addListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -925,7 +925,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1135
+node_modules/@types/node/stream.d.ts:1167
 
 ▸ **addListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -946,7 +946,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1136
+node_modules/@types/node/stream.d.ts:1168
 
 ▸ **addListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -967,7 +967,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1137
+node_modules/@types/node/stream.d.ts:1169
 
 ▸ **addListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -988,7 +988,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1138
+node_modules/@types/node/stream.d.ts:1170
 
 ▸ **addListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -1009,7 +1009,7 @@ Transform.addListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1139
+node_modules/@types/node/stream.d.ts:1171
 
 ___
 
@@ -1042,7 +1042,7 @@ Transform.asIndexedPairs
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:572
+node_modules/@types/node/stream.d.ts:541
 
 ___
 
@@ -1092,7 +1092,7 @@ Transform.cork
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1111
+node_modules/@types/node/stream.d.ts:1119
 
 ___
 
@@ -1128,7 +1128,7 @@ Transform.destroy
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:609
+node_modules/@types/node/stream.d.ts:578
 
 ___
 
@@ -1161,7 +1161,7 @@ Transform.drop
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:558
+node_modules/@types/node/stream.d.ts:527
 
 ___
 
@@ -1185,7 +1185,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1140
+node_modules/@types/node/stream.d.ts:1172
 
 ▸ **emit**(`event`, `chunk`): `boolean`
 
@@ -1206,7 +1206,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1141
+node_modules/@types/node/stream.d.ts:1173
 
 ▸ **emit**(`event`): `boolean`
 
@@ -1226,7 +1226,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1142
+node_modules/@types/node/stream.d.ts:1174
 
 ▸ **emit**(`event`): `boolean`
 
@@ -1246,7 +1246,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1143
+node_modules/@types/node/stream.d.ts:1175
 
 ▸ **emit**(`event`, `err`): `boolean`
 
@@ -1267,7 +1267,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1144
+node_modules/@types/node/stream.d.ts:1176
 
 ▸ **emit**(`event`): `boolean`
 
@@ -1287,7 +1287,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1145
+node_modules/@types/node/stream.d.ts:1177
 
 ▸ **emit**(`event`): `boolean`
 
@@ -1307,7 +1307,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1146
+node_modules/@types/node/stream.d.ts:1178
 
 ▸ **emit**(`event`, `src`): `boolean`
 
@@ -1328,7 +1328,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1147
+node_modules/@types/node/stream.d.ts:1179
 
 ▸ **emit**(`event`): `boolean`
 
@@ -1348,7 +1348,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1148
+node_modules/@types/node/stream.d.ts:1180
 
 ▸ **emit**(`event`): `boolean`
 
@@ -1368,7 +1368,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1149
+node_modules/@types/node/stream.d.ts:1181
 
 ▸ **emit**(`event`, `src`): `boolean`
 
@@ -1389,7 +1389,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1150
+node_modules/@types/node/stream.d.ts:1182
 
 ▸ **emit**(`event`, `...args`): `boolean`
 
@@ -1410,7 +1410,7 @@ Transform.emit
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1151
+node_modules/@types/node/stream.d.ts:1183
 
 ___
 
@@ -1434,7 +1434,7 @@ Transform.end
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1108
+node_modules/@types/node/stream.d.ts:1116
 
 ▸ **end**(`chunk`, `cb?`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -1455,7 +1455,7 @@ Transform.end
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1109
+node_modules/@types/node/stream.d.ts:1117
 
 ▸ **end**(`chunk`, `encoding?`, `cb?`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -1477,7 +1477,7 @@ Transform.end
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1110
+node_modules/@types/node/stream.d.ts:1118
 
 ___
 
@@ -1489,7 +1489,8 @@ Returns an array listing the events for which the emitter has registered
 listeners. The values in the array are strings or `Symbol`s.
 
 ```js
-const EventEmitter = require('events');
+import { EventEmitter } from 'node:events';
+
 const myEE = new EventEmitter();
 myEE.on('foo', () => {});
 myEE.on('bar', () => {});
@@ -1515,7 +1516,7 @@ Transform.eventNames
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:794
+node_modules/@types/node/events.d.ts:870
 
 ___
 
@@ -1551,7 +1552,7 @@ Transform.every
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:537
+node_modules/@types/node/stream.d.ts:506
 
 ___
 
@@ -1586,7 +1587,7 @@ Transform.filter
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:465
+node_modules/@types/node/stream.d.ts:434
 
 ___
 
@@ -1629,7 +1630,7 @@ Transform.find
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:520
+node_modules/@types/node/stream.d.ts:489
 
 ▸ **find**(`fn`, `options?`): `Promise`<`any`\>
 
@@ -1650,7 +1651,7 @@ Transform.find
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:524
+node_modules/@types/node/stream.d.ts:493
 
 ___
 
@@ -1687,7 +1688,7 @@ Transform.flatMap
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:551
+node_modules/@types/node/stream.d.ts:520
 
 ___
 
@@ -1729,7 +1730,7 @@ Transform.forEach
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:484
+node_modules/@types/node/stream.d.ts:453
 
 ___
 
@@ -1754,7 +1755,7 @@ Transform.getMaxListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:647
+node_modules/@types/node/events.d.ts:722
 
 ___
 
@@ -1790,7 +1791,7 @@ Transform.isPaused
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:318
+node_modules/@types/node/stream.d.ts:287
 
 ___
 
@@ -1823,7 +1824,7 @@ Transform.iterator
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:448
+node_modules/@types/node/stream.d.ts:417
 
 ___
 
@@ -1831,10 +1832,9 @@ ___
 
 ▸ **listenerCount**(`eventName`, `listener?`): `number`
 
-Returns the number of listeners listening to the event named `eventName`.
-
-If `listener` is provided, it will return how many times the listener
-is found in the list of the listeners of the event.
+Returns the number of listeners listening for the event named `eventName`.
+If `listener` is provided, it will return how many times the listener is found
+in the list of the listeners of the event.
 
 #### Parameters
 
@@ -1857,7 +1857,7 @@ Transform.listenerCount
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:741
+node_modules/@types/node/events.d.ts:816
 
 ___
 
@@ -1895,7 +1895,7 @@ Transform.listeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:660
+node_modules/@types/node/events.d.ts:735
 
 ___
 
@@ -1929,7 +1929,7 @@ Transform.map
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:456
+node_modules/@types/node/stream.d.ts:425
 
 ___
 
@@ -1960,7 +1960,7 @@ Transform.off
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:620
+node_modules/@types/node/events.d.ts:695
 
 ___
 
@@ -1985,7 +1985,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1152
+node_modules/@types/node/stream.d.ts:1184
 
 ▸ **on**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2006,7 +2006,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1153
+node_modules/@types/node/stream.d.ts:1185
 
 ▸ **on**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2027,7 +2027,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1154
+node_modules/@types/node/stream.d.ts:1186
 
 ▸ **on**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2048,7 +2048,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1155
+node_modules/@types/node/stream.d.ts:1187
 
 ▸ **on**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2069,7 +2069,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1156
+node_modules/@types/node/stream.d.ts:1188
 
 ▸ **on**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2090,7 +2090,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1157
+node_modules/@types/node/stream.d.ts:1189
 
 ▸ **on**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2111,7 +2111,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1158
+node_modules/@types/node/stream.d.ts:1190
 
 ▸ **on**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2132,7 +2132,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1159
+node_modules/@types/node/stream.d.ts:1191
 
 ▸ **on**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2153,7 +2153,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1160
+node_modules/@types/node/stream.d.ts:1192
 
 ▸ **on**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2174,7 +2174,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1161
+node_modules/@types/node/stream.d.ts:1193
 
 ▸ **on**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2195,7 +2195,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1162
+node_modules/@types/node/stream.d.ts:1194
 
 ▸ **on**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2216,7 +2216,7 @@ Transform.on
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1163
+node_modules/@types/node/stream.d.ts:1195
 
 ___
 
@@ -2241,7 +2241,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1164
+node_modules/@types/node/stream.d.ts:1196
 
 ▸ **once**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2262,7 +2262,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1165
+node_modules/@types/node/stream.d.ts:1197
 
 ▸ **once**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2283,7 +2283,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1166
+node_modules/@types/node/stream.d.ts:1198
 
 ▸ **once**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2304,7 +2304,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1167
+node_modules/@types/node/stream.d.ts:1199
 
 ▸ **once**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2325,7 +2325,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1168
+node_modules/@types/node/stream.d.ts:1200
 
 ▸ **once**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2346,7 +2346,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1169
+node_modules/@types/node/stream.d.ts:1201
 
 ▸ **once**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2367,7 +2367,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1170
+node_modules/@types/node/stream.d.ts:1202
 
 ▸ **once**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2388,7 +2388,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1171
+node_modules/@types/node/stream.d.ts:1203
 
 ▸ **once**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2409,7 +2409,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1172
+node_modules/@types/node/stream.d.ts:1204
 
 ▸ **once**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2430,7 +2430,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1173
+node_modules/@types/node/stream.d.ts:1205
 
 ▸ **once**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2451,7 +2451,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1174
+node_modules/@types/node/stream.d.ts:1206
 
 ▸ **once**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2472,7 +2472,7 @@ Transform.once
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1175
+node_modules/@types/node/stream.d.ts:1207
 
 ___
 
@@ -2513,7 +2513,7 @@ Transform.pause
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:282
+node_modules/@types/node/stream.d.ts:251
 
 ___
 
@@ -2570,7 +2570,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1176
+node_modules/@types/node/stream.d.ts:1208
 
 ▸ **prependListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2591,7 +2591,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1177
+node_modules/@types/node/stream.d.ts:1209
 
 ▸ **prependListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2612,7 +2612,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1178
+node_modules/@types/node/stream.d.ts:1210
 
 ▸ **prependListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2633,7 +2633,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1179
+node_modules/@types/node/stream.d.ts:1211
 
 ▸ **prependListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2654,7 +2654,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1180
+node_modules/@types/node/stream.d.ts:1212
 
 ▸ **prependListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2675,7 +2675,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1181
+node_modules/@types/node/stream.d.ts:1213
 
 ▸ **prependListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2696,7 +2696,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1182
+node_modules/@types/node/stream.d.ts:1214
 
 ▸ **prependListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2717,7 +2717,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1183
+node_modules/@types/node/stream.d.ts:1215
 
 ▸ **prependListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2738,7 +2738,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1184
+node_modules/@types/node/stream.d.ts:1216
 
 ▸ **prependListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2759,7 +2759,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1185
+node_modules/@types/node/stream.d.ts:1217
 
 ▸ **prependListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2780,7 +2780,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1186
+node_modules/@types/node/stream.d.ts:1218
 
 ▸ **prependListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2801,7 +2801,7 @@ Transform.prependListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1187
+node_modules/@types/node/stream.d.ts:1219
 
 ___
 
@@ -2826,7 +2826,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1188
+node_modules/@types/node/stream.d.ts:1220
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2847,7 +2847,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1189
+node_modules/@types/node/stream.d.ts:1221
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2868,7 +2868,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1190
+node_modules/@types/node/stream.d.ts:1222
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2889,7 +2889,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1191
+node_modules/@types/node/stream.d.ts:1223
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2910,7 +2910,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1192
+node_modules/@types/node/stream.d.ts:1224
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2931,7 +2931,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1193
+node_modules/@types/node/stream.d.ts:1225
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2952,7 +2952,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1194
+node_modules/@types/node/stream.d.ts:1226
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2973,7 +2973,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1195
+node_modules/@types/node/stream.d.ts:1227
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -2994,7 +2994,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1196
+node_modules/@types/node/stream.d.ts:1228
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -3015,7 +3015,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1197
+node_modules/@types/node/stream.d.ts:1229
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -3036,7 +3036,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1198
+node_modules/@types/node/stream.d.ts:1230
 
 ▸ **prependOnceListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -3057,7 +3057,7 @@ Transform.prependOnceListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1199
+node_modules/@types/node/stream.d.ts:1231
 
 ___
 
@@ -3082,7 +3082,7 @@ Transform.push
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:438
+node_modules/@types/node/stream.d.ts:407
 
 ___
 
@@ -3094,6 +3094,7 @@ Returns a copy of the array of listeners for the event named `eventName`,
 including any wrappers (such as those created by `.once()`).
 
 ```js
+import { EventEmitter } from 'node:events';
 const emitter = new EventEmitter();
 emitter.once('log', () => console.log('log once'));
 
@@ -3137,7 +3138,7 @@ Transform.rawListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:690
+node_modules/@types/node/events.d.ts:766
 
 ___
 
@@ -3238,7 +3239,7 @@ Transform.read
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:235
+node_modules/@types/node/stream.d.ts:204
 
 ___
 
@@ -3285,7 +3286,7 @@ Transform.reduce
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:587
+node_modules/@types/node/stream.d.ts:556
 
 ▸ **reduce**<`T`\>(`fn`, `initial`, `options?`): `Promise`<`T`\>
 
@@ -3313,7 +3314,7 @@ Transform.reduce
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:592
+node_modules/@types/node/stream.d.ts:561
 
 ___
 
@@ -3349,7 +3350,7 @@ Transform.removeAllListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:631
+node_modules/@types/node/events.d.ts:706
 
 ___
 
@@ -3374,7 +3375,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1200
+node_modules/@types/node/stream.d.ts:1232
 
 ▸ **removeListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -3395,7 +3396,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1201
+node_modules/@types/node/stream.d.ts:1233
 
 ▸ **removeListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -3416,7 +3417,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1202
+node_modules/@types/node/stream.d.ts:1234
 
 ▸ **removeListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -3437,7 +3438,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1203
+node_modules/@types/node/stream.d.ts:1235
 
 ▸ **removeListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -3458,7 +3459,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1204
+node_modules/@types/node/stream.d.ts:1236
 
 ▸ **removeListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -3479,7 +3480,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1205
+node_modules/@types/node/stream.d.ts:1237
 
 ▸ **removeListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -3500,7 +3501,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1206
+node_modules/@types/node/stream.d.ts:1238
 
 ▸ **removeListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -3521,7 +3522,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1207
+node_modules/@types/node/stream.d.ts:1239
 
 ▸ **removeListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -3542,7 +3543,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1208
+node_modules/@types/node/stream.d.ts:1240
 
 ▸ **removeListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -3563,7 +3564,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1209
+node_modules/@types/node/stream.d.ts:1241
 
 ▸ **removeListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -3584,7 +3585,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1210
+node_modules/@types/node/stream.d.ts:1242
 
 ▸ **removeListener**(`event`, `listener`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
@@ -3605,7 +3606,7 @@ Transform.removeListener
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1211
+node_modules/@types/node/stream.d.ts:1243
 
 ___
 
@@ -3643,7 +3644,7 @@ Transform.resume
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:301
+node_modules/@types/node/stream.d.ts:270
 
 ___
 
@@ -3667,7 +3668,7 @@ Transform.setDefaultEncoding
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1107
+node_modules/@types/node/stream.d.ts:1115
 
 ___
 
@@ -3716,7 +3717,7 @@ Transform.setEncoding
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:260
+node_modules/@types/node/stream.d.ts:229
 
 ___
 
@@ -3751,7 +3752,7 @@ Transform.setMaxListeners
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:641
+node_modules/@types/node/events.d.ts:716
 
 ___
 
@@ -3787,7 +3788,7 @@ Transform.some
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:506
+node_modules/@types/node/stream.d.ts:475
 
 ___
 
@@ -3820,7 +3821,7 @@ Transform.take
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:565
+node_modules/@types/node/stream.d.ts:534
 
 ___
 
@@ -3855,7 +3856,7 @@ Transform.toArray
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:496
+node_modules/@types/node/stream.d.ts:465
 
 ___
 
@@ -3873,7 +3874,7 @@ Transform.uncork
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1112
+node_modules/@types/node/stream.d.ts:1120
 
 ___
 
@@ -3890,7 +3891,7 @@ If the `destination` is specified, but no pipe is set up for it, then
 the method does nothing.
 
 ```js
-const fs = require('fs');
+const fs = require('node:fs');
 const readable = getReadableStreamSomehow();
 const writable = fs.createWriteStream('file.txt');
 // All the data from readable goes into 'file.txt',
@@ -3924,7 +3925,7 @@ Transform.unpipe
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:345
+node_modules/@types/node/stream.d.ts:314
 
 ___
 
@@ -3952,7 +3953,7 @@ use of a `Transform` stream instead. See the `API for stream implementers` secti
 // Pull off a header delimited by \n\n.
 // Use unshift() if we get too much.
 // Call the callback with (error, header, stream).
-const { StringDecoder } = require('string_decoder');
+const { StringDecoder } = require('node:string_decoder');
 function parseHeader(stream, callback) {
   stream.on('error', callback);
   stream.on('readable', onReadable);
@@ -3996,7 +3997,7 @@ process of performing a read.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `chunk` | `any` | Chunk of data to unshift onto the read queue. For streams not operating in object mode, `chunk` must be a string, `Buffer`, `Uint8Array` or `null`. For object mode streams, `chunk` may be any JavaScript value. |
+| `chunk` | `any` | Chunk of data to unshift onto the read queue. For streams not operating in object mode, `chunk` must be a string, `Buffer`, `Uint8Array`, or `null`. For object mode streams, `chunk` may be any JavaScript value. |
 | `encoding?` | `BufferEncoding` | Encoding of string chunks. Must be a valid `Buffer` encoding, such as `'utf8'` or `'ascii'`. |
 
 #### Returns
@@ -4013,7 +4014,7 @@ Transform.unshift
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:411
+node_modules/@types/node/stream.d.ts:380
 
 ___
 
@@ -4021,8 +4022,8 @@ ___
 
 ▸ **wrap**(`stream`): [`SourceTransform`](sourceDestination.SourceTransform.md)
 
-Prior to Node.js 0.10, streams did not implement the entire `stream` module API
-as it is currently defined. (See `Compatibility` for more information.)
+Prior to Node.js 0.10, streams did not implement the entire `node:stream`module API as it is currently defined. (See `Compatibility` for more
+information.)
 
 When using an older Node.js library that emits `'data'` events and has a [pause](sourceDestination.SourceTransform.md#pause) method that is advisory only, the`readable.wrap()` method can be used to create a `Readable`
 stream that uses
@@ -4034,7 +4035,7 @@ libraries.
 
 ```js
 const { OldReader } = require('./old-api-module.js');
-const { Readable } = require('stream');
+const { Readable } = require('node:stream');
 const oreader = new OldReader();
 const myReader = new Readable().wrap(oreader);
 
@@ -4063,7 +4064,7 @@ Transform.wrap
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:437
+node_modules/@types/node/stream.d.ts:406
 
 ___
 
@@ -4089,7 +4090,7 @@ Transform.write
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1105
+node_modules/@types/node/stream.d.ts:1113
 
 ▸ **write**(`chunk`, `cb?`): `boolean`
 
@@ -4110,4 +4111,4 @@ Transform.write
 
 #### Defined in
 
-node_modules/@types/node/stream.d.ts:1106
+node_modules/@types/node/stream.d.ts:1114

@@ -35,7 +35,7 @@
 
 ### constructor
 
-• **new ChecksumVerificationError**(`message`, `checksum`, `expectedChecksum`)
+• **new ChecksumVerificationError**(`message`, `checksum`, `expectedChecksum`): [`ChecksumVerificationError`](errors.ChecksumVerificationError.md)
 
 #### Parameters
 
@@ -45,13 +45,17 @@
 | `checksum` | `string` |
 | `expectedChecksum` | `string` |
 
+#### Returns
+
+[`ChecksumVerificationError`](errors.ChecksumVerificationError.md)
+
 #### Overrides
 
 [VerificationError](errors.VerificationError.md).[constructor](errors.VerificationError.md#constructor)
 
 #### Defined in
 
-[lib/errors.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/errors.ts#L29)
+[lib/errors.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/errors.ts#L29)
 
 ## Properties
 
@@ -61,7 +65,7 @@
 
 #### Defined in
 
-[lib/errors.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/errors.ts#L31)
+[lib/errors.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/errors.ts#L31)
 
 ___
 
@@ -75,7 +79,7 @@ ___
 
 #### Defined in
 
-[lib/errors.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/errors.ts#L25)
+[lib/errors.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/errors.ts#L25)
 
 ___
 
@@ -85,7 +89,7 @@ ___
 
 #### Defined in
 
-[lib/errors.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/errors.ts#L32)
+[lib/errors.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/errors.ts#L32)
 
 ___
 
@@ -162,7 +166,7 @@ https://v8.dev/docs/stack-trace-api#customizing-stack-traces
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:11
+node_modules/@types/node/globals.d.ts:28
 
 ___
 
@@ -176,13 +180,13 @@ ___
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:13
+node_modules/@types/node/globals.d.ts:30
 
 ## Methods
 
 ### captureStackTrace
 
-▸ `Static` **captureStackTrace**(`targetObject`, `constructorOpt?`): `void`
+▸ **captureStackTrace**(`targetObject`, `constructorOpt?`): `void`
 
 Create .stack property on a target object
 
@@ -203,4 +207,4 @@ Create .stack property on a target object
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:4
+node_modules/@types/node/globals.d.ts:21

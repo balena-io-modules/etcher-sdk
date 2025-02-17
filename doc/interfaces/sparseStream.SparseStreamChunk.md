@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[lib/sparse-stream/shared.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/sparse-stream/shared.ts#L39)
+[lib/sparse-stream/shared.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/shared.ts#L39)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/shared.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/sparse-stream/shared.ts#L40)
+[lib/sparse-stream/shared.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/shared.ts#L40)

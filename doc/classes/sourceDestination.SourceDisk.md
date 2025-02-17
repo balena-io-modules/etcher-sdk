@@ -46,7 +46,7 @@
 
 ### constructor
 
-• **new SourceDisk**(`source`)
+• **new SourceDisk**(`source`): [`SourceDisk`](sourceDestination.SourceDisk.md)
 
 #### Parameters
 
@@ -54,13 +54,17 @@
 | :------ | :------ |
 | `source` | [`SourceDestination`](sourceDestination.SourceDestination.md) |
 
+#### Returns
+
+[`SourceDisk`](sourceDestination.SourceDisk.md)
+
 #### Overrides
 
 Disk.constructor
 
 #### Defined in
 
-[lib/source-destination/configured-source/configured-source.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/configured-source/configured-source.ts#L48)
+[lib/source-destination/configured-source/configured-source.ts:52](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/configured-source/configured-source.ts#L52)
 
 ## Properties
 
@@ -154,13 +158,13 @@ ___
 
 #### Defined in
 
-[lib/source-destination/configured-source/configured-source.ts:48](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/configured-source/configured-source.ts#L48)
+[lib/source-destination/configured-source/configured-source.ts:52](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/configured-source/configured-source.ts#L52)
 
 ## Methods
 
 ### \_flush
 
-▸ `Protected` **_flush**(): `Promise`<`void`\>
+▸ **_flush**(): `Promise`<`void`\>
 
 #### Returns
 
@@ -172,13 +176,13 @@ Disk.\_flush
 
 #### Defined in
 
-[lib/source-destination/configured-source/configured-source.ts:90](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/configured-source/configured-source.ts#L90)
+[lib/source-destination/configured-source/configured-source.ts:94](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/configured-source/configured-source.ts#L94)
 
 ___
 
 ### \_getCapacity
 
-▸ `Protected` **_getCapacity**(): `Promise`<`number`\>
+▸ **_getCapacity**(): `Promise`<`number`\>
 
 #### Returns
 
@@ -190,13 +194,13 @@ Disk.\_getCapacity
 
 #### Defined in
 
-[lib/source-destination/configured-source/configured-source.ts:63](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/configured-source/configured-source.ts#L63)
+[lib/source-destination/configured-source/configured-source.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/configured-source/configured-source.ts#L67)
 
 ___
 
 ### \_read
 
-▸ `Protected` **_read**(`buffer`, `bufferOffset`, `length`, `fileOffset`): `Promise`<`ReadResult`\>
+▸ **_read**(`buffer`, `bufferOffset`, `length`, `fileOffset`): `Promise`<`ReadResult`\>
 
 #### Parameters
 
@@ -217,13 +221,13 @@ Disk.\_read
 
 #### Defined in
 
-[lib/source-destination/configured-source/configured-source.ts:72](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/configured-source/configured-source.ts#L72)
+[lib/source-destination/configured-source/configured-source.ts:76](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/configured-source/configured-source.ts#L76)
 
 ___
 
 ### \_write
 
-▸ `Protected` **_write**(`_buffer`, `_bufferOffset`, `_length`, `_fileOffset`): `Promise`<`WriteResult`\>
+▸ **_write**(`_buffer`, `_bufferOffset`, `_length`, `_fileOffset`): `Promise`<`WriteResult`\>
 
 #### Parameters
 
@@ -244,7 +248,7 @@ Disk.\_write
 
 #### Defined in
 
-[lib/source-destination/configured-source/configured-source.ts:81](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/configured-source/configured-source.ts#L81)
+[lib/source-destination/configured-source/configured-source.ts:85](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/configured-source/configured-source.ts#L85)
 
 ___
 

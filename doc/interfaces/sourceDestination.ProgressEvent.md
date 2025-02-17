@@ -21,7 +21,7 @@
 
 #### Defined in
 
-[lib/source-destination/progress.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/progress.ts#L30)
+[lib/source-destination/progress.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/progress.ts#L30)
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/progress.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/progress.ts#L28)
+[lib/source-destination/progress.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/progress.ts#L28)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/progress.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/progress.ts#L27)
+[lib/source-destination/progress.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/progress.ts#L27)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 #### Defined in
 
-[lib/source-destination/progress.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/progress.ts#L29)
+[lib/source-destination/progress.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/progress.ts#L29)

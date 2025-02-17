@@ -91,7 +91,7 @@
 
 #### Defined in
 
-[lib/source-destination/configured-source/configured-source.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/configured-source/configured-source.ts#L45)
+[lib/source-destination/configured-source/configured-source.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/configured-source/configured-source.ts#L49)
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 #### Type declaration
 
-• (`...args`)
+• (`...args`): `T`
 
 ##### Parameters
 
@@ -115,9 +115,13 @@ ___
 | :------ | :------ |
 | `...args` | `any`[] |
 
+##### Returns
+
+`T`
+
 #### Defined in
 
-[lib/source-destination/progress.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/progress.ts#L24)
+[lib/source-destination/progress.ts:24](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/progress.ts#L24)
 
 ___
 
@@ -127,7 +131,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/balena-s3-compressed-source.ts#L36)
+[lib/source-destination/balena-s3-compressed-source.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L36)
 
 ## Variables
 
@@ -137,7 +141,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L95)
+[lib/source-destination/source-destination.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L95)
 
 ___
 
@@ -147,7 +151,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/progress.ts:113](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/progress.ts#L113)
+[lib/source-destination/progress.ts:119](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/progress.ts#L119)
 
 ___
 
@@ -157,7 +161,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/file.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/file.ts#L36)
+[lib/source-destination/file.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/file.ts#L36)
 
 ## Functions
 
@@ -171,7 +175,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:101](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/source-destination.ts#L101)
+[lib/source-destination/source-destination.ts:101](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L101)
 
 ___
 
@@ -191,7 +195,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/compressed-source.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/compressed-source.ts#L35)
+[lib/source-destination/compressed-source.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/compressed-source.ts#L35)
 
 ___
 
@@ -211,7 +215,7 @@ stream is SourceTransform
 
 #### Defined in
 
-[lib/source-destination/compressed-source.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/compressed-source.ts#L31)
+[lib/source-destination/compressed-source.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/compressed-source.ts#L31)
 
 ___
 
@@ -240,7 +244,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/progress.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/progress.ts#L33)
+[lib/source-destination/progress.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/progress.ts#L33)
 
 ___
 
@@ -260,4 +264,4 @@ ___
 
 #### Defined in
 
-[lib/source-destination/zip.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/a70e73b/lib/source-destination/zip.ts#L62)
+[lib/source-destination/zip.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/zip.ts#L62)
