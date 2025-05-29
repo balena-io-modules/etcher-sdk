@@ -1,4 +1,16 @@
 - commits:
+    - subject: Run `npm audit fix` which should only do non-breaking changes
+      hash: 22aaacc0744e41989706c968c4efc8767d30b7a8
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Otavio Jacobi
+      nested: []
+  version: 9.1.4
+  title: ""
+  date: 2025-05-29T08:57:28.785Z
+- commits:
     - subject: Embed config.json with a fixed timestamp to enable consistent checksums
       hash: 83e67a4089ec39023c39fe79fe59021237797c85
       body: |
