@@ -1,4 +1,16 @@
 - commits:
+    - subject: Drop support to node18 and add support to node 22 & 24
+      hash: 95e577823f642a6c0e500aa29fc150b7807d84f7
+      body: ""
+      footer:
+        Change-type: major
+        change-type: major
+      author: Otavio Jacobi
+      nested: []
+  version: 10.0.0
+  title: ""
+  date: 2025-06-02T09:12:32.868Z
+- commits:
     - subject: Run `npm audit fix` which should only do non-breaking changes
       hash: 22aaacc0744e41989706c968c4efc8767d30b7a8
       body: ""
