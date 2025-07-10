@@ -110,8 +110,16 @@ export class BlockReadStream extends Readable {
 			this.bytesRead += bytesRead;
 			if (bytesRead !== 0) {
 				this.push(buffer.slice(0, bytesRead));
+				// Release buffer reference after slice is pushed downstream
+				if (isAlignedLockableBuffer(buffer)) {
+					buffer.release();
+				}
 			} else {
 				this.push(null);
+				// Release buffer reference even for empty read
+				if (isAlignedLockableBuffer(buffer)) {
+					buffer.release();
+				}
 			}
 		} catch (error) {
 			this.emit('error', error);
