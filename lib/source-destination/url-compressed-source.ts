@@ -8,8 +8,8 @@ import {
 import { Readable } from 'stream';
 import * as ZipPartStream from 'zip-part-stream';
 import { createInflateRaw } from 'zlib';
+import axios from 'axios';
 
-import { BalenaS3SourceBase, BalenaS3SourceOptions } from './balena-s3-source';
 import {
 	normalizePartition,
 	shouldRunOperation,
@@ -19,35 +19,54 @@ import {
 import { configure } from './configured-source/operations/configure';
 import { copy } from './configured-source/operations/copy';
 import { Metadata } from './metadata';
-import { CreateReadStreamOptions } from './source-destination';
+import {
+	CreateReadStreamOptions,
+	SourceDestination,
+} from './source-destination';
+import { ImageJSON, ImageJSONPart } from './compressed-source-types';
 
 import { NotCapable } from '../errors';
 import { StreamLimiter } from '../stream-limiter';
 import { Dictionary, streamToBuffer } from '../utils';
-import type { ImageJSON, ImageJSONPart } from './compressed-source-types';
 
-export interface BalenaS3CompressedSourceOptions extends BalenaS3SourceOptions {
+/**
+ * Configuration for URLCompressedSource
+ * Maps keys to their direct URLs (similar to what S3 would provide)
+ */
+export interface URLSourceConfig {
+	VERSION: string; // URL to VERSION file
+	VERSION_HOSTOS: string; // URL to VERSION_HOSTOS file
+	'device-type.json': string; // URL to device-type.json file
+	'image.json': string; // URL to image.json file
+	parts: Dictionary<string>; // Map of part filenames to their URLs
+}
+
+export interface URLCompressedSourceOptions {
+	urls: URLSourceConfig;
 	format: 'zip' | 'gzip';
 	filenamePrefix?: string;
 	configuration?: Dictionary<any>;
+	deviceType: string; // raspberry-pi
+	buildId: string; // 2.9.6+rev1.prod
 }
 
-export class BalenaS3CompressedSource extends BalenaS3SourceBase {
-	/*
-	 * Supports regular disk images (zipped or gzipped) and edison zip archives (zip only as it contains many files).
-	 * No random reads, you can't use this with ConfiguredSource.
-	 * Instead it handles the configuration on its own.
-	 * Partial compressed files are streamed from S3.
-	 * If a partition (or disk image in the zip archive for edisons) needs configuration, it is downloaded, decompressed and recompressed.
-	 * The complete compressed stream is created from the partial compressed files in S3 and the configured parts described above.
-	 * Downside: can't be used with ConfiguredSource.
-	 * Upside: only the needed parts of the archive need to be decomressed and recompressed.
-	 *
-	 * Note: edison zip archives are not valid sources for flashing, they contain multiple files, not a single disk image.
-	 */
-	private imageJSON: ImageJSON;
-	private deviceTypeJSON: DeviceTypeJSON;
-	private format: BalenaS3CompressedSourceOptions['format'];
+/**
+ * URLCompressedSource - Downloads and streams compressed images from direct URLs
+ * Similar to BalenaS3CompressedSource but uses pre-configured URLs instead of S3 paths
+ *
+ * Supports regular disk images (zipped or gzipped) and edison zip archives (zip only as it contains many files).
+ * No random reads, you can't use this with ConfiguredSource.
+ * Instead it handles the configuration on its own.
+ * Partial compressed files are streamed from URLs.
+ * If a partition (or disk image in the zip archive for edisons) needs configuration, it is downloaded, decompressed and recompressed.
+ * The complete compressed stream is created from the partial compressed files from URLs and the configured parts described above.
+ */
+export class URLCompressedSource extends SourceDestination {
+	public readonly deviceType: string;
+	public readonly buildId: string;
+
+	private urls: URLSourceConfig;
+	private format: URLCompressedSourceOptions['format'];
 	private filenamePrefix?: string;
 	// configuration is config.json + network configuration + dashboard "when" options like "processorCore" for ts4900
 	private configuration?: Dictionary<any>;
@@ -55,22 +74,31 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 		string,
 		{ crc: number; zLen: number; buffer: Buffer }
 	>();
+
+	// image metadata populated on _open
+	private imageJSON: ImageJSON;
+	private deviceTypeJSON: DeviceTypeJSON;
 	private supervisorVersion: string;
-	private lastModified: Date;
 	private osVersion: string;
+	private lastModified: Date;
 	private size: number;
 	private filename: string;
 
 	constructor({
+		urls,
 		format,
 		filenamePrefix,
 		configuration,
-		...options
-	}: BalenaS3CompressedSourceOptions) {
-		super(options);
+		buildId,
+		deviceType,
+	}: URLCompressedSourceOptions) {
+		super();
+		this.urls = urls;
 		this.format = format;
 		this.filenamePrefix = filenamePrefix;
 		this.configuration = configuration;
+		this.buildId = buildId;
+		this.deviceType = deviceType;
 	}
 
 	private async getSize(): Promise<number> {
@@ -84,7 +112,6 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 			this.osVersion,
 			this.buildId.endsWith('.dev') ? 'dev' : undefined,
 			this.supervisorVersion,
-			this.release,
 		]
 			.filter((p) => p !== undefined)
 			.join('-');
@@ -116,9 +143,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	}
 
 	private async getImageJSON(): Promise<ImageJSON> {
-		const imageJSON = (await this.download(`image${this.imageSuffix}.json`))
-			.data;
-		return imageJSON;
+		return (await this.download('image.json')).data;
 	}
 
 	private async getDeviceTypeJSON(): Promise<DeviceTypeJSON> {
@@ -128,11 +153,22 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	private async getPartStream(
 		filename: string,
 	): Promise<NodeJS.ReadableStream> {
-		const response = await this.download(
-			`compressed${this.imageSuffix}/${filename}`,
-			'stream',
-		);
+		const url = this.urls.parts[filename];
+		if (!url) {
+			throw new Error(`URL not found for part: ${filename}`);
+		}
+		const response = await axios.get(url, {
+			responseType: 'stream',
+		});
 		return response.data;
+	}
+
+	private async download(key: Exclude<keyof URLSourceConfig, 'parts'>) {
+		const url = this.urls[key];
+		if (url == null) {
+			throw new Error(`URL not found for key: ${key}`);
+		}
+		return await axios.get(url);
 	}
 
 	private findPartitionPart(
@@ -227,6 +263,11 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	}
 
 	protected async _open(): Promise<void> {
+		// Validate that all required URLs are present
+		if (!this.urls.VERSION || !this.urls['image.json']) {
+			throw new Error('Required URLs (VERSION, image.json) must be provided');
+		}
+
 		const [
 			{ supervisorVersion, lastModified },
 			osVersion,
@@ -258,6 +299,18 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 		} else {
 			this.imageJSON = imageJSON;
 		}
+
+		// Validate that all parts referenced in image.json have corresponding URLs
+		for (const [imageName, { parts }] of Object.entries(this.imageJSON)) {
+			for (const part of parts) {
+				if (!this.urls.parts[part.filename]) {
+					throw new Error(
+						`URL not found for part ${part.filename} referenced in image.json for ${imageName}`,
+					);
+				}
+			}
+		}
+
 		await this.configure();
 		// The order is important, getSize() expects imageJSON and filename to be set and the image to be configured
 		this.size = await this.getSize();
@@ -315,5 +368,9 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 			return new StreamLimiter(stream, options.end + 1);
 		}
 		return stream;
+	}
+
+	public async canCreateReadStream(): Promise<boolean> {
+		return true;
 	}
 }
