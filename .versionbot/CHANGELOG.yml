@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency axios to v1.12.0 [SECURITY]
+      hash: c16b7b192e8b8079e3b8624ae9267bc22730d58d
+      body: |
+        Update axios from 1.9.0 to 1.12.0
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 10.0.2
+  title: ""
+  date: 2025-11-24T19:01:10.257Z
+- commits:
     - subject: Update mocha to 11.7.5
       hash: d3d3bc6fb4cdfa2e1099f22a60b4e111ad06a816
       body: ""
