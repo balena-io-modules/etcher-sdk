@@ -8,7 +8,7 @@
   "types": "build/index.d.ts",
   "scripts": {
     "flowzone-preinstall": "sudo apt-get update && sudo apt-get install -y libudev-dev",
-    "test": "npm run lint && mocha -r ts-node/register tests/**/*.spec.ts",
+    "test": "npm run lint && node scripts/run-tests.js",
     "lint": "balena-lint lib typings examples",
     "lint-fix": "balena-lint --fix lib typings examples tests",
     "build": "tsc",
