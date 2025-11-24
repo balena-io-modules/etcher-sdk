@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update mocha to 11.7.5
+      hash: d3d3bc6fb4cdfa2e1099f22a60b4e111ad06a816
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+  version: 10.0.1
+  title: ""
+  date: 2025-11-24T18:13:54.389Z
+- commits:
     - subject: Drop support to node18 and add support to node 22 & 24
       hash: 95e577823f642a6c0e500aa29fc150b7807d84f7
       body: ""
