@@ -1,4 +1,16 @@
 - commits:
+    - subject: Add URLCompressedSource class
+      hash: 944639c609c4417a54210918b78f5c275fa75b36
+      body: ""
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Otavio Jacobi
+      nested: []
+  version: 10.1.0
+  title: ""
+  date: 2025-11-27T17:00:56.596Z
+- commits:
     - subject: Update dependency axios to v1.12.0 [SECURITY]
       hash: c16b7b192e8b8079e3b8624ae9267bc22730d58d
       body: |
