@@ -35,20 +35,25 @@ import { Dictionary, streamToBuffer } from '../utils';
  */
 export interface URLSourceConfig {
 	VERSION: string; // URL to VERSION file
-	VERSION_HOSTOS: string; // URL to VERSION_HOSTOS file
 	'device-type.json': string; // URL to device-type.json file
 	'image.json': string; // URL to image.json file
 	parts: Dictionary<string>; // Map of part filenames to their URLs
 }
 
-export interface URLCompressedSourceOptions {
+export type URLCompressedSourceOptions = {
 	urls: URLSourceConfig;
 	format: 'zip' | 'gzip';
-	filenamePrefix?: string;
 	configuration?: Dictionary<any>;
-	deviceType: string; // raspberry-pi
-	buildId: string; // 2.9.6+rev1.prod
-}
+} & (
+	| {
+			baseFilename: string;
+	  }
+	| {
+			filenamePrefix?: string;
+			deviceType: string; // raspberry-pi
+			buildId: string; // 2.9.6+rev1.prod
+	  }
+);
 
 /**
  * URLCompressedSource - Downloads and streams compressed images from direct URLs
@@ -62,12 +67,9 @@ export interface URLCompressedSourceOptions {
  * The complete compressed stream is created from the partial compressed files from URLs and the configured parts described above.
  */
 export class URLCompressedSource extends SourceDestination {
-	public readonly deviceType: string;
-	public readonly buildId: string;
-
 	private urls: URLSourceConfig;
 	private format: URLCompressedSourceOptions['format'];
-	private filenamePrefix?: string;
+	private baseFilename: string;
 	// configuration is config.json + network configuration + dashboard "when" options like "processorCore" for ts4900
 	private configuration?: Dictionary<any>;
 	private configuredParts = new Map<
@@ -79,7 +81,6 @@ export class URLCompressedSource extends SourceDestination {
 	private imageJSON: ImageJSON;
 	private deviceTypeJSON: DeviceTypeJSON;
 	private supervisorVersion: string;
-	private osVersion: string;
 	private lastModified: Date;
 	private size: number;
 	private filename: string;
@@ -87,43 +88,36 @@ export class URLCompressedSource extends SourceDestination {
 	constructor({
 		urls,
 		format,
-		filenamePrefix,
 		configuration,
-		buildId,
-		deviceType,
+		...opts
 	}: URLCompressedSourceOptions) {
 		super();
 		this.urls = urls;
 		this.format = format;
-		this.filenamePrefix = filenamePrefix;
+
+		this.baseFilename =
+			'baseFilename' in opts
+				? opts.baseFilename
+				: [
+						opts.filenamePrefix,
+						opts.deviceType,
+						opts.buildId.replace(/\.(prod|dev)$/, ''),
+						opts.buildId.endsWith('.dev') ? 'dev' : undefined,
+				  ]
+						.filter((p) => p !== undefined)
+						.join('-');
 		this.configuration = configuration;
-		this.buildId = buildId;
-		this.deviceType = deviceType;
 	}
 
 	private async getSize(): Promise<number> {
 		return (await this.createStream(true)).zLen;
 	}
 
-	private getFilename(): string {
-		return [
-			this.filenamePrefix,
-			this.deviceType,
-			this.osVersion,
-			this.buildId.endsWith('.dev') ? 'dev' : undefined,
-			this.supervisorVersion,
-		]
-			.filter((p) => p !== undefined)
-			.join('-');
-	}
-
 	protected async _getMetadata(): Promise<Metadata> {
 		return {
 			supervisorVersion: this.supervisorVersion,
-			osVersion: this.osVersion,
 			lastModified: this.lastModified,
 			size: this.size,
-			version: this.buildId,
 			name: this.filename,
 			format: this.format,
 			arch: this.deviceTypeJSON?.arch,
@@ -135,11 +129,6 @@ export class URLCompressedSource extends SourceDestination {
 		const lastModified = new Date(response.headers['last-modified']);
 		const supervisorVersion = response.data.trim();
 		return { supervisorVersion, lastModified };
-	}
-
-	private async getOsVersion() {
-		const response = await this.download('VERSION_HOSTOS');
-		return response.data.trim();
 	}
 
 	private async getImageJSON(): Promise<ImageJSON> {
@@ -268,27 +257,22 @@ export class URLCompressedSource extends SourceDestination {
 			throw new Error('Required URLs (VERSION, image.json) must be provided');
 		}
 
-		const [
-			{ supervisorVersion, lastModified },
-			osVersion,
-			imageJSON,
-			deviceTypeJSON,
-		] = await Promise.all([
-			this.getSupervisorVersion(),
-			this.getOsVersion(),
-			this.getImageJSON(),
-			this.getDeviceTypeJSON(),
-		]);
+		const [{ supervisorVersion, lastModified }, imageJSON, deviceTypeJSON] =
+			await Promise.all([
+				this.getSupervisorVersion(),
+				this.getImageJSON(),
+				this.getDeviceTypeJSON(),
+			]);
 		if (deviceTypeJSON.yocto.archive) {
 			// Only zip works for yocto archives (intel-edison)
 			this.format = 'zip';
 		}
 		this.supervisorVersion = supervisorVersion;
 		this.lastModified = lastModified;
-		this.osVersion = osVersion;
 		this.deviceTypeJSON = deviceTypeJSON;
-		// The order is important, getFilename() expects osVersion and supervisorVersion to be set
-		this.filename = this.getFilename();
+		this.filename = [this.baseFilename, supervisorVersion]
+			.filter((p) => p !== undefined)
+			.join('-');
 		// replace resin.img with the requested filename if needed
 		const keys = Object.keys(imageJSON);
 		if (keys.length === 1 && keys[0] === 'resin.img') {
