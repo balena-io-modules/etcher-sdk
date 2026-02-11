@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency axios to v1.13.5 [SECURITY]
+      hash: 949d372607afa4da3ae94749a22e6e10037b9001
+      body: |
+        Update axios from 1.12.0 to 1.13.5
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 10.1.1
+  title: ""
+  date: 2026-02-11T18:13:31.029Z
+- commits:
     - subject: Add URLCompressedSource class
       hash: 944639c609c4417a54210918b78f5c275fa75b36
       body: ""
