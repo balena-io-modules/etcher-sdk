@@ -61,7 +61,7 @@
     "glob": "^10.3.10",
     "gzip-stream": "^2.0.0",
     "lzma-native": "^8.0.6",
-    "minimatch": "^9.0.3",
+    "minimatch": "^10.0.0",
     "mountutils": "^2.0.0",
     "node-raspberrypi-usbboot": "1.1.0",
     "outdent": "^0.8.0",
