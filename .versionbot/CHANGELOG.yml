@@ -1,4 +1,18 @@
 - commits:
+    - subject: "Add id-token: write permission for NPM OIDC publishing"
+      hash: 4804aa54abf087f6b3ad7ade35a709653ad3629a
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+  version: 10.1.2
+  title: ""
+  date: 2026-02-19T01:47:07.036Z
+- commits:
     - subject: Update dependency axios to v1.13.5 [SECURITY]
       hash: 949d372607afa4da3ae94749a22e6e10037b9001
       body: |
