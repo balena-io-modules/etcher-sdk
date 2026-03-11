@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency minimatch to v9.0.7 [SECURITY]
+      hash: 21edecaf61ad2050a9b26435f635c07a3aae479b
+      body: |
+        Update minimatch from 9.0.6 to 9.0.7
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 10.1.4
+  title: ""
+  date: 2026-03-11T10:11:04.883Z
+- commits:
     - subject: Update dependency minimatch to v9.0.6 [SECURITY]
       hash: 2de7b8a156cc0293d836c7c68eb0eb65d98d18e9
       body: |
