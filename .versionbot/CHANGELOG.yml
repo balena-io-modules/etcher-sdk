@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency axios to v1.15.0 [SECURITY]
+      hash: 583d961e53d8b5776605e6ea15f1a3c767b7a796
+      body: |
+        Update axios from 1.13.5 to 1.15.0
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 10.1.5
+  title: ""
+  date: 2026-04-12T11:06:38.750Z
+- commits:
     - subject: Update dependency minimatch to v9.0.7 [SECURITY]
       hash: 21edecaf61ad2050a9b26435f635c07a3aae479b
       body: |
