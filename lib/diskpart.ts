@@ -123,6 +123,50 @@ const prepareDeviceId = (device: string) => {
 };
 
 /**
+ * @summary Force-unmount a whole disk (including any APFS/synthesized
+ *   sub-volumes) on macOS via `diskutil unmountDisk force`.
+ *
+ * The `mountutils` package used elsewhere in the SDK calls
+ * `DADiskUnmount(disk, kDADiskUnmountOptionWhole | kDADiskUnmountOptionForce, ...)`
+ * against the parent BSD device (e.g. `/dev/disk2`). For drives formatted
+ * with APFS, the volumes are exposed as a separate *synthesized* disk
+ * (e.g. `/dev/disk3`) backed by an APFS container partition on the parent
+ * device. DiskArbitration's whole-disk unmount on the parent does not
+ * propagate to the synthesized APFS volumes, leaving them mounted. The
+ * subsequent `O_EXLOCK` open of the raw device then blocks/fails, which
+ * manifests as Etcher hanging at "Starting" when flashing APFS-formatted
+ * drives (see balena-io/etcher#4490).
+ *
+ * `diskutil unmountDisk force` understands APFS containers and will unmount
+ * the synthesized volumes as well as the parent disk, so we invoke it as
+ * an additional safeguard on macOS.
+ *
+ * No-op on non-darwin platforms.
+ *
+ * @param {String} device - device path (e.g. `/dev/disk2`)
+ */
+export const forceUnmountDisk = async (device: string): Promise<void> => {
+	if (platform() !== 'darwin') {
+		return;
+	}
+	debug('forceUnmountDisk', device);
+	try {
+		const { stdout, stderr } = await execFileAsync('diskutil', [
+			'unmountDisk',
+			'force',
+			device,
+		]);
+		debug('diskutil stdout:', stdout);
+		debug('diskutil stderr:', stderr);
+	} catch (error) {
+		// Don't propagate: the preceding mountutils unmount may already have
+		// succeeded for non-APFS volumes, and if the device truly cannot be
+		// unmounted the subsequent open will surface a meaningful error.
+		debug('forceUnmountDisk failed:', error.message);
+	}
+};
+
+/**
  * @summary Clean a device's partition tables
  * Functional only on Windows platform; otherwise does nothing.
  * @param {String} device - device path
