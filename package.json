@@ -59,7 +59,7 @@
     "file-disk": "^8.0.1",
     "file-type": "^16.0.0",
     "glob": "^10.3.10",
-    "gzip-stream": "^2.0.0",
+    "gzip-stream": "2.0.2-build-large-file-support-3b05fe923bd50846612f0954a840b06d7b07234a-1",
     "lzma-native": "^8.0.6",
     "minimatch": "^9.0.3",
     "mountutils": "^2.0.0",
