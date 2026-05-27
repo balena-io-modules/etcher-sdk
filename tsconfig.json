@@ -12,5 +12,9 @@
     "importHelpers": true,
     "strictNullChecks": true
   },
-  "include": ["lib"]
+  "include": [
+    "lib",
+    "typings",
+    "tests"
+  ]
 }
