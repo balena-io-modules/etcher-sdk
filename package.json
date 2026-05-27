@@ -53,6 +53,7 @@
     "balena-image-fs": "^7.2.0",
     "blockmap": "^4.0.3",
     "check-disk-space": "^3.4.0",
+    "compress-commons": "^6.0.2",
     "cyclic-32": "^1.1.0",
     "debug": "^4.4.1",
     "drivelist": "^12.0.0",
@@ -71,8 +72,7 @@
     "unbzip2-stream": "github:balena-io-modules/unbzip2-stream#4a54f56a25b58950f9e4277c56db2912d62242e7",
     "unzip-stream": "^0.3.1",
     "xxhash-addon": "^2.0.1",
-    "yauzl": "^2.9.2",
-    "zip-part-stream": "^2.0.0"
+    "yauzl": "^2.9.2"
   },
   "optionalDependencies": {
     "winusb-driver-generator": "^2.0.0"
