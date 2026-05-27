@@ -25,7 +25,7 @@ import {
 	ProgressBlockWriteStream,
 } from '../block-write-stream';
 import { DEFAULT_ALIGNMENT } from '../constants';
-import { clean } from '../diskpart';
+import { clean, forceUnmountDisk } from '../diskpart';
 import { getUnmountDisk } from '../lazy';
 import { AdapterSourceDestination } from '../scanner/adapters/adapter';
 import {
@@ -183,6 +183,13 @@ export class BlockDevice extends File implements AdapterSourceDestination {
 			if (plat !== 'win32') {
 				const unmountDisk = getUnmountDisk();
 				await unmountDisk(this.drive.device);
+				if (plat === 'darwin') {
+					// `mountutils.unmountDisk` does not unmount APFS volumes,
+					// which are exposed as a separate synthesized disk on macOS.
+					// Without this, opening an APFS-formatted drive with O_EXLOCK
+					// hangs/fails - see balena-io/etcher#4490.
+					await forceUnmountDisk(this.drive.device);
+				}
 			}
 			// diskpart clean on windows
 			if (!this.keepOriginal) {
