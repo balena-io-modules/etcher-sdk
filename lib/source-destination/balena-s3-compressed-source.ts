@@ -6,7 +6,10 @@ import {
 	DEFLATE_END,
 } from 'gzip-stream';
 import { Readable } from 'stream';
-import * as ZipPartStream from 'zip-part-stream';
+import {
+	createZipStreamFromParts,
+	getZipSizeFromParts,
+} from './raw-deflate-zip-stream';
 import { createInflateRaw } from 'zlib';
 
 import { BalenaS3SourceBase, BalenaS3SourceOptions } from './balena-s3-source';
@@ -74,7 +77,10 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	}
 
 	private async getSize(): Promise<number> {
-		return (await this.createStream(true)).zLen;
+		if (this.format === 'zip') {
+			return getZipSizeFromParts(await this.getParts(true));
+		}
+		return (await this.createGzipStream(true)).zLen;
 	}
 
 	private getFilename(): string {
@@ -287,10 +293,8 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	}
 
 	private async createZipStream(fake: boolean) {
-		const entries = (await this.getParts(fake)).map(({ filename, parts }) =>
-			ZipPartStream.createEntry(filename, parts),
-		);
-		return ZipPartStream.create(entries);
+		const parts = await this.getParts(fake);
+		return createZipStreamFromParts(parts);
 	}
 
 	private async createGzipStream(fake: boolean) {

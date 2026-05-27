@@ -1,72 +1,21 @@
-import { execFile as execFileCb } from 'child_process';
-import { promisify } from 'util';
-const execFile = promisify(execFileCb);
 import { expect } from 'chai';
-import * as fs from 'fs';
-import * as os from 'os';
-import * as path from 'path';
 import { Readable, Writable } from 'stream';
 import { pipeline } from 'stream/promises';
 import { createGunzip } from 'zlib';
 import * as sinon from 'sinon';
-import * as unzip from 'unzip-stream';
 
 import {
 	URLCompressedSource,
 	URLSourceConfig,
 } from '../lib/source-destination/url-compressed-source';
 import { streamToBuffer } from '../lib/utils';
-import { countBytes, makeDeflatePart, sumImageJSONLenFields } from './utils';
-
-/**
- * Build a URLSourceConfig from standard S3 bucket parameters.
- * Part URLs are resolved dynamically via a Proxy so we don't need to know
- * the part filenames ahead of time.
- */
-function buildS3URLConfig(
-	host: string,
-	bucket: string,
-	prefix: string,
-	deviceType: string,
-	buildId: string,
-): URLSourceConfig {
-	const base = [
-		host,
-		bucket,
-		prefix,
-		deviceType,
-		encodeURIComponent(buildId),
-	].join('/');
-
-	const parts = new Proxy({} as Record<string, string>, {
-		get(_target, filename: string) {
-			return `${base}/compressed/${filename}`;
-		},
-		has() {
-			return true;
-		},
-	});
-
-	return {
-		VERSION: `${base}/VERSION`,
-		VERSION_HOSTOS: `${base}/VERSION_HOSTOS`,
-		'device-type.json': `${base}/device-type.json`,
-		'image.json': `${base}/image.json`,
-		parts,
-	};
-}
+import {
+	makeDeflatePart,
+	sumImageJSONLenFields,
+	testZipArchive,
+} from './utils';
 
 // ─── unit test fixtures ───────────────────────────────────────────────────────
-
-/**
- * A Proxy that returns a truthy stub URL for any part filename.
- * This satisfies the URLCompressedSource._open() validation that checks
- * `this.urls.parts[part.filename]` without needing to know filenames upfront.
- */
-const stubPartsProxy = new Proxy({} as Record<string, string>, {
-	get: () => 'https://example.com/stub',
-	has: () => true,
-});
 
 const BASE_OPTIONS = {
 	urls: {
@@ -74,7 +23,13 @@ const BASE_OPTIONS = {
 		VERSION_HOSTOS: 'https://example.com/VERSION_HOSTOS',
 		'device-type.json': 'https://example.com/device-type.json',
 		'image.json': 'https://example.com/image.json',
-		parts: stubPartsProxy,
+		parts: new Proxy({} as Record<string, string>, {
+			get(_target, filename: string) {
+				// return a URL from the compressed folder, for any deflate indicated by the image.json
+				return `https://example.com/stub/compressed/${filename}`;
+			},
+			has: () => true,
+		}),
 	} as URLSourceConfig,
 	deviceType: 'raspberrypi3',
 	buildId: '2.9.6+rev1.prod',
@@ -90,11 +45,6 @@ const DEVICE_TYPE_JSON = {
 	yocto: {},
 };
 
-/**
- * Stubs the private `download` method (for VERSION / VERSION_HOSTOS /
- * image.json / device-type.json) and the private `getPartStream` method (for
- * compressed part data) on a URLCompressedSource instance.
- */
 function stubDownload(
 	source: URLCompressedSource,
 	imageJSON: object,
@@ -126,7 +76,7 @@ function stubDownload(
 		.stub(source, 'getPartStream')
 		.callsFake(async (filename: string) => {
 			const buf = partFiles.get(filename);
-			if (buf === undefined) {
+			if (buf == null) {
 				throw new Error(`No part data for: ${filename}`);
 			}
 			return Readable.from([buf]);
@@ -138,11 +88,32 @@ function stubDownload(
 describe('URLCompressedSource', function () {
 	this.timeout(10000);
 
-	const PART_DATA = Buffer.alloc(512, 0xab);
-	let deflatePartMeta: { buf: Buffer; crc: number; len: number; zLen: number };
+	const PART_DATA0 = Buffer.alloc(512, 0xab);
+	const PART_DATA1 = Buffer.alloc(512, 0xcd);
+
+	type DeflatePartMeta = {
+		buf: Buffer;
+		crc: number;
+		len: number;
+		zLen: number;
+	};
+	let deflateParts: DeflatePartMeta[] = [];
+
+	const getImageJSON = (parts: DeflatePartMeta[]) => ({
+		'resin.img': {
+			parts: parts.map((part, i) => ({
+				filename: `part-${i}.deflate`,
+				crc: part.crc,
+				len: part.len,
+				zLen: part.zLen,
+			})),
+		},
+	});
 
 	before(async () => {
-		deflatePartMeta = await makeDeflatePart(PART_DATA);
+		deflateParts = await Promise.all(
+			[PART_DATA0, PART_DATA1].map((data) => makeDeflatePart(data)),
+		);
 	});
 
 	afterEach(() => sinon.restore());
@@ -151,37 +122,17 @@ describe('URLCompressedSource', function () {
 
 	describe('createReadStream() — gzip format', () => {
 		it('concatenates multiple deflate parts into a single gzip stream', async () => {
-			const PART_DATA2 = Buffer.alloc(512, 0xcd);
-			const deflatePart2Meta = await makeDeflatePart(PART_DATA2);
-
 			const source = new URLCompressedSource({
 				...BASE_OPTIONS,
 				format: 'gzip',
 			});
-			const imageJSON = {
-				'resin.img': {
-					parts: [
-						{
-							filename: 'part1.gz',
-							crc: deflatePartMeta.crc,
-							len: deflatePartMeta.len,
-							zLen: deflatePartMeta.zLen,
-						},
-						{
-							filename: 'part2.gz',
-							crc: deflatePart2Meta.crc,
-							len: deflatePart2Meta.len,
-							zLen: deflatePart2Meta.zLen,
-						},
-					],
-				},
-			};
+			const imageJSON = getImageJSON(deflateParts);
 			stubDownload(
 				source,
 				imageJSON,
 				new Map([
-					['part1.gz', deflatePartMeta.buf],
-					['part2.gz', deflatePart2Meta.buf],
+					['part-0.deflate', deflateParts[0].buf],
+					['part-1.deflate', deflateParts[1].buf],
 				]),
 			);
 
@@ -193,7 +144,7 @@ describe('URLCompressedSource', function () {
 			const decompressed = await bufPromise;
 
 			expect(decompressed).to.deep.equal(
-				Buffer.concat([PART_DATA, PART_DATA2]),
+				Buffer.concat([PART_DATA0, PART_DATA1]),
 			);
 			await source.close();
 		});
@@ -207,41 +158,28 @@ describe('URLCompressedSource', function () {
 				...BASE_OPTIONS,
 				format: 'zip',
 			});
-			const imageJSON = {
-				'resin.img': {
-					parts: [
-						{
-							filename: 'part.gz',
-							crc: deflatePartMeta.crc,
-							len: deflatePartMeta.len,
-							zLen: deflatePartMeta.zLen,
-						},
-					],
-				},
-			};
+			const imageJSON = getImageJSON(deflateParts);
 			stubDownload(
 				source,
 				imageJSON,
-				new Map([['part.gz', deflatePartMeta.buf]]),
+				new Map([
+					['part-0.deflate', deflateParts[0].buf],
+					['part-1.deflate', deflateParts[1].buf],
+				]),
 			);
 
 			await source.open();
 			const metadata = await source.getMetadata();
 
+			// @ts-expect-error access private property for test
+			const expectedExtractedSize = sumImageJSONLenFields(source.imageJSON);
 			const stream = await source.createReadStream();
-			const unzipper = unzip.Parse();
-			const entryPromises: Array<Promise<{ name: string; data: Buffer }>> = [];
-			unzipper.on('entry', (entry: unzip.ZipStreamEntry) => {
-				entryPromises.push(
-					streamToBuffer(entry).then((data) => ({ name: entry.path, data })),
-				);
-			});
-			await pipeline(stream, unzipper);
-			const [result] = await Promise.all(entryPromises);
 
-			expect(result.name).to.equal(metadata.name);
-			expect(result.data).to.deep.equal(PART_DATA);
-			await source.close();
+			try {
+				await testZipArchive(stream, metadata, expectedExtractedSize);
+			} finally {
+				await source.close();
+			}
 		});
 	});
 });
@@ -271,14 +209,29 @@ for (const opts of [
 ]) {
 	describe(`URLCompressedSource (integration — ${opts.deviceType} ${opts.buildId})`, function () {
 		this.timeout(600_000);
+		const baseUrl = [
+			BUCKET_BASE_OPTIONS.host,
+			BUCKET_BASE_OPTIONS.bucket,
+			BUCKET_BASE_OPTIONS.prefix,
+			opts.deviceType,
+			encodeURIComponent(opts.buildId),
+		].join('/');
 		const sourceBaseOptions = {
-			urls: buildS3URLConfig(
-				BUCKET_BASE_OPTIONS.host,
-				BUCKET_BASE_OPTIONS.bucket,
-				BUCKET_BASE_OPTIONS.prefix,
-				opts.deviceType,
-				opts.buildId,
-			),
+			urls: {
+				VERSION: `${baseUrl}/VERSION`,
+				VERSION_HOSTOS: `${baseUrl}/VERSION_HOSTOS`,
+				'device-type.json': `${baseUrl}/device-type.json`,
+				'image.json': `${baseUrl}/image.json`,
+				parts: new Proxy({} as Record<string, string>, {
+					get(_target, filename: string) {
+						// return a URL from the compressed folder, for any deflate indicated by the image.json
+						return `${baseUrl}/compressed/${filename}`;
+					},
+					has() {
+						return true;
+					},
+				}),
+			},
 			deviceType: opts.deviceType,
 			buildId: opts.buildId,
 			configuration: {
@@ -328,46 +281,13 @@ for (const opts of [
 				name: `${opts.deviceType}-${opts.buildId}-${opts.supervisorVersion}.img`,
 			});
 			// @ts-expect-error access private property for test
-			const expectedTotal = sumImageJSONLenFields(source.imageJSON);
+			const expectedExtractedSize = sumImageJSONLenFields(source.imageJSON);
 			const stream = await source.createReadStream();
 
-			const tmpDir = await fs.promises.mkdtemp(
-				path.join(os.tmpdir(), 'etcher-sdk-tests-'),
-			);
-			const tmpPath = `${tmpDir}/${metadata.name}.zip`;
 			try {
-				await pipeline(stream, fs.createWriteStream(tmpPath));
-
-				// Confirms that the crc is correct
-				// Note: I wasn't able to find an npm package that checks with crc verification
-				await execFile('unzip', ['-t', tmpPath]);
-
-				const unzipper = unzip.Parse();
-				const entryPromises: Array<
-					Promise<{ entryName: string; totalBytes: number }>
-				> = [];
-				unzipper.on('entry', (entry: unzip.ZipStreamEntry) => {
-					entryPromises.push(
-						countBytes(entry).then((n) => ({
-							entryName: entry.path,
-							totalBytes: n,
-						})),
-					);
-				});
-				await pipeline(fs.createReadStream(tmpPath), unzipper);
-				const entryInfo = await Promise.all(entryPromises);
-
-				await source.close();
-				expect(entryInfo).to.deep.equal([
-					{ entryName: metadata.name, totalBytes: expectedTotal },
-				]);
-
-				const { size: zipFileSize } = await fs.promises.stat(tmpPath);
-				expect(metadata).to.include({
-					size: zipFileSize,
-				});
+				await testZipArchive(stream, metadata, expectedExtractedSize);
 			} finally {
-				await fs.promises.rm(tmpDir, { recursive: true });
+				await source.close();
 			}
 		});
 	});

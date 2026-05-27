@@ -30,6 +30,6 @@ upstream:
   - repo: node-raspberrypi-usbboot
     url: https://github.com/balena-io-modules/node-raspberrypi-usbboot
     module: node-raspberrypi-usbboot
-  - repo: zip-part-stream
-    url: https://github.com/balena-io-modules/zip-part-stream
-    module: zip-part-stream
+  - repo: '@balena/node-crc-utils'
+    url: https://github.com/balena-io-modules/node-crc-utils
+    module: '@balena/node-crc-utils'

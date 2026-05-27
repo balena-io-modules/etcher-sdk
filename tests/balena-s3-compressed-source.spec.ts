@@ -1,19 +1,16 @@
-import { execFile as execFileCb } from 'child_process';
-import { promisify } from 'util';
-const execFile = promisify(execFileCb);
 import { expect } from 'chai';
-import * as fs from 'fs';
-import * as os from 'os';
-import * as path from 'path';
 import { Readable, Writable } from 'stream';
 import { pipeline } from 'stream/promises';
 import { createGunzip } from 'zlib';
 import * as sinon from 'sinon';
-import * as unzip from 'unzip-stream';
 
 import { BalenaS3CompressedSource } from '../lib/source-destination/balena-s3-compressed-source';
 import { streamToBuffer } from '../lib/utils';
-import { countBytes, makeDeflatePart, sumImageJSONLenFields } from './utils';
+import {
+	makeDeflatePart,
+	sumImageJSONLenFields,
+	testZipArchive,
+} from './utils';
 
 // ─── unit test fixtures ───────────────────────────────────────────────────────
 
@@ -34,11 +31,6 @@ const DEVICE_TYPE_JSON = {
 	yocto: {},
 };
 
-/**
- * Stubs the private `download` method (for VERSION / VERSION_HOSTOS /
- * image.json / device-type.json) and the private `getPartStream` method (for
- * compressed part data) on a URLCompressedSource instance.
- */
 function stubDownload(
 	source: BalenaS3CompressedSource,
 	imageJSON: object,
@@ -62,12 +54,11 @@ function stubDownload(
 					case 'device-type.json':
 						return { headers: {}, data: DEVICE_TYPE_JSON };
 					default:
-						for (const [filename, buf] of partFiles) {
-							if (path === `compressed/${filename}`) {
-								return { data: Readable.from([buf]) };
-							}
+						const part = partFiles.get(path);
+						if (part == null) {
+							throw new Error(`Unexpected download call: ${path}`);
 						}
-						throw new Error(`Unexpected download call: ${path}`);
+						return { data: Readable.from([part]) };
 				}
 			})
 	);
@@ -78,11 +69,32 @@ function stubDownload(
 describe('BalenaS3CompressedSource', function () {
 	this.timeout(10000);
 
-	const PART_DATA = Buffer.alloc(512, 0xab);
-	let deflatePartMeta: { buf: Buffer; crc: number; len: number; zLen: number };
+	const PART_DATA0 = Buffer.alloc(512, 0xab);
+	const PART_DATA1 = Buffer.alloc(512, 0xcd);
+
+	type DeflatePartMeta = {
+		buf: Buffer;
+		crc: number;
+		len: number;
+		zLen: number;
+	};
+	let deflateParts: DeflatePartMeta[] = [];
+
+	const getImageJSON = (parts: DeflatePartMeta[]) => ({
+		'resin.img': {
+			parts: parts.map((part, i) => ({
+				filename: `part-${i}.deflate`,
+				crc: part.crc,
+				len: part.len,
+				zLen: part.zLen,
+			})),
+		},
+	});
 
 	before(async () => {
-		deflatePartMeta = await makeDeflatePart(PART_DATA);
+		deflateParts = await Promise.all(
+			[PART_DATA0, PART_DATA1].map((data) => makeDeflatePart(data)),
+		);
 	});
 
 	afterEach(() => sinon.restore());
@@ -91,37 +103,17 @@ describe('BalenaS3CompressedSource', function () {
 
 	describe('createReadStream() — gzip format', () => {
 		it('concatenates multiple deflate parts into a single gzip stream', async () => {
-			const PART_DATA2 = Buffer.alloc(512, 0xcd);
-			const deflatePart2Meta = await makeDeflatePart(PART_DATA2);
-
 			const source = new BalenaS3CompressedSource({
 				...BASE_OPTIONS,
 				format: 'gzip',
 			});
-			const imageJSON = {
-				'resin.img': {
-					parts: [
-						{
-							filename: 'part1.gz',
-							crc: deflatePartMeta.crc,
-							len: deflatePartMeta.len,
-							zLen: deflatePartMeta.zLen,
-						},
-						{
-							filename: 'part2.gz',
-							crc: deflatePart2Meta.crc,
-							len: deflatePart2Meta.len,
-							zLen: deflatePart2Meta.zLen,
-						},
-					],
-				},
-			};
+			const imageJSON = getImageJSON(deflateParts);
 			stubDownload(
 				source,
 				imageJSON,
 				new Map([
-					['part1.gz', deflatePartMeta.buf],
-					['part2.gz', deflatePart2Meta.buf],
+					['compressed/part-0.deflate', deflateParts[0].buf],
+					['compressed/part-1.deflate', deflateParts[1].buf],
 				]),
 			);
 
@@ -133,7 +125,7 @@ describe('BalenaS3CompressedSource', function () {
 			const decompressed = await bufPromise;
 
 			expect(decompressed).to.deep.equal(
-				Buffer.concat([PART_DATA, PART_DATA2]),
+				Buffer.concat([PART_DATA0, PART_DATA1]),
 			);
 			await source.close();
 		});
@@ -147,41 +139,28 @@ describe('BalenaS3CompressedSource', function () {
 				...BASE_OPTIONS,
 				format: 'zip',
 			});
-			const imageJSON = {
-				'resin.img': {
-					parts: [
-						{
-							filename: 'part.gz',
-							crc: deflatePartMeta.crc,
-							len: deflatePartMeta.len,
-							zLen: deflatePartMeta.zLen,
-						},
-					],
-				},
-			};
+			const imageJSON = getImageJSON(deflateParts);
 			stubDownload(
 				source,
 				imageJSON,
-				new Map([['part.gz', deflatePartMeta.buf]]),
+				new Map([
+					['compressed/part-0.deflate', deflateParts[0].buf],
+					['compressed/part-1.deflate', deflateParts[1].buf],
+				]),
 			);
 
 			await source.open();
 			const metadata = await source.getMetadata();
 
+			// @ts-expect-error access private property for test
+			const expectedExtractedSize = sumImageJSONLenFields(source.imageJSON);
 			const stream = await source.createReadStream();
-			const unzipper = unzip.Parse();
-			const entryPromises: Array<Promise<{ name: string; data: Buffer }>> = [];
-			unzipper.on('entry', (entry: unzip.ZipStreamEntry) => {
-				entryPromises.push(
-					streamToBuffer(entry).then((data) => ({ name: entry.path, data })),
-				);
-			});
-			await pipeline(stream, unzipper);
-			const [result] = await Promise.all(entryPromises);
 
-			expect(result.name).to.equal(metadata.name);
-			expect(result.data).to.deep.equal(PART_DATA);
-			await source.close();
+			try {
+				await testZipArchive(stream, metadata, expectedExtractedSize);
+			} finally {
+				await source.close();
+			}
 		});
 	});
 });
@@ -262,50 +241,13 @@ for (const opts of [
 				name: `${opts.deviceType}-${opts.buildId}-${opts.supervisorVersion}.img`,
 			});
 			// @ts-expect-error access private property for test
-			const expectedTotal = sumImageJSONLenFields(source.imageJSON);
+			const expectedExtractedSize = sumImageJSONLenFields(source.imageJSON);
 			const stream = await source.createReadStream();
 
-			const tmpDir = await fs.promises.mkdtemp(
-				path.join(os.tmpdir(), 'etcher-sdk-tests-'),
-			);
-			const tmpPath = `${tmpDir}/${metadata.name}.zip`;
 			try {
-				await pipeline(stream, fs.createWriteStream(tmpPath));
-
-				// Confirms that the crc is correct
-				// Note: I wasn't able to find an npm package that checks with crc verification
-				await execFile('unzip', ['-t', tmpPath]);
-
-				const unzipper = unzip.Parse();
-				const entryPromises: Array<
-					Promise<{ entryName: string; totalBytes: number }>
-				> = [];
-				unzipper
-					.on('entry', (entry: unzip.ZipStreamEntry) => {
-						entryPromises.push(
-							countBytes(entry).then((n) => ({
-								entryName: entry.path,
-								totalBytes: n,
-							})),
-						);
-					})
-					.on('error', (err) => {
-						entryPromises.push(Promise.reject(err));
-					});
-				await pipeline(fs.createReadStream(tmpPath), unzipper);
-				const entryInfo = await Promise.all(entryPromises);
-
-				await source.close();
-				expect(entryInfo).to.deep.equal([
-					{ entryName: metadata.name, totalBytes: expectedTotal },
-				]);
-
-				const { size: zipFileSize } = await fs.promises.stat(tmpPath);
-				expect(metadata).to.include({
-					size: zipFileSize,
-				});
+				await testZipArchive(stream, metadata, expectedExtractedSize);
 			} finally {
-				await fs.promises.rm(tmpDir, { recursive: true });
+				await source.close();
 			}
 		});
 	});
