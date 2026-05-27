@@ -1,4 +1,18 @@
 - commits:
+    - subject: Properly lint typings & tests
+      hash: 63470edd9c9d69b5dff40a7e46c4408ecc215594
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        See: https://balena.fibery.io/Work/Project/2525
+        see: https://balena.fibery.io/Work/Project/2525
+      author: Thodoris Greasidis
+      nested: []
+  version: 10.1.6
+  title: ""
+  date: 2026-05-27T09:15:55.661Z
+- commits:
     - subject: Update dependency axios to v1.15.0 [SECURITY]
       hash: 583d961e53d8b5776605e6ea15f1a3c767b7a796
       body: |
