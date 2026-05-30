@@ -1,6 +1,7 @@
 import { crc32_combine_multi } from '@balena/node-crc-utils';
 import * as CombinedStream from 'combined-stream';
 import { ZipArchiveEntry, ZipArchiveOutputStream } from 'compress-commons';
+import { PassThrough, Transform } from 'stream';
 
 function getCombinedCrcOfPreDeflatedParts(
 	parts: Array<{ crc: number; len: number }>,
@@ -32,6 +33,9 @@ function getCombinedCrcOfPreDeflatedParts(
 // DEFLATE ending block
 const DEFLATE_END = Buffer.from([0x03, 0x00]);
 
+// Standard ZIP format constants
+const METHOD_DEFLATED = 8;
+
 interface RawDeflatePart {
 	filename: string;
 	parts: Array<{
@@ -47,62 +51,90 @@ interface RawDeflatePart {
  * pre-deflated entries without decompressing and recompressing them.
  */
 class RawDeflateZipStream extends ZipArchiveOutputStream {
-	async entryRawDeflatePart({ filename, parts }: RawDeflatePart) {
-		// Mirroring the ZipArchiveOutputStream.entry() checks
-		// https://github.com/archiverjs/node-compress-commons/blob/6.0.2/lib/archivers/archive-output-stream.js#L58
-		if (this._archive.finish || this._archive.finished) {
-			throw new Error('unacceptable entry after finish');
+	override _smartStream(
+		ae: ZipArchiveEntry,
+		callback: (error: Error | null, ae?: ZipArchiveEntry) => void,
+	): Transform {
+		if (!(ae instanceof RawDeflateEntry)) {
+			return super._smartStream(ae, callback);
 		}
-		if (this._archive.processing) {
-			throw new Error('already processing an entry');
+		// Technically a redundant check, since it's the default,
+		// but better make sure everything is set up as expected.
+		if (ae.getMethod() !== METHOD_DEFLATED) {
+			const err = new Error('Entry must use the DEFLATE method');
+			callback(err);
+			throw err;
 		}
-		this._archive.processing = true;
 
-		// Named the var `ae` to mirror ZipArchiveOutputStream's naming.
-		const ae = new ZipArchiveEntry(filename);
-		// Set sizes before _normalizeEntry/_writeLocalFileHeader so that ae.isZip64()
-		// is correct when _writeLocalFileHeader runs: for zip64 entries it sets
-		// versionNeeded=45 and the data descriptor uses 8-byte sizes (ZIP64-compliant).
-		ae.setCrc(getCombinedCrcOfPreDeflatedParts(parts));
-		ae.setSize(parts.reduce((sum, p) => sum + p.len, 0));
-		ae.setCompressedSize(
-			parts.reduce((sum, p) => sum + p.zLen, 0) + DEFLATE_END.length,
-		);
-		this._normalizeEntry(ae);
-		this._entry = ae;
+		// Mirrors the logic of ZipArchiveOutputStream._smartStream, but uses a passthrough
+		// since the entry is already deflated format, and relies on the pre-set crc & sizes RawDeflateEntry.
+		// See: https://github.com/archiverjs/node-compress-commons/blob/6.0.2/lib/archivers/zip/zip-archive-output-stream.js#L165
+		const process = new PassThrough() satisfies Transform;
 
-		// Mirroring the ZipArchiveOutputStream._appendStream()
-		// https://github.com/archiverjs/node-compress-commons/blob/6.0.2/lib/archivers/zip/zip-archive-output-stream.js#L90
-		this._writeLocalFileHeader(ae);
-
-		// Mirroring the ZipArchiveOutputStream._smartStream() but replacing
-		// DeflateCRC32Stream/CRC32Stream with our pre-deflated combined stream.
-		// https://github.com/archiverjs/node-compress-commons/blob/6.0.2/lib/archivers/zip/zip-archive-output-stream.js#L165
-		const process = CombinedStream.create();
-		for (const { stream } of parts) {
-			process.append(stream);
-		}
-		process.append(DEFLATE_END);
-
-		await new Promise<void>((resolve, reject) => {
-			let streamError: Error | null = null;
-			process.once('end', () => {
-				this._afterAppend(ae);
-				if (streamError != null) {
-					reject(streamError);
-					return;
-				}
-				resolve();
-			});
-			process.once('error', (err: Error) => {
-				streamError = err;
-			});
-
-			process.pipe(this, { end: false });
+		let error: Error | null = null;
+		process.once('end', () => {
+			// crc, size & uncompressedSize are already set by the RawDeflateEntry constructor
+			// so we don't need to set them here like ZipArchiveOutputStream._smartStream does.
+			this._afterAppend(ae);
+			callback(error, ae);
+		});
+		process.once('error', (err: Error) => {
+			error = err;
 		});
 
-		return this;
+		process.pipe(this, { end: false });
+
+		return process;
 	}
+}
+
+class RawDeflateEntry extends ZipArchiveEntry {
+	constructor({
+		name,
+		crc,
+		size,
+		compressedSize,
+	}: {
+		name: string;
+		crc: number;
+		size: number;
+		compressedSize: number;
+	}) {
+		super(name);
+		// Requires & sets the crc & sizes upfront, so that when ZipArchiveOutputStream._writeLocalFileHeader is called,
+		// isZip64() returns the correct result and the header is written with the right format (with or without ZIP64 extra).
+		// See: https://github.com/archiverjs/node-compress-commons/blob/6.0.2/lib/archivers/zip/zip-archive-output-stream.js#L369
+		this.setCrc(crc);
+		this.setSize(size);
+		this.setCompressedSize(compressedSize);
+	}
+}
+
+async function addRawDeflatePartEntry(
+	archive: RawDeflateZipStream,
+	{ filename, parts }: RawDeflatePart,
+) {
+	const entry = new RawDeflateEntry({
+		name: filename,
+		crc: getCombinedCrcOfPreDeflatedParts(parts),
+		size: parts.reduce((sum, p) => sum + p.len, 0),
+		compressedSize:
+			parts.reduce((sum, p) => sum + p.zLen, 0) + DEFLATE_END.length,
+	});
+	const source = CombinedStream.create();
+	for (const { stream } of parts) {
+		source.append(stream);
+	}
+	source.append(DEFLATE_END);
+	await new Promise<void>((resolve, reject) => {
+		archive.entry(entry, source, (err) => {
+			if (err != null) {
+				reject(err);
+				return;
+			}
+			resolve();
+		});
+	});
 }
 
 export function createZipStreamFromParts(partsByImage: RawDeflatePart[]) {
@@ -110,7 +142,7 @@ export function createZipStreamFromParts(partsByImage: RawDeflatePart[]) {
 	void (async () => {
 		try {
 			for (const part of partsByImage) {
-				await archive.entryRawDeflatePart(part);
+				await addRawDeflatePartEntry(archive, part);
 			}
 			archive.finish();
 		} catch (error: any) {
