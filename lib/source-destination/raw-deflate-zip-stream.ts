@@ -32,10 +32,6 @@ function getCombinedCrcOfPreDeflatedParts(
 // DEFLATE ending block
 const DEFLATE_END = Buffer.from([0x03, 0x00]);
 
-// Standard ZIP format constants
-const METHOD_DEFLATED = 8;
-const MIN_VERSION_DATA_DESCRIPTOR = 20;
-
 interface RawDeflatePart {
 	filename: string;
 	parts: Array<{
@@ -64,43 +60,33 @@ class RawDeflateZipStream extends ZipArchiveOutputStream {
 
 		// Named the var `ae` to mirror ZipArchiveOutputStream's naming.
 		const ae = new ZipArchiveEntry(filename);
+		// Set sizes before _normalizeEntry/_writeLocalFileHeader so that ae.isZip64()
+		// is correct when _writeLocalFileHeader runs: for zip64 entries it sets
+		// versionNeeded=45 and the data descriptor uses 8-byte sizes (ZIP64-compliant).
 		ae.setCrc(getCombinedCrcOfPreDeflatedParts(parts));
 		ae.setSize(parts.reduce((sum, p) => sum + p.len, 0));
 		ae.setCompressedSize(
 			parts.reduce((sum, p) => sum + p.zLen, 0) + DEFLATE_END.length,
 		);
-		// Mirroring ZipArchiveOutputStream._normalizeEntry() but w/o enabling data descriptors, b/c we need
-		// ZipArchiveOutputStream's _afterAppend() & _writeLocalFileHeader()
-		// to use the crc and sizes that we are providing.
-		ae.setMethod(METHOD_DEFLATED);
-		ae.setVersionNeededToExtract(MIN_VERSION_DATA_DESCRIPTOR);
-		ae.setTime(new Date(), this._archive.forceLocalTime);
-		ae._offsets = {
-			file: 0,
-			data: 0,
-			contents: 0,
-		};
+		this._normalizeEntry(ae);
 		this._entry = ae;
 
 		// Mirroring the ZipArchiveOutputStream._appendStream()
 		// https://github.com/archiverjs/node-compress-commons/blob/6.0.2/lib/archivers/zip/zip-archive-output-stream.js#L90
 		this._writeLocalFileHeader(ae);
 
-		const source = CombinedStream.create();
-		for (const { stream } of parts) {
-			source.append(stream);
-		}
-		source.append(DEFLATE_END);
-
 		// Mirroring the ZipArchiveOutputStream._smartStream() but replacing
 		// DeflateCRC32Stream/CRC32Stream with our pre-deflated combined stream.
 		// https://github.com/archiverjs/node-compress-commons/blob/6.0.2/lib/archivers/zip/zip-archive-output-stream.js#L165
+		const process = CombinedStream.create();
+		for (const { stream } of parts) {
+			process.append(stream);
+		}
+		process.append(DEFLATE_END);
+
 		await new Promise<void>((resolve, reject) => {
 			let streamError: Error | null = null;
-			source.once('error', (err: Error) => {
-				streamError = err;
-			});
-			source.once('end', () => {
+			process.once('end', () => {
 				this._afterAppend(ae);
 				if (streamError != null) {
 					reject(streamError);
@@ -108,7 +94,11 @@ class RawDeflateZipStream extends ZipArchiveOutputStream {
 				}
 				resolve();
 			});
-			source.pipe(this, { end: false });
+			process.once('error', (err: Error) => {
+				streamError = err;
+			});
+
+			process.pipe(this, { end: false });
 		});
 
 		return this;
@@ -136,8 +126,11 @@ export function getZipSizeFromParts(partsByImage: RawDeflatePart[]): number {
 	// Local file header: signature(4)+version(2)+gpb(2)+method(2)+datetime(4)+
 	//                    crc(4)+csize(4)+size(4)+nameLen(2)+extraLen(2) = 30 bytes fixed
 	const LFH_BASE = 30;
-	// Data descriptor written by _afterAppend for zip64-by-size entries:
-	//   signature(4) + crc(4) + compressedSize(8) + size(8) = 24 bytes
+	// Data descriptor written by _afterAppend for every DEFLATED entry
+	// (useDataDescriptor is always true after _normalizeEntry):
+	//   non-zip64: signature(4) + crc(4) + compressedSize(4) + size(4) = 16 bytes
+	//   zip64:     signature(4) + crc(4) + compressedSize(8) + size(8) = 24 bytes
+	const DD_SIZE = 16;
 	const ZIP64_DD_SIZE = 24;
 	// Central directory header base (46 bytes) + optional ZIP64 extra field:
 	//   tag(2) + extraDataSize(2) + origSize(8) + compSize(8) + fileOffset(8) = 28 bytes
@@ -168,7 +161,7 @@ export function getZipSizeFromParts(partsByImage: RawDeflatePart[]): number {
 			fileOffset: ongoingLocalOffset,
 		});
 
-		const ddSize = isZip64 ? ZIP64_DD_SIZE : 0;
+		const ddSize = isZip64 ? ZIP64_DD_SIZE : DD_SIZE;
 		ongoingLocalOffset += LFH_BASE + filename.length + compressedSize + ddSize;
 	}
 
