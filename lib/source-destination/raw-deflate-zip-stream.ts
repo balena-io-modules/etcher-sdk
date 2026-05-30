@@ -152,68 +152,68 @@ export function createZipStreamFromParts(partsByImage: RawDeflatePart[]) {
 	return archive;
 }
 
+// ZIP specification reference: APPNOTE.TXT by PKWare
+// https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT
+// Check §4.3.6 for a file format overview
 export function getZipSizeFromParts(partsByImage: RawDeflatePart[]): number {
 	const ZIP64_MAGIC = 0xffffffff;
 	const ZIP64_MAGIC_SHORT = 0xffff;
-	// Local file header: signature(4)+version(2)+gpb(2)+method(2)+datetime(4)+
-	//                    crc(4)+csize(4)+size(4)+nameLen(2)+extraLen(2) = 30 bytes fixed
+
+	// APPNOTE.TXT §4.3.7 - Local file header
+	//   signature(4)+version(2)+gpb(2)+method(2)+datetime(4)+
+	//   crc(4)+csize(4)+size(4)+nameLen(2)+extraLen(2) = 30 bytes fixed
 	const LFH_BASE = 30;
-	// Data descriptor written by _afterAppend for every DEFLATED entry
-	// (useDataDescriptor is always true after _normalizeEntry):
+
+	// APPNOTE.TXT §4.3.9 - Data descriptor & $4.3.9.3 for SIG_DD
+	// Written by _afterAppend for every DEFLATED entry
 	//   non-zip64: signature(4) + crc(4) + compressedSize(4) + size(4) = 16 bytes
 	//   zip64:     signature(4) + crc(4) + compressedSize(8) + size(8) = 24 bytes
 	const DD_SIZE = 16;
 	const ZIP64_DD_SIZE = 24;
-	// Central directory header base (46 bytes) + optional ZIP64 extra field:
-	//   tag(2) + extraDataSize(2) + origSize(8) + compSize(8) + fileOffset(8) = 28 bytes
+
+	// APPNOTE.TXT §4.3.12 - Central directory structure (46 bytes fixed)
 	const CDH_BASE = 46;
+	// APPNOTE.TXT §4.5.3 - Zip64 Extended Information Extra Field
+	// ! ZipArchiveOutputStream._writeCentralFileHeader does not set the Disk Start Number because it is always 0 !
+	//   tag(2) + extraDataSize(2) + origSize(8) + compSize(8) + fileOffset(8) = 28 bytes
 	const ZIP64_CDH_EXTRA_SIZE = 28;
+
+	// APPNOTE.TXT §4.3.16 - End of central directory record
 	const EOCD_SIZE = 22;
-	// ZIP64 end-of-central-directory record (56) + locator (20)
+	// APPNOTE.TXT §4.3.14 - ZIP64 end of central directory record (56 bytes)
+	//               §4.3.15 - ZIP64 end of central directory locator (20 bytes)
 	const ZIP64_EOCD_SIZE = 76;
 
-	const entryMeta: Array<{
-		filename: string;
-		compressedSize: number;
-		isZip64: boolean;
-		fileOffset: number;
-	}> = [];
-
-	let ongoingLocalOffset = 0;
+	let ongoingLocalFileEntryOffset = 0;
+	let centralDirectoryTotalSize = 0;
 	for (const { filename, parts } of partsByImage) {
+		const size = parts.reduce((sum, p) => sum + p.len, 0);
 		const compressedSize =
 			parts.reduce((sum, p) => sum + p.zLen, 0) + DEFLATE_END.length;
-		const size = parts.reduce((sum, p) => sum + p.len, 0);
+		const fileOffset = ongoingLocalFileEntryOffset;
+		// APPNOTE.TXT §4.5.3: ZIP64 format is required when either size exceeds 0xFFFFFFFF
 		const isZip64 = compressedSize > ZIP64_MAGIC || size > ZIP64_MAGIC;
 
-		entryMeta.push({
-			filename,
-			compressedSize,
-			isZip64,
-			fileOffset: ongoingLocalOffset,
-		});
-
 		const ddSize = isZip64 ? ZIP64_DD_SIZE : DD_SIZE;
-		ongoingLocalOffset += LFH_BASE + filename.length + compressedSize + ddSize;
+		ongoingLocalFileEntryOffset +=
+			LFH_BASE + filename.length + compressedSize + ddSize;
+
+		// APPNOTE.TXT §4.5.3: ZIP64 extra field is written in CDH when sizes or offset exceed 0xFFFFFFFF
+		const needsCDZip64Extra = isZip64 || fileOffset > ZIP64_MAGIC;
+		centralDirectoryTotalSize +=
+			CDH_BASE +
+			filename.length +
+			(needsCDZip64Extra ? ZIP64_CDH_EXTRA_SIZE : 0);
 	}
 
-	const centralOffset = ongoingLocalOffset;
-	let centralLength = 0;
-	for (const { filename, isZip64, fileOffset } of entryMeta) {
-		const needsZip64Extra = isZip64 || fileOffset > ZIP64_MAGIC;
-		centralLength +=
-			CDH_BASE + filename.length + (needsZip64Extra ? ZIP64_CDH_EXTRA_SIZE : 0);
-	}
-
-	// ZIP64 EOCD is emitted when the central directory fields overflow 32-bit, or when
-	// there are more than 65535 entries (mirrors compress-commons isZip64() condition).
 	const needsZip64Eocd =
-		centralOffset > ZIP64_MAGIC ||
-		centralLength > ZIP64_MAGIC ||
+		ongoingLocalFileEntryOffset > ZIP64_MAGIC ||
+		centralDirectoryTotalSize > ZIP64_MAGIC ||
+		// entry count exceeds 2^16-1 as per ZipArchiveOutputStream.isZip64()
 		partsByImage.length > ZIP64_MAGIC_SHORT;
 	return (
-		centralOffset +
-		centralLength +
+		ongoingLocalFileEntryOffset +
+		centralDirectoryTotalSize +
 		EOCD_SIZE +
 		(needsZip64Eocd ? ZIP64_EOCD_SIZE : 0)
 	);
