@@ -1,5 +1,5 @@
 declare module 'gzip-stream' {
-	import { PassThrough } from 'stream';
+	import { PassThrough, Readable } from 'stream';
 
 	export interface DeflatePartStreamMetadata {
 		crc: number;
@@ -12,7 +12,7 @@ declare module 'gzip-stream' {
 		metadata: () => DeflatePartStreamMetadata;
 	}
 
-	export interface GzipStream extends NodeJS.ReadableStream {
+	export interface GzipStream extends Readable {
 		zLen: number;
 	}
 
