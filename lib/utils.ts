@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import { Readable, Stream } from 'stream';
+
 import { isAlignedLockableBuffer } from './aligned-lockable-buffer';
 import { SparseStreamChunk } from './sparse-stream/shared';
 
@@ -184,4 +186,36 @@ export function once<T>(fn: () => T): () => T {
 		}
 		return result;
 	};
+}
+
+export function combineStreams(streams: Array<Readable | Buffer>): Readable {
+	return Readable.from(
+		(async function* () {
+			// Track the index before each iteration so the finally block
+			// knows which streams were not fully consumed and must be destroyed.
+			let currentIndex = 0;
+			try {
+				for (let i = 0; i < streams.length; i++) {
+					currentIndex = i;
+					const s = streams[i];
+					if (Buffer.isBuffer(s)) {
+						yield s;
+					} else {
+						// yield* propagates return() to the stream's async iterator,
+						// which calls stream.destroy() if the consumer stops early.
+						yield* s;
+					}
+				}
+			} finally {
+				// Destroy the streams that were never fully consumed.
+				for (let i = currentIndex; i < streams.length; i++) {
+					const s = streams[i];
+					if (s instanceof Stream && !s.destroyed) {
+						s.destroy();
+					}
+				}
+			}
+		})(),
+		{ objectMode: false },
+	);
 }
