@@ -1,4 +1,3 @@
-import * as CombinedStream from 'combined-stream';
 import { BufferDisk } from 'file-disk';
 import {
 	createDeflatePart,
@@ -30,7 +29,7 @@ import { ImageJSON, ImageJSONPart } from './compressed-source-types';
 
 import { NotCapable } from '../errors';
 import { StreamLimiter } from '../stream-limiter';
-import { Dictionary, noop, streamToBuffer } from '../utils';
+import { Dictionary, noop, streamToBuffer, concatStreams } from '../utils';
 
 /**
  * Configuration for URLCompressedSource
@@ -214,9 +213,7 @@ export class URLCompressedSource extends SourceDestination {
 
 	private async extractDeflateToDisk(filename: string) {
 		const stream = await this.getPartStream(filename);
-		const combined = CombinedStream.create();
-		combined.append(stream);
-		combined.append(DEFLATE_END);
+		const combined = concatStreams([stream, DEFLATE_END]);
 		const inflate = createInflateRaw();
 		pipeline(combined, inflate, noop);
 		return new BufferDisk(await streamToBuffer(inflate));

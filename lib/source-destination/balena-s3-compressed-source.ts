@@ -1,4 +1,3 @@
-import * as CombinedStream from 'combined-stream';
 import { BufferDisk } from 'file-disk';
 import {
 	createDeflatePart,
@@ -26,7 +25,7 @@ import { CreateReadStreamOptions } from './source-destination';
 
 import { NotCapable } from '../errors';
 import { StreamLimiter } from '../stream-limiter';
-import { Dictionary, noop, streamToBuffer } from '../utils';
+import { Dictionary, noop, streamToBuffer, concatStreams } from '../utils';
 import type { ImageJSON, ImageJSONPart } from './compressed-source-types';
 
 export interface BalenaS3CompressedSourceOptions extends BalenaS3SourceOptions {
@@ -178,9 +177,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 
 	private async extractDeflateToDisk(filename: string) {
 		const stream = await this.getPartStream(filename);
-		const combined = CombinedStream.create();
-		combined.append(stream);
-		combined.append(DEFLATE_END);
+		const combined = concatStreams([stream, DEFLATE_END]);
 		const inflate = createInflateRaw();
 		pipeline(combined, inflate, noop);
 		return new BufferDisk(await streamToBuffer(inflate));

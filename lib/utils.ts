@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import { Readable } from 'stream';
+
 import { isAlignedLockableBuffer } from './aligned-lockable-buffer';
 import { SparseStreamChunk } from './sparse-stream/shared';
 
@@ -188,4 +190,46 @@ export function once<T>(fn: () => T): () => T {
 		}
 		return result;
 	};
+}
+
+/**
+ * Concatenates multiple readable streams and/or Buffers into a single Readable stream
+ * without buffering, avoiding the memory leak issues of combined-stream.
+ */
+export function concatStreams(
+	streams: Array<NodeJS.ReadableStream | Buffer>,
+): Readable {
+	return Readable.from(
+		(async function* () {
+			// Track the index before each iteration so the finally block
+			// knows which streams were never started and must be destroyed.
+			let startedIdx = -1;
+			try {
+				for (let i = 0; i < streams.length; i++) {
+					startedIdx = i;
+					const s = streams[i];
+					if (Buffer.isBuffer(s)) {
+						yield s;
+					} else {
+						// yield* propagates return() to the stream's async iterator,
+						// which calls stream.destroy() if the consumer stops early.
+						yield* s;
+					}
+				}
+			} finally {
+				// Destroy any streams that were never iterated (consumer stopped early).
+				for (let j = startedIdx + 1; j < streams.length; j++) {
+					const s = streams[j];
+					if (
+						!Buffer.isBuffer(s) &&
+						'destroy' in s &&
+						typeof s.destroy === 'function'
+					) {
+						s.destroy();
+					}
+				}
+			}
+		})(),
+		{ objectMode: false },
+	);
 }
