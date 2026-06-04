@@ -1,4 +1,75 @@
 - commits:
+    - subject: "url-compressed-source: Switch to compress-commons to support zip64"
+      hash: d1d39fdae1fe0680acc0809b0ca0b5bdfb1a343f
+      body: ""
+      footer:
+        Change-type: minor
+        change-type: minor
+        See: https://balena.fibery.io/Work/Project/2525
+        see: https://balena.fibery.io/Work/Project/2525
+      author: Thodoris Greasidis
+      nested: []
+    - subject: Update gzip-stream to 2.0.3 to add support for files > 4GB
+      hash: 24bda5f0ec3d6ccc9eebfb0febac4695117517df
+      body: |
+        Update gzip-stream from 2.0.0 to 2.0.3
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Thodoris Greasidis
+      nested:
+        - commits:
+            - subject: Update @balena/node-crc-utils to 3.1.0 & use the built-in 4GB part
+                normalization
+              hash: 7afa168fe3e497f0d2dae3f4f691faa6ea34c7bf
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+                See: https://github.com/balena-io-modules/node-crc-utils/pull/8
+                see: https://github.com/balena-io-modules/node-crc-utils/pull/8
+              author: Thodoris Greasidis
+          version: gzip-stream-2.0.3
+          title: ""
+          date: 2026-06-03T10:17:08.839Z
+        - commits:
+            - subject: Fix compressing files larger than 4GB
+              hash: 9828ba3f6708000e1c8f0bf108d00fe2ba754dbf
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+                See: https://balena.fibery.io/Work/Project/2525
+                see: https://balena.fibery.io/Work/Project/2525
+              author: Thodoris Greasidis
+          version: gzip-stream-2.0.2
+          title: ""
+          date: 2026-05-31T20:29:55.522Z
+        - commits:
+            - subject: "Add id-token: write permission for NPM OIDC publishing"
+              hash: 8320d6677124854fa21c8f25fe27f2c06fedca69
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+                Signed-off-by: Kyle Harding <kyle@balena.io>
+                signed-off-by: Kyle Harding <kyle@balena.io>
+              author: Kyle Harding
+          version: gzip-stream-2.0.1
+          title: ""
+          date: 2026-02-18T21:54:24.842Z
+    - subject: Add tests for the BalenaS3CompressedSource & UrlCompressedSource modules
+      hash: 55b8ec8ae908891537c55ca095be041c0d4eea66
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+  version: 10.2.0
+  title: ""
+  date: 2026-06-04T12:52:22.954Z
+- commits:
     - subject: Properly lint typings & tests
       hash: 63470edd9c9d69b5dff40a7e46c4408ecc215594
       body: ""
