@@ -44,15 +44,32 @@ class RawDeflateZipStream extends ZipArchiveOutputStream {
 		// See: https://github.com/archiverjs/node-compress-commons/blob/6.0.2/lib/archivers/zip/zip-archive-output-stream.js#L165
 		const process = new PassThrough() satisfies Transform;
 
+		// If the archive is destroyed while the entry is in progress, propagate
+		// that to the process stream so the callback is called with an error and
+		// the IIFE in createZipStreamFromParts is not left hanging indefinitely.
+		const onClose = () =>
+			process.destroy(new Error('Archive stream was destroyed'));
+		this.once('close', onClose);
+
 		let error: Error | null = null;
-		process.once('end', () => {
+		let hasHandledStuff = false;
+		const handleStuff = () => {
+			if (hasHandledStuff) {
+				return;
+			}
+			hasHandledStuff = true;
+			this.removeListener('close', onClose);
 			// crc, size & uncompressedSize are already set by the RawDeflateEntry constructor
 			// so we don't need to set them here like ZipArchiveOutputStream._smartStream does.
 			this._afterAppend(ae);
 			callback(error, ae);
-		});
+		};
+		process.once('end', handleStuff);
 		process.once('error', (err: Error) => {
 			error = err;
+			// Unlike DeflateCRC32Stream, a PassThrough destroyed via onClose will
+			// not emit 'end' after 'error', so we must settle here rather than waiting.
+			handleStuff();
 		});
 
 		process.pipe(this, { end: false });
@@ -129,7 +146,11 @@ export function createZipStreamFromParts(partsByImage: RawDeflatePart[]) {
 			}
 			archive.finish();
 		} catch (error: any) {
-			archive.emit('error', error);
+			// If the error was emitted by the archive stream,
+			// we then don't need to emit back to the stream again.
+			if (!archive.destroyed) {
+				archive.emit('error', error);
+			}
 		}
 	})();
 	return archive;
