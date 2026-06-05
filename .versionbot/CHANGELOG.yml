@@ -1,4 +1,18 @@
 - commits:
+    - subject: "url-compressed-source: Fix the stream cleanup on error"
+      hash: b35532ae8627d38ef67dbb137c6fad601abf94ef
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        See: https://balena.fibery.io/Work/Project/2628
+        see: https://balena.fibery.io/Work/Project/2628
+      author: Thodoris Greasidis
+      nested: []
+  version: 10.2.1
+  title: ""
+  date: 2026-06-05T05:39:20.095Z
+- commits:
     - subject: "url-compressed-source: Switch to compress-commons to support zip64"
       hash: d1d39fdae1fe0680acc0809b0ca0b5bdfb1a343f
       body: ""
