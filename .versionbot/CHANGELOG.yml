@@ -1,4 +1,18 @@
 - commits:
+    - subject: "url-compressed-source: Fix zipped img permissions to be 644"
+      hash: 619abfc13f5243d3ba07978a6a217bd7434e2b75
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        See: https://balena.fibery.io/Work/Project/2628
+        see: https://balena.fibery.io/Work/Project/2628
+      author: Thodoris Greasidis
+      nested: []
+  version: 10.2.2
+  title: ""
+  date: 2026-06-08T18:03:01.429Z
+- commits:
     - subject: "url-compressed-source: Fix the stream cleanup on error"
       hash: b35532ae8627d38ef67dbb137c6fad601abf94ef
       body: ""
