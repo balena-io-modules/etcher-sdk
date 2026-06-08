@@ -7,6 +7,7 @@ declare module 'compress-commons' {
 		setSize(size: number): void;
 		setCompressedSize(size: number): void;
 		getMethod(): number;
+		setUnixMode(mode: number): void;
 	}
 
 	export class ZipArchiveOutputStream extends Transform {

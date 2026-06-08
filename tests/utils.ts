@@ -11,6 +11,13 @@ import { Readable, Writable } from 'stream';
 import { pipeline } from 'stream/promises';
 import { Metadata } from '../lib/source-destination';
 
+export function assertExists(
+	v: unknown,
+	message?: string,
+): asserts v is NonNullable<typeof v> {
+	expect(v, message).to.exist;
+}
+
 /** Compress data with DeflatePartStream and return the buffer + metadata. */
 export async function makeDeflatePart(
 	data: Buffer,
@@ -59,16 +66,13 @@ export async function testZipArchive(
 	metadata: Metadata,
 	uncompressedSize: number,
 ) {
+	assertExists(metadata.name);
 	const tmpDir = await fs.promises.mkdtemp(
 		path.join(os.tmpdir(), 'etcher-sdk-tests-'),
 	);
-	const tmpPath = `${tmpDir}/${metadata.name}.zip`;
+	const tmpPath = path.join(tmpDir, `${metadata.name}.zip`);
 	try {
 		await pipeline(stream, fs.createWriteStream(tmpPath));
-
-		// Confirms that the crc is correct.
-		// Note: Wasn't able to find an npm package that does crc verification of zip files.
-		await execFile('unzip', ['-t', tmpPath]);
 
 		const unzipper = unzip.Parse();
 		const entryPromises: Array<
@@ -93,10 +97,20 @@ export async function testZipArchive(
 			{ entryName: metadata.name, totalBytes: uncompressedSize },
 		]);
 
-		const { size: zipFileSize } = await fs.promises.stat(tmpPath);
+		const archiveStats = await fs.promises.stat(tmpPath);
 		expect(metadata).to.include({
-			size: zipFileSize,
+			size: archiveStats.size,
 		});
+
+		// Also confirms that the crc is correct.
+		// Note: Wasn't able to find an npm package that does crc verification of zip files.
+		await execFile('unzip', ['-o', tmpPath, '-d', tmpDir]);
+		const imgStats = await fs.promises.stat(path.join(tmpDir, metadata.name));
+		expect(imgStats).to.include({
+			mode: 0o100644, // S_IFREG (regular file: 0o100), rw-r--r--
+		});
+		const imgPermissions = (imgStats.mode & 0o777).toString(8);
+		expect(imgPermissions).to.equal('644');
 	} finally {
 		await fs.promises.rm(tmpDir, { recursive: true });
 	}
