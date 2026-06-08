@@ -121,6 +121,15 @@ async function addRawDeflatePartEntry(
 		compressedSize:
 			parts.reduce((sum, p) => sum + p.zLen, 0) + DEFLATE_END.length,
 	});
+
+	// Set the entry permissions to 644, just like zip-part-stream was using 0x81a4 (which equals 0o100644)
+	// See: https://github.com/balena-io-modules/zip-part-stream/blob/v2.0.1/index.coffee#L16
+	// using `setUnixMode()` in the same way zip-stream's entry() sets the permissions
+	// See: https://github.com/archiverjs/node-zip-stream/blob/6.0.1/index.js#L157
+	// which is also the default that node-archiver uses
+	// See: https://github.com/archiverjs/node-archiver/blob/7.0.1/lib/core.js#L339
+	entry.setUnixMode(0o644); // rw-r--r--
+
 	const source = CombinedStream.create();
 	for (const { stream } of parts) {
 		source.append(stream);
