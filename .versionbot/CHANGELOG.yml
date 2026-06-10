@@ -1,4 +1,18 @@
 - commits:
+    - subject: "url-compressed-source: Use pipeline on streams during configuration"
+      hash: a9e69f7961e8aff93f46f1590045b7d6a7eafb71
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        See: https://balena.fibery.io/Work/Project/2628
+        see: https://balena.fibery.io/Work/Project/2628
+      author: Thodoris Greasidis
+      nested: []
+  version: 10.2.3
+  title: ""
+  date: 2026-06-10T08:32:19.663Z
+- commits:
     - subject: "url-compressed-source: Fix zipped img permissions to be 644"
       hash: 619abfc13f5243d3ba07978a6a217bd7434e2b75
       body: ""
