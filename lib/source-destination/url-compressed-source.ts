@@ -5,7 +5,7 @@ import {
 	createGzipFromParts,
 	DEFLATE_END,
 } from 'gzip-stream';
-import { Readable } from 'stream';
+import { Readable, pipeline } from 'stream';
 import {
 	createZipStreamFromParts,
 	getZipSizeFromParts,
@@ -30,7 +30,7 @@ import { ImageJSON, ImageJSONPart } from './compressed-source-types';
 
 import { NotCapable } from '../errors';
 import { StreamLimiter } from '../stream-limiter';
-import { Dictionary, streamToBuffer } from '../utils';
+import { Dictionary, noop, streamToBuffer } from '../utils';
 
 /**
  * Configuration for URLCompressedSource
@@ -218,7 +218,7 @@ export class URLCompressedSource extends SourceDestination {
 		combined.append(stream);
 		combined.append(DEFLATE_END);
 		const inflate = createInflateRaw();
-		combined.pipe(inflate);
+		pipeline(combined, inflate, noop);
 		return new BufferDisk(await streamToBuffer(inflate));
 	}
 
@@ -260,7 +260,11 @@ export class URLCompressedSource extends SourceDestination {
 		// compress
 		await Promise.all(
 			Array.from(disks.entries()).map(async ([filename, disk]) => {
-				const stream = (await disk.getStream()).pipe(createDeflatePart());
+				const stream = pipeline(
+					await disk.getStream(),
+					createDeflatePart(),
+					noop,
+				);
 				const buffer = await streamToBuffer(stream);
 				const { crc, zLen } = stream.metadata();
 				this.configuredParts.set(filename, { crc, zLen, buffer });

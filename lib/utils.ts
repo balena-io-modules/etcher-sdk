@@ -21,6 +21,10 @@ export interface Dictionary<T> {
 	[key: string]: T;
 }
 
+export const noop = () => {
+	/* noop */
+};
+
 export function streamToBuffer(stream: NodeJS.ReadableStream): Promise<Buffer> {
 	return new Promise(
 		(resolve: (buffer: Buffer) => void, reject: (error: Error) => void) => {
