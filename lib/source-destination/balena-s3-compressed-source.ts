@@ -285,7 +285,10 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 						if (configuredPart !== undefined) {
 							({ buffer: stream, crc, zLen } = configuredPart);
 						} else if (fake) {
-							stream = new Readable();
+							// We use an empty buffer when getting the parts to estimate
+							// the resulting size, since we do not use it in the size calculations anyway
+							// and it's lighter than a dummy stream.
+							stream = Buffer.alloc(0);
 						} else {
 							stream = await this.getPartStream(p.filename);
 						}
