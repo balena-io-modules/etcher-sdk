@@ -125,6 +125,9 @@ async function addRawDeflatePartEntry(
 	await new Promise<void>((resolve, reject) => {
 		archive.entry(entry, source, (err) => {
 			if (err != null) {
+				if (!source.destroyed) {
+					source.destroy();
+				}
 				reject(err);
 				return;
 			}
@@ -145,7 +148,7 @@ export function createZipStreamFromParts(partsByImage: RawDeflatePart[]) {
 			// If the error was emitted by the archive stream,
 			// we then don't need to emit back to the stream again.
 			if (!archive.destroyed) {
-				archive.emit('error', error);
+				archive.destroy(error);
 			}
 		}
 	})();
