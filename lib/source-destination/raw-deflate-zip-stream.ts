@@ -1,7 +1,7 @@
 import { crc32_combine_multi } from '@balena/node-crc-utils';
 import * as CombinedStream from 'combined-stream';
 import { ZipArchiveEntry, ZipArchiveOutputStream } from 'compress-commons';
-import { PassThrough, Transform } from 'stream';
+import { PassThrough, Transform, promises as streamPromises } from 'stream';
 
 // DEFLATE ending block
 const DEFLATE_END = Buffer.from([0x03, 0x00]);
@@ -44,35 +44,22 @@ class RawDeflateZipStream extends ZipArchiveOutputStream {
 		// See: https://github.com/archiverjs/node-compress-commons/blob/6.0.2/lib/archivers/zip/zip-archive-output-stream.js#L165
 		const process = new PassThrough() satisfies Transform;
 
-		// If the archive is destroyed while the entry is in progress, propagate
-		// that to the process stream so the callback is called with an error and
-		// the IIFE in createZipStreamFromParts is not left hanging indefinitely.
-		const onClose = () =>
-			process.destroy(new Error('Archive stream was destroyed'));
-		this.once('close', onClose);
+		void (async () => {
+			let error: Error | null = null;
+			try {
+				await streamPromises.pipeline(process, this, { end: false });
+			} catch (err: any) {
+				error = err;
+			} finally {
+				// crc, size & uncompressedSize are already set by the RawDeflateEntry constructor
+				// so we don't need to set them here like ZipArchiveOutputStream._smartStream does.
 
-		let error: Error | null = null;
-		let hasHandledStuff = false;
-		const handleStuff = () => {
-			if (hasHandledStuff) {
-				return;
+				// ZipArchiveOutputStream's _smartStream always calls _afterAppend so that the entry is properly cleaned up.
+				// See: https://github.com/archiverjs/node-compress-commons/blob/6.0.2/lib/archivers/zip/zip-archive-output-stream.js#L175
+				this._afterAppend(ae);
+				callback(error, ae);
 			}
-			hasHandledStuff = true;
-			this.removeListener('close', onClose);
-			// crc, size & uncompressedSize are already set by the RawDeflateEntry constructor
-			// so we don't need to set them here like ZipArchiveOutputStream._smartStream does.
-			this._afterAppend(ae);
-			callback(error, ae);
-		};
-		process.once('end', handleStuff);
-		process.once('error', (err: Error) => {
-			error = err;
-			// Unlike DeflateCRC32Stream, a PassThrough destroyed via onClose will
-			// not emit 'end' after 'error', so we must settle here rather than waiting.
-			handleStuff();
-		});
-
-		process.pipe(this, { end: false });
+		})();
 
 		return process;
 	}
