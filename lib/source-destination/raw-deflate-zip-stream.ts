@@ -1,7 +1,8 @@
 import { crc32_combine_multi } from '@balena/node-crc-utils';
-import * as CombinedStream from 'combined-stream';
 import { ZipArchiveEntry, ZipArchiveOutputStream } from 'compress-commons';
 import { PassThrough, Transform } from 'stream';
+
+import { concatStreams } from '../utils';
 
 // DEFLATE ending block
 const DEFLATE_END = Buffer.from([0x03, 0x00]);
@@ -130,11 +131,10 @@ async function addRawDeflatePartEntry(
 	// See: https://github.com/archiverjs/node-archiver/blob/7.0.1/lib/core.js#L339
 	entry.setUnixMode(0o644); // rw-r--r--
 
-	const source = CombinedStream.create();
-	for (const { stream } of parts) {
-		source.append(stream);
-	}
-	source.append(DEFLATE_END);
+	const source = concatStreams([
+		...parts.map(({ stream }) => stream),
+		DEFLATE_END,
+	]);
 	await new Promise<void>((resolve, reject) => {
 		archive.entry(entry, source, (err) => {
 			if (err != null) {
