@@ -1,4 +1,19 @@
 - commits:
+    - subject: "url-compressed-source: Reduce the places that getParts is called to
+        make it easier to reason"
+      hash: 02d427075f343eaaca0383c7296228d08cae1549
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        See: https://balena.fibery.io/Work/Project/2628
+        see: https://balena.fibery.io/Work/Project/2628
+      author: Thodoris Greasidis
+      nested: []
+  version: 10.2.5
+  title: ""
+  date: 2026-06-11T09:42:45.373Z
+- commits:
     - subject: "url-compressed-source: Use an empty Buffer instead of a dummy Stream
         while estimating the download size"
       hash: e1c9b1e4007e362fedb771909106e8ec218419d2
