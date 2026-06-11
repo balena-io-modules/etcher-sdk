@@ -1,8 +1,11 @@
 import * as CombinedStream from 'combined-stream';
 import { BufferDisk } from 'file-disk';
 import { createDeflatePart, DEFLATE_END } from 'gzip-stream';
-import { createGzipStreamFromParts } from './compressed-source-utils';
-import { Readable, pipeline } from 'stream';
+import {
+	cleanupParts,
+	createGzipStreamFromParts,
+} from './compressed-source-utils';
+import { Readable, finished, pipeline } from 'stream';
 import {
 	createZipStreamFromParts,
 	getZipSizeFromParts,
@@ -356,6 +359,12 @@ export class URLCompressedSource extends SourceDestination {
 			this.format === 'zip'
 				? createZipStreamFromParts(parts)
 				: createGzipStreamFromParts(parts);
+		const cleanup = finished(stream, (err) => {
+			if (err != null) {
+				cleanupParts(parts, err);
+			}
+			cleanup();
+		});
 		return stream;
 	}
 

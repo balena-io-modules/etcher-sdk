@@ -1,5 +1,6 @@
 import { createGzipFromParts } from 'gzip-stream';
 import { RawDeflatePart } from './raw-deflate-zip-stream';
+import { Readable } from 'node:stream';
 
 export const createGzipStreamFromParts = (parts: RawDeflatePart[]) => {
 	if (parts.length !== 1) {
@@ -8,4 +9,17 @@ export const createGzipStreamFromParts = (parts: RawDeflatePart[]) => {
 		);
 	}
 	return createGzipFromParts(parts[0].parts);
+};
+
+export const cleanupParts = function (
+	partsByImage: RawDeflatePart[],
+	error?: Error,
+) {
+	for (const part of partsByImage) {
+		for (const { stream } of part.parts) {
+			if (stream instanceof Readable && !stream.destroyed) {
+				stream.destroy(error);
+			}
+		}
+	}
 };
