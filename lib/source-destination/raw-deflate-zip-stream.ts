@@ -9,7 +9,7 @@ const DEFLATE_END = Buffer.from([0x03, 0x00]);
 // Standard ZIP format constants
 const METHOD_DEFLATED = 8;
 
-interface RawDeflatePart {
+export interface RawDeflatePart {
 	filename: string;
 	parts: Array<{
 		crc: number;
