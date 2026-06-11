@@ -1,10 +1,7 @@
 import * as CombinedStream from 'combined-stream';
 import { BufferDisk } from 'file-disk';
-import {
-	createDeflatePart,
-	createGzipFromParts,
-	DEFLATE_END,
-} from 'gzip-stream';
+import { createDeflatePart, DEFLATE_END } from 'gzip-stream';
+import { createGzipStreamFromParts } from './compressed-source-utils';
 import { Readable, pipeline } from 'stream';
 import {
 	createZipStreamFromParts,
@@ -74,13 +71,6 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 		this.format = format;
 		this.filenamePrefix = filenamePrefix;
 		this.configuration = configuration;
-	}
-
-	private async getSize(): Promise<number> {
-		if (this.format === 'zip') {
-			return getZipSizeFromParts(await this.getParts(true));
-		}
-		return (await this.createGzipStream(true)).zLen;
 	}
 
 	private getFilename(): string {
@@ -299,20 +289,21 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 		);
 	}
 
-	private async createZipStream(fake: boolean) {
-		const parts = await this.getParts(fake);
-		return createZipStreamFromParts(parts);
+	private async getSize(): Promise<number> {
+		const parts = await this.getParts(true);
+		if (this.format === 'zip') {
+			return getZipSizeFromParts(parts);
+		}
+		return createGzipStreamFromParts(parts).zLen;
 	}
 
-	private async createGzipStream(fake: boolean) {
-		const [{ parts }] = await this.getParts(fake);
-		return createGzipFromParts(parts);
-	}
-
-	private async createStream(fake = false) {
-		return await (this.format === 'zip'
-			? this.createZipStream(fake)
-			: this.createGzipStream(fake));
+	private async createStream() {
+		const parts = await this.getParts(false);
+		const stream =
+			this.format === 'zip'
+				? createZipStreamFromParts(parts)
+				: createGzipStreamFromParts(parts);
+		return stream;
 	}
 
 	public async createReadStream(
