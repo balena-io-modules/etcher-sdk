@@ -2,7 +2,7 @@ import * as CombinedStream from 'combined-stream';
 import { BufferDisk } from 'file-disk';
 import { createDeflatePart, DEFLATE_END } from 'gzip-stream';
 import { createGzipStreamFromParts } from './compressed-source-utils';
-import { Readable, pipeline } from 'stream';
+import { Readable, pipeline } from 'node:stream';
 import {
 	createZipStreamFromParts,
 	getZipSizeFromParts,
