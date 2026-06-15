@@ -1,4 +1,18 @@
 - commits:
+    - subject: "url-compressed-source: Use pipeline during the ZipStream construction"
+      hash: 302c028dcf4785352ba6f42e49fc85859b5cce77
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        See: https://balena.fibery.io/Work/Project/2628
+        see: https://balena.fibery.io/Work/Project/2628
+      author: Thodoris Greasidis
+      nested: []
+  version: 10.2.6
+  title: ""
+  date: 2026-06-15T08:46:45.359Z
+- commits:
     - subject: "url-compressed-source: Reduce the places that getParts is called to
         make it easier to reason"
       hash: 02d427075f343eaaca0383c7296228d08cae1549
