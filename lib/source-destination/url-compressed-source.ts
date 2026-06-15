@@ -146,9 +146,7 @@ export class URLCompressedSource extends SourceDestination {
 		return (await this.download('device-type.json')).data;
 	}
 
-	private async getPartStream(
-		filename: string,
-	): Promise<NodeJS.ReadableStream> {
+	private async getPartStream(filename: string): Promise<Readable> {
 		const url = this.urls.parts[filename];
 		if (!url) {
 			throw new Error(`URL not found for part: ${filename}`);
@@ -156,6 +154,13 @@ export class URLCompressedSource extends SourceDestination {
 		const response = await axios.get(url, {
 			responseType: 'stream',
 		});
+		// Confirm that the response is of the expected type, until axios no longer types it as any.
+		if (!(response.data instanceof Readable)) {
+			// This should never happen
+			throw new Error(
+				`Expected response.data to be a Readable stream, but got: ${typeof response.data}`,
+			);
+		}
 		return response.data;
 	}
 
@@ -322,7 +327,7 @@ export class URLCompressedSource extends SourceDestination {
 				filename,
 				parts: await Promise.all(
 					parts.map(async (p) => {
-						let stream: NodeJS.ReadableStream | Buffer;
+						let stream: Readable | Buffer;
 						let { crc, zLen } = p;
 						const configuredPart = this.configuredParts.get(p.filename);
 						if (configuredPart !== undefined) {

@@ -3,6 +3,7 @@ import * as CombinedStream from 'combined-stream';
 import { ZipArchiveEntry, ZipArchiveOutputStream } from 'compress-commons';
 import {
 	PassThrough,
+	Readable,
 	Transform,
 	promises as streamPromises,
 } from 'node:stream';
@@ -18,7 +19,7 @@ export interface RawDeflatePart {
 	parts: Array<{
 		crc: number;
 		zLen: number;
-		stream: NodeJS.ReadableStream | Buffer;
+		stream: Readable | Buffer;
 		len: number;
 	}>;
 }
