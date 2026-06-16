@@ -1,4 +1,18 @@
 - commits:
+    - subject: "url-compressed-source: Cleanup all streams"
+      hash: c81329d69b13c023ea95894ec7317f8578a99741
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        See: https://balena.fibery.io/Work/Project/2628
+        see: https://balena.fibery.io/Work/Project/2628
+      author: Thodoris Greasidis
+      nested: []
+  version: 10.2.8
+  title: ""
+  date: 2026-06-16T15:20:06.468Z
+- commits:
     - subject: "url-compressed-source: Improve axios stream response type as Readable"
       hash: dbf23330ca107aee24a0cdfeb6bfbd7164cb4c07
       body: ""
