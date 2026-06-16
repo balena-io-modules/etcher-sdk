@@ -1,8 +1,11 @@
 import * as CombinedStream from 'combined-stream';
 import { BufferDisk } from 'file-disk';
 import { createDeflatePart, DEFLATE_END } from 'gzip-stream';
-import { createGzipStreamFromParts } from './compressed-source-utils';
-import { Readable, pipeline } from 'node:stream';
+import {
+	cleanupParts,
+	createGzipStreamFromParts,
+} from './compressed-source-utils';
+import { Readable, finished, pipeline } from 'node:stream';
 import {
 	createZipStreamFromParts,
 	getZipSizeFromParts,
@@ -310,6 +313,12 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 			this.format === 'zip'
 				? createZipStreamFromParts(parts)
 				: createGzipStreamFromParts(parts);
+		const cleanupFinishedListeners = finished(stream, (err) => {
+			if (err != null) {
+				cleanupParts(parts);
+			}
+			cleanupFinishedListeners();
+		});
 		return stream;
 	}
 
