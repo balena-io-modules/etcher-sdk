@@ -323,6 +323,8 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	}
 
 	public async createReadStream(
+		// TODO: Drop in the next major
+		/* @deprecated */
 		options: CreateReadStreamOptions = {},
 	): Promise<Readable> {
 		if (options.start !== undefined) {
