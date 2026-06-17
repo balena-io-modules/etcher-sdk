@@ -374,6 +374,8 @@ export class URLCompressedSource extends SourceDestination {
 	}
 
 	public async createReadStream(
+		// TODO: Drop in the next major
+		/* @deprecated */
 		options: CreateReadStreamOptions = {},
 	): Promise<Readable> {
 		if (options.start !== undefined) {
