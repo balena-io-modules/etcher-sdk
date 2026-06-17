@@ -4,6 +4,7 @@ import { createDeflatePart, DEFLATE_END } from 'gzip-stream';
 import {
 	cleanupParts,
 	createGzipStreamFromParts,
+	getGzipSizeFromParts,
 } from './compressed-source-utils';
 import { Readable, finished, pipeline } from 'node:stream';
 import {
@@ -306,7 +307,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 		if (this.format === 'zip') {
 			return getZipSizeFromParts(parts);
 		}
-		return createGzipStreamFromParts(parts).zLen;
+		return getGzipSizeFromParts(parts);
 	}
 
 	private async createStream() {

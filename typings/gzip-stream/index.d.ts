@@ -18,6 +18,12 @@ declare module 'gzip-stream' {
 
 	export function createDeflatePart(): DeflatePartStream;
 
+	export function getGzipSizeFromParts(
+		parts: Array<{
+			zLen: number;
+		}>,
+	): number;
+
 	export function createGzipFromParts(
 		parts: Array<{
 			stream: NodeJS.ReadableStream | Buffer;

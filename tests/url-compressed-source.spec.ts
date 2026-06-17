@@ -249,6 +249,15 @@ for (const opts of [
 			await source.open();
 			// @ts-expect-error access private property for test
 			const expectedTotal = sumImageJSONLenFields(source.imageJSON);
+			const metadata = await source.getMetadata();
+			expect(metadata).to.include({
+				format: 'gzip',
+				osVersion: opts.buildId,
+				version: opts.buildId,
+				supervisorVersion: opts.supervisorVersion,
+				arch: opts.arch,
+				name: `${opts.deviceType}-${opts.buildId}-${opts.supervisorVersion}.img`,
+			});
 			const stream = await source.createReadStream();
 			let total = 0;
 			await pipeline(
