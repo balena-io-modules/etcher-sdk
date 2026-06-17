@@ -148,6 +148,8 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 	}
 }
 
+// TODO: Drop in the next major
+/* @deprecated */
 export class BalenaS3Source extends BalenaS3SourceBase {
 	/*
 	 * Random reads from the uncompressed image in S3
