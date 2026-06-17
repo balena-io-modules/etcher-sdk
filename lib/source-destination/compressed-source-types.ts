@@ -1,5 +1,3 @@
-import { Dictionary } from '../utils';
-
 export interface ImageJSONPart {
 	filename: string;
 	crc: number;
@@ -8,4 +6,4 @@ export interface ImageJSONPart {
 	partitionIndex?: string;
 }
 
-export type ImageJSON = Dictionary<{ parts: ImageJSONPart[] }>;
+export type ImageJSON = Record<string, { parts: ImageJSONPart[] }>;
