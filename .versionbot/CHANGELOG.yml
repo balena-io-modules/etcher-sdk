@@ -1,4 +1,16 @@
 - commits:
+    - subject: Remove the `Dictionary` type sugar in favor of using `Record` directly
+      hash: f901d123557b1fb02ef39382a592ab1d404cc655
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+  version: 10.2.10
+  title: ""
+  date: 2026-06-17T18:47:38.259Z
+- commits:
     - subject: URLCompressedSource.createReadStream deprecate the options parameter
       hash: 5350a2e590f1c6a78c58cef46c2f1728f10ce828
       body: ""
