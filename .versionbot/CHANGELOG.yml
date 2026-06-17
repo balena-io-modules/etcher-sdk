@@ -1,4 +1,48 @@
 - commits:
+    - subject: URLCompressedSource.createReadStream deprecate the options parameter
+      hash: 5350a2e590f1c6a78c58cef46c2f1728f10ce828
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+    - subject: Deprecate the BalenaS3Source class
+      hash: 601f304bccdfefe42391bc7b2fb3b3595d51fb98
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+    - subject: Deprecate the BalenaS3SourceBase class
+      hash: b935f6da7c371b3ad5b141221161d4da2fc886fe
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+    - subject: Deprecate the BalenaS3CompressedSource class
+      hash: eef4c5e718dca70e8ba341fd6e1a5853ba7c756b
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+    - subject: BalenaS3CompressedSource.createReadStream deprecate the options parameter
+      hash: 0f632b79a8719f1d3ef24cc0120fa99272c9e355
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+  version: 10.2.9
+  title: ""
+  date: 2026-06-17T18:28:50.462Z
+- commits:
     - subject: "url-compressed-source: Cleanup all streams"
       hash: c81329d69b13c023ea95894ec7317f8578a99741
       body: ""
