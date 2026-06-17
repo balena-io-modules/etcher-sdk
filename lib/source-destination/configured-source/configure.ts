@@ -22,8 +22,6 @@ import { promisify } from 'util';
 import { configure as configureAction } from './operations/configure';
 import { copy as copyAction } from './operations/copy';
 
-import { Dictionary } from '../../utils';
-
 export type Partition = number | { primary: number; logical?: number };
 
 export interface FileOnPartition {
@@ -36,7 +34,7 @@ export interface CopyOperation {
 	command: 'copy';
 	from: FileOnPartition;
 	to: FileOnPartition;
-	when: Dictionary<string>;
+	when: Record<string, string>;
 }
 
 export interface DeviceTypeJSON {
@@ -53,7 +51,7 @@ export interface DeviceTypeJSON {
 const MBR_LAST_PRIMARY_PARTITION = 4;
 
 export function shouldRunOperation(
-	options: Dictionary<any>,
+	options: Record<string, any>,
 	operation: CopyOperation,
 ): boolean {
 	const when = operation.when ?? {};
@@ -103,7 +101,7 @@ async function getDiskDeviceType(
 
 export async function configure(
 	disk: Disk,
-	config?: Dictionary<any>,
+	config?: Record<string, any>,
 ): Promise<void> {
 	const deviceType = await getDiskDeviceType(disk);
 	const operations = deviceType?.configuration?.operations ?? [];

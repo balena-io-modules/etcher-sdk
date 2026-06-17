@@ -26,13 +26,13 @@ import { CreateReadStreamOptions } from './source-destination';
 
 import { NotCapable } from '../errors';
 import { StreamLimiter } from '../stream-limiter';
-import { Dictionary, noop, streamToBuffer } from '../utils';
+import { noop, streamToBuffer } from '../utils';
 import type { ImageJSON, ImageJSONPart } from './compressed-source-types';
 
 export interface BalenaS3CompressedSourceOptions extends BalenaS3SourceOptions {
 	format: 'zip' | 'gzip';
 	filenamePrefix?: string;
-	configuration?: Dictionary<any>;
+	configuration?: Record<string, any>;
 }
 
 // TODO: Drop in a major once we no longer use S3 for OS images
@@ -55,7 +55,7 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	private format: BalenaS3CompressedSourceOptions['format'];
 	private filenamePrefix?: string;
 	// configuration is config.json + network configuration + dashboard "when" options like "processorCore" for ts4900
-	private configuration?: Dictionary<any>;
+	private configuration?: Record<string, any>;
 	private configuredParts = new Map<
 		string,
 		{ crc: number; zLen: number; buffer: Buffer }

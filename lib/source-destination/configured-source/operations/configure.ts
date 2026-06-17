@@ -19,8 +19,6 @@ import { Disk } from 'file-disk';
 import { outdent } from 'outdent';
 import { promisify } from 'util';
 
-import { Dictionary } from '../../../utils';
-
 interface WifiConfig {
 	wifiSsid: string;
 	wifiKey?: string;
@@ -101,7 +99,7 @@ function pad(num: number): string {
 export async function configure(
 	disk: Disk,
 	partition: number | undefined,
-	config: Dictionary<any>,
+	config: Record<string, any>,
 ): Promise<void> {
 	const {
 		wifiSsid,

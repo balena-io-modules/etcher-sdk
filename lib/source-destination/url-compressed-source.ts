@@ -30,7 +30,7 @@ import { ImageJSON, ImageJSONPart } from './compressed-source-types';
 
 import { NotCapable } from '../errors';
 import { StreamLimiter } from '../stream-limiter';
-import { Dictionary, noop, streamToBuffer } from '../utils';
+import { noop, streamToBuffer } from '../utils';
 
 /**
  * Configuration for URLCompressedSource
@@ -41,14 +41,14 @@ export interface URLSourceConfig {
 	VERSION_HOSTOS: string; // URL to VERSION_HOSTOS file
 	'device-type.json': string; // URL to device-type.json file
 	'image.json': string; // URL to image.json file
-	parts: Dictionary<string>; // Map of part filenames to their URLs
+	parts: Record<string, string>; // Map of part filenames to their URLs
 }
 
 export interface URLCompressedSourceOptions {
 	urls: URLSourceConfig;
 	format: 'zip' | 'gzip';
 	filenamePrefix?: string;
-	configuration?: Dictionary<any>;
+	configuration?: Record<string, any>;
 	deviceType: string; // raspberry-pi
 	buildId: string; // 2.9.6+rev1.prod
 }
@@ -72,7 +72,7 @@ export class URLCompressedSource extends SourceDestination {
 	private format: URLCompressedSourceOptions['format'];
 	private filenamePrefix?: string;
 	// configuration is config.json + network configuration + dashboard "when" options like "processorCore" for ts4900
-	private configuration?: Dictionary<any>;
+	private configuration?: Record<string, any>;
 	private configuredParts = new Map<
 		string,
 		{ crc: number; zLen: number; buffer: Buffer }

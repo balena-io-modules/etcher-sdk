@@ -17,10 +17,6 @@
 import { isAlignedLockableBuffer } from './aligned-lockable-buffer';
 import { SparseStreamChunk } from './sparse-stream/shared';
 
-export interface Dictionary<T> {
-	[key: string]: T;
-}
-
 export const noop = () => {
 	/* noop */
 };
