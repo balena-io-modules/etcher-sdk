@@ -35,6 +35,8 @@ export interface BalenaS3CompressedSourceOptions extends BalenaS3SourceOptions {
 	configuration?: Dictionary<any>;
 }
 
+// TODO: Drop in a major once we no longer use S3 for OS images
+/* @deprecated */
 export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	/*
 	 * Supports regular disk images (zipped or gzipped) and edison zip archives (zip only as it contains many files).
