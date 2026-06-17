@@ -49,6 +49,8 @@ export interface BalenaS3SourceOptions {
 	awsCredentials?: AwsCredentials;
 }
 
+// TODO: Drop in a major once we no longer use S3 for OS images
+/* @deprecated */
 export abstract class BalenaS3SourceBase extends SourceDestination {
 	public readonly host: string;
 	public readonly bucket: string;
