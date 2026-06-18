@@ -1,4 +1,7 @@
-import { createGzipFromParts } from 'gzip-stream';
+import {
+	createGzipFromParts,
+	getGzipSizeFromParts as $getGzipSizeFromParts,
+} from 'gzip-stream';
 import { RawDeflatePart } from './raw-deflate-zip-stream';
 import { Stream } from 'node:stream';
 
@@ -9,6 +12,15 @@ export const createGzipStreamFromParts = (parts: RawDeflatePart[]) => {
 		);
 	}
 	return createGzipFromParts(parts[0].parts);
+};
+
+export const getGzipSizeFromParts = (parts: RawDeflatePart[]) => {
+	if (parts.length !== 1) {
+		throw new Error(
+			'Using gzip is only supported for sources with a single part',
+		);
+	}
+	return $getGzipSizeFromParts(parts[0].parts);
 };
 
 export const cleanupParts = function (partsByImage: RawDeflatePart[]) {
