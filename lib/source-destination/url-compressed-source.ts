@@ -322,10 +322,29 @@ export class URLCompressedSource extends SourceDestination {
 
 		await this.configure();
 		// The order is important, getSize() expects imageJSON and filename to be set and the image to be configured
-		this.size = await this.getSize();
+		this.size = this.getSize();
 	}
 
-	private async getParts(fake: boolean) {
+	private getSize(): number {
+		const partInfos = Object.entries(this.imageJSON).map(
+			([filename, { parts }]) => ({
+				filename,
+				parts: parts.map((p) => {
+					const configuredPart = this.configuredParts.get(p.filename);
+					return {
+						len: p.len,
+						zLen: (configuredPart ?? p).zLen,
+					};
+				}),
+			}),
+		);
+		if (this.format === 'zip') {
+			return getZipSizeFromParts(partInfos);
+		}
+		return getGzipSizeFromParts(partInfos);
+	}
+
+	private async getParts() {
 		return Promise.all(
 			Object.entries(this.imageJSON).map(async ([filename, { parts }]) => ({
 				filename,
@@ -336,11 +355,6 @@ export class URLCompressedSource extends SourceDestination {
 						const configuredPart = this.configuredParts.get(p.filename);
 						if (configuredPart !== undefined) {
 							({ buffer: stream, crc, zLen } = configuredPart);
-						} else if (fake) {
-							// We use an empty buffer when getting the parts to estimate
-							// the resulting size, since we do not use it in the size calculations anyway
-							// and it's lighter than a dummy stream.
-							stream = Buffer.alloc(0);
 						} else {
 							stream = await this.getPartStream(p.filename);
 						}
@@ -351,16 +365,8 @@ export class URLCompressedSource extends SourceDestination {
 		);
 	}
 
-	private async getSize(): Promise<number> {
-		const parts = await this.getParts(true);
-		if (this.format === 'zip') {
-			return getZipSizeFromParts(parts);
-		}
-		return getGzipSizeFromParts(parts);
-	}
-
 	private async createStream() {
-		const parts = await this.getParts(false);
+		const parts = await this.getParts();
 		const stream =
 			this.format === 'zip'
 				? createZipStreamFromParts(parts)
