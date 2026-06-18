@@ -1,4 +1,40 @@
 - commits:
+    - subject: "url-compressed-source: Avoid creating gz streams while estimating size"
+      hash: 2ff681bee5ae29958a348aa85b3aff1a896ca873
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        See: https://balena.fibery.io/Work/Project/2628
+        see: https://balena.fibery.io/Work/Project/2628
+      author: Thodoris Greasidis
+      nested: []
+    - subject: Update gzip-stream to 2.1.0
+      hash: a664eeb1a6c605a34c992df95e18e9dd0aabf426
+      body: |
+        Update gzip-stream from 2.0.3 to 2.1.0
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested:
+        - commits:
+            - subject: Add a separate getGzipSizeFromParts helper
+              hash: c6ded05785cb8c02c7eda1e429946270dc619782
+              body: ""
+              footer:
+                Change-type: minor
+                change-type: minor
+                See: https://github.com/balena-io-modules/node-crc-utils/pull/8
+                see: https://github.com/balena-io-modules/node-crc-utils/pull/8
+              author: Thodoris Greasidis
+          version: gzip-stream-2.1.0
+          title: ""
+          date: 2026-06-18T02:03:08.131Z
+  version: 10.2.11
+  title: ""
+  date: 2026-06-18T08:03:43.159Z
+- commits:
     - subject: Remove the `Dictionary` type sugar in favor of using `Record` directly
       hash: f901d123557b1fb02ef39382a592ab1d404cc655
       body: ""
