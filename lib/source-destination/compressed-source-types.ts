@@ -7,3 +7,11 @@ export interface ImageJSONPart {
 }
 
 export type ImageJSON = Record<string, { parts: ImageJSONPart[] }>;
+
+export interface ImagePartInfo {
+	filename: string;
+	parts: Array<{
+		zLen: number;
+		len: number;
+	}>;
+}

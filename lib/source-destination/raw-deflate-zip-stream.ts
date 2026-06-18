@@ -7,6 +7,7 @@ import {
 	Transform,
 	promises as streamPromises,
 } from 'node:stream';
+import type { ImagePartInfo } from './compressed-source-types';
 
 // DEFLATE ending block
 const DEFLATE_END = Buffer.from([0x03, 0x00]);
@@ -163,7 +164,7 @@ export function createZipStreamFromParts(partsByImage: RawDeflatePart[]) {
 // ZIP specification reference: APPNOTE.TXT by PKWare
 // https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT
 // Check §4.3.6 for a file format overview
-export function getZipSizeFromParts(partsByImage: RawDeflatePart[]): number {
+export function getZipSizeFromParts(partsByImage: ImagePartInfo[]): number {
 	const ZIP64_MAGIC = 0xffffffff;
 	const ZIP64_MAGIC_SHORT = 0xffff;
 
