@@ -90,7 +90,7 @@ node_modules/@types/node/events.d.ts:110
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:166](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L166)
+[lib/source-destination/source-destination.ts:166](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L166)
 
 ___
 
@@ -418,7 +418,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:175](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L175)
+[lib/source-destination/source-destination.ts:175](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L175)
 
 ___
 
@@ -927,7 +927,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:173](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L173)
+[lib/source-destination/source-destination.ts:173](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L173)
 
 ___
 

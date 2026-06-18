@@ -1,109 +1,134 @@
-[etcher-sdk](../README.md) / [sourceDestination](../modules/sourceDestination.md) / DriverlessDevice
+[etcher-sdk](../README.md) / [sourceDestination](../modules/sourceDestination.md) / URLCompressedSource
 
-# Class: DriverlessDevice
+# Class: URLCompressedSource
 
-[sourceDestination](../modules/sourceDestination.md).DriverlessDevice
+[sourceDestination](../modules/sourceDestination.md).URLCompressedSource
+
+URLCompressedSource - Downloads and streams compressed images from direct URLs
+Similar to BalenaS3CompressedSource but uses pre-configured URLs instead of S3 paths
+
+Supports regular disk images (zipped or gzipped) and edison zip archives (zip only as it contains many files).
+No random reads, you can't use this with ConfiguredSource.
+Instead it handles the configuration on its own.
+Partial compressed files are streamed from URLs.
+If a partition (or disk image in the zip archive for edisons) needs configuration, it is downloaded, decompressed and recompressed.
+The complete compressed stream is created from the partial compressed files from URLs and the configured parts described above.
 
 ## Hierarchy
 
 - [`SourceDestination`](sourceDestination.SourceDestination.md)
 
-  ↳ **`DriverlessDevice`**
-
-## Implements
-
-- [`AdapterSourceDestination`](../interfaces/scanner.adapters.AdapterSourceDestination.md)
+  ↳ **`URLCompressedSource`**
 
 ## Table of contents
 
 ### Constructors
 
-- [constructor](sourceDestination.DriverlessDevice.md#constructor)
+- [constructor](sourceDestination.URLCompressedSource.md#constructor)
 
 ### Properties
 
-- [accessible](sourceDestination.DriverlessDevice.md#accessible)
-- [description](sourceDestination.DriverlessDevice.md#description)
-- [device](sourceDestination.DriverlessDevice.md#device)
-- [deviceDescriptor](sourceDestination.DriverlessDevice.md#devicedescriptor)
-- [devicePath](sourceDestination.DriverlessDevice.md#devicepath)
-- [emitsProgress](sourceDestination.DriverlessDevice.md#emitsprogress)
-- [isSystem](sourceDestination.DriverlessDevice.md#issystem)
-- [mountpoints](sourceDestination.DriverlessDevice.md#mountpoints)
-- [raw](sourceDestination.DriverlessDevice.md#raw)
-- [size](sourceDestination.DriverlessDevice.md#size)
-- [captureRejectionSymbol](sourceDestination.DriverlessDevice.md#capturerejectionsymbol)
-- [captureRejections](sourceDestination.DriverlessDevice.md#capturerejections)
-- [defaultMaxListeners](sourceDestination.DriverlessDevice.md#defaultmaxlisteners)
-- [errorMonitor](sourceDestination.DriverlessDevice.md#errormonitor)
-- [imageExtensions](sourceDestination.DriverlessDevice.md#imageextensions)
-- [mimetype](sourceDestination.DriverlessDevice.md#mimetype)
+- [buildId](sourceDestination.URLCompressedSource.md#buildid)
+- [configuration](sourceDestination.URLCompressedSource.md#configuration)
+- [configuredParts](sourceDestination.URLCompressedSource.md#configuredparts)
+- [deviceType](sourceDestination.URLCompressedSource.md#devicetype)
+- [deviceTypeJSON](sourceDestination.URLCompressedSource.md#devicetypejson)
+- [filename](sourceDestination.URLCompressedSource.md#filename)
+- [filenamePrefix](sourceDestination.URLCompressedSource.md#filenameprefix)
+- [format](sourceDestination.URLCompressedSource.md#format)
+- [imageJSON](sourceDestination.URLCompressedSource.md#imagejson)
+- [lastModified](sourceDestination.URLCompressedSource.md#lastmodified)
+- [osVersion](sourceDestination.URLCompressedSource.md#osversion)
+- [size](sourceDestination.URLCompressedSource.md#size)
+- [supervisorVersion](sourceDestination.URLCompressedSource.md#supervisorversion)
+- [urls](sourceDestination.URLCompressedSource.md#urls)
+- [captureRejectionSymbol](sourceDestination.URLCompressedSource.md#capturerejectionsymbol)
+- [captureRejections](sourceDestination.URLCompressedSource.md#capturerejections)
+- [defaultMaxListeners](sourceDestination.URLCompressedSource.md#defaultmaxlisteners)
+- [errorMonitor](sourceDestination.URLCompressedSource.md#errormonitor)
+- [imageExtensions](sourceDestination.URLCompressedSource.md#imageextensions)
+- [mimetype](sourceDestination.URLCompressedSource.md#mimetype)
 
 ### Methods
 
-- [[captureRejectionSymbol]](sourceDestination.DriverlessDevice.md#[capturerejectionsymbol])
-- [\_close](sourceDestination.DriverlessDevice.md#_close)
-- [\_getMetadata](sourceDestination.DriverlessDevice.md#_getmetadata)
-- [\_open](sourceDestination.DriverlessDevice.md#_open)
-- [addListener](sourceDestination.DriverlessDevice.md#addlistener)
-- [canCreateReadStream](sourceDestination.DriverlessDevice.md#cancreatereadstream)
-- [canCreateSparseReadStream](sourceDestination.DriverlessDevice.md#cancreatesparsereadstream)
-- [canCreateSparseWriteStream](sourceDestination.DriverlessDevice.md#cancreatesparsewritestream)
-- [canCreateWriteStream](sourceDestination.DriverlessDevice.md#cancreatewritestream)
-- [canRead](sourceDestination.DriverlessDevice.md#canread)
-- [canWrite](sourceDestination.DriverlessDevice.md#canwrite)
-- [close](sourceDestination.DriverlessDevice.md#close)
-- [createReadStream](sourceDestination.DriverlessDevice.md#createreadstream)
-- [createSparseReadStream](sourceDestination.DriverlessDevice.md#createsparsereadstream)
-- [createSparseWriteStream](sourceDestination.DriverlessDevice.md#createsparsewritestream)
-- [createVerifier](sourceDestination.DriverlessDevice.md#createverifier)
-- [createWriteStream](sourceDestination.DriverlessDevice.md#createwritestream)
-- [emit](sourceDestination.DriverlessDevice.md#emit)
-- [eventNames](sourceDestination.DriverlessDevice.md#eventnames)
-- [getAlignment](sourceDestination.DriverlessDevice.md#getalignment)
-- [getBlocks](sourceDestination.DriverlessDevice.md#getblocks)
-- [getInnerSource](sourceDestination.DriverlessDevice.md#getinnersource)
-- [getMaxListeners](sourceDestination.DriverlessDevice.md#getmaxlisteners)
-- [getMetadata](sourceDestination.DriverlessDevice.md#getmetadata)
-- [getPartitionTable](sourceDestination.DriverlessDevice.md#getpartitiontable)
-- [listenerCount](sourceDestination.DriverlessDevice.md#listenercount)
-- [listeners](sourceDestination.DriverlessDevice.md#listeners)
-- [off](sourceDestination.DriverlessDevice.md#off)
-- [on](sourceDestination.DriverlessDevice.md#on)
-- [once](sourceDestination.DriverlessDevice.md#once)
-- [open](sourceDestination.DriverlessDevice.md#open)
-- [prependListener](sourceDestination.DriverlessDevice.md#prependlistener)
-- [prependOnceListener](sourceDestination.DriverlessDevice.md#prependoncelistener)
-- [rawListeners](sourceDestination.DriverlessDevice.md#rawlisteners)
-- [read](sourceDestination.DriverlessDevice.md#read)
-- [removeAllListeners](sourceDestination.DriverlessDevice.md#removealllisteners)
-- [removeListener](sourceDestination.DriverlessDevice.md#removelistener)
-- [setMaxListeners](sourceDestination.DriverlessDevice.md#setmaxlisteners)
-- [write](sourceDestination.DriverlessDevice.md#write)
-- [addAbortListener](sourceDestination.DriverlessDevice.md#addabortlistener)
-- [getEventListeners](sourceDestination.DriverlessDevice.md#geteventlisteners)
-- [getMaxListeners](sourceDestination.DriverlessDevice.md#getmaxlisteners-1)
-- [listenerCount](sourceDestination.DriverlessDevice.md#listenercount-1)
-- [on](sourceDestination.DriverlessDevice.md#on-1)
-- [once](sourceDestination.DriverlessDevice.md#once-1)
-- [register](sourceDestination.DriverlessDevice.md#register)
-- [setMaxListeners](sourceDestination.DriverlessDevice.md#setmaxlisteners-1)
+- [[captureRejectionSymbol]](sourceDestination.URLCompressedSource.md#[capturerejectionsymbol])
+- [\_close](sourceDestination.URLCompressedSource.md#_close)
+- [\_getMetadata](sourceDestination.URLCompressedSource.md#_getmetadata)
+- [\_open](sourceDestination.URLCompressedSource.md#_open)
+- [addListener](sourceDestination.URLCompressedSource.md#addlistener)
+- [canCreateReadStream](sourceDestination.URLCompressedSource.md#cancreatereadstream)
+- [canCreateSparseReadStream](sourceDestination.URLCompressedSource.md#cancreatesparsereadstream)
+- [canCreateSparseWriteStream](sourceDestination.URLCompressedSource.md#cancreatesparsewritestream)
+- [canCreateWriteStream](sourceDestination.URLCompressedSource.md#cancreatewritestream)
+- [canRead](sourceDestination.URLCompressedSource.md#canread)
+- [canWrite](sourceDestination.URLCompressedSource.md#canwrite)
+- [close](sourceDestination.URLCompressedSource.md#close)
+- [configure](sourceDestination.URLCompressedSource.md#configure)
+- [createReadStream](sourceDestination.URLCompressedSource.md#createreadstream)
+- [createSparseReadStream](sourceDestination.URLCompressedSource.md#createsparsereadstream)
+- [createSparseWriteStream](sourceDestination.URLCompressedSource.md#createsparsewritestream)
+- [createStream](sourceDestination.URLCompressedSource.md#createstream)
+- [createVerifier](sourceDestination.URLCompressedSource.md#createverifier)
+- [createWriteStream](sourceDestination.URLCompressedSource.md#createwritestream)
+- [download](sourceDestination.URLCompressedSource.md#download)
+- [emit](sourceDestination.URLCompressedSource.md#emit)
+- [eventNames](sourceDestination.URLCompressedSource.md#eventnames)
+- [extractDeflateToDisk](sourceDestination.URLCompressedSource.md#extractdeflatetodisk)
+- [findImagePart](sourceDestination.URLCompressedSource.md#findimagepart)
+- [findPart](sourceDestination.URLCompressedSource.md#findpart)
+- [findPartitionPart](sourceDestination.URLCompressedSource.md#findpartitionpart)
+- [getAlignment](sourceDestination.URLCompressedSource.md#getalignment)
+- [getBlocks](sourceDestination.URLCompressedSource.md#getblocks)
+- [getDeviceTypeJSON](sourceDestination.URLCompressedSource.md#getdevicetypejson)
+- [getFilename](sourceDestination.URLCompressedSource.md#getfilename)
+- [getImageJSON](sourceDestination.URLCompressedSource.md#getimagejson)
+- [getInnerSource](sourceDestination.URLCompressedSource.md#getinnersource)
+- [getMaxListeners](sourceDestination.URLCompressedSource.md#getmaxlisteners)
+- [getMetadata](sourceDestination.URLCompressedSource.md#getmetadata)
+- [getOsVersion](sourceDestination.URLCompressedSource.md#getosversion)
+- [getPartStream](sourceDestination.URLCompressedSource.md#getpartstream)
+- [getPartitionTable](sourceDestination.URLCompressedSource.md#getpartitiontable)
+- [getParts](sourceDestination.URLCompressedSource.md#getparts)
+- [getSize](sourceDestination.URLCompressedSource.md#getsize)
+- [getSupervisorVersion](sourceDestination.URLCompressedSource.md#getsupervisorversion)
+- [listenerCount](sourceDestination.URLCompressedSource.md#listenercount)
+- [listeners](sourceDestination.URLCompressedSource.md#listeners)
+- [off](sourceDestination.URLCompressedSource.md#off)
+- [on](sourceDestination.URLCompressedSource.md#on)
+- [once](sourceDestination.URLCompressedSource.md#once)
+- [open](sourceDestination.URLCompressedSource.md#open)
+- [prependListener](sourceDestination.URLCompressedSource.md#prependlistener)
+- [prependOnceListener](sourceDestination.URLCompressedSource.md#prependoncelistener)
+- [rawListeners](sourceDestination.URLCompressedSource.md#rawlisteners)
+- [read](sourceDestination.URLCompressedSource.md#read)
+- [removeAllListeners](sourceDestination.URLCompressedSource.md#removealllisteners)
+- [removeListener](sourceDestination.URLCompressedSource.md#removelistener)
+- [setMaxListeners](sourceDestination.URLCompressedSource.md#setmaxlisteners)
+- [write](sourceDestination.URLCompressedSource.md#write)
+- [addAbortListener](sourceDestination.URLCompressedSource.md#addabortlistener)
+- [getEventListeners](sourceDestination.URLCompressedSource.md#geteventlisteners)
+- [getMaxListeners](sourceDestination.URLCompressedSource.md#getmaxlisteners-1)
+- [listenerCount](sourceDestination.URLCompressedSource.md#listenercount-1)
+- [on](sourceDestination.URLCompressedSource.md#on-1)
+- [once](sourceDestination.URLCompressedSource.md#once-1)
+- [register](sourceDestination.URLCompressedSource.md#register)
+- [setMaxListeners](sourceDestination.URLCompressedSource.md#setmaxlisteners-1)
 
 ## Constructors
 
 ### constructor
 
-• **new DriverlessDevice**(`driverlessDevice`): [`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+• **new URLCompressedSource**(`«destructured»`): [`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `driverlessDevice` | `DriverlessDevice` |
+| `«destructured»` | [`URLCompressedSourceOptions`](../interfaces/sourceDestination.URLCompressedSourceOptions.md) |
 
 #### Returns
 
-[`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+[`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 #### Overrides
 
@@ -111,146 +136,147 @@
 
 #### Defined in
 
-[lib/source-destination/driverless.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/driverless.ts#L37)
+[lib/source-destination/url-compressed-source.ts:91](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L91)
 
 ## Properties
 
-### accessible
+### buildId
 
-• **accessible**: `boolean` = `false`
+• `Readonly` **buildId**: `string`
 
 #### Defined in
 
-[lib/source-destination/driverless.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/driverless.ts#L26)
+[lib/source-destination/url-compressed-source.ts:70](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L70)
 
 ___
 
-### description
+### configuration
 
-• **description**: `string` = `''`
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[description](../interfaces/scanner.adapters.AdapterSourceDestination.md#description)
+• `Private` `Optional` **configuration**: `Record`<`string`, `any`\>
 
 #### Defined in
 
-[lib/source-destination/driverless.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/driverless.ts#L35)
+[lib/source-destination/url-compressed-source.ts:76](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L76)
 
 ___
 
-### device
+### configuredParts
 
-• **device**: ``null``
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[device](../interfaces/scanner.adapters.AdapterSourceDestination.md#device)
+• `Private` **configuredParts**: `Map`<`string`, { `buffer`: `Buffer` ; `crc`: `number` ; `zLen`: `number`  }\>
 
 #### Defined in
 
-[lib/source-destination/driverless.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/driverless.ts#L28)
+[lib/source-destination/url-compressed-source.ts:77](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L77)
 
 ___
 
-### deviceDescriptor
+### deviceType
 
-• **deviceDescriptor**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `idProduct` | `number` |
-| `idVendor` | `number` |
+• `Readonly` **deviceType**: `string`
 
 #### Defined in
 
-[lib/source-destination/driverless.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/driverless.ts#L34)
+[lib/source-destination/url-compressed-source.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L69)
 
 ___
 
-### devicePath
+### deviceTypeJSON
 
-• **devicePath**: ``null``
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[devicePath](../interfaces/scanner.adapters.AdapterSourceDestination.md#devicepath)
+• `Private` **deviceTypeJSON**: `DeviceTypeJSON`
 
 #### Defined in
 
-[lib/source-destination/driverless.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/driverless.ts#L29)
+[lib/source-destination/url-compressed-source.ts:84](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L84)
 
 ___
 
-### emitsProgress
+### filename
 
-• **emitsProgress**: `boolean` = `false`
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[emitsProgress](../interfaces/scanner.adapters.AdapterSourceDestination.md#emitsprogress)
+• `Private` **filename**: `string`
 
 #### Defined in
 
-[lib/source-destination/driverless.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/driverless.ts#L33)
+[lib/source-destination/url-compressed-source.ts:89](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L89)
 
 ___
 
-### isSystem
+### filenamePrefix
 
-• **isSystem**: `boolean` = `false`
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[isSystem](../interfaces/scanner.adapters.AdapterSourceDestination.md#issystem)
+• `Private` `Optional` **filenamePrefix**: `string`
 
 #### Defined in
 
-[lib/source-destination/driverless.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/driverless.ts#L30)
+[lib/source-destination/url-compressed-source.ts:74](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L74)
 
 ___
 
-### mountpoints
+### format
 
-• **mountpoints**: `never`[] = `[]`
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[mountpoints](../interfaces/scanner.adapters.AdapterSourceDestination.md#mountpoints)
+• `Private` **format**: ``"gzip"`` \| ``"zip"``
 
 #### Defined in
 
-[lib/source-destination/driverless.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/driverless.ts#L31)
+[lib/source-destination/url-compressed-source.ts:73](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L73)
 
 ___
 
-### raw
+### imageJSON
 
-• **raw**: ``null``
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[raw](../interfaces/scanner.adapters.AdapterSourceDestination.md#raw)
+• `Private` **imageJSON**: [`ImageJSON`](../modules/sourceDestination.md#imagejson)
 
 #### Defined in
 
-[lib/source-destination/driverless.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/driverless.ts#L27)
+[lib/source-destination/url-compressed-source.ts:83](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L83)
+
+___
+
+### lastModified
+
+• `Private` **lastModified**: `Date`
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:87](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L87)
+
+___
+
+### osVersion
+
+• `Private` **osVersion**: `string`
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:86](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L86)
 
 ___
 
 ### size
 
-• **size**: ``null``
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[size](../interfaces/scanner.adapters.AdapterSourceDestination.md#size)
+• `Private` **size**: `number`
 
 #### Defined in
 
-[lib/source-destination/driverless.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/driverless.ts#L32)
+[lib/source-destination/url-compressed-source.ts:88](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L88)
+
+___
+
+### supervisorVersion
+
+• `Private` **supervisorVersion**: `string`
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:85](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L85)
+
+___
+
+### urls
+
+• `Private` **urls**: [`URLSourceConfig`](../interfaces/sourceDestination.URLSourceConfig.md)
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:72](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L72)
 
 ___
 
@@ -417,10 +443,6 @@ ___
 
 `void`
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[[captureRejectionSymbol]](../interfaces/scanner.adapters.AdapterSourceDestination.md#[capturerejectionsymbol])
-
 #### Inherited from
 
 [SourceDestination](sourceDestination.SourceDestination.md).[[captureRejectionSymbol]](sourceDestination.SourceDestination.md#[capturerejectionsymbol])
@@ -438,10 +460,6 @@ ___
 #### Returns
 
 `Promise`<`void`\>
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[_close](../interfaces/scanner.adapters.AdapterSourceDestination.md#_close)
 
 #### Inherited from
 
@@ -461,17 +479,13 @@ ___
 
 `Promise`<[`Metadata`](../interfaces/sourceDestination.Metadata.md)\>
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[_getMetadata](../interfaces/scanner.adapters.AdapterSourceDestination.md#_getmetadata)
-
-#### Inherited from
+#### Overrides
 
 [SourceDestination](sourceDestination.SourceDestination.md).[_getMetadata](sourceDestination.SourceDestination.md#_getmetadata)
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:352](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L352)
+[lib/source-destination/url-compressed-source.ts:120](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L120)
 
 ___
 
@@ -483,23 +497,19 @@ ___
 
 `Promise`<`void`\>
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[_open](../interfaces/scanner.adapters.AdapterSourceDestination.md#_open)
-
-#### Inherited from
+#### Overrides
 
 [SourceDestination](sourceDestination.SourceDestination.md).[_open](sourceDestination.SourceDestination.md#_open)
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:416](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L416)
+[lib/source-destination/url-compressed-source.ts:274](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L274)
 
 ___
 
 ### addListener
 
-▸ **addListener**(`eventName`, `listener`): [`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+▸ **addListener**(`eventName`, `listener`): [`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 Alias for `emitter.on(eventName, listener)`.
 
@@ -512,15 +522,11 @@ Alias for `emitter.on(eventName, listener)`.
 
 #### Returns
 
-[`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+[`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 **`Since`**
 
 v0.1.26
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[addListener](../interfaces/scanner.adapters.AdapterSourceDestination.md#addlistener)
 
 #### Inherited from
 
@@ -540,17 +546,13 @@ ___
 
 `Promise`<`boolean`\>
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[canCreateReadStream](../interfaces/scanner.adapters.AdapterSourceDestination.md#cancreatereadstream)
-
-#### Inherited from
+#### Overrides
 
 [SourceDestination](sourceDestination.SourceDestination.md).[canCreateReadStream](sourceDestination.SourceDestination.md#cancreatereadstream)
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:329](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L329)
+[lib/source-destination/url-compressed-source.ts:398](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L398)
 
 ___
 
@@ -561,10 +563,6 @@ ___
 #### Returns
 
 `Promise`<`boolean`\>
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[canCreateSparseReadStream](../interfaces/scanner.adapters.AdapterSourceDestination.md#cancreatesparsereadstream)
 
 #### Inherited from
 
@@ -584,10 +582,6 @@ ___
 
 `Promise`<`boolean`\>
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[canCreateSparseWriteStream](../interfaces/scanner.adapters.AdapterSourceDestination.md#cancreatesparsewritestream)
-
 #### Inherited from
 
 [SourceDestination](sourceDestination.SourceDestination.md).[canCreateSparseWriteStream](sourceDestination.SourceDestination.md#cancreatesparsewritestream)
@@ -605,10 +599,6 @@ ___
 #### Returns
 
 `Promise`<`boolean`\>
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[canCreateWriteStream](../interfaces/scanner.adapters.AdapterSourceDestination.md#cancreatewritestream)
 
 #### Inherited from
 
@@ -628,10 +618,6 @@ ___
 
 `Promise`<`boolean`\>
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[canRead](../interfaces/scanner.adapters.AdapterSourceDestination.md#canread)
-
 #### Inherited from
 
 [SourceDestination](sourceDestination.SourceDestination.md).[canRead](sourceDestination.SourceDestination.md#canread)
@@ -649,10 +635,6 @@ ___
 #### Returns
 
 `Promise`<`boolean`\>
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[canWrite](../interfaces/scanner.adapters.AdapterSourceDestination.md#canwrite)
 
 #### Inherited from
 
@@ -672,10 +654,6 @@ ___
 
 `Promise`<`void`\>
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[close](../interfaces/scanner.adapters.AdapterSourceDestination.md#close)
-
 #### Inherited from
 
 [SourceDestination](sourceDestination.SourceDestination.md).[close](sourceDestination.SourceDestination.md#close)
@@ -686,31 +664,41 @@ ___
 
 ___
 
+### configure
+
+▸ **configure**(): `Promise`<`void`\>
+
+#### Returns
+
+`Promise`<`void`\>
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:224](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L224)
+
+___
+
 ### createReadStream
 
-▸ **createReadStream**(`_options?`): `Promise`<`ReadableStream`\>
+▸ **createReadStream**(`options?`): `Promise`<`Readable`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `_options?` | [`CreateReadStreamOptions`](../interfaces/sourceDestination.CreateReadStreamOptions.md) |
+| `options` | [`CreateReadStreamOptions`](../interfaces/sourceDestination.CreateReadStreamOptions.md) |
 
 #### Returns
 
-`Promise`<`ReadableStream`\>
+`Promise`<`Readable`\>
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[createReadStream](../interfaces/scanner.adapters.AdapterSourceDestination.md#createreadstream)
-
-#### Inherited from
+#### Overrides
 
 [SourceDestination](sourceDestination.SourceDestination.md).[createReadStream](sourceDestination.SourceDestination.md#createreadstream)
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:374](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L374)
+[lib/source-destination/url-compressed-source.ts:383](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L383)
 
 ___
 
@@ -727,10 +715,6 @@ ___
 #### Returns
 
 `Promise`<[`SparseReadable`](../interfaces/sparseStream.SparseReadable.md)\>
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[createSparseReadStream](../interfaces/scanner.adapters.AdapterSourceDestination.md#createsparsereadstream)
 
 #### Inherited from
 
@@ -757,10 +741,6 @@ ___
 
 `Promise`<[`SparseWritable`](../interfaces/sparseStream.SparseWritable.md)\>
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[createSparseWriteStream](../interfaces/scanner.adapters.AdapterSourceDestination.md#createsparsewritestream)
-
 #### Inherited from
 
 [SourceDestination](sourceDestination.SourceDestination.md).[createSparseWriteStream](sourceDestination.SourceDestination.md#createsparsewritestream)
@@ -768,6 +748,20 @@ ___
 #### Defined in
 
 [lib/source-destination/source-destination.ts:396](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L396)
+
+___
+
+### createStream
+
+▸ **createStream**(): `Promise`<`GzipStream` \| `RawDeflateZipStream`\>
+
+#### Returns
+
+`Promise`<`GzipStream` \| `RawDeflateZipStream`\>
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:368](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L368)
 
 ___
 
@@ -785,10 +779,6 @@ ___
 #### Returns
 
 [`Verifier`](sourceDestination.Verifier.md)
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[createVerifier](../interfaces/scanner.adapters.AdapterSourceDestination.md#createverifier)
 
 #### Inherited from
 
@@ -815,10 +805,6 @@ ___
 
 `Promise`<`WritableStream`\>
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[createWriteStream](../interfaces/scanner.adapters.AdapterSourceDestination.md#createwritestream)
-
 #### Inherited from
 
 [SourceDestination](sourceDestination.SourceDestination.md).[createWriteStream](sourceDestination.SourceDestination.md#createwritestream)
@@ -826,6 +812,26 @@ ___
 #### Defined in
 
 [lib/source-destination/source-destination.ts:390](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L390)
+
+___
+
+### download
+
+▸ **download**(`key`): `Promise`<`AxiosResponse`<`any`, `any`, {}\>\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `key` | ``"VERSION"`` \| ``"VERSION_HOSTOS"`` \| ``"device-type.json"`` \| ``"image.json"`` |
+
+#### Returns
+
+`Promise`<`AxiosResponse`<`any`, `any`, {}\>\>
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:171](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L171)
 
 ___
 
@@ -886,10 +892,6 @@ myEmitter.emit('event', 1, 2, 3, 4, 5);
 
 v0.1.26
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[emit](../interfaces/scanner.adapters.AdapterSourceDestination.md#emit)
-
 #### Inherited from
 
 [SourceDestination](sourceDestination.SourceDestination.md).[emit](sourceDestination.SourceDestination.md#emit)
@@ -929,10 +931,6 @@ console.log(myEE.eventNames());
 
 v6.0.0
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[eventNames](../interfaces/scanner.adapters.AdapterSourceDestination.md#eventnames)
-
 #### Inherited from
 
 [SourceDestination](sourceDestination.SourceDestination.md).[eventNames](sourceDestination.SourceDestination.md#eventnames)
@@ -943,6 +941,88 @@ node_modules/@types/node/events.d.ts:870
 
 ___
 
+### extractDeflateToDisk
+
+▸ **extractDeflateToDisk**(`filename`): `Promise`<`BufferDisk`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `filename` | `string` |
+
+#### Returns
+
+`Promise`<`BufferDisk`\>
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:214](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L214)
+
+___
+
+### findImagePart
+
+▸ **findImagePart**(`imageJSON`, `image`): [`ImageJSONPart`](../interfaces/sourceDestination.ImageJSONPart.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `imageJSON` | [`ImageJSON`](../modules/sourceDestination.md#imagejson) |
+| `image` | `string` |
+
+#### Returns
+
+[`ImageJSONPart`](../interfaces/sourceDestination.ImageJSONPart.md)
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:195](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L195)
+
+___
+
+### findPart
+
+▸ **findPart**(`definition`): [`ImageJSONPart`](../interfaces/sourceDestination.ImageJSONPart.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `definition` | `FileOnPartition` |
+
+#### Returns
+
+[`ImageJSONPart`](../interfaces/sourceDestination.ImageJSONPart.md)
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:203](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L203)
+
+___
+
+### findPartitionPart
+
+▸ **findPartitionPart**(`imageJSON`, `partition`): [`ImageJSONPart`](../interfaces/sourceDestination.ImageJSONPart.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `imageJSON` | [`ImageJSON`](../modules/sourceDestination.md#imagejson) |
+| `partition` | `number` |
+
+#### Returns
+
+[`ImageJSONPart`](../interfaces/sourceDestination.ImageJSONPart.md)
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:179](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L179)
+
+___
+
 ### getAlignment
 
 ▸ **getAlignment**(): `undefined` \| `number`
@@ -950,10 +1030,6 @@ ___
 #### Returns
 
 `undefined` \| `number`
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[getAlignment](../interfaces/scanner.adapters.AdapterSourceDestination.md#getalignment)
 
 #### Inherited from
 
@@ -973,10 +1049,6 @@ ___
 
 `Promise`<[`BlocksWithChecksum`](../interfaces/sparseStream.BlocksWithChecksum.md)[]\>
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[getBlocks](../interfaces/scanner.adapters.AdapterSourceDestination.md#getblocks)
-
 #### Inherited from
 
 [SourceDestination](sourceDestination.SourceDestination.md).[getBlocks](sourceDestination.SourceDestination.md#getblocks)
@@ -987,6 +1059,48 @@ ___
 
 ___
 
+### getDeviceTypeJSON
+
+▸ **getDeviceTypeJSON**(): `Promise`<`DeviceTypeJSON`\>
+
+#### Returns
+
+`Promise`<`DeviceTypeJSON`\>
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:149](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L149)
+
+___
+
+### getFilename
+
+▸ **getFilename**(): `string`
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:108](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L108)
+
+___
+
+### getImageJSON
+
+▸ **getImageJSON**(): `Promise`<[`ImageJSON`](../modules/sourceDestination.md#imagejson)\>
+
+#### Returns
+
+`Promise`<[`ImageJSON`](../modules/sourceDestination.md#imagejson)\>
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:145](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L145)
+
+___
+
 ### getInnerSource
 
 ▸ **getInnerSource**(): `Promise`<[`SourceDestination`](sourceDestination.SourceDestination.md)\>
@@ -994,10 +1108,6 @@ ___
 #### Returns
 
 `Promise`<[`SourceDestination`](sourceDestination.SourceDestination.md)\>
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[getInnerSource](../interfaces/scanner.adapters.AdapterSourceDestination.md#getinnersource)
 
 #### Inherited from
 
@@ -1014,7 +1124,7 @@ ___
 ▸ **getMaxListeners**(): `number`
 
 Returns the current max listener value for the `EventEmitter` which is either
-set by `emitter.setMaxListeners(n)` or defaults to [defaultMaxListeners](sourceDestination.DriverlessDevice.md#defaultmaxlisteners).
+set by `emitter.setMaxListeners(n)` or defaults to [defaultMaxListeners](sourceDestination.URLCompressedSource.md#defaultmaxlisteners).
 
 #### Returns
 
@@ -1023,10 +1133,6 @@ set by `emitter.setMaxListeners(n)` or defaults to [defaultMaxListeners](sourceD
 **`Since`**
 
 v1.0.0
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[getMaxListeners](../interfaces/scanner.adapters.AdapterSourceDestination.md#getmaxlisteners)
 
 #### Inherited from
 
@@ -1046,10 +1152,6 @@ ___
 
 `Promise`<[`Metadata`](../interfaces/sourceDestination.Metadata.md)\>
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[getMetadata](../interfaces/scanner.adapters.AdapterSourceDestination.md#getmetadata)
-
 #### Inherited from
 
 [SourceDestination](sourceDestination.SourceDestination.md).[getMetadata](sourceDestination.SourceDestination.md#getmetadata)
@@ -1057,6 +1159,40 @@ ___
 #### Defined in
 
 [lib/source-destination/source-destination.ts:345](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L345)
+
+___
+
+### getOsVersion
+
+▸ **getOsVersion**(): `Promise`<`any`\>
+
+#### Returns
+
+`Promise`<`any`\>
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:140](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L140)
+
+___
+
+### getPartStream
+
+▸ **getPartStream**(`filename`): `Promise`<`Readable`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `filename` | `string` |
+
+#### Returns
+
+`Promise`<`Readable`\>
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:153](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L153)
 
 ___
 
@@ -1068,10 +1204,6 @@ ___
 
 `Promise`<`undefined` \| `GetPartitionsResult`\>
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[getPartitionTable](../interfaces/scanner.adapters.AdapterSourceDestination.md#getpartitiontable)
-
 #### Inherited from
 
 [SourceDestination](sourceDestination.SourceDestination.md).[getPartitionTable](sourceDestination.SourceDestination.md#getpartitiontable)
@@ -1079,6 +1211,48 @@ ___
 #### Defined in
 
 [lib/source-destination/source-destination.ts:529](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L529)
+
+___
+
+### getParts
+
+▸ **getParts**(): `Promise`<{ `filename`: `string` ; `parts`: { `crc`: `number` ; `filename`: `string` ; `len`: `number` ; `partitionIndex?`: `string` ; `stream`: `Buffer` \| `Readable` ; `zLen`: `number`  }[]  }[]\>
+
+#### Returns
+
+`Promise`<{ `filename`: `string` ; `parts`: { `crc`: `number` ; `filename`: `string` ; `len`: `number` ; `partitionIndex?`: `string` ; `stream`: `Buffer` \| `Readable` ; `zLen`: `number`  }[]  }[]\>
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:347](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L347)
+
+___
+
+### getSize
+
+▸ **getSize**(): `number`
+
+#### Returns
+
+`number`
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:328](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L328)
+
+___
+
+### getSupervisorVersion
+
+▸ **getSupervisorVersion**(): `Promise`<{ `lastModified`: `Date` ; `supervisorVersion`: `any`  }\>
+
+#### Returns
+
+`Promise`<{ `lastModified`: `Date` ; `supervisorVersion`: `any`  }\>
+
+#### Defined in
+
+[lib/source-destination/url-compressed-source.ts:133](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/url-compressed-source.ts#L133)
 
 ___
 
@@ -1104,10 +1278,6 @@ in the list of the listeners of the event.
 **`Since`**
 
 v3.2.0
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[listenerCount](../interfaces/scanner.adapters.AdapterSourceDestination.md#listenercount)
 
 #### Inherited from
 
@@ -1147,10 +1317,6 @@ console.log(util.inspect(server.listeners('connection')));
 
 v0.1.26
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[listeners](../interfaces/scanner.adapters.AdapterSourceDestination.md#listeners)
-
 #### Inherited from
 
 [SourceDestination](sourceDestination.SourceDestination.md).[listeners](sourceDestination.SourceDestination.md#listeners)
@@ -1163,7 +1329,7 @@ ___
 
 ### off
 
-▸ **off**(`eventName`, `listener`): [`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+▸ **off**(`eventName`, `listener`): [`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 Alias for `emitter.removeListener()`.
 
@@ -1176,15 +1342,11 @@ Alias for `emitter.removeListener()`.
 
 #### Returns
 
-[`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+[`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 **`Since`**
 
 v10.0.0
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[off](../interfaces/scanner.adapters.AdapterSourceDestination.md#off)
 
 #### Inherited from
 
@@ -1198,7 +1360,7 @@ ___
 
 ### on
 
-▸ **on**(`eventName`, `listener`): [`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+▸ **on**(`eventName`, `listener`): [`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 Adds the `listener` function to the end of the listeners array for the
 event named `eventName`. No checks are made to see if the `listener` has
@@ -1236,15 +1398,11 @@ myEE.emit('foo');
 
 #### Returns
 
-[`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+[`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 **`Since`**
 
 v0.1.101
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[on](../interfaces/scanner.adapters.AdapterSourceDestination.md#on)
 
 #### Inherited from
 
@@ -1258,7 +1416,7 @@ ___
 
 ### once
 
-▸ **once**(`eventName`, `listener`): [`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+▸ **once**(`eventName`, `listener`): [`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 Adds a **one-time**`listener` function for the event named `eventName`. The
 next time `eventName` is triggered, this listener is removed and then invoked.
@@ -1294,15 +1452,11 @@ myEE.emit('foo');
 
 #### Returns
 
-[`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+[`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 **`Since`**
 
 v0.3.0
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[once](../interfaces/scanner.adapters.AdapterSourceDestination.md#once)
 
 #### Inherited from
 
@@ -1322,10 +1476,6 @@ ___
 
 `Promise`<`void`\>
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[open](../interfaces/scanner.adapters.AdapterSourceDestination.md#open)
-
 #### Inherited from
 
 [SourceDestination](sourceDestination.SourceDestination.md).[open](sourceDestination.SourceDestination.md#open)
@@ -1338,7 +1488,7 @@ ___
 
 ### prependListener
 
-▸ **prependListener**(`eventName`, `listener`): [`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+▸ **prependListener**(`eventName`, `listener`): [`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 Adds the `listener` function to the _beginning_ of the listeners array for the
 event named `eventName`. No checks are made to see if the `listener` has
@@ -1362,15 +1512,11 @@ Returns a reference to the `EventEmitter`, so that calls can be chained.
 
 #### Returns
 
-[`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+[`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 **`Since`**
 
 v6.0.0
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[prependListener](../interfaces/scanner.adapters.AdapterSourceDestination.md#prependlistener)
 
 #### Inherited from
 
@@ -1384,7 +1530,7 @@ ___
 
 ### prependOnceListener
 
-▸ **prependOnceListener**(`eventName`, `listener`): [`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+▸ **prependOnceListener**(`eventName`, `listener`): [`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 Adds a **one-time**`listener` function for the event named `eventName` to the _beginning_ of the listeners array. The next time `eventName` is triggered, this
 listener is removed, and then invoked.
@@ -1406,15 +1552,11 @@ Returns a reference to the `EventEmitter`, so that calls can be chained.
 
 #### Returns
 
-[`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+[`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 **`Since`**
 
 v6.0.0
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[prependOnceListener](../interfaces/scanner.adapters.AdapterSourceDestination.md#prependoncelistener)
 
 #### Inherited from
 
@@ -1472,10 +1614,6 @@ emitter.emit('log');
 
 v9.4.0
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[rawListeners](../interfaces/scanner.adapters.AdapterSourceDestination.md#rawlisteners)
-
 #### Inherited from
 
 [SourceDestination](sourceDestination.SourceDestination.md).[rawListeners](sourceDestination.SourceDestination.md#rawlisteners)
@@ -1503,10 +1641,6 @@ ___
 
 `Promise`<`ReadResult`\>
 
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[read](../interfaces/scanner.adapters.AdapterSourceDestination.md#read)
-
 #### Inherited from
 
 [SourceDestination](sourceDestination.SourceDestination.md).[read](sourceDestination.SourceDestination.md#read)
@@ -1519,7 +1653,7 @@ ___
 
 ### removeAllListeners
 
-▸ **removeAllListeners**(`event?`): [`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+▸ **removeAllListeners**(`event?`): [`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 Removes all listeners, or those of the specified `eventName`.
 
@@ -1537,15 +1671,11 @@ Returns a reference to the `EventEmitter`, so that calls can be chained.
 
 #### Returns
 
-[`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+[`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 **`Since`**
 
 v0.1.26
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[removeAllListeners](../interfaces/scanner.adapters.AdapterSourceDestination.md#removealllisteners)
 
 #### Inherited from
 
@@ -1559,7 +1689,7 @@ ___
 
 ### removeListener
 
-▸ **removeListener**(`eventName`, `listener`): [`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+▸ **removeListener**(`eventName`, `listener`): [`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 Removes the specified `listener` from the listener array for the event named`eventName`.
 
@@ -1650,15 +1780,11 @@ Returns a reference to the `EventEmitter`, so that calls can be chained.
 
 #### Returns
 
-[`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+[`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 **`Since`**
 
 v0.1.26
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[removeListener](../interfaces/scanner.adapters.AdapterSourceDestination.md#removelistener)
 
 #### Inherited from
 
@@ -1672,7 +1798,7 @@ ___
 
 ### setMaxListeners
 
-▸ **setMaxListeners**(`n`): [`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+▸ **setMaxListeners**(`n`): [`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 By default `EventEmitter`s will print a warning if more than `10` listeners are
 added for a particular event. This is a useful default that helps finding
@@ -1689,15 +1815,11 @@ Returns a reference to the `EventEmitter`, so that calls can be chained.
 
 #### Returns
 
-[`DriverlessDevice`](sourceDestination.DriverlessDevice.md)
+[`URLCompressedSource`](sourceDestination.URLCompressedSource.md)
 
 **`Since`**
 
 v0.3.5
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[setMaxListeners](../interfaces/scanner.adapters.AdapterSourceDestination.md#setmaxlisteners)
 
 #### Inherited from
 
@@ -1725,10 +1847,6 @@ ___
 #### Returns
 
 `Promise`<`WriteResult`\>
-
-#### Implementation of
-
-[AdapterSourceDestination](../interfaces/scanner.adapters.AdapterSourceDestination.md).[write](../interfaces/scanner.adapters.AdapterSourceDestination.md#write)
 
 #### Inherited from
 

@@ -137,7 +137,7 @@ Readable.constructor
 
 #### Defined in
 
-[lib/sparse-stream/sparse-read-stream.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-read-stream.ts#L41)
+[lib/sparse-stream/sparse-read-stream.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-read-stream.ts#L41)
 
 ## Properties
 
@@ -147,7 +147,7 @@ Readable.constructor
 
 #### Defined in
 
-[lib/sparse-stream/sparse-read-stream.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-read-stream.ts#L39)
+[lib/sparse-stream/sparse-read-stream.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-read-stream.ts#L39)
 
 ___
 
@@ -161,7 +161,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-read-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-read-stream.ts#L34)
+[lib/sparse-stream/sparse-read-stream.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-read-stream.ts#L34)
 
 ___
 
@@ -171,7 +171,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-read-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-read-stream.ts#L35)
+[lib/sparse-stream/sparse-read-stream.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-read-stream.ts#L35)
 
 ___
 
@@ -241,7 +241,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-read-stream.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-read-stream.ts#L38)
+[lib/sparse-stream/sparse-read-stream.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-read-stream.ts#L38)
 
 ___
 
@@ -439,7 +439,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-read-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-read-stream.ts#L33)
+[lib/sparse-stream/sparse-read-stream.ts:33](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-read-stream.ts#L33)
 
 ___
 
@@ -449,7 +449,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-read-stream.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-read-stream.ts#L37)
+[lib/sparse-stream/sparse-read-stream.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-read-stream.ts#L37)
 
 ___
 
@@ -459,7 +459,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-read-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-read-stream.ts#L36)
+[lib/sparse-stream/sparse-read-stream.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-read-stream.ts#L36)
 
 ___
 
@@ -668,7 +668,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-read-stream.ts:91](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-read-stream.ts#L91)
+[lib/sparse-stream/sparse-read-stream.ts:91](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-read-stream.ts#L91)
 
 ___
 
@@ -735,7 +735,7 @@ Readable.\_read
 
 #### Defined in
 
-[lib/sparse-stream/sparse-read-stream.ts:77](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-read-stream.ts#L77)
+[lib/sparse-stream/sparse-read-stream.ts:77](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-read-stream.ts#L77)
 
 ___
 
@@ -1810,7 +1810,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-read-stream.ts:86](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-read-stream.ts#L86)
+[lib/sparse-stream/sparse-read-stream.ts:86](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-read-stream.ts#L86)
 
 ___
 

@@ -139,7 +139,7 @@ HashStream.constructor
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L47)
+[lib/source-destination/source-destination.ts:47](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L47)
 
 ## Properties
 
@@ -174,7 +174,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L67)
+[lib/source-destination/source-destination.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L67)
 
 ___
 
@@ -726,7 +726,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L69)
+[lib/source-destination/source-destination.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L69)
 
 ___
 
@@ -823,7 +823,7 @@ HashStream.\_flush
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L60)
+[lib/source-destination/source-destination.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L60)
 
 ___
 
@@ -873,7 +873,7 @@ HashStream.\_transform
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:86](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L86)
+[lib/source-destination/source-destination.ts:86](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L86)
 
 ___
 

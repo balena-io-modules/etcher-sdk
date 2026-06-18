@@ -115,7 +115,7 @@ Writable.constructor
 
 #### Defined in
 
-[lib/sparse-stream/sparse-write-stream.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-write-stream.ts#L20)
+[lib/sparse-stream/sparse-write-stream.ts:20](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-write-stream.ts#L20)
 
 ## Properties
 
@@ -125,7 +125,7 @@ Writable.constructor
 
 #### Defined in
 
-[lib/sparse-stream/sparse-write-stream.ts:18](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-write-stream.ts#L18)
+[lib/sparse-stream/sparse-write-stream.ts:18](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-write-stream.ts#L18)
 
 ___
 
@@ -135,7 +135,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-write-stream.ts:17](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-write-stream.ts#L17)
+[lib/sparse-stream/sparse-write-stream.ts:17](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-write-stream.ts#L17)
 
 ___
 
@@ -165,7 +165,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-write-stream.ts:13](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-write-stream.ts#L13)
+[lib/sparse-stream/sparse-write-stream.ts:13](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-write-stream.ts#L13)
 
 ___
 
@@ -215,7 +215,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-write-stream.ts:14](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-write-stream.ts#L14)
+[lib/sparse-stream/sparse-write-stream.ts:14](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-write-stream.ts#L14)
 
 ___
 
@@ -225,7 +225,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-write-stream.ts:15](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-write-stream.ts#L15)
+[lib/sparse-stream/sparse-write-stream.ts:15](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-write-stream.ts#L15)
 
 ___
 
@@ -235,7 +235,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-write-stream.ts:16](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-write-stream.ts#L16)
+[lib/sparse-stream/sparse-write-stream.ts:16](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-write-stream.ts#L16)
 
 ___
 
@@ -567,7 +567,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-write-stream.ts:118](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-write-stream.ts#L118)
+[lib/sparse-stream/sparse-write-stream.ts:118](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-write-stream.ts#L118)
 
 ___
 
@@ -587,7 +587,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-write-stream.ts:73](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-write-stream.ts#L73)
+[lib/sparse-stream/sparse-write-stream.ts:73](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-write-stream.ts#L73)
 
 ___
 
@@ -664,7 +664,7 @@ Writable.\_final
 
 #### Defined in
 
-[lib/sparse-stream/sparse-write-stream.ts:132](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-write-stream.ts#L132)
+[lib/sparse-stream/sparse-write-stream.ts:132](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-write-stream.ts#L132)
 
 ___
 
@@ -694,7 +694,7 @@ Writable.\_write
 
 #### Defined in
 
-[lib/sparse-stream/sparse-write-stream.ts:110](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-write-stream.ts#L110)
+[lib/sparse-stream/sparse-write-stream.ts:110](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-write-stream.ts#L110)
 
 ___
 
@@ -959,7 +959,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-write-stream.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-write-stream.ts#L60)
+[lib/sparse-stream/sparse-write-stream.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-write-stream.ts#L60)
 
 ___
 
@@ -2993,7 +2993,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-write-stream.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-write-stream.ts#L37)
+[lib/sparse-stream/sparse-write-stream.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-write-stream.ts#L37)
 
 ___
 

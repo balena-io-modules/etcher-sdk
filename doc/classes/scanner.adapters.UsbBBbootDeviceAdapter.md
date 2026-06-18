@@ -71,7 +71,7 @@
 
 #### Defined in
 
-[lib/scanner/adapters/usb-bb-boot.ts:13](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/usb-bb-boot.ts#L13)
+[lib/scanner/adapters/usb-bb-boot.ts:13](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/usb-bb-boot.ts#L13)
 
 ## Properties
 
@@ -81,7 +81,7 @@
 
 #### Defined in
 
-[lib/scanner/adapters/usb-bb-boot.ts:10](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/usb-bb-boot.ts#L10)
+[lib/scanner/adapters/usb-bb-boot.ts:10](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/usb-bb-boot.ts#L10)
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/usb-bb-boot.ts:11](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/usb-bb-boot.ts#L11)
+[lib/scanner/adapters/usb-bb-boot.ts:11](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/usb-bb-boot.ts#L11)
 
 ___
 
@@ -576,7 +576,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/usb-bb-boot.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/usb-bb-boot.ts#L30)
+[lib/scanner/adapters/usb-bb-boot.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/usb-bb-boot.ts#L30)
 
 ___
 
@@ -596,7 +596,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/usb-bb-boot.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/usb-bb-boot.ts#L39)
+[lib/scanner/adapters/usb-bb-boot.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/usb-bb-boot.ts#L39)
 
 ___
 
@@ -986,7 +986,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/usb-bb-boot.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/usb-bb-boot.ts#L22)
+[lib/scanner/adapters/usb-bb-boot.ts:22](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/usb-bb-boot.ts#L22)
 
 ___
 
@@ -1004,7 +1004,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/usb-bb-boot.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/usb-bb-boot.ts#L26)
+[lib/scanner/adapters/usb-bb-boot.ts:26](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/usb-bb-boot.ts#L26)
 
 ___
 

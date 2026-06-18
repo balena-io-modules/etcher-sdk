@@ -77,7 +77,7 @@
 
 #### Defined in
 
-[lib/scanner/adapters/usbboot.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/usbboot.ts#L30)
+[lib/scanner/adapters/usbboot.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/usbboot.ts#L30)
 
 ## Properties
 
@@ -87,7 +87,7 @@
 
 #### Defined in
 
-[lib/scanner/adapters/usbboot.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/usbboot.ts#L27)
+[lib/scanner/adapters/usbboot.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/usbboot.ts#L27)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/usbboot.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/usbboot.ts#L28)
+[lib/scanner/adapters/usbboot.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/usbboot.ts#L28)
 
 ___
 
@@ -582,7 +582,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/usbboot.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/usbboot.ts#L53)
+[lib/scanner/adapters/usbboot.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/usbboot.ts#L53)
 
 ___
 
@@ -602,7 +602,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/usbboot.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/usbboot.ts#L62)
+[lib/scanner/adapters/usbboot.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/usbboot.ts#L62)
 
 ___
 
@@ -992,7 +992,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/usbboot.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/usbboot.ts#L45)
+[lib/scanner/adapters/usbboot.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/usbboot.ts#L45)
 
 ___
 
@@ -1010,7 +1010,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/usbboot.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/usbboot.ts#L49)
+[lib/scanner/adapters/usbboot.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/usbboot.ts#L49)
 
 ___
 

@@ -361,7 +361,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/compressed-source.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/compressed-source.ts#L28)
+[lib/source-destination/compressed-source.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/compressed-source.ts#L28)
 
 ___
 

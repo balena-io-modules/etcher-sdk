@@ -930,7 +930,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/adapter.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/adapter.ts#L34)
+[lib/scanner/adapters/adapter.ts:34](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/adapter.ts#L34)
 
 ___
 
@@ -944,7 +944,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/adapter.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/adapter.ts#L35)
+[lib/scanner/adapters/adapter.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/adapter.ts#L35)
 
 ___
 

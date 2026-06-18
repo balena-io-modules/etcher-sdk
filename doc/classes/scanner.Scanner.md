@@ -78,7 +78,7 @@ EventEmitter.constructor
 
 #### Defined in
 
-[lib/scanner/scanner.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/scanner.ts#L27)
+[lib/scanner/scanner.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/scanner.ts#L27)
 
 ## Properties
 
@@ -88,7 +88,7 @@ EventEmitter.constructor
 
 #### Defined in
 
-[lib/scanner/scanner.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/scanner.ts#L27)
+[lib/scanner/scanner.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/scanner.ts#L27)
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/scanner.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/scanner.ts#L25)
+[lib/scanner/scanner.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/scanner.ts#L25)
 
 ___
 
@@ -401,7 +401,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/scanner.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/scanner.ts#L46)
+[lib/scanner/scanner.ts:46](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/scanner.ts#L46)
 
 ___
 
@@ -604,7 +604,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/scanner.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/scanner.ts#L36)
+[lib/scanner/scanner.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/scanner.ts#L36)
 
 ___
 
@@ -624,7 +624,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/scanner.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/scanner.ts#L41)
+[lib/scanner/scanner.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/scanner.ts#L41)
 
 ___
 
@@ -1010,7 +1010,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/scanner.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/scanner.ts#L57)
+[lib/scanner/scanner.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/scanner.ts#L57)
 
 ___
 
@@ -1024,7 +1024,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/scanner.ts:74](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/scanner.ts#L74)
+[lib/scanner/scanner.ts:74](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/scanner.ts#L74)
 
 ___
 

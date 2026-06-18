@@ -53,7 +53,7 @@ Error.constructor
 
 #### Defined in
 
-[lib/source-destination/multi-destination.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/multi-destination.ts#L40)
+[lib/source-destination/multi-destination.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/multi-destination.ts#L40)
 
 ## Properties
 
@@ -63,7 +63,7 @@ Error.constructor
 
 #### Defined in
 
-[lib/source-destination/multi-destination.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/multi-destination.ts#L42)
+[lib/source-destination/multi-destination.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/multi-destination.ts#L42)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/multi-destination.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/multi-destination.ts#L41)
+[lib/source-destination/multi-destination.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/multi-destination.ts#L41)
 
 ___
 
