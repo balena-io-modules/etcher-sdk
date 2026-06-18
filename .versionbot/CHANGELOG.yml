@@ -1,4 +1,17 @@
 - commits:
+    - subject: "url-compressed-source: Separate the size estimation parts from the
+        part streaming"
+      hash: df3c1d144aa8d6a87136bda9565450b831ef2029
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+  version: 10.2.12
+  title: ""
+  date: 2026-06-18T09:48:52.101Z
+- commits:
     - subject: "url-compressed-source: Avoid creating gz streams while estimating size"
       hash: 2ff681bee5ae29958a348aa85b3aff1a896ca873
       body: ""
