@@ -149,7 +149,7 @@ Transform.constructor
 
 #### Defined in
 
-[lib/sparse-stream/sparse-filter-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-filter-stream.ts#L32)
+[lib/sparse-stream/sparse-filter-stream.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-filter-stream.ts#L32)
 
 ## Properties
 
@@ -188,7 +188,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-filter-stream.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-filter-stream.ts#L27)
+[lib/sparse-stream/sparse-filter-stream.ts:27](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-filter-stream.ts#L27)
 
 ___
 
@@ -246,7 +246,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-filter-stream.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-filter-stream.ts#L30)
+[lib/sparse-stream/sparse-filter-stream.ts:30](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-filter-stream.ts#L30)
 
 ___
 
@@ -444,7 +444,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-filter-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-filter-stream.ts#L29)
+[lib/sparse-stream/sparse-filter-stream.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-filter-stream.ts#L29)
 
 ___
 
@@ -454,7 +454,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-filter-stream.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-filter-stream.ts#L28)
+[lib/sparse-stream/sparse-filter-stream.ts:28](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-filter-stream.ts#L28)
 
 ___
 
@@ -781,7 +781,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-filter-stream.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-filter-stream.ts#L69)
+[lib/sparse-stream/sparse-filter-stream.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-filter-stream.ts#L69)
 
 ___
 
@@ -928,7 +928,7 @@ Transform.\_transform
 
 #### Defined in
 
-[lib/sparse-stream/sparse-filter-stream.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-filter-stream.ts#L55)
+[lib/sparse-stream/sparse-filter-stream.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-filter-stream.ts#L55)
 
 ___
 
@@ -2341,7 +2341,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/sparse-filter-stream.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/sparse-filter-stream.ts#L51)
+[lib/sparse-stream/sparse-filter-stream.ts:51](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/sparse-filter-stream.ts#L51)
 
 ___
 

@@ -89,7 +89,7 @@
 
 #### Defined in
 
-[lib/scanner/adapters/block-device.ts:74](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/block-device.ts#L74)
+[lib/scanner/adapters/block-device.ts:74](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/block-device.ts#L74)
 
 ## Properties
 
@@ -99,7 +99,7 @@
 
 #### Defined in
 
-[lib/scanner/adapters/block-device.ts:70](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/block-device.ts#L70)
+[lib/scanner/adapters/block-device.ts:70](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/block-device.ts#L70)
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/block-device.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/block-device.ts#L65)
+[lib/scanner/adapters/block-device.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/block-device.ts#L65)
 
 ___
 
@@ -135,7 +135,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/block-device.ts:66](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/block-device.ts#L66)
+[lib/scanner/adapters/block-device.ts:66](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/block-device.ts#L66)
 
 ___
 
@@ -145,7 +145,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/block-device.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/block-device.ts#L69)
+[lib/scanner/adapters/block-device.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/block-device.ts#L69)
 
 ___
 
@@ -155,7 +155,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/block-device.ts:68](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/block-device.ts#L68)
+[lib/scanner/adapters/block-device.ts:68](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/block-device.ts#L68)
 
 ___
 
@@ -165,7 +165,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/block-device.ts:72](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/block-device.ts#L72)
+[lib/scanner/adapters/block-device.ts:72](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/block-device.ts#L72)
 
 ___
 
@@ -175,7 +175,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/block-device.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/block-device.ts#L71)
+[lib/scanner/adapters/block-device.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/block-device.ts#L71)
 
 ___
 
@@ -185,7 +185,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/block-device.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/block-device.ts#L67)
+[lib/scanner/adapters/block-device.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/block-device.ts#L67)
 
 ___
 
@@ -506,7 +506,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/block-device.ts:141](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/block-device.ts#L141)
+[lib/scanner/adapters/block-device.ts:141](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/block-device.ts#L141)
 
 ___
 
@@ -1015,7 +1015,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/block-device.ts:117](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/block-device.ts#L117)
+[lib/scanner/adapters/block-device.ts:117](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/block-device.ts#L117)
 
 ___
 
@@ -1029,7 +1029,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/block-device.ts:106](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/block-device.ts#L106)
+[lib/scanner/adapters/block-device.ts:106](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/block-device.ts#L106)
 
 ___
 
@@ -1082,7 +1082,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/block-device.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/block-device.ts#L95)
+[lib/scanner/adapters/block-device.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/block-device.ts#L95)
 
 ___
 
@@ -1100,7 +1100,7 @@ ___
 
 #### Defined in
 
-[lib/scanner/adapters/block-device.ts:100](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/scanner/adapters/block-device.ts#L100)
+[lib/scanner/adapters/block-device.ts:100](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/scanner/adapters/block-device.ts#L100)
 
 ___
 

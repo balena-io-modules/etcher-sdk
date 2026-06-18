@@ -102,7 +102,7 @@ ___
 
 #### Defined in
 
-[lib/sparse-stream/shared.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/sparse-stream/shared.ts#L49)
+[lib/sparse-stream/shared.ts:49](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/sparse-stream/shared.ts#L49)
 
 ___
 

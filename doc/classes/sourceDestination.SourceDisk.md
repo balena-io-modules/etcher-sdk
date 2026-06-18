@@ -64,7 +64,7 @@ Disk.constructor
 
 #### Defined in
 
-[lib/source-destination/configured-source/configured-source.ts:52](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/configured-source/configured-source.ts#L52)
+[lib/source-destination/configured-source/configured-source.ts:52](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/configured-source/configured-source.ts#L52)
 
 ## Properties
 
@@ -158,7 +158,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/configured-source/configured-source.ts:52](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/configured-source/configured-source.ts#L52)
+[lib/source-destination/configured-source/configured-source.ts:52](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/configured-source/configured-source.ts#L52)
 
 ## Methods
 
@@ -176,7 +176,7 @@ Disk.\_flush
 
 #### Defined in
 
-[lib/source-destination/configured-source/configured-source.ts:94](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/configured-source/configured-source.ts#L94)
+[lib/source-destination/configured-source/configured-source.ts:94](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/configured-source/configured-source.ts#L94)
 
 ___
 
@@ -194,7 +194,7 @@ Disk.\_getCapacity
 
 #### Defined in
 
-[lib/source-destination/configured-source/configured-source.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/configured-source/configured-source.ts#L67)
+[lib/source-destination/configured-source/configured-source.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/configured-source/configured-source.ts#L67)
 
 ___
 
@@ -221,7 +221,7 @@ Disk.\_read
 
 #### Defined in
 
-[lib/source-destination/configured-source/configured-source.ts:76](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/configured-source/configured-source.ts#L76)
+[lib/source-destination/configured-source/configured-source.ts:76](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/configured-source/configured-source.ts#L76)
 
 ___
 
@@ -248,7 +248,7 @@ Disk.\_write
 
 #### Defined in
 
-[lib/source-destination/configured-source/configured-source.ts:85](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/configured-source/configured-source.ts#L85)
+[lib/source-destination/configured-source/configured-source.ts:85](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/configured-source/configured-source.ts#L85)
 
 ___
 

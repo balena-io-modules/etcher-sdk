@@ -55,7 +55,7 @@
 
 #### Defined in
 
-[lib/errors.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/errors.ts#L29)
+[lib/errors.ts:29](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/errors.ts#L29)
 
 ## Properties
 
@@ -65,7 +65,7 @@
 
 #### Defined in
 
-[lib/errors.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/errors.ts#L31)
+[lib/errors.ts:31](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/errors.ts#L31)
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 #### Defined in
 
-[lib/errors.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/errors.ts#L25)
+[lib/errors.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/errors.ts#L25)
 
 ___
 
@@ -89,7 +89,7 @@ ___
 
 #### Defined in
 
-[lib/errors.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/errors.ts#L32)
+[lib/errors.ts:32](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/errors.ts#L32)
 
 ___
 

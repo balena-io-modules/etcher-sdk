@@ -65,7 +65,7 @@ node_modules/typescript/lib/lib.es5.d.ts:1073
 
 #### Defined in
 
-[lib/errors.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/errors.ts#L25)
+[lib/errors.ts:25](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/errors.ts#L25)
 
 ___
 

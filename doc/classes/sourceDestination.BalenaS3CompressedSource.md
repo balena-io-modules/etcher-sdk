@@ -63,14 +63,12 @@
 - [canWrite](sourceDestination.BalenaS3CompressedSource.md#canwrite)
 - [close](sourceDestination.BalenaS3CompressedSource.md#close)
 - [configure](sourceDestination.BalenaS3CompressedSource.md#configure)
-- [createGzipStream](sourceDestination.BalenaS3CompressedSource.md#creategzipstream)
 - [createReadStream](sourceDestination.BalenaS3CompressedSource.md#createreadstream)
 - [createSparseReadStream](sourceDestination.BalenaS3CompressedSource.md#createsparsereadstream)
 - [createSparseWriteStream](sourceDestination.BalenaS3CompressedSource.md#createsparsewritestream)
 - [createStream](sourceDestination.BalenaS3CompressedSource.md#createstream)
 - [createVerifier](sourceDestination.BalenaS3CompressedSource.md#createverifier)
 - [createWriteStream](sourceDestination.BalenaS3CompressedSource.md#createwritestream)
-- [createZipStream](sourceDestination.BalenaS3CompressedSource.md#createzipstream)
 - [download](sourceDestination.BalenaS3CompressedSource.md#download)
 - [emit](sourceDestination.BalenaS3CompressedSource.md#emit)
 - [eventNames](sourceDestination.BalenaS3CompressedSource.md#eventnames)
@@ -139,7 +137,7 @@
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:73](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L73)
+[lib/source-destination/balena-s3-compressed-source.ts:70](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L70)
 
 ## Properties
 
@@ -153,7 +151,7 @@
 
 #### Defined in
 
-[lib/source-destination/balena-s3-source.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-source.ts#L60)
+[lib/source-destination/balena-s3-source.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-source.ts#L62)
 
 ___
 
@@ -167,7 +165,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-source.ts:54](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-source.ts#L54)
+[lib/source-destination/balena-s3-source.ts:56](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-source.ts#L56)
 
 ___
 
@@ -181,17 +179,17 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-source.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-source.ts#L57)
+[lib/source-destination/balena-s3-source.ts:59](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-source.ts#L59)
 
 ___
 
 ### configuration
 
-• `Private` `Optional` **configuration**: [`Dictionary`](../interfaces/utils.Dictionary.md)<`any`\>
+• `Private` `Optional` **configuration**: `Record`<`string`, `any`\>
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:62](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L62)
+[lib/source-destination/balena-s3-compressed-source.ts:59](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L59)
 
 ___
 
@@ -201,7 +199,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:63](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L63)
+[lib/source-destination/balena-s3-compressed-source.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L60)
 
 ___
 
@@ -215,7 +213,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-source.ts:56](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-source.ts#L56)
+[lib/source-destination/balena-s3-source.ts:58](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-source.ts#L58)
 
 ___
 
@@ -225,7 +223,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:58](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L58)
+[lib/source-destination/balena-s3-compressed-source.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L55)
 
 ___
 
@@ -235,7 +233,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:71](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L71)
+[lib/source-destination/balena-s3-compressed-source.ts:68](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L68)
 
 ___
 
@@ -245,7 +243,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L60)
+[lib/source-destination/balena-s3-compressed-source.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L57)
 
 ___
 
@@ -255,7 +253,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:59](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L59)
+[lib/source-destination/balena-s3-compressed-source.ts:56](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L56)
 
 ___
 
@@ -269,7 +267,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-source.ts:53](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-source.ts#L53)
+[lib/source-destination/balena-s3-source.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-source.ts#L55)
 
 ___
 
@@ -279,7 +277,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L57)
+[lib/source-destination/balena-s3-compressed-source.ts:54](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L54)
 
 ___
 
@@ -293,7 +291,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-source.ts:59](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-source.ts#L59)
+[lib/source-destination/balena-s3-source.ts:61](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-source.ts#L61)
 
 ___
 
@@ -303,7 +301,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:68](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L68)
+[lib/source-destination/balena-s3-compressed-source.ts:65](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L65)
 
 ___
 
@@ -313,7 +311,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:69](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L69)
+[lib/source-destination/balena-s3-compressed-source.ts:66](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L66)
 
 ___
 
@@ -327,7 +325,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-source.ts:55](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-source.ts#L55)
+[lib/source-destination/balena-s3-source.ts:57](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-source.ts#L57)
 
 ___
 
@@ -341,7 +339,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-source.ts:58](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-source.ts#L58)
+[lib/source-destination/balena-s3-source.ts:60](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-source.ts#L60)
 
 ___
 
@@ -351,7 +349,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:70](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L70)
+[lib/source-destination/balena-s3-compressed-source.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L67)
 
 ___
 
@@ -361,7 +359,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L67)
+[lib/source-destination/balena-s3-compressed-source.ts:64](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L64)
 
 ___
 
@@ -494,7 +492,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:293](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L293)
+[lib/source-destination/source-destination.ts:293](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L293)
 
 ___
 
@@ -508,7 +506,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:305](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L305)
+[lib/source-destination/source-destination.ts:305](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L305)
 
 ## Accessors
 
@@ -526,7 +524,7 @@ BalenaS3SourceBase.imageSuffix
 
 #### Defined in
 
-[lib/source-destination/balena-s3-source.ts:104](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-source.ts#L104)
+[lib/source-destination/balena-s3-source.ts:106](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-source.ts#L106)
 
 ## Methods
 
@@ -570,7 +568,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:420](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L420)
+[lib/source-destination/source-destination.ts:420](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L420)
 
 ___
 
@@ -588,7 +586,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:102](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L102)
+[lib/source-destination/balena-s3-compressed-source.ts:95](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L95)
 
 ___
 
@@ -606,7 +604,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:238](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L238)
+[lib/source-destination/balena-s3-compressed-source.ts:242](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L242)
 
 ___
 
@@ -655,7 +653,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-source.ts:108](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-source.ts#L108)
+[lib/source-destination/balena-s3-source.ts:110](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-source.ts#L110)
 
 ___
 
@@ -673,7 +671,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:333](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L333)
+[lib/source-destination/source-destination.ts:333](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L333)
 
 ___
 
@@ -691,7 +689,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:341](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L341)
+[lib/source-destination/source-destination.ts:341](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L341)
 
 ___
 
@@ -709,7 +707,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:337](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L337)
+[lib/source-destination/source-destination.ts:337](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L337)
 
 ___
 
@@ -727,7 +725,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:321](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L321)
+[lib/source-destination/source-destination.ts:321](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L321)
 
 ___
 
@@ -745,7 +743,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:325](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L325)
+[lib/source-destination/source-destination.ts:325](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L325)
 
 ___
 
@@ -763,7 +761,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:409](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L409)
+[lib/source-destination/source-destination.ts:409](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L409)
 
 ___
 
@@ -777,27 +775,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:192](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L192)
-
-___
-
-### createGzipStream
-
-▸ **createGzipStream**(`fake`): `Promise`<`GzipStream`\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `fake` | `boolean` |
-
-#### Returns
-
-`Promise`<`GzipStream`\>
-
-#### Defined in
-
-[lib/source-destination/balena-s3-compressed-source.ts:305](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L305)
+[lib/source-destination/balena-s3-compressed-source.ts:192](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L192)
 
 ___
 
@@ -821,7 +799,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:316](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L316)
+[lib/source-destination/balena-s3-compressed-source.ts:334](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L334)
 
 ___
 
@@ -845,7 +823,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:380](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L380)
+[lib/source-destination/source-destination.ts:380](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L380)
 
 ___
 
@@ -870,27 +848,21 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:396](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L396)
+[lib/source-destination/source-destination.ts:396](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L396)
 
 ___
 
 ### createStream
 
-▸ **createStream**(`fake?`): `Promise`<`any`\>
-
-#### Parameters
-
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `fake` | `boolean` | `false` |
+▸ **createStream**(): `Promise`<`GzipStream` \| `RawDeflateZipStream`\>
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`GzipStream` \| `RawDeflateZipStream`\>
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:310](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L310)
+[lib/source-destination/balena-s3-compressed-source.ts:319](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L319)
 
 ___
 
@@ -915,7 +887,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:424](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L424)
+[lib/source-destination/source-destination.ts:424](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L424)
 
 ___
 
@@ -940,33 +912,13 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:390](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L390)
-
-___
-
-### createZipStream
-
-▸ **createZipStream**(`fake`): `Promise`<`any`\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `fake` | `boolean` |
-
-#### Returns
-
-`Promise`<`any`\>
-
-#### Defined in
-
-[lib/source-destination/balena-s3-compressed-source.ts:298](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L298)
+[lib/source-destination/source-destination.ts:390](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L390)
 
 ___
 
 ### download
 
-▸ **download**(`path`, `responseType?`): `Promise`<`AxiosResponse`<`any`, `any`\>\>
+▸ **download**(`path`, `responseType?`): `Promise`<`AxiosResponse`<`any`, `any`, {}\>\>
 
 #### Parameters
 
@@ -977,7 +929,7 @@ ___
 
 #### Returns
 
-`Promise`<`AxiosResponse`<`any`, `any`\>\>
+`Promise`<`AxiosResponse`<`any`, `any`, {}\>\>
 
 #### Inherited from
 
@@ -985,7 +937,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-source.ts:120](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-source.ts#L120)
+[lib/source-destination/balena-s3-source.ts:122](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-source.ts#L122)
 
 ___
 
@@ -1111,13 +1063,13 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:182](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L182)
+[lib/source-destination/balena-s3-compressed-source.ts:182](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L182)
 
 ___
 
 ### findImagePart
 
-▸ **findImagePart**(`imageJSON`, `image`): `ImageJSONPart`
+▸ **findImagePart**(`imageJSON`, `image`): [`ImageJSONPart`](../interfaces/sourceDestination.ImageJSONPart.md)
 
 #### Parameters
 
@@ -1128,17 +1080,17 @@ ___
 
 #### Returns
 
-`ImageJSONPart`
+[`ImageJSONPart`](../interfaces/sourceDestination.ImageJSONPart.md)
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:163](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L163)
+[lib/source-destination/balena-s3-compressed-source.ts:163](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L163)
 
 ___
 
 ### findPart
 
-▸ **findPart**(`definition`): `ImageJSONPart`
+▸ **findPart**(`definition`): [`ImageJSONPart`](../interfaces/sourceDestination.ImageJSONPart.md)
 
 #### Parameters
 
@@ -1148,17 +1100,17 @@ ___
 
 #### Returns
 
-`ImageJSONPart`
+[`ImageJSONPart`](../interfaces/sourceDestination.ImageJSONPart.md)
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:171](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L171)
+[lib/source-destination/balena-s3-compressed-source.ts:171](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L171)
 
 ___
 
 ### findPartitionPart
 
-▸ **findPartitionPart**(`imageJSON`, `partition`): `ImageJSONPart`
+▸ **findPartitionPart**(`imageJSON`, `partition`): [`ImageJSONPart`](../interfaces/sourceDestination.ImageJSONPart.md)
 
 #### Parameters
 
@@ -1169,11 +1121,11 @@ ___
 
 #### Returns
 
-`ImageJSONPart`
+[`ImageJSONPart`](../interfaces/sourceDestination.ImageJSONPart.md)
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:147](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L147)
+[lib/source-destination/balena-s3-compressed-source.ts:147](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L147)
 
 ___
 
@@ -1191,7 +1143,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:317](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L317)
+[lib/source-destination/source-destination.ts:317](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L317)
 
 ___
 
@@ -1209,7 +1161,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:386](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L386)
+[lib/source-destination/source-destination.ts:386](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L386)
 
 ___
 
@@ -1223,7 +1175,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:133](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L133)
+[lib/source-destination/balena-s3-compressed-source.ts:126](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L126)
 
 ___
 
@@ -1237,7 +1189,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:89](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L89)
+[lib/source-destination/balena-s3-compressed-source.ts:82](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L82)
 
 ___
 
@@ -1251,7 +1203,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:127](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L127)
+[lib/source-destination/balena-s3-compressed-source.ts:120](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L120)
 
 ___
 
@@ -1269,7 +1221,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:499](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L499)
+[lib/source-destination/source-destination.ts:499](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L499)
 
 ___
 
@@ -1312,7 +1264,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:345](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L345)
+[lib/source-destination/source-destination.ts:345](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L345)
 
 ___
 
@@ -1326,13 +1278,13 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:122](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L122)
+[lib/source-destination/balena-s3-compressed-source.ts:115](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L115)
 
 ___
 
 ### getPartStream
 
-▸ **getPartStream**(`filename`): `Promise`<`ReadableStream`\>
+▸ **getPartStream**(`filename`): `Promise`<`Readable`\>
 
 #### Parameters
 
@@ -1342,11 +1294,11 @@ ___
 
 #### Returns
 
-`Promise`<`ReadableStream`\>
+`Promise`<`Readable`\>
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:137](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L137)
+[lib/source-destination/balena-s3-compressed-source.ts:130](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L130)
 
 ___
 
@@ -1364,41 +1316,35 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:529](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L529)
+[lib/source-destination/source-destination.ts:529](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L529)
 
 ___
 
 ### getParts
 
-▸ **getParts**(`fake`): `Promise`<{ `filename`: `string` ; `parts`: { `crc`: `number` ; `filename`: `string` ; `len`: `number` ; `partitionIndex?`: `string` ; `stream`: `Buffer` \| `ReadableStream` ; `zLen`: `number`  }[]  }[]\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `fake` | `boolean` |
+▸ **getParts**(): `Promise`<{ `filename`: `string` ; `parts`: { `crc`: `number` ; `filename`: `string` ; `len`: `number` ; `partitionIndex?`: `string` ; `stream`: `Buffer` \| `Readable` ; `zLen`: `number`  }[]  }[]\>
 
 #### Returns
 
-`Promise`<{ `filename`: `string` ; `parts`: { `crc`: `number` ; `filename`: `string` ; `len`: `number` ; `partitionIndex?`: `string` ; `stream`: `Buffer` \| `ReadableStream` ; `zLen`: `number`  }[]  }[]\>
+`Promise`<{ `filename`: `string` ; `parts`: { `crc`: `number` ; `filename`: `string` ; `len`: `number` ; `partitionIndex?`: `string` ; `stream`: `Buffer` \| `Readable` ; `zLen`: `number`  }[]  }[]\>
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:275](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L275)
+[lib/source-destination/balena-s3-compressed-source.ts:298](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L298)
 
 ___
 
 ### getSize
 
-▸ **getSize**(): `Promise`<`number`\>
+▸ **getSize**(): `number`
 
 #### Returns
 
-`Promise`<`number`\>
+`number`
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:85](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L85)
+[lib/source-destination/balena-s3-compressed-source.ts:279](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L279)
 
 ___
 
@@ -1412,7 +1358,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-compressed-source.ts:115](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-compressed-source.ts#L115)
+[lib/source-destination/balena-s3-compressed-source.ts:108](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-compressed-source.ts#L108)
 
 ___
 
@@ -1436,7 +1382,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-source.ts:124](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-source.ts#L124)
+[lib/source-destination/balena-s3-source.ts:126](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-source.ts#L126)
 
 ___
 
@@ -1666,7 +1612,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:402](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L402)
+[lib/source-destination/source-destination.ts:402](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L402)
 
 ___
 
@@ -1831,7 +1777,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:356](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L356)
+[lib/source-destination/source-destination.ts:356](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L356)
 
 ___
 
@@ -2038,7 +1984,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:365](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L365)
+[lib/source-destination/source-destination.ts:365](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L365)
 
 ___
 
@@ -2231,7 +2177,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/balena-s3-source.ts:112](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/balena-s3-source.ts#L112)
+[lib/source-destination/balena-s3-source.ts:114](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/balena-s3-source.ts#L114)
 
 ___
 
@@ -2516,7 +2462,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:311](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L311)
+[lib/source-destination/source-destination.ts:311](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L311)
 
 ___
 

@@ -109,7 +109,7 @@ node_modules/@types/node/stream.d.ts:715
 
 #### Defined in
 
-[lib/source-destination/progress.ts:101](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/progress.ts#L101)
+[lib/source-destination/progress.ts:101](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/progress.ts#L101)
 
 ___
 
@@ -179,7 +179,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/progress.ts:102](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/progress.ts#L102)
+[lib/source-destination/progress.ts:102](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/progress.ts#L102)
 
 ___
 
@@ -588,7 +588,7 @@ Writable.\_write
 
 #### Defined in
 
-[lib/source-destination/progress.ts:104](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/progress.ts#L104)
+[lib/source-destination/progress.ts:104](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/progress.ts#L104)
 
 ___
 

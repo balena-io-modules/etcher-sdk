@@ -112,7 +112,7 @@
 
 #### Defined in
 
-[lib/source-destination/http.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/http.ts#L45)
+[lib/source-destination/http.ts:45](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/http.ts#L45)
 
 ## Properties
 
@@ -122,7 +122,7 @@
 
 #### Defined in
 
-[lib/source-destination/http.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/http.ts#L40)
+[lib/source-destination/http.ts:40](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/http.ts#L40)
 
 ___
 
@@ -132,7 +132,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/http.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/http.ts#L38)
+[lib/source-destination/http.ts:38](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/http.ts#L38)
 
 ___
 
@@ -142,7 +142,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/http.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/http.ts#L43)
+[lib/source-destination/http.ts:43](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/http.ts#L43)
 
 ___
 
@@ -152,7 +152,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/http.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/http.ts#L42)
+[lib/source-destination/http.ts:42](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/http.ts#L42)
 
 ___
 
@@ -162,7 +162,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/http.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/http.ts#L35)
+[lib/source-destination/http.ts:35](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/http.ts#L35)
 
 ___
 
@@ -172,7 +172,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/http.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/http.ts#L41)
+[lib/source-destination/http.ts:41](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/http.ts#L41)
 
 ___
 
@@ -182,7 +182,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/http.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/http.ts#L37)
+[lib/source-destination/http.ts:37](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/http.ts#L37)
 
 ___
 
@@ -192,7 +192,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/http.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/http.ts#L39)
+[lib/source-destination/http.ts:39](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/http.ts#L39)
 
 ___
 
@@ -202,7 +202,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/http.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/http.ts#L36)
+[lib/source-destination/http.ts:36](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/http.ts#L36)
 
 ___
 
@@ -335,7 +335,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:293](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L293)
+[lib/source-destination/source-destination.ts:293](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L293)
 
 ___
 
@@ -349,7 +349,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:305](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L305)
+[lib/source-destination/source-destination.ts:305](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L305)
 
 ## Methods
 
@@ -393,7 +393,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:420](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L420)
+[lib/source-destination/source-destination.ts:420](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L420)
 
 ___
 
@@ -411,7 +411,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/http.ts:108](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/http.ts#L108)
+[lib/source-destination/http.ts:108](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/http.ts#L108)
 
 ___
 
@@ -429,7 +429,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:416](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L416)
+[lib/source-destination/source-destination.ts:416](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L416)
 
 ___
 
@@ -478,7 +478,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/http.ts:104](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/http.ts#L104)
+[lib/source-destination/http.ts:104](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/http.ts#L104)
 
 ___
 
@@ -496,7 +496,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:333](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L333)
+[lib/source-destination/source-destination.ts:333](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L333)
 
 ___
 
@@ -514,7 +514,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:341](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L341)
+[lib/source-destination/source-destination.ts:341](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L341)
 
 ___
 
@@ -532,7 +532,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:337](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L337)
+[lib/source-destination/source-destination.ts:337](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L337)
 
 ___
 
@@ -550,7 +550,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/http.ts:96](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/http.ts#L96)
+[lib/source-destination/http.ts:96](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/http.ts#L96)
 
 ___
 
@@ -568,7 +568,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:325](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L325)
+[lib/source-destination/source-destination.ts:325](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L325)
 
 ___
 
@@ -586,7 +586,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:409](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L409)
+[lib/source-destination/source-destination.ts:409](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L409)
 
 ___
 
@@ -610,7 +610,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/http.ts:153](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/http.ts#L153)
+[lib/source-destination/http.ts:153](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/http.ts#L153)
 
 ___
 
@@ -634,7 +634,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:380](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L380)
+[lib/source-destination/source-destination.ts:380](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L380)
 
 ___
 
@@ -659,7 +659,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:396](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L396)
+[lib/source-destination/source-destination.ts:396](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L396)
 
 ___
 
@@ -684,7 +684,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:424](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L424)
+[lib/source-destination/source-destination.ts:424](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L424)
 
 ___
 
@@ -709,7 +709,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:390](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L390)
+[lib/source-destination/source-destination.ts:390](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L390)
 
 ___
 
@@ -833,7 +833,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:317](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L317)
+[lib/source-destination/source-destination.ts:317](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L317)
 
 ___
 
@@ -851,7 +851,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:386](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L386)
+[lib/source-destination/source-destination.ts:386](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L386)
 
 ___
 
@@ -865,7 +865,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/http.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/http.ts#L67)
+[lib/source-destination/http.ts:67](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/http.ts#L67)
 
 ___
 
@@ -883,7 +883,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:499](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L499)
+[lib/source-destination/source-destination.ts:499](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L499)
 
 ___
 
@@ -926,7 +926,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:345](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L345)
+[lib/source-destination/source-destination.ts:345](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L345)
 
 ___
 
@@ -944,7 +944,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:529](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L529)
+[lib/source-destination/source-destination.ts:529](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L529)
 
 ___
 
@@ -965,7 +965,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/http.ts:123](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/http.ts#L123)
+[lib/source-destination/http.ts:123](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/http.ts#L123)
 
 ___
 
@@ -1195,7 +1195,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:402](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L402)
+[lib/source-destination/source-destination.ts:402](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L402)
 
 ___
 
@@ -1360,7 +1360,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/http.ts:132](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/http.ts#L132)
+[lib/source-destination/http.ts:132](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/http.ts#L132)
 
 ___
 
@@ -1567,7 +1567,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:365](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L365)
+[lib/source-destination/source-destination.ts:365](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L365)
 
 ___
 
@@ -2021,7 +2021,7 @@ ___
 
 #### Defined in
 
-[lib/source-destination/source-destination.ts:311](https://github.com/balena-io-modules/etcher-sdk/blob/2636458/lib/source-destination/source-destination.ts#L311)
+[lib/source-destination/source-destination.ts:311](https://github.com/balena-io-modules/etcher-sdk/blob/00df1fd/lib/source-destination/source-destination.ts#L311)
 
 ___
 
