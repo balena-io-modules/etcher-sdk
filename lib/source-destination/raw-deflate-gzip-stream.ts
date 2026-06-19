@@ -1,5 +1,5 @@
 import { crc32_combine_multi } from '@balena/node-crc-utils';
-import * as CombinedStream from 'combined-stream';
+import { combineStreams } from '../utils';
 import { DeflateCRC32Stream } from 'crc32-stream';
 import { Readable } from 'node:stream';
 // gzip header
@@ -80,23 +80,22 @@ export const createGzipFromParts = function (
 		stream: Readable | Buffer;
 	}>,
 ) {
-	const out = CombinedStream.create();
-	// write the header
-	out.append(GZIP_HEADER);
-	// write all middle parts
-	for (const { stream } of parts) {
-		out.append(stream);
-	}
-	// write ending DEFLATE part
-	out.append(DEFLATE_END);
-	// write CRC
-	out.append(crc32_combine_multi(parts).combinedCrc32);
 	// write the ISIZE length, modulo 2^32 per RFC 1952 section 2.3.1
 	// https://www.rfc-editor.org/info/rfc1952/#page-8:~:text=original%20(uncompressed)%20input-,data%20modulo%202%5E32
 	const len = Buffer.alloc(4);
 	const isize = parts.map((p) => p.len).reduce((a, b) => a + b) % 0x100000000;
 	len.writeUInt32LE(isize, 0);
-	out.append(len);
+	const out = combineStreams([
+		// write the header
+		GZIP_HEADER,
+		// write all middle parts
+		...parts.map(({ stream }) => stream),
+		// write ending DEFLATE part
+		DEFLATE_END,
+		// write CRC
+		crc32_combine_multi(parts).combinedCrc32,
+		len,
+	]) as ReturnType<typeof combineStreams> & { zLen: number };
 	// calculate compressed size.
 	out.zLen = getGzipSizeFromParts(parts);
 	// return stream
