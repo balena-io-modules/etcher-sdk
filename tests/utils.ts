@@ -6,7 +6,7 @@ import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import * as unzip from 'unzip-stream';
-import { createDeflatePart } from 'gzip-stream';
+import { createDeflatePart } from '../lib/source-destination/raw-deflate-gzip-stream';
 import { Readable, Writable } from 'stream';
 import { pipeline } from 'stream/promises';
 import { Metadata } from '../lib/source-destination';
