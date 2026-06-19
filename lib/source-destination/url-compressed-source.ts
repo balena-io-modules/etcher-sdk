@@ -1,5 +1,5 @@
 import { BufferDisk } from 'file-disk';
-import { createDeflatePart, DEFLATE_END } from 'gzip-stream';
+import { createDeflatePart, DEFLATE_END } from './raw-deflate-gzip-stream';
 import {
 	cleanupParts,
 	createGzipStreamFromParts,
