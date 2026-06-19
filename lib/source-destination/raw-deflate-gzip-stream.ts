@@ -3,10 +3,12 @@ import * as CombinedStream from 'combined-stream';
 import { DeflateCRC32Stream } from 'crc32-stream';
 import { Readable } from 'node:stream';
 // gzip header
-const GZIP_HEADER = Buffer.from([ 0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff ]);
+const GZIP_HEADER = Buffer.from([
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff,
+]);
 
 // DEFLATE ending block
-export const DEFLATE_END = Buffer.from([ 0x03, 0x00 ]);
+export const DEFLATE_END = Buffer.from([0x03, 0x00]);
 const DEFLATE_END_LENGTH = DEFLATE_END.length;
 
 export interface DeflatePartStreamMetadata {
@@ -33,7 +35,10 @@ class DeflatePartStream extends DeflateCRC32Stream {
 		} else {
 			// got null signalling end of stream
 			// inspect last chunk for DEFLATE_END marker and remove it
-			if ((this.buf.length >= DEFLATE_END_LENGTH) && this.buf.slice(-DEFLATE_END_LENGTH).equals(DEFLATE_END)) {
+			if (
+				this.buf.length >= DEFLATE_END_LENGTH &&
+				this.buf.slice(-DEFLATE_END_LENGTH).equals(DEFLATE_END)
+			) {
 				this.buf = this.buf.slice(0, -DEFLATE_END_LENGTH);
 			}
 			super.push(this.buf);
@@ -50,32 +55,38 @@ class DeflatePartStream extends DeflateCRC32Stream {
 		return {
 			crc: this.digest().readUInt32BE(0),
 			len: this.size(),
-			zLen: this.size(true)
+			zLen: this.size(true),
 		};
 	}
 }
 
 export const createDeflatePart = () => new DeflatePartStream();
 
-export const getGzipSizeFromParts = function(parts: Array<{
+export const getGzipSizeFromParts = function (
+	parts: Array<{
 		zLen: number;
-	}>) {
+	}>,
+) {
 	// calculate compressed size. Add 10 byte header, 2 byte DEFLATE ending block, 8 byte footer
-	const zLen = parts.map(p => p.zLen).reduce((a, b) => a + b) + 20;
+	const zLen = parts.map((p) => p.zLen).reduce((a, b) => a + b) + 20;
 	return zLen;
 };
 
-export const createGzipFromParts = function(parts: Array<{
+export const createGzipFromParts = function (
+	parts: Array<{
 		crc: number;
 		zLen: number;
 		len: number;
 		stream: Readable | Buffer;
-	}>) {
+	}>,
+) {
 	const out = CombinedStream.create();
 	// write the header
 	out.append(GZIP_HEADER);
 	// write all middle parts
-	for (var { stream } of parts) { out.append(stream); }
+	for (const { stream } of parts) {
+		out.append(stream);
+	}
 	// write ending DEFLATE part
 	out.append(DEFLATE_END);
 	// write CRC
@@ -83,7 +94,7 @@ export const createGzipFromParts = function(parts: Array<{
 	// write the ISIZE length, modulo 2^32 per RFC 1952 section 2.3.1
 	// https://www.rfc-editor.org/info/rfc1952/#page-8:~:text=original%20(uncompressed)%20input-,data%20modulo%202%5E32
 	const len = Buffer.alloc(4);
-	const isize = parts.map(p => p.len).reduce((a, b) => a + b) % 0x100000000;
+	const isize = parts.map((p) => p.len).reduce((a, b) => a + b) % 0x100000000;
 	len.writeUInt32LE(isize, 0);
 	out.append(len);
 	// calculate compressed size.
