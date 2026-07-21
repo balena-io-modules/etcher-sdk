@@ -66,7 +66,7 @@
     "lzma-native": "^8.0.6",
     "minimatch": "^9.0.3",
     "mountutils": "^2.0.0",
-    "node-raspberrypi-usbboot": "1.1.0",
+    "node-raspberrypi-usbboot": "1.1.12",
     "outdent": "^0.8.0",
     "partitioninfo": "^6.0.2",
     "rwmutex": "^1.0.0",
