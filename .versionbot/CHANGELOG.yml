@@ -1,4 +1,162 @@
 - commits:
+    - subject: Update dependency node-raspberrypi-usbboot to v1.1.12
+      hash: 29d1b930b67e0787cce3f6a34b75696a8aaab2cc
+      body: |
+        Update node-raspberrypi-usbboot from 1.1.0 to 1.1.12
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested:
+        - commits:
+            - subject: Update dependency @types/node to v20.19.43
+              hash: 92c7ce94d4c3fd2142d566a6d7d2ced23221453e
+              body: |
+                Update @types/node from 20.19.42 to 20.19.43
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: balena-renovate[bot]
+          version: node-raspberrypi-usbboot-1.1.12
+          title: ""
+          date: 2026-07-16T07:42:12.805Z
+        - commits:
+            - subject: Pin dependencies
+              hash: aa376c4527578cc6a2ded1e900302395658038aa
+              body: |
+                Update @types/debug
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: balena-renovate[bot]
+          version: node-raspberrypi-usbboot-1.1.11
+          title: ""
+          date: 2026-07-16T06:39:33.846Z
+        - commits:
+            - subject: Lock file maintenance
+              hash: 03f7f912229c87514f72709f99a3775cda54d3a0
+              body: |
+                Update 
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: balena-renovate[bot]
+          version: node-raspberrypi-usbboot-1.1.10
+          title: ""
+          date: 2026-06-08T00:14:57.060Z
+        - commits:
+            - subject: Lock file maintenance
+              hash: 7e8e53ee0319269d7ff2e15bc13976a8c1d53abf
+              body: |
+                Update 
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: balena-renovate[bot]
+          version: node-raspberrypi-usbboot-1.1.9
+          title: ""
+          date: 2026-06-01T00:15:36.874Z
+        - commits:
+            - subject: Lock file maintenance
+              hash: 81776ca34544c3480eeed56f18f1e16c65c63dd9
+              body: |
+                Update 
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: balena-renovate[bot]
+          version: node-raspberrypi-usbboot-1.1.8
+          title: ""
+          date: 2026-05-25T00:14:15.837Z
+        - commits:
+            - subject: Lock file maintenance
+              hash: 57ed05c5d8b0c1b15b4f9818796a3489ce1d908f
+              body: |
+                Update 
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: balena-renovate[bot]
+          version: node-raspberrypi-usbboot-1.1.7
+          title: ""
+          date: 2026-05-18T00:14:02.880Z
+        - commits:
+            - subject: Update dependency rimraf to ^6.1.2
+              hash: 46e075c29e1f8b0190edce1ed3b07c70c07347bf
+              body: |
+                Update rimraf from 6.1.2 to 6.1.3
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: balena-renovate[bot]
+          version: node-raspberrypi-usbboot-1.1.6
+          title: ""
+          date: 2026-05-16T00:20:04.268Z
+        - commits:
+            - subject: "Add id-token: write permission for NPM OIDC publishing"
+              hash: 8e7d49d0c19d99d5a7fbb34a2d284ebf62b3b513
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+                Signed-off-by: Kyle Harding <kyle@balena.io>
+                signed-off-by: Kyle Harding <kyle@balena.io>
+              author: Kyle Harding
+          version: node-raspberrypi-usbboot-1.1.5
+          title: ""
+          date: 2026-02-19T01:55:57.935Z
+        - commits:
+            - subject: Lock file maintenance
+              hash: 65eb0d4254a1820a6d09b97ecc747cd1944ff9d2
+              body: |
+                Update 
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: balena-renovate[bot]
+          version: node-raspberrypi-usbboot-1.1.4
+          title: ""
+          date: 2026-01-22T19:06:37.031Z
+        - commits:
+            - subject: Lock file maintenance
+              hash: 043548da4899dcb107cf3a9ee22b07dcdaaa0ab7
+              body: |
+                Update 
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: balena-renovate[bot]
+          version: node-raspberrypi-usbboot-1.1.3
+          title: ""
+          date: 2025-04-07T01:15:21.673Z
+        - commits:
+            - subject: Update dependency rimraf to v6
+              hash: 7ff75fb675f7f12c754754ad6ea18d744e5ed35f
+              body: |
+                Update rimraf from 5.0.7 to 6.0.1
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: balena-renovate[bot]
+          version: node-raspberrypi-usbboot-1.1.2
+          title: ""
+          date: 2025-04-02T14:04:49.166Z
+        - commits:
+            - subject: Update dependency @balena/lint to v8.2.8
+              hash: e9ca9b0e8292c50556320e5ef0c74511c9e236fe
+              body: |
+                Update @balena/lint from 8.0.2 to 8.2.8
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: balena-renovate[bot]
+          version: node-raspberrypi-usbboot-1.1.1
+          title: ""
+          date: 2025-03-19T16:06:11.858Z
+  version: 10.2.14
+  title: ""
+  date: 2026-07-21T14:42:49.488Z
+- commits:
     - subject: Regenerate docs
       hash: d4d28341c025cd6647d5fe01d0ea1928fc3b9c10
       body: ""
