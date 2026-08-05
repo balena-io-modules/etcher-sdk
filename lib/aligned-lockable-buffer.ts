@@ -6,6 +6,9 @@ export interface AlignedLockableBuffer extends Buffer {
 	lock: () => Promise<() => void>;
 	rlock: () => Promise<() => void>;
 	slice: (start?: number, end?: number) => AlignedLockableBuffer;
+	refCount: number;
+	addRef: () => void;
+	release: () => void;
 }
 
 function alignedLockableBufferSlice(
@@ -28,6 +31,15 @@ function attachMutex(
 	buffer.lock = lock;
 	buffer.rlock = rlock;
 	buffer.slice = alignedLockableBufferSlice;
+	buffer.refCount = 0;
+	buffer.addRef = () => {
+		buffer.refCount++;
+	};
+	buffer.release = () => {
+		if (buffer.refCount > 0) {
+			buffer.refCount--;
+		}
+	};
 	return buffer;
 }
 
@@ -63,12 +75,28 @@ export class AlignedReadableState {
 	}
 
 	public getCurrentBuffer(): AlignedLockableBuffer {
-		let buffer = this.buffers[this.currentBufferIndex];
-		if (buffer === undefined) {
-			buffer = createBuffer(this.bufferSize, this.alignment);
-			this.buffers[this.currentBufferIndex] = buffer;
+		// Find a buffer with refCount === 0 (safe to reuse)
+		for (let i = 0; i < this.numBuffers; i++) {
+			const bufferIndex = (this.currentBufferIndex + i) % this.numBuffers;
+			let buffer = this.buffers[bufferIndex];
+
+			if (buffer === undefined) {
+				// Create new buffer
+				buffer = createBuffer(this.bufferSize, this.alignment);
+				this.buffers[bufferIndex] = buffer;
+			}
+
+			if (buffer.refCount === 0) {
+				// Found available buffer
+				this.currentBufferIndex = (bufferIndex + 1) % this.numBuffers;
+				buffer.addRef(); // Increment reference count
+				return buffer;
+			}
 		}
-		this.currentBufferIndex = (this.currentBufferIndex + 1) % this.numBuffers;
-		return buffer;
+
+		// All buffers are in use, create a new one (expand pool)
+		const newBuffer = createBuffer(this.bufferSize, this.alignment);
+		newBuffer.addRef();
+		return newBuffer;
 	}
 }
