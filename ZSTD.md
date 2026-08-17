@@ -120,6 +120,21 @@ Why these flags:
 The generated `lib/zstd/zstd.js` is **committed** (ts-node runs tests directly
 against `lib/`) and excluded from lint in `.eslintrc.js`.
 
+## Licensing
+
+etcher-sdk itself is Apache-2.0, but `lib/zstd/zstd.js` is a **redistributed
+binary build of Zstandard (libzstd) v1.5.6**, which is BSD-3-Clause licensed.
+BSD-3-Clause requires that the copyright notice accompany any binary
+redistribution, so the notice is kept in `lib/zstd/NOTICE` (the full upstream
+license, reproduced verbatim).
+
+- `lib/zstd/NOTICE` — the upstream BSD license, reproduced verbatim.
+- `build-scripts/copy-zstd-assets.js` — also copies `NOTICE` next to `zstd.js`
+  into `build/zstd/`, so the license ships inside the published npm package
+  (`files: ["build", "typings"]`).
+- `build-scripts/build-zstd/build.sh` — pins the exact upstream release
+  (v1.5.6) the notice refers to.
+
 ## Tests
 
 `tests/zstd.spec.ts` + committed fixtures in `tests/data/zst/`:
