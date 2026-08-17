@@ -3,3 +3,5 @@ build
 node_modules
 yalc.lock
 .yalc
+# npm pack output
+*.tgz
