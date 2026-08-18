@@ -19,7 +19,7 @@ import {
 	ZSTD_FRAMEHEADERSIZE_MAX,
 	ZstdDecompressor,
 } from '@balena/zstd-decompress-stream';
-import { Transform } from 'stream';
+import type { Transform } from 'stream';
 
 import { CompressedSource } from './compressed-source';
 import { SourceDestination } from './source-destination';
@@ -53,7 +53,7 @@ export class ZstdSource extends CompressedSource {
 				if (frameContentSize !== undefined) {
 					return { size: frameContentSize, isEstimated: false };
 				}
-			} catch (error) {
+			} catch {
 				// Fall through to the partition table estimate.
 			}
 		}
