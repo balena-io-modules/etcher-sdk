@@ -18,7 +18,7 @@ import {
 	getFrameContentSize,
 	ZSTD_FRAMEHEADERSIZE_MAX,
 	ZstdDecompressor,
-} from '@balena/zstd-decompress-stream';
+} from 'zstd-decompress-stream';
 import type { Transform } from 'stream';
 
 import { CompressedSource } from './compressed-source';
