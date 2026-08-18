@@ -48,6 +48,7 @@
     "@balena/node-beaglebone-usbboot": "^3.0.0",
     "@balena/node-crc-utils": "^3.1.0",
     "@balena/udif": "^1.1.2",
+    "@balena/zstd-decompress-stream": "github:resadent/zstd-decompress-stream#40bf667d23c847f7cad038fa1d8d5fee856f513b",
     "@ronomon/direct-io": "^3.0.1",
     "aws4-axios": "^3.3.0",
     "axios": "^1.9.0",
