@@ -1,7 +1,7 @@
 import {
 	createGzipFromParts,
 	getGzipSizeFromParts as $getGzipSizeFromParts,
-} from 'gzip-stream';
+} from './raw-deflate-gzip-stream';
 import { RawDeflatePart } from './raw-deflate-zip-stream';
 import { Stream } from 'node:stream';
 import type { ImagePartInfo } from './compressed-source-types';
