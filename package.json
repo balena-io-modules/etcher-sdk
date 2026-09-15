@@ -55,7 +55,7 @@
     "balena-image-fs": "^7.2.0",
     "blockmap": "^4.0.3",
     "check-disk-space": "^3.4.0",
-    "compress-commons": "^6.0.2",
+    "compress-commons": "^7.0.0",
     "cyclic-32": "^1.1.0",
     "debug": "^4.4.1",
     "drivelist": "^12.0.0",
