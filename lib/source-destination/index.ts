@@ -36,4 +36,5 @@ export * from './single-use-stream-source';
 export * from './usb-bb-boot';
 export * from './usbboot';
 export * from './xz';
+export * from './zstd';
 export * from './zip';
