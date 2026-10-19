@@ -9,6 +9,7 @@ import { Readable, finished, pipeline } from 'node:stream';
 import {
 	createZipStreamFromParts,
 	getZipSizeFromParts,
+	type RawDeflatePart,
 } from './raw-deflate-zip-stream';
 import { createInflateRaw } from 'zlib';
 import axios from 'axios';
@@ -30,7 +31,12 @@ import { ImageJSON, ImageJSONPart } from './compressed-source-types';
 
 import { NotCapable } from '../errors';
 import { StreamLimiter } from '../stream-limiter';
-import { noop, streamToBuffer, combineStreams } from '../utils';
+import {
+	noop,
+	streamToBuffer,
+	combineStreams,
+	PromiseAllWithCleanup,
+} from '../utils';
 
 /**
  * Configuration for URLCompressedSource
@@ -342,10 +348,12 @@ export class URLCompressedSource extends SourceDestination {
 	}
 
 	private async getParts() {
-		return Promise.all(
+		// Use PromiseAllWithCleanup instead of Promise.all so that if any part request fails,
+		// the part streams that were already opened get destroyed instead of leaking.
+		return PromiseAllWithCleanup<RawDeflatePart>(
 			Object.entries(this.imageJSON).map(async ([filename, { parts }]) => ({
 				filename,
-				parts: await Promise.all(
+				parts: await PromiseAllWithCleanup(
 					parts.map(async (p) => {
 						let stream: Readable | Buffer;
 						let { crc, zLen } = p;
@@ -357,8 +365,12 @@ export class URLCompressedSource extends SourceDestination {
 						}
 						return { ...p, crc, zLen, stream };
 					}),
+					(openedParts) => {
+						cleanupParts([{ parts: openedParts }]);
+					},
 				),
 			})),
+			cleanupParts,
 		);
 	}
 
