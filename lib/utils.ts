@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import { finished, Readable, Stream } from 'node:stream';
+
 import { isAlignedLockableBuffer } from './aligned-lockable-buffer';
 import { SparseStreamChunk } from './sparse-stream/shared';
 
@@ -184,4 +186,52 @@ export function once<T>(fn: () => T): () => T {
 		}
 		return result;
 	};
+}
+
+export function combineStreams(streams: Array<Readable | Buffer>): Readable {
+	const destroyAll = () => {
+		for (const s of streams) {
+			if (s instanceof Stream && !s.destroyed) {
+				s.destroy();
+			}
+		}
+	};
+
+	const combinedStream = Readable.from(
+		(async function* () {
+			for (const s of streams) {
+				if (Buffer.isBuffer(s)) {
+					yield s;
+				} else {
+					yield* s;
+				}
+			}
+		})(),
+		{
+			objectMode: false,
+			// Match Node's default highWaterMark for non-object-mode Readable streams.
+			// See: https://github.com/nodejs/node/blob/v26.12.1/lib/internal/streams/readable.js#L297
+			highWaterMark: 64 * 1024,
+		},
+	);
+
+	// Propagate destroy to sub-streams
+	const combinedStreamOriginalDestroy = combinedStream._destroy;
+	combinedStream._destroy = (error, callback) => {
+		destroyAll();
+		combinedStreamOriginalDestroy.call(combinedStream, error, callback);
+	};
+
+	// Fail fast if any stream errors or closes prematurely, including ones not reached yet.
+	for (const stream of streams) {
+		if (stream instanceof Readable) {
+			finished(stream, (err) => {
+				if (err != null) {
+					combinedStream.destroy(err);
+				}
+			});
+		}
+	}
+
+	return combinedStream;
 }
