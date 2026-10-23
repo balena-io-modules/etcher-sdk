@@ -1,4 +1,19 @@
 - commits:
+    - subject: "url-compressed-source: Replace combined-stream with a native generator
+        based Readable stream"
+      hash: f7395d656414528c5688d098fc77307803c23bf7
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        See: https://balena.fibery.io/Work/Project/2628
+        see: https://balena.fibery.io/Work/Project/2628
+      author: Thodoris Greasidis
+      nested: []
+  version: 10.2.16
+  title: ""
+  date: 2026-10-23T07:53:30.218Z
+- commits:
     - subject: Update dependency flowzonify to v0.4.5
       hash: e882785957513629643329b9ca7d33b9916413ba
       body: |
