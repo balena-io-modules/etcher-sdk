@@ -24,7 +24,9 @@ export const getGzipSizeFromParts = (parts: ImagePartInfo[]) => {
 	return $getGzipSizeFromParts(parts[0].parts);
 };
 
-export const cleanupParts = function (partsByImage: RawDeflatePart[]) {
+export const cleanupParts = function (
+	partsByImage: Array<Pick<RawDeflatePart, 'parts'>>,
+) {
 	for (const part of partsByImage) {
 		for (const { stream } of part.parts) {
 			if (stream instanceof Stream && !stream.destroyed) {

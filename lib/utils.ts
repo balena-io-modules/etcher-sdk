@@ -235,3 +235,31 @@ export function combineStreams(streams: Array<Readable | Buffer>): Readable {
 
 	return combinedStream;
 }
+
+export async function PromiseAllWithCleanup<T>(
+	promises: Array<Promise<T>>,
+	/* The cleanup values do not have the same order as the provided promises. */
+	cleanup: (resolvedValues: T[]) => void,
+): Promise<T[]> {
+	// Don't pre-allocate the array, so that
+	// we can reason whether a spot was set or not.
+	const values: T[] = [];
+	let rejection: Error | undefined;
+	await Promise.all(
+		promises.map(async (p, i) => {
+			try {
+				values[i] = await p;
+			} catch (err) {
+				// We do not throw early, so that we can collect all values
+				// that need cleanup from each individual initated promise.
+				rejection ??= err as Error;
+			}
+		}),
+	);
+	if (rejection != null) {
+		// Filter out the non-filled spots
+		cleanup(values.filter((_, i) => i != null));
+		throw rejection;
+	}
+	return values;
+}
