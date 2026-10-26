@@ -15,7 +15,7 @@
  */
 
 import { Transform } from 'stream';
-import unbzip2Stream = require('unbzip2-stream');
+import unbzip2Stream = require('@balena/unbzip2-stream');
 
 import { CompressedSource } from './compressed-source';
 import { SourceDestination } from './source-destination';
