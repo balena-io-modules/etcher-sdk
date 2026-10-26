@@ -1,4 +1,18 @@
 - commits:
+    - subject: Replace the unbzip2-stream git dependency with @balena/unbzip2-stream
+      hash: f633cb15384528dbd2e03f8146f19dde27310b1a
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        See: https://github.com/regular/unbzip2-stream/commit/4a54f56a25b58950f9e4277c56db2912d62242e7
+        see: https://github.com/regular/unbzip2-stream/commit/4a54f56a25b58950f9e4277c56db2912d62242e7
+      author: Thodoris Greasidis
+      nested: []
+  version: 10.2.17
+  title: ""
+  date: 2026-10-26T10:48:22.388Z
+- commits:
     - subject: "url-compressed-source: Replace combined-stream with a native generator
         based Readable stream"
       hash: f7395d656414528c5688d098fc77307803c23bf7
