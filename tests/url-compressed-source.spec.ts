@@ -218,7 +218,71 @@ describe('URLCompressedSource', function () {
 		});
 	});
 
-	// ── part stream cleanup ───────────────────────────────────────────────────
+	// ── cleanup ───────────────────────────────────────────────────────────────
+
+	describe('createReadStream() — cleanup on failure', () => {
+		it('destroys the already opened part streams when a part request fails', async () => {
+			const source = new URLCompressedSource({
+				...BASE_OPTIONS,
+				format: 'zip',
+			});
+			stubDownload(
+				source,
+				getImageJSON(deflateParts),
+				new Map(deflateParts.map((p, i) => [`part-${i}.deflate`, p.buf])),
+			);
+			await source.open();
+
+			const openedStreamPromises: Array<
+				Promise<Readable & { filename: string }>
+			> = [];
+			// Replace the getPartStream stub from stubDownload() with one where a part request fails
+			sinon.restore();
+			sinon
+				// @ts-expect-error access protected property for test
+				.stub(source, 'getPartStream')
+				.callsFake(async (filename: string) => {
+					const resultPromise = (async () => {
+						// async boundary
+						await delay(1);
+						// part-0 opens right away
+						// part-1 fails
+						// part-2 is hanging and opens only after part-1 has already failed
+						if (filename === 'part-1.deflate') {
+							throw new Error('403 Forbidden');
+						}
+						if (filename === 'part-2.deflate') {
+							await delay(50);
+						}
+						const stream = Object.assign(new Readable({ read() {} }), {
+							filename,
+						});
+						return stream;
+					})();
+					openedStreamPromises.push(resultPromise);
+					return await resultPromise;
+				});
+
+			try {
+				await source.createReadStream();
+				expect.fail('createReadStream() should have rejected');
+			} catch (err) {
+				expect(err).to.have.property('message', '403 Forbidden');
+			}
+			// wait for all streams to be opened
+			const openedStreams = (
+				await Promise.allSettled(openedStreamPromises)
+			).flatMap((p) => (p.status === 'fulfilled' ? [p.value] : []));
+			const openedStreamsByFilename = Object.fromEntries(
+				openedStreams.map((s) => [s.filename, { destroyed: s.destroyed }]),
+			);
+			expect(openedStreamsByFilename).to.deep.equal({
+				'part-0.deflate': { destroyed: true },
+				'part-2.deflate': { destroyed: true },
+			});
+			await source.close();
+		});
+	});
 
 	describe('createReadStream() — zip format, part stream cleanup', () => {
 		async function openSourceWithMockedParts() {

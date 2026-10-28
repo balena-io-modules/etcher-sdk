@@ -9,6 +9,7 @@ import { Readable, finished, pipeline } from 'node:stream';
 import {
 	createZipStreamFromParts,
 	getZipSizeFromParts,
+	type RawDeflatePart,
 } from './raw-deflate-zip-stream';
 import { createInflateRaw } from 'zlib';
 
@@ -26,7 +27,12 @@ import { CreateReadStreamOptions } from './source-destination';
 
 import { NotCapable } from '../errors';
 import { StreamLimiter } from '../stream-limiter';
-import { noop, streamToBuffer, combineStreams } from '../utils';
+import {
+	noop,
+	streamToBuffer,
+	combineStreams,
+	PromiseAllWithCleanup,
+} from '../utils';
 import type { ImageJSON, ImageJSONPart } from './compressed-source-types';
 
 export interface BalenaS3CompressedSourceOptions extends BalenaS3SourceOptions {
@@ -293,10 +299,11 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 	}
 
 	private async getParts() {
-		return Promise.all(
+		// Cleanup any part streams that were already opened in case any request fails.
+		return PromiseAllWithCleanup<RawDeflatePart>(
 			Object.entries(this.imageJSON).map(async ([filename, { parts }]) => ({
 				filename,
-				parts: await Promise.all(
+				parts: await PromiseAllWithCleanup(
 					parts.map(async (p) => {
 						let stream: Readable | Buffer;
 						let { crc, zLen } = p;
@@ -308,8 +315,12 @@ export class BalenaS3CompressedSource extends BalenaS3SourceBase {
 						}
 						return { ...p, crc, zLen, stream };
 					}),
+					(openedParts) => {
+						cleanupParts([{ parts: openedParts }]);
+					},
 				),
 			})),
+			cleanupParts,
 		);
 	}
 
