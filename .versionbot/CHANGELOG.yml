@@ -1,4 +1,19 @@
 - commits:
+    - subject: "url-compressed-source: Fix memory leak when one of the part streams
+        fails to open"
+      hash: 00152037d72052e479ae694af2fb5c2d1506cecd
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        See: https://balena.fibery.io/Work/Project/2628
+        see: https://balena.fibery.io/Work/Project/2628
+      author: Thodoris Greasidis
+      nested: []
+  version: 10.2.18
+  title: ""
+  date: 2026-10-28T07:45:14.087Z
+- commits:
     - subject: Replace the unbzip2-stream git dependency with @balena/unbzip2-stream
       hash: f633cb15384528dbd2e03f8146f19dde27310b1a
       body: ""
