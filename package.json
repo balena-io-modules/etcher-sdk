@@ -74,7 +74,8 @@
     "tslib": "^2.0.0",
     "unzip-stream": "^0.3.1",
     "xxhash-addon": "^2.0.1",
-    "yauzl": "^2.9.2"
+    "yauzl": "^2.9.2",
+    "zstd-decompress-stream": "github:resadent/zstd-decompress-stream#dc24023166f600ea44e5aeffad68f61fbe9a178b"
   },
   "optionalDependencies": {
     "winusb-driver-generator": "^2.0.0"
