@@ -1,4 +1,19 @@
 - commits:
+    - subject: "package: Update node-raspberrypi-usbboot to v1.2.0"
+      hash: 3dbc8590d2e984f0baeca4857e7aa43f57b7a0ce
+      body: |
+        ... to bring in support for CM5 Mass Storage mode
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alexandru Costache <alexandru@balena.io>
+        signed-off-by: Alexandru Costache <alexandru@balena.io>
+      author: Alexandru Costache
+      nested: []
+  version: 10.2.19
+  title: ""
+  date: 2026-11-03T08:34:02.937Z
+- commits:
     - subject: "url-compressed-source: Fix memory leak when one of the part streams
         fails to open"
       hash: 00152037d72052e479ae694af2fb5c2d1506cecd
