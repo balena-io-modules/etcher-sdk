@@ -33,11 +33,21 @@ const USBBOOT_RPI_COMPUTE_MODULE_NAMES = [
 	'Linux File-Stor Gadget USB Device',
 	'Linux File-Stor Gadget Media',
 ];
+// The CM5 mass-storage gadget reports the exposed block device name as its
+// SCSI vendor, so only trust it for USB attached drives.
+const USBBOOT_RPI_CM5_NAMES = ['mmcblk0 '];
 
-function looksLikeComputeModule(description: string): boolean {
+function looksLikeComputeModule(drive: $Drive): boolean {
 	for (const name of USBBOOT_RPI_COMPUTE_MODULE_NAMES) {
-		if (description.startsWith(name)) {
+		if (drive.description.startsWith(name)) {
 			return true;
+		}
+	}
+	if (drive.isUSB === true) {
+		for (const name of USBBOOT_RPI_CM5_NAMES) {
+			if (drive.description.startsWith(name)) {
+				return true;
+			}
 		}
 	}
 	return false;
@@ -174,7 +184,7 @@ export class BlockDeviceAdapter extends Adapter {
 					? drive.mountpoints.map((m) => m.path).join(', ') // Windows
 					: drive.device;
 			const resultDrive: DrivelistDrive = { ...drive, displayName };
-			if (looksLikeComputeModule(resultDrive.description)) {
+			if (looksLikeComputeModule(resultDrive)) {
 				resultDrive.description = 'Compute Module';
 				// TODO: Should this be in the sdk?
 				resultDrive.icon = 'raspberrypi';
