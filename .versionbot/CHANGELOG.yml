@@ -1,4 +1,29 @@
 - commits:
+    - subject: "scanner: Recognise CM5 mass-storage gadget as a Compute Module"
+      hash: ac95b26cc79f97b3a87658593356cecac94051c7
+      body: >
+        The CM5 mass-storage gadget (mass-storage-gadget64) reports the exposed
+
+        block device name ("mmcblk0") as its SCSI vendor, so drivelist describes
+
+        it as "mmcblk0 (<partition labels>)" - it's never labelled as a Compute
+        Module.
+
+
+        Match the "mmcblk0 " prefix only for USB attached drives, so a host's
+
+        own internal mmcblk0 isn't picked up.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alexandru Costache <alexandru@balena.io>
+        signed-off-by: Alexandru Costache <alexandru@balena.io>
+      author: Alexandru Costache
+      nested: []
+  version: 10.2.20
+  title: ""
+  date: 2026-11-06T14:39:45.377Z
+- commits:
     - subject: "package: Update node-raspberrypi-usbboot to v1.2.0"
       hash: 3dbc8590d2e984f0baeca4857e7aa43f57b7a0ce
       body: |
