@@ -47,6 +47,11 @@ export interface BalenaS3SourceOptions {
 	release?: string; // 1344795
 	imageType?: string; // raw | flasher
 	awsCredentials?: AwsCredentials;
+	/**
+	 * Aborts the requests that the source makes, both while opening and the ones streaming
+	 * the image parts of createReadStream(). Pending operations then reject with axios' CanceledError.
+	 */
+	abortSignal?: AbortSignal;
 }
 
 // TODO: Drop in a major once we no longer use S3 for OS images
@@ -60,6 +65,7 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 	public readonly release?: string; // Only used for preloaded images
 	public readonly imageType?: string;
 	protected axiosInstance: AxiosInstance;
+	private abortSignal?: AbortSignal;
 	private static filesMissingFromPreloadedImages = [
 		'VERSION',
 		'VERSION_HOSTOS',
@@ -75,6 +81,7 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 		release,
 		imageType,
 		awsCredentials,
+		abortSignal,
 	}: BalenaS3SourceOptions) {
 		super();
 		this.host = host;
@@ -101,6 +108,7 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 				}),
 			);
 		}
+		this.abortSignal = abortSignal;
 	}
 
 	protected get imageSuffix(): string {
@@ -120,7 +128,10 @@ export abstract class BalenaS3SourceBase extends SourceDestination {
 	}
 
 	protected async download(path: string, responseType?: 'stream') {
-		return await this.axiosInstance.get(this.getUrl(path), { responseType });
+		return await this.axiosInstance.get(this.getUrl(path), {
+			responseType,
+			signal: this.abortSignal,
+		});
 	}
 
 	protected getUrl(path: string): string {
