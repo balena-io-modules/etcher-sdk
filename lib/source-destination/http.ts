@@ -30,6 +30,9 @@ import {
 	CreateReadStreamOptions,
 	SourceDestination,
 } from './source-destination';
+
+// TODO: Drop in the next major
+/* @deprecated */
 export class Http extends SourceDestination {
 	// Only implements reading for now
 	private fileName: string | undefined;
@@ -41,6 +44,7 @@ export class Http extends SourceDestination {
 	private ready: Promise<void>;
 	private error: Error;
 	private axiosInstance: AxiosInstance;
+	private abortSignal?: AbortSignal;
 
 	constructor({
 		url,
@@ -68,13 +72,18 @@ export class Http extends SourceDestination {
 		try {
 			let response: AxiosResponse;
 			try {
-				response = await this.axiosInstance({ method: 'head', url: this.url });
+				response = await this.axiosInstance({
+					method: 'head',
+					url: this.url,
+					signal: this.abortSignal,
+				});
 			} catch (error) {
 				// We use GET instead of HEAD as some servers will respond with a 403 to HEAD requests
 				response = await this.axiosInstance({
 					method: 'get',
 					url: this.url,
 					responseType: 'stream',
+					signal: this.abortSignal,
 				});
 				response.data.destroy();
 			}
@@ -143,6 +152,7 @@ export class Http extends SourceDestination {
 				Range: this.getRange(sourceOffset, sourceOffset + length - 1),
 				'accept-encoding': 'gzip',
 			},
+			signal: this.abortSignal,
 		});
 		const bytesRead = response.data.length;
 		// TODO: it would be nice to avoid copying here but it would require modifying axios
@@ -163,6 +173,7 @@ export class Http extends SourceDestination {
 				'accept-encoding': 'gzip',
 			},
 			responseType: 'stream',
+			signal: this.abortSignal,
 		});
 		if (emitProgress) {
 			let bytes = 0;

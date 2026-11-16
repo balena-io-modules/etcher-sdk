@@ -57,6 +57,11 @@ export interface URLCompressedSourceOptions {
 	configuration?: Record<string, any>;
 	deviceType: string; // raspberry-pi
 	buildId: string; // 2.9.6+rev1.prod
+	/**
+	 * Aborts the requests that the source makes, both while opening and the ones streaming
+	 * the image parts of createReadStream(). Pending operations then reject with axios' CanceledError.
+	 */
+	abortSignal?: AbortSignal;
 }
 
 /**
@@ -79,6 +84,7 @@ export class URLCompressedSource extends SourceDestination {
 	private filenamePrefix?: string;
 	// configuration is config.json + network configuration + dashboard "when" options like "processorCore" for ts4900
 	private configuration?: Record<string, any>;
+	private abortSignal?: AbortSignal;
 	private configuredParts = new Map<
 		string,
 		{ crc: number; zLen: number; buffer: Buffer }
@@ -100,6 +106,7 @@ export class URLCompressedSource extends SourceDestination {
 		configuration,
 		buildId,
 		deviceType,
+		abortSignal,
 	}: URLCompressedSourceOptions) {
 		super();
 		this.urls = urls;
@@ -108,6 +115,7 @@ export class URLCompressedSource extends SourceDestination {
 		this.configuration = configuration;
 		this.buildId = buildId;
 		this.deviceType = deviceType;
+		this.abortSignal = abortSignal;
 	}
 
 	private getFilename(): string {
@@ -162,6 +170,7 @@ export class URLCompressedSource extends SourceDestination {
 		}
 		const response = await axios.get(url, {
 			responseType: 'stream',
+			signal: this.abortSignal,
 		});
 		// Confirm that the response is of the expected type, until axios no longer types it as any.
 		if (!(response.data instanceof Readable)) {
@@ -178,7 +187,7 @@ export class URLCompressedSource extends SourceDestination {
 		if (url == null) {
 			throw new Error(`URL not found for key: ${key}`);
 		}
-		return await axios.get(url);
+		return await axios.get(url, { signal: this.abortSignal });
 	}
 
 	private findPartitionPart(
