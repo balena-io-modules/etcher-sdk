@@ -1,4 +1,17 @@
 - commits:
+    - subject: "url-compressed-source: Add an abortSignal parameter to early cancel
+        requests"
+      hash: 6617b2098e18127b597897311076ad93a1b479f3
+      body: ""
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Thodoris Greasidis
+      nested: []
+  version: 10.3.0
+  title: ""
+  date: 2026-11-16T10:23:47.003Z
+- commits:
     - subject: "scanner: Recognise CM5 mass-storage gadget as a Compute Module"
       hash: ac95b26cc79f97b3a87658593356cecac94051c7
       body: >
