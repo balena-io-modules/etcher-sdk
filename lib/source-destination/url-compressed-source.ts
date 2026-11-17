@@ -388,11 +388,10 @@ export class URLCompressedSource extends SourceDestination {
 			this.format === 'zip'
 				? createZipStreamFromParts(parts)
 				: createGzipStreamFromParts(parts);
-		const cleanupFinishedListeners = finished(stream, (err) => {
+		finished(stream, (err) => {
 			if (err != null) {
 				cleanupParts(parts);
 			}
-			cleanupFinishedListeners();
 		});
 		return stream;
 	}
