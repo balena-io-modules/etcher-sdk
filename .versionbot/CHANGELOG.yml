@@ -1,4 +1,24 @@
 - commits:
+    - subject: Stop manually cleaning up the finished() listeners
+      hash: 35660e3527fe372c7c6a4f3b87f3258280cb997a
+      body: >
+        The combined-stream that gzip-stream uses
+
+        could emit 'error' more than once (eg: once per failed part), and a
+        later error
+
+        with no listener would crash the process.
+      footer:
+        Change-type: patch
+        change-type: patch
+        See: https://balena.fibery.io/Work/Project/3083
+        see: https://balena.fibery.io/Work/Project/3083
+      author: Thodoris Greasidis
+      nested: []
+  version: 10.3.1
+  title: ""
+  date: 2026-11-18T07:26:13.790Z
+- commits:
     - subject: "url-compressed-source: Add an abortSignal parameter to early cancel
         requests"
       hash: 6617b2098e18127b597897311076ad93a1b479f3
